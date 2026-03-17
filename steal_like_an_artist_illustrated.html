@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steal Like an Artist: A Comprehensive Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fafafa;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ===== COVER ===== */
+        .cover {
+            background: linear-gradient(135deg, var(--coral) 0%, var(--orange) 25%, var(--sunny) 50%, var(--teal) 75%, var(--sky) 100%);
+            border-radius: 12px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .cover .subtitle {
+            font-size: 1.3em;
+            font-weight: 300;
+            margin-bottom: 20px;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .cover .author {
+            font-size: 1.1em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .scissors-icon {
+            display: inline-block;
+            font-size: 3em;
+            margin: 20px 0;
+            animation: snip 2s ease-in-out infinite;
+        }
+
+        @keyframes snip {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-15deg); }
+        }
+
+        /* ===== LESSONS GRID ===== */
+        .lessons-intro {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.08), rgba(78, 205, 196, 0.08));
+            border-radius: 12px;
+            border-left: 5px solid var(--coral);
+        }
+
+        .lessons-intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .lessons-intro p {
+            font-size: 1.1em;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        /* ===== LESSON CARDS ===== */
+        .lesson {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .lesson-header {
+            padding: 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 120px;
+        }
+
+        .lesson:nth-child(1) .lesson-header { background: linear-gradient(135deg, var(--coral), var(--warm-red)); }
+        .lesson:nth-child(2) .lesson-header { background: linear-gradient(135deg, var(--teal), var(--sky)); }
+        .lesson:nth-child(3) .lesson-header { background: linear-gradient(135deg, var(--sunny), var(--orange)); }
+        .lesson:nth-child(4) .lesson-header { background: linear-gradient(135deg, var(--purple), var(--dark-purple)); }
+        .lesson:nth-child(5) .lesson-header { background: linear-gradient(135deg, var(--pink), var(--coral)); }
+        .lesson:nth-child(6) .lesson-header { background: linear-gradient(135deg, var(--mint), var(--forest)); }
+        .lesson:nth-child(7) .lesson-header { background: linear-gradient(135deg, var(--sky), var(--deep-blue)); }
+        .lesson:nth-child(8) .lesson-header { background: linear-gradient(135deg, var(--orange), var(--sunny)); }
+        .lesson:nth-child(9) .lesson-header { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+        .lesson:nth-child(10) .lesson-header { background: linear-gradient(135deg, var(--teal), var(--mint)); }
+
+        .lesson-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            font-weight: 700;
+            opacity: 0.7;
+            margin-right: 20px;
+        }
+
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            font-weight: 700;
+        }
+
+        .lesson-inner {
+            padding: 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-summary {
+            font-size: 0.95em;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .lesson-summary strong {
+            color: var(--dark);
+        }
+
+        /* ===== DETAILED SECTIONS ===== */
+        .detailed-section {
+            background: white;
+            border-radius: 12px;
+            padding: 50px 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid;
+        }
+
+        .detailed-section:nth-child(odd) {
+            border-top-color: var(--coral);
+        }
+
+        .detailed-section:nth-child(even) {
+            border-top-color: var(--teal);
+        }
+
+        .detailed-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== CARDS & BOXES ===== */
+        .card {
+            background: #f5f5f5;
+            border-left: 4px solid var(--coral);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .card-label {
+            display: inline-block;
+            background: var(--coral);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+            border-left: 5px solid var(--coral);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            font-style: italic;
+            color: #333;
+        }
+
+        .quote-attribution {
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--dark);
+            font-style: normal;
+        }
+
+        .funny-box {
+            background: linear-gradient(135deg, var(--sunny), var(--orange));
+            color: var(--dark);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 2px solid #FFE66D;
+        }
+
+        .funny-box h4 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .ai-box {
+            background: linear-gradient(135deg, rgba(160, 108, 213, 0.1), rgba(9, 132, 227, 0.1));
+            border-left: 5px solid var(--dark-purple);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .ai-box h4 {
+            color: var(--dark-purple);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .ai-box p {
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .connect-box {
+            background: linear-gradient(135deg, rgba(85, 239, 196, 0.1), rgba(0, 184, 148, 0.1));
+            border-left: 5px solid var(--forest);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .connect-box h4 {
+            color: var(--forest);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .illustration-container {
+            background: linear-gradient(135deg, #f5f5f5, #ffffff);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+            border: 2px dashed #ddd;
+        }
+
+        /* ===== STORY SECTIONS ===== */
+        .story {
+            background: linear-gradient(135deg, rgba(253, 203, 107, 0.1), rgba(255, 107, 107, 0.1));
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid var(--orange);
+        }
+
+        .story h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* ===== CHEATSHEET ===== */
+        .cheatsheet {
+            background: white;
+            border-radius: 12px;
+            padding: 50px 40px;
+            margin: 60px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid var(--dark-purple);
+        }
+
+        .cheatsheet h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+
+        .cheatsheet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .cheatsheet-item {
+            background: linear-gradient(135deg, #f5f5f5, #fafafa);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+
+        .cheatsheet-item:nth-child(1) { border-left-color: var(--coral); }
+        .cheatsheet-item:nth-child(2) { border-left-color: var(--teal); }
+        .cheatsheet-item:nth-child(3) { border-left-color: var(--sunny); }
+        .cheatsheet-item:nth-child(4) { border-left-color: var(--purple); }
+        .cheatsheet-item:nth-child(5) { border-left-color: var(--pink); }
+        .cheatsheet-item:nth-child(6) { border-left-color: var(--forest); }
+
+        .cheatsheet-item h4 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .cheatsheet-item p {
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* ===== ELEMENTS ===== */
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6em;
+            margin: 30px 0 15px 0;
+            color: var(--dark);
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        ul, ol {
+            margin: 20px 0 20px 30px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: var(--deep-blue);
+            text-decoration: none;
+            border-bottom: 2px solid var(--sunny);
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--dark);
+            border-bottom-color: var(--coral);
+        }
+
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, var(--coral), var(--teal), var(--sunny), var(--purple));
+            margin: 60px 0;
+            border-radius: 2px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--dark), var(--dark-purple));
+            color: white;
+            border-radius: 12px;
+            margin-top: 80px;
+        }
+
+        .footer h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            opacity: 0.9;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 30px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--coral), var(--warm-red));
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .highlight {
+            background: var(--sunny);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        /* ===== CALLOUT ===== */
+        .callout {
+            background: linear-gradient(135deg, var(--sky), var(--deep-blue));
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 5px solid white;
+        }
+
+        .callout strong {
+            font-weight: 700;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 2.2em;
+            }
+
+            .cover {
+                padding: 40px 20px;
+            }
+
+            .detailed-section {
+                padding: 30px 20px;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== COVER ===== -->
+        <div class="cover">
+            <div class="cover-content">
+                <div class="scissors-icon">✂️</div>
+                <h1>Steal Like an Artist</h1>
+                <p class="subtitle">10 Things Nobody Told You About Being Creative</p>
+                <p class="author">by Austin Kleon</p>
+                <p style="margin-top: 30px; opacity: 0.85; font-size: 0.95em;">A Comprehensive Illustrated Guide to the 10 Principles of Creative Theft</p>
+            </div>
+        </div>
+
+        <!-- ===== INTRODUCTION ===== -->
+        <div class="lessons-intro">
+            <h2>What This Guide Covers</h2>
+            <p>
+                Austin Kleon's groundbreaking manifesto reveals that all creative work is built on what came before. This guide explores his 10 transformative principles for unleashing your creativity, understanding the remix nature of art, and building a sustainable creative practice. From the honest theft of artistic influence to the power of sharing your work, these lessons apply to writers, designers, musicians, entrepreneurs, and anyone seeking to make something meaningful.
+            </p>
+        </div>
+
+        <!-- ===== LESSON CARDS ===== -->
+        <div class="lessons-grid">
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">1</div>
+                    <div class="lesson-title">Steal Like an Artist</div>
+                </div>
+                <div class="lesson-inner">
+                    <p class="lesson-summary"><strong>All creative work is remix.</strong> Great artists copy, borrow, and transform. The key is knowing what to steal and understanding that imitation is a path to originality.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">2</div>
+                    <div class="lesson-title">Don't Wait to Know Yourself</div>
+                </div>
+                <div class="lesson-inner">
+                    <p class="lesson-summary"><strong>Start creating now.</strong> You don't need to wait until you've figured out who you are. Identity emerges through the act of making.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">3</div>
+                    <div class="lesson-title">Write the Book You Want to Read</div>
+                </div>
+                <div class="lesson-inner">
+                    <p class="lesson-summary"><strong>Make art for yourself first.</strong> Create the work you wish existed. If you'd want to read/watch/play it, others will too.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">4</div>
+                    <div class="lesson-title">Use Your Hands</div>
+                </div>
+                <div class="lesson-inner">
+                    <p class="lesson-summary"><strong>Analog work matters.</strong> Drawing, writing by hand, making things tangible connects you to your creativity in ways digital tools cannot.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">5</div>
+                    <div class="lesson-title">Side Projects & Hobbies</div>
+                </div>
+                <div class="lesson-inner">
+                    <p class="lesson-summary"><strong>Work matters more than your day job.</strong> Your side projects are where you truly experiment and discover your voice.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">6</div>
+                    <div class="lesson-title">The Secret: Do Good Work & Share It</div>
+                </div>
+                <div class="lesson-inner">
+                    <p class="lesson-summary"><strong>Quality + Visibility = Success.</strong> Create your best work and show it to the world. This simple formula opens doors.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">7</div>
+                    <div class="lesson-title">Geography is No Longer Your Master</div>
+                </div>
+                <div class="lesson-inner">
+                    <p class="lesson-summary"><strong>The internet levels the playing field.</strong> You no longer need to live in NYC or LA. Your audience is global from day one.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">8</div>
+                    <div class="lesson-title">Be Nice (The World is a Small Town)</div>
+                </div>
+                <div class="lesson-inner">
+                    <p class="lesson-summary"><strong>Community matters.</strong> Treat people well. Support others. The creative world is small—reputation is everything.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">9</div>
+                    <div class="lesson-title">Be Boring</div>
+                </div>
+                <div class="lesson-inner">
+                    <p class="lesson-summary"><strong>Routine breeds greatness.</strong> Boring life = creative brilliance. Protect your energy for making art, not for being interesting.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">10</div>
+                    <div class="lesson-title">Creativity is Subtraction</div>
+                </div>
+                <div class="lesson-inner">
+                    <p class="lesson-summary"><strong>Constraints breed creativity.</strong> Fewer tools, less choice, and firm boundaries unlock your best ideas.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== LESSON 1: STEAL LIKE AN ARTIST ===== -->
+        <div class="detailed-section">
+            <h2>Lesson 1: Steal Like an Artist</h2>
+
+            <div class="two-col">
+                <div>
+                    <h3>The Core Idea</h3>
+                    <p>
+                        "The best artists copy, the great artists steal." This isn't about plagiarism—it's about understanding that all creative work is built on what came before. T.S. Eliot said it plainly: "Immature poets imitate; mature poets steal." What this means is that you absorb influences, transform them through your own lens, and create something original that honors its sources.
+                    </p>
+                    <p>
+                        Picasso spoke about good artists copying and great artists stealing. The difference between these isn't moral—it's about depth of understanding. You don't just copy the surface; you understand the DNA of what moved you, then remix it with your own perspective.
+                    </p>
+
+                    <h3>Historical Examples</h3>
+                    <ul>
+                        <li><strong>Picasso:</strong> Developed Cubism by studying African masks and deconstructing perspective</li>
+                        <li><strong>David Bowie:</strong> Created distinct personas by remixing art movements, theater, and music from across genres</li>
+                        <li><strong>Tarantino:</strong> Steals shots and scenes from classics, recontextualizing them for new meaning</li>
+                        <li><strong>Beatles:</strong> Built on American rock, blues, and girl-group traditions while creating something entirely new</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="illustration-container">
+                        <svg viewBox="0 0 200 200" width="200" height="200">
+                            <!-- Scissors -->
+                            <g transform="translate(50, 50)">
+                                <circle cx="20" cy="20" r="12" stroke="#FF6B6B" stroke-width="2" fill="none"/>
+                                <circle cx="80" cy="20" r="12" stroke="#FF6B6B" stroke-width="2" fill="none"/>
+                                <line x1="32" y1="20" x2="68" y2="20" stroke="#FF6B6B" stroke-width="2"/>
+                                <path d="M 20 8 L 20 32" stroke="#4ECDC4" stroke-width="3" stroke-linecap="round"/>
+                            </g>
+                            <!-- Clipboard with stolen ideas -->
+                            <rect x="30" y="110" width="70" height="50" stroke="#FFE66D" stroke-width="2" fill="rgba(255, 230, 109, 0.2)"/>
+                            <line x1="35" y1="120" x2="95" y2="120" stroke="#A06CD5" stroke-width="1.5"/>
+                            <line x1="35" y1="130" x2="95" y2="130" stroke="#A06CD5" stroke-width="1.5"/>
+                            <line x1="35" y1="140" x2="75" y2="140" stroke="#A06CD5" stroke-width="1.5"/>
+                            <line x1="35" y1="150" x2="90" y2="150" stroke="#A06CD5" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Key Insight</span>
+                        <p><strong>Theft ≠ Plagiarism</strong></p>
+                        <p style="margin-top: 10px; font-size: 0.95em;">
+                            Plagiarism is taking someone's work and presenting it as your own. Stealing is understanding someone's work deeply, transforming it, and creating something new that honors the original.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>How to Practice This</h3>
+            <ul>
+                <li><strong>Make a "Blank Slate" collection:</strong> Gather work that moves you—regardless of medium. Why do you love it? What's the common thread?</li>
+                <li><strong>Study the lineage:</strong> If you love David Bowie, study his influences (Iggy Pop, Kabuki, Weimar cabaret). Follow the creative thread backward</li>
+                <li><strong>Remix, don't copy:</strong> Take a technique from artist A, a concept from artist B, and combine them with your own obsessions</li>
+                <li><strong>Credit your sources:</strong> When your work is clearly inspired by something, mention it. Transparency builds trust</li>
+            </ul>
+
+            <div class="story">
+                <h4>📖 The Picasso Principle</h4>
+                <p>
+                    Picasso couldn't draw realistically until he was a teenager. He then spent years mastering traditional perspective and representation. Only after he understood the rules deeply did he have the authority to break them. This is what "stealing" really means: you must first understand the tradition you're transforming.
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI Connection: LLMs as Ultimate Stealers</h4>
+                <p>
+                    Large Language Models are trained on billions of texts—they're the ultimate "stealers," absorbing patterns from all of human writing. They remix language probabilistically, combining influences at scale. The ethical question isn't whether they're stealing (they are), but how that theft is credited and compensated. LLMs are mechanizing what artists have always done: absorbing influences and remixing them into new outputs.
+                </p>
+            </div>
+
+            <div class="funny-box">
+                <h4>😄 The Honest Truth About Influence</h4>
+                <p>
+                    You probably have about 100 artists/creators you love. Your work will inevitably be a blend of those 100. That's not a failure—that's how art works. The interesting part is discovering which 100 you unconsciously absorb and how you recombine them. Your taste is your fingerprint.
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 2: DON'T WAIT ===== -->
+        <div class="detailed-section">
+            <h2>Lesson 2: Don't Wait to Know Yourself</h2>
+
+            <div class="two-col">
+                <div>
+                    <h3>The Paradox of Identity</h3>
+                    <p>
+                        Most people believe they need to first discover who they are, then create work that expresses that identity. This is backwards. Identity doesn't precede creation—it emerges from it. You don't figure out who you are in a vacuum; you discover it by making things.
+                    </p>
+                    <p>
+                        Young artists often feel paralyzed: "I don't know my style yet." "I need to find my voice." "I should wait until I'm ready." This is a trap. The paradox is that you become ready by starting, not by waiting.
+                    </p>
+
+                    <h3>Why Waiting Kills Creativity</h3>
+                    <ul>
+                        <li>Perfectionism masquerades as waiting for the "right time"</li>
+                        <li>Self-doubt grows in silence and isolation</li>
+                        <li>You learn your voice through feedback, not introspection</li>
+                        <li>Every day you wait is a day you're not gaining experience</li>
+                    </ul>
+
+                    <div class="card">
+                        <span class="card-label">Reframe</span>
+                        <p>
+                            Instead of asking "Who am I?" ask "What do I want to make?" The answer to the second question will reveal the answer to the first.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="illustration-container">
+                        <svg viewBox="0 0 200 200" width="200" height="200">
+                            <!-- Person with question mark -->
+                            <circle cx="100" cy="50" r="20" fill="#FF6B6B" opacity="0.3"/>
+                            <rect x="85" y="75" width="30" height="40" fill="#4ECDC4" opacity="0.3"/>
+                            <circle cx="90" cy="130" r="8" fill="#4ECDC4" opacity="0.3"/>
+                            <circle cx="110" cy="130" r="8" fill="#4ECDC4" opacity="0.3"/>
+                            <!-- Question mark -->
+                            <text x="100" y="140" font-size="60" font-weight="bold" fill="#FFE66D" text-anchor="middle">?</text>
+                            <!-- Arrow pointing down -->
+                            <line x1="100" y1="160" x2="100" y2="190" stroke="#A06CD5" stroke-width="3"/>
+                            <polygon points="100,190 95,180 105,180" fill="#A06CD5"/>
+                        </svg>
+                    </div>
+
+                    <div class="quote-box">
+                        <p>
+                            "The person you aspire to be and the creator you are becoming are born from action, not contemplation."
+                        </p>
+                    </div>
+
+                    <h3>Historical Models</h3>
+                    <p>
+                        Every major artist started before they were "ready." Kafka wrote in his diaries. Van Gogh didn't pick up a brush until his late twenties. Toni Morrison wrote her first novel while raising three kids as a single parent. None of them waited for permission or perfect self-knowledge.
+                    </p>
+                </div>
+            </div>
+
+            <h3>Action Steps</h3>
+            <div style="background: #f5f5f5; padding: 25px; border-radius: 8px; margin: 30px 0;">
+                <ol>
+                    <li><strong>Start terrible:</strong> Make your first work knowing it will be bad. Permission granted</li>
+                    <li><strong>Make regularly:</strong> Consistency matters more than perfection. Daily practice reveals your voice</li>
+                    <li><strong>Show your work:</strong> Get feedback. Let others help you see what you're building</li>
+                    <li><strong>Adjust based on what you learn:</strong> Identity is iterative. You refine it as you go</li>
+                    <li><strong>Trust the process:</strong> Your style emerges over time, not through deliberation</li>
+                </ol>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connections to Other Books</h4>
+                <p>
+                    Anne Lamott's "Bird by Bird" emphasizes starting with "shitty first drafts." Steven Pressfield's "The War of Art" talks about resistance—the force that keeps you from starting. Both echo Kleon's core message: the only way to become is to begin.
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 3: WRITE THE BOOK ===== -->
+        <div class="detailed-section">
+            <h2>Lesson 3: Write the Book You Want to Read</h2>
+
+            <h3>The Selfish Starting Point</h3>
+            <p>
+                This seems counterintuitive: doesn't good art consider the audience? No—great art starts with the artist's genuine interest. The paradox is that when you make something you'd genuinely want to consume, you're likely making something others will too.
+            </p>
+
+            <p>
+                Your specific taste, your particular obsessions, your weird combination of interests—these are your competitive advantages. There's nobody else like you. When you create from that specificity, you're automatically creating something original.
+            </p>
+
+            <div class="two-col">
+                <div>
+                    <h3>Why This Works</h3>
+                    <ul>
+                        <li><strong>Authenticity resonates:</strong> People sense when you genuinely care about something</li>
+                        <li><strong>Passion sustains effort:</strong> You'll persist through difficulty if the project matters to you</li>
+                        <li><strong>Uniqueness emerges:</strong> Your weird is someone else's exactly-what-I-needed</li>
+                        <li><strong>Quality improves:</strong> You'll refine endlessly what you love, naturally producing better work</li>
+                    </ul>
+
+                    <div class="story">
+                        <h4>📖 Stephen King's "On Writing"</h4>
+                        <p>
+                            King writes the books he wants to read. He doesn't write for "the market." Yet his work finds huge audiences because his genuine enthusiasm for storytelling is infectious. The trick: write for yourself, and people who share your taste will find you.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="illustration-container">
+                        <svg viewBox="0 0 200 200" width="200" height="200">
+                            <!-- Book -->
+                            <rect x="60" y="40" width="80" height="100" rx="5" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+                            <line x1="100" y1="40" x2="100" y2="140" stroke="#FF6B6B" stroke-width="2"/>
+                            <!-- Pages -->
+                            <line x1="70" y1="60" x2="130" y2="60" stroke="#4ECDC4" stroke-width="1.5"/>
+                            <line x1="70" y1="75" x2="130" y2="75" stroke="#4ECDC4" stroke-width="1.5"/>
+                            <line x1="70" y1="90" x2="130" y2="90" stroke="#4ECDC4" stroke-width="1.5"/>
+                            <line x1="70" y1="105" x2="110" y2="105" stroke="#4ECDC4" stroke-width="1.5"/>
+                            <!-- Heart -->
+                            <path d="M 100 155 C 100 155 85 170 75 170 C 65 170 60 165 60 158 C 60 150 100 135 100 135 C 100 135 140 150 140 158 C 140 165 135 170 125 170 C 115 170 100 155 100 155" fill="#FFE66D" stroke="#FFE66D" stroke-width="1"/>
+                        </svg>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Practice</span>
+                        <p>
+                            <strong>List your obsessions:</strong> What books, shows, music, or art do you return to constantly? What's the thread connecting your loves? Now make something that combines your unique blend.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h4>😄 The Audience is You (Plus Your People)</h4>
+                <p>
+                    If you're the primary audience for your work, you have a built-in quality filter. You won't settle for something mediocre because you'd have to live with it. Plus, there are probably thousands of people like you—people who share your specific taste. By writing for yourself, you're actually writing for a laser-focused audience that will love you precisely because you weren't writing for "them."
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & Audience-First Thinking</h4>
+                <p>
+                    One of the best criticisms of AI-generated content is that it often lacks authentic perspective. It's trained to predict what audiences want, rather than expressing what an individual creator genuinely cares about. The antidote is the opposite: create from your specific passion. This is what AI struggles to replicate—not skill, but genuine human taste and preference.
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 4: USE YOUR HANDS ===== -->
+        <div class="detailed-section">
+            <h2>Lesson 4: Use Your Hands</h2>
+
+            <h3>The Power of Analog Work</h3>
+            <p>
+                In our digital age, it's easy to forget that some of the best creative thinking happens with pen and paper, clay and wood, needle and thread. Digital tools are essential, but there's something about physical making that engages your brain differently.
+            </p>
+
+            <p>
+                When you hand-write, you slow down. When you draw, you observe. When you physically build something, you problem-solve in real-time. This friction—this resistance—is actually creative fuel.
+            </p>
+
+            <div class="two-col">
+                <div>
+                    <h3>Why Analog Matters</h3>
+                    <ul>
+                        <li><strong>Slowing down:</strong> Typing 100 words/minute vs. handwriting 20 words/minute forces different thinking</li>
+                        <li><strong>Embodied cognition:</strong> Using your whole body engages more neural pathways</li>
+                        <li><strong>Mistakes are features:</strong> A brush stroke can't be undone instantly—it forces commitment</li>
+                        <li><strong>Presence:</strong> No distractions, no notifications, just you and the material</li>
+                        <li><strong>Texture:</strong> Physical materials have resistance and surprise that screens can't replicate</li>
+                    </ul>
+
+                    <div class="card">
+                        <span class="card-label">Challenge</span>
+                        <p>
+                            Spend one week writing by hand, sketching, or building something physical. Notice how your thinking changes. Most creators find they're more creative when forced to slow down.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="illustration-container">
+                        <svg viewBox="0 0 200 200" width="200" height="200">
+                            <!-- Hand -->
+                            <path d="M 60 120 L 60 60 M 75 120 L 75 50 M 90 120 L 90 40 M 105 120 L 105 50 M 120 120 L 120 60" stroke="#FF6B6B" stroke-width="8" stroke-linecap="round"/>
+                            <ellipse cx="85" cy="130" rx="30" ry="15" fill="#FF6B6B" opacity="0.2"/>
+                            <!-- Pen/pencil -->
+                            <rect x="130" y="80" width="8" height="60" fill="#FFE66D" stroke="#FF6B6B" stroke-width="1"/>
+                            <polygon points="134,140 130,150 138,150" fill="#FF6B6B"/>
+                            <!-- Paper marks -->
+                            <line x1="50" y1="155" x2="150" y2="155" stroke="#4ECDC4" stroke-width="2" opacity="0.6"/>
+                            <line x1="50" y1="170" x2="140" y2="170" stroke="#4ECDC4" stroke-width="2" opacity="0.6"/>
+                        </svg>
+                    </div>
+
+                    <h3>Real Examples</h3>
+                    <ul>
+                        <li><strong>Writers:</strong> Cormac McCarthy, George R.R. Martin—both write drafts by hand or typewriter</li>
+                        <li><strong>Designers:</strong> Many sketch ideas first, even digital designers</li>
+                        <li><strong>Musicians:</strong> Songs often start with acoustic instruments before digital production</li>
+                        <li><strong>Thinkers:</strong> Notebooks and journals are where many great ideas germinate</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Combining Analog + Digital</h3>
+            <p>
+                The goal isn't to reject digital tools—it's to use both. Many successful creators have a hybrid workflow:
+            </p>
+            <ul>
+                <li><strong>Sketch by hand,</strong> refine digitally</li>
+                <li><strong>Write first draft longhand,</strong> edit on computer</li>
+                <li><strong>Record live performance,</strong> produce digitally</li>
+                <li><strong>Build physical prototypes,</strong> manufacture at scale</li>
+            </ul>
+
+            <div class="story">
+                <h4>📖 The Moleskine Effect</h4>
+                <p>
+                    Many successful creators use analog notebooks religiously. Not for sentimentality, but because the constraint of paper and pen creates focus. There's no undo button, no formatting toolbar, no internet. Just you, your thoughts, and the materials. This simplicity paradoxically makes you more creative.
+                </p>
+            </div>
+
+            <div class="callout">
+                <strong>Pro Tip:</strong> Keep a physical notebook with you always. Capture ideas in their raw form. Photographs of your sketches, voice notes of your thoughts, quick writing—this analog capture often contains your best ideas before editing removes their rough edges.
+            </div>
+        </div>
+
+        <!-- ===== LESSON 5: SIDE PROJECTS ===== -->
+        <div class="detailed-section">
+            <h2>Lesson 5: Side Projects & Hobbies are Your Real Work</h2>
+
+            <h3>Redefining "Work"</h3>
+            <p>
+                Most people think of their day job as "work" and their creative projects as "hobbies." Kleon inverts this: your creative projects are your real work. Your day job is just funding. This mindset shift is liberating.
+            </p>
+
+            <p>
+                Your day job pays bills. Your side project is your life's work. This is where you develop mastery, where you discover your voice, where you do the work that will outlast you.
+            </p>
+
+            <div class="two-col">
+                <div>
+                    <h3>Why Side Projects Are Essential</h3>
+                    <ul>
+                        <li><strong>Zero commercial pressure:</strong> Nobody's paying you, so you can fail freely</li>
+                        <li><strong>Genuine exploration:</strong> No clients, no stakeholders, just your curiosity</li>
+                        <li><strong>Skill development:</strong> You learn faster when playing than when working for money</li>
+                        <li><strong>Discovery of voice:</strong> Your real style emerges in projects nobody asked for</li>
+                        <li><strong>Portfolio building:</strong> Side projects often become your professional portfolio</li>
+                    </ul>
+
+                    <h3>Historical Patterns</h3>
+                    <p>
+                        <strong>Bob Ross</strong> painted landscapes for free in his spare time. This became a global phenomenon. <strong>J.K. Rowling</strong> wrote Harry Potter while unemployed. <strong>Beyoncé</strong> released surprise albums as creative experiments outside her label constraints. Your side project is where genius lives.
+                    </p>
+                </div>
+
+                <div>
+                    <div class="illustration-container">
+                        <svg viewBox="0 0 200 200" width="200" height="200">
+                            <!-- Two circles representing work vs side project -->
+                            <circle cx="70" cy="100" r="40" fill="none" stroke="#999" stroke-width="2"/>
+                            <text x="70" y="105" font-size="12" font-weight="bold" text-anchor="middle" fill="#999">Day Job</text>
+                            <circle cx="130" cy="100" r="40" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+                            <text x="130" y="95" font-size="12" font-weight="bold" text-anchor="middle" fill="#FF6B6B">REAL</text>
+                            <text x="130" y="108" font-size="12" font-weight="bold" text-anchor="middle" fill="#FF6B6B">WORK</text>
+                            <!-- Arrow -->
+                            <line x1="110" y1="100" x2="90" y2="100" stroke="#FFE66D" stroke-width="3"/>
+                            <polygon points="90,100 100,95 100,105" fill="#FFE66D"/>
+                        </svg>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Mindset Shift</span>
+                        <p>
+                            <strong>Your side project isn't a hobby.</strong> It's your primary work. Your day job is just the funding mechanism. Restructure your time, energy, and emotional investment accordingly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>How to Protect Your Side Project</h3>
+            <div style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1)); padding: 25px; border-radius: 8px; margin: 30px 0; border-left: 5px solid var(--coral);">
+                <ul style="margin-left: 20px;">
+                    <li><strong>Schedule it:</strong> Treat it like a meeting you won't miss</li>
+                    <li><strong>Protect the time:</strong> Say no to other things that invade your creative time</li>
+                    <li><strong>Set boundaries:</strong> Don't let your day job bleed into evenings/weekends</li>
+                    <li><strong>Create space:</strong> Physical and mental space matter. Find your creative corner</li>
+                    <li><strong>Share it:</strong> Accountability helps. Tell people about your project</li>
+                </ul>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Multi-Task Learning & AI</h4>
+                <p>
+                    In machine learning, "multi-task learning" trains a model on multiple related tasks simultaneously, improving overall performance. Your side projects work similarly—exploring different mediums, techniques, and ideas makes you better at all of them. A writer who paints improves at both. An engineer who sings develops different problem-solving approaches. Diversity of projects creates unexpected synergies.
+                </p>
+            </div>
+
+            <div class="funny-box">
+                <h4>😄 The Day Job Paradox</h4>
+                <p>
+                    "Get a day job" sounds like settling. Actually, it's liberation. A decent day job gives you money without controlling your soul (unlike freelance work that's never-ending). You can think about your real work while walking to the office. Your real work doesn't demand you be "on brand." Your day job is the best patronage system for artists today.
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 6: THE SECRET ===== -->
+        <div class="detailed-section">
+            <h2>Lesson 6: The Secret: Do Good Work & Share It</h2>
+
+            <h3>The Two-Part Formula</h3>
+            <p>
+                Success in creative work isn't mysterious. It's not about luck or connections or being in the right place at the right time. The secret is embarrassingly simple: make something good, then show it to people. That's it.
+            </p>
+
+            <p>
+                Yet this is where most creators fail. They either make mediocre work and share it aggressively (spam), or make good work and keep it private (hiding). Both fail. The magic is the combination.
+            </p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Scenario</th>
+                            <th>Outcome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Good work + No sharing</td>
+                            <td>Invisible. Nobody knows about it</td>
+                        </tr>
+                        <tr>
+                            <td>Mediocre work + Aggressive sharing</td>
+                            <td>Spam. People tune you out</td>
+                        </tr>
+                        <tr>
+                            <td>Good work + Consistent sharing</td>
+                            <td>✓ Success. Audience finds you</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>What "Good Work" Means</h3>
+            <p>
+                Good doesn't mean perfect. It means:
+            </p>
+            <ul>
+                <li>You've put genuine effort into it</li>
+                <li>You've iterated and refined</li>
+                <li>You're proud to attach your name to it</li>
+                <li>It reflects your real taste and perspective</li>
+                <li>It would satisfy you as a consumer</li>
+            </ul>
+
+            <div class="quote-box">
+                <p>
+                    "You must do the work that only you can do."
+                </p>
+                <div class="quote-attribution">— Austin Kleon</div>
+            </div>
+
+            <h3>How to Share Your Work</h3>
+            <div class="two-col">
+                <div>
+                    <p>
+                        <strong>Consistency matters more than volume.</strong> Share regularly. Weekly, daily—whatever pace you can sustain. Your audience grows through habit, not through viral moments.
+                    </p>
+
+                    <p>
+                        <strong>Tell the story behind the work.</strong> Don't just post the final product. Share the process, the thinking, the failures. People connect with the story, not just the output.
+                    </p>
+
+                    <p>
+                        <strong>Be generous with context.</strong> Link to your influences. Credit the people who inspired you. This builds community and directs audiences to other interesting creators.
+                    </p>
+
+                    <p>
+                        <strong>Engage with others' work.</strong> Don't just broadcast. Comment on work you admire. Share others' projects. The creative community is reciprocal.
+                    </p>
+                </div>
+
+                <div>
+                    <div class="card">
+                        <span class="card-label">Sharing Channels</span>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>Social media (1-2 platforms max)</li>
+                            <li>Email newsletter</li>
+                            <li>Blog/website</li>
+                            <li>Portfolio</li>
+                            <li>Open-source communities</li>
+                            <li>Galleries/shows</li>
+                            <li>Museums/conferences</li>
+                            <li>Publishing platforms</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 "Show Your Work" by Austin Kleon</h4>
+                <p>
+                    This is Kleon's follow-up to "Steal Like an Artist." It's entirely about the second half of the formula: sharing. If you resonate with this principle, that book goes much deeper into the philosophy and practice of public creativity.
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Open-Source Models & Public Work</h4>
+                <p>
+                    The most successful AI and software projects share their work constantly. Open-source code is the ultimate "show your work." Researchers publish papers. Creators share process. Sharing creates feedback loops that improve the work. In the AI era, transparency and public iteration are increasingly valuable competitive advantages.
+                </p>
+            </div>
+
+            <div class="funny-box">
+                <h4>😄 The Paradox of Sharing</h4>
+                <p>
+                    You might worry: "Won't people steal my ideas if I share?" Possibly. But here's the thing: most people won't. And of those who might, they'll execute differently anyway. Plus, being known as the person who had the idea first is worth more than keeping secrets. Your ideas are better served in the world than locked in your drawer.
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 7: GEOGRAPHY ===== -->
+        <div class="detailed-section">
+            <h2>Lesson 7: Geography is No Longer Your Master</h2>
+
+            <h3>The Democratization of Distribution</h3>
+            <p>
+                Thirty years ago, if you wanted to be a musician, you needed to live in Nashville or LA. If you wanted to be a writer, New York. If you wanted to be a designer, you had to be in a major city with agencies. Geography determined opportunity.
+            </p>
+
+            <p>
+                The internet changed everything. You can build an audience from anywhere. You can collaborate with people across the globe. Your work can reach millions without ever leaving your home.
+            </p>
+
+            <h3>What This Means</h3>
+            <ul>
+                <li><strong>Cost advantage:</strong> Live where it's cheap. Your cost of living doesn't need to match big city rates</li>
+                <li><strong>Audience advantage:</strong> You have access to billions of potential fans instantly</li>
+                <li><strong>Collaboration advantage:</strong> You can work with the best people globally, not just locally</li>
+                <li><strong>Authenticity advantage:</strong> You can build work grounded in your actual community, not a major city</li>
+                <li><strong>Focus advantage:</strong> No nightlife distractions, no need to network constantly. Just make work</li>
+            </ul>
+
+            <div class="two-col">
+                <div>
+                    <div class="illustration-container">
+                        <svg viewBox="0 0 200 200" width="200" height="200">
+                            <!-- Globe -->
+                            <circle cx="100" cy="100" r="50" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                            <path d="M 100 50 Q 80 100 100 150 Q 120 100 100 50" fill="none" stroke="#4ECDC4" stroke-width="1"/>
+                            <ellipse cx="100" cy="100" rx="50" ry="10" fill="none" stroke="#4ECDC4" stroke-width="1"/>
+                            <!-- Signals radiating out -->
+                            <circle cx="100" cy="100" r="65" fill="none" stroke="#FF6B6B" stroke-width="1" opacity="0.5"/>
+                            <circle cx="100" cy="100" r="75" fill="none" stroke="#FF6B6B" stroke-width="1" opacity="0.3"/>
+                            <!-- Dots for people around globe -->
+                            <circle cx="150" cy="100" r="3" fill="#FFE66D"/>
+                            <circle cx="50" cy="100" r="3" fill="#FFE66D"/>
+                            <circle cx="100" cy="50" r="3" fill="#FFE66D"/>
+                            <circle cx="100" cy="150" r="3" fill="#FFE66D"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Real Examples</h3>
+                    <ul>
+                        <li><strong>YouTubers:</strong> Many of the biggest creators are from small towns, not LA</li>
+                        <li><strong>Writers:</strong> Self-publishing means you don't need a major publisher</li>
+                        <li><strong>Musicians:</strong> You can build a fanbase and tour globally without a label</li>
+                        <li><strong>Programmers:</strong> Remote work means you can work for global companies from anywhere</li>
+                        <li><strong>Designers:</strong> Freelance platforms connect you to clients worldwide</li>
+                    </ul>
+
+                    <div class="card">
+                        <span class="card-label">Opportunity</span>
+                        <p>
+                            <strong>You don't need permission from gatekeepers.</strong> The internet is open. You can start building your audience today from wherever you are.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story">
+                <h4>📖 The Rise of Creator Economy</h4>
+                <p>
+                    Platforms like Patreon, Substack, Kickstarter, and Gumroad mean you can be funded directly by your audience. Geographic location doesn't matter. What matters is creating work that resonates. This is the ultimate democratization of creativity.
+                </p>
+            </div>
+
+            <div class="funny-box">
+                <h4>😄 The City Myth</h4>
+                <p>
+                    There's still a cultural narrative that "real artists move to the big city." But plenty of successful creators now live in rural areas, small towns, and affordable cities. They've realized something essential: a desk and internet connection are the only tools you need. Everything else is just overhead.
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 8: BE NICE ===== -->
+        <div class="detailed-section">
+            <h2>Lesson 8: Be Nice (The World is a Small Town)</h2>
+
+            <h3>Reputation is Everything</h3>
+            <p>
+                This seems obvious, but many people approach the creative world transactionally: "What can I get from this person? How can I network my way up?" This mindset backfires. The creative world is small. Everyone knows everyone eventually. Reputation travels faster than you think.
+            </p>
+
+            <p>
+                The best approach is both simpler and more generous: be genuinely kind. Support other people's work. Collaborate freely. Help people who ask. Treat people with respect. Not because it's strategic, but because it's right.
+            </p>
+
+            <h3>Why This Works</h3>
+            <ul>
+                <li><strong>Community over competition:</strong> Creatives who help each other rise together</li>
+                <li><strong>Collaboration opens doors:</strong> Your best opportunities come through connections</li>
+                <li><strong>Reputation compounds:</strong> Being known as generous and kind builds trust</li>
+                <li><strong>Goodwill reciprocates:</strong> People want to help people who've helped them</li>
+                <li><strong>You enjoy the work more:</strong> Creating in community is more fun than isolated competition</li>
+            </ul>
+
+            <div class="quote-box">
+                <p>
+                    "Be so good they can't ignore you. And be so nice they can't forget you."
+                </p>
+            </div>
+
+            <div class="two-col">
+                <div>
+                    <h3>Practical Actions</h3>
+                    <ul>
+                        <li>Share others' work. Give credit generously</li>
+                        <li>Respond to messages. Even a brief reply matters</li>
+                        <li>Support creators earlier in their journey</li>
+                        <li>Collaborate freely without always asking "what's in it for me?"</li>
+                        <li>Defend other creators publicly</li>
+                        <li>Share knowledge and techniques freely</li>
+                        <li>Introduce people who should know each other</li>
+                        <li>Celebrate others' success genuinely</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="illustration-container">
+                        <svg viewBox="0 0 200 200" width="200" height="200">
+                            <!-- Network of connected people -->
+                            <circle cx="100" cy="100" r="12" fill="#FF6B6B"/>
+                            <circle cx="60" cy="60" r="8" fill="#4ECDC4"/>
+                            <circle cx="140" cy="60" r="8" fill="#FFE66D"/>
+                            <circle cx="60" cy="140" r="8" fill="#A06CD5"/>
+                            <circle cx="140" cy="140" r="8" fill="#55EFC4"/>
+                            <!-- Connections -->
+                            <line x1="100" y1="100" x2="60" y2="60" stroke="#FF6B6B" stroke-width="2" opacity="0.6"/>
+                            <line x1="100" y1="100" x2="140" y2="60" stroke="#FF6B6B" stroke-width="2" opacity="0.6"/>
+                            <line x1="100" y1="100" x2="60" y2="140" stroke="#FF6B6B" stroke-width="2" opacity="0.6"/>
+                            <line x1="100" y1="100" x2="140" y2="140" stroke="#FF6B6B" stroke-width="2" opacity="0.6"/>
+                            <!-- Outer connections -->
+                            <line x1="60" y1="60" x2="140" y2="60" stroke="#4ECDC4" stroke-width="1" opacity="0.4"/>
+                            <line x1="60" y1="140" x2="140" y2="140" stroke="#4ECDC4" stroke-width="1" opacity="0.4"/>
+                        </svg>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Mindset</span>
+                        <p>
+                            <strong>See others' success as inspiration, not threat.</strong> In creative work, your competitor's win doesn't take from you. There's room for everyone.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 "Big Magic" by Elizabeth Gilbert</h4>
+                <p>
+                    Gilbert emphasizes creative friendship—deep connections with other creators. This bonds you to community and reminds you that the creative life isn't solitary. Building genuine friendships with other artists makes the work better and more meaningful.
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Decentralized Networks & Community</h4>
+                <p>
+                    Web3 and decentralized communities are creating new models for creative collaboration. Discord communities, open-source projects, and shared development environments are replacing the centralized gatekeepers. Being nice and collaborative isn't just ethical—it's the operating system of these new networks.
+                </p>
+            </div>
+
+            <div class="funny-box">
+                <h4>😄 The Karma Boomerang</h4>
+                <p>
+                    You don't help people expecting something in return. But interestingly, it comes back anyway. The person you mentor becomes successful and hires you. The creator you supported early shares your work to thousands. The colleague you helped connects you with your dream project. Goodwill compounds in unexpected ways.
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 9: BE BORING ===== -->
+        <div class="detailed-section">
+            <h2>Lesson 9: Be Boring (It's How You Get Work Done)</h2>
+
+            <h3>The Boring Life Paradox</h3>
+            <p>
+                There's enormous cultural pressure to be interesting: to have adventurous hobbies, to travel constantly, to attend every event, to be "living your best life." Yet this is antithetical to creative work. Your creative output requires stability, routine, and boring consistency.
+            </p>
+
+            <p>
+                Paradoxically, the most interesting creators often have incredibly boring lives. They wake at the same time. They work the same hours. They eat the same meals. They avoid drama. This boring routine is what gives them the mental space to do remarkable work.
+            </p>
+
+            <h3>Why Routine Matters</h3>
+            <div class="two-col">
+                <div>
+                    <ul>
+                        <li><strong>No decision fatigue:</strong> Boring routines remove daily choices, preserving mental energy for your art</li>
+                        <li><strong>Predictability:</strong> Consistent schedule means consistent work output</li>
+                        <li><strong>Less anxiety:</strong> Boring life means fewer dramas, fewer problems, less stress</li>
+                        <li><strong>Better health:</strong> Regular sleep, exercise, meals make you more creative</li>
+                        <li><strong>Focus:</strong> No constant excitement means you can concentrate deeply</li>
+                    </ul>
+
+                    <h3>Examples of Boring Creators</h3>
+                    <ul>
+                        <li><strong>Kafka:</strong> Worked a day job, wrote every night in his small apartment</li>
+                        <li><strong>Kurt Vonnegut:</strong> Had a strict daily schedule: write 5am-10am, then nothing</li>
+                        <li><strong>Maya Angelou:</strong> Always got a hotel room, same desk, same routine</li>
+                        <li><strong>Paul McCartney:</strong> Structured days, consistent work time, boring personal life</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="illustration-container">
+                        <svg viewBox="0 0 200 200" width="200" height="200">
+                            <!-- Calendar/schedule -->
+                            <rect x="40" y="40" width="120" height="120" rx="5" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                            <!-- Days -->
+                            <line x1="40" y1="65" x2="160" y2="65" stroke="#4ECDC4" stroke-width="1"/>
+                            <rect x="50" y="70" width="20" height="20" fill="#FF6B6B" opacity="0.3"/>
+                            <rect x="75" y="70" width="20" height="20" fill="#FF6B6B" opacity="0.3"/>
+                            <rect x="100" y="70" width="20" height="20" fill="#FF6B6B" opacity="0.3"/>
+                            <rect x="125" y="70" width="20" height="20" fill="#FF6B6B" opacity="0.3"/>
+                            <!-- More rows -->
+                            <rect x="50" y="95" width="20" height="20" fill="#FF6B6B" opacity="0.3"/>
+                            <rect x="75" y="95" width="20" height="20" fill="#FF6B6B" opacity="0.3"/>
+                            <rect x="100" y="95" width="20" height="20" fill="#FF6B6B" opacity="0.3"/>
+                            <rect x="125" y="95" width="20" height="20" fill="#FF6B6B" opacity="0.3"/>
+                            <!-- Checkmarks -->
+                            <text x="60" y="85" font-size="16" fill="#4ECDC4">✓</text>
+                            <text x="85" y="85" font-size="16" fill="#4ECDC4">✓</text>
+                            <text x="110" y="85" font-size="16" fill="#4ECDC4">✓</text>
+                            <text x="135" y="85" font-size="16" fill="#4ECDC4">✓</text>
+                        </svg>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">The Secret</span>
+                        <p>
+                            <strong>Boring = Productive.</strong> Your job isn't to be interesting in your personal life. Your job is to create interesting work. Protect boring time fiercely.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Building Your Boring Routine</h3>
+            <div style="background: linear-gradient(135deg, rgba(160, 108, 213, 0.1), rgba(255, 230, 109, 0.1)); padding: 25px; border-radius: 8px; margin: 30px 0; border-left: 5px solid var(--purple);">
+                <ul style="margin-left: 20px;">
+                    <li><strong>Fix a schedule:</strong> Same time every day. Your body adapts, creativity flows</li>
+                    <li><strong>Same workspace:</strong> Consistency helps your brain enter creative mode</li>
+                    <li><strong>Simple meals:</strong> Reduce decision-making. Eat the same breakfast every day</li>
+                    <li><strong>Consistent sleep:</strong> This is non-negotiable for creativity</li>
+                    <li><strong>Minimal social calendar:</strong> Say no to things that eat creative time</li>
+                    <li><strong>Avoid comparison:</strong> Don't follow people living "interesting" lives on social media</li>
+                </ul>
+            </div>
+
+            <div class="funny-box">
+                <h4>😄 The Boring Lifestyle Instagram</h4>
+                <p>
+                    If boring creators posted their lives, it would be: "Got up. Wrote for three hours. Ate the same breakfast. Napped. Wrote more. Dinner. Bed." It's not exciting. It's not going viral. It's also exactly what makes major work possible.
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 10: CONSTRAINTS ===== -->
+        <div class="detailed-section">
+            <h2>Lesson 10: Creativity is Subtraction (Constraints Breed Creativity)</h2>
+
+            <h3>Limitation Unlocks Innovation</h3>
+            <p>
+                Paradoxically, unlimited resources stifle creativity. When you have every tool, every option, every possibility, you freeze. Constraints force decisions. They eliminate the paralysis of infinite choice.
+            </p>
+
+            <p>
+                The most creative work often comes from tight limitations: a painter with only three colors, a writer with a word limit, a musician with a single instrument, a filmmaker with a small budget. These constraints force creativity.
+            </p>
+
+            <h3>Types of Constraints</h3>
+            <div class="two-col">
+                <div>
+                    <ul>
+                        <li><strong>Material constraints:</strong> Using only what you have</li>
+                        <li><strong>Time constraints:</strong> Deadline pressure drives focus</li>
+                        <li><strong>Format constraints:</strong> Twitter's character limit, haiku's syllables, a sonnet's structure</li>
+                        <li><strong>Technical constraints:</strong> Low-res cameras, limited software features</li>
+                        <li><strong>Budget constraints:</strong> Working with next to nothing</li>
+                        <li><strong>Skill constraints:</strong> Learning limitations force creative workarounds</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="illustration-container">
+                        <svg viewBox="0 0 200 200" width="200" height="200">
+                            <!-- Expanding circle hitting walls -->
+                            <rect x="30" y="30" width="140" height="140" rx="5" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+                            <circle cx="100" cy="100" r="30" fill="none" stroke="#4ECDC4" stroke-width="3"/>
+                            <text x="100" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="#4ECDC4">FOCUS</text>
+                            <!-- Arrows pointing inward -->
+                            <line x1="30" y1="100" x2="50" y2="100" stroke="#FFE66D" stroke-width="2"/>
+                            <line x1="170" y1="100" x2="150" y2="100" stroke="#FFE66D" stroke-width="2"/>
+                            <line x1="100" y1="30" x2="100" y2="50" stroke="#FFE66D" stroke-width="2"/>
+                            <line x1="100" y1="170" x2="100" y2="150" stroke="#FFE66D" stroke-width="2"/>
+                        </svg>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Truth</span>
+                        <p>
+                            <strong>Fewer choices = More creativity.</strong> The constraint isn't a limitation—it's a laser focusing your creativity.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Historical Examples</h3>
+            <ul>
+                <li><strong>Twitter poetry:</strong> The 140-character limit created a new art form</li>
+                <li><strong>Lo-fi music:</strong> Limited equipment → distinct aesthetic → global movement</li>
+                <li><strong>Sonnets:</strong> 14 lines, specific rhyme scheme → centuries of masterpieces</li>
+                <li><strong>Film noir:</strong> Budget limitations → shadow-heavy aesthetic → iconic genre</li>
+                <li><strong>Punk music:</strong> "We can't play well" → new genre that changed rock music</li>
+            </ul>
+
+            <div class="story">
+                <h4>📖 Constraints as Teachers</h4>
+                <p>
+                    When you hit a limitation, you have to innovate around it. This innovation often becomes your signature style. The three-chord limit of early rock and roll didn't weaken it—it defined it. Constraints don't limit creativity; they concentrate it.
+                </p>
+            </div>
+
+            <div class="quote-box">
+                <p>
+                    "The task of an artist is not to resist the world, but to resist the ways the world tries to limit you."
+                </p>
+            </div>
+
+            <h3>How to Use Constraints Productively</h3>
+            <ul>
+                <li><strong>Embrace your limitations:</strong> Work with what you have, not what you don't</li>
+                <li><strong>Set arbitrary constraints:</strong> Choose to work with one tool, one color, one voice</li>
+                <li><strong>Use deadlines:</strong> Real or artificial, deadlines force decisions</li>
+                <li><strong>Work within genres:</strong> Genre conventions are built-in constraints that guide creativity</li>
+                <li><strong>Limit your audience:</strong> Work for a specific person, not everyone</li>
+                <li><strong>Reduce your palette:</strong> Fewer options mean stronger choices</li>
+            </ul>
+
+            <div class="ai-box">
+                <h4>🤖 Constraints in AI & Prompt Engineering</h4>
+                <p>
+                    In AI, "prompt engineering" is essentially constraint-setting. Better prompts aren't longer—they're more specific. "Write in the style of X" is a constraint. "Use only these three themes" is a constraint. The best AI outputs come from tight, well-designed constraints, not from giving the model complete freedom. This mirrors human creativity perfectly.
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Style Transfer Through Constraints</h4>
+                <p>
+                    In machine learning, "style transfer" applies constraints (an artistic style) to new content. This is exactly what human artists do when they say "write this in the style of Hemingway" or "paint like Pollock." Constraints are how we both teach machines and teach ourselves to be creative.
+                </p>
+            </div>
+
+            <div class="funny-box">
+                <h4>😄 The Paradox of Creative Freedom</h4>
+                <p>
+                    Complete creative freedom sounds like the dream. But in practice, it's paralyzing. Even rock stars with unlimited budgets often make their best work under tight constraints. They hire producers who say "no," record in cramped studios, or give themselves arbitrary rules. Constraints aren't bugs—they're the feature.
+                </p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== MASTER SUMMARY ===== -->
+        <div class="cheatsheet">
+            <h2>Quick Reference: The 10 Lessons Distilled</h2>
+            <div class="cheatsheet-grid">
+                <div class="cheatsheet-item">
+                    <h4>1. Steal Like an Artist</h4>
+                    <p>All creative work builds on what came before. Study your influences deeply and remix them authentically.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <h4>2. Don't Wait to Know Yourself</h4>
+                    <p>Identity emerges from action. Start creating now. You discover who you are by making things.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <h4>3. Write the Book You Want to Read</h4>
+                    <p>Make work for yourself first. Your specific taste will resonate with others who share it.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <h4>4. Use Your Hands</h4>
+                    <p>Analog work slows you down and engages your mind differently. Sketch, write by hand, build physically.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <h4>5. Side Projects & Hobbies</h4>
+                    <p>Your real work is what you create without payment. Protect that time. That's where mastery lives.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <h4>6. The Secret: Good Work + Share It</h4>
+                    <p>Make something you'd consume, then show it consistently. That's the entire formula for success.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <h4>7. Geography is No Longer Master</h4>
+                    <p>The internet levels the playing field. You can build a global audience from anywhere.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <h4>8. Be Nice</h4>
+                    <p>Treat people well. Support others. The creative world is small—reputation compounds.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <h4>9. Be Boring</h4>
+                    <p>Routine and simplicity free mental energy for creative work. Boring life = brilliant art.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <h4>10. Creativity is Subtraction</h4>
+                    <p>Constraints breed creativity. Fewer tools and options force better decisions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== DEEPER CONNECTIONS ===== -->
+        <div class="detailed-section">
+            <h2>Connections to Other Creative Books</h2>
+
+            <div class="story">
+                <h4>📖 "Show Your Work" (Austin Kleon)</h4>
+                <p>
+                    The natural follow-up to "Steal Like an Artist." While Steal focuses on consuming and creating, Show Your Work is entirely about the second part of the formula: sharing what you make. It's a masterclass in public creativity and building an audience.
+                </p>
+            </div>
+
+            <div class="story">
+                <h4>📖 "Big Magic" (Elizabeth Gilbert)</h4>
+                <p>
+                    Where Kleon emphasizes technique and practice, Gilbert emphasizes permission and curiosity. "Big Magic" is about living a creative life, not just producing. It's more spiritual, less practical, but deeply complementary. Together, they cover creativity from multiple angles.
+                </p>
+            </div>
+
+            <div class="story">
+                <h4>📖 "The War of Art" (Steven Pressfield)</h4>
+                <p>
+                    Pressfield identifies Resistance—the internal force that stops you from creating. "Steal" tells you how to create; "War" tells you how to overcome what stops you. If you struggle to start, this book is essential.
+                </p>
+            </div>
+
+            <div class="story">
+                <h4>📖 "On Writing" (Stephen King)</h4>
+                <p>
+                    Deeply practical advice on the craft of writing. King shares his personal rules, his routine, his philosophy. It complements Kleon by diving specifically into one medium. His emphasis on reading and writing constantly echoes Kleon's principles.
+                </p>
+            </div>
+
+            <div class="story">
+                <h4>📖 "Bird by Bird" (Anne Lamott)</h4>
+                <p>
+                    Lamott's mantra is "shitty first drafts"—the permission to make bad work. This is foundational to Kleon's philosophy. Her warmth and humor make her essential reading for anyone struggling with perfectionism or creative block.
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== AI & CREATIVE FUTURE ===== -->
+        <div class="detailed-section">
+            <h2>Steal Like an Artist in the Age of AI</h2>
+
+            <h3>How These Principles Apply (and Evolve)</h3>
+
+            <div class="ai-box">
+                <h4>🤖 Principle 1: LLMs as Ultimate Stealers</h4>
+                <p>
+                    Large Language Models like GPT-4 are trained on billions of texts. They're absorbing the entire literary tradition simultaneously. They're mechanizing what Kleon describes: wholesale absorption of influences. The ethical questions are new, but the creative principle is ancient.
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Principle 2: AI Doesn't Skip Steps</h4>
+                <p>
+                    AI can generate plausible prose instantly, but it skips the learning that Kleon emphasizes. It doesn't wait. It doesn't struggle. It doesn't know itself. Human artists are still essential because growth happens through limitation and struggle.
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Principle 3: Prompting as Modern Creativity</h4>
+                <p>
+                    Using AI requires craft. Good prompts are constraints: specifying style, tone, perspective. This is exactly what Kleon teaches—working within limitations to create something specific. AI isn't replacing creativity; it's shifting where creativity is needed (more in ideation and prompting, less in execution).
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Principle 4: Remix Culture Accelerates</h4>
+                <p>
+                    Style transfer, image generation, and text synthesis are mechanizing remix. What Kleon describes philosophically, AI makes technologically possible. The question shifts from "how do I remix?" to "how do I remix responsibly?"
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Principle 5: Side Projects Get Easier</h4>
+                <p>
+                    AI tools lower the barrier to making things. You can draft a novel, generate images, produce music with minimal skills. This democratizes creation (good) but also floods the world with mediocre work. Quality and taste become more valuable.
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Principle 6: Authenticity Becomes Rare</h4>
+                <p>
+                    As AI floods the market with generated content, human-created work—actual taste, actual struggle, actual failure—becomes precious. Kleon's emphasis on "do good work and share it" becomes more important, not less. Audiences will crave the human.
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Principle 7: Distribution Becomes Saturated</h4>
+                <p>
+                    The internet is already democratized. The new scarcity isn't distribution—it's attention. Be nice, have taste, create from genuine interest. These distinguish you in a world flooded with generated content.
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Principle 8: Community Matters More</h4>
+                <p>
+                    In an age of AI, community becomes your moat. If you're kind, if you collaborate, if you help others, you build a network that AI can't replicate. Your people stay loyal not just to your work, but to you.
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Principle 9: Boredom is Competitive</h4>
+                <p>
+                    Consistent routine and boring discipline are even more valuable when AI can generate flashy content instantly. Long-term focus on fundamentals—deep reading, deliberate practice, real reflection—is increasingly rare and valuable.
+                </p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 Principle 10: Constraints Are Your Friend</h4>
+                <p>
+                    AI works best with constraints (good prompts). You work best with constraints (real limitations). In the age of infinite possibility, the ability to self-impose useful constraints is a superpower.
+                </p>
+            </div>
+
+            <div class="callout">
+                <strong>The Bottom Line:</strong> Kleon's principles aren't weakened by AI—they're reinforced. In a world where anyone can generate plausible content, being a person with taste, judgment, and genuine perspective matters more than ever. The tools change; the principles endure.
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- ===== CLOSING CHALLENGE ===== -->
+        <div class="detailed-section">
+            <h2>Your Challenge: Start Today</h2>
+
+            <div style="background: linear-gradient(135deg, var(--coral), var(--warm-red)); color: white; padding: 40px; border-radius: 12px; text-align: center;">
+                <h3 style="color: white; margin-bottom: 20px;">Pick One Principle</h3>
+                <p style="font-size: 1.1em; line-height: 1.8; max-width: 600px; margin: 0 auto;">
+                    You don't need to implement all 10 lessons today. Pick one that resonates most deeply. Pick the one that your resistance is strongest against. That's probably the one you need most. Start there. Small action today compounds into mastery over months and years.
+                </p>
+            </div>
+
+            <h3 style="margin-top: 40px;">Suggested First Steps</h3>
+            <ul>
+                <li><strong>Lesson 1:</strong> Make a collection of work you love. Find the pattern. What's the common thread?</li>
+                <li><strong>Lesson 2:</strong> Start creating something small today. Write 100 words. Sketch 5 minutes. Make something bad.</li>
+                <li><strong>Lesson 3:</strong> Write down the book/show/art you wish existed. What would it contain? Start drafting.</li>
+                <li><strong>Lesson 4:</strong> Pick up a pen. Write by hand for 15 minutes. Notice how it feels different.</li>
+                <li><strong>Lesson 5:</strong> Block time for your side project this week. Treat it like a meeting. Protect it.</li>
+                <li><strong>Lesson 6:</strong> Finish something and share it. Don't wait for perfect. Share and learn from feedback.</li>
+                <li><strong>Lesson 7:</strong> Start building an audience online. One post. One email. Begin the conversation.</li>
+                <li><strong>Lesson 8:</strong> Support someone else's work publicly. Share, comment, boost. Begin building community.</li>
+                <li><strong>Lesson 9:</strong> Design one boring routine. Same time, same place, same work. Stick with it one week.</li>
+                <li><strong>Lesson 10:</strong> Impose a creative constraint. One tool. One color. One form. Work within it completely.</li>
+            </ul>
+
+            <div class="funny-box" style="margin-top: 40px;">
+                <h4>😄 The Real Secret</h4>
+                <p>
+                    You've now read about Austin Kleon's 10 principles. You understand the theory. You know what to do. But here's the thing: knowing isn't doing. The real secret—the one Kleon keeps emphasizing—is that you have to actually do it. Show up. Make work. Share it. Repeat. That's it. That's the entire secret. Everything else is just details.
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="footer">
+            <h3>Go Make Something</h3>
+            <p>
+                "All I've ever wanted was to be inspired to do the best work. The best work is done when you're creating on behalf of something bigger than yourself—when you're part of a community."
+            </p>
+            <p style="margin-top: 20px; font-size: 0.95em;">
+                — <strong>Austin Kleon</strong>
+            </p>
+            <p style="margin-top: 30px; opacity: 0.8; font-size: 0.9em;">
+                This comprehensive guide synthesizes Austin Kleon's "Steal Like an Artist" with connections to contemporary creative practice, AI, and related works. Start creating. The world needs your perspective.
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Comedians — Illustrated Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+  :root {
+    --coral: #FF6B6B; --teal: #4ECDC4; --sunny: #FFE66D;
+    --purple: #A06CD5; --sky: #74B9FF; --mint: #55EFC4;
+    --pink: #FD79A8; --orange: #FDCB6E; --dark: #2D3436;
+    --cream: #FFEAA7; --deep-blue: #0984E3; --warm-red: #E17055;
+    --forest: #00B894; --dark-purple: #6C5CE7;
+    --comedy-gold: #FFD700; --comedy-crimson: #DC143C; --comedy-navy: #1a1a4d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+
+  .cover {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a0033 0%, #0d0d1f 50%, #1a0033 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; padding: 40px 20px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem; color: #FFE66D; letter-spacing: -2px;
+    text-align: center; position: relative; z-index: 2; text-shadow: 0 4px 12px rgba(255,230,109,0.3);
+  }
+  .cover .author { font-size: 1.3rem; color: #FF6B6B; margin-top: 8px; font-weight: 600; z-index: 2; }
+  .cover .subtitle { font-size: 1rem; color: rgba(255,255,255,0.7); margin-top: 16px; z-index: 2; text-align: center; max-width: 600px; }
+
+  .particle {
+    position: absolute; border-radius: 50%; opacity: 0.15;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+  }
+
+  .cover-svg { margin-top: 40px; z-index: 2; }
+
+  .lesson {
+    min-height: 100vh; padding: 60px 20px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lesson-inner { max-width: 900px; width: 100%; }
+  .lesson-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem;
+    color: white; margin-bottom: 12px;
+  }
+  .lesson-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2;
+  }
+  .lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+
+  .illustration-container { margin-bottom: 30px; text-align: center; }
+  .illustration-container svg { max-width: 100%; height: auto; }
+
+  .card {
+    background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  .card-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .card p { font-size: 0.95rem; line-height: 1.7; color: #444; }
+  .card strong { color: var(--warm-red); }
+
+  .quote-box {
+    background: var(--dark); color: white; border-radius: 16px;
+    padding: 24px 28px; margin-bottom: 20px; border-left: 4px solid var(--comedy-gold);
+  }
+  .quote-box .quote-text { font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+  .quote-box .quote-attr { color: var(--comedy-gold); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+
+  .connect-box {
+    background: #fff3e0; border-left: 4px solid var(--orange);
+    border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px;
+  }
+  .connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--warm-red); letter-spacing: 1px; margin-bottom: 6px; }
+  .connect-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+
+  .ai-box {
+    background: linear-gradient(135deg, #FF6B6B, #DC143C);
+    color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px;
+  }
+  .ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--sunny); margin-bottom: 6px; }
+  .ai-box p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.95); }
+
+  .funny-box {
+    background: #fff5f5; border-radius: 16px; padding: 20px 24px;
+    margin-bottom: 20px; border: 2px dashed var(--coral);
+  }
+  .funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: var(--coral); letter-spacing: 1px; margin-bottom: 6px; }
+  .funny-box p { font-size: 0.9rem; line-height: 1.6; color: #666; font-style: italic; }
+
+  .story {
+    min-height: 100vh; padding: 60px 20px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+    color: white;
+  }
+  .story-inner { max-width: 900px; width: 100%; }
+  .story-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem; margin-bottom: 30px; color: var(--comedy-gold);
+  }
+  .story-text { font-size: 1rem; line-height: 1.9; margin-bottom: 20px; opacity: 0.95; }
+
+  .cheatsheet {
+    min-height: 100vh; padding: 60px 20px;
+    background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cheatsheet-inner { max-width: 900px; width: 100%; }
+  .cheatsheet h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--comedy-gold); text-align: center; margin-bottom: 40px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  .cheat-card {
+    background: rgba(255,230,109,0.1); border: 1px solid var(--comedy-gold); border-radius: 12px;
+    padding: 20px; color: white;
+  }
+  .cheat-card h3 { color: var(--comedy-gold); margin-bottom: 10px; font-size: 1.1rem; }
+  .cheat-card p { font-size: 0.9rem; line-height: 1.6; opacity: 0.9; }
+
+  @media (max-width: 700px) {
+    .cover h1 { font-size: 2.5rem; }
+    .lesson-title { font-size: 1.8rem; }
+    .story-title { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER SECTION -->
+<section class="cover">
+  <div class="particle" style="width: 80px; height: 80px; left: 10%; top: 20%; background: var(--comedy-gold);"></div>
+  <div class="particle" style="width: 60px; height: 60px; right: 15%; top: 30%; background: var(--comedy-crimson);"></div>
+  <div class="particle" style="width: 100px; height: 100px; left: 5%; bottom: 20%; background: var(--coral);"></div>
+  <div class="particle" style="width: 70px; height: 70px; right: 10%; bottom: 15%; background: var(--teal);"></div>
+
+  <h1>The Comedians</h1>
+  <p class="author">Kliph Nesteroff</p>
+  <p class="subtitle">Drunks, Thieves, Scoundrels, and the Hidden History of American Comedy</p>
+
+  <div class="cover-svg">
+    <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Stage -->
+      <rect x="50" y="200" width="600" height="80" fill="var(--comedy-gold)" opacity="0.3"/>
+      <line x1="50" y1="200" x2="650" y2="200" stroke="var(--comedy-gold)" stroke-width="3"/>
+
+      <!-- Spotlight -->
+      <circle cx="350" cy="100" r="120" fill="var(--comedy-gold)" opacity="0.15"/>
+      <path d="M 250 200 L 350 50 L 450 200" fill="none" stroke="var(--comedy-gold)" stroke-width="2" opacity="0.5"/>
+
+      <!-- Microphone -->
+      <rect x="330" y="150" width="40" height="50" fill="var(--dark)" rx="3"/>
+      <circle cx="350" cy="140" r="15" fill="var(--dark)" stroke="var(--comedy-gold)" stroke-width="2"/>
+      <rect x="345" y="120" width="10" height="20" fill="var(--dark)"/>
+
+      <!-- Crowd silhouettes -->
+      <circle cx="120" cy="240" r="20" fill="var(--teal)" opacity="0.6"/>
+      <circle cx="150" cy="245" r="18" fill="var(--coral)" opacity="0.6"/>
+      <circle cx="180" cy="240" r="22" fill="var(--pink)" opacity="0.6"/>
+      <circle cx="550" cy="245" r="20" fill="var(--teal)" opacity="0.6"/>
+      <circle cx="580" cy="240" r="18" fill="var(--coral)" opacity="0.6"/>
+      <circle cx="610" cy="245" r="22" fill="var(--pink)" opacity="0.6"/>
+
+      <!-- Comedy masks -->
+      <circle cx="100" cy="80" r="25" fill="none" stroke="var(--comedy-crimson)" stroke-width="2"/>
+      <line x1="90" y1="70" x2="110" y2="70" stroke="var(--comedy-crimson)" stroke-width="2"/>
+      <path d="M 95 85 Q 100 90 105 85" fill="none" stroke="var(--comedy-crimson)" stroke-width="2"/>
+
+      <circle cx="600" cy="80" r="25" fill="none" stroke="var(--comedy-gold)" stroke-width="2"/>
+      <line x1="590" y1="70" x2="610" y2="70" stroke="var(--comedy-gold)" stroke-width="2"/>
+      <path d="M 595 85 Q 600 80 605 85" fill="none" stroke="var(--comedy-gold)" stroke-width="2"/>
+    </svg>
+  </div>
+</section>
+
+<!-- LESSON 1: VAUDEVILLE'S ROUGH EDGE -->
+<section class="lesson" style="background: linear-gradient(180deg, #f5f0ff 0%, #fff0f5 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--comedy-crimson);">1</div>
+    <h2 class="lesson-title">Vaudeville's Rough Edge</h2>
+    <p class="lesson-subtitle">The Working-Class Comedy That Built America's Laugh Industry (1880s-1920s)</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="700" height="300" fill="var(--cream)" opacity="0.3"/>
+
+        <!-- Theatre facade -->
+        <rect x="80" y="40" width="540" height="220" fill="#C9A876" stroke="var(--dark)" stroke-width="3"/>
+        <rect x="100" y="60" width="500" height="180" fill="#E8D4B8"/>
+
+        <!-- Marquee -->
+        <rect x="100" y="20" width="500" height="35" fill="var(--comedy-gold)"/>
+        <text x="350" y="45" font-family="Playfair Display" font-size="20" font-weight="bold" fill="var(--dark)" text-anchor="middle">VAUDEVILLE THEATRE</text>
+
+        <!-- Windows/doors -->
+        <rect x="150" y="90" width="60" height="70" fill="var(--sky)" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="180" y1="90" x2="180" y2="160" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="150" y1="125" x2="210" y2="125" stroke="var(--dark)" stroke-width="2"/>
+
+        <rect x="490" y="90" width="60" height="70" fill="var(--sky)" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="520" y1="90" x2="520" y2="160" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="490" y1="125" x2="550" y2="125" stroke="var(--dark)" stroke-width="2"/>
+
+        <!-- Stage inside -->
+        <rect x="250" y="130" width="200" height="80" fill="var(--teal)" opacity="0.4" stroke="var(--dark)" stroke-width="2"/>
+
+        <!-- Performers on stage -->
+        <!-- Juggler -->
+        <circle cx="300" cy="160" r="12" fill="var(--dark)"/>
+        <rect x="290" y="172" width="20" height="25" fill="var(--warm-red)"/>
+        <circle cx="285" cy="145" r="6" fill="var(--orange)"/>
+        <circle cx="300" cy="140" r="6" fill="var(--orange)"/>
+        <circle cx="315" cy="145" r="6" fill="var(--orange)"/>
+
+        <!-- Dancer -->
+        <circle cx="400" cy="155" r="12" fill="var(--dark)"/>
+        <rect x="390" y="170" width="20" height="22" fill="var(--pink)"/>
+        <line x1="392" y1="168" x2="385" y2="140" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="408" y1="168" x2="420" y2="145" stroke="var(--dark)" stroke-width="2"/>
+
+        <!-- Audience silhouettes -->
+        <circle cx="120" cy="210" r="15" fill="var(--dark)" opacity="0.5"/>
+        <circle cx="160" cy="215" r="14" fill="var(--dark)" opacity="0.5"/>
+        <circle cx="200" cy="212" r="13" fill="var(--dark)" opacity="0.5"/>
+        <circle cx="540" cy="210" r="15" fill="var(--dark)" opacity="0.5"/>
+        <circle cx="580" cy="215" r="14" fill="var(--dark)" opacity="0.5"/>
+        <circle cx="620" cy="212" r="13" fill="var(--dark)" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎭 KEY LESSON</div>
+      <p>Vaudeville wasn't genteel entertainment—it was rollicking, bawdy, working-class humor that thrived in saloons and immigrant neighborhoods. The comedians who built vaudeville were often <strong>immigrants, con artists, and hustlers</strong> who turned the stage into their living. <strong>Bert Lahr</strong> (1895-1967) started as a vaudeville song-and-dance man before becoming the Cowardly Lion. <strong>Fred Allen</strong> (1894-1956) refined vaudeville timing into a weapon for social commentary. <strong>Fanny Brice</strong> (1891-1951) blended Yiddish humor with physical comedy and became a star by staying authentically working-class even as vaudeville moved uptown. The circuit generated hundreds of theaters across America, from the Orpheum in San Francisco to the Palace Theatre in New York, where comedians could work five shows a day, six days a week, honing their craft in front of real audiences who paid with hard-earned pennies.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Vaudeville comedians treated the stage like a gym and the audience like sparring partners. They'd bomb, die, get booed, and come back the next day with new material. It's like Yelp reviews before the internet—except the reviews were heckles thrown directly at your face while you were trying to tell a joke about a chicken. Modern comedians have safe rooms and podcasts; vaudeville had actual violence.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ COMEDY ALGORITHM</div>
+      <p>Vaudeville operated like a massive comedy feedback loop—the closest thing to real-time A/B testing for jokes. Comedians would test material night after night, watching audience response and iterating constantly. In machine learning terms, this is <strong>reinforcement learning through immediate reward signals</strong>: laugh harder = repeat that joke structure; silence = discard. The vaudeville circuit was a distributed training system for developing jokes that converted audience attention into laughter, much like how large language models learn from feedback to optimize for engagement and coherence.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 ACROSS THE COMEDY LANDSCAPE</div>
+      <p>This mirrors the apprenticeship model in <strong>Deep Work</strong>—craftspeople mastering their discipline through deliberate, repetitive practice. The vaudeville shuffle also echoes the messy trial-and-error process detailed in <strong>The Black Swan</strong>, where rare successes emerge from infinite small failures in unpredictable systems.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Vaudeville was the only place where a poor kid could become a star without having a famous name or rich parents. You just had to be funny enough to survive the heckles."</div>
+      <div class="quote-attr">— Paraphrased from Kliph Nesteroff's research</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 2: THE RISE OF THE RADIO COMEDIAN -->
+<section class="lesson" style="background: linear-gradient(180deg, #fff0e6 0%, #ffe6f0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--orange);">2</div>
+    <h2 class="lesson-title">Radio Comedy Rewires the Brain</h2>
+    <p class="lesson-subtitle">From Theaters to Airwaves: How Fred Allen, Jack Benny, & Others Invented Mass Comedy (1920s-1940s)</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Radio set -->
+        <rect x="200" y="60" width="300" height="200" fill="#8B4513" stroke="var(--dark)" stroke-width="3" rx="10"/>
+        <rect x="220" y="80" width="260" height="120" fill="#D2691E" stroke="var(--dark)" stroke-width="2"/>
+
+        <!-- Speaker grille -->
+        <rect x="230" y="90" width="240" height="100" fill="#A0522D"/>
+        <line x1="250" y1="90" x2="250" y2="190" stroke="#D2691E" stroke-width="1"/>
+        <line x1="270" y1="90" x2="270" y2="190" stroke="#D2691E" stroke-width="1"/>
+        <line x1="290" y1="90" x2="290" y2="190" stroke="#D2691E" stroke-width="1"/>
+        <line x1="310" y1="90" x2="310" y2="190" stroke="#D2691E" stroke-width="1"/>
+        <line x1="330" y1="90" x2="330" y2="190" stroke="#D2691E" stroke-width="1"/>
+        <line x1="350" y1="90" x2="350" y2="190" stroke="#D2691E" stroke-width="1"/>
+        <line x1="370" y1="90" x2="370" y2="190" stroke="#D2691E" stroke-width="1"/>
+        <line x1="390" y1="90" x2="390" y2="190" stroke="#D2691E" stroke-width="1"/>
+        <line x1="410" y1="90" x2="410" y2="190" stroke="#D2691E" stroke-width="1"/>
+        <line x1="430" y1="90" x2="430" y2="190" stroke="#D2691E" stroke-width="1"/>
+
+        <!-- Dials -->
+        <circle cx="240" cy="225" r="15" fill="#A0522D" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="240" y1="215" x2="240" y2="205" stroke="var(--dark)" stroke-width="2"/>
+
+        <circle cx="420" cy="225" r="15" fill="#A0522D" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="420" y1="215" x2="420" y2="205" stroke="var(--dark)" stroke-width="2"/>
+
+        <!-- Radio waves -->
+        <circle cx="550" cy="80" r="30" fill="none" stroke="var(--sky)" stroke-width="2" opacity="0.6"/>
+        <circle cx="550" cy="80" r="50" fill="none" stroke="var(--sky)" stroke-width="2" opacity="0.4"/>
+        <circle cx="550" cy="80" r="70" fill="none" stroke="var(--sky)" stroke-width="2" opacity="0.2"/>
+
+        <!-- Microphone -->
+        <rect x="150" y="100" width="8" height="40" fill="var(--dark)"/>
+        <circle cx="154" cy="95" r="8" fill="var(--dark)" stroke="var(--comedy-gold)" stroke-width="2"/>
+        <line x1="154" y1="70" x2="154" y2="85" stroke="var(--dark)" stroke-width="2"/>
+
+        <!-- Voice lines -->
+        <path d="M 160 100 Q 170 90 180 100" fill="none" stroke="var(--coral)" stroke-width="2" stroke-dasharray="5,5"/>
+        <path d="M 165 110 Q 180 100 195 115" fill="none" stroke="var(--coral)" stroke-width="2" stroke-dasharray="5,5"/>
+        <path d="M 170 125 Q 190 115 210 130" fill="none" stroke="var(--coral)" stroke-width="2" stroke-dasharray="5,5"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">📻 KEY LESSON</div>
+      <p>Radio transformed comedy from a live, ephemeral art into something that could reach millions simultaneously. <strong>Jack Benny</strong> (1894-1974) dominated the airwaves with a revolutionary approach: comedic timing that relied on pauses and restraint rather than physical gags. <strong>Fred Allen</strong> (1894-1956) used radio to craft sophisticated political satire and character-based humor, pioneering the "Allen's Alley" sketch format. <strong>George Burns and Gracie Allen</strong> (married couple) brought domestic comedy to radio with Gracie's famous non sequiturs that baffled and delighted audiences. By 1939, <strong>radio reached 86% of American homes</strong>, making comedians cultural icons more powerful than movie stars. Shows like "The Jack Benny Program" (1932-1955) and "Fibber McGee and Molly" (1935-1959) became part of the national ritual—families would gather around the radio like we do with screens today.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Radio comedy is like a magic trick where you're describing the magic over the phone. The audience can't see Jack Benny's famous deadpan stare or Fred Allen's eyebrow raise, so comedians had to encode the comedy into inflection, silence, and timing. It's basically the audio equivalent of subtext—the joke isn't in what they say, it's in what they're *not* saying. Modern comedians would kill for that kind of power: the ability to make millions laugh through pure vocal performance. Now we have to add dumb filters and edit ourselves into a box.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ COMEDY ALGORITHM</div>
+      <p>Radio comedy faced the <strong>compression problem</strong> that large language models face: translating visual information into sequential tokens that preserve meaning. Comedians developed sophisticated encoding strategies—Jack Benny's famous vault joke worked because listeners built mental models of the vault through audio cues. This parallels how LLMs encode spatial and causal information through attention patterns. Radio forced comedians to become <strong>information architects</strong>, designing jokes that listeners could reconstruct in their minds through acoustic signals alone.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 ACROSS THE COMEDY LANDSCAPE</div>
+      <p>This reflects concepts from <strong>Atomic Habits</strong>—the power of tiny, consistent micro-interactions (weekly radio shows) creating cultural momentum. It also echoes <strong>Thinking, Fast and Slow</strong>'s research on how our minds fill in gaps: audiences were completing the jokes themselves, making them more memorable.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Jack Benny taught America that the biggest laugh comes from what you don't say. A pause was a punchline."</div>
+      <div class="quote-attr">— Kliph Nesteroff on Radio's Golden Age</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 3: THE NIGHTCLUB REVOLUTION -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f5ff 0%, #fff5f0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--coral);">3</div>
+    <h2 class="lesson-title">Nightclubs: Where Comedy Got Adult</h2>
+    <p class="lesson-subtitle">Lenny Bruce, Mort Sahl, and the Birth of Dangerous Comedy (1950s-1960s)</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Nightclub interior -->
+        <rect x="0" y="0" width="700" height="300" fill="#1a1a2e"/>
+
+        <!-- Walls -->
+        <rect x="30" y="30" width="640" height="240" fill="#2d2d4a" stroke="var(--comedy-gold)" stroke-width="2"/>
+
+        <!-- Ceiling and lights -->
+        <line x1="30" y1="80" x2="670" y2="80" stroke="var(--comedy-gold)" stroke-width="2"/>
+        <circle cx="150" cy="55" r="8" fill="var(--comedy-gold)"/>
+        <circle cx="350" cy="55" r="8" fill="var(--coral)"/>
+        <circle cx="550" cy="55" r="8" fill="var(--teal)"/>
+
+        <!-- Stage -->
+        <rect x="200" y="120" width="300" height="100" fill="var(--dark)" stroke="var(--comedy-gold)" stroke-width="2"/>
+        <line x1="200" y1="120" x2="500" y2="120" stroke="var(--comedy-gold)" stroke-width="3"/>
+
+        <!-- Spotlight -->
+        <path d="M 150 50 L 250 120 L 350 120 L 250 50" fill="var(--comedy-gold)" opacity="0.2"/>
+
+        <!-- Microphone on stage -->
+        <circle cx="350" cy="135" r="6" fill="var(--comedy-gold)"/>
+        <rect x="346" y="135" width="8" height="50" fill="var(--dark)"/>
+        <circle cx="350" cy="190" r="4" fill="var(--comedy-gold)"/>
+
+        <!-- Tables and chairs -->
+        <rect x="70" y="200" width="40" height="5" fill="#999"/>
+        <circle cx="75" cy="220" r="8" fill="var(--teal)" opacity="0.5"/>
+        <circle cx="95" cy="220" r="8" fill="var(--coral)" opacity="0.5"/>
+
+        <rect x="590" y="200" width="40" height="5" fill="#999"/>
+        <circle cx="595" cy="220" r="8" fill="var(--teal)" opacity="0.5"/>
+        <circle cx="615" cy="220" r="8" fill="var(--coral)" opacity="0.5"/>
+
+        <!-- Crowd silhouettes -->
+        <circle cx="120" cy="240" r="10" fill="#666"/>
+        <circle cx="140" cy="245" r="9" fill="#666"/>
+        <circle cx="160" cy="240" r="11" fill="#666"/>
+        <circle cx="540" cy="240" r="10" fill="#666"/>
+        <circle cx="560" cy="245" r="9" fill="#666"/>
+        <circle cx="580" cy="240" r="11" fill="#666"/>
+
+        <!-- Smoke/atmosphere -->
+        <circle cx="300" cy="100" r="20" fill="white" opacity="0.1"/>
+        <circle cx="400" cy="110" r="25" fill="white" opacity="0.08"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🚬 KEY LESSON</div>
+      <p><strong>Lenny Bruce</strong> (1925-1966) was the nuclear bomb that detonated comedy's Hays Code. His 1962 album "The Lenny Bruce Togetherness Band" won a Grammy, but his real genius was saying the words—"cocksucker," "shit," "motherfucker"—that had been forbidden on American stages. He was arrested for obscenity in 1964 in Chicago, turning his comedy into a free speech battle. <strong>Mort Sahl</strong> (1926-2021) weaponized topical political commentary, making dinner-jacket comedy about current events and politicians. Their nightclub performances at The Hungry i in San Francisco, The Gate of Horn in Chicago, and the Cellar in Los Angeles became laboratories for pushing cultural boundaries. <strong>Dick Gregory</strong> (1932-2017) broke the color barrier in comedy while using his comedy as a tool for civil rights activism, proving that a Black comedian could work prestigious nightclubs and command audiences. These comedians turned nightclubs into venues where adults could hear the truth spoken aloud.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Lenny Bruce got arrested for saying words that TikTok teenagers say casually between sips of iced coffee. He spent months in legal battles so people could have the "right" to swear on stage, and now every open mic night is basically a profanity showcase. It's like he fought for free speech and we weaponized it into "edgy" as a personality trait. He'd probably find that hilarious—and deeply disappointing.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ COMEDY ALGORITHM</div>
+      <p>Lenny Bruce's innovation was discovering comedy's <strong>taboo boundary</strong>—the line between "allowed" and "forbidden" content. By pushing that boundary deliberately, he exposed how comedy's rules were arbitrary cultural constructs, not logical systems. In machine learning, this parallels how models learn by discovering the <strong>decision boundary</strong>: the threshold separating one classification from another. Bruce essentially performed boundary detection on American culture's comedy model, revealing its hidden parameters.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 ACROSS THE COMEDY LANDSCAPE</div>
+      <p>Echoes <strong>Influence</strong>'s concept of <strong>social proof and authority</strong>: once Lenny Bruce said the forbidden word and didn't die, it became sayable. This also connects to <strong>Thinking, Fast and Slow</strong>'s discussion of how exposure to previously taboo ideas makes them feel normal through mere familiarity.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"I'm not a comedian. I'm Lenny Bruce."</div>
+      <div class="quote-attr">— Lenny Bruce</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 4: THE STAND-UP COMEDY EXPLOSION -->
+<section class="lesson" style="background: linear-gradient(180deg, #ffe6e6 0%, #e6f5ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--teal);">4</div>
+    <h2 class="lesson-title">The Rise of the Solo Performer</h2>
+    <p class="lesson-subtitle">George Carlin, Richard Pryor, and How Stand-Up Became an Art Form (1970s-1980s)</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stage -->
+        <rect x="50" y="200" width="600" height="80" fill="var(--teal)" opacity="0.3" stroke="var(--dark)" stroke-width="2"/>
+
+        <!-- Curtain -->
+        <rect x="100" y="30" width="500" height="170" fill="#8B0000" opacity="0.8"/>
+        <line x1="150" y1="30" x2="150" y2="200" stroke="#600000" stroke-width="1"/>
+        <line x1="200" y1="30" x2="200" y2="200" stroke="#600000" stroke-width="1"/>
+        <line x1="250" y1="30" x2="250" y2="200" stroke="#600000" stroke-width="1"/>
+        <line x1="300" y1="30" x2="300" y2="200" stroke="#600000" stroke-width="1"/>
+        <line x1="350" y1="30" x2="350" y2="200" stroke="#600000" stroke-width="1"/>
+        <line x1="400" y1="30" x2="400" y2="200" stroke="#600000" stroke-width="1"/>
+        <line x1="450" y1="30" x2="450" y2="200" stroke="#600000" stroke-width="1"/>
+        <line x1="500" y1="30" x2="500" y2="200" stroke="#600000" stroke-width="1"/>
+        <line x1="550" y1="30" x2="550" y2="200" stroke="#600000" stroke-width="1"/>
+
+        <!-- Spotlight -->
+        <circle cx="350" cy="80" r="80" fill="var(--comedy-gold)" opacity="0.25"/>
+        <path d="M 270 200 L 350 100 L 430 200" fill="none" stroke="var(--comedy-gold)" stroke-width="2" opacity="0.6"/>
+
+        <!-- Comedian silhouette in spotlight -->
+        <circle cx="350" cy="130" r="15" fill="var(--dark)"/>
+        <rect x="340" y="145" width="20" height="35" fill="var(--dark)"/>
+        <line x1="342" y1="150" x2="330" y2="170" stroke="var(--dark)" stroke-width="3"/>
+        <line x1="358" y1="150" x2="370" y2="170" stroke="var(--dark)" stroke-width="3"/>
+        <line x1="342" y1="180" x2="335" y2="200" stroke="var(--dark)" stroke-width="3"/>
+        <line x1="358" y1="180" x2="365" y2="200" stroke="var(--dark)" stroke-width="3"/>
+
+        <!-- Microphone -->
+        <circle cx="380" cy="155" r="5" fill="var(--comedy-gold)"/>
+        <line x1="380" y1="155" x2="380" y2="190" stroke="var(--dark)" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎤 KEY LESSON</div>
+      <p><strong>George Carlin</strong> (1937-2008) evolved from doing clean radio comedy to becoming a ferocious social critic. His 1978 album "FM & AM" won a Grammy, but his real power came from albums like "Class Clown" (1972) where he dissected language, religion, and authority with surgical precision. <strong>Richard Pryor</strong> (1940-2005) became the greatest stand-up comedian of all time by bringing complete emotional authenticity and racial truth to the stage. His albums "That Nigger's Crazy" (1974) and "Bicentennial Nigger" (1976) won Grammys and transformed comedy into confessional art. <strong>Steve Martin</strong> (1945-) brought absurdist, intellectual comedy with his "wild and crazy guy" persona and prop comedy that challenged what stand-up could be. By 1980, stand-up had become a viable career path. Comedy albums became Grammy-winning art. Comic strip-mall shows could draw 500 people. Stand-up went from vaudeville's punchline machine to a form where a single comedian could command a stage alone for 90 minutes and hold an audience captive through sheer force of personality and ideas.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Richard Pryor essentially said "I'm going to take all of American racial trauma, my personal drug addiction, my sexuality, my broken marriages, and turn it into comedy that makes white people uncomfortable while sitting in the dark." And he won. The genius move: making the audience complicit in the joke. They couldn't ignore what he was saying because the laughter was their only defense. It's psychology disguised as entertainment.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ COMEDY ALGORITHM</div>
+      <p>Stand-up comedy is essentially <strong>real-time human-AI interaction</strong>. The comedian generates content, observes audience feedback (laughter, silence, groans), and adapts in real-time. This is <strong>reinforcement learning with immediate reward signals</strong>—each laugh is a positive reinforcement that shapes the comedian's next move. Richard Pryor's genius was reading the room's emotional state and adjusting tone, pacing, and content accordingly. This mirrors how modern LLMs are fine-tuned through <strong>RLHF (Reinforcement Learning from Human Feedback)</strong>, where human preferences shape model behavior. Solo performance eliminates the buffer of other performers, forcing maximum responsiveness to audience signals.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 ACROSS THE COMEDY LANDSCAPE</div>
+      <p>This reflects <strong>Deep Work</strong>'s emphasis on focused mastery—these comedians refined their craft through obsessive dedication to their art form. It also connects to <strong>Flow</strong>'s concept of being completely absorbed in an activity that demands total presence and adaptability.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"I went through heroin, I went through a lot of things. Stand-up was the only thing that kept me alive."</div>
+      <div class="quote-attr">— Richard Pryor</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 5: ALTERNATIVE COMEDY AND PUNK ENERGY -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0ffe6 0%, #ffe6f5 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--forest);">5</div>
+    <h2 class="lesson-title">Alternative Comedy's Punk Rebellion</h2>
+    <p class="lesson-subtitle">Andy Kaufman, Sandra Bernhard, and Anti-Comedy (1970s-1980s)</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Raw brick wall -->
+        <rect x="0" y="0" width="700" height="300" fill="#8B4513"/>
+        <rect x="10" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="50" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="90" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="130" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="170" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="210" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="250" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="290" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="330" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="370" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="410" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="450" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="490" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="530" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="570" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="610" y="10" width="30" height="30" fill="#A0522D"/>
+        <rect x="650" y="10" width="30" height="30" fill="#A0522D"/>
+
+        <!-- More bricks pattern -->
+        <rect x="30" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="70" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="110" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="150" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="190" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="230" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="270" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="310" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="350" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="390" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="430" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="470" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="510" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="550" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="590" y="50" width="30" height="30" fill="#A0522D"/>
+        <rect x="630" y="50" width="30" height="30" fill="#A0522D"/>
+
+        <!-- Graffiti/posters -->
+        <rect x="50" y="100" width="150" height="80" fill="var(--coral)" stroke="var(--dark)" stroke-width="2"/>
+        <text x="125" y="145" font-family="Playfair Display" font-size="24" font-weight="bold" fill="white" text-anchor="middle">???</text>
+
+        <rect x="500" y="110" width="140" height="70" fill="var(--teal)" stroke="var(--dark)" stroke-width="2"/>
+        <text x="570" y="155" font-family="Inter" font-size="16" font-weight="bold" fill="var(--dark)" text-anchor="middle">ANTI-COMEDY</text>
+
+        <!-- Spray paint can -->
+        <rect x="650" y="180" width="15" height="40" fill="var(--dark)"/>
+        <circle cx="657.5" cy="175" r="6" fill="var(--comedy-gold)"/>
+
+        <!-- Splatter marks -->
+        <circle cx="300" cy="240" r="8" fill="var(--coral)" opacity="0.6"/>
+        <circle cx="320" cy="250" r="6" fill="var(--teal)" opacity="0.6"/>
+        <circle cx="280" cy="255" r="5" fill="var(--coral)" opacity="0.6"/>
+        <circle cx="340" cy="245" r="7" fill="var(--teal)" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎨 KEY LESSON</div>
+      <p><strong>Andy Kaufman</strong> (1949-1984) wasn't doing comedy—he was doing anti-comedy. His deliberately bad foreign man character, his infamous wrestling match with Jerry "The King" Lawler, his complete rejection of punchlines and timing conventions—Kaufman was deconstructing what comedy even meant. <strong>Sandra Bernhard</strong> (1955-) brought performance art, gender-bending sexuality, and vulnerability into comedy, refusing the male template of comedy and forcing audiences to sit with discomfort. <strong>Emo Philips</strong> (1956-) developed deliberately anti-charismatic comedy with bizarre deadpan observations. These comics emerged from the punk rock ethos of the late 1970s: if you can't trust institutions, why trust comedy's institutions? Alternative comedy clubs like The Comic Strip in New York and The Improv became laboratories where the rules could be broken. The revolution wasn't just about content—it was about form. If you could get a laugh by NOT being funny, what did that say about comedy itself?</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Andy Kaufman achieved the philosopher's stone of comedy: getting paid to confuse people. He'd go on David Letterman and do the worst singing possible, making the audience unsure if he was joking or genuinely terrible. The genius: both answers were true simultaneously. He proved you could make a career out of making people deeply uncomfortable, which is basically what half the internet does now but with less artistic integrity.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ COMEDY ALGORITHM</div>
+      <p>Anti-comedy is <strong>adversarial training</strong> applied to entertainment. Andy Kaufman trained audiences like a GAN trains a discriminator—by constantly violating their expectations, he forced them to recalibrate their model of what "comedy" means. This is similar to how adversarial examples expose vulnerabilities in neural networks by finding edge cases that break predictions. Kaufman was essentially finding the edge cases of comedy itself—the boundaries where the definition breaks down.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 ACROSS THE COMEDY LANDSCAPE</div>
+      <p>This echoes <strong>The Black Swan</strong>'s argument that rare, unpredictable events define systems more than expected ones. It also connects to <strong>Blink</strong>'s research on how snap judgments can be completely wrong—Kaufman trained audiences to distrust their initial reactions.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"I'm not a real person. I'm a character."</div>
+      <div class="quote-attr">— Andy Kaufman</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 6: WOMEN COMEDIANS AND BREAKING THE GLASS CEILING -->
+<section class="lesson" style="background: linear-gradient(180deg, #fff0e6 0%, #e6f0ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--pink);">6</div>
+    <h2 class="lesson-title">Women Comics Claim the Stage</h2>
+    <p class="lesson-subtitle">Joan Rivers, Lily Tomlin, and Female Comedic Authority (1970s-1990s)</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Dressing room mirror -->
+        <rect x="100" y="50" width="500" height="200" fill="white" stroke="var(--dark)" stroke-width="3" rx="10"/>
+        <rect x="110" y="60" width="480" height="180" fill="#FFF8DC" stroke="var(--pink)" stroke-width="2"/>
+
+        <!-- Mirror lights -->
+        <circle cx="130" cy="75" r="8" fill="var(--comedy-gold)"/>
+        <circle cx="170" cy="75" r="8" fill="var(--coral)"/>
+        <circle cx="210" cy="75" r="8" fill="var(--teal)"/>
+        <circle cx="250" cy="75" r="8" fill="var(--pink)"/>
+        <circle cx="290" cy="75" r="8" fill="var(--comedy-gold)"/>
+        <circle cx="330" cy="75" r="8" fill="var(--coral)"/>
+        <circle cx="370" cy="75" r="8" fill="var(--teal)"/>
+        <circle cx="410" cy="75" r="8" fill="var(--pink)"/>
+        <circle cx="450" cy="75" r="8" fill="var(--comedy-gold)"/>
+        <circle cx="490" cy="75" r="8" fill="var(--coral)"/>
+        <circle cx="530" cy="75" r="8" fill="var(--teal)"/>
+        <circle cx="570" cy="75" r="8" fill="var(--pink)"/>
+
+        <!-- Makeup and items -->
+        <rect x="140" y="210" width="20" height="25" fill="var(--pink)"/>
+        <circle cx="160" cy="220" r="8" fill="var(--comedy-gold)"/>
+        <rect x="180" y="215" width="15" height="20" fill="var(--coral)"/>
+
+        <!-- Reflection/silhouette -->
+        <circle cx="350" cy="140" r="18" fill="var(--dark)" opacity="0.7"/>
+        <rect x="335" y="160" width="30" height="40" fill="var(--dark)" opacity="0.7"/>
+
+        <!-- Frame on wall -->
+        <rect x="50" y="280" width="200" height="3" fill="var(--dark)"/>
+        <text x="150" y="295" font-family="Playfair Display" font-size="12" fill="var(--dark)" text-anchor="middle">MAKE THEM LAUGH</text>
+
+        <rect x="450" y="280" width="200" height="3" fill="var(--dark)"/>
+        <text x="550" y="295" font-family="Playfair Display" font-size="12" fill="var(--dark)" text-anchor="middle">BREAK BARRIERS</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">💪 KEY LESSON</div>
+      <p><strong>Joan Rivers</strong> (1933-2014) was relentlessly, fearlessly herself on stage—sharp, observational, obsessed with appearance and sex. Her early albums in the 1970s established her as a major comic force. When Johnny Carson banned her from The Tonight Show, she pivoted to hosting her own talk show (1989-1990), becoming the first woman to host a late-night network show. <strong>Lily Tomlin</strong> (1939-) brought intellectual, character-based comedy and absurdist humor to mainstream audiences through television and stand-up. <strong>Phyllis Diller</strong> (1917-2012) was already a legend, but the 1970s-1980s saw her influence explode as younger women claimed comedy stages. <strong>Gail Matthius</strong>, <strong>Robin Williams' ex-wife</strong> (context for understanding how many women comedians were isolated in male-dominated circuits), and others began to establish themselves. By the 1990s, women like <strong>Ellen DeGeneres</strong> (who came out as gay in 1997 and normalized LGBTQ+ presence in comedy), <strong>Janeane Garofalo</strong>, and <strong>Margaret Cho</strong> were headlining, proving that women's comedy voices were essential to American culture, not supplementary.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Joan Rivers spent her entire career saying things that made male comedians look like they were performing for church audiences. She talked about sex, aging, appearance, and female sexuality with zero filters. The male establishment's response? Blacklist her. She responded by creating her own empire. It's like watching someone get kicked out of the boys' club and then building a better club next door—with blackjack and hookers, as Bender would say.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ COMEDY ALGORITHM</div>
+      <p>Women comedians had to develop <strong>novel training data</strong>: observational content about female experience that male comedians weren't generating. Joan Rivers' insistence on talking about her aging body, her sexuality, her appearance forced comedy systems to absorb a completely new domain. In machine learning terms, they're <strong>data augmentation</strong>—expanding the training set to include voices that were previously underrepresented. This increased the model's ability to make meaningful predictions across a broader population. Women comedians essentially debugged comedy, revealing hidden assumptions baked into the system.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 ACROSS THE COMEDY LANDSCAPE</div>
+      <p>Reflects <strong>Mindset</strong>'s distinction between fixed and growth mindsets: women comedians had to develop growth mentality in a system designed to tell them comedy wasn't their domain. Also connects to <strong>Influence</strong>'s research on how breaking norms requires extraordinary persistence and charisma.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"I have no filter. If you don't like what I'm saying, change the channel."</div>
+      <div class="quote-attr">— Joan Rivers</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 7: OBSERVATIONAL COMEDY AND THE EVERYDAY -->
+<section class="lesson" style="background: linear-gradient(180deg, #e6ffe6 0%, #fff0e6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--sunny);">7</div>
+    <h2 class="lesson-title">The Art of Noticing What Everyone Ignores</h2>
+    <p class="lesson-subtitle">Jerry Seinfeld, Bill Burr, and the Power of The Mundane (1980s-2000s)</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Daily life scene -->
+        <!-- Building -->
+        <rect x="50" y="80" width="200" height="160" fill="#D2B48C" stroke="var(--dark)" stroke-width="2"/>
+        <!-- Windows -->
+        <rect x="70" y="100" width="30" height="30" fill="var(--sky)"/>
+        <rect x="120" y="100" width="30" height="30" fill="var(--sky)"/>
+        <rect x="170" y="100" width="30" height="30" fill="var(--sky)"/>
+        <rect x="70" y="150" width="30" height="30" fill="var(--sky)"/>
+        <rect x="120" y="150" width="30" height="30" fill="var(--sky)"/>
+        <rect x="170" y="150" width="30" height="30" fill="var(--sky)"/>
+
+        <!-- Door -->
+        <rect x="100" y="220" width="35" height="70" fill="#8B4513" stroke="var(--dark)" stroke-width="2"/>
+        <circle cx="132" cy="255" r="3" fill="var(--comedy-gold)"/>
+
+        <!-- Street elements -->
+        <rect x="300" y="220" width="15" height="60" fill="#555"/>
+        <circle cx="307.5" cy="285" r="12" fill="#333"/>
+        <rect x="340" y="220" width="15" height="60" fill="#555"/>
+        <circle cx="347.5" cy="285" r="12" fill="#333"/>
+
+        <!-- Person -->
+        <circle cx="450" cy="150" r="12" fill="var(--dark)"/>
+        <rect x="442" y="165" width="16" height="30" fill="var(--warm-red)"/>
+        <line x1="442" y1="175" x2="425" y2="200" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="458" y1="175" x2="475" y2="200" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="445" y1="195" x2="435" y2="225" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="455" y1="195" x2="465" y2="225" stroke="var(--dark)" stroke-width="2"/>
+
+        <!-- Thought bubble -->
+        <circle cx="500" cy="120" r="50" fill="white" stroke="var(--dark)" stroke-width="2"/>
+        <circle cx="510" cy="170" r="8" fill="white" stroke="var(--dark)" stroke-width="2"/>
+        <circle cx="520" cy="185" r="5" fill="white" stroke="var(--dark)" stroke-width="2"/>
+        <text x="500" y="125" font-family="Inter" font-size="12" text-anchor="middle" fill="var(--dark)">Why do we</text>
+        <text x="500" y="140" font-family="Inter" font-size="12" text-anchor="middle" fill="var(--dark)">do things</text>
+        <text x="500" y="155" font-family="Inter" font-size="12" text-anchor="middle" fill="var(--dark)">like this?</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">👀 KEY LESSON</div>
+      <p><strong>Jerry Seinfeld</strong> (1954-) made his career out of asking "Why do we do that?" about the most mundane aspects of modern life: waiting in line, laundry, how we organize the fridge. His 1989 HBO special "I'm Telling You for the Last Time" is observational comedy at its purest. His sitcom "Seinfeld" (1989-1998) became the most successful TV comedy ever by making the everyday extraordinary. <strong>Bill Burr</strong> (1968-) takes observational comedy and marries it to biting social critique. His podcast "Monday Morning Podcast" reaches millions weekly, and his specials like "F is for Family" show that observational comedy can also be politically charged. <strong>Dave Chappelle</strong> (1973-) proved that observational comedy about race, power, and identity could be the smartest political commentary on television (his 2003-2004 sketch show was groundbreaking). The key insight: comedy's power isn't in witty constructions; it's in noticing what everyone's been too close to see clearly. It's the comedy equivalent of the scientific method—observe carefully, find the pattern, express the absurdity hidden in plain sight.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Jerry Seinfeld spent an entire career saying "That's weird, right?" about stuff we don't think about. Why DO we arrange groceries in the order we shop? Why IS cereal a breakfast but soup isn't? He took the mundane, microscoped it, and revealed the absurdity. It's like he was debugging human behavior one laundry basket at a time. And somehow that made a billion dollars.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ COMEDY ALGORITHM</div>
+      <p>Observational comedy is <strong>pattern recognition and anomaly detection</strong>. The comedian scans everyday life for behaviors that violate the patterns we've stopped noticing. This is exactly what machine learning does: find statistical deviations from expected distributions. Seinfeld's genius was applying human anomaly detection to mundane domains—grocery store behavior, laundry sorting, phone etiquette. He trained audiences to see these domains as having "normal" distributions, then pointed out statistical outliers in our own behavior, making us laugh at ourselves.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 ACROSS THE COMEDY LANDSCAPE</div>
+      <p>Echoes <strong>Thinking, Fast and Slow</strong>'s discussion of how we operate on autopilot for routine tasks and miss obvious inefficiencies. Also connects to <strong>Atomic Habits</strong>—Seinfeld's work is fundamentally about making visible the invisible habits that structure our days.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"I just notice things. Other people notice things too, but they don't talk about it."</div>
+      <div class="quote-attr">— Jerry Seinfeld</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 8: CHARACTER COMEDY AND PERSONAS -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0e6ff 0%, #ffe6e6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--dark-purple);">8</div>
+    <h2 class="lesson-title">Comedy Through Character and Persona</h2>
+    <p class="lesson-subtitle">Eddie Murphy, Mike Myers, and Theatrical Comedy (1980s-1990s)</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Dressing room wall -->
+        <rect x="0" y="0" width="700" height="300" fill="#2D2D2D"/>
+
+        <!-- Costume racks -->
+        <rect x="50" y="40" width="280" height="180" fill="none" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="70" y1="40" x2="70" y2="220" stroke="var(--dark)" stroke-width="1"/>
+        <line x1="90" y1="40" x2="90" y2="220" stroke="var(--dark)" stroke-width="1"/>
+        <line x1="110" y1="40" x2="110" y2="220" stroke="var(--dark)" stroke-width="1"/>
+        <line x1="130" y1="40" x2="130" y2="220" stroke="var(--dark)" stroke-width="1"/>
+        <line x1="150" y1="40" x2="150" y2="220" stroke="var(--dark)" stroke-width="1"/>
+        <line x1="170" y1="40" x2="170" y2="220" stroke="var(--dark)" stroke-width="1"/>
+        <line x1="190" y1="40" x2="190" y2="220" stroke="var(--dark)" stroke-width="1"/>
+        <line x1="210" y1="40" x2="210" y2="220" stroke="var(--dark)" stroke-width="1"/>
+        <line x1="230" y1="40" x2="230" y2="220" stroke="var(--dark)" stroke-width="1"/>
+        <line x1="250" y1="40" x2="250" y2="220" stroke="var(--dark)" stroke-width="1"/>
+        <line x1="270" y1="40" x2="270" y2="220" stroke="var(--dark)" stroke-width="1"/>
+        <line x1="290" y1="40" x2="290" y2="220" stroke="var(--dark)" stroke-width="1"/>
+        <line x1="310" y1="40" x2="310" y2="220" stroke="var(--dark)" stroke-width="1"/>
+
+        <!-- Costumes -->
+        <rect x="60" y="50" width="15" height="40" fill="var(--coral)"/>
+        <rect x="85" y="50" width="15" height="40" fill="var(--pink)"/>
+        <rect x="110" y="50" width="15" height="40" fill="var(--teal)"/>
+        <rect x="135" y="50" width="15" height="40" fill="var(--comedy-gold)"/>
+        <rect x="160" y="50" width="15" height="40" fill="var(--warm-red)"/>
+        <rect x="185" y="50" width="15" height="40" fill="var(--sky)"/>
+        <rect x="210" y="50" width="15" height="40" fill="var(--coral)"/>
+        <rect x="235" y="50" width="15" height="40" fill="var(--teal)"/>
+        <rect x="260" y="50" width="15" height="40" fill="var(--pink)"/>
+        <rect x="285" y="50" width="15" height="40" fill="var(--comedy-gold)"/>
+
+        <!-- Wigs on shelf -->
+        <circle cx="160" cy="110" r="12" fill="var(--dark)" stroke="var(--coral)" stroke-width="2"/>
+        <circle cx="200" cy="110" r="12" fill="var(--dark)" stroke="var(--teal)" stroke-width="2"/>
+        <circle cx="240" cy="110" r="12" fill="var(--dark)" stroke="var(--pink)" stroke-width="2"/>
+
+        <!-- Character mask/face -->
+        <circle cx="530" cy="120" r="60" fill="white" stroke="var(--dark)" stroke-width="3"/>
+        <circle cx="510" cy="100" r="10" fill="var(--dark)"/>
+        <circle cx="550" cy="100" r="10" fill="var(--dark)"/>
+        <path d="M 520 140 Q 530 150 540 140" fill="none" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="525" y1="155" x2="535" y2="165" stroke="var(--dark)" stroke-width="2"/>
+
+        <!-- Different expression -->
+        <circle cx="590" cy="195" r="35" fill="white" stroke="var(--dark)" stroke-width="2"/>
+        <circle cx="578" cy="185" r="6" fill="var(--dark)"/>
+        <circle cx="602" cy="185" r="6" fill="var(--dark)"/>
+        <path d="M 580 200 Q 590 205 600 200" fill="none" stroke="var(--dark)" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎭 KEY LESSON</div>
+      <p><strong>Eddie Murphy</strong> (1961-) revolutionized comedy through character work and voices. His 1987 comedy special "Raw" showcased multiple personas and impressions that could shift the entire energy of a set. His characters like Buckwheat, Gumby, and Velvet Jones from Saturday Night Live became cultural icons. <strong>Mike Myers</strong> (1964-) built his career on character-based comedy: Wayne Campbell from Wayne's World, Dr. Evil from the Austin Powers films, and characters from his sketch work. <strong>Dana Carvey</strong> (1955-) created iconic characters like the Church Lady and Garth Algar that transcended comedy and became part of American cultural vocabulary. Character comedy allowed performers to explore different aspects of identity, cultural commentary, and absurdist humor simultaneously. A character could say things the "real" performer couldn't because there was plausible deniability—it's not the comedian speaking, it's the character. This gave comedians freedom to push boundaries while maintaining a layer of protection.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Eddie Murphy proved you could be ridiculously funny without a punchline, just by committing completely to a character and its internal logic. A rubber-faced man pretending to be Buckwheat shouldn't work, but it did because Murphy understood that commitment is the funniest thing. It's like method acting collided with stand-up and produced something that made everyone in the room uncomfortable and delighted simultaneously.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ COMEDY ALGORITHM</div>
+      <p>Character comedy is essentially <strong>ensemble learning with different models</strong>. Rather than a single unified "comedian" generating predictions, the performer trains multiple sub-models (characters), each with different parameters and training data. This is similar to how LLMs use <strong>mixture of experts architectures</strong>—multiple specialized networks activated for different input domains. Eddie Murphy's genius was developing characters that could extract patterns from different cultural domains: Gumby from toy culture, the white reporter from journalism, etc. Each character became a specialist model.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 ACROSS THE COMEDY LANDSCAPE</div>
+      <p>Connects to <strong>Emotional Intelligence</strong>'s concept of perspective-taking and understanding different viewpoints. Also echoes <strong>Thinking, Fast and Slow</strong>'s discussion of how we adopt different cognitive modes depending on context—character comedy weaponizes this psychological flexibility.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Comedy is about the truth, and sometimes the truth comes through a character's lies."</div>
+      <div class="quote-attr">— Eddie Murphy, paraphrased</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 9: DARK COMEDY AND TABOO SUBJECTS -->
+<section class="lesson" style="background: linear-gradient(180deg, #1a1a1a 0%, #2d2d3d 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--warm-red);">9</div>
+    <h2 class="lesson-title">Laughing in the Dark: Taboo Comedy</h2>
+    <p class="lesson-subtitle">Andrew Dice Clay, Bobcat Goldthwait, and Shock Comedy (1980s-1990s)</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Dark club atmosphere -->
+        <rect x="0" y="0" width="700" height="300" fill="#0a0a0a"/>
+
+        <!-- Warning sign -->
+        <polygon points="350,30 380,90 320,90" fill="var(--warm-red)" stroke="var(--comedy-gold)" stroke-width="2"/>
+        <text x="350" y="75" font-family="Inter" font-size="24" font-weight="bold" fill="var(--comedy-gold)" text-anchor="middle">!</text>
+
+        <!-- Barrier tape -->
+        <line x1="100" y1="150" x2="600" y2="150" stroke="var(--warm-red)" stroke-width="3" stroke-dasharray="20,10"/>
+
+        <!-- Barricade -->
+        <rect x="250" y="160" width="200" height="30" fill="var(--warm-red)" stroke="var(--dark)" stroke-width="2"/>
+        <text x="350" y="180" font-family="Inter" font-size="14" font-weight="bold" fill="white" text-anchor="middle">EXPLICIT CONTENT</text>
+
+        <!-- Person in audience -->
+        <circle cx="150" cy="100" r="12" fill="white"/>
+        <rect x="142" y="115" width="16" height="25" fill="white"/>
+        <line x1="142" y1="120" x2="130" y2="140" stroke="white" stroke-width="2"/>
+        <line x1="158" y1="120" x2="170" y2="140" stroke="white" stroke-width="2"/>
+
+        <!-- Shocked expression -->
+        <circle cx="150" cy="105" r="4" fill="var(--dark)"/>
+        <circle cx="150" cy="100" r="4" fill="var(--dark)"/>
+        <path d="M 145 110 Q 150 115 155 110" fill="none" stroke="var(--dark)" stroke-width="1.5"/>
+
+        <!-- Stage with problematic content (represented abstractly) -->
+        <rect x="300" y="200" width="200" height="60" fill="var(--dark)" stroke="var(--warm-red)" stroke-width="2"/>
+        <circle cx="320" cy="230" r="5" fill="var(--coral)"/>
+        <circle cx="340" cy="235" r="4" fill="var(--coral)"/>
+        <circle cx="360" cy="228" r="6" fill="var(--coral)"/>
+        <circle cx="380" cy="232" r="5" fill="var(--coral)"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">💥 KEY LESSON</div>
+      <p><strong>Andrew Dice Clay</strong> (1957-) made shock his brand: misogynistic, homophobic, crude, and aggressive. His 1989 HBO special made him a star despite (or because of) massive backlash. He proved there was an audience for comedy that said the most offensive things imaginable. <strong>Bobcat Goldthwait</strong> (1962-) brought screaming absurdism and emotional rawness to dark material. His unconventional delivery—high-pitched voice, physical contortions—made deeply disturbing jokes somehow vulnerable. <strong>Sam Kinison</strong> (1953-1992) screamed religious blasphemy and sexual transgression in a way that seemed genuinely dangerous. These comedians pushed the boundary of what could be said on stage, sometimes crossing into genuinely harmful territory, sometimes achieving cathartic truth about ugly aspects of human nature. The tension: when is dark comedy releasing a necessary pressure valve, and when is it just punching down? Nesteroff's book documents how comedy always walks this line—is it critique or cruelty?</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Dark comedy comedians basically said "What if we made the audience so uncomfortable they had no choice but to laugh?" It's like psychological torture disguised as entertainment. Andrew Dice Clay's whole act was weaponizing offensiveness into charisma. Some would argue that's genius; others would argue it's just being an asshole with a microphone. He proved both could be simultaneously true.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ COMEDY ALGORITHM</div>
+      <p>Dark comedy tests the <strong>boundary of acceptable outputs</strong> in a language model trained on human values. If comedy is a predictive model of what audiences find funny, dark comedy is a systematic exploration of the model's edges—the point where "funny" flips to "horrifying." This is similar to <strong>adversarial examples and robustness testing</strong> in AI: finding the minimal perturbations that cause a model to produce harmful outputs. Dark comedians are essentially white-hat hackers of cultural systems, testing whether the safeguards are actually working.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 ACROSS THE COMEDY LANDSCAPE</div>
+      <p>Relates to <strong>Influence</strong>'s discussion of how transgression can create forbidden fruit appeal. Also connects to <strong>The Black Swan</strong>'s argument that dangerous edge cases define systems more than comfortable averages. Dark comedy exposes the hidden values and assumptions of cultures.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"If you're going to do dark material, you have to be darker than the material."</div>
+      <div class="quote-attr">— Paraphrased from comedy theory</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 10: STORYTELLING COMEDIANS AND NARRATIVE STRUCTURE -->
+<section class="lesson" style="background: linear-gradient(180deg, #fff9e6 0%, #e6f0ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--deep-blue);">10</div>
+    <h2 class="lesson-title">Comedy as Narrative Art</h2>
+    <p class="lesson-subtitle">David Sedaris, Mike Birbiglia, and the Power of Personal Stories (1990s-2000s)</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Open book -->
+        <ellipse cx="350" cy="150" rx="120" ry="100" fill="white" stroke="var(--dark)" stroke-width="3"/>
+        <line x1="350" y1="50" x2="350" y2="250" stroke="var(--dark)" stroke-width="2"/>
+
+        <!-- Left page -->
+        <rect x="240" y="70" width="100" height="160" fill="white"/>
+        <line x1="250" y1="80" x2="330" y2="80" stroke="#ccc" stroke-width="1"/>
+        <line x1="250" y1="95" x2="330" y2="95" stroke="#ccc" stroke-width="1"/>
+        <line x1="250" y1="110" x2="330" y2="110" stroke="#ccc" stroke-width="1"/>
+        <line x1="250" y1="125" x2="330" y2="125" stroke="#ccc" stroke-width="1"/>
+        <line x1="250" y1="140" x2="330" y2="140" stroke="#ccc" stroke-width="1"/>
+        <line x1="250" y1="155" x2="330" y2="155" stroke="#ccc" stroke-width="1"/>
+        <line x1="250" y1="170" x2="330" y2="170" stroke="#ccc" stroke-width="1"/>
+        <line x1="250" y1="185" x2="330" y2="185" stroke="#ccc" stroke-width="1"/>
+        <line x1="250" y1="200" x2="330" y2="200" stroke="#ccc" stroke-width="1"/>
+        <line x1="250" y1="215" x2="330" y2="215" stroke="#ccc" stroke-width="1"/>
+
+        <!-- Right page -->
+        <rect x="360" y="70" width="100" height="160" fill="white"/>
+        <line x1="370" y1="80" x2="450" y2="80" stroke="#ccc" stroke-width="1"/>
+        <line x1="370" y1="95" x2="450" y2="95" stroke="#ccc" stroke-width="1"/>
+        <line x1="370" y1="110" x2="450" y2="110" stroke="#ccc" stroke-width="1"/>
+        <line x1="370" y1="125" x2="450" y2="125" stroke="#ccc" stroke-width="1"/>
+        <line x1="370" y1="140" x2="450" y2="140" stroke="#ccc" stroke-width="1"/>
+        <line x1="370" y1="155" x2="450" y2="155" stroke="#ccc" stroke-width="1"/>
+        <line x1="370" y1="170" x2="450" y2="170" stroke="#ccc" stroke-width="1"/>
+        <line x1="370" y1="185" x2="450" y2="185" stroke="#ccc" stroke-width="1"/>
+        <line x1="370" y1="200" x2="450" y2="200" stroke="#ccc" stroke-width="1"/>
+        <line x1="370" y1="215" x2="450" y2="215" stroke="#ccc" stroke-width="1"/>
+
+        <!-- Bookmark -->
+        <rect x="460" y="60" width="12" height="140" fill="var(--coral)"/>
+
+        <!-- Flashlight/reader -->
+        <circle cx="100" cy="150" r="18" fill="var(--comedy-gold)" opacity="0.6"/>
+        <rect x="80" y="150" width="40" height="8" fill="#FFB900"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">📖 KEY LESSON</div>
+      <p><strong>David Sedaris</strong> (1956-) transformed narrative nonfiction into comedy, publishing books like "Dress Your Family in Corduroy and Denim" (2004) and reading his work on NPR's "This American Life." His comedy is deeply personal: childhood weirdness, family dysfunction, sexual identity, and personal humiliation. <strong>Mike Birbiglia</strong> (1978-) built his career on 20+ minute stories that construct comedic narratives with clear arcs, character development, and emotional stakes. His films "Sleepwalk with Me" (2012) and "Don't Think Twice" (2016) about comedy itself became critical successes. These comedians discovered that audiences don't just want jokes—they want *stories*. They want to follow a character through a journey and arrive at truth through narrative rather than punchlines. This shifted comedy closer to literature, memoir, and theater. The comedy comes from the relatable specificity of the story, the vulnerability in admitting defeat or embarrassment, and the earned emotional payoffs that come from commitment to narrative structure.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>David Sedaris essentially discovered that telling deeply embarrassing stories about yourself and laughing at them is cathartic for audiences. It's like group therapy where everyone pays money to hear someone admit their worst moments. Mike Birbiglia took it further and made audiences care about his story's outcome, so when the punchline came, it wasn't just funny—it was earned. It's the difference between a joke and a revelation.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ COMEDY ALGORITHM</div>
+      <p>Story-based comedy requires <strong>temporal reasoning and causal modeling</strong>. The jokes don't work in isolation; they only land within the context of the narrative arc. This mirrors how language models use <strong>attention mechanisms and transformer architectures</strong> to track long-range dependencies across sequences. A joke from minute 10 of a 20-minute story depends on information established in minute 2. The comedian is essentially training the audience to maintain coherent context over time, building predictions about where the story's headed, then subverting or fulfilling those predictions with comedic payoffs.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 ACROSS THE COMEDY LANDSCAPE</div>
+      <p>Relates to <strong>Made to Stick</strong>'s research on narrative structure and how stories make ideas memorable. Also connects to <strong>Thinking, Fast and Slow</strong>'s concept of how we construct narratives to understand events and predict outcomes.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The best comedy comes from the most painful truths."</div>
+      <div class="quote-attr">— David Sedaris</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 11: ABSURDIST AND EXPERIMENTAL COMEDY -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0e6ff 0%, #ffe6f5 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--pink);">11</div>
+    <h2 class="lesson-title">Comedy Breaks Its Own Rules</h2>
+    <p class="lesson-subtitle">Tim and Eric, Maria Bamford, and Experimental Forms (2000s-2010s)</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Broken stage -->
+        <rect x="50" y="180" width="600" height="100" fill="#999" stroke="var(--dark)" stroke-width="2"/>
+
+        <!-- Pieces of stage -->
+        <polygon points="100,180 140,160 160,190 120,200" fill="#555" stroke="var(--dark)" stroke-width="1"/>
+        <polygon points="200,180 240,175 260,195 220,200" fill="#666" stroke="var(--dark)" stroke-width="1"/>
+        <polygon points="500,180 540,170 560,200 520,205" fill="#555" stroke="var(--dark)" stroke-width="1"/>
+
+        <!-- Weird equipment -->
+        <circle cx="200" cy="100" r="30" fill="none" stroke="var(--coral)" stroke-width="3"/>
+        <line x1="200" y1="70" x2="200" y2="130" stroke="var(--coral)" stroke-width="2"/>
+        <line x1="170" y1="100" x2="230" y2="100" stroke="var(--coral)" stroke-width="2"/>
+
+        <!-- Distorted elements -->
+        <path d="M 450 120 Q 460 80 470 120 Q 480 150 450 120" fill="var(--teal)" opacity="0.5"/>
+        <path d="M 430 150 L 470 130 L 450 170 Z" fill="var(--pink)" opacity="0.5"/>
+
+        <!-- Floating shapes -->
+        <rect x="350" y="50" width="40" height="40" fill="var(--comedy-gold)" opacity="0.4" transform="rotate(45 370 70)"/>
+        <circle cx="300" cy="80" r="20" fill="var(--warm-red)" opacity="0.4"/>
+        <polygon points="250,60 270,40 290,60 270,80" fill="var(--teal)" opacity="0.4"/>
+
+        <!-- Question marks -->
+        <text x="350" y="220" font-family="Playfair Display" font-size="48" fill="var(--coral)" opacity="0.3" text-anchor="middle">?</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎪 KEY LESSON</div>
+      <p><strong>Tim Heidecker and Eric Wareheim</strong> created "Tim and Eric Awesome Show, Great Job!" (2007-2010) which was fundamentally about comedy's discomfort—long uncomfortable silences, bad acting, nonsensical premises, budget aesthetic that looked like a child's video project. <strong>Maria Bamford</strong> (1970-) integrated her bipolar disorder diagnosis directly into her comedy, making mental illness the subject and the frame. Her show "Lady Dynamite" (Netflix 2016-2017) presented non-linear narrative, breaking the fourth wall constantly, destabilizing any comfortable perspective. These comedians rejected the template: that comedy should be clear, punchy, build logically. Instead, they asked: what if comedy was *weird*? What if it was uncomfortable? What if it didn't resolve? What if it failed? Absurdist comedy tests the audience's patience and expectations, often deliberately disappointing prediction, creating comedy from the collision between what people expect and the actual experience of the performance.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Tim and Eric basically said "What if we made something so weird and uncomfortable that people wouldn't know if they were laughing or having an existential crisis?" And somehow it worked. They proved that comedy doesn't need to serve the audience—sometimes it can challenge, confuse, and alienate them into an entirely new kind of appreciation. Maria Bamford went further: "What if I made my mental illness the entire structure of the show?" It's like weaponizing vulnerability and using your worst moments as narrative architecture.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ COMEDY ALGORITHM</div>
+      <p>Absurdist comedy is essentially <strong>training on noise and failure modes</strong>. Standard comedy trains for maximum predictability and engagement. Absurdist comedy inverts this—it's optimized for unpredictability and audience disorientation. In machine learning, this is like deliberately introducing adversarial examples into training data, or training generative models on corrupted inputs. The result is systems that operate outside normal parameters. Maria Bamford's approach—breaking narrative coherence, destabilizing perspective—mirrors <strong>attention mechanisms that deliberately attend to irrelevant information</strong> or <strong>dropout training</strong> that randomly removes features. It makes the system stranger but potentially more creative.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 ACROSS THE COMEDY LANDSCAPE</div>
+      <p>Relates to <strong>The Black Swan</strong>'s discussion of how we're unprepared for radical unpredictability. Also echoes postmodern literature's rejection of coherent narrative in favor of fragmentation and uncertainty.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"If I can make something uncomfortable and people still laugh, then I've discovered something about what's real."</div>
+      <div class="quote-attr">— Maria Bamford, paraphrased</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 12: DIGITAL COMEDY AND THE FUTURE -->
+<section class="lesson" style="background: linear-gradient(180deg, #e6f5ff 0%, #fff0e6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--sky);">12</div>
+    <h2 class="lesson-title">Comedy in the Digital Age</h2>
+    <p class="lesson-subtitle">YouTube, Netflix, and Comedy Unbundled (2010s-2020s)</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Devices -->
+        <rect x="80" y="80" width="120" height="150" fill="white" stroke="var(--dark)" stroke-width="2" rx="8"/>
+        <rect x="90" y="90" width="100" height="110" fill="#111"/>
+        <circle cx="140" cy="225" r="4" fill="var(--dark)"/>
+        <text x="140" y="260" font-family="Inter" font-size="11" fill="var(--dark)" text-anchor="middle">Phone</text>
+
+        <!-- Tablet -->
+        <rect x="250" y="70" width="150" height="170" fill="white" stroke="var(--dark)" stroke-width="2" rx="8"/>
+        <rect x="260" y="80" width="130" height="140" fill="#111"/>
+        <circle cx="325" cy="250" r="5" fill="var(--dark)"/>
+        <text x="325" y="280" font-family="Inter" font-size="11" fill="var(--dark)" text-anchor="middle">Tablet</text>
+
+        <!-- Laptop -->
+        <rect x="470" y="100" width="170" height="120" fill="white" stroke="var(--dark)" stroke-width="2" rx="8"/>
+        <rect x="480" y="110" width="150" height="85" fill="#111"/>
+        <rect x="470" y="220" width="170" height="15" fill="white" stroke="var(--dark)" stroke-width="1"/>
+        <text x="555" y="280" font-family="Inter" font-size="11" fill="var(--dark)" text-anchor="middle">Laptop</text>
+
+        <!-- Play buttons on screens -->
+        <polygon points="120,135 120,155 140,145" fill="var(--coral)"/>
+        <polygon points="295,115 295,145 325,130" fill="var(--teal)"/>
+        <polygon points="520,140 520,170 550,155" fill="var(--pink)"/>
+
+        <!-- Connection lines -->
+        <line x1="200" y1="160" x2="250" y2="160" stroke="var(--sunny)" stroke-width="2" stroke-dasharray="5,5"/>
+        <line x1="400" y1="150" x2="470" y2="160" stroke="var(--sunny)" stroke-width="2" stroke-dasharray="5,5"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">📱 KEY LESSON</div>
+      <p>Netflix comedy specials became the dominant delivery mechanism: <strong>Hannah Gadsby</strong> (1978-) deconstructed stand-up itself with "Nanette" (2017), which wasn't funny in traditional ways but was conceptually devastating. <strong>John Mulaney</strong> (1982-) proved that traditional stand-up could dominate streaming platforms with perfectly crafted specials like "Kid Gorgeous" (2018). <strong>Bo Burnham</strong> (1990-) made streaming comedy about the alienation of creating content for invisible audiences (his 2021 special "Inside" was made during lockdown, entirely self-directed and self-performed). YouTube democratized comedy: <strong>Russell Peters</strong> (1966-) built a career on YouTube before Netflix, reaching millions without traditional gatekeepers. TikTok created comedy's newest frontier where 15-60 second jokes reach billions of people. The lesson: technology doesn't replace comedy, it *redistributes* it. Comedy moved from theaters to TV, from TV to radio, from radio to streaming. Each distribution method creates different constraints and possibilities. Netflix's specials are perfectly polished; TikTok comedy is raw and algorithmically optimized for viral engagement. The future of comedy isn't a single format—it's a multiplication of formats, each with its own aesthetic and economy.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Comedy went from "let's all gather in a room" to "perform directly to your couch in front of millions of strangers you'll never see." It's like we inverted the stage: instead of the audience watching the performer, the performer performs for algorithmically selected strangers. Hannah Gadsby figured out that if you're deconstructing comedy on Netflix, you're doing performance art for an invisible multinational corporation. Bo Burnham got even darker and made the whole thing about that alienation. It's post-modern comedy for the streaming age.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ COMEDY ALGORITHM</div>
+      <p>Netflix and YouTube comedy is optimized by <strong>algorithmic recommendation systems</strong>. The platform's AI learns what keeps audiences watching, suggests comedy that matches viewing patterns, and surfaces videos through engagement metrics. Comedians are now training against algorithmic models, not just human audiences. This creates a feedback loop: comedians study which bits get paused/rewatched, which gets stopped early, what keeps people watching till the end. It's <strong>reinforcement learning against a black-box reward function</strong>. TikTok comedy is even more extreme—the algorithm is the audience. 60 seconds of content is processed through billions of parameters to determine if it spreads. Comedians are essentially competing in a large-scale optimization game where the objective is virality.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 ACROSS THE COMEDY LANDSCAPE</div>
+      <p>Reflects <strong>Atomic Habits</strong>'s discussion of how systems shape behavior—the algorithm shapes what gets produced. Also echoes <strong>The Black Swan</strong>'s discussion of how rare, unpredictable events dominate in winner-take-all systems (a single viral video beats thousands of good ones).</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The algorithm is the new audience, and no one knows what it wants."</div>
+      <div class="quote-attr">— Contemporary comedy observation</div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY SPOTLIGHT 1: LENNY BRUCE'S ARREST -->
+<section class="story" style="background: linear-gradient(135deg, #0f0f23, #1a1a3e);">
+  <div class="story-inner">
+    <h2 class="story-title">The Word That Changed Comedy: Lenny Bruce's 1962 Arrest</h2>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Courthouse -->
+        <rect x="100" y="40" width="500" height="200" fill="#D2B48C" stroke="#8B4513" stroke-width="3"/>
+        <line x1="100" y1="100" x2="600" y2="100" stroke="#8B4513" stroke-width="2"/>
+
+        <!-- Columns -->
+        <rect x="120" y="50" width="15" height="100" fill="#A0522D" stroke="#8B4513" stroke-width="1"/>
+        <rect x="550" y="50" width="15" height="100" fill="#A0522D" stroke="#8B4513" stroke-width="1"/>
+
+        <!-- Steps -->
+        <line x1="90" y1="240" x2="610" y2="240" stroke="#999" stroke-width="3"/>
+        <line x1="85" y1="255" x2="615" y2="255" stroke="#999" stroke-width="3"/>
+        <line x1="80" y1="270" x2="620" y2="270" stroke="#999" stroke-width="3"/>
+
+        <!-- Judge's bench -->
+        <rect x="250" y="80" width="200" height="60" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+        <text x="350" y="115" font-family="Playfair Display" font-size="20" font-weight="bold" fill="white" text-anchor="middle">⚖</text>
+
+        <!-- Lenny silhouette -->
+        <circle cx="350" cy="180" r="15" fill="var(--coral)"/>
+        <rect x="340" y="195" width="20" height="30" fill="var(--coral)"/>
+        <text x="350" y="270" font-family="Inter" font-size="13" fill="white" text-anchor="middle">LENNY BRUCE</text>
+
+        <!-- Word floating -->
+        <rect x="500" y="150" width="120" height="40" fill="var(--warm-red)" stroke="var(--comedy-gold)" stroke-width="2" rx="5"/>
+        <text x="560" y="177" font-family="Inter" font-size="18" font-weight="bold" fill="white" text-anchor="middle">****</text>
+      </svg>
+    </div>
+
+    <p class="story-text">On April 7, 1962, Lenny Bruce walked on stage at the Gate of Horn in Chicago. During his set, he said the word "cocksucker." It was a word so forbidden that newspaper couldn't even print it. The police arrested him that night. He was charged with obscenity, taken to jail, and tried before a judge. The case became a First Amendment battle that lasted years and cost him hundreds of thousands of dollars in legal fees. But something profound happened: once Lenny Bruce said the word in public and wasn't struck dead by divine lightning, it became possible for other comedians to say it. The word remained shocking, but it was no longer *impossible*. Lenny Bruce went to jail so that comics could have the freedom to use the full spectrum of human language. Whether you think that's a gift or a curse depends on your perspective, but there's no denying the impact.</p>
+
+    <p class="story-text">Nesteroff's book documents this moment as the pivot point where comedy stopped being "family entertainment" and became an arena for free expression and transgression. Bruce wasn't just telling jokes—he was making a political statement about what Americans were allowed to say in public. He lost everything in the legal battles: his career was destroyed, he was blacklisted by major venues, and he died broke and alone in 1966. But he won the war. American comedy was forever changed by his sacrifice.</p>
+  </div>
+</section>
+
+<!-- STORY SPOTLIGHT 2: RICHARD PRYOR'S AUTOBIOGRAPHICAL TURN -->
+<section class="story" style="background: linear-gradient(135deg, #1a0033, #0d0d1f);">
+  <div class="story-inner">
+    <h2 class="story-title">Richard Pryor's Radical Vulnerability: Turning Pain Into Art</h2>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stage with single spotlight -->
+        <rect x="50" y="200" width="600" height="80" fill="var(--warm-red)" opacity="0.2" stroke="var(--warm-red)" stroke-width="2"/>
+        <circle cx="350" cy="100" r="100" fill="var(--comedy-gold)" opacity="0.15"/>
+        <path d="M 280 200 L 350 80 L 420 200" fill="none" stroke="var(--comedy-gold)" stroke-width="2" opacity="0.5"/>
+
+        <!-- Microphone -->
+        <circle cx="350" cy="155" r="7" fill="var(--comedy-gold)"/>
+        <rect x="345" y="155" width="10" height="50" fill="var(--dark)" stroke="var(--dark)" stroke-width="1"/>
+
+        <!-- Figure -->
+        <circle cx="350" cy="140" r="14" fill="var(--dark)"/>
+        <rect x="341" y="155" width="18" height="28" fill="var(--warm-red)"/>
+        <line x1="341" y1="160" x2="325" y2="180" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="359" y1="160" x2="375" y2="180" stroke="var(--dark)" stroke-width="2"/>
+
+        <!-- Audience silhouettes -->
+        <circle cx="100" cy="240" r="12" fill="var(--dark)" opacity="0.6"/>
+        <circle cx="130" cy="245" r="11" fill="var(--dark)" opacity="0.6"/>
+        <circle cx="160" cy="240" r="13" fill="var(--dark)" opacity="0.6"/>
+        <circle cx="540" cy="240" r="12" fill="var(--dark)" opacity="0.6"/>
+        <circle cx="570" cy="245" r="11" fill="var(--dark)" opacity="0.6"/>
+        <circle cx="600" cy="240" r="13" fill="var(--dark)" opacity="0.6"/>
+
+        <!-- Emotion indicators -->
+        <circle cx="580" cy="100" r="20" fill="none" stroke="var(--coral)" stroke-width="2"/>
+        <line x1="570" y1="90" x2="590" y2="90" stroke="var(--coral)" stroke-width="2"/>
+        <line x1="570" y1="110" x2="590" y2="110" stroke="var(--coral)" stroke-width="2"/>
+        <path d="M 575 95 Q 580 105 585 95" fill="none" stroke="var(--coral)" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <p class="story-text">Richard Pryor came up in the early 1960s doing clean, safe club comedy—nothing offensive, nothing that challenged the status quo. He was technically skilled but spiritually empty. Then something broke. By 1971, with the album "Craps" and 1972's "That Nigger's Crazy," Pryor completely dismantled his previous persona and rebuilt himself as a comedian willing to tell the truth. He stopped performing for white approval and started performing for himself. He talked about growing up in his grandmother's brothel, his relationships, his drug use, his sexual insecurities, his racial rage. He didn't make these things funny through distancing or clever construction—he made them funny by being *honest*. When he said "nigger," it wasn't shock comedy; it was linguistic reclamation and cultural truth-telling. The word carried weight because he'd earned the right to say it through absolute vulnerability.</p>
+
+    <p class="story-text">Pryor's genius was understanding that comedy's deepest power comes from truth. You can construct clever jokes all day, but the jokes that break people—the ones that make them laugh until they cry, that stay with them for years—those come from a place of genuine revelation. Richard Pryor became the greatest stand-up comedian in history because he was willing to stand on stage and essentially bleed for strangers. Nesteroff's documentation of Pryor's journey shows how comedy can be not just entertainment but radical emotional catharsis.</p>
+  </div>
+</section>
+
+<!-- STORY SPOTLIGHT 3: DAVE CHAPPELLE'S CONTROVERSIAL RISE -->
+<section class="story" style="background: linear-gradient(135deg, #0d0d1f, #1a0033);">
+  <div class="story-inner">
+    <h2 class="story-title">Dave Chappelle: Comedy as Political Intervention</h2>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+        <!-- TV screen/monitor -->
+        <rect x="150" y="50" width="400" height="250" fill="#1a1a1a" stroke="var(--dark)" stroke-width="3" rx="10"/>
+        <rect x="160" y="60" width="380" height="200" fill="#000"/>
+
+        <!-- Network logos area -->
+        <rect x="170" y="75" width="80" height="40" fill="var(--teal)" opacity="0.4"/>
+        <text x="210" y="105" font-family="Inter" font-size="11" font-weight="bold" fill="white" text-anchor="middle">Comedy Central</text>
+
+        <!-- Show imagery -->
+        <circle cx="320" cy="130" r="25" fill="var(--coral)" opacity="0.5"/>
+        <text x="320" y="135" font-family="Inter" font-size="24" fill="white" text-anchor="middle">🎬</text>
+
+        <!-- Controversy indicators -->
+        <polygon points="450,75 470,85 450,95" fill="var(--warm-red)"/>
+        <polygon points="450,75 470,85 450,95" fill="var(--warm-red)"/>
+        <text x="475" y="85" font-family="Inter" font-size="11" fill="var(--warm-red)" font-weight="bold">CONTROVERSY</text>
+
+        <!-- Bottom ticker -->
+        <rect x="160" y="265" width="380" height="25" fill="#222" stroke="var(--dark)" stroke-width="1"/>
+        <text x="350" y="282" font-family="Inter" font-size="10" fill="var(--coral)" text-anchor="middle">CHAPPELLE'S SHOW | SOCIAL COMMENTARY | RACIAL TRUTH</text>
+
+        <!-- Reflection effect -->
+        <rect x="150" y="310" width="400" height="10" fill="var(--dark)" opacity="0.3"/>
+      </svg>
+    </div>
+
+    <p class="story-text">Dave Chappelle's sketch comedy show (2003-2006) became the most politically incisive comedy television program in American history. With a predominantly Black writing and performance team, Chappelle created sketches that confronted racism, power structures, and American hypocrisy directly. His "Racial Draft" sketch, where white celebrities were traded away because of Black cultural contributions, was comedy as social theory. His "Clayton Bigsby" character—a blind, white supremacist who didn't realize he was Black—deconstructed racism's logical absurdity. His skits about O.J. Simpson, crack cocaine, and police brutality weren't just funny; they were political interventions.</p>
+
+    <p class="story-text">The show became so culturally dominant that Comedy Central offered him $55 million to continue. Instead, Chappelle walked away at his peak. He'd become uncomfortable with how much power his comedy had—worried that audiences were laughing at racism rather than *with* his critique of racism. That moment, documented in Nesteroff's book, reveals comedy's deepest paradox: the more powerful comedy becomes, the easier it is to misuse. A joke about racism can become either a weapon against racism or ammunition for racists depending on the audience's perspective. Chappelle recognized this and stepped back. It's a act of artistic responsibility rarely seen in popular culture.</p>
+  </div>
+</section>
+
+<!-- CHEATSHEET SECTION -->
+<section class="cheatsheet">
+  <div class="cheatsheet-inner">
+    <h2>Comedy Through History: The Essential Cheatsheet</h2>
+
+    <div class="two-col">
+      <div class="cheat-card">
+        <h3>🎪 Vaudeville Era (1880s-1920s)</h3>
+        <p><strong>Key Insight:</strong> Comedy as a working-class craft honed through constant repetition. Performers could work 5+ shows daily across circuit theaters. <strong>Comedians:</strong> Bert Lahr, Fred Allen, Fanny Brice. <strong>Legacy:</strong> Established that comedy is a skill that can be systematically improved through relentless practice.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>📻 Radio Age (1920s-1950s)</h3>
+        <p><strong>Key Insight:</strong> Comedy must be completely reimagined for audio—timing, pauses, vocal inflection become weapons. <strong>Comedians:</strong> Jack Benny, Fred Allen, George Burns & Gracie Allen. <strong>Legacy:</strong> Demonstrated that the biggest laughs come from what you don't say.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>🚬 Nightclub Revolution (1950s-1960s)</h3>
+        <p><strong>Key Insight:</strong> Adult audiences, adult content, transgressive material. Comedy becomes a space for breaking taboos. <strong>Comedians:</strong> Lenny Bruce, Mort Sahl, Dick Gregory. <strong>Legacy:</strong> Pushed free speech boundaries; comedy became inseparable from social commentary.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>🎤 Stand-Up Explosion (1970s-1980s)</h3>
+        <p><strong>Key Insight:</strong> Solo performance without ensemble. Single comedian vs. audience. Vulnerability and authenticity become essential. <strong>Comedians:</strong> George Carlin, Richard Pryor, Steve Martin. <strong>Legacy:</strong> Stand-up becomes an art form equal to theater, literature, film.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>🎨 Alternative/Anti-Comedy (1970s-1980s)</h3>
+        <p><strong>Key Insight:</strong> Break comedy's rules deliberately. Make audiences uncomfortable. Challenge what comedy even means. <strong>Comedians:</strong> Andy Kaufman, Sandra Bernhard, Emo Philips. <strong>Legacy:</strong> Proved comedy doesn't need punchlines to be funny. Absurdism became viable.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>💪 Women in Comedy (1970s-1990s)</h3>
+        <p><strong>Key Insight:</strong> Women claim authority over their own bodies, experiences, and perspectives. Female sexuality and aging become comedy topics. <strong>Comedians:</strong> Joan Rivers, Lily Tomlin, Ellen DeGeneres. <strong>Legacy:</strong> Expanded comedy's range to include previously excluded perspectives.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>👁️ Observational Comedy (1980s-2000s)</h3>
+        <p><strong>Key Insight:</strong> The funniest jokes come from noticing what everyone ignores. Scientific observation applied to everyday life. <strong>Comedians:</strong> Jerry Seinfeld, Bill Burr, Dave Chappelle. <strong>Legacy:</strong> Proved that mundane observation could command massive audiences.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>🎭 Character Comedy (1980s-1990s)</h3>
+        <p><strong>Key Insight:</strong> Multiple personas allow exploration of different cultural perspectives simultaneously. <strong>Comedians:</strong> Eddie Murphy, Mike Myers, Dana Carvey. <strong>Legacy:</strong> Character comedy became dominant form in sketch and film.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>💥 Dark/Shock Comedy (1980s-1990s)</h3>
+        <p><strong>Key Insight:</strong> Test comedy's boundaries by saying the most offensive things possible. <strong>Comedians:</strong> Andrew Dice Clay, Bobcat Goldthwait, Sam Kinison. <strong>Legacy:</strong> Established that transgression itself can be a comedy strategy.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>📖 Narrative Comedy (1990s-2010s)</h3>
+        <p><strong>Key Insight:</strong> Comedy structured like literature—with arcs, character development, earned emotional payoffs. <strong>Comedians:</strong> David Sedaris, Mike Birbiglia. <strong>Legacy:</strong> Proved that intimate, personal storytelling could compete with traditional comedy.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>🎪 Experimental/Absurdist (2000s-2010s)</h3>
+        <p><strong>Key Insight:</strong> Deliberately break narrative coherence. Make audiences uncomfortable. Use mental illness as structure. <strong>Comedians:</strong> Tim & Eric, Maria Bamford. <strong>Legacy:</strong> Pushed comedy toward performance art and challenged genre definitions.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>📱 Digital Age (2010s-2020s)</h3>
+        <p><strong>Key Insight:</strong> Algorithm replaces audience. Form factors range from 15-second TikTok to 90-minute Netflix special. <strong>Comedians:</strong> Hannah Gadsby, John Mulaney, Bo Burnham. <strong>Legacy:</strong> Comedy becomes algorithm-optimized; viral metrics replace ticket sales.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 50px; padding: 30px; background: rgba(255,230,109,0.1); border-left: 4px solid var(--comedy-gold); border-radius: 8px;">
+      <h3 style="color: var(--comedy-gold); margin-bottom: 15px;">The Meta-Lesson: Why Comedy Matters</h3>
+      <p style="color: rgba(255,255,255,0.9); font-size: 0.95rem; line-height: 1.7;">Comedy's history reveals something essential about human culture: we're drawn to people willing to tell uncomfortable truths, to notice what we've stopped seeing, to break rules in ways that liberate rather than harm. Throughout American history, comedians have been the canaries in the coal mine—testing cultural boundaries, revealing hidden assumptions, and sometimes paying enormous prices for that honesty. Kliph Nesteroff's book documents how comedy evolved from working-class entertainment to an art form equal to any other—precisely because comedians kept pushing, kept transgressing, kept refusing to make audiences comfortable when comfort was the enemy of truth.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

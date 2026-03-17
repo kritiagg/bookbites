@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Made to Stick: An Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background-color: #f9f9f9;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            line-height: 1.2;
+            margin: 0.5em 0;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.8rem; }
+        h4 { font-size: 1.4rem; }
+        h5 { font-size: 1.1rem; }
+
+        /* ===== COVER SECTION ===== */
+        .cover {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--sky) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .cover-content {
+            max-width: 800px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .cover h1 {
+            font-size: 4.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .cover-authors {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cover-tagline {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* SVG Sticky Notes & Velcro Background */
+        .cover-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        /* ===== MAIN CONTENT CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 100px;
+        }
+
+        .section-title {
+            color: var(--dark);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--coral);
+            display: inline-block;
+        }
+
+        /* ===== LESSON CARD STYLING ===== */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .lesson {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .lesson:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .lesson-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--coral), var(--pink));
+            color: white;
+            position: relative;
+        }
+
+        .lesson-header.teal {
+            background: linear-gradient(135deg, var(--teal), var(--mint));
+        }
+
+        .lesson-header.sunny {
+            background: linear-gradient(135deg, var(--sunny), var(--orange));
+            color: var(--dark);
+        }
+
+        .lesson-header.purple {
+            background: linear-gradient(135deg, var(--purple), var(--dark-purple));
+            color: white;
+        }
+
+        .lesson-header.sky {
+            background: linear-gradient(135deg, var(--sky), var(--deep-blue));
+            color: white;
+        }
+
+        .lesson-header.forest {
+            background: linear-gradient(135deg, var(--forest), var(--teal));
+            color: white;
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-tagline {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .lesson-inner {
+            padding: 2rem;
+        }
+
+        .lesson-inner p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        /* ===== ILLUSTRATION CONTAINERS ===== */
+        .illustration-container {
+            background: linear-gradient(135deg, #f0f9ff 0%, #f0fff4 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .illustration-svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ===== QUOTE BOXES ===== */
+        .quote-box {
+            background: var(--cream);
+            border-left: 5px solid var(--coral);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--dark);
+        }
+
+        .quote-attribution {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            font-style: normal;
+            color: #666;
+        }
+
+        /* ===== FUNNY BOX ===== */
+        .funny-box {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--cream) 100%);
+            border: 2px dashed var(--orange);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .funny-box::before {
+            content: "😄 ";
+            font-size: 1.5rem;
+        }
+
+        .funny-box h5 {
+            color: var(--dark);
+            margin-bottom: 0.75rem;
+            margin-top: 0;
+        }
+
+        /* ===== AI BOX ===== */
+        .ai-box {
+            background: linear-gradient(135deg, var(--sky) 0%, var(--deep-blue) 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .ai-box h5 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .ai-box::before {
+            content: "🤖 ";
+            font-size: 1.3rem;
+            margin-right: 0.5rem;
+        }
+
+        /* ===== CONNECT BOX ===== */
+        .connect-box {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--dark-purple) 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .connect-box h5 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .connect-box::before {
+            content: "📚 ";
+            font-size: 1.3rem;
+            margin-right: 0.5rem;
+        }
+
+        /* ===== STORY BOX ===== */
+        .story {
+            background: white;
+            border: 2px solid var(--teal);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+
+        .story-header {
+            background: linear-gradient(135deg, var(--teal), var(--mint));
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .story-inner {
+            padding: 1.5rem;
+        }
+
+        .story-inner p {
+            margin-bottom: 1rem;
+        }
+
+        .story-lesson {
+            background: var(--cream);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .story-lesson::before {
+            content: "✓ ";
+            color: var(--forest);
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+
+        /* ===== CHEATSHEET ===== */
+        .cheatsheet {
+            background: linear-gradient(135deg, var(--coral) 0%, var(--pink) 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 2rem 0;
+            color: white;
+        }
+
+        .cheatsheet-inner {
+            padding: 2rem;
+        }
+
+        .cheatsheet-inner h4 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .cheatsheet-list {
+            list-style: none;
+        }
+
+        .cheatsheet-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cheatsheet-list li:last-child {
+            border-bottom: none;
+        }
+
+        .cheatsheet-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* ===== TWO COLUMN LAYOUT ===== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== CARD LAYOUT ===== */
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1rem;
+        }
+
+        .card-label {
+            display: inline-block;
+            background: var(--teal);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== PARTICLES/DECORATIONS ===== */
+        .particle {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .sticky-note {
+            width: 100px;
+            height: 100px;
+            background: var(--sunny);
+            box-shadow: -3px 3px 8px rgba(0, 0, 0, 0.1);
+            transform: rotate(-15deg);
+            position: absolute;
+        }
+
+        .velcro-hooks {
+            display: inline-block;
+            padding: 0 0.5rem;
+            color: var(--coral);
+            font-weight: 700;
+        }
+
+        /* ===== BUTTON STYLING ===== */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--teal);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--teal);
+        }
+
+        .btn:hover {
+            background: var(--deep-blue);
+            border-color: var(--deep-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--teal);
+        }
+
+        .btn-outline:hover {
+            background: var(--teal);
+            color: white;
+        }
+
+        /* ===== SUCCESS FRAMEWORK VISUAL ===== */
+        .success-framework {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .success-letter {
+            background: white;
+            border: 3px solid var(--coral);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .success-letter.s { border-color: var(--coral); }
+        .success-letter.u { border-color: var(--teal); }
+        .success-letter.c { border-color: var(--sunny); }
+        .success-letter.c2 { border-color: var(--forest); }
+        .success-letter.e { border-color: var(--pink); }
+        .success-letter.s2 { border-color: var(--sky); }
+
+        .success-letter h4 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-letter p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        /* ===== TABLE OF CONTENTS ===== */
+        .toc {
+            background: linear-gradient(135deg, var(--cream) 0%, #fff8dc 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .toc-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--coral);
+            font-weight: 700;
+        }
+
+        .toc-list a {
+            color: var(--deep-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+            color: var(--coral);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.4rem; }
+
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            .cover-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .success-framework {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lesson {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .lesson:nth-child(2) { animation-delay: 0.1s; }
+        .lesson:nth-child(3) { animation-delay: 0.2s; }
+        .lesson:nth-child(4) { animation-delay: 0.3s; }
+        .lesson:nth-child(5) { animation-delay: 0.4s; }
+        .lesson:nth-child(6) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+
+<!-- ===== COVER SECTION ===== -->
+<section class="cover">
+    <svg class="cover-svg" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sticky Notes -->
+        <rect x="50" y="50" width="120" height="140" fill="white" opacity="0.3" rx="4" transform="rotate(-25 110 120)"/>
+        <rect x="800" y="150" width="120" height="140" fill="white" opacity="0.25" rx="4" transform="rotate(20 860 220)"/>
+        <rect x="150" y="600" width="120" height="140" fill="white" opacity="0.2" rx="4" transform="rotate(15 210 670)"/>
+
+        <!-- Glue Drips -->
+        <path d="M 400 100 Q 405 150 400 200" stroke="white" stroke-width="8" fill="none" opacity="0.2" stroke-linecap="round"/>
+        <path d="M 600 200 Q 595 260 600 320" stroke="white" stroke-width="6" fill="none" opacity="0.15" stroke-linecap="round"/>
+
+        <!-- Brain/Velcro Hooks Pattern -->
+        <circle cx="100" cy="250" r="8" fill="white" opacity="0.15"/>
+        <circle cx="900" cy="400" r="6" fill="white" opacity="0.12"/>
+        <circle cx="200" cy="500" r="7" fill="white" opacity="0.14"/>
+    </svg>
+
+    <div class="cover-content">
+        <h1>Made to Stick</h1>
+        <p class="cover-subtitle">Why Some Ideas Survive and Others Die</p>
+        <p class="cover-authors">by Chip Heath & Dan Heath</p>
+
+        <div class="cover-tagline">
+            <p><strong>The Science of Memorable Ideas</strong></p>
+            <p>An Illustrated Guide to the SUCCESS Framework and the Psychology of What Makes Ideas "Sticky"</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="container">
+
+    <!-- TABLE OF CONTENTS -->
+    <section class="toc">
+        <h3>📖 What's Inside</h3>
+        <ul class="toc-list">
+            <li><a href="#overview">Book Overview & Core Concept</a></li>
+            <li><a href="#success">The SUCCESS Framework (6 Lessons)</a></li>
+            <li><a href="#additional">Additional Lessons (6+ More)</a></li>
+            <li><a href="#examples">Real-World Examples & Stories</a></li>
+            <li><a href="#ai">AI & Modern Connections</a></li>
+            <li><a href="#books">Cross-Book References</a></li>
+            <li><a href="#cheatsheet">Quick Reference Cheatsheet</a></li>
+        </ul>
+    </section>
+
+    <!-- OVERVIEW SECTION -->
+    <section class="section" id="overview">
+        <h2 class="section-title">Overview & Core Concept</h2>
+
+        <div class="two-col">
+            <div>
+                <p>Why do some ideas spread like wildfire while others vanish overnight? Why does a simple phrase like <span class="velcro-hooks">"The low-fare airline"</span> reshape an entire industry?</p>
+
+                <p><strong>Made to Stick</strong> explores the hidden rules that make ideas memorable, believable, and actionable. Through compelling stories and psychological research, Chip and Dan Heath reveal why some ideas have a special quality—they "stick"—and provide a practical framework for creating ideas that matter.</p>
+
+                <div class="funny-box">
+                    <h5>The Curse of Knowledge</h5>
+                    <p>Once you know something, it's nearly impossible to remember what it was like not to know it. This is why experts are terrible at explaining things to beginners. You've got sticky notes all over your brain!</p>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Brain outline -->
+                    <ellipse cx="150" cy="150" rx="80" ry="90" fill="none" stroke="#A06CD5" stroke-width="3"/>
+
+                    <!-- Brain convolutions -->
+                    <path d="M 100 120 Q 110 100 120 120 Q 130 140 140 120" fill="none" stroke="#A06CD5" stroke-width="2"/>
+                    <path d="M 150 100 Q 165 85 180 100" fill="none" stroke="#A06CD5" stroke-width="2"/>
+                    <path d="M 100 150 Q 90 160 100 170 Q 110 175 120 170" fill="none" stroke="#A06CD5" stroke-width="2"/>
+                    <path d="M 180 150 Q 190 160 180 170 Q 170 175 160 170" fill="none" stroke="#A06CD5" stroke-width="2"/>
+
+                    <!-- Sticky notes on brain -->
+                    <rect x="70" y="100" width="35" height="40" fill="#FFE66D" opacity="0.8" transform="rotate(-20 87 120)"/>
+                    <text x="87" y="125" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">STICK</text>
+
+                    <rect x="200" y="110" width="35" height="40" fill="#FF6B6B" opacity="0.8" transform="rotate(25 217 130)"/>
+                    <text x="217" y="135" font-size="11" fill="white" font-weight="bold" text-anchor="middle">IDEAS</text>
+
+                    <rect x="130" y="200" width="40" height="35" fill="#4ECDC4" opacity="0.8" transform="rotate(-15 150 217)"/>
+                    <text x="150" y="220" font-size="10" fill="white" font-weight="bold" text-anchor="middle">VELCRO</text>
+
+                    <!-- Light bulb -->
+                    <circle cx="150" cy="230" r="12" fill="#FFE66D" opacity="0.6"/>
+                    <rect x="145" y="242" width="10" height="15" fill="#FFE66D" opacity="0.6"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <p>"We all have the ability to make our ideas stick. It's not a gift reserved for the lucky or the creative. It's a learnable skill."</p>
+            <p class="quote-attribution">— Chip & Dan Heath</p>
+        </div>
+    </section>
+
+    <!-- SUCCESS FRAMEWORK SECTION -->
+    <section class="section" id="success">
+        <h2 class="section-title">The SUCCESS Framework</h2>
+
+        <p>The core of <em>Made to Stick</em> is the SUCCESS framework—six principles that make ideas memorable:</p>
+
+        <div class="success-framework">
+            <div class="success-letter s">
+                <h4>S</h4>
+                <p><strong>Simple</strong></p>
+                <p>Find the core. Cut through jargon and complexity.</p>
+            </div>
+            <div class="success-letter u">
+                <h4>U</h4>
+                <p><strong>Unexpected</strong></p>
+                <p>Violate expectations. Surprise sticks in memory.</p>
+            </div>
+            <div class="success-letter c">
+                <h4>C</h4>
+                <p><strong>Concrete</strong></p>
+                <p>Make it tangible. Use sensory details.</p>
+            </div>
+            <div class="success-letter c2">
+                <h4>C</h4>
+                <p><strong>Credible</strong></p>
+                <p>Help people believe. Use evidence & expertise.</p>
+            </div>
+            <div class="success-letter e">
+                <h4>E</h4>
+                <p><strong>Emotional</strong></p>
+                <p>Make them care. Tap into feelings, not just logic.</p>
+            </div>
+            <div class="success-letter s2">
+                <h4>S</h4>
+                <p><strong>Stories</strong></p>
+                <p>Get people to act. Narrative drives behavior.</p>
+            </div>
+        </div>
+
+        <!-- LESSON 1: SIMPLE -->
+        <div class="lesson">
+            <div class="lesson-header coral">
+                <span class="lesson-number">LESSON 1</span>
+                <h3>Simple: Find the Core</h3>
+                <p class="lesson-tagline">Strip away complexity. Boil ideas down to their essence.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>The most memorable ideas are the simplest ones. Not simple in the sense of "dumbed down," but simple in the sense of <strong>finding the core insight</strong>—the one thing that matters most.</p>
+
+                <h5>The Core Idea</h5>
+                <p>Instead of listing all attributes, identify the single most important thing. Southwest Airlines didn't call itself "a low-cost airline with good service and friendly staff." They said: <span class="velcro-hooks">"The low-fare airline."</span> That's it. One core idea that cuts through everything else.</p>
+
+                <div class="story">
+                    <div class="story-header">Southwest Airlines Case Study</div>
+                    <div class="story-inner">
+                        <p>Before Southwest, airlines competed on meals, seat assignments, and frills. Southwest said: We're cheap. Period. Every decision flowed from that core principle. No meals (save money), single aircraft type (save money), no assigned seats (save money). Everything stuck to that core.</p>
+                        <div class="story-lesson">The single concept "low-fare" was so simple and clear that employees at every level—from pilots to baggage handlers—knew exactly what mattered.</div>
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h5>The Elevator Pitch Test</h5>
+                    <p>If you can't explain your idea in an elevator ride (30 seconds), it's probably not simple enough. Try it right now with your biggest idea. Still too long? You haven't found the core.</p>
+                </div>
+
+                <h5>Key Principles</h5>
+                <ul style="margin-left: 2rem;">
+                    <li>Use words and phrases people already understand</li>
+                    <li>Remove jargon and technical terms</li>
+                    <li>Find the one thing that matters most</li>
+                    <li>Use analogies and frameworks people know</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- LESSON 2: UNEXPECTED -->
+        <div class="lesson">
+            <div class="lesson-header teal">
+                <span class="lesson-number">LESSON 2</span>
+                <h3>Unexpected: Violate Expectations</h3>
+                <p class="lesson-tagline">Surprise breaks through the noise. Curiosity gaps make ideas sticky.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>Our brains are pattern-matching machines. We see what we expect to see and ignore the rest. To break through, you need to <strong>violate expectations</strong> in a meaningful way.</p>
+
+                <h5>The Curiosity Gap</h5>
+                <p>When someone's expectations are violated, a curiosity gap forms. They want to know: "What's going on? What did I miss?" This curiosity makes them pay attention and remember.</p>
+
+                <div class="story">
+                    <div class="story-header">JFK's Moon Speech (1961)</div>
+                    <div class="story-inner">
+                        <p>Before Kennedy, space exploration was seen as a Cold War arms race—a military and scientific competition. Kennedy reframed it: "We choose to go to the moon, not because it is easy, but because it is hard." He violated the expectation that we should do things for practical reasons. Instead, he made it noble and inspiring.</p>
+                        <div class="story-lesson">By violating the expectation of practicality and appealing to aspiration, Kennedy made the moon landing an unforgettable American commitment.</div>
+                    </div>
+                </div>
+
+                <h5>Tactics for Creating Surprise</h5>
+                <ul style="margin-left: 2rem;">
+                    <li><strong>Question common assumptions:</strong> "Everyone thinks X, but actually Y..."</li>
+                    <li><strong>Use contrast:</strong> Juxtapose two things that don't belong together</li>
+                    <li><strong>Tell the unexpected part first:</strong> Grab attention before explaining</li>
+                    <li><strong>Break patterns:</strong> If everyone goes left, go right</li>
+                </ul>
+
+                <div class="funny-box">
+                    <h5>The "What?!" Moment</h5>
+                    <p>If your audience doesn't think "What?!" in the first 10 seconds, your idea probably isn't surprising enough. Make them lean forward, then reward their curiosity.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 3: CONCRETE -->
+        <div class="lesson">
+            <div class="lesson-header sunny">
+                <span class="lesson-number">LESSON 3</span>
+                <h3>Concrete: Make It Tangible</h3>
+                <p class="lesson-tagline">Abstract concepts fade. Sensory details stick around.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>Our brains process concrete information far better than abstract concepts. People remember <strong>what they can see, hear, smell, taste, and touch</strong>—not what they merely understand.</p>
+
+                <h5>Abstraction vs. Concreteness</h5>
+                <p><em>Abstract:</em> "This software improves productivity." 📉</p>
+                <p><em>Concrete:</em> "You'll spend 2 fewer hours in email meetings each week—that's 100 hours a year to spend on work that matters." 📈</p>
+
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Abstract cloud -->
+                        <ellipse cx="75" cy="80" rx="45" ry="35" fill="#74B9FF" opacity="0.6"/>
+                        <text x="75" y="85" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">Abstract</text>
+                        <text x="75" y="100" font-size="10" fill="#2D3436" text-anchor="middle">Hard to grasp</text>
+
+                        <!-- Arrow -->
+                        <path d="M 130 80 L 160 80" stroke="#FF6B6B" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#FF6B6B"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Concrete object -->
+                        <rect x="185" y="50" width="80" height="60" fill="#FFE66D" stroke="#FD79A8" stroke-width="2" rx="4"/>
+                        <text x="225" y="75" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">Concrete</text>
+                        <text x="225" y="90" font-size="10" fill="#2D3436" text-anchor="middle">You can see it</text>
+                        <text x="225" y="105" font-size="10" fill="#2D3436" text-anchor="middle">You remember it</text>
+                    </svg>
+                </div>
+
+                <div class="story">
+                    <div class="story-header">Subway's Jared</div>
+                    <div class="story-inner">
+                        <p>In the late 90s, Subway had a marketing problem. Most fast food marketing focuses on taste or trendiness. Jared Fogle, an Indiana college student, lost 245 pounds eating Subway sandwiches. Instead of abstract claims like "Subway is healthier," they told Jared's story—complete with his old 60-inch pants.</p>
+                        <div class="story-lesson">Concrete details (245 pounds, size 60 pants, specific menu items) made the health claim unforgettable. You could see, feel, and almost experience Jared's journey.</div>
+                    </div>
+                </div>
+
+                <h5>How to Add Concrete Details</h5>
+                <ul style="margin-left: 2rem;">
+                    <li>Use specific numbers, not percentages</li>
+                    <li>Mention actual products, names, and places</li>
+                    <li>Engage the senses (sight, sound, smell, taste, touch)</li>
+                    <li>Tell stories about real people doing real things</li>
+                    <li>Use analogies to things people experience daily</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- LESSON 4: CREDIBLE -->
+        <div class="lesson">
+            <div class="lesson-header purple">
+                <span class="lesson-number">LESSON 4</span>
+                <h3>Credible: Make People Believe</h3>
+                <p class="lesson-tagline">Belief requires more than good intentions. Use evidence, authority, and proof.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>Even if your idea is simple, unexpected, and concrete, people won't act on it unless they <strong>believe it's true</strong>. Credibility is the bridge between understanding and action.</p>
+
+                <h5>Four Ways to Build Credibility</h5>
+
+                <div class="card">
+                    <span class="card-label">Experts & Authorities</span>
+                    <p>People believe authorities. A doctor's endorsement is more powerful than a celebrity's. Find credible voices who can vouch for your idea.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Data & Statistics</span>
+                    <p>Numbers are credible—but only if they're surprising or memorable. "87% of doctors recommend..." sticks better than abstract percentages.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Internal Credibility</span>
+                    <p>The idea itself must be internally consistent. If parts contradict, people doubt the whole thing. Every element must reinforce your core message.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">The "Sinatra Test"</span>
+                    <p>Frank Sinatra sang "New York, New York" with a line: "If I can make it there, I can make it anywhere." One place proves competence everywhere. Small proofs can establish credibility for larger claims.</p>
+                </div>
+
+                <div class="story">
+                    <div class="story-header">The Kidney Heist Urban Legend</div>
+                    <div class="story-inner">
+                        <p>An urban legend circulates: A man wakes up in a bathtub full of ice, his kidney missing. This terrifying story has been told for decades and believed by millions—despite zero credible evidence. Why? Because it has internal credibility: the setup makes sense, the motive is plausible, and the details feel real.</p>
+                        <div class="story-lesson">This teaches us that credibility isn't always about truth—it's about consistency. If you want people to believe a lie, you need internal credibility. So if you want them to believe the truth, make sure it's credible <em>and</em> consistent.</div>
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h5>The Sinatra Test in Action</h5>
+                    <p>Nordstrom's famous no-questions-asked return policy? A customer once returned tires to Nordstrom. Tires! They didn't sell tires. But they accepted the return anyway. That one moment of absurd kindness proved their entire philosophy of customer service credibility.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 5: EMOTIONAL -->
+        <div class="lesson">
+            <div class="lesson-header forest">
+                <span class="lesson-number">LESSON 5</span>
+                <h3>Emotional: Make Them Care</h3>
+                <p class="lesson-tagline">Logic makes people think. Emotion makes them act.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>This is perhaps the most powerful principle. People are driven by emotion far more than by logic. Ideas that make people <strong>feel something</strong> are ideas they'll remember and share.</p>
+
+                <h5>Four Emotional Triggers</h5>
+
+                <div class="card">
+                    <span class="card-label">Fear & Danger</span>
+                    <p>Fear grabs attention. Messages about health risks, security threats, or loss are powerfully emotional. But use responsibly—fear that's too strong backfires.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Aspiration & Pride</span>
+                    <p>People want to be better. Appeals to growth, achievement, and self-improvement trigger emotional investment. "Wouldn't you like to be the kind of person who...?"</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Belonging & Community</span>
+                    <p>Humans are social. Ideas that make people feel part of a group, tribe, or movement are deeply emotional. "You're not alone in thinking this..."</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Surprise & Delight</span>
+                    <p>Positive emotions are just as sticky as negative ones. Delighting someone creates emotional loyalty. They'll remember—and tell others about—the joy.</p>
+                </div>
+
+                <div class="quote-box">
+                    <p>"You can't think your way to emotional commitment. You have to feel your way there."</p>
+                    <p class="quote-attribution">— Made to Stick principle</p>
+                </div>
+
+                <h5>The Power of Self-Interest with Meaning</h5>
+                <p>The most sticky emotional appeals combine personal benefit with larger meaning. "Donate to save your own child's life" is emotional. "Donate to save <em>any</em> child's life" is more emotional because it combines personal values with meaning.</p>
+            </div>
+        </div>
+
+        <!-- LESSON 6: STORIES -->
+        <div class="lesson">
+            <div class="lesson-header sky">
+                <span class="lesson-number">LESSON 6</span>
+                <h3>Stories: Get People to Act</h3>
+                <p class="lesson-tagline">Stories transport us. They make ideas contagious and actionable.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>Stories are the ultimate sticky medium. They're more memorable than facts, more persuasive than arguments, and more actionable than instructions. Stories <strong>show</strong> rather than tell.</p>
+
+                <h5>Why Stories Stick</h5>
+                <p>When you tell a story, people don't just process information—they <em>experience</em> it. Their brains activate as if they're living the story themselves. This neural engagement makes stories unforgettable.</p>
+
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Brain receiving story -->
+                        <ellipse cx="150" cy="100" rx="70" ry="60" fill="none" stroke="#6C5CE7" stroke-width="3"/>
+                        <path d="M 100 80 Q 110 60 120 80 Q 130 100 140 80" fill="none" stroke="#6C5CE7" stroke-width="2"/>
+                        <path d="M 150 70 Q 165 50 180 70" fill="none" stroke="#6C5CE7" stroke-width="2"/>
+                        <text x="150" y="105" font-size="11" fill="#6C5CE7" font-weight="bold" text-anchor="middle">STORY</text>
+
+                        <!-- Story elements coming in -->
+                        <g>
+                            <circle cx="40" cy="200" r="6" fill="#FF6B6B"/>
+                            <text x="40" y="225" font-size="10" fill="#2D3436" text-anchor="middle">Character</text>
+                        </g>
+                        <g>
+                            <circle cx="150" cy="220" r="6" fill="#FFE66D"/>
+                            <text x="150" y="245" font-size="10" fill="#2D3436" text-anchor="middle">Conflict</text>
+                        </g>
+                        <g>
+                            <circle cx="260" cy="200" r="6" fill="#55EFC4"/>
+                            <text x="260" y="225" font-size="10" fill="#2D3436" text-anchor="middle">Resolution</text>
+                        </g>
+
+                        <!-- Arrows showing activation -->
+                        <path d="M 60 180 L 100 130" stroke="#FF6B6B" stroke-width="2" fill="none" opacity="0.5"/>
+                        <path d="M 150 210 L 150 160" stroke="#FFE66D" stroke-width="2" fill="none" opacity="0.5"/>
+                        <path d="M 240 180 L 200 130" stroke="#55EFC4" stroke-width="2" fill="none" opacity="0.5"/>
+                    </svg>
+                </div>
+
+                <h5>Three Story Types (the Hearthfire Framework)</h5>
+
+                <div class="card">
+                    <span class="card-label">Challenge Stories</span>
+                    <p><strong>Setup:</strong> Someone faces an obstacle or challenge.<br>
+                    <strong>Development:</strong> They struggle but persevere.<br>
+                    <strong>Resolution:</strong> They overcome it through effort or cleverness.<br>
+                    <strong>Purpose:</strong> Inspires action and resilience. Shows what's possible.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Connection Stories</span>
+                    <p><strong>Setup:</strong> Two people or groups seem different or opposed.<br>
+                    <strong>Development:</strong> They find common ground or unexpected similarity.<br>
+                    <strong>Resolution:</strong> They connect on a human level.<br>
+                    <strong>Purpose:</strong> Builds empathy and belonging. Bridges divides.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Creativity Stories</span>
+                    <p><strong>Setup:</strong> A problem seems impossible or unsolvable.<br>
+                    <strong>Development:</strong> Someone thinks differently and sees a new angle.<br>
+                    <strong>Resolution:</strong> An unexpected solution emerges.<br>
+                    <strong>Purpose:</strong> Sparks innovation. Shows that creative thinking works.</p>
+                </div>
+
+                <div class="story">
+                    <div class="story-header">Southwest Airlines: The Origin Story</div>
+                    <div class="story-inner">
+                        <p>In the 1970s, air travel was expensive and bureaucratic. Herb Kelleher and Rollin King sketched Southwest on a cocktail napkin: a no-frills airline that would be cheap and cheerful. The idea was so unconventional that everyone said it would fail. The airline industry was dominated by huge carriers with high costs and high prices.</p>
+
+                        <p>But Southwest had a different model: fly point-to-point instead of hub-and-spoke, use just one aircraft type, offer no meals, no assigned seats, and above all, keep it fun. Every employee—from pilots to gate agents—was empowered to deliver great customer service with a smile.</p>
+
+                        <p>The result? Southwest became the most profitable airline in history. The story shows that radical simplicity, combined with human warmth, can revolutionize an industry.</p>
+
+                        <div class="story-lesson">This is a Challenge Story + Creativity Story: Southwest faced the "impossible" of competing with industry giants, solved it through creative thinking about what airlines really needed to be, and inspired an entire industry transformation.</div>
+                    </div>
+                </div>
+
+                <h5>How to Tell Sticky Stories</h5>
+                <ul style="margin-left: 2rem;">
+                    <li><strong>Make the stakes clear:</strong> What does the character have to lose or gain?</li>
+                    <li><strong>Show the struggle:</strong> Make the conflict real and tangible</li>
+                    <li><strong>Reveal the insight:</strong> What did they learn? How did they change?</li>
+                    <li><strong>End with action:</strong> Leave the listener with something to do or believe</li>
+                    <li><strong>Make it true:</strong> Real stories are stickier than fabrications (your audience senses when you're not being genuine)</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ADDITIONAL LESSONS SECTION -->
+    <section class="section" id="additional">
+        <h2 class="section-title">Additional Key Lessons</h2>
+
+        <!-- THE CURSE OF KNOWLEDGE -->
+        <div class="lesson">
+            <div class="lesson-header coral">
+                <span class="lesson-number">LESSON 7</span>
+                <h3>The Curse of Knowledge</h3>
+                <p class="lesson-tagline">Once you know something, you can't unknow it. This is why experts fail to explain.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>The Curse of Knowledge is perhaps the most important lesson in the entire book. It's the reason so many smart people communicate poorly.</p>
+
+                <h5>The Tappers and Listeners Experiment</h5>
+                <p>Researchers asked participants to tap out the rhythm of a famous song (like "Happy Birthday") while others listened and tried to guess the song. The tapper knew the song, so it seemed obvious. But listeners only guessed correctly about 3% of the time. The tapper predicted 50% accuracy.</p>
+
+                <p><strong>Why?</strong> Once you know the song, your brain automatically hears the melody along with the tapping. You can't separate the tapping from the song. But the listener only hears random tapping—they have no reference point.</p>
+
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Tapper's brain -->
+                        <g>
+                            <ellipse cx="75" cy="80" rx="35" ry="45" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+                            <text x="75" y="65" font-size="11" fill="#FF6B6B" font-weight="bold" text-anchor="middle">TAPPER</text>
+                            <text x="75" y="85" font-size="9" fill="#FF6B6B" text-anchor="middle">Hears: Song</text>
+                            <text x="75" y="98" font-size="9" fill="#FF6B6B" text-anchor="middle">+ Tapping</text>
+                            <text x="75" y="115" font-size="10" fill="#FF6B6B" font-weight="bold" text-anchor="middle">OBVIOUS!</text>
+                        </g>
+
+                        <!-- Listener's brain -->
+                        <g>
+                            <ellipse cx="225" cy="80" rx="35" ry="45" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                            <text x="225" y="65" font-size="11" fill="#4ECDC4" font-weight="bold" text-anchor="middle">LISTENER</text>
+                            <text x="225" y="85" font-size="9" fill="#4ECDC4" text-anchor="middle">Hears: Just</text>
+                            <text x="225" y="98" font-size="9" fill="#4ECDC4" text-anchor="middle">Tapping</text>
+                            <text x="225" y="115" font-size="10" fill="#4ECDC4" font-weight="bold" text-anchor="middle">Confused!</text>
+                        </g>
+
+                        <!-- Tapping lines -->
+                        <path d="M 110 100 L 190 100" stroke="#FFE66D" stroke-width="2" fill="none"/>
+                        <circle cx="120" cy="100" r="2" fill="#FFE66D"/>
+                        <circle cx="140" cy="100" r="2" fill="#FFE66D"/>
+                        <circle cx="160" cy="100" r="2" fill="#FFE66D"/>
+                        <circle cx="180" cy="100" r="2" fill="#FFE66D"/>
+                    </svg>
+                </div>
+
+                <div class="quote-box">
+                    <p>"The curse of knowledge makes you a terrible communicator. What you need to do is to get out of your own head and into the heads of people who don't know what you know."</p>
+                    <p class="quote-attribution">— Made to Stick</p>
+                </div>
+
+                <h5>How to Fight the Curse</h5>
+                <ul style="margin-left: 2rem;">
+                    <li><strong>Test your explanations with novices:</strong> Have someone who knows nothing about your topic try to understand it. Watch where they get confused.</li>
+                    <li><strong>Explain as if to a child:</strong> Can you describe your idea to a 10-year-old? If not, it's not simple enough.</li>
+                    <li><strong>Remove jargon:</strong> Every technical term you use is a curse. Replace it with something concrete and familiar.</li>
+                    <li><strong>Make implicit assumptions explicit:</strong> What background knowledge are you assuming? State it out loud.</li>
+                    <li><strong>Slow down:</strong> Don't rush through things that feel obvious to you. They're not obvious to others.</li>
+                </ul>
+
+                <div class="ai-box">
+                    <h5>AI & The Curse of Knowledge</h5>
+                    <p>Large language models suffer from a version of this curse when explaining complex topics. They "know" too much and often skip steps that seem obvious to them but aren't obvious to beginners. Effective AI prompts acknowledge this: "Explain this like I'm 5 years old" or "Assume I have no prior knowledge."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VELCRO THEORY -->
+        <div class="lesson">
+            <div class="lesson-header teal">
+                <span class="lesson-number">LESSON 8</span>
+                <h3>Velcro Theory of Memory</h3>
+                <p class="lesson-tagline">Ideas stick when they attach to what people already know.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>Memory doesn't work like a file cabinet. Instead, your brain is like a web of sticky Velcro hooks. New ideas don't land in isolation—they stick because they hook onto existing knowledge.</p>
+
+                <h5>The Velcro Principle</h5>
+                <p>When you learn something new, it hooks into what you already know. The more hooks it has—the more connections to existing ideas—the stickier it becomes.</p>
+
+                <p><strong>Example:</strong> If you know nothing about basketball, explaining "pick and roll" means nothing. But if you already know basketball, it immediately hooks into your existing understanding of the game's fundamentals. The idea sticks because there are Velcro hooks already there.</p>
+
+                <div class="story">
+                    <div class="story-header">Learning a New Language</div>
+                    <div class="story-inner">
+                        <p>If English is your native language, learning Spanish is easier than learning Mandarin. Why? Because many Spanish words hook into English words you already know (cognates). "Library" and "librería" are similar. But Mandarin characters have no hooks into English—you're building from scratch.</p>
+                        <div class="story-lesson">Ideas that connect to familiar concepts stick better than ideas that stand alone. This is why analogies are so powerful—they create instant Velcro connections.</div>
+                    </div>
+                </div>
+
+                <h5>How to Use Velcro Theory</h5>
+                <ul style="margin-left: 2rem;">
+                    <li><strong>Use familiar analogies:</strong> "Blockchain is like a shared ledger" hooks into everyone's understanding of ledgers</li>
+                    <li><strong>Connect to pop culture:</strong> "This is the Netflix of X industry" immediately clicks</li>
+                    <li><strong>Build on common experiences:</strong> Everyone has waited in line, felt lost, or wanted something badly. Use those hooks</li>
+                    <li><strong>Map to mental models people already have:</strong> "Customer journey" works because people understand journeys</li>
+                </ul>
+
+                <div class="ai-box">
+                    <h5>AI as Velcro Optimizer</h5>
+                    <p>Good AI prompt engineering uses Velcro Theory. When you say "explain machine learning like it's a Netflix recommendation algorithm," you're telling the AI to create hooks into knowledge the user already has. The more familiar references in your prompt, the stickier the explanation will be.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- THE SINATRA TEST -->
+        <div class="lesson">
+            <div class="lesson-header sunny">
+                <span class="lesson-number">LESSON 9</span>
+                <h3>The Sinatra Test</h3>
+                <p class="lesson-tagline">"If I can make it there, I can make it anywhere." Small proofs = big credibility.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>One perfect example can prove an entire principle. If your idea works in the hardest possible context, people assume it works everywhere.</p>
+
+                <h5>The Power of One Proof</h5>
+                <p>Frank Sinatra singing "New York, New York" isn't just making it there—he's proving he can make it anywhere. One superlative success becomes proof of universal capability.</p>
+
+                <div class="story">
+                    <div class="story-header">Toyota's Kaizen Philosophy</div>
+                    <div class="story-inner">
+                        <p>Toyota's manufacturing philosophy was hard to believe—until they built the Camry in a non-union factory in Kentucky with American workers who had no experience with Japanese manufacturing. If they could build quality cars in the American South (the Sinatra test), they could do it anywhere.</p>
+                        <div class="story-lesson">That one factory became proof that Toyota's entire system of continuous improvement and quality control worked universally, not just in Japan.</div>
+                    </div>
+                </div>
+
+                <h5>How to Use the Sinatra Test</h5>
+                <ul style="margin-left: 2rem;">
+                    <li><strong>Find the toughest context:</strong> Where would your idea be hardest to implement?</li>
+                    <li><strong>Win there first:</strong> Get proof of concept in the most challenging scenario</li>
+                    <li><strong>Publicize that win:</strong> Make sure people know you succeeded where it's hardest</li>
+                    <li><strong>Use it as proof:</strong> "We did it in [tough context], so we can do it anywhere"</li>
+                </ul>
+
+                <div class="funny-box">
+                    <h5>The Nordstrom Tire Story (Part 2)</h5>
+                    <p>Why would Nordstrom accept a tire return when they've never sold tires? The Sinatra Test: if we're willing to take back something we didn't even sell, imagine what we'll do for the things we did sell. One absurd gesture became proof of an entire customer service philosophy.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMANDER'S INTENT -->
+        <div class="lesson">
+            <div class="lesson-header purple">
+                <span class="lesson-number">LESSON 10</span>
+                <h3>Commander's Intent</h3>
+                <p class="lesson-tagline">Military leaders know: give people the "why," not just the "what." Simple core + autonomy = alignment.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>In the military, "Commander's Intent" is the underlying purpose of an order. Soldiers understand <strong>why</strong> they're doing something, so they can adapt tactics as conditions change.</p>
+
+                <h5>Why This Matters</h5>
+                <p>If you tell someone "Guard the bridge," and circumstances change, they're stuck. But if you tell them "Our army needs to cross this river without being detected. That bridge controls our crossing route," then if the bridge is destroyed, they understand the real goal and can find an alternative route.</p>
+
+                <p>Commander's Intent is about communicating the core purpose so clearly that people can make good decisions on their own.</p>
+
+                <div class="quote-box">
+                    <p>"Tell people the destination, not the route. They'll figure out the best way to get there."</p>
+                    <p class="quote-attribution">— Military leadership principle</p>
+                </div>
+
+                <h5>In Business</h5>
+                <p>Instead of: "Process all customer tickets within 24 hours,"<br>
+                Try: "We want customers to feel heard and valued. Respond to them faster than they expect, and solve their problem completely."</p>
+
+                <p>The first is a rule. The second is intent—and it gives people autonomy to achieve the real goal.</p>
+
+                <div class="ai-box">
+                    <h5>Prompt Engineering & Commander's Intent</h5>
+                    <p>The best AI prompts work like Commander's Intent. Instead of "Write me 5 bullet points about marketing," try "I need to convince CFOs that this marketing strategy saves money. What's the core argument?" You've communicated your intent, and the AI can respond much more effectively.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- THE KIDNEY HEIST -->
+        <div class="lesson">
+            <div class="lesson-header forest">
+                <span class="lesson-number">LESSON 11</span>
+                <h3>The Kidney Heist: Why Bad Ideas Stick</h3>
+                <p class="lesson-tagline">Urban legends and false beliefs persist because they follow the SUCCESS framework perfectly.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>The "kidney heist" urban legend—a man wakes up in a bathtub missing a kidney—has circulated for decades with zero evidence. It's a perfect case study in how bad ideas become sticky when they follow the SUCCESS framework.</p>
+
+                <h5>Why the Kidney Heist Sticks</h5>
+
+                <div class="card">
+                    <span class="card-label">Simple</span>
+                    <p>Core idea: Organ thieves are real, and they might steal yours.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Unexpected</span>
+                    <p>Most people don't expect to be surgically assaulted in a hotel room.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Concrete</span>
+                    <p>Waking up in a bathtub full of ice with a scar—vivid, sensory-rich, tangible.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Credible</span>
+                    <p>Kidneys have value on the black market. Surgery requires skill, but it's plausible. The story has internal consistency.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Emotional</span>
+                    <p>Fear. Violation. Helplessness. Powerful emotions make you remember and share.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Stories</span>
+                    <p>It's told as a narrative, often with a friend-of-a-friend attribution ("My cousin's roommate...").</p>
+                </div>
+
+                <div class="quote-box">
+                    <p>"False ideas that follow the SUCCESS framework stick just as well as true ideas. This is why combating misinformation is so hard—you can't fight sticky ideas with facts. You need stickier ideas."</p>
+                    <p class="quote-attribution">— Made to Stick principle</p>
+                </div>
+
+                <h5>How to Unstick Bad Ideas</h5>
+                <p>The book teaches that <strong>you can't unstick a bad idea with facts alone</strong>. Here's what works:</p>
+
+                <ul style="margin-left: 2rem;">
+                    <li><strong>Acknowledge why it stuck:</strong> People believed it for good reasons (it was vivid, emotional, etc.)</li>
+                    <li><strong>Provide a sticky alternative:</strong> Replace the false idea with a true idea that's <em>just as</em> memorable</li>
+                    <li><strong>Attack the core, not the details:</strong> Don't argue about ice—argue about the implausibility of organ harvesting as a crime</li>
+                    <li><strong>Use the same weapons:</strong> Make your counter-idea simple, unexpected, concrete, credible, emotional, and story-driven</li>
+                </ul>
+
+                <div class="funny-box">
+                    <h5>Why Snopes.com Isn't Enough</h5>
+                    <p>Listing facts about why the kidney heist is false doesn't work. The false story is stickier than the refutation. The book argues you need to replace the bad idea with a better one, not just debunk it.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNSTICKING BAD IDEAS -->
+        <div class="lesson">
+            <div class="lesson-header sky">
+                <span class="lesson-number">LESSON 12</span>
+                <h3>How to Unstick Bad Ideas</h3>
+                <p class="lesson-tagline">Facts alone won't work. You need a stickier truth.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>Once a bad idea sticks, it's incredibly hard to remove. The book teaches that the solution isn't more facts—it's a stickier, better idea.</p>
+
+                <h5>Four Strategies for Unsticking</h5>
+
+                <div class="card">
+                    <span class="card-label">Strategy 1: Address the Core Misconception</span>
+                    <p>Don't attack peripheral details. Attack the fundamental belief. Instead of saying "There's no evidence of kidney theft," argue "Organ theft doesn't make economic sense"—you're attacking the core assumption that makes the idea seem plausible.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Strategy 2: Use Sticky Counter-Stories</span>
+                    <p>Replace the false story with a true story that's equally vivid and emotional. If someone believes the kidney heist, tell them the real story of organ donation—equally dramatic, equally concrete, but actually true.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Strategy 3: Break the Internal Consistency</span>
+                    <p>Point out logical flaws that make the idea self-contradictory. "If hospitals are stealing organs, where are the lawsuits? Where are the missing persons reports?" Make people doubt the internal consistency.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Strategy 4: Appeal to Shared Values</span>
+                    <p>Don't just argue facts. Show how the true idea aligns with what the person values. If they value safety, argue why the actual medical facts keep them safer than the false belief.</p>
+                </div>
+
+                <h5>The Inoculation Effect</h5>
+                <p>The best way to prevent bad ideas from sticking is to inoculate people before exposure. Teaching the SUCCESS framework itself helps people recognize sticky ideas—both true and false. When you understand how ideas stick, you become more skeptical of extremely sticky ideas that sound too convenient.</p>
+
+                <div class="ai-box">
+                    <h5>Misinformation in the Age of AI</h5>
+                    <p>With AI-generated content becoming commonplace, unsticking bad ideas becomes harder. AI can generate perfectly credible-seeming narratives. The book's principles suggest the answer: counter-narratives, education, and helping people understand how stickiness works.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- EXAMPLES & REAL WORLD STORIES -->
+    <section class="section" id="examples">
+        <h2 class="section-title">Real-World Examples & Stories</h2>
+
+        <p>The best part of Made to Stick is the examples. Here are the most powerful ones:</p>
+
+        <div class="two-col">
+            <div>
+                <div class="story">
+                    <div class="story-header">Southwest Airlines</div>
+                    <div class="story-inner">
+                        <p><strong>The Idea:</strong> "The low-fare airline"</p>
+                        <p>Before Southwest, airlines competed on meals, lounges, and luxury. Southwest said: "We're cheap. That's it." This simple core idea transformed everything—from the aircraft they bought (one type only, for efficiency) to how employees dressed (casual, fun) to the routes they flew (point-to-point, not hub-and-spoke).</p>
+                        <p><strong>Why It Stuck:</strong> Simple core, everything reinforced it, employees believed it, customers understood it instantly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="story">
+                    <div class="story-header">JFK's Moon Speech</div>
+                    <div class="story-inner">
+                        <p><strong>The Idea:</strong> "We choose to go to the moon, not because it is easy, but because it is hard."</p>
+                        <p>Kennedy didn't talk about military advantage or scientific achievement. He made the moon landing emotional and aspirational. It became a challenge, a dream, something we chose to do for the sake of choosing to do hard things.</p>
+                        <p><strong>Why It Stuck:</strong> Unexpected (reframing space as aspiration, not competition), emotional (touching something eternal about human ambition), concrete (moon, not "outer space"), credible (we had the technology), simple (one goal: the moon).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <div>
+                <div class="story">
+                    <div class="story-header">Subway's Jared</div>
+                    <div class="story-inner">
+                        <p><strong>The Idea:</strong> A college kid lost 245 pounds eating Subway sandwiches.</p>
+                        <p>Instead of abstract health claims ("Subway is healthier"), they had a concrete, emotional, narrative-driven story. Jared's before-and-after photos, his specific sandwich orders, his real journey—it all stuck.</p>
+                        <p><strong>Why It Stuck:</strong> Emotional connection to a real person, concrete results (245 lbs, size 60 pants), credible (documented journey), simple (one guy, one diet), a story people could tell and re-tell.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="story">
+                    <div class="story-header">Nordstrom's Tire Return</div>
+                    <div class="story-inner">
+                        <p><strong>The Idea:</strong> Nordstrom's returns policy is so generous, a customer once returned tires—which Nordstrom has never sold.</p>
+                        <p>This (possibly apocryphal) story became the ultimate proof of Nordstrom's customer service philosophy. One absurd, concrete example proved an entire principle.</p>
+                        <p><strong>Why It Stuck:</strong> Unexpected (tires at a department store?), concrete (you can picture it), credible (it fits their philosophy), emotional (it's generous and a little funny), simple (the message: we trust our customers).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="story">
+            <div class="story-header">The Kidney Heist Urban Legend</div>
+            <div class="story-inner">
+                <p><strong>The Idea:</strong> A man wakes up in a bathtub missing a kidney, stolen by organ traffickers.</p>
+                <p>This story has circulated for decades with zero credible evidence. Why? Because it perfectly follows the SUCCESS framework. It's simple (organ theft), unexpected (it could happen to you), concrete (bathtub full of ice), credible (organs have value, surgery is possible), emotional (terrifying violation), and told as a story (friend of a friend).</p>
+                <p><strong>The Lesson:</strong> Bad ideas can be just as sticky as good ones. The framework doesn't care about truth—it cares about stickiness.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- AI & MODERN CONNECTIONS -->
+    <section class="section" id="ai">
+        <h2 class="section-title">Made to Stick in the Age of AI & Prompt Engineering</h2>
+
+        <p>The principles of Made to Stick apply directly to modern AI communication, machine learning, and prompt engineering. Here's how:</p>
+
+        <div class="lesson">
+            <div class="lesson-header deep-blue">
+                <span class="lesson-number">AI LESSON 1</span>
+                <h3>The Curse of Knowledge in AI Explanations</h3>
+                <p class="lesson-tagline">LLMs know too much. They skip steps that seem obvious to them.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>Large language models have access to all of human knowledge, but this creates a massive "curse of knowledge" problem. They know so much that they often skip foundational steps and assume knowledge their audience doesn't have.</p>
+
+                <h5>The Problem</h5>
+                <p>When you ask Claude to explain quantum computing, it might skip crucial foundational concepts because they seem obvious—to an AI trained on millions of technical documents. But to a beginner, it's gibberish.</p>
+
+                <h5>The Solution: Commander's Intent Prompts</h5>
+                <p>Instead of: "Explain quantum computing"<br>
+                Try: "Explain quantum computing to a smart 14-year-old who knows nothing about physics. Make it concrete and fun."</p>
+
+                <p>You're using Commander's Intent: you're communicating your actual goal (audience level, desired tone) so the AI can adapt and not fall victim to the curse of knowledge.</p>
+
+                <div class="ai-box">
+                    <h5>Key Prompt Patterns</h5>
+                    <p>
+                        • "Explain like I'm 5" (forces concreteness)<br>
+                        • "I have no background in X" (breaks curse of knowledge)<br>
+                        • "Use analogies I'd understand" (creates Velcro hooks)<br>
+                        • "Make this surprising and memorable" (adds emotional stickiness)<br>
+                        • "End with a story" (adds narrative stickiness)
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson">
+            <div class="lesson-header deep-blue">
+                <span class="lesson-number">AI LESSON 2</span>
+                <h3>SUCCESS Framework as Prompt Engineering Principles</h3>
+                <p class="lesson-tagline">Good prompts use the same principles as sticky ideas.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>The SUCCESS framework maps directly onto effective prompt engineering:</p>
+
+                <div class="success-framework">
+                    <div class="success-letter s">
+                        <h4>S</h4>
+                        <p><strong>Simple Prompts</strong></p>
+                        <p>Clear instructions without jargon.</p>
+                    </div>
+                    <div class="success-letter u">
+                        <h4>U</h4>
+                        <p><strong>Unexpected Constraints</strong></p>
+                        <p>"Answer in one sentence" or "Like a pirate".</p>
+                    </div>
+                    <div class="success-letter c">
+                        <h4>C</h4>
+                        <p><strong>Concrete Context</strong></p>
+                        <p>Specific examples, real scenarios, not abstract concepts.</p>
+                    </div>
+                    <div class="success-letter c2">
+                        <h4>C</h4>
+                        <p><strong>Credible Constraints</strong></p>
+                        <p>"Based on recent research" or "From a CEO's perspective".</p>
+                    </div>
+                    <div class="success-letter e">
+                        <h4>E</h4>
+                        <p><strong>Emotional Framing</strong></p>
+                        <p>"Help me convince my skeptical boss" or "Make this fun".</p>
+                    </div>
+                    <div class="success-letter s2">
+                        <h4>S</h4>
+                        <p><strong>Story Structures</strong></p>
+                        <p>"Tell me the journey" or "Format as a conversation".</p>
+                    </div>
+                </div>
+
+                <h5>Example</h5>
+                <p><strong>Bad prompt:</strong> "Explain machine learning"</p>
+                <p><strong>Good prompt (using SUCCESS):</strong> "Explain machine learning to someone who's never heard of it, using only analogies to things they do every day. Start with a surprising fact that breaks their expectations. Make it memorable so they can explain it to a friend tonight."</p>
+
+                <p>The second prompt uses: Simple (no jargon), Unexpected (surprising fact), Concrete (everyday analogies), Credible (they can explain it to others), Emotional (making it memorable), Stories (asking for explanation ready to share).</p>
+
+                <div class="ai-box">
+                    <h5>The Velcro Hook Technique</h5>
+                    <p>When prompting an AI to explain something complex, explicitly ask it to use Velcro hooks: "Explain this using analogies to [thing the user knows well]." This forces the AI to create connections to existing knowledge—making the explanation stickier.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson">
+            <div class="lesson-header deep-blue">
+                <span class="lesson-number">AI LESSON 3</span>
+                <h3>Unexpected as Attention Mechanisms</h3>
+                <p class="lesson-tagline">Surprising patterns get through. This is how neural nets work.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>In neural networks, "attention mechanisms" determine which inputs matter most. Surprise and novelty are high-attention patterns. This mirrors the "Unexpected" principle from SUCCESS:</p>
+
+                <p>In Made to Stick, unexpected information sticks because it violates patterns and creates a "curiosity gap." In neural networks, attention mechanisms work similarly—they focus on anomalies, surprises, and violations of expected patterns.</p>
+
+                <h5>The Connection</h5>
+                <p>When you prompt an AI and say "Start with the most surprising fact," you're asking it to do what attention mechanisms do: focus on the anomaly, the novelty, the pattern-breaking insight.</p>
+
+                <div class="ai-box">
+                    <h5>Prompt Pattern: Leverage Surprise</h5>
+                    <p>
+                        "What's the most counterintuitive thing about X?"<br>
+                        "What would surprise someone who thinks they know about Y?"<br>
+                        "What's the assumption everyone makes that turns out to be wrong?"<br>
+                    </p>
+                    <p>These prompts ask the AI to activate its attention mechanism on surprising, unexpected patterns.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson">
+            <div class="lesson-header deep-blue">
+                <span class="lesson-number">AI LESSON 4</span>
+                <h3>Concrete as Grounding</h3>
+                <p class="lesson-tagline">Specific examples ground abstract concepts. This is both a communication principle and a machine learning one.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>In machine learning, "grounding" means connecting abstract representations to concrete, observable reality. The "Concrete" principle from SUCCESS does the same thing—it prevents abstraction from floating away unmemorable.</p>
+
+                <h5>In Prompt Engineering</h5>
+                <p>Instead of asking for abstract advice, ask for concrete examples:</p>
+
+                <p><strong>Abstract:</strong> "Give me marketing tips"<br>
+                <strong>Concrete:</strong> "Give me 3 specific marketing tactics I could use tomorrow to promote a dog walking service, with exact step-by-step instructions for one of them"</p>
+
+                <p>The concrete version grounds the advice in reality. It gives specific, actionable, tangible results instead of abstract principles.</p>
+
+                <div class="ai-box">
+                    <h5>Grounding Patterns</h5>
+                    <p>
+                        • "Give me a specific example of X"<br>
+                        • "Show me exactly how I would do this"<br>
+                        • "What are 3 concrete tactics, not abstract principles?"<br>
+                        • "Format it as a to-do list I could follow today"<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson">
+            <div class="lesson-header deep-blue">
+                <span class="lesson-number">AI LESSON 5</span>
+                <h3>Emotional as Reward Shaping</h3>
+                <p class="lesson-tagline">In reinforcement learning and human motivation, emotion shapes behavior.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>In machine learning, "reward shaping" is how you train models to care about certain outcomes. In human psychology (and in Made to Stick), emotional framing is how you make people care about ideas.</p>
+
+                <h5>The Parallel</h5>
+                <p>When you prompt an AI with emotional context—"Help me convince my skeptical boss," "I'm frustrated because..."—you're shaping the reward structure. You're saying: "This output is valuable if it succeeds at <em>this emotional goal</em>, not just <em>this informational goal</em>."</p>
+
+                <p>The AI will weight its response differently when it understands the emotional stakes.</p>
+
+                <div class="ai-box">
+                    <h5>Emotional Prompting</h5>
+                    <p>
+                        • "Help me feel confident about this decision"<br>
+                        • "I'm worried about X. Address my concerns directly"<br>
+                        • "Make this inspiring, not just informative"<br>
+                        • "I need to feel like I made the right choice"<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson">
+            <div class="lesson-header deep-blue">
+                <span class="lesson-number">AI LESSON 6</span>
+                <h3>Stories as Training Data & Narrative Structure</h3>
+                <p class="lesson-tagline">Stories are how humans and AIs learn. Narrative structure is how we encode knowledge.</p>
+            </div>
+            <div class="lesson-inner">
+                <p>The final SUCCESS principle is Stories. And here's something fascinating: AIs are trained on stories. Most training data for large language models contains narrative structure—books, articles, conversations—all following story patterns.</p>
+
+                <h5>When You Ask for Stories</h5>
+                <p>When you prompt an AI to "tell me a story about X," you're asking it to use the narrative structures it learned during training. Stories are often more natural for AIs because their training data is full of them.</p>
+
+                <p>Moreover, stories make ideas stickier—in both human minds and in how concepts cluster in AI embeddings. A concept explained through narrative is more tightly integrated than a concept explained abstractly.</p>
+
+                <div class="ai-box">
+                    <h5>Story-Based Prompting</h5>
+                    <p>
+                        • "Tell me a story about how someone used this successfully"<br>
+                        • "Walk me through the journey of implementing this"<br>
+                        • "Format this as a conversation between two people"<br>
+                        • "Show me the before-and-after narrative"<br>
+                    </p>
+                    <p>These prompts ask the AI to structure knowledge as narrative—which often produces more memorable, actionable outputs.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- CROSS-BOOK CONNECTIONS -->
+    <section class="section" id="books">
+        <h2 class="section-title">Cross-Book Connections</h2>
+
+        <p>Made to Stick builds on ideas from other great books about communication, influence, and creativity:</p>
+
+        <div class="connect-box">
+            <h5>The Moth: The Art and Craft of Storytelling</h5>
+            <p>Made to Stick shows <em>why</em> stories stick. The Moth shows <em>how to tell them</em>. The Moth focuses on narrative craft: pacing, tension, the setup-twist-resolution structure. Together, they explain both the psychology and the technique of memorable storytelling.</p>
+        </div>
+
+        <div class="connect-box">
+            <h5>Influence: The Psychology of Persuasion (Robert Cialdini)</h5>
+            <p>Cialdini explains the principles of persuasion (reciprocity, authority, social proof, liking, scarcity, commitment). Made to Stick shows how to package those principles in memorable ways. Credibility and Emotional are directly related to Cialdini's authority and liking principles.</p>
+        </div>
+
+        <div class="connect-box">
+            <h5>Thinking, Fast and Slow (Daniel Kahneman)</h5>
+            <p>Kahneman explains how we think: System 1 (fast, intuitive, emotional) and System 2 (slow, rational, deliberate). The SUCCESS framework works because it appeals to System 1—the fast brain that actually drives behavior. Concrete, Unexpected, and Stories all bypass System 2 and hit System 1 directly.</p>
+        </div>
+
+        <div class="connect-box">
+            <h5>On Writing (Stephen King)</h5>
+            <p>King teaches craft—how to write with clarity and power. Made to Stick teaches strategy—how to make your writing memorable. Combined, they explain both technique and psychology. King says "write what you know"; Made to Stick says "when you do, make it concrete and unexpected."</p>
+        </div>
+
+        <div class="connect-box">
+            <h5>Steal Like an Artist (Austin Kleon)</h5>
+            <p>Kleon argues that all good ideas build on previous ideas. Made to Stick shows that good ideas stick when they create Velcro hooks to what people already know—existing ideas, mental models, and cultural references. The two books work together: steal from ideas that already have hooks in culture, then make your remix sticky.</p>
+        </div>
+
+    </section>
+
+    <!-- CHEATSHEET -->
+    <section class="section" id="cheatsheet">
+        <h2 class="section-title">Quick Reference Cheatsheet</h2>
+
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <h4>The SUCCESS Framework Checklist</h4>
+                <ul class="cheatsheet-list">
+                    <li><strong>Simple:</strong> Can you explain your idea in one sentence? Is there jargon you can remove?</li>
+                    <li><strong>Unexpected:</strong> Does your first statement break expectations? Does it create a curiosity gap?</li>
+                    <li><strong>Concrete:</strong> Can people see, hear, or experience your idea? Do you have specific examples?</li>
+                    <li><strong>Credible:</strong> Do people believe you? Can you cite authorities, data, or the "Sinatra Test"?</li>
+                    <li><strong>Emotional:</strong> Do people care? Can you connect to their values, aspirations, or fears?</li>
+                    <li><strong>Stories:</strong> Can you show, not just tell? Do you have a narrative that illustrates your idea?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <h4>Fighting the Curse of Knowledge</h4>
+                <ul class="cheatsheet-list">
+                    <li>Test your explanation with someone who knows nothing about the topic</li>
+                    <li>Remove every piece of jargon and technical language</li>
+                    <li>State your implicit assumptions out loud</li>
+                    <li>Explain like you're talking to a 10-year-old</li>
+                    <li>Slow down at the parts that feel obvious to you</li>
+                    <li>Ask "What am I assuming they already know?"</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <h4>Creating Velcro Hooks</h4>
+                <ul class="cheatsheet-list">
+                    <li>Use familiar analogies and comparisons</li>
+                    <li>Reference pop culture, common experiences, or well-known concepts</li>
+                    <li>Map to mental models people already have (journeys, wars, families)</li>
+                    <li>Say "This is like..." and complete the Velcro connection</li>
+                    <li>Find what they know well, then build your new idea on top of it</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <h4>The Three Story Types</h4>
+                <ul class="cheatsheet-list">
+                    <li><strong>Challenge:</strong> Someone faces an obstacle and overcomes it. (Inspires action.)</li>
+                    <li><strong>Connection:</strong> People who seem different find common ground. (Builds empathy.)</li>
+                    <li><strong>Creativity:</strong> A problem is solved through unexpected thinking. (Sparks innovation.)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <h4>How to Unstick Bad Ideas</h4>
+                <ul class="cheatsheet-list">
+                    <li>Attack the core misconception, not peripheral details</li>
+                    <li>Use sticky counter-stories, not just facts</li>
+                    <li>Break internal consistency and logical coherence</li>
+                    <li>Appeal to shared values, not just rational arguments</li>
+                    <li>Inoculate people with understanding of how stickiness works</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <h4>Prompt Engineering Using Made to Stick</h4>
+                <ul class="cheatsheet-list">
+                    <li><strong>S:</strong> Write simple prompts without jargon</li>
+                    <li><strong>U:</strong> Use unexpected constraints ("Answer in one sentence")</li>
+                    <li><strong>C:</strong> Give concrete context and specific examples</li>
+                    <li><strong>C:</strong> Frame from a credible perspective ("As a CEO...")</li>
+                    <li><strong>E:</strong> Express emotional stakes ("Help me convince...")</li>
+                    <li><strong>S:</strong> Ask for stories and narratives, not just information</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- KEY TAKEAWAYS -->
+    <section class="section">
+        <h2 class="section-title">Key Takeaways</h2>
+
+        <div class="card">
+            <h5>1. Ideas aren't naturally sticky. You have to make them stick.</h5>
+            <p>Being smart, right, or well-intentioned isn't enough. You need to follow the SUCCESS framework: Simple, Unexpected, Concrete, Credible, Emotional, and Stories.</p>
+        </div>
+
+        <div class="card">
+            <h5>2. The Curse of Knowledge is your worst enemy.</h5>
+            <p>Once you know something, you can't remember what it was like not to know it. Test your ideas with novices. Remove jargon. Slow down at the obvious parts.</p>
+        </div>
+
+        <div class="card">
+            <h5>3. Concrete details stick. Abstract concepts fade.</h5>
+            <p>Use specific numbers, names, places, and sensory details. Make people <em>see</em> your idea, not just understand it.</p>
+        </div>
+
+        <div class="card">
+            <h5>4. Surprising ideas break through the noise.</h5>
+            <p>Violate expectations. Create a curiosity gap. Make people lean forward and pay attention before you reward them with the answer.</p>
+        </div>
+
+        <div class="card">
+            <h5>5. Emotion drives action, not logic.</h5>
+            <p>People believe facts they don't remember. People act on feelings they do remember. Make your idea matter emotionally.</p>
+        </div>
+
+        <div class="card">
+            <h5>6. Stories transport people into experience.</h5>
+            <p>Stories are more memorable and persuasive than facts, arguments, or instructions. They make ideas actionable by showing, not telling.</p>
+        </div>
+
+        <div class="card">
+            <h5>7. Bad ideas stick just as well as good ideas.</h5>
+            <p>The SUCCESS framework doesn't care about truth. The kidney heist is false but incredibly sticky. Counter misinformation with <em>stickier</em> truth, not just facts.</p>
+        </div>
+
+        <div class="card">
+            <h5>8. Ideas are like Velcro—they stick to what's already there.</h5>
+            <p>New ideas hook into existing knowledge. The more connections (Velcro hooks), the stickier they become. Use analogies and references people already understand.</p>
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p><strong>Made to Stick: Why Some Ideas Survive and Others Die</strong></p>
+    <p>by Chip Heath & Dan Heath</p>
+    <p>An Illustrated Guide to the Psychology of Memorable Ideas</p>
+    <p style="margin-top: 2rem; opacity: 0.8; font-size: 0.9rem;">
+        This guide synthesizes the book's key principles, frameworks, and stories.
+        For the full experience, read the original book and discover more examples,
+        research, and deeper explorations.
+    </p>
+</footer>
+
+</body>
+</html>

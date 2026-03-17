@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Happiness Hypothesis: Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            overflow-x: hidden;
+        }
+
+        .page-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        /* ============ HEADER & COVER ============ */
+        .cover-section {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--teal) 50%, var(--sky) 100%);
+            padding: 80px 40px;
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cover-content {
+            flex: 1;
+            z-index: 2;
+            color: white;
+        }
+
+        .cover-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .cover-content .subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+
+        .cover-content .author {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            margin-bottom: 40px;
+        }
+
+        .cover-svg {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ============ NAVIGATION ============ */
+        .toc-section {
+            background: var(--cream);
+            padding: 60px 40px;
+            border-bottom: 4px solid var(--orange);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark-purple);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .toc-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 6px solid var(--coral);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .toc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border-left-color: var(--teal);
+        }
+
+        .toc-card h3 {
+            color: var(--dark-purple);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .toc-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* ============ LESSON CARDS ============ */
+        .lessons-container {
+            padding: 60px 40px;
+            background: linear-gradient(to bottom, #f8f9fa, white);
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 16px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-top: 6px solid var(--teal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,182,193,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: var(--coral);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+        }
+
+        .lesson-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark-purple);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lesson-card .haidt-quote {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--orange) 100%);
+            padding: 25px;
+            border-left: 5px solid var(--warm-red);
+            margin: 25px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--dark);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lesson-card .core-concept {
+            background: linear-gradient(135deg, var(--mint) 0%, var(--teal) 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 5px solid var(--forest);
+        }
+
+        .lesson-card .core-concept h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .lesson-content {
+            position: relative;
+            z-index: 1;
+            color: #333;
+            line-height: 1.9;
+        }
+
+        .lesson-content p {
+            margin-bottom: 18px;
+        }
+
+        .key-points {
+            background: #f0f3f7;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 5px solid var(--sky);
+        }
+
+        .key-points h4 {
+            color: var(--dark-purple);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #444;
+        }
+
+        .key-points li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--forest);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .research-highlight {
+            background: linear-gradient(135deg, rgba(160,108,213,0.1) 0%, rgba(74,205,196,0.1) 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 5px solid var(--dark-purple);
+        }
+
+        .research-highlight h4 {
+            color: var(--dark-purple);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .research-highlight p {
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .funny-take {
+            background: linear-gradient(135deg, var(--pink) 0%, var(--coral) 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 5px solid #E74C3C;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .funny-take h4 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .ai-connection {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--dark-purple) 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 5px solid var(--sky);
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ai-connection h4 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--sky);
+        }
+
+        .ai-connection p {
+            color: white;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ============ VISUAL ELEMENTS ============ */
+        .visual-section {
+            background: linear-gradient(135deg, var(--cream) 0%, white 100%);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .visual-section h3 {
+            color: var(--dark-purple);
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+
+        .svg-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* ============ CROSS-BOOK CONNECTIONS ============ */
+        .cross-book-section {
+            background: linear-gradient(135deg, var(--sky) 0%, var(--teal) 100%);
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 30px;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cross-book-section h4 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .cross-book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .cross-book-item {
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid white;
+            backdrop-filter: blur(10px);
+        }
+
+        .cross-book-item strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .cross-book-item small {
+            opacity: 0.9;
+        }
+
+        /* ============ HAPPINESS FORMULA VISUAL ============ */
+        .formula-breakdown {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 2px solid var(--teal);
+        }
+
+        .formula-equation {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            text-align: center;
+            margin: 20px 0;
+            color: var(--dark-purple);
+        }
+
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .formula-component {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--cream) 100%);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 5px solid var(--warm-red);
+            text-align: center;
+        }
+
+        .formula-component h4 {
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .formula-component p {
+            color: #333;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ============ ADAPTATION PIE CHART ============ */
+        .pie-chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .pie-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .pie-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .pie-color-box {
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+        }
+
+        /* ============ FOOTER ============ */
+        .footer-section {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--dark) 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p {
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 15px auto;
+            line-height: 1.7;
+        }
+
+        .footer-quotes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .footer-quote {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--teal);
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-quote p {
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-quote .attribution {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: normal;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .cover-section {
+                flex-direction: column;
+                padding: 40px 25px;
+                min-height: auto;
+            }
+
+            .cover-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .lesson-card {
+                padding: 30px 20px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .formula-grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 10px;
+            }
+
+            .page-wrapper {
+                box-shadow: none;
+            }
+
+            .lessons-container {
+                padding: 30px 20px;
+            }
+
+            .toc-section {
+                padding: 40px 20px;
+            }
+
+            .cover-content h1 {
+                font-size: 2rem;
+            }
+
+            .cover-content .subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- ============ COVER ============ -->
+        <section class="cover-section">
+            <div class="cover-content">
+                <h1>The Happiness Hypothesis</h1>
+                <p class="subtitle">Finding Modern Truth in Ancient Wisdom</p>
+                <p class="author">by Jonathan Haidt</p>
+                <p style="font-size: 1rem; opacity: 0.85; margin-top: 30px;">An illustrated guide to the 10 happiness lessons from positive psychology research, ancient philosophy, and neuroscience.</p>
+            </div>
+            <div class="cover-svg">
+                <svg viewBox="0 0 300 350" width="280" height="350" style="filter: drop-shadow(0 10px 25px rgba(0,0,0,0.2));">
+                    <!-- Elephant (System 1 / Intuition) -->
+                    <ellipse cx="150" cy="200" rx="70" ry="80" fill="#A06CD5" opacity="0.9"/>
+                    <!-- Elephant head -->
+                    <circle cx="150" cy="110" r="45" fill="#A06CD5"/>
+                    <!-- Elephant trunk -->
+                    <path d="M 150 130 Q 130 160 135 200" stroke="#A06CD5" stroke-width="18" fill="none" stroke-linecap="round"/>
+                    <!-- Elephant ear -->
+                    <ellipse cx="105" cy="110" rx="25" ry="45" fill="#A06CD5" opacity="0.7"/>
+                    <!-- Elephant eye -->
+                    <circle cx="165" cy="100" r="6" fill="white"/>
+
+                    <!-- Rider (System 2 / Reason) -->
+                    <circle cx="150" cy="75" r="18" fill="#FFE66D"/>
+                    <!-- Rider body -->
+                    <rect x="140" y="95" width="20" height="35" fill="#FF6B6B" rx="3"/>
+                    <!-- Rider arms -->
+                    <rect x="125" y="105" width="50" height="8" fill="#FFD93D" rx="4"/>
+                    <!-- Rider reins -->
+                    <line x1="130" y1="110" x2="120" y2="135" stroke="#4ECDC4" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="170" y1="110" x2="180" y2="135" stroke="#4ECDC4" stroke-width="3" stroke-linecap="round"/>
+
+                    <!-- Ancient pillar (left) -->
+                    <g opacity="0.6">
+                        <rect x="20" y="240" width="40" height="90" fill="#FFE66D"/>
+                        <rect x="15" y="235" width="50" height="8" fill="#FFE66D"/>
+                    </g>
+
+                    <!-- Modern lab (right) -->
+                    <g opacity="0.6">
+                        <rect x="240" y="240" width="40" height="90" fill="#74B9FF"/>
+                        <circle cx="250" cy="255" r="8" fill="white"/>
+                        <circle cx="270" cy="255" r="8" fill="white"/>
+                        <rect x="245" y="275" width="25" height="20" fill="#4ECDC4"/>
+                    </g>
+
+                    <!-- Happiness spectrum (bottom) -->
+                    <g>
+                        <rect x="80" y="310" width="140" height="25" rx="12" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                        <circle cx="90" cy="322.5" r="8" fill="#FF6B6B"/>
+                        <circle cx="150" cy="322.5" r="8" fill="#FFE66D"/>
+                        <circle cx="210" cy="322.5" r="8" fill="#00B894"/>
+                    </g>
+                </svg>
+            </div>
+        </section>
+
+        <!-- ============ TABLE OF CONTENTS ============ -->
+        <section class="toc-section">
+            <h2 class="section-title">10 Lessons in This Guide</h2>
+            <div class="toc-grid">
+                <div class="toc-card">
+                    <h3>1. The Rider & Elephant</h3>
+                    <p>Reason and emotion—the two systems of mind fighting for control</p>
+                </div>
+                <div class="toc-card">
+                    <h3>2. The Happiness Formula</h3>
+                    <p>H = S + C + V: Set point, Conditions, Voluntary activities</p>
+                </div>
+                <div class="toc-card">
+                    <h3>3. Adaptation & Hedonic Treadmill</h3>
+                    <p>Why we quickly return to baseline despite life changes</p>
+                </div>
+                <div class="toc-card">
+                    <h3>4. Reciprocity & Golden Rule</h3>
+                    <p>The ancient wisdom that mirrors modern game theory and cooperation</p>
+                </div>
+                <div class="toc-card">
+                    <h3>5. The Fundamental Attribution Error</h3>
+                    <p>Why we blame people for situations they didn't control</p>
+                </div>
+                <div class="toc-card">
+                    <h3>6. The Happiness Paradox</h3>
+                    <p>Chasing happiness directly often backfires—how to pursue it obliquely</p>
+                </div>
+                <div class="toc-card">
+                    <h3>7. Love & Attachment</h3>
+                    <p>Bowlby, Harlow, and why connection is foundational to wellbeing</p>
+                </div>
+                <div class="toc-card">
+                    <h3>8. Adversity & Growth</h3>
+                    <p>Post-traumatic growth: how trauma can strengthen resilience</p>
+                </div>
+                <div class="toc-card">
+                    <h3>9. Virtue as Skill</h3>
+                    <p>Aristotle's eudaimonia—virtue and character development through practice</p>
+                </div>
+                <div class="toc-card">
+                    <h3>10. Divinity & Meaning</h3>
+                    <p>Vital engagement, coherence, and the sacred in human experience</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ LESSONS ============ -->
+        <section class="lessons-container">
+
+            <!-- LESSON 1 -->
+            <div class="lesson-card">
+                <div class="lesson-number">1</div>
+                <h2>The Rider and the Elephant: Reason vs. Intuition</h2>
+
+                <div class="haidt-quote">
+                    "The rider is the conscious reasoning we're aware of; the elephant is the automatic, intuitive processes that actually control most of our behavior."
+                </div>
+
+                <div class="core-concept">
+                    <h4>Core Metaphor</h4>
+                    <p>Your mind is not unified. The Rider (System 2—deliberate, slow, logical) sits atop the Elephant (System 1—fast, intuitive, emotional). Most of the time, the Elephant decides, and the Rider justifies.</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Jonathan Haidt drew inspiration from decades of cognitive science and Hindu philosophy to propose that human cognition operates through two distinct systems. The Rider represents conscious reasoning, willpower, and deliberate decision-making—the voice we identify as "ourselves." The Elephant represents automatic intuitions, emotional drives, evolved impulses, and learned patterns that operate below conscious awareness.</p>
+
+                    <p>The critical insight: <strong>the Elephant is much larger and stronger than the Rider</strong>. We experience our lives as though we're in control (Rider), but most behavior is driven by intuition, emotion, and habit (Elephant). The Rider can only influence the Elephant through suggestion, incentive, and repeated framing—not through willpower alone.</p>
+
+                    <p>This maps directly to Kahneman's dual-process theory in <em>Thinking, Fast and Slow</em>: System 1 (fast, intuitive, emotional) does the heavy lifting; System 2 (slow, rational, deliberate) provides post-hoc reasoning.</p>
+                </div>
+
+                <div class="key-points">
+                    <h4>Key Takeaways</h4>
+                    <ul>
+                        <li>Reason alone won't change behavior—you must influence the Elephant</li>
+                        <li>Emotions evolved for adaptive reasons; they're not errors to be suppressed</li>
+                        <li>Willpower is a limited resource; design environments instead of relying on self-control</li>
+                        <li>The Rider's job is narrative construction—telling a coherent story about what we do</li>
+                        <li>Persuasion works by appealing to emotions first, reason second</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    <h4>🎭 The Funny Take</h4>
+                    <p>You ever make a terrible decision and your Rider immediately creates an elaborate justification for why it was actually genius? That's not you being irrational—that's your Rider doing its job as your personal defense attorney. It's not truth-seeking; it's reputation management.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: System 1 as Pretrained Intuition</h4>
+                    <p>The Elephant is like a pretrained neural network—trained by evolution and experience, it recognizes patterns instantly and outputs decisions without showing work. The Rider is fine-tuning and reasoning about those outputs. In LLMs, this is transformer attention (fast pattern matching = Elephant) plus explicit reasoning tokens (Rider). Large models need both: pre-trained intuition for speed, reasoning for accuracy.</p>
+                </div>
+
+                <div class="cross-book-section">
+                    <h4>Connected Ideas</h4>
+                    <div class="cross-book-grid">
+                        <div class="cross-book-item">
+                            <strong>Thinking, Fast and Slow</strong>
+                            <small>Kahneman's Systems 1 & 2</small>
+                        </div>
+                        <div class="cross-book-item">
+                            <strong>The Righteous Mind</strong>
+                            <small>Haidt on moral intuition (more Elephant than Rider)</small>
+                        </div>
+                        <div class="cross-book-item">
+                            <strong>Stumbling on Happiness</strong>
+                            <small>How our intuitions mislead our happiness predictions</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 2 -->
+            <div class="lesson-card">
+                <div class="lesson-number">2</div>
+                <h2>The Happiness Formula: H = S + C + V</h2>
+
+                <div class="haidt-quote">
+                    "Your happiness level has three components: your set point (genetics), your circumstances (life conditions), and your voluntary activities (what you choose to do)."
+                </div>
+
+                <div class="formula-breakdown">
+                    <div class="formula-equation">H = S + C + V</div>
+                    <div class="formula-grid">
+                        <div class="formula-component">
+                            <h4>S: Set Point (50%)</h4>
+                            <p>Genetic baseline for happiness. Twins raised apart show ~50% correlation in wellbeing. Hard to change permanently but not impossible.</p>
+                        </div>
+                        <div class="formula-component">
+                            <h4>C: Conditions (10%)</h4>
+                            <p>Life circumstances (wealth, health, marriage, job). Surprisingly weak predictor of happiness due to adaptation. Extreme poverty hurts; beyond modest comfort, money barely helps.</p>
+                        </div>
+                        <div class="formula-component">
+                            <h4>V: Voluntary (40%)</h4>
+                            <p>What you do and how you think. Gratitude practices, social connection, flow activities, mindfulness. These stick because they're intentional, surprising, and require engagement.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-content">
+                    <p>This is Haidt's most actionable insight, built on Lyubomirsky's pie-chart research (Lyubomirsky et al., 2005). The formula reveals why lottery winners return to baseline happiness after a year, and why job loss—devastating at first—typically shows substantial recovery within 12-18 months.</p>
+
+                    <p><strong>The good news:</strong> 40% of your happiness is under your control. The bad news: most people don't exploit this because voluntary activities require continuous effort (unlike a one-time life change that adaptation will neutralize).</p>
+
+                    <p>Seligman's Authentic Happiness framework expanded on this, identifying five pillars: Positive Emotion, Engagement (flow), Relationships, Meaning, and Accomplishment (PERMA). These map to different V activities.</p>
+                </div>
+
+                <div class="key-points">
+                    <h4>Research Evidence</h4>
+                    <ul>
+                        <li><strong>Lyubomirsky's meta-analysis:</strong> 50% set point, 10% circumstances, 40% intentional activities</li>
+                        <li><strong>Seligman's authentic happiness:</strong> PERMA (Positive emotion, Engagement, Relationships, Meaning, Accomplishment)</li>
+                        <li><strong>Csikszentmihalyi's flow:</strong> Peak happiness comes from challenging activities matched to skill level</li>
+                        <li><strong>Diener's wealth curve:</strong> Money helps until ~$75k/year (Kahneman & Deaton, 2010); beyond that, diminishing returns</li>
+                        <li><strong>Adaptation:</strong> Lottery winners (3 months later): baseline. Paraplegics (1-2 years later): mostly baseline</li>
+                    </ul>
+                </div>
+
+                <div class="research-highlight">
+                    <h4>📊 The Lyubomirsky Pie Chart (Happiness Decomposition)</h4>
+                    <p>This simple chart exploded the "get rich / move to sunny place" happiness myth. <strong>50% genetic set point</strong> (relatively stable but not immutable), <strong>10% life circumstances</strong> (what you thought mattered most!), and <strong>40% intentional activities</strong> (gratitude, meditation, exercise, savoring, acts of kindness). Why isn't everyone doing V activities? Because they require consistency and novelty. Your brain adapts to them unless you deliberately vary them.</p>
+                </div>
+
+                <div class="funny-take">
+                    <h4>🎭 The Funny Take</h4>
+                    <p>People spend their lives grinding for the C (circumstances)—bigger house, faster car, hotter partner—only to discover they've just moved to a new baseline. Meanwhile, gratitude journaling (literally free and takes 5 minutes) works better because it surprises the Elephant. The Rider is furious about this injustice.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Reward Function with Baseline, Conditions, and Learned Components</h4>
+                    <p>This is a reinforcement learning architecture. H = S (base reward function, learned during pretraining) + C (environmental features / state) + V (policy-driven actions, where the agent explores). The agent can't change its base reward function much, and environmental rewards plateau due to normalization. But novel, challenging actions (high V) generate continuous returns because they require active learning. This is why fine-tuning (V) works better than just scaling (S) or changing inputs (C).</p>
+                </div>
+            </div>
+
+            <!-- LESSON 3 -->
+            <div class="lesson-card">
+                <div class="lesson-number">3</div>
+                <h2>The Hedonic Treadmill & Adaptation Principle</h2>
+
+                <div class="haidt-quote">
+                    "We are perhaps the most impressively successful species at adaptation. We can adapt to almost anything and, after some time, consider it normal."
+                </div>
+
+                <div class="core-concept">
+                    <h4>Why Good Things Stop Feeling Good</h4>
+                    <p>Your brain evolved to notice <em>change</em>, not absolute states. A new car thrills you for 3 months, then becomes background. A promotion excites you; then you adapt to the salary. Even chronic pain or disability—catastrophic at first—typically returns to a stable (if lower) baseline within 12-24 months.</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>This is called the <strong>hedonic treadmill</strong> or <strong>hedonic adaptation</strong>. Your nervous system is designed to detect novelty and change—not absolute values. This made evolutionary sense: a predator-free environment was good, but if you remained blissed-out about it, you wouldn't notice the new predator.</p>
+
+                    <p>Research by Diener, Suh, Lucas, and others shows remarkable consistency: major life events produce temporary happiness boosts (marriage +7 points for 2 years, then back to baseline). Even wealth increases show this pattern—the rich aren't meaningfully happier than the middle class, because both have adapted.</p>
+
+                    <p>But here's the loophole: <strong>adaptation happens more slowly to novel, surprising, and effortful activities</strong>. Your brain can't easily habituate to something that keeps changing. Practicing gratitude (varying what you're grateful for), trying new hobbies, or taking small varied vacations all resist adaptation better than, say, buying a bigger house and sitting in it.</p>
+                </div>
+
+                <div class="key-points">
+                    <h4>Adaptation Mechanisms</h4>
+                    <ul>
+                        <li><strong>Biological normalization:</strong> Your neurotransmitter baseline resets after life changes</li>
+                        <li><strong>Attentional filtering:</strong> You stop noticing what was once novel (new home, new partner's quirks)</li>
+                        <li><strong>Comparison shifts:</strong> You compare yourself to new peer groups (richer friends, higher standards)</li>
+                        <li><strong>Goal escalation:</strong> You raise your expectations as you achieve them</li>
+                        <li><strong>Novelty resistance:</strong> Effortful, surprising activities resist adaptation</li>
+                    </ul>
+                </div>
+
+                <div class="research-highlight">
+                    <h4>📊 The Adaptation Curve</h4>
+                    <p>Lucas (2005) followed people through marriage, divorce, and disability using large longitudinal datasets. Marriage: happiness spikes 2 years, back to baseline. Paraplegics: devastated initially, but 70% return within 2 years. Lottery winners: spike fades. The exceptions? People who pair major events with new voluntary activities (honeymoon travel + ongoing date nights; disability + new adaptive hobbies). Adaptation is not fate—it's the default unless you actively resist it.</p>
+                </div>
+
+                <div class="visual-section">
+                    <h3>Adaptation Over Time</h3>
+                    <div class="svg-container">
+                        <svg viewBox="0 0 400 250" width="400" height="250">
+                            <!-- Axes -->
+                            <line x1="40" y1="200" x2="350" y2="200" stroke="#333" stroke-width="2"/>
+                            <line x1="40" y1="200" x2="40" y2="30" stroke="#333" stroke-width="2"/>
+                            <!-- Labels -->
+                            <text x="360" y="220" font-size="12" fill="#333">Time</text>
+                            <text x="10" y="50" font-size="12" fill="#333">Happy</text>
+                            <!-- Baseline (before) -->
+                            <line x1="40" y1="150" x2="150" y2="150" stroke="#A06CD5" stroke-width="3" stroke-dasharray="5,5"/>
+                            <!-- Event spike -->
+                            <path d="M 150 150 Q 170 40 180 150" stroke="#FF6B6B" stroke-width="3" fill="none"/>
+                            <!-- Return to baseline -->
+                            <line x1="180" y1="150" x2="350" y2="150" stroke="#A06CD5" stroke-width="3" stroke-dasharray="5,5"/>
+                            <!-- Label -->
+                            <text x="220" y="220" font-size="12" fill="#333">Adaptation occurs</text>
+                            <text x="160" y="100" font-size="12" fill="#FF6B6B">Life Event</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="funny-take">
+                    <h4>🎭 The Funny Take</h4>
+                    <p>You'd think winning the lottery would change your life forever. It does—for about 6 months. Then you're back to worrying about the same things, except now your new baseline is "$5M in the bank." Evolution designed our happiness system to push us forward, not to let us rest. We're achievement treadmills wearing shoes that guarantee we'll never feel truly satisfied.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Normalization Layers</h4>
+                    <p>Adaptation is like batch normalization in neural networks. Raw inputs get normalized to zero mean and unit variance so the network focuses on new information, not absolute values. Your brain runs the same computation: it normalizes baseline states to detect change. Just as neural networks need normalization to train effectively, humans need novelty to stay engaged. Without it, loss of signal.</p>
+                </div>
+            </div>
+
+            <!-- LESSON 4 -->
+            <div class="lesson-card">
+                <div class="lesson-number">4</div>
+                <h2>Reciprocity & The Golden Rule</h2>
+
+                <div class="haidt-quote">
+                    "Reciprocity is not just a moral principle in ancient cultures—it's written into human neurobiology and was the solution to the cooperation problem that made human civilization possible."
+                </div>
+
+                <div class="core-concept">
+                    <h4>The Cooperation Code</h4>
+                    <p>Every human culture has discovered reciprocity independently. Help me, I help you. Hurt me, I hurt you. This simple rule, enforced through reputation and emotion (gratitude, anger), solved the problem of group cooperation that genes alone couldn't.</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Haidt argues that reciprocity isn't learned—it's intuitive. Infants as young as 12 months show proto-reciprocal behavior. Anthropological evidence shows every culture, from hunter-gatherers to modern cities, structures society around exchange and reputation. Break the rule, and you're punished even if the other person pays a cost to punish you (altruistic punishment).</p>
+
+                    <p>This maps perfectly to game theory. Trivers' reciprocal altruism (1971) and Axelrod's tournament of the prisoner's dilemma (1984) showed that "tit-for-tat" (cooperate first, then mirror the other's move) is evolutionarily stable and beats both pure defection and unconditional cooperation. Haidt says humans implemented this strategy emotionally: guilt (obligation to reciprocate), gratitude (emotional record-keeping), anger (punishment signal).</p>
+
+                    <p>The dark side: we're hyperaware of unfairness. Ultimatum game experiments show people reject unequal offers even at cost to themselves—a sign that fairness motives override pure material self-interest. Our Elephant cares about justice.</p>
+                </div>
+
+                <div class="key-points">
+                    <h4>Reciprocity in Action</h4>
+                    <ul>
+                        <li>Gratitude is the emotional antidote to the obligation debt created by receiving help</li>
+                        <li>Guilt drives us to reciprocate and prevents us from free-riding</li>
+                        <li>Anger signals that you've been wronged and punishes future defectors</li>
+                        <li>Reputation is the currency of social reciprocity—reputation damage worse than material loss</li>
+                        <li>Fairness is intuitive; we judge morality partly by whether exchanges seem balanced</li>
+                    </ul>
+                </div>
+
+                <div class="research-highlight">
+                    <h4>📊 The Ultimatum Game & Fairness</h4>
+                    <p>One player gets $10 and proposes a split with another. Both players know if they reject the offer, neither gets anything. Rational self-interest predicts the second player accepts any offer (something beats nothing). Reality: offers of $2 or less are rejected ~50% of the time, even at cost. Why? Fairness is hardwired. The Elephant punishes unfairness; the Rider tries to override it and usually fails.</p>
+                </div>
+
+                <div class="funny-take">
+                    <h4>🎭 The Funny Take</h4>
+                    <p>You'll spend money to punish someone who wronged you, even if you never see them again. That's not rational; that's the Elephant sending a message to the universe: "Don't mess with us." Good luck, Elephant. The universe isn't listening. But every other human who hears about it is.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Tit-for-Tat in Multi-Agent Systems</h4>
+                    <p>Reciprocity is a game-theoretic equilibrium. In multi-agent reinforcement learning, tit-for-tat is the canonical cooperative strategy—it's nice (cooperates first), retaliatory (punishes defection), forgiving (returns to cooperation if the other cooperates), and clear (the other agent can predict your move). Human emotions (gratitude, guilt, anger) are the implementation details. In AI systems, this would be explicit reward shaping: +reward for mutual cooperation, -reward for cheating-and-getting-away-with-it, but massive punishment for cheaters caught. Reputation is the state variable.</p>
+                </div>
+            </div>
+
+            <!-- LESSON 5 -->
+            <div class="lesson-card">
+                <div class="lesson-number">5</div>
+                <h2>The Fundamental Attribution Error</h2>
+
+                <div class="haidt-quote">
+                    "We are all everyday mind readers, convinced of the accuracy of our judgments about why people do what they do. But we're usually wrong."
+                </div>
+
+                <div class="core-concept">
+                    <h4>Blame the Person, Overlook the Situation</h4>
+                    <p>When others fail, we blame their character (laziness, incompetence, cruelty). When we fail, we blame circumstances (bad luck, unfair pressure, impossible task). This asymmetry is systematic and powerful.</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>The fundamental attribution error (also called the correspondence bias) is one of social psychology's most robust findings. In hundreds of studies, people overestimate personality factors and underestimate situational factors when explaining behavior. A person cuts you off in traffic—you assume they're reckless; you cut someone off—you assume you didn't see them because the glare was bad.</p>
+
+                    <p>Why? The Rider lacks access to situational information that the Elephant picks up. You see the action (cut-off) and infer the disposition (recklessness). You don't see that the driver's wife just went into labor. The person is in your visual field; the situation is not. Your Elephant makes a quick inference (bad driver); your Rider rationalizes it.</p>
+
+                    <p>The consequence: we're too harsh on others and too lenient on ourselves. This erodes empathy, justifies punishment, and is the root of much social dysfunction—bullying, racism, war, relationship conflict. The fix is deliberate: <strong>imagine the other person's full situational context</strong>. This doesn't excuse bad behavior, but it redirects blame from character to circumstance, opening doors to compassion and problem-solving.</p>
+                </div>
+
+                <div class="key-points">
+                    <h4>Evidence & Implications</h4>
+                    <ul>
+                        <li><strong>Actor-observer bias:</strong> Actors blame situations; observers blame actors</li>
+                        <li><strong>Fundamental attribution error:</strong> We underestimate situational constraints on others' behavior</li>
+                        <li><strong>Just-world hypothesis:</strong> People believe the world is fair—bad outcomes = bad character</li>
+                        <li><strong>The remedy:</strong> Perspective-taking, exposure to others' constraints, and epistemic humility</li>
+                        <li><strong>Culture matters:</strong> Western individualists show stronger FAE; East Asians are more situationally sensitive</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    <h4>🎭 The Funny Take</h4>
+                    <p>When you yell at someone, you're having a bad day. When they yell at you, they're a hostile person. Your Elephant is running a courtroom where you're always the defendant and everyone else is the perpetrator. Justice served—as long as you don't have to look in the mirror.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Interpretation Bias in Neural Networks</h4>
+                    <p>Neural networks also show a form of fundamental attribution error: they learn surface correlations (in the training distribution) and attribute them to the objects rather than the context. A dog classifier trained on photos of grass learns to classify "grass" as part of "dog." Humans do the same: we attribute behavior to agents rather than contexts. The fix is the same: give the model more contextual information (situation variables), not just the object. Explainability and saliency mapping are analogous to deliberate perspective-taking.</p>
+                </div>
+            </div>
+
+            <!-- LESSON 6 -->
+            <div class="lesson-card">
+                <div class="lesson-number">6</div>
+                <h2>The Happiness Paradox: Why Chasing Happiness Backfires</h2>
+
+                <div class="haidt-quote">
+                    "The happiness paradox says that the best strategy for getting what you want is not to make it your ultimate goal. Making happiness the goal of life may actually undermine happiness."
+                </div>
+
+                <div class="core-concept">
+                    <h4>The Indirect Path</h4>
+                    <p>Happiness is a byproduct, not a destination. People who prioritize happiness above all else often become unhappy. The happiest people are usually pursuing something else: meaning, mastery, connection, or service.</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>This is Haidt's most counterintuitive claim, and it's supported by decades of psychology research. Studies show that people who make happiness their explicit life goal are more vulnerable to disappointment, more likely to ruminate about their moods, and paradoxically less happy overall. Meanwhile, people chasing meaning, learning, relationships, or service stumble into happiness as a side effect.</p>
+
+                    <p>The mechanism: <strong>spotlight effect</strong> and <strong>hedonic focus</strong>. When you monitor your happiness directly (Am I happy yet? Am I happy now?), you become overly attuned to any dip in mood, ruminate on it, and generate anxiety about why you're not happier. You also narrow your focus: happiness becomes about pleasure, not meaning. The Rider's constant monitoring interferes with the Elephant's smooth operation.</p>
+
+                    <p>This is related to Frankl's logotherapy (from <em>Man's Search for Meaning</em>): meaning, not happiness, should be the primary goal. And Csikszentmihalyi's flow research: peak happiness comes from full absorption in a challenging task, not from goal-setting or introspection.</p>
+                </div>
+
+                <div class="key-points">
+                    <h4>The Paradox in Practice</h4>
+                    <ul>
+                        <li><strong>Direct pursuit backfires:</strong> Monitoring your mood increases anxiety and decreases satisfaction</li>
+                        <li><strong>Indirect strategies work:</strong> Pursuing meaning, mastery, connection, service leads to happiness</li>
+                        <li><strong>Flow beats reflection:</strong> Absorption in a task produces more happiness than introspection</li>
+                        <li><strong>Meaning > pleasure:</strong> A life of service or learning is happier than a life of leisure</li>
+                        <li><strong>The treadmill works best unexamined:</strong> People on treadmills who don't check their speed are happier</li>
+                    </ul>
+                </div>
+
+                <div class="research-highlight">
+                    <h4>📊 Happiness as Side Effect</h4>
+                    <p>People who make happiness the explicit goal report lower wellbeing (Mauss et al., 2011). Those pursuing mastery, meaning, or service report higher wellbeing. The happiness paradox: "I'm chasing happiness" often means "I'm dissatisfied with my current state and focused on the gap." But the gap-monitoring itself is a form of suffering. The fix: pursue something other than happiness. Happiness will follow like a shadow.</p>
+                </div>
+
+                <div class="funny-take">
+                    <h4>🎭 The Funny Take</h4>
+                    <p>Self-help culture is built on this paradox. "How to be happy" books make people focus on the problem (I'm not happy), which makes the problem worse. The irony is delicious: the happiness industry profits from unhappiness, and anyone who actually reads the research realizes the solution is to stop reading happiness books and go help someone instead.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Reward Hacking & Wireheading</h4>
+                    <p>This is reward hacking in the language of AI safety. If you make happiness the explicit objective function, the agent will find loopholes (constant self-stimulation of pleasure centers, like heroin). But if you constrain the objective to meaningful tasks with intrinsic difficulty, the agent pursues the task for its own sake and happiness emerges. Humans are doing wireheading when they pursue pleasure directly. Eudaimonia (flourishing) is solving the alignment problem by making the goal about capability development, not reward maximization.</p>
+                </div>
+            </div>
+
+            <!-- LESSON 7 -->
+            <div class="lesson-card">
+                <div class="lesson-number">7</div>
+                <h2>Love & Attachment: The Foundations of Wellbeing</h2>
+
+                <div class="haidt-quote">
+                    "Love is a basic human need, as much as food and water. Deprivation in the earliest years can cause permanent damage."
+                </div>
+
+                <div class="core-concept">
+                    <h4>Attachment as Survival System</h4>
+                    <p>John Bowlby's attachment theory shows that infants have an evolved need for proximity to a caregiver. A secure attachment creates a foundation for all later relationships, resilience, and mental health. Love isn't a luxury; it's a requirement.</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Haidt draws on Bowlby's attachment theory and Harry Harlow's controversial monkey experiments to make the case that love and connection are primary drives, not secondary to survival needs. Harlow's infant monkeys, given a cold wire mother and a soft cloth mother, chose the soft mother despite the wire mother having the milk bottle. They needed comfort and contact, not just nutrition.</p>
+
+                    <p>Bowlby showed that secure attachment in infancy predicts mental health, social competence, and resilience throughout life. Insecure attachment (avoidant, anxious, disorganized) creates patterns of relationship dysfunction that persist unless actively rewired through therapy or new relationships.</p>
+
+                    <p>The happiness connection: people with secure attachments and strong relationships report higher life satisfaction, cope better with adversity, and live longer (Holt-Lunstad et al., 2010). Conversely, loneliness is as harmful as smoking—a major health risk. Our Elephant is wired for connection; deny it and everything else fails.</p>
+
+                    <p>This suggests that many modern problems (anxiety, depression, addiction, narcissism) are partly attachment failures. We evolved to grow up in groups; modern isolation is a design mismatch.</p>
+                </div>
+
+                <div class="key-points">
+                    <h4>Attachment & Happiness</h4>
+                    <ul>
+                        <li><strong>Secure attachment:</strong> Caregiver is reliable, responsive, and protective; infant develops trust</li>
+                        <li><strong>Anxious attachment:</strong> Caregiver is inconsistent; person becomes hypervigilant to rejection</li>
+                        <li><strong>Avoidant attachment:</strong> Caregiver is cold or dismissive; person downregulates need for closeness</li>
+                        <li><strong>Disorganized attachment:</strong> Caregiver is frightening; person has no consistent strategy</li>
+                        <li><strong>Earned security:</strong> Therapy, meditation, and new secure relationships can rewire attachment patterns</li>
+                    </ul>
+                </div>
+
+                <div class="research-highlight">
+                    <h4>📊 Loneliness & Mortality</h4>
+                    <p>Holt-Lunstad's meta-analysis: loneliness increases mortality risk by 26-32%, comparable to smoking and exceeding obesity. Social connection predicts longer life, better immune function, and faster healing from injury. This isn't correlation—experiments show that social support reduces stress hormones and inflammation. Attachment is literally keeping us alive.</p>
+                </div>
+
+                <div class="funny-take">
+                    <h4>🎭 The Funny Take</h4>
+                    <p>We spend billions on medications and gym memberships when the cheapest, most effective health intervention is to not be alone. Evolution designed us for tribes; modernity designed us for nuclear families and then isolation. We're running software built for communities on a device configured for solitude. No wonder we're all anxious.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Secure Attachment as Training Stability</h4>
+                    <p>Secure attachment is like stable, consistent training. The model learns to trust the gradient signal; it's predictable and responsive. Anxious attachment is like noisy, inconsistent training—the model learns to obsess over the loss signal and becomes prone to overfitting. Avoidant attachment is like being starved of training signal—the model learns to ignore feedback. Disorganized attachment is like random label flipping—the model has no consistent objective. This is why consistent, responsive feedback (teacher, mentor, partner) is so valuable: it creates the conditions for stable learning and resilience.</p>
+                </div>
+            </div>
+
+            <!-- LESSON 8 -->
+            <div class="lesson-card">
+                <div class="lesson-number">8</div>
+                <h2>Adversity & Post-Traumatic Growth</h2>
+
+                <div class="haidt-quote">
+                    "Adversity can wreck you, but it can also wake you up. What doesn't kill you may make you not just stronger, but wiser and more generous."
+                </div>
+
+                <div class="core-concept">
+                    <h4>Growth Through Struggle</h4>
+                    <p>Trauma is terrible. But psychological research shows that 50-70% of trauma survivors report post-traumatic growth—genuine increases in resilience, wisdom, meaning, relationships, and personal strength.</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Haidt challenges the victim narrative that trauma is only destructive. Research by Tedeschi & Calhoun (1996) and subsequent studies show that people who survive and process adversity often experience genuine growth: deeper relationships, renewed appreciation for life, discovery of inner strength, spiritual development, and changed priorities.</p>
+
+                    <p>This is not survivor bias (only weak people report growth) or Pollyanna thinking (trauma is good). Trauma is genuinely harmful—PTSD is real. But the brain's plasticity means that recovery and growth can coexist. The mechanism appears to involve narrative reconstruction: people reprocess the traumatic event within a new framework of meaning, often leading to wisdom and compassion.</p>
+
+                    <p>Key insight: post-traumatic growth doesn't happen automatically. It requires cognitive processing (therapy, journaling, talking), time, and often deliberate meaning-making. People who integrate the trauma into their life narrative, rather than compartmentalizing it, show stronger growth. Social support is critical—isolation worsens outcomes; connection facilitates healing and growth.</p>
+
+                    <p>This connects to Frankl's (1946) observation from the Holocaust: meaning-making is the critical variable in surviving suffering. Those who found meaning (helping others, spiritual devotion, future projects) coped better than those who did not.</p>
+                </div>
+
+                <div class="key-points">
+                    <h4>Post-Traumatic Growth Domains</h4>
+                    <ul>
+                        <li><strong>Personal strength:</strong> "I survived; I can handle hard things"</li>
+                        <li><strong>Relationships:</strong> Stronger bonds, increased empathy, deeper connections</li>
+                        <li><strong>Appreciation:</strong> Renewed gratitude for life, changed priorities</li>
+                        <li><strong>Meaning:</strong> Life trajectory revised; new purpose discovered</li>
+                        <li><strong>Spirituality:</strong> Many trauma survivors report increased spiritual or existential awareness</li>
+                    </ul>
+                </div>
+
+                <div class="research-highlight">
+                    <h4>📊 The Growth Paradox</h4>
+                    <p>Tedeschi & Calhoun found that 50-70% of trauma survivors report meaningful positive changes (Posttraumatic Growth Inventory). But the presence of growth doesn't mean the trauma was good—it means humans are remarkably generative. The variables predicting growth: social support, deliberate reflection, reframing the trauma as meaningful. The variables predicting worse outcomes: isolation, rumination, loss of meaning.</p>
+                </div>
+
+                <div class="funny-take">
+                    <h4>🎭 The Funny Take</h4>
+                    <p>We tell trauma survivors "what doesn't kill you makes you stronger," as if adversity is a gift. Wrong. Adversity is a terrible gift with a very high price tag. The "strength" is real—people do grow—but it would be much cheaper to just have a normal life. The fact that humans can turn suffering into wisdom doesn't make suffering good. It makes humans impressive.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Adversarial Training as Growth</h4>
+                    <p>Post-traumatic growth is like adversarial training in machine learning. Exposure to hard examples (adversarial perturbations, edge cases) initially degrades performance. But if the model processes this adversarial input thoughtfully, it learns more robust features and generalizes better. The trauma is the adversarial example; the growth is the improved model. The key difference: humans can choose meaning; models can't. We're lucky.</p>
+                </div>
+            </div>
+
+            <!-- LESSON 9 -->
+            <div class="lesson-card">
+                <div class="lesson-number">9</div>
+                <h2>Virtue as Skill: Eudaimonia Through Practice</h2>
+
+                <div class="haidt-quote">
+                    "Virtues are not traits you're born with; they're skills you develop through practice. You become virtuous by doing virtuous acts repeatedly until they become part of your character."
+                </div>
+
+                <div class="core-concept">
+                    <h4>Aristotle's Insight: Excellence as Habit</h4>
+                    <p>Aristotle distinguished between hedonia (pleasure) and eudaimonia (flourishing). Eudaimonia comes from living virtuously—developing and exercising virtues like courage, wisdom, temperance, and justice. Virtue is not an inborn trait but a skill honed through repeated practice.</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Haidt argues that Aristotle was right and modern psychology validates this: character is not fixed. People who practice compassion become more compassionate. Those who practice courage become braver. This is skill development—not genetic determinism. The brain changes through repeated practice (neuroplasticity); your values and character can be intentionally sculpted.</p>
+
+                    <p>The mechanism: repeated behavior patterns change neural pathways (Hebbian learning: neurons that fire together wire together). A person who practices gratitude daily actually restructures their attention patterns—they notice positive things more readily and automatically. Someone who practices apologies and forgiveness literally rewires their conflict resolution circuits.</p>
+
+                    <p>This challenges the modern notion that happiness comes from self-acceptance and authenticity. Haidt says: you grow by doing things that feel unnatural until they become natural. The Stoics knew this—they practiced virtue through deliberate exercises. Modern psychology now shows this works: virtue practices improve wellbeing not through pleasure but through meaning and competence (autonomy, mastery, purpose).</p>
+
+                    <p>The eudaimonia life is more satisfying than the hedonic life, but it requires effort. This is why meditation, philosophy, and deliberate practice matter.</p>
+                </div>
+
+                <div class="key-points">
+                    <h4>Virtue Development</h4>
+                    <ul>
+                        <li><strong>Virtue is a skill:</strong> Developed through repeated practice, not inborn</li>
+                        <li><strong>Character is malleable:</strong> Your personality is not fixed; neuroplasticity allows change</li>
+                        <li><strong>Effort creates flourishing:</strong> Eudaimonia requires deliberate practice, not just pleasure-seeking</li>
+                        <li><strong>Virtue spirals:</strong> Practicing virtue makes you better at it; practice generates benefits; success motivates more practice</li>
+                        <li><strong>Virtue practices:</strong> Meditation (patience, awareness), service (compassion, generosity), debate (wisdom, intellectual humility)</li>
+                    </ul>
+                </div>
+
+                <div class="research-highlight">
+                    <h4>📊 Character Strengths & Wellbeing</h4>
+                    <p>Peterson & Seligman's (2004) character strengths framework identifies 24 strengths (wisdom, courage, temperance, justice, etc.). Research shows that knowing your strengths and deliberately practicing them increases life satisfaction and reduces depression more effectively than focusing on fixing weaknesses. This inverts the therapy model: instead of pathology-focus, practice what you do well.</p>
+                </div>
+
+                <div class="visual-section">
+                    <h3>The Virtue Spiral: Practice → Competence → Meaning → More Practice</h3>
+                    <div class="svg-container">
+                        <svg viewBox="0 0 300 300" width="300" height="300">
+                            <!-- Circle path -->
+                            <circle cx="150" cy="150" r="100" fill="none" stroke="#4ECDC4" stroke-width="2" stroke-dasharray="5,5"/>
+                            <!-- Practice -->
+                            <circle cx="150" cy="50" r="35" fill="#FF6B6B"/>
+                            <text x="150" y="55" text-anchor="middle" font-size="14" fill="white" font-weight="bold">Practice</text>
+                            <!-- Competence -->
+                            <circle cx="230" cy="120" r="35" fill="#A06CD5"/>
+                            <text x="230" y="125" text-anchor="middle" font-size="14" fill="white" font-weight="bold">Competence</text>
+                            <!-- Meaning -->
+                            <circle cx="200" cy="220" r="35" fill="#FFE66D"/>
+                            <text x="200" y="225" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">Meaning</text>
+                            <!-- Motivation -->
+                            <circle cx="100" cy="220" r="35" fill="#55EFC4"/>
+                            <text x="100" y="225" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">Motivation</text>
+                            <!-- Arrows -->
+                            <path d="M 150 85 L 210 115" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                            <path d="M 220 160 L 190 190" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                            <path d="M 140 210 L 110 190" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                            <path d="M 90 160 L 120 110" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                            <!-- Arrow marker definition -->
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
+                                    <polygon points="0 0, 10 3, 0 6" fill="#333"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="funny-take">
+                    <h4>🎭 The Funny Take</h4>
+                    <p>We tell people "just be yourself" and "follow your passion," but Aristotle knew better. You're born as a blank slate of potential vice. You become a virtuous person by doing virtuous things, even when you don't feel like it, until you don't have to fight yourself anymore. That's not inauthentic; that's called growing up.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Fine-tuning & Behavioral Alignment</h4>
+                    <p>Virtue development is supervised fine-tuning. You practice (data), you get feedback (loss), you update weights (repeat). An LLM isn't virtuous by default—it's trained through RLHF (reinforcement learning from human feedback) to exhibit behaviors like helpfulness, honesty, and harmlessness. These aren't emergent; they're trained in. Similarly, humans start with instincts and develop virtues through practice. The more you practice a behavior, the more it becomes your default (similar to how more fine-tuning iterations create stronger alignment to the desired behavior).</p>
+                </div>
+            </div>
+
+            <!-- LESSON 10 -->
+            <div class="lesson-card">
+                <div class="lesson-number">10</div>
+                <h2>Divinity, Disgust & Meaning: The Sacred in Human Life</h2>
+
+                <div class="haidt-quote">
+                    "Humans are creatures capable of transcendence. We find meaning not just in pleasure, connection, or virtue—but in something larger than ourselves. Call it divinity, spirituality, or the sacred."
+                </div>
+
+                <div class="core-concept">
+                    <h4>Beyond the Material</h4>
+                    <p>Happiness science often focuses on measurable goods: relationships, autonomy, accomplishment. But humans also need meaning—a sense that life transcends the immediate and material. This is the religious impulse, even in secular people.</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Haidt integrates findings from neuroscience, anthropology, and psychology to argue that humans have a "divinity sense"—a capacity to perceive and experience the sacred. This isn't just religious belief; it's a cognitive and emotional system. People feel divinity in nature (standing before mountains), in music (moved to tears), in human connection (awe at birth), in service (transcendence in helping others).</p>
+
+                    <p>Interestingly, this same system produces disgust. The divinity sense makes us recoil from contamination (physical filth, disease, sacrilege). This is adaptive—disgust kept our ancestors away from disease vectors. But it also creates moral disgust: we find certain acts (murder, incest, desecration) intuitively repulsive. Morality is not purely rational; it's rooted in embodied, emotional response systems that evolved for survival.</p>
+
+                    <p>The key insight: <strong>meaning and purpose come from vitally engaging with something larger than yourself</strong>. This can be religious (faith, prayer, ritual), secular (art, nature, science, service), or personal (raising children, building something lasting). People with a sense of larger purpose—religious or not—report higher life satisfaction and resilience.</p>
+
+                    <p>Haidt calls this "vital engagement"—deep involvement with something beyond the self. The happy life is not the satisfied life (pleasure achieved); it's the engaged life (purpose actualized). Victor Frankl's observation holds: meaning is more powerful than pleasure in sustaining wellbeing, even amid suffering.</p>
+                </div>
+
+                <div class="key-points">
+                    <h4>Meaning & Transcendence</h4>
+                    <ul>
+                        <li><strong>Vital engagement:</strong> Deep involvement with something larger than yourself (work, family, faith, art, nature, service)</li>
+                        <li><strong>Coherence:</strong> A narrative that ties your life together—understanding where you've been and where you're going</li>
+                        <li><strong>Divinity sense:</strong> Capacity for awe, transcendence, and experiencing the sacred (in religious or secular contexts)</li>
+                        <li><strong>Purpose > pleasure:</strong> A meaningful life with struggle often exceeds a pleasurable life without challenge</li>
+                        <li><strong>Moral foundations:</strong> Divinity/sanctity is one of five moral foundations (care, fairness, loyalty, authority, sanctity)</li>
+                    </ul>
+                </div>
+
+                <div class="research-highlight">
+                    <h4>📊 Purpose & Mortality</h4>
+                    <p>People with a strong sense of life purpose live longer, have lower rates of disease, and handle adversity better (Steger et al., 2006). This is not correlation—experiments show that meaning-making interventions improve mental and physical health. Purpose activates the parasympathetic nervous system; meaninglessness activates stress responses. A transcendent life is literally healthier.</p>
+                </div>
+
+                <div class="visual-section">
+                    <h3>Sources of Meaning & Transcendence</h3>
+                    <div class="svg-container">
+                        <svg viewBox="0 0 400 300" width="400" height="300">
+                            <!-- Center point -->
+                            <circle cx="200" cy="150" r="40" fill="#FFE66D"/>
+                            <text x="200" y="160" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Self</text>
+                            <!-- Religious -->
+                            <circle cx="80" cy="80" r="35" fill="#A06CD5" opacity="0.7"/>
+                            <text x="80" y="85" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Faith &amp; Ritual</text>
+                            <!-- Nature -->
+                            <circle cx="320" cy="80" r="35" fill="#00B894" opacity="0.7"/>
+                            <text x="320" y="85" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Nature &amp; Awe</text>
+                            <!-- Service -->
+                            <circle cx="80" cy="220" r="35" fill="#FF6B6B" opacity="0.7"/>
+                            <text x="80" y="225" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Service &amp; Care</text>
+                            <!-- Creation -->
+                            <circle cx="320" cy="220" r="35" fill="#4ECDC4" opacity="0.7"/>
+                            <text x="320" y="225" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Creation &amp; Art</text>
+                            <!-- Connectors -->
+                            <line x1="200" y1="150" x2="100" y2="110" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+                            <line x1="200" y1="150" x2="300" y2="110" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+                            <line x1="200" y1="150" x2="100" y2="190" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+                            <line x1="200" y1="150" x2="300" y2="190" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="funny-take">
+                    <h4>🎭 The Funny Take</h4>
+                    <p>We moderns think we're rational and past the need for meaning and transcendence. Meanwhile, we're hiking mountains for "spiritual reasons," queuing for hours to see art, and naming our children after fictional characters. We haven't killed the need for the sacred; we've just renamed it and pretended it's something else. The divinity sense doesn't care about your labels.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Reward Functions Beyond Utility Maximization</h4>
+                    <p>Standard reinforcement learning optimizes a scalar reward function. But human happiness isn't scalar—it's multidimensional (pleasure, meaning, competence, belonging, transcendence). An AI system that only maximizes reward (dopamine) would be like a human on heroin: terminal state reached, no further interest in anything else. Human flourishing requires constraints and values beyond pure reward. We need meaning (purpose), coherence (narrative), and transcendence (something larger). An aligned AI would need similar multi-objective optimization, not pure reward hacking.</p>
+                </div>
+            </div>
+
+            <!-- LESSON 11 - KEY LESSON WITH RESEARCH -->
+            <div class="lesson-card" style="border-top-color: var(--orange); background: linear-gradient(135deg, rgba(255,182,193,0.05) 0%, rgba(255,230,109,0.05) 100%);">
+                <div class="lesson-number" style="background: var(--orange);">🔬</div>
+                <h2>The Research Deep Dive: Authentic Happiness, Flow & the Adaptation Pie</h2>
+
+                <div class="haidt-quote">
+                    "What the research actually shows—not the self-help mythology, but the data—is that happiness is possible, measurable, and partially under your control."
+                </div>
+
+                <div class="core-concept">
+                    <h4>The Empirical Foundation</h4>
+                    <p>Haidt builds on three major research programs that transformed our understanding of happiness: Seligman's Authentic Happiness model, Lyubomirsky's intervention studies, and Csikszentmihalyi's flow research.</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p><strong>1. Seligman's PERMA Model (2011)</strong>: Martin Seligman, father of positive psychology, moved from "happiness" to "flourishing" and identified five pillars:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li><strong>Positive emotion:</strong> Pleasure, contentment, joy (but not the only component)</li>
+                        <li><strong>Engagement:</strong> Flow—psychological absorption in a challenging task</li>
+                        <li><strong>Relationships:</strong> Social connection and love (the strongest predictor)</li>
+                        <li><strong>Meaning:</strong> Purpose, transcendence, contribution</li>
+                        <li><strong>Accomplishment:</strong> Mastery, competence, achievement</li>
+                    </ul>
+
+                    <p><strong>2. Csikszentmihalyi's Flow State (1990s onward)</strong>: Mihaly Csikszentmihalyi's Experience Sampling Method had people report their mood throughout the day. Surprising finding: peak happiness doesn't occur during leisure; it occurs during work or hobbies when the person is fully absorbed in a challenge matched to their skill level. This is "flow"—the sweet spot where difficulty and capability are balanced.</p>
+
+                    <p>When the challenge is too easy: boredom. Too hard: anxiety. Just right: flow. Flow is intrinsically rewarding—people forget time, forget self-consciousness, and report deep satisfaction afterward. This is where eudaimonia lives.</p>
+
+                    <p><strong>3. Lyubomirsky's Intervention Studies (2005-2010)</strong>: Kristin Lyubomirsky conducted randomized experiments on happiness practices. Key findings:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li><strong>Gratitude journaling:</strong> Writing three good things daily increases happiness for months (effect size: moderate)</li>
+                        <li><strong>Acts of kindness:</strong> Deliberate acts of service boost wellbeing more than passive consumption</li>
+                        <li><strong>Savoring:</strong> Pausing to appreciate positive experiences increases their impact</li>
+                        <li><strong>Adaptation resistance:</strong> Introducing variety (not the same vacation every year; varied gratitude targets) extends happiness gains</li>
+                        <li><strong>Fit matters:</strong> Interventions that match personality (extroverts do better with social activities; introverts with reflection) are most effective</li>
+                    </ul>
+
+                    <p><strong>4. The Diener Wealth-Happiness Curve</strong>: Ed Diener and other researchers studying income and happiness found a curve, not a cliff. Below ~$75,000/year (varies by region and year), each additional dollar meaningfully increases wellbeing. Above $75k, additional income has diminishing returns—you notice it less. Billionaires are not 100x happier than millionaires. This is the "hedonic treadmill" in action: you adapt to money.</p>
+
+                    <p><strong>5. Hedonic Treadmill & Adaptation (Lucas, 2005)</strong>: Using longitudinal data from 15,000 Germans, Richard Lucas tracked happiness before and after life events. Marriage: +7 points for 2 years, back to baseline. Paraplegics: devastated (−7 points), but 65-70% return within 2 years. Lottery winners: spike, fade back. The treadmill is real. But the exceptions are informative: people who kept doing new activities (travel, hobbies, social engagement) stayed happier longer. Novelty slows adaptation.</p>
+                </div>
+
+                <div class="key-points">
+                    <h4>The Core Research Findings</h4>
+                    <ul>
+                        <li><strong>Happiness is measurable:</strong> Self-report, day reconstruction method, ecological momentary assessment all correlate well</li>
+                        <li><strong>Set point is real but not fixed:</strong> 50% heritability is not 100%; people can shift their baseline through sustained effort</li>
+                        <li><strong>Circumstances matter less than we think:</strong> 10% of variance; people adapt quickly</li>
+                        <li><strong>Voluntary activities matter most:</strong> 40% of variance, and this is underutilized</li>
+                        <li><strong>Relationships are the strongest predictor:</strong> More powerful than wealth, health, or achievement alone</li>
+                        <li><strong>Flow beats pleasure:</strong> Engagement in challenging activity produces deeper satisfaction than passive enjoyment</li>
+                        <li><strong>Meaning is antifragile:</strong> People with strong purpose maintain wellbeing even amid adversity</li>
+                    </ul>
+                </div>
+
+                <div class="research-highlight">
+                    <h4>📊 Meta-Analysis: What Actually Increases Happiness</h4>
+                    <p><strong>Large effect sizes (worth doing):</strong> Social connection (+0.7), gratitude practice (+0.4), acts of kindness (+0.3), flow activities (+0.5), meditation/mindfulness (+0.3), therapy/counseling (+0.8 for those with depression). <strong>Small effect sizes (maybe do):</strong> Vacation (+0.2, temporary), gym (+0.2), music (+0.2). <strong>Near-zero effect sizes (don't bother):</strong> Money beyond $75k (+0.02), cosmetic surgery (+0.1), big house (+0.05, adapts away). The pattern: intrinsic, challenging, social activities work; material acquisition doesn't.</p>
+                </div>
+
+                <div class="visual-section">
+                    <h3>The Intervention Effect Sizes (What Actually Works)</h3>
+                    <div class="svg-container">
+                        <svg viewBox="0 0 400 300" width="400" height="300">
+                            <!-- Axes -->
+                            <line x1="50" y1="250" x2="350" y2="250" stroke="#333" stroke-width="2"/>
+                            <line x1="50" y1="250" x2="50" y2="30" stroke="#333" stroke-width="2"/>
+                            <text x="360" y="270" font-size="12" fill="#333">Interventions →</text>
+                            <text x="20" y="30" font-size="12" fill="#333">Effect</text>
+                            <!-- Bars -->
+                            <rect x="60" y="180" width="30" height="70" fill="#FF6B6B"/>
+                            <text x="75" y="270" font-size="10" fill="#333" text-anchor="middle">Social</text>
+                            <rect x="110" y="200" width="30" height="50" fill="#A06CD5"/>
+                            <text x="125" y="270" font-size="10" fill="#333" text-anchor="middle">Flow</text>
+                            <rect x="160" y="210" width="30" height="40" fill="#FFE66D"/>
+                            <text x="175" y="270" font-size="10" fill="#333" text-anchor="middle">Gratitude</text>
+                            <rect x="210" y="215" width="30" height="35" fill="#4ECDC4"/>
+                            <text x="225" y="270" font-size="10" fill="#333" text-anchor="middle">Kindness</text>
+                            <rect x="260" y="235" width="30" height="15" fill="#FDCB6E"/>
+                            <text x="275" y="270" font-size="10" fill="#333" text-anchor="middle">Gym</text>
+                            <rect x="310" y="245" width="30" height="5" fill="#55EFC4"/>
+                            <text x="325" y="270" font-size="10" fill="#333" text-anchor="middle">Money</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="funny-take">
+                    <h4>🎭 The Funny Take</h4>
+                    <p>The happiness research reveals a cosmic joke: everything that gets funded (self-help books, luxury goods, luxury vacations) has weak effects. Everything that works (friendship, meaningful work, service, gratitude) is free and inconvenient. It's as if the universe is specifically designed to reward what's hard and punish what's easy. Capitalism cannot profit from friendship; therefore, capitalism tells us friendship is insufficient.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Loss Functions for Human Flourishing</h4>
+                    <p>If we were to design an AI system that maximizes human flourishing, we wouldn't optimize for a single scalar (happiness or utility). We'd optimize for a multi-objective function: Flourishing = w₁ × Connection + w₂ × Meaning + w₃ × Engagement + w₄ × Competence + w₅ × Health, with constraints (equity, sustainability). The research suggests these weights: connection and meaning are highest, engagement is surprisingly strong, external goods (money beyond threshold) have near-zero weight. This is why a simple utility-maximization doesn't work for humans—we're not one thing optimizing one objective. We're multidimensional, and we flourish when multiple dimensions are developing simultaneously.</p>
+                </div>
+
+                <div class="cross-book-section">
+                    <h4>The Research Landscape</h4>
+                    <div class="cross-book-grid">
+                        <div class="cross-book-item">
+                            <strong>Seligman (2011)</strong>
+                            <small>Flourish: PERMA framework</small>
+                        </div>
+                        <div class="cross-book-item">
+                            <strong>Csikszentmihalyi (1990)</strong>
+                            <small>Flow: The Psychology of Optimal Experience</small>
+                        </div>
+                        <div class="cross-book-item">
+                            <strong>Lyubomirsky (2005)</strong>
+                            <small>Intervention effects & adaptation</small>
+                        </div>
+                        <div class="cross-book-item">
+                            <strong>Diener & Seligman (2004)</strong>
+                            <small>Beyond money: wealth-happiness curve</small>
+                        </div>
+                        <div class="cross-book-item">
+                            <strong>Kahneman & Deaton (2010)</strong>
+                            <small>$75k threshold: income satiation</small>
+                        </div>
+                        <div class="cross-book-item">
+                            <strong>Holt-Lunstad (2010)</strong>
+                            <small>Loneliness mortality risk</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 12 - SYNTHESIS -->
+            <div class="lesson-card" style="border-top-color: var(--dark-purple); background: linear-gradient(135deg, rgba(160,108,213,0.05) 0%, rgba(74,205,196,0.05) 100%);">
+                <div class="lesson-number" style="background: var(--dark-purple);">🌟</div>
+                <h2>Synthesis: Ancient Wisdom Meets Modern Science</h2>
+
+                <div class="haidt-quote">
+                    "The sages and philosophers of ancient times weren't operating from ignorance. They were running experiments on the human condition without fMRI machines. They discovered truths that modern neuroscience is only now validating."
+                </div>
+
+                <div class="core-concept">
+                    <h4>The Haidt Project: Bridging Timelines</h4>
+                    <p><em>The Happiness Hypothesis</em> is structured as a conversation between ancient wisdom and modern science. Each major finding from psychology, neuroscience, or sociology is paired with a parallel insight from philosophy, religion, or classic literature.</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>The book demonstrates that:</p>
+
+                    <p><strong>1. The Rider and the Elephant</strong> is Plato's chariot allegory (reason controlling appetites) plus modern neuroscience (Systems 1 & 2). Both say: you're not unified; expect internal conflict. The Stoics knew this and developed practices (meditation, introspection) to align reason with emotion. Modern cognitive behavioral therapy does the same thing with different language.</p>
+
+                    <p><strong>2. Reciprocity</strong> is literally the Golden Rule (do unto others), found independently in Christianity, Buddhism, Confucianism, Islam, Judaism. Trivers and Axelrod proved it mathematically. Humans evolved to implement it emotionally. The ancient wisdom was recognizing a stable equilibrium.</p>
+
+                    <p><strong>3. Adaptation and contentment</strong> are Stoic themes (accept what you cannot control; focus on what you can). Marcus Aurelius practiced negativity: imagining losses to appreciate what he had. Modern gratitude research validates this—it's the flip side of Stoic resignation. Both work by shifting attention.</p>
+
+                    <p><strong>4. Love and attachment</strong> are what every religion and mythology emphasizes. Bowlby provided the mechanism. Harlow provided the evidence. The wisdom was right; we just didn't understand how or why it works.</p>
+
+                    <p><strong>5. Virtue through practice</strong> is Aristotle's eudaimonia. Modern psychology confirms: character is not fixed; it's skill. You become virtuous by practicing virtue. Every culture's moral training system recognizes this (repetition, modeling, feedback). It's not a cultural invention; it's how human brains actually learn.</p>
+
+                    <p><strong>6. Meaning and transcendence</strong> are what religions provide structurally. Modern secular culture struggles here because we haven't replaced religious rituals and communities with secular equivalents (though some try: gyms as temples, meditation as prayer). The neuroscience shows: meaning activates reward circuits differently than pleasure. It's orthogonal, not redundant.</p>
+
+                    <p>The synthesis message: <strong>you don't need to choose between reason and intuition, science and spirituality, ancient and modern. They're describing the same reality from different angles.</strong> The contemplative traditions developed practices (meditation, philosophy, ritual) that psychology now validates. Neuroscience reveals the mechanisms. Ancient wisdom was beta-testing what science eventually proved.</p>
+
+                    <p>This is why Haidt's book is so refreshing: it takes seriously both the sages and the scientists. It assumes people weren't stupid; they were just asking different kinds of questions.</p>
+                </div>
+
+                <div class="key-points">
+                    <h4>Ancient-Modern Parallels</h4>
+                    <ul>
+                        <li><strong>Plato → Kahneman:</strong> Reason vs. appetite → System 2 vs. System 1</li>
+                        <li><strong>Aristotle → Positive Psychology:</strong> Eudaimonia → Flourishing (PERMA)</li>
+                        <li><strong>Stoics → CBT:</strong> Control perceptions, not events → Cognitive restructuring</li>
+                        <li><strong>Buddha → Neuroscience:</strong> Attachment causes suffering → Insecure attachment predicts mental health problems</li>
+                        <li><strong>Confucius → Evolutionary Psychology:</strong> Reciprocity is natural → Trivers' reciprocal altruism</li>
+                        <li><strong>Jesus/Buddha → Neuroscience:</strong> Service and compassion are the path → Helping activates reward circuits more than receiving</li>
+                    </ul>
+                </div>
+
+                <div class="research-highlight">
+                    <h4>📊 Convergent Evolution: Two Different Paths to the Same Truth</h4>
+                    <p>Contemplatives developed practices empirically: if you sit quietly and observe your mind, you'll notice patterns (impermanence, emptiness, interconnection). Scientists studied the brain and behavior and discovered the same patterns mathematically. Both arrive at similar conclusions about attention, emotion, habit, and meaning. This convergence is powerful evidence that both are describing something real.</p>
+                </div>
+
+                <div class="funny-take">
+                    <h4>🎭 The Funny Take</h4>
+                    <p>Modern people like to think we're smarter than the ancients because we have fMRI machines and randomized controlled trials. But the monks had a better machine: thousands of hours of introspection and careful observation. They just didn't write peer-reviewed papers. If Socrates and the Buddha had access to modern publication venues, they'd probably have higher h-indices than most contemporary psychologists.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Convergent Solutions to Alignment</h4>
+                    <p>When different approaches (wisdom traditions, cognitive science, neuroscience) converge on the same answer, it's strong evidence the answer is correct. In AI alignment, we're seeing similar convergence: reinforcement learning from human feedback, constitutional AI, and interpretability research all point to the same lesson—you can't just optimize one objective; you need coherence, values, and constraint. Ancient humans figured out human alignment (virtue, meaning, community) through trial and error. Modern AI is learning the same lesson through mathematics. Both wisdom traditions and alignment research say: the goal isn't to maximize one thing; it's to balance multiple values in a coherent system.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============ FOOTER ============ -->
+        <section class="footer-section">
+            <h3>The Wisdom of Haidt</h3>
+            <p>Jonathan Haidt's <em>The Happiness Hypothesis</em> is ultimately a bridge-building project. It takes seriously both the empiricist's demand for evidence and the philosopher's insight into human nature. It refuses the false choice between science and wisdom, between reason and emotion, between individual flourishing and collective meaning.</p>
+
+            <p>The book's core message: <strong>happiness is possible, partly under your control, and achieved not through seeking pleasure but through virtue, connection, meaning, and engagement.</strong></p>
+
+            <p>The practices work because they're aligned with how human brains actually function—not because they're trendy or intuitively obvious. The ancient sages discovered them through introspection; modern science validates them through experiment. Both routes lead to the same destination: a life of flourishing.</p>
+
+            <div class="footer-quotes">
+                <div class="footer-quote">
+                    <p>"The happiness hypothesis says that happiness is not achieved by chasing it. You must pursue engagement, meaning, and virtue for their own sake."</p>
+                    <p class="attribution">— Jonathan Haidt</p>
+                </div>
+                <div class="footer-quote">
+                    <p>"We are all everyday philosophers and psychologists. The only question is whether we do the work consciously or stumble through life unconsciously."</p>
+                    <p class="attribution">— The Stoic tradition (via Haidt)</p>
+                </div>
+                <div class="footer-quote">
+                    <p>"The examined life is not just the most virtuous life; it's the happiest one. Modern neuroscience proves what Socrates knew."</p>
+                    <p class="attribution">— Synthesis</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 50px; font-size: 0.95rem; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 30px;">This illustrated guide integrates research from Seligman's PERMA framework, Csikszentmihalyi's flow theory, Lyubomirsky's happiness interventions, Kahneman's dual-process theory, attachment theory, post-traumatic growth research, and virtue ethics. It connects ideas from <em>Thinking, Fast and Slow</em>, <em>Stumbling on Happiness</em>, <em>The Righteous Mind</em>, <em>Flow</em>, and Marcus Aurelius's <em>Meditations</em>.</p>
+
+            <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 15px;">Created as a deep synthesis of Jonathan Haidt's <em>The Happiness Hypothesis</em> (2006), bridging ancient wisdom and modern neuroscience.</p>
+        </section>
+
+    </div>
+</body>
+</html>

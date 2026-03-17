@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 7 Habits of Highly Effective People - Illustrated Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f5 100%);
+            color: var(--dark);
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Cover Section */
+        .cover {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--teal) 100%);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover p {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+        }
+
+        .cover .author {
+            font-size: 1.1em;
+            margin-top: 30px;
+            opacity: 0.9;
+        }
+
+        /* Spiral SVG - 7 Step Maturity Continuum */
+        .spiral-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .spiral-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            color: var(--deep-blue);
+        }
+
+        .svg-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Lesson Card */
+        .lesson {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border-left: 6px solid var(--teal);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lesson:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .lesson.habit-1 { border-left-color: var(--coral); }
+        .lesson.habit-2 { border-left-color: var(--orange); }
+        .lesson.habit-3 { border-left-color: var(--sunny); }
+        .lesson.habit-4 { border-left-color: var(--forest); }
+        .lesson.habit-5 { border-left-color: var(--sky); }
+        .lesson.habit-6 { border-left-color: var(--teal); }
+        .lesson.habit-7 { border-left-color: var(--purple); }
+        .lesson.paradigm { border-left-color: var(--dark-purple); }
+        .lesson.pc-balance { border-left-color: var(--mint); }
+        .lesson.emotional-bank { border-left-color: var(--pink); }
+        .lesson.interdependence { border-left-color: var(--deep-blue); }
+
+        .lesson h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: var(--teal);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-weight: 700;
+            font-size: 1.3em;
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+
+        .lesson.habit-1 .lesson-number { background: var(--coral); }
+        .lesson.habit-2 .lesson-number { background: var(--orange); }
+        .lesson.habit-3 .lesson-number { background: var(--sunny); color: var(--dark); }
+        .lesson.habit-4 .lesson-number { background: var(--forest); }
+        .lesson.habit-5 .lesson-number { background: var(--sky); }
+        .lesson.habit-6 .lesson-number { background: var(--teal); }
+        .lesson.habit-7 .lesson-number { background: var(--purple); }
+
+        .lesson-subtitle {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .lesson-content {
+            margin-bottom: 25px;
+            line-height: 1.9;
+        }
+
+        .lesson-content p {
+            margin-bottom: 15px;
+        }
+
+        .key-idea {
+            background: linear-gradient(120deg, rgba(74, 205, 196, 0.1) 0%, rgba(255, 107, 107, 0.05) 100%);
+            border-left: 4px solid var(--teal);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .example-box {
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--deep-blue);
+        }
+
+        .example-label {
+            font-weight: 600;
+            color: var(--deep-blue);
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .funny-take {
+            background: linear-gradient(120deg, rgba(253, 121, 168, 0.1) 0%, rgba(255, 230, 109, 0.1) 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px dashed var(--pink);
+            font-style: italic;
+            color: #555;
+        }
+
+        .ai-connection {
+            background: linear-gradient(120deg, rgba(108, 92, 231, 0.1) 0%, rgba(9, 132, 227, 0.1) 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--dark-purple);
+        }
+
+        .ai-connection strong {
+            color: var(--dark-purple);
+        }
+
+        .cross-book-ref {
+            background: #f0f4f8;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+
+        .cross-book-ref strong {
+            color: var(--forest);
+        }
+
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .matrix-cell {
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid #e8eef5;
+        }
+
+        .matrix-cell h4 {
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .matrix-cell p {
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        /* Visual Elements */
+        .badge {
+            display: inline-block;
+            background: var(--cream);
+            color: var(--dark);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin: 5px 5px 5px 0;
+        }
+
+        .badge.habit { background: var(--teal); color: white; }
+        .badge.concept { background: var(--sky); color: white; }
+        .badge.practice { background: var(--forest); color: white; }
+
+        .dimension-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .dimension-item {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--teal);
+            display: flex;
+            gap: 15px;
+        }
+
+        .dimension-item strong {
+            color: var(--teal);
+            min-width: 120px;
+        }
+
+        /* Footer */
+        .book-footer {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--teal) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .book-footer h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 2.2em;
+            }
+
+            .lesson h3 {
+                font-size: 1.5em;
+            }
+
+            .matrix-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .spiral-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cover Section -->
+        <div class="cover">
+            <h1>The 7 Habits of Highly Effective People</h1>
+            <p>An Illustrated Guide to Personal & Professional Mastery</p>
+            <div class="author">by Stephen R. Covey<br>Comprehensive Study Edition with AI Connections & Modern Applications</div>
+        </div>
+
+        <!-- Maturity Continuum Spiral -->
+        <div class="spiral-section">
+            <h2>The Maturity Continuum: The Journey to Interdependence</h2>
+            <p>Covey's masterwork maps a three-stage journey that mirrors human psychological development. Each stage builds upon the last, creating a spiral of increasing effectiveness:</p>
+
+            <div class="svg-container">
+                <svg viewBox="0 0 600 400" width="600" height="400">
+                    <!-- Background -->
+                    <defs>
+                        <linearGradient id="spiralGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#0984E3;stop-opacity:0.1" />
+                            <stop offset="100%" style="stop-color:#00B894;stop-opacity:0.1" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="600" height="400" fill="url(#spiralGrad)"/>
+
+                    <!-- Spiral Path -->
+                    <path d="M 150 350 Q 200 300, 250 250 T 350 200 T 450 100" stroke="#0984E3" stroke-width="3" fill="none" stroke-dasharray="5,5" opacity="0.3"/>
+
+                    <!-- Stage 1: Dependence -->
+                    <circle cx="150" cy="350" r="40" fill="#FF6B6B" opacity="0.8"/>
+                    <text x="150" y="355" text-anchor="middle" font-size="24" font-weight="bold" fill="white">1</text>
+                    <text x="150" y="400" text-anchor="middle" font-size="14" font-weight="600" fill="#2D3436">Dependence</text>
+
+                    <!-- Stage 2: Independence -->
+                    <circle cx="300" cy="200" r="40" fill="#FFE66D" opacity="0.8"/>
+                    <text x="300" y="205" text-anchor="middle" font-size="24" font-weight="bold" fill="#2D3436">2</text>
+                    <text x="300" y="250" text-anchor="middle" font-size="14" font-weight="600" fill="#2D3436">Independence</text>
+
+                    <!-- Stage 3: Interdependence -->
+                    <circle cx="450" cy="100" r="40" fill="#00B894" opacity="0.8"/>
+                    <text x="450" y="105" text-anchor="middle" font-size="24" font-weight="bold" fill="white">3</text>
+                    <text x="450" y="50" text-anchor="middle" font-size="14" font-weight="600" fill="#2D3436">Interdependence</text>
+
+                    <!-- Arrows -->
+                    <path d="M 190 330 L 260 240" stroke="#0984E3" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 340 180 L 410 120" stroke="#0984E3" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#0984E3" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="dimension-list">
+                <div class="dimension-item">
+                    <strong>Dependence (You):</strong>
+                    <span>Childhood to early adulthood. Relying on others for direction, resources, and validation. "You take care of me."</span>
+                </div>
+                <div class="dimension-item">
+                    <strong>Independence (I):</strong>
+                    <span>Self-reliance and personal discipline. You set goals, manage yourself, achieve results alone. "I can do it."</span>
+                </div>
+                <div class="dimension-item">
+                    <strong>Interdependence (We):</strong>
+                    <span>The highest form. Combining individual strength with collaborative power. "We can achieve more together."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson 1: Paradigm Shifts & Character Ethic -->
+        <div class="lesson paradigm">
+            <span class="lesson-number">★</span>
+            <h3>Foundation: Paradigm Shifts & Character Ethic</h3>
+            <p class="lesson-subtitle">The Mental Maps that Shape Everything</p>
+
+            <div class="lesson-content">
+                <p><strong>Your paradigm is your lens.</strong> A paradigm is a fundamental assumption, worldview, or mental map that shapes how you interpret reality. Covey argued that success books of the past century focused on "personality ethic"—quick fixes, techniques, charm—but true effectiveness comes from <strong>character ethic</strong>: integrity, honesty, and authenticity.</p>
+
+                <p>A paradigm shift is a dramatic change in how you see the world. When your map changes, your behavior changes. Covey opens with the classic example: you're on a subway in New York. A man enters with his children, who are running wild, disturbing everyone. You're irritated. Then the man says, "I'm sorry. Their mother just died. I don't know what to do." Instantly, your entire paradigm shifts. Same situation. Different understanding. Different behavior.</p>
+
+                <div class="key-idea">
+                    <strong>Core Principle:</strong> You cannot change your life without changing your thinking. Your paradigm determines your behavior, and your paradigm is often invisible to you—until examined.
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Covey's Story</div>
+                    <p>Covey spent years developing his "time management" course, then realized it didn't work for everyone equally. Why? Because people had different paradigms about what mattered. A person who values family above all cannot simply "manage time" better; they need a paradigm that puts relationships first. One size does not fit all—until you change the map.</p>
+                </div>
+
+                <div class="funny-take">
+                    "Your paradigm is like your mental OS. You can't run better software on a broken operating system; you have to reboot. And yes, sometimes you need to turn it off and on again—but you actually turn it off and ON AGAIN."
+                </div>
+
+                <div class="ai-connection">
+                    <strong>AI Parallel:</strong> A language model's "paradigm" is its training data and architecture. Change the training data, you change the output. Change the objective function, you change what the model optimizes for. Before you can fine-tune an LLM for your task, you must align its fundamental values (system prompt = paradigm).
+                </div>
+
+                <div class="cross-book-ref">
+                    <strong>Cross-Book Connection:</strong> This aligns with <em>Atomic Habits</em> (identity > behavior), <em>Meditations</em> (your perceptions create your reality), and <em>Crucial Conversations</em> (stories shape dialogue).
+                </div>
+
+                <span class="badge concept">Concept</span>
+                <span class="badge habit">Character</span>
+                <span class="badge practice">Foundation</span>
+            </div>
+        </div>
+
+        <!-- Lesson 2: PC Balance -->
+        <div class="lesson pc-balance">
+            <span class="lesson-number">★</span>
+            <h3>The P/PC Balance: Production vs. Production Capability</h3>
+            <p class="lesson-subtitle">The Goose and the Golden Eggs</p>
+
+            <div class="lesson-content">
+                <p><strong>The goose that lays the golden eggs is more valuable than any single egg.</strong> This is Covey's most elegant metaphor. Production (P) is the gold. Production Capability (PC) is the goose. Kill the goose for immediate gold, and you have nothing tomorrow.</p>
+
+                <p>Many people (and organizations) obsess over results (P) while neglecting the systems that create them (PC). You work 80 hours a week to hit sales targets but destroy your health, relationships, and mental clarity—the very capacities that made you successful. You're killing the goose.</p>
+
+                <div class="key-idea">
+                    <strong>Effectiveness = P/PC Balance:</strong> Obsessing over output without maintaining your capacity is unsustainable. The highest performers protect both the eggs (results) and the goose (their ability to keep producing).
+                </div>
+
+                <div class="matrix-grid">
+                    <div class="matrix-cell">
+                        <h4>High P, Low PC</h4>
+                        <p><strong>The Burnout Trap.</strong> Maximum short-term output, zero sustainability. You crash.</p>
+                    </div>
+                    <div class="matrix-cell">
+                        <h4>Low P, High PC</h4>
+                        <p><strong>The Learning Phase.</strong> Building skills, systems, health. Delayed gratification pays off long-term.</p>
+                    </div>
+                    <div class="matrix-cell">
+                        <h4>High P, High PC</h4>
+                        <p><strong>The Sweet Spot.</strong> Delivering results while strengthening your capacity. Sustainable excellence.</p>
+                    </div>
+                    <div class="matrix-cell">
+                        <h4>Low P, Low PC</h4>
+                        <p><strong>The Spiral Down.</strong> Neither results nor capacity. The danger zone.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Business Example</div>
+                    <p>A sales manager hits quota by pushing the team mercilessly. Morale tanks. Turnover soars. Institutional knowledge walks out the door. Next year, no one knows the playbook. The goose (team capability) is dying. The short-term eggs (Q4 numbers) obscure long-term collapse.</p>
+                </div>
+
+                <div class="funny-take">
+                    "We're running on fumes but crushing it! Fumes burn hot. Right up until they're empty. Then you're pushing a car uphill."
+                </div>
+
+                <div class="ai-connection">
+                    <strong>AI Parallel:</strong> Training a model is PC. Inference/deployment is P. Optimal ML teams maintain both: invest in better training pipelines, cleaner data, compute efficiency (PC) while shipping products (P). A model in production with no model monitoring or retraining infrastructure is a goose heading to slaughter.
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson 3: Emotional Bank Account -->
+        <div class="lesson emotional-bank">
+            <span class="lesson-number">★</span>
+            <h3>The Emotional Bank Account: Deposits and Withdrawals</h3>
+            <p class="lesson-subtitle">Trust as Currency in Relationships</p>
+
+            <div class="lesson-content">
+                <p><strong>Relationships have bank accounts. You make deposits and withdrawals.</strong> Every interaction with another person is either a deposit (building trust, showing respect, listening, keeping promises) or a withdrawal (breaking commitments, dismissing feelings, disrespecting boundaries).</p>
+
+                <p>When your account is high, you have a buffer. One mistake doesn't torpedo the relationship. When it's low, a single misstep triggers conflict. And when it's empty, communication breaks down entirely.</p>
+
+                <div class="key-idea">
+                    <strong>Key Deposits:</strong> Understanding the person, keeping promises, clarifying expectations, showing integrity, apologizing sincerely, listening with intent to understand.
+                </div>
+
+                <div class="key-idea">
+                    <strong>Key Withdrawals:</strong> Broken promises, ignoring boundaries, defensive listening, betraying confidences, disrespecting, being late, dismissing feelings.
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Family Example</div>
+                    <p>A father is consistently absent during his kids' important moments. But one day, he shows up for a soccer game. He expects praise. His kids feel resentment. Why? His emotional bank account with them is overdrawn. One deposit (showing up once) cannot recover from years of withdrawals (missing games, broken promises, phone scrolling during family time).</p>
+                </div>
+
+                <div class="funny-take">
+                    "Making one grand gesture after months of neglect is like depositing $1 after you've overdrafted by $10,000. The teller's not impressed. Neither is your family."
+                </div>
+
+                <div class="ai-connection">
+                    <strong>AI Parallel:</strong> User trust in AI systems. Every accurate prediction is a deposit. Every hallucination, bias, or missed context is a withdrawal. An AI that works perfectly 99% of the time but fails catastrophically on the 1% depletes trust. Trustworthy AI requires consistent deposits across edge cases.
+                </div>
+
+                <div class="cross-book-ref">
+                    <strong>Cross-Book Connection:</strong> <em>Crucial Conversations</em> focuses on maintaining these accounts during difficult dialogues. <em>Atomic Habits</em> frames deposits as small consistent wins that compound.
+                </div>
+            </div>
+        </div>
+
+        <!-- Habit 1 -->
+        <div class="lesson habit-1">
+            <span class="lesson-number">1</span>
+            <h3>Be Proactive</h3>
+            <p class="lesson-subtitle">Circle of Influence vs. Circle of Concern</p>
+
+            <div class="lesson-content">
+                <p><strong>You have two circles: concern and influence.</strong> Your circle of concern includes everything you think about—weather, politics, other people's behavior, global events. Your circle of influence includes what you can actually control—your effort, your response, your choices, your attitude.</p>
+
+                <p>Reactive people expand their circle of concern by worrying about things they cannot control, and their circle of influence shrinks. Proactive people focus energy on their circle of influence, which expands.</p>
+
+                <div class="key-idea">
+                    <strong>The Proactive Stance:</strong> "I cannot control the economy, but I can control my skills and my budget. I cannot control others' opinions, but I can control my integrity. I cannot control the situation, but I can control my response."
+                </div>
+
+                <div class="svg-container">
+                    <svg viewBox="0 0 500 400" width="500" height="400">
+                        <!-- Background -->
+                        <rect width="500" height="400" fill="#f9fafb" rx="10"/>
+
+                        <!-- Circles -->
+                        <circle cx="250" cy="180" r="120" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+                        <circle cx="250" cy="180" r="70" fill="#FF6B6B" opacity="0.15"/>
+                        <circle cx="250" cy="180" r="70" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+
+                        <!-- Labels -->
+                        <text x="250" y="50" text-anchor="middle" font-size="14" font-weight="600" fill="#FF6B6B">CIRCLE OF CONCERN</text>
+                        <text x="250" y="200" text-anchor="middle" font-size="16" font-weight="700" fill="#2D3436">CIRCLE OF</text>
+                        <text x="250" y="225" text-anchor="middle" font-size="16" font-weight="700" fill="#2D3436">INFLUENCE</text>
+
+                        <!-- Items in Circle of Concern -->
+                        <text x="150" y="120" font-size="11" fill="#555">• Economy</text>
+                        <text x="150" y="140" font-size="11" fill="#555">• Weather</text>
+                        <text x="150" y="160" font-size="11" fill="#555">• Others' opinions</text>
+                        <text x="340" y="120" font-size="11" fill="#555">• Politics</text>
+                        <text x="340" y="140" font-size="11" fill="#555">• Global events</text>
+                        <text x="340" y="160" font-size="11" fill="#555">• Past mistakes</text>
+
+                        <!-- Items in Circle of Influence -->
+                        <text x="200" y="200" font-size="10" fill="#555">Effort • Skills</text>
+                        <text x="200" y="220" font-size="10" fill="#555">Response • Attitude</text>
+                    </svg>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Work Example</div>
+                    <p><strong>Reactive:</strong> "The company won't promote me because of politics. The economy is bad. My boss doesn't respect me."<br>
+                    <strong>Proactive:</strong> "I control my skills development. I control how I present my work. I control my professionalism. Let me master those and my influence grows."</p>
+                </div>
+
+                <div class="funny-take">
+                    "Reactive people: 'The weather is ruining my mood.' Proactive people: 'I'm choosing my mood despite the weather, and then I'm adapting my plan.' The weather doesn't care about your feelings. Your feelings care about your choice."
+                </div>
+
+                <div class="ai-connection">
+                    <strong>AI as Agent Autonomy:</strong> A proactive agent has a clear model of what it controls (its actions, its information gathering) vs. what it doesn't (the environment's response, other agents' choices). The agent focuses on optimizing its controllable action space rather than worrying about uncontrollable external states. Reinforcement learning agents that learn a good policy are implicitly learning which actions influence which outcomes.
+                </div>
+
+                <div class="cross-book-ref">
+                    <strong>Cross-Book Connection:</strong> <em>Meditations</em> (dichotomy of control), <em>Grit</em> (focus on effort and growth, not fixed outcomes).
+                </div>
+
+                <span class="badge habit">Habit 1/7</span>
+                <span class="badge concept">Autonomy</span>
+                <span class="badge practice">Control</span>
+            </div>
+        </div>
+
+        <!-- Habit 2 -->
+        <div class="lesson habit-2">
+            <span class="lesson-number">2</span>
+            <h3>Begin with the End in Mind</h3>
+            <p class="lesson-subtitle">Personal Mission Statement & Funeral Visualization</p>
+
+            <div class="lesson-content">
+                <p><strong>All things are created twice: first mentally, then physically.</strong> You build a house twice—in blueprints (mental), then in wood and stone (physical). You write a speech twice—in outline (mental), then in delivery (physical).</p>
+
+                <p>Most people are busy building without a blueprint. They react to daily urgencies but never define their ultimate purpose. Habit 2 is about creating your blueprint: your personal mission statement.</p>
+
+                <div class="key-idea">
+                    <strong>The Exercise:</strong> Attend your own funeral (mentally). Who speaks? What do they say about how you lived? How did you treat people? What impact did you have? What did you create or contribute? <em>This is your end.</em> Now work backward to define how to live.
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Covey's Mission Statement</div>
+                    <p>Covey spent time writing his personal mission. It emphasized family, teaching, contribution to society, and personal growth. When faced with a lucrative consulting contract that demanded 80% travel, he could say "no" because it violated his mission. Most people say yes because they lack a clear end.</p>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Mission vs. Résumé</div>
+                    <p>Your résumé is what you did. Your mission is who you are and what you stand for. A CEO might have a mission: "I lead with integrity, develop talent, create sustainable value." That mission guides every decision—which clients to serve, how to treat employees, when to say no to profit.</p>
+                </div>
+
+                <div class="funny-take">
+                    "People say, 'I don't have time for a mission statement.' Meanwhile, they have time to scroll Instagram, attend meetings about meetings, and stress about things they can't control. A mission statement is your compass. Without it, any wind will blow you off course."
+                </div>
+
+                <div class="ai-connection">
+                    <strong>Goal-Conditioned Generation:</strong> Modern AI systems use goal-conditioned policies—given a goal, generate a path to it. Defining "the end" (your goal state) lets you work backward: what capabilities must you develop? What decisions must you make now? This is reinforcement learning with sparse rewards. Your mission statement is your reward function.
+                </div>
+
+                <div class="cross-book-ref">
+                    <strong>Cross-Book Connection:</strong> <em>Deep Work</em> (clarity on what matters drives focus), <em>Atomic Habits</em> (identity-based habits flow from a clear sense of self).
+                </div>
+
+                <span class="badge habit">Habit 2/7</span>
+                <span class="badge concept">Purpose</span>
+                <span class="badge practice">Vision</span>
+            </div>
+        </div>
+
+        <!-- Habit 3 -->
+        <div class="lesson habit-3">
+            <span class="lesson-number">3</span>
+            <h3>Put First Things First</h3>
+            <p class="lesson-subtitle">The Eisenhower Matrix & Big Rocks</p>
+
+            <div class="lesson-content">
+                <p><strong>Not everything that's urgent is important. Not everything that's important is urgent.</strong> Most people confuse urgency with importance. Habit 3 is about creating time for what matters.</p>
+
+                <p>Covey's framework divides tasks into four quadrants based on urgency and importance. Most people spend their time in quadrants 1 (urgent/important) and 3 (urgent/not important), reacting to crises and interruptions. But the magic happens in quadrant 2: important but not urgent.</p>
+
+                <div class="svg-container">
+                    <svg viewBox="0 0 550 450" width="550" height="450">
+                        <!-- Background -->
+                        <rect width="550" height="450" fill="#f9fafb" rx="10"/>
+
+                        <!-- Axes -->
+                        <line x1="275" y1="50" x2="275" y2="400" stroke="#2D3436" stroke-width="2"/>
+                        <line x1="50" y1="225" x2="500" y2="225" stroke="#2D3436" stroke-width="2"/>
+
+                        <!-- Axis Labels -->
+                        <text x="520" y="230" font-size="12" font-weight="600" fill="#2D3436">URGENT</text>
+                        <text x="280" y="35" font-size="12" font-weight="600" fill="#2D3436">IMPORTANT</text>
+
+                        <!-- Quadrants -->
+                        <!-- Q1: Urgent + Important (Red) -->
+                        <rect x="275" y="50" width="225" height="175" fill="#FF6B6B" opacity="0.2"/>
+                        <text x="388" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#FF6B6B">Q1</text>
+                        <text x="388" y="115" text-anchor="middle" font-size="11" fill="#333">URGENT &amp;</text>
+                        <text x="388" y="130" text-anchor="middle" font-size="11" fill="#333">IMPORTANT</text>
+                        <text x="388" y="155" text-anchor="middle" font-size="10" fill="#555">Crises, Deadlines</text>
+                        <text x="388" y="170" text-anchor="middle" font-size="10" fill="#555">Problems</text>
+
+                        <!-- Q2: Important + Not Urgent (Green) -->
+                        <rect x="50" y="50" width="225" height="175" fill="#00B894" opacity="0.2"/>
+                        <text x="162" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#00B894">Q2</text>
+                        <text x="162" y="115" text-anchor="middle" font-size="11" fill="#333">IMPORTANT</text>
+                        <text x="162" y="130" text-anchor="middle" font-size="11" fill="#333">NOT URGENT</text>
+                        <text x="162" y="155" text-anchor="middle" font-size="10" fill="#555">Planning, Growth</text>
+                        <text x="162" y="170" text-anchor="middle" font-size="10" fill="#555">Prevention</text>
+
+                        <!-- Q3: Urgent + Not Important (Orange) -->
+                        <rect x="275" y="225" width="225" height="175" fill="#FDCB6E" opacity="0.2"/>
+                        <text x="388" y="265" text-anchor="middle" font-size="13" font-weight="700" fill="#F39C12">Q3</text>
+                        <text x="388" y="290" text-anchor="middle" font-size="11" fill="#333">URGENT</text>
+                        <text x="388" y="305" text-anchor="middle" font-size="11" fill="#333">NOT IMPORTANT</text>
+                        <text x="388" y="330" text-anchor="middle" font-size="10" fill="#555">Interruptions</text>
+                        <text x="388" y="345" text-anchor="middle" font-size="10" fill="#555">Some Meetings</text>
+
+                        <!-- Q4: Not Urgent + Not Important (Gray) -->
+                        <rect x="50" y="225" width="225" height="175" fill="#95A5A6" opacity="0.2"/>
+                        <text x="162" y="265" text-anchor="middle" font-size="13" font-weight="700" fill="#7F8C8D">Q4</text>
+                        <text x="162" y="290" text-anchor="middle" font-size="11" fill="#333">NOT URGENT</text>
+                        <text x="162" y="305" text-anchor="middle" font-size="11" fill="#333">NOT IMPORTANT</text>
+                        <text x="162" y="330" text-anchor="middle" font-size="10" fill="#555">Time Wasters</text>
+                        <text x="162" y="345" text-anchor="middle" font-size="10" fill="#555">Busywork</text>
+
+                        <!-- Legend -->
+                        <text x="275" y="425" text-anchor="middle" font-size="12" font-weight="600" fill="#00B894">Q2 (Important/Not Urgent) is where transformation happens. Protect this time.</text>
+                    </svg>
+                </div>
+
+                <div class="key-idea">
+                    <strong>The Q2 Insight:</strong> Prevention, planning, relationship-building, skill development, physical health—none are urgent. All are important. They create the capacity and leverage that make everything else easier. But they're sacrificed first when time gets tight.
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Big Rocks Story</div>
+                    <p>Covey tells of a classroom experiment: a jar, big rocks, gravel, sand, and water. The instructor fills the jar with gravel first, then sand, then water—no room for the big rocks. Then he starts over: big rocks first, then gravel fills the gaps, then sand, then water. Everything fits. The big rocks are your important-but-not-urgent priorities. If you don't place them first, there's no room.</p>
+                </div>
+
+                <div class="funny-take">
+                    "Urgent and not important are the productivity equivalent of junk food. Satisfying in the moment, terrible in hindsight, designed to be addictive. Emails feel important. They're not. Deep work is boring and not urgent. It's everything."
+                </div>
+
+                <div class="ai-connection">
+                    <strong>Priority Queuing in Agents:</strong> Intelligent agents have a priority queue. They distinguish between interrupt signals (urgent) and background tasks (important). An AI system should block time for model retraining (Q2: important, not urgent) even when customer support tickets queue up (Q3: urgent, not important). The matrix prevents long-term capability decay.
+                </div>
+
+                <div class="cross-book-ref">
+                    <strong>Cross-Book Connection:</strong> <em>Deep Work</em> is entirely about protecting Q2 time. <em>Atomic Habits</em> shows how small Q2 practices compound. <em>Grit</em> explains why Q2 investments in deliberate practice matter.
+                </div>
+
+                <span class="badge habit">Habit 3/7</span>
+                <span class="badge concept">Priority</span>
+                <span class="badge practice">Time</span>
+            </div>
+        </div>
+
+        <!-- Habit 4 -->
+        <div class="lesson habit-4">
+            <span class="lesson-number">4</span>
+            <h3>Think Win-Win</h3>
+            <p class="lesson-subtitle">Abundance Mentality & Creative Cooperation</p>
+
+            <div class="lesson-content">
+                <p><strong>Life is not a zero-sum game.</strong> A scarcity mindset assumes there's only one pie. If you get a bigger slice, I get less. So I hoard, compete, and zero-sum. An abundance mindset assumes the pie can grow. If we cooperate, we both win bigger.</p>
+
+                <p>Win-Win is not about being nice. It's about being clear on mutual benefit and unwilling to settle for less. If there's no win for both parties, it's better to say "no deal" than to make a destructive bargain.</p>
+
+                <div class="key-idea">
+                    <strong>Six Paradigms of Human Interaction:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>Win-Lose:</strong> I succeed, you fail. Competitive. Creates enemies.</li>
+                        <li><strong>Lose-Win:</strong> You succeed, I sacrifice. Weakness. Breeds resentment.</li>
+                        <li><strong>Lose-Lose:</strong> We both lose. Revenge-driven.</li>
+                        <li><strong>Win:</strong> I succeed. Indifferent to you. Zero accountability.</li>
+                        <li><strong>Win-Win or No Deal:</strong> We both win, or we don't transact. Integrity.</li>
+                        <li><strong>Win-Win (Gold Standard):</strong> Seeking mutual benefit with accountability.</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Negotiation Example</div>
+                    <p>A company buys a supplier. Win-Lose negotiator squeezes prices, killing the supplier's margins and quality. Lose-Win negotiator overpays out of guilt. Win-Win negotiator finds the supplier's real constraints (labor costs, material sourcing) and asks: "How do we reduce your costs so I can get a fair price?" Both win.</p>
+                </div>
+
+                <div class="funny-take">
+                    "Win-Lose people think they're playing chess. They're actually playing checkers against someone who read the rulebook. Win-Win people build a game where both players want to show up tomorrow."
+                </div>
+
+                <div class="ai-connection">
+                    <strong>Cooperative Multi-Agent Systems:</strong> A single AI model optimizes for its own loss function. Multiple models in an ecosystem (recommendation systems, trading algorithms, content moderation) must be aligned for win-win outcomes. Misaligned incentives create arms races and collapse. Cooperative agents share information, signal intent, and reward mutual success. This is the difference between competitive and collaborative reinforcement learning.
+                </div>
+
+                <div class="cross-book-ref">
+                    <strong>Cross-Book Connection:</strong> <em>Crucial Conversations</em> is about finding win-win solutions during conflict. <em>Atomic Habits</em> shows compound effects of cooperation (your systems affect others' systems).
+                </div>
+
+                <span class="badge habit">Habit 4/7</span>
+                <span class="badge concept">Abundance</span>
+                <span class="badge practice">Negotiation</span>
+            </div>
+        </div>
+
+        <!-- Habit 5 -->
+        <div class="lesson habit-5">
+            <span class="lesson-number">5</span>
+            <h3>Seek First to Understand, Then to Be Understood</h3>
+            <p class="lesson-subtitle">Empathic Listening & Genuine Dialogue</p>
+
+            <div class="lesson-content">
+                <p><strong>Most people don't listen to understand. They listen to reply.</strong> You're in a conversation, but you're already forming your counterargument, planning your response, judging the other person. True listening is empathic: you drop your agenda and enter their world.</p>
+
+                <p>Covey identifies four levels of listening: ignoring (not listening), pretend listening (nodding while thinking of yourself), selective listening (catching bits), and empathic listening (seeking to understand the person's frame of reference, feelings, meaning).</p>
+
+                <div class="key-idea">
+                    <strong>Empathic Listening Requires:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Genuine desire to understand</li>
+                        <li>Suspension of judgment</li>
+                        <li>Attention to tone, body language, silence</li>
+                        <li>Reflection: "What I hear you saying is..."</li>
+                        <li>No advice-giving until they feel heard</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Covey's Family Story</div>
+                    <p>A teenage son is upset. The father immediately jumps to solutions: "Here's what you should do." The son shuts down. Later, Covey learns: the boy didn't need solutions. He needed his father to understand his fear and disappointment. When the father finally listens—really listens, without judgment or advice—the son opens up. Trust deepens.</p>
+                </div>
+
+                <div class="funny-take">
+                    "People think they're great communicators because they're good speakers. No. Great communicators are great listeners. They let others feel heard. Then they speak, and people actually listen because they know they'll be heard in return."
+                </div>
+
+                <div class="ai-connection">
+                    <strong>Active Listening in Context Gathering:</strong> Language models in conversation should "listen" before responding—gather context, understand the user's actual need (not the surface request), infer emotional state and constraints. This is context engineering: building a rich internal model of the user's situation before generating. Prompt injection attacks often exploit models that generate (respond) without understanding (listening).
+                </div>
+
+                <div class="cross-book-ref">
+                    <strong>Cross-Book Connection:</strong> <em>Crucial Conversations</em> is built on this habit: dialogue fails when people don't feel heard. <em>Meditations</em> (perspective-taking) supports empathy.
+                </div>
+
+                <span class="badge habit">Habit 5/7</span>
+                <span class="badge concept">Understanding</span>
+                <span class="badge practice">Empathy</span>
+            </div>
+        </div>
+
+        <!-- Habit 6 -->
+        <div class="lesson habit-6">
+            <span class="lesson-number">6</span>
+            <h3>Synergize</h3>
+            <p class="lesson-subtitle">Creative Cooperation & 1+1=3</p>
+
+            <div class="lesson-content">
+                <p><strong>Synergy is the highest activity of life.</strong> The whole is greater than the sum of parts. Covey defines synergy as creative cooperation—combining differences to create something neither party could alone.</p>
+
+                <p>This doesn't mean everyone agrees. Quite the opposite. True synergy requires diversity. A room of yes-men creates nothing. A room of thoughtful disagreement, where each party is heard and respected, creates innovation.</p>
+
+                <div class="key-idea">
+                    <strong>The Formula:</strong> Diversity + Respect + Psychological Safety = Synergy<br>
+                    Different perspectives + genuine listening + trust to be vulnerable = novel solutions.
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Product Development</div>
+                    <p>Engineers say: "Here's what's technically possible." Designers say: "Here's what users will love." Marketers say: "Here's what will sell." Alone, each is incomplete. Together, with respect for each discipline, they create products that are beautiful, functional, and profitable. 1+1+1 > 3.</p>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Family Synergy</div>
+                    <p>A parent and teenager plan a road trip. The parent wants structure and safety. The teenager wants spontaneity and adventure. If they fight (win-lose), the trip is tense. If they synergize, they might build flexibility into the schedule, plan safe adventures, and bond over something neither would have done alone.</p>
+                </div>
+
+                <div class="funny-take">
+                    "Meetings where everyone agrees are the most dangerous. You're not solving problems; you're confirming biases. The uncomfortable meeting where someone challenges an assumption and everyone thinks, 'Oh, I didn't see it that way'—that's synergy."
+                </div>
+
+                <div class="ai-connection">
+                    <strong>Ensemble Methods Exceeding Individual Models:</strong> A single neural network has a ceiling. But an ensemble—diverse models, different architectures, trained on different data—often outperforms the best individual model. The synergy comes from combining weak learners into a strong one. Each model "sees" different patterns. Combined with proper weighting, they capture what none alone could.
+                </div>
+
+                <div class="cross-book-ref">
+                    <strong>Cross-Book Connection:</strong> <em>Crucial Conversations</em> teaches how to create psychological safety for genuine dialogue. <em>Atomic Habits</em> shows how systems compound (synergy through small changes).
+                </div>
+
+                <span class="badge habit">Habit 6/7</span>
+                <span class="badge concept">Cooperation</span>
+                <span class="badge practice">Innovation</span>
+            </div>
+        </div>
+
+        <!-- Habit 7 -->
+        <div class="lesson habit-7">
+            <span class="lesson-number">7</span>
+            <h3>Sharpen the Saw</h3>
+            <p class="lesson-subtitle">Renewal in Four Dimensions</p>
+
+            <div class="lesson-content">
+                <p><strong>A dull saw needs sharpening, or it becomes useless.</strong> You are the saw. Sharpening is renewal. Covey identifies four dimensions that must be maintained continuously: physical, spiritual, mental, and social-emotional.</p>
+
+                <p>This is the PC (production capability) habit. You cannot sustain high performance without regular renewal. Many high-achievers neglect sharpening, then burn out and collapse.</p>
+
+                <div class="dimension-list">
+                    <div class="dimension-item">
+                        <strong>Physical:</strong>
+                        <span>Exercise, nutrition, sleep, stress management. Your body is the vehicle for everything else.</span>
+                    </div>
+                    <div class="dimension-item">
+                        <strong>Spiritual:</strong>
+                        <span>Clarifying purpose, values, meaning. Meditation, prayer, time in nature, reflection on what matters.</span>
+                    </div>
+                    <div class="dimension-item">
+                        <strong>Mental:</strong>
+                        <span>Continuous learning, reading, writing, analysis. Expand your mind. Challenge assumptions.</span>
+                    </div>
+                    <div class="dimension-item">
+                        <strong>Social-Emotional:</strong>
+                        <span>Relationships, service, empathy. Invest in people. Contribute. Feel connected.</span>
+                    </div>
+                </div>
+
+                <div class="key-idea">
+                    <strong>The Paradox:</strong> Sharpening feels like you're not producing. You're not hitting targets this hour. But those hours compound into exponentially higher production capability. Ignore sharpening, and your saw gets duller and duller until you can't cut at all.
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">The Runner</div>
+                    <p>A runner trains 10 hours per week to run a 5K in 20 minutes. 9 hours are recovery, strength, technique work (sharpening). 1 hour is the actual race. People see the race and think that's where performance comes from. No. Performance comes from the sharpening.</p>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">The Executive</div>
+                    <p>A CEO works 70 hours per week, never reads, never exercises, neglects family. After 5 years, she's burned out, makes poor decisions, alienates people. A CEO who works 50 hours, but spends 5 hours on physical renewal, 5 on learning, 5 on relationships, sustains higher quality performance over decades.</p>
+                </div>
+
+                <div class="funny-take">
+                    "People say, 'I'm too busy to exercise.' Translation: 'I'm too busy managing the crisis to prevent the next one.' You're not too busy. You're too reactive."
+                </div>
+
+                <div class="ai-connection">
+                    <strong>Continued Training & Maintenance:</strong> A deployed ML model degrades. Data distributions shift (concept drift). New edge cases emerge. The model must be regularly retrained on fresh data, evaluated on new benchmarks, and maintained. This is the "sharpening" of AI systems. Neglect it, and the model becomes useless—high latency, hallucinations, and costly failures.
+                </div>
+
+                <div class="cross-book-ref">
+                    <strong>Cross-Book Connection:</strong> <em>Deep Work</em> (mental sharpening), <em>Grit</em> (deliberate practice is sharpening), <em>Atomic Habits</em> (small renewal practices compound).
+                </div>
+
+                <span class="badge habit">Habit 7/7</span>
+                <span class="badge concept">Renewal</span>
+                <span class="badge practice">Maintenance</span>
+            </div>
+        </div>
+
+        <!-- Lesson: Interdependence -->
+        <div class="lesson interdependence">
+            <span class="lesson-number">★</span>
+            <h3>The Interdependence Shift: From "I" to "We"</h3>
+            <p class="lesson-subtitle">Why Habits 1-3 Are Just the Foundation</p>
+
+            <div class="lesson-content">
+                <p><strong>Habits 1-3 (Be Proactive, Begin with the End, Put First Things First) build independence.</strong> You master yourself. You set goals. You manage your time. These are essential.</p>
+
+                <p><strong>But they're not the goal. They're the foundation.</strong> Habits 4-6 shift you to interdependence: synergistic relationships, mutual benefit, genuine understanding. You've developed enough self-awareness and discipline to now engage others without losing yourself.</p>
+
+                <p><strong>Habit 7 (Sharpen the Saw) sustains the whole spiral.</strong> Without renewal, you regress. With renewal, you continue to grow.</p>
+
+                <div class="key-idea">
+                    <strong>The Maturity Path:</strong> <br>
+                    Dependence (childhood) → Independence (self-mastery) → Interdependence (mature collaboration) → Renewal (continuous growth)
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">The Three Phases</div>
+                    <p><strong>Phase 1 (Dependence):</strong> "You take care of me." Most people start here and stay here. They blame others, avoid responsibility.<br>
+                    <strong>Phase 2 (Independence):</strong> "I take care of myself." You develop discipline, skills, autonomy. You achieve results alone.<br>
+                    <strong>Phase 3 (Interdependence):</strong> "We take care of each other." You maintain your independence but combine it with others' strengths. You achieve things impossible alone.</p>
+                </div>
+
+                <div class="funny-take">
+                    "Some people never leave Dependence (blaming everyone). Some get to Independence and stop (they think independence = success, so they isolate). The real wins happen when you're so strong in yourself that you don't need to dominate others—you can collaborate. That's rare."
+                </div>
+
+                <div class="ai-connection">
+                    <strong>Multi-Agent AI Systems at Scale:</strong> Single agents are Habit 1-3: autonomous, goal-directed, efficient at specific tasks. Productive systems (Habit 4-6) combine agents with different capabilities, aligned incentives, and genuine information sharing. They achieve what no single agent could. Scaling this requires continuous monitoring and adaptation (Habit 7)—retraining agents, adjusting communication protocols, maintaining system health.
+                </div>
+            </div>
+        </div>
+
+        <!-- Closing Section -->
+        <div class="book-footer">
+            <h3>The 7 Habits as a Living System</h3>
+            <p style="margin-bottom: 20px;">
+                Covey's genius was seeing these habits not as isolated techniques but as an integrated philosophy. Paradigm shift unlocks everything. P/PC balance sustains it. Proactivity drives it. Vision directs it. Priority preserves it. Cooperation multiplies it. Renewal maintains it.
+            </p>
+            <p>
+                Master these habits, and you don't become a high-achiever who burns out. You become effective: sustained, aligned, collaborative, and continuously growing. Whether you're an individual contributor, a leader, or an AI engineer designing multi-agent systems, the principles transcend scale.
+            </p>
+            <p style="margin-top: 30px; font-size: 0.95em; opacity: 0.9;">
+                "The highest act of love is to help other people succeed." — Stephen R. Covey
+            </p>
+        </div>
+    </div>
+</body>
+</html>

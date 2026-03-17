@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impro: Illustrated Guide - Keith Johnstone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.8;
+            background: #fafafa;
+        }
+
+        /* ===== COVER ===== */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--dark) 50%, var(--warm-red) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -150px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(74, 205, 196, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -100px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            color: var(--mint);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .cover-svg {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+
+        .cover-footer {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            margin-top: 2rem;
+        }
+
+        /* ===== PARTICLES ===== */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: drift 20s infinite linear;
+        }
+
+        @keyframes drift {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* ===== LESSONS ===== */
+        .lesson {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            background: linear-gradient(to bottom, #fafafa 0%, white 50%, #fafafa 100%);
+            border-top: 8px solid var(--purple);
+            position: relative;
+        }
+
+        .lesson:nth-child(even) {
+            border-top-color: var(--coral);
+            background: linear-gradient(to bottom, #fafafa 0%, #fff9f5 50%, #fafafa 100%);
+        }
+
+        .lesson:nth-child(3n) {
+            border-top-color: var(--teal);
+            background: linear-gradient(to bottom, #fafafa 0%, #f0fffe 50%, #fafafa 100%);
+        }
+
+        .lesson-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .lesson-badge {
+            display: inline-block;
+            background: var(--purple);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lesson:nth-child(even) .lesson-badge {
+            background: var(--coral);
+        }
+
+        .lesson:nth-child(3n) .lesson-badge {
+            background: var(--teal);
+        }
+
+        .lesson h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+
+        .lesson-flex {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-bottom: 3rem;
+        }
+
+        .illustration-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .illustration-container svg {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+        }
+
+        .lesson-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: white;
+            border-left: 4px solid var(--purple);
+            padding: 1.8rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            margin-bottom: 1.5rem;
+        }
+
+        .card:nth-child(even) {
+            border-left-color: var(--coral);
+        }
+
+        .card:nth-child(3n) {
+            border-left-color: var(--teal);
+        }
+
+        .card-label {
+            display: inline-block;
+            background: var(--purple);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card:nth-child(even) .card-label {
+            background: var(--coral);
+        }
+
+        .card:nth-child(3n) .card-label {
+            background: var(--teal);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        /* ===== SPECIAL BOXES ===== */
+        .funny-box {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--orange) 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .funny-box::before {
+            content: '🎭';
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.1;
+            right: -1rem;
+            top: -1rem;
+        }
+
+        .funny-box h3 {
+            color: var(--warm-red);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .funny-box p {
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+            line-height: 1.8;
+        }
+
+        .ai-box {
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0e6ff 100%);
+            border: 2px solid var(--deep-blue);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .ai-box h3 {
+            color: var(--deep-blue);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ai-box p {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .ai-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .connect-box {
+            background: linear-gradient(135deg, #f0fff4 0%, #fffbf0 100%);
+            border-left: 5px solid var(--forest);
+            padding: 1.8rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .connect-box h4 {
+            color: var(--forest);
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .connect-box p {
+            color: #444;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ===== QUOTE BOX ===== */
+        .quote-box {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--dark) 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            border-left: 5px solid var(--mint);
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            font-size: 5rem;
+            opacity: 0.1;
+            top: -1rem;
+            left: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .quote-text {
+            font-size: 1.4rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* ===== TWO COLUMN ===== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-col,
+            .lesson-flex {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== STORIES ===== */
+        .story {
+            background: linear-gradient(135deg, rgba(160, 108, 213, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            border: 2px dashed var(--purple);
+        }
+
+        .story-inner h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-purple);
+        }
+
+        .story-inner p {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 1.2rem;
+        }
+
+        /* ===== CHEATSHEET ===== */
+        .cheatsheet {
+            background: white;
+            padding: 3rem 2rem;
+            margin: 4rem 0;
+            border-top: 8px solid var(--purple);
+            border-bottom: 8px solid var(--coral);
+        }
+
+        .cheatsheet h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .cheatsheet-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .cheatsheet-item {
+            background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+            padding: 1.8rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--teal);
+        }
+
+        .cheatsheet-item:nth-child(even) {
+            border-left-color: var(--coral);
+        }
+
+        .cheatsheet-item:nth-child(3n) {
+            border-left-color: var(--sunny);
+        }
+
+        .cheatsheet-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .cheatsheet-item ul {
+            list-style: none;
+        }
+
+        .cheatsheet-item li {
+            padding: 0.5rem 0;
+            color: #555;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .cheatsheet-item li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+            font-weight: bold;
+        }
+
+        .cheatsheet-item:nth-child(even) li::before {
+            color: var(--coral);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 4px solid var(--purple);
+        }
+
+        footer p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 2.8rem;
+            }
+
+            .lesson-flex {
+                grid-template-columns: 1fr;
+            }
+
+            .cheatsheet-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .lesson h2 {
+                font-size: 2.2rem;
+            }
+
+            .cover-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- COVER -->
+    <section class="cover">
+        <div class="cover-content">
+            <h1>IMPRO</h1>
+            <p class="cover-subtitle">Improvisation and the Theatre</p>
+            <svg class="cover-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Stage -->
+                <rect x="50" y="150" width="300" height="120" fill="none" stroke="white" stroke-width="3"/>
+                <line x1="50" y1="150" x2="350" y2="150" stroke="white" stroke-width="2"/>
+                <!-- Curtains -->
+                <path d="M 50 80 Q 60 100 50 150" fill="none" stroke="#FF6B6B" stroke-width="8"/>
+                <path d="M 350 80 Q 340 100 350 150" fill="none" stroke="#FF6B6B" stroke-width="8"/>
+                <!-- Comedy/Tragedy Masks -->
+                <circle cx="140" cy="110" r="25" fill="none" stroke="#FFE66D" stroke-width="2"/>
+                <path d="M 135 105 L 145 105" stroke="#FFE66D" stroke-width="2"/>
+                <path d="M 135 115 Q 140 120 145 115" stroke="#FFE66D" stroke-width="2"/>
+                <circle cx="260" cy="110" r="25" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                <path d="M 255 105 L 265 105" stroke="#4ECDC4" stroke-width="2"/>
+                <path d="M 255 115 Q 260 110 265 115" stroke="#4ECDC4" stroke-width="2"/>
+                <!-- Spotlights -->
+                <line x1="80" y1="30" x2="140" y2="140" stroke="#FDCB6E" stroke-width="2" opacity="0.6"/>
+                <line x1="320" y1="30" x2="260" y2="140" stroke="#FDCB6E" stroke-width="2" opacity="0.6"/>
+                <circle cx="200" cy="40" r="15" fill="#FDCB6E" opacity="0.4"/>
+            </svg>
+            <div class="cover-footer">
+                <p>By Keith Johnstone</p>
+                <p>An Illustrated Guide to Human Creativity & Performance</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 1: STATUS TRANSACTIONS -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <span class="lesson-badge">Lesson 1</span>
+            <h2>Status Transactions: The Hidden Game in Every Interaction</h2>
+
+            <div class="lesson-flex">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Two figures with status dynamics -->
+                        <circle cx="100" cy="200" r="30" fill="#A06CD5" opacity="0.7"/>
+                        <rect x="70" y="240" width="60" height="80" fill="#A06CD5" opacity="0.5"/>
+                        <circle cx="300" cy="200" r="30" fill="#4ECDC4" opacity="0.7"/>
+                        <rect x="270" y="240" width="60" height="80" fill="#4ECDC4" opacity="0.5"/>
+                        <!-- Status indicator: height -->
+                        <line x1="100" y1="180" x2="100" y2="140" stroke="#FF6B6B" stroke-width="8"/>
+                        <text x="50" y="130" font-size="14" fill="#FF6B6B" font-weight="bold">HIGH</text>
+                        <!-- Status transaction arrow -->
+                        <path d="M 140 200 L 260 200" stroke="#FFE66D" stroke-width="4" marker-end="url(#arrowhead)"/>
+                        <text x="175" y="190" font-size="12" fill="#FFE66D" font-weight="bold">STATUS SHIFT</text>
+                        <!-- Low status indicator -->
+                        <line x1="300" y1="220" x2="300" y2="260" stroke="#55EFC4" stroke-width="8"/>
+                        <text x="270" y="280" font-size="14" fill="#55EFC4" font-weight="bold">LOW</text>
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#FFE66D"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="card">
+                        <span class="card-label">KEY LESSON</span>
+                        <h3>Every scene is a status negotiation</h3>
+                        <p>Johnstone discovered that human interaction is fundamentally about status transactions. In every exchange, people are playing "high status" (dominant, confident, controlling) or "low status" (deferential, uncertain, accommodating). Great improvisers recognize these micro-transactions and can shift them fluidly.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The CEO and the Janitor</h3>
+                        <p>CEO walks in demanding "Coffee. Now." (high status). Janitor could respond submissively (low status) OR could say "I'm on break" (status assertion). A skilled improviser chooses the transaction that creates the most interesting scene—sometimes low status creates comedy and pathos.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Status seesaws</h3>
+                        <p>In healthy scenes, status shifts back and forth. Character A: "I'm the boss here!" (high). Character B: "Really? Then explain why you're always late" (now B is high). This dance keeps scenes alive. Static status is boring.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The mirror game</h3>
+                        <p>When both players play the same status level (both high or both low), it creates either conflict or weakness. Experienced improvisers notice: If you're already high status, the interesting move is to drop it slightly and let your partner rise. This generosity energizes scenes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h3>🎭 The Funny Take</h3>
+                <p>Johnstone noticed that people who are "blocked" in life often play one status relentlessly. The accountant is always high status at home but low status at work. A truly alive person shifts fluidly. Improvisers who master status can walk into any room and instantly know what game is being played—and how to play a smarter version of it.</p>
+            </div>
+
+            <div class="ai-box">
+                <h3>🤖 AI Connection: Status as Reward Signals</h3>
+                <p>In machine learning, reward signals guide behavior. Status transactions function identically in humans. When you play low status (accepting the other person's frame), you're rewarding their suggestion—you're saying "yes" to their reality. When you play high status, you're overriding their input. Improvisers who understand this intuitively manage reward signals. They know when to reinforce (accept) and when to challenge (block).</p>
+                <p>Large language models learn through reinforcement signals similar to status. When you prompt an AI and it generates something good, you're giving it a positive status signal (acceptance). When you reject output, you're playing high status, asserting your frame. The best human-AI collaboration happens when both parties understand the status dance: accept the AI's offer, let it build, then gently assert your vision.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Cross-Book Connection: Influence by Robert Cialdini</h4>
+                <p>Cialdini's principle of reciprocity and authority operate through status. When someone with high status (authority) makes a request, compliance increases. When you give someone status (make them feel authoritative), they become more persuasive. Johnstone's status game is Cialdini's influence in real time.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">Status is a secret that once learned, cannot be unlearned. You'll see it everywhere.</div>
+                <div class="quote-author">— Keith Johnstone</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 2: BLOCKING VS ACCEPTING -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <span class="lesson-badge">Lesson 2</span>
+            <h2>Blocking vs Accepting: The Foundation of Scene Work</h2>
+
+            <div class="lesson-flex">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- BLOCKING side -->
+                        <g id="blocking">
+                            <rect x="20" y="80" width="140" height="160" fill="#FF6B6B" opacity="0.3" rx="8"/>
+                            <circle cx="90" cy="140" r="25" fill="#FF6B6B"/>
+                            <rect x="75" y="170" width="30" height="60" fill="#FF6B6B"/>
+                            <text x="25" y="280" font-size="16" font-weight="bold" fill="#FF6B6B">BLOCKING</text>
+                            <text x="30" y="305" font-size="12" fill="#666">"No, that's wrong"</text>
+                            <!-- Red X -->
+                            <line x1="130" y1="110" x2="150" y2="130" stroke="#E17055" stroke-width="4"/>
+                            <line x1="150" y1="110" x2="130" y2="130" stroke="#E17055" stroke-width="4"/>
+                        </g>
+
+                        <!-- ACCEPTING side -->
+                        <g id="accepting">
+                            <rect x="240" y="80" width="140" height="160" fill="#55EFC4" opacity="0.3" rx="8"/>
+                            <circle cx="310" cy="140" r="25" fill="#55EFC4"/>
+                            <rect x="295" y="170" width="30" height="60" fill="#55EFC4"/>
+                            <text x="255" y="280" font-size="16" font-weight="bold" fill="#55EFC4">ACCEPTING</text>
+                            <text x="260" y="305" font-size="12" fill="#666">"Yes, and..."</text>
+                            <!-- Green checkmark -->
+                            <polyline points="300,130 310,140 330,110" stroke="#00B894" stroke-width="4" fill="none"/>
+                        </g>
+
+                        <!-- Arrow showing momentum -->
+                        <path d="M 160 240 L 240 240" stroke="#FFE66D" stroke-width="3" marker-end="url(#arrowhead2)"/>
+                        <defs>
+                            <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#FFE66D"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="card">
+                        <span class="card-label">KEY LESSON</span>
+                        <h3>Blocking stops the scene; accepting propels it</h3>
+                        <p>A "block" is any denial of reality. Your scene partner says "Look, a dragon!" and you say "There's no dragon here." You've blocked their offer. Acceptance means: "Yes, I see the dragon, and [I build on it]." Blocking kills momentum; accepting creates infinite possibilities.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The classic block</h3>
+                        <p>Partner: "I love you." You: "No you don't. You barely know me." The scene is now about defending the block rather than exploring the relationship. One person is playing chess; the other is playing checkers. The block creates argument, not story.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The acceptance that transforms</h3>
+                        <p>Partner: "I love you." You: "I know... but I'm leaving tomorrow forever." You accepted the love and added a complication. Now the scene has conflict AND depth. You're building a world together, not defending positions.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Subtle blocks are deadly</h3>
+                        <p>Partner: "I'm a detective." You: "Okay, so what are you investigating?" (block by redirecting). Better: "I'm a detective too—what case are you on?" You're accepting their identity and building parallel reality. Subtle blocks feel like agreement but drain energy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h3>🎭 The Funny Take</h3>
+                <p>In real life, blocking is how we stay sane. Someone says "Let's move to Iceland!" and we block: "That's impractical." But improv teaches us that the block is a choice. A fearless improviser would accept: "Iceland—yes! We leave Friday. What job will you take there?" Suddenly you're in a story, not a debate. Life becomes more improvisational when you accept more offers.</p>
+            </div>
+
+            <div class="ai-box">
+                <h3>🤖 AI Connection: Blocking as Mode Collapse</h3>
+                <p>In neural networks, a "mode collapse" happens when the model gets stuck in one narrow output pattern. It stops exploring the possibility space. Blocking in improv is mode collapse: you've decided the only reality is yours, so you reject all other possibilities. Accepting is like increasing the temperature in language model sampling—you're exploring more of the solution space.</p>
+                <p>When humans block, they reduce the model's exploration space. When they accept and add ("yes, and"), they expand it. Multi-agent AI systems that succeed at complex tasks do so by accepting each other's proposals and building on them. A system that rejects all suggestions from other agents is essentially blocking—and it gets stuck.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Cross-Book Connection: Flow by Mihaly Csikszentmihalyi</h4>
+                <p>Flow happens when you accept the challenge in front of you (accept the game's rules) and build on it. Blocking interrupts flow by creating resistance. When you say "yes" to difficulty, you enter flow; when you say "no, that's not fair," you exit the state. Improv is a masterclass in maintaining flow by accepting the world as it is.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">If someone says "the chair is green" and you say "no it isn't," you've stopped the story dead. And you're arguing about furniture.</div>
+                <div class="quote-author">— Keith Johnstone</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 3: SPONTANEITY AND THE UNCENSORED MIND -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <span class="lesson-badge">Lesson 3</span>
+            <h2>Spontaneity: The Uncensored Mind Performs</h2>
+
+            <div class="lesson-flex">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Brain with two states -->
+                        <circle cx="100" cy="200" r="50" fill="#A06CD5" opacity="0.4"/>
+                        <text x="50" y="210" font-size="14" font-weight="bold" fill="#A06CD5">THINKING</text>
+                        <text x="45" y="230" font-size="11" fill="#666">Self-critical</text>
+                        <text x="45" y="245" font-size="11" fill="#666">Filtered</text>
+
+                        <circle cx="300" cy="200" r="50" fill="#55EFC4" opacity="0.4"/>
+                        <text x="260" y="210" font-size="14" font-weight="bold" fill="#55EFC4">SPONTANEOUS</text>
+                        <text x="260" y="230" font-size="11" fill="#666">Unfiltered</text>
+                        <text x="265" y="245" font-size="11" fill="#666">Alive</text>
+
+                        <!-- Lightning bolt for spontaneity -->
+                        <path d="M 300 80 L 310 140 L 290 150 L 320 210" fill="#FFE66D" opacity="0.6"/>
+
+                        <!-- Obstacle for thinking -->
+                        <rect x="70" y="280" width="60" height="80" fill="#FF6B6B" opacity="0.3"/>
+                        <text x="75" y="330" font-size="12" fill="#FF6B6B">BLOCK</text>
+                    </svg>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="card">
+                        <span class="card-label">KEY LESSON</span>
+                        <h3>The first impulse is the best impulse</h3>
+                        <p>Johnstone taught that the conscious mind (the critic) kills spontaneity. Your first instinct in a scene is pure and authentic. When you pause to think "Is this good? Is this original? Will they like it?"—you've entered the filter zone, and the magic dies. Spontaneity is trusting your unconscious.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The hesitation death</h3>
+                        <p>Scene: Partner says "I think I'm pregnant." Your first impulse: laugh nervously (real, spontaneous). But then you think "Should I laugh? That seems callous." So you get serious. You've just killed the authentic response. The spontaneous laugh would have created depth.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The obvious choice</h3>
+                        <p>Many improvisers reject their first thought because it seems too obvious. "If they say hello, they expect me to say hello back... so I'll say goodbye instead to be original." But the spontaneous hello would have created organic reality. Originality emerges from truth, not from rejection.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Training spontaneity</h3>
+                        <p>Johnstone used exercises where players had to shout the first word that came to mind, make the first movement, accept the first emotion. This silences the critic. Weeks of this training reprogram the brain: spontaneous becomes safe, and the filter loosens.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h3>🎭 The Funny Take</h3>
+                <p>We spend years being told "think before you speak," and then improvisers spend years unlearning that. Education teaches us that the unfiltered impulse is dangerous. But Johnstone discovered: the filtered impulse is boring. The unfiltered impulse is where all the truth lives. Your uncensored self is way more interesting than your polite self.</p>
+            </div>
+
+            <div class="ai-box">
+                <h3>🤖 AI Connection: Spontaneity as Temperature in Sampling</h3>
+                <p>Language models have a "temperature" parameter. Low temperature = the model picks the most probable next word (safe, boring, repetitive). High temperature = the model explores unlikely words (creative, sometimes chaotic). Spontaneity is high temperature. When humans filter (censor), they're lowering the temperature. When they trust their first impulse, they're running hot.</p>
+                <p>The paradox: both too-low and too-high temperature produce garbage. LLMs need calibration. So do humans. Johnstone's insight is that most people run too cold. The uncensored mind isn't a random mess—it's pre-trained on millions of genuine human interactions, so the first impulse is actually quite refined. You can trust it more than you think.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Cross-Book Connection: Mindset by Carol Dweck</h4>
+                <p>Growth mindset embraces the mistake as part of learning. A fixed mindset filters impulses to avoid mistakes. Spontaneity requires growth mindset: the willingness to say the weird thing and learn from it. Johnstone's spontaneity is Dweck's growth mindset in action.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">If you block your first thoughts, you'll always be boring.</div>
+                <div class="quote-author">— Keith Johnstone</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 4: HOW EDUCATION DESTROYS CREATIVITY -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <span class="lesson-badge">Lesson 4</span>
+            <h2>Education Destroys Creativity: The Unschooling Paradox</h2>
+
+            <div class="lesson-flex">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Child on left (creative) -->
+                        <circle cx="80" cy="120" r="30" fill="#FFE66D" opacity="0.7"/>
+                        <path d="M 80 160 L 80 220 M 60 180 L 100 180" stroke="#FFE66D" stroke-width="3"/>
+                        <text x="40" y="270" font-size="14" font-weight="bold" fill="#FFE66D">AGE 5</text>
+                        <text x="30" y="290" font-size="11" fill="#666">Fearless</text>
+                        <text x="30" y="305" font-size="11" fill="#666">Spontaneous</text>
+
+                        <!-- Downward arrow through school -->
+                        <path d="M 80 320 L 80 350" stroke="#E17055" stroke-width="4"/>
+
+                        <!-- School effect -->
+                        <rect x="30" y="350" width="100" height="30" fill="#E17055" opacity="0.2" rx="4"/>
+                        <text x="45" y="370" font-size="12" fill="#E17055" font-weight="bold">SCHOOL</text>
+
+                        <!-- Adult on right (filtered) -->
+                        <circle cx="320" cy="120" r="30" fill="#A06CD5" opacity="0.5"/>
+                        <path d="M 320 160 L 320 220 M 300 180 L 340 180" stroke="#A06CD5" stroke-width="2"/>
+                        <text x="290" y="270" font-size="14" font-weight="bold" fill="#A06CD5">AGE 25</text>
+                        <text x="280" y="290" font-size="11" fill="#666">Self-conscious</text>
+                        <text x="280" y="305" font-size="11" fill="#666">Filtered</text>
+
+                        <!-- The filter device -->
+                        <rect x="300" y="340" width="40" height="40" fill="#FF6B6B" opacity="0.5" rx="4"/>
+                        <text x="305" y="368" font-size="10" fill="#FF6B6B" font-weight="bold">FILTER</text>
+                    </svg>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="card">
+                        <span class="card-label">KEY LESSON</span>
+                        <h3>Schools teach compliance, not creativity</h3>
+                        <p>Children are naturally creative—they play, imagine, explore without self-consciousness. Then school teaches them: follow the rules, give the correct answer, don't embarrass yourself. By adulthood, the spontaneous child has been conditioned into a self-censoring adult. Education doesn't build creativity; it crushes it.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The "right" answer trap</h3>
+                        <p>Teacher asks: "What's a use for a brick?" Child: "A time machine!" Teacher: "No, it's building material." The child learns: weird ideas are wrong. By high school, students have internalized this so deeply they can't access their original thoughts. They know only the teacher's expected answers.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Performance anxiety is trained</h3>
+                        <p>Young kids perform unselfconsciously. Around age 7-8, after years of grades and judgment, they become afraid. "What if I'm bad?" "What if people laugh?" The fear is learned. Education teaches you to fear judgment, and so creativity—which requires risk—becomes dangerous.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The unlearning process</h3>
+                        <p>Johnstone's improv students spend months unlearning school. They have to re-learn that their first impulse is valid, that "wrong" answers are interesting, that vulnerability isn't weakness. Essentially, they're de-schooling themselves back to the five-year-old mind.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h3>🎭 The Funny Take</h3>
+                <p>Parents say "Get good grades so you can succeed." But success in improv (and many creative fields) requires unlearning everything that got you good grades. The straight-A student often makes the worst improviser because they're too invested in being "correct." Meanwhile, the kid who never fit in? That kid can play.</p>
+            </div>
+
+            <div class="ai-box">
+                <h3>🤖 AI Connection: Fine-tuning as Over-Optimization</h3>
+                <p>Large language models start with broad, creative capabilities (pre-training). Then we fine-tune them on labeled data to be "helpful, harmless, honest." This is analogous to education: we're teaching the model "the right answers." The model becomes better at the specific task but less creative overall. It's now optimized for compliance, not exploration.</p>
+                <p>Johnstone's critique of education applies directly to AI training. If you over-fine-tune for correctness, you lose the ability to generate novel solutions. The best AI systems maintain some "temperature" — some degree of exploration — even after training. They aren't fully optimized into a corner.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Cross-Book Connection: Mindset by Carol Dweck</h4>
+                <p>Fixed mindset (cultivated by traditional education) says "Your abilities are fixed; avoid challenges to protect your competence." Growth mindset says "Mistakes are learning." Johnstone argues that education instills fixed mindset. Unlearning it—embracing spontaneity—is adopting growth mindset.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">Schools teach you to be afraid of being wrong. Improvisation is about being wrong cheerfully.</div>
+                <div class="quote-author">— Keith Johnstone (paraphrased)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 5: MASK WORK AND TRANCE STATES -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <span class="lesson-badge">Lesson 5</span>
+            <h2>Mask Work: Accessing the Uncensored Self</h2>
+
+            <div class="lesson-flex">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Three stages -->
+                        <!-- Without mask (self-conscious) -->
+                        <circle cx="60" cy="100" r="25" fill="#A06CD5" opacity="0.6"/>
+                        <path d="M 60 130 L 60 170 M 40 150 L 80 150" stroke="#A06CD5" stroke-width="2"/>
+                        <text x="35" y="200" font-size="12" fill="#A06CD5" font-weight="bold">UNMASKED</text>
+                        <text x="30" y="220" font-size="10" fill="#666">Self-aware</text>
+
+                        <!-- With mask (liberated) -->
+                        <circle cx="200" cy="100" r="25" fill="#4ECDC4" opacity="0.7"/>
+                        <!-- Theatrical mask -->
+                        <path d="M 200 75 Q 185 90 190 110 Q 200 120 210 110 Q 215 90 200 75" fill="#FDCB6E" stroke="#dark" stroke-width="1"/>
+                        <text x="180" y="200" font-size="12" fill="#4ECDC4" font-weight="bold">MASKED</text>
+                        <text x="175" y="220" font-size="10" fill="#666">Liberated</text>
+
+                        <!-- Trance state (dissolved) -->
+                        <circle cx="340" cy="100" r="25" fill="#FF6B6B" opacity="0.6"/>
+                        <circle cx="340" cy="100" r="20" fill="none" stroke="#FF6B6B" stroke-width="1" stroke-dasharray="3,3"/>
+                        <text x="315" y="200" font-size="12" fill="#FF6B6B" font-weight="bold">TRANCE</text>
+                        <text x="310" y="220" font-size="10" fill="#666">Unself-conscious</text>
+
+                        <!-- Performance energy -->
+                        <path d="M 90 150 L 160 150" stroke="#FFE66D" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        <path d="M 230 150 L 300 150" stroke="#FFE66D" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+                        <defs>
+                            <marker id="arrowhead3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#FFE66D"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="card">
+                        <span class="card-label">KEY LESSON</span>
+                        <h3>The mask gives permission to be yourself</h3>
+                        <p>When an actor puts on a mask, something strange happens: they become MORE themselves, not less. The mask is permission. It says "This isn't me being judged; this is a character." And so the actor can be wilder, more honest, more vulnerable than they ever could unmasked. The mask paradoxically liberates authenticity.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The shy student</h3>
+                        <p>A quiet student who never speaks up in class puts on a commedia dell'arte mask. Instantly, they're performing with wild physicality and vocal freedom. Remove the mask, and they're shy again. The mask didn't change their abilities—it changed their permission structure. It gave them access to capabilities they already had.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Trance as performer's tool</h3>
+                        <p>The best masked performances happen when the performer enters a light trance—they stop thinking and just move. The mask, the music, the audience all induce a hypnotic state where self-consciousness dissolves. In trance, there's no inner critic, just impulse and action.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The psychological relief</h3>
+                        <p>Actors often report feeling emotionally relieved after playing characters that are nothing like them. The mask is therapy. You can express things through the character that your everyday self can't. The character becomes a container for the real you that society won't allow.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h3>🎭 The Funny Take</h3>
+                <p>We're all wearing masks—social masks, professional masks, family masks. But we pretend they're not there. Johnstone's insight: acknowledge the mask and you liberate yourself. You can play with it. A therapist is literally just someone who helps you look at your masks and ask "Do I still want to wear that one?" The best performers do this consciously. They choose their masks and change them at will.</p>
+            </div>
+
+            <div class="ai-box">
+                <h3>🤖 AI Connection: Personas and Role Prompting</h3>
+                <p>When you prompt an AI with "You are a pirate chef," you're putting a digital mask on the model. And something remarkable happens: the model generates more creative, consistent outputs. The persona creates constraints (in a good way) that actually expand performance. "Be yourself" often produces generic output. "Be a bitter 16th-century cartographer" produces specific, vivid responses.</p>
+                <p>Johnstone understood that the mask isn't restrictive—it's enabling. Constraints create creativity. A persona gives the model (or the performer) permission to commit fully to a specific energy. Without the mask, both humans and AI tend toward the middle, the safe, the generic.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Cross-Book Connection: The Moth Real Stories</h4>
+                <p>The Moth celebrates vulnerability in storytelling. But vulnerability is easier when you frame it as narrative, as story—a kind of mask. "Let me tell you a story about the time I failed" is less exposing than "I'm a failure." The frame (the mask) makes honesty possible.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">The mask is not a disguise. It's a liberation.</div>
+                <div class="quote-author">— Keith Johnstone</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 6: NARRATIVE SKILLS -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <span class="lesson-badge">Lesson 6</span>
+            <h2>Narrative Skills: Structuring Spontaneity</h2>
+
+            <div class="lesson-flex">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Story arc -->
+                        <path d="M 40 300 L 80 200 L 150 180 L 220 200 L 280 100 L 340 250"
+                              fill="none" stroke="#A06CD5" stroke-width="4"/>
+
+                        <!-- Story elements -->
+                        <circle cx="40" cy="300" r="12" fill="#FFE66D"/>
+                        <text x="20" y="330" font-size="11" fill="#FFE66D" font-weight="bold">SETUP</text>
+
+                        <circle cx="150" cy="180" r="12" fill="#4ECDC4"/>
+                        <text x="130" y="160" font-size="11" fill="#4ECDC4" font-weight="bold">CONFLICT</text>
+
+                        <circle cx="280" cy="100" r="12" fill="#FF6B6B"/>
+                        <text x="265" y="80" font-size="11" fill="#FF6B6B" font-weight="bold">CLIMAX</text>
+
+                        <circle cx="340" cy="250" r="12" fill="#55EFC4"/>
+                        <text x="320" y="280" font-size="11" fill="#55EFC4" font-weight="bold">RESOLUTION</text>
+
+                        <!-- Pattern repetition arrows -->
+                        <path d="M 50 350 L 50 370 L 350 370 L 350 350" fill="none" stroke="#FDCB6E" stroke-width="2" stroke-dasharray="3,3"/>
+                        <text x="150" y="390" font-size="11" fill="#FDCB6E" font-weight="bold">PATTERN: SETUP, OFFER, ACCEPT, BUILD, HEIGHTEN</text>
+                    </svg>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="card">
+                        <span class="card-label">KEY LESSON</span>
+                        <h3>Stories have unconscious structures</h3>
+                        <p>Johnstone discovered that storytelling isn't random. There are deep patterns in how humans construct narrative: setup (establish who/what), conflict (something is at stake), climax (the moment of truth), resolution (how it ends). These patterns are so fundamental that good improvisers internalize them without thinking, just like breathing.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The pattern of heightening</h3>
+                        <p>Scene: "My car won't start." Partner: "That's because the aliens stole the engine." You: "Aliens? The ones from the news last week?" (accepting and building). "And they're coming back tonight for more parts?" (heightening). Each addition raises stakes. This is narrative structure emerging spontaneously.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The callback</h3>
+                        <p>In Act 1, a character mentions their fear of birds. In Act 3, a pigeon enters the scene. The pattern completes. Audiences don't consciously know this is narrative structure, but they feel it. Pattern recognition is how humans find meaning. Skilled improvisers plant patterns and pay them off.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The three-beat structure</h3>
+                        <p>First beat: establish the game. Second beat: complicate it. Third beat: peak or transform it. This rhythm is invisible but structural. Amateurs do beats endlessly; professionals know when to cap it. The audience senses completion and feels satisfied.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h3>🎭 The Funny Take</h3>
+                <p>We think of storytelling as creative, free-form, artistic. But Johnstone saw it's actually constrained by deep patterns. And that's the paradox: constraints create freedom. When you internalize story structure, you can improvise within it seamlessly. It's like jazz—musicians know the form so well they can abandon it and it still swings.</p>
+            </div>
+
+            <div class="ai-box">
+                <h3>🤖 AI Connection: Narrative as Sequence Modeling</h3>
+                <p>Language models are sequence models—they predict the next token given previous tokens. Narrative is also sequence modeling: given "setup," what comes next? Given "conflict," what comes next? The model learns patterns from training data, just as an improviser internalizes story patterns from a lifetime of stories heard and told.</p>
+                <p>Johnstone's insight about narrative structure maps directly to how transformers work. The pattern in "Once upon a time..." predicts certain types of next sequences. The pattern in "But then..." predicts conflict or complication. Good storytelling (human or machine) is fluent prediction of meaningful sequences. The difference: humans can feel when a sequence is true, even if it's unlikely.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Cross-Book Connection: The Moth Real Stories</h4>
+                <p>The Moth collections show that the best true stories follow narrative structure invisibly. The best tellers don't announce the structure—they let it emerge. Johnstone teaches performers to do the same: let the pattern work below consciousness.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">When you know the structure, you can forget about it and just play.</div>
+                <div class="quote-author">— Keith Johnstone</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 7: YES AND -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <span class="lesson-badge">Lesson 7</span>
+            <h2>"Yes, And..." The Foundation of Ensemble</h2>
+
+            <div class="lesson-flex">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Three levels of response -->
+                        <!-- NO -->
+                        <g>
+                            <rect x="20" y="50" width="100" height="80" fill="#E17055" opacity="0.3" rx="6"/>
+                            <text x="45" y="100" font-size="18" font-weight="bold" fill="#E17055">NO</text>
+                            <text x="30" y="130" font-size="11" fill="#666">Kills the scene</text>
+                            <text x="30" y="145" font-size="11" fill="#666">Blocks partner</text>
+                        </g>
+
+                        <!-- YES -->
+                        <g>
+                            <rect x="150" y="50" width="100" height="80" fill="#FFE66D" opacity="0.3" rx="6"/>
+                            <text x="175" y="100" font-size="18" font-weight="bold" fill="#FFE66D">YES</text>
+                            <text x="155" y="130" font-size="11" fill="#666">Accepts</text>
+                            <text x="155" y="145" font-size="11" fill="#666">Feels safe</text>
+                        </g>
+
+                        <!-- YES AND -->
+                        <g>
+                            <rect x="280" y="50" width="100" height="80" fill="#55EFC4" opacity="0.3" rx="6"/>
+                            <text x="290" y="95" font-size="16" font-weight="bold" fill="#55EFC4">YES,</text>
+                            <text x="290" y="115" font-size="16" font-weight="bold" fill="#55EFC4">AND...</text>
+                            <text x="285" y="145" font-size="11" fill="#666">Builds together</text>
+                        </g>
+
+                        <!-- Momentum -->
+                        <path d="M 120 130 L 150 130" stroke="#FFE66D" stroke-width="3" marker-end="url(#arrowhead4)"/>
+                        <path d="M 250 130 L 280 130" stroke="#FFE66D" stroke-width="3" marker-end="url(#arrowhead4)"/>
+
+                        <!-- Exponential growth -->
+                        <path d="M 380 180 Q 350 250 280 300" fill="none" stroke="#4ECDC4" stroke-width="4" marker-end="url(#arrowhead5)"/>
+                        <text x="320" y="280" font-size="12" fill="#4ECDC4" font-weight="bold">EXPONENTIAL</text>
+                        <text x="310" y="300" font-size="12" fill="#4ECDC4" font-weight="bold">GROWTH</text>
+
+                        <defs>
+                            <marker id="arrowhead4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#FFE66D"/>
+                            </marker>
+                            <marker id="arrowhead5" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#4ECDC4"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="card">
+                        <span class="card-label">KEY LESSON</span>
+                        <h3>Yes, And is the engine of co-creation</h3>
+                        <p>"Yes, And" is the rule that powers improv. You accept your partner's offer (yes) and contribute something new (and). This simple formula creates exponential possibility. Without "and," you're just agreeing. Without "yes," you're blocking. Together, they're the technology of ensemble.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The escalation</h3>
+                        <p>A: "I've decided to become a monk." B: "That's great! You'll need a robe." A: "A purple robe, made from the silk of enlightened spiders." B: "And we'll get it from the monastery in Peru." Each "and" doubles the world. What started as monk becomes enlightened spiders becomes Peruvian monasteries.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The partnership feeling</h3>
+                        <p>When both players are genuinely doing "yes, and," there's a palpable harmony. You're not competing for control; you're building together. This feeling is what makes improv magical and what makes teams function. It's the opposite of hierarchical: it's mutual creation.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>And is the hardest part</h3>
+                        <p>Many improvisers can "yes," but struggle with "and." They accept ("Yes, you're a monk") but don't contribute ("And... uh..."). The fear is that your addition won't be good. But Johnstone teaches: any addition is better than no addition. The "and" is your power.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h3>🎭 The Funny Take</h3>
+                <p>In real life, "yes, but..." is the death phrase. Someone suggests something, and you say "Yes, but that won't work because..." You've accepted and immediately negated. Johnstone noticed that people do this constantly in life, and it kills collaboration. Switching to "yes, and" in real conversation rewires how you work with others. Try it in a meeting: instead of defending your position, add to what the other person said. It's terrifying at first and then it's liberating.</p>
+            </div>
+
+            <div class="ai-box">
+                <h3>🤖 AI Connection: Attention Mechanisms and Co-attention</h3>
+                <p>"Yes" in improv is like attention: you're attending to and accepting what your partner said. "And" is like generation: you're adding new information. In transformer models, attention mechanisms let the model focus on relevant inputs (yes), and then the feed-forward network generates new outputs (and). Multi-head attention allows different heads to attend to different aspects—different improvisers in different scenes, all saying yes to different elements and adding different things.</p>
+                <p>The best multi-agent AI systems work by mutual attention and contribution—exactly like "yes, and." Each agent attends to others' outputs and generates its own contribution. Systems that work competitively (my output must be better than yours) fail. Systems that collaborate (yes to your idea, and here's mine) scale.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Cross-Book Connection: The Moth Real Stories</h4>
+                <p>The best Moth stories feel like conversations with the audience. The storyteller does "yes, and" with the audience's reactions. A laugh? And you lean into the humor. Quiet attention? And you deepen the pathos. The story is co-created.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">If you say "yes, but," you're saying "I don't trust you." If you say "yes, and," you're saying "Let's see where this goes together."</div>
+                <div class="quote-author">— Keith Johnstone</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 8: BEING CHANGED BY THE SCENE -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <span class="lesson-badge">Lesson 8</span>
+            <h2>Being Changed by the Scene: The Performer's Surrender</h2>
+
+            <div class="lesson-flex">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Before and after transformation -->
+                        <!-- Before -->
+                        <g id="before">
+                            <circle cx="100" cy="120" r="35" fill="#A06CD5" opacity="0.6"/>
+                            <rect x="65" y="160" width="70" height="100" fill="#A06CD5" opacity="0.4"/>
+                            <text x="75" y="290" font-size="13" fill="#A06CD5" font-weight="bold">ORIGINAL</text>
+                            <text x="65" y="310" font-size="10" fill="#666">Plan: Be witty</text>
+                        </g>
+
+                        <!-- Arrow of transformation -->
+                        <path d="M 140 200 L 260 200" fill="none" stroke="#FFE66D" stroke-width="5"/>
+                        <text x="175" y="190" font-size="11" fill="#FFE66D" font-weight="bold">SCENE UNFOLDS</text>
+
+                        <!-- After -->
+                        <g id="after">
+                            <circle cx="300" cy="120" r="35" fill="#4ECDC4" opacity="0.7"/>
+                            <rect x="265" y="160" width="70" height="100" fill="#4ECDC4" opacity="0.4"/>
+                            <text x="280" y="290" font-size="13" fill="#4ECDC4" font-weight="bold">TRANSFORMED</text>
+                            <text x="270" y="310" font-size="10" fill="#666">Became: Sad hero</text>
+                        </g>
+
+                        <!-- Spiral of growth -->
+                        <path d="M 200 340 Q 150 360 120 320 Q 100 280 140 250 Q 180 240 200 280"
+                              fill="none" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="3,3" opacity="0.5"/>
+                    </svg>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="card">
+                        <span class="card-label">KEY LESSON</span>
+                        <h3>Surrender to the logic of the scene</h3>
+                        <p>Improvisers who are attached to their plan ("I'm going to be funny") get in trouble. Great improvisers have a plan but then let the scene change it. As the scene develops—maybe you're no longer witty, maybe you're desperate and sad—you follow. You're being shaped by interaction. This surrender is what makes scenes feel real.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The wrong character choice</h3>
+                        <p>You planned to be a confident salesman. But your partner is playing terrified. If you stick to confident, you'll bully them and the scene dies. A good improviser feels the scene shift and becomes protective instead. The character transforms. The audience feels the authentic change and it reads as depth.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Vulnerability emerging</h3>
+                        <p>A scene about a job interview starts out corporate. But then the interviewer hears the applicant's story and gets moved. The character becomes human. This shift—from professional mask to genuine emotion—happened because the improviser surrendered to the scene's emotional trajectory, not a plan.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The paradox of control</h3>
+                        <p>Improvisers who try to control the scene (sticking to their plan) have weak scenes. Improvisers who let go of control (surrender to what's happening) have strong scenes. This is counterintuitive: less control = better results. But it's true because the scene has its own logic, and fighting it is always losing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h3>🎭 The Funny Take</h3>
+                <p>This applies to life. People have plans for who they're going to be, and then life happens. The flexible person who can let their plan change in response to reality does better than the person who rigidly clings to their original design. Improvisers practice this consciously. They're training themselves to be responsive rather than rigid. It's a superpower in a changing world.</p>
+            </div>
+
+            <div class="ai-box">
+                <h3>🤖 AI Connection: Gradient Descent and Adaptation</h3>
+                <p>Neural networks learn through backpropagation—they adjust weights based on error signals from the environment. Being changed by the scene is like backprop: you're updating your internal model based on signals from your partner. A rigid agent that won't update its weights gets stuck; an adaptive agent that updates continuously learns.</p>
+                <p>In reinforcement learning, agents that are too committed to their initial policy fail in changing environments. The winning agents are those that explore, sense feedback, and adapt. Johnstone's improv principle is identical: don't be committed to your original move; be committed to responding to what's happening.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Cross-Book Connection: Mindset by Carol Dweck</h4>
+                <p>Growth mindset means being changed by challenge. Fixed mindset means defending your original abilities. In improv, growth mindset performers welcome being surprised and transformed. Fixed mindset performers try to prove they were right in their original choice.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">If you're attached to your plan, you'll miss the scene.</div>
+                <div class="quote-author">— Keith Johnstone</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 9: MAKING YOUR PARTNER LOOK GOOD -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <span class="lesson-badge">Lesson 9</span>
+            <h2>Making Your Partner Look Good: The Generosity Principle</h2>
+
+            <div class="lesson-flex">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Two performers -->
+                        <!-- Generous performer -->
+                        <circle cx="100" cy="120" r="30" fill="#55EFC4" opacity="0.7"/>
+                        <rect x="70" y="160" width="60" height="80" fill="#55EFC4" opacity="0.5"/>
+                        <!-- Gesture of support -->
+                        <path d="M 130 200 L 170 200" stroke="#55EFC4" stroke-width="4"/>
+                        <text x="60" y="270" font-size="12" fill="#55EFC4" font-weight="bold">GENEROUS</text>
+
+                        <!-- Spotlight on partner -->
+                        <circle cx="300" cy="120" r="35" fill="#FFE66D" opacity="0.8"/>
+                        <rect x="265" y="160" width="70" height="80" fill="#FFE66D" opacity="0.6"/>
+                        <circle cx="300" cy="120" r="50" fill="none" stroke="#FFE66D" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+                        <text x="270" y="270" font-size="12" fill="#FFE66D" font-weight="bold">PARTNER</text>
+                        <text x="265" y="290" font-size="10" fill="#FFE66D">(SPOTLIGHT)</text>
+
+                        <!-- Energy flow -->
+                        <path d="M 130 150 Q 200 100 270 150" fill="none" stroke="#FD79A8" stroke-width="3"/>
+                        <text x="155" y="110" font-size="11" fill="#FD79A8" font-weight="bold">ENERGY SUPPORT</text>
+                    </svg>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="card">
+                        <span class="card-label">KEY LESSON</span>
+                        <h3>Your job is to make your partner brilliant</h3>
+                        <p>The paradox: if you're focused on making yourself look good, you'll look mediocre. If you're focused on making your partner look good, you both look brilliant. This is because generosity creates trust, and trust creates space for real performance. When a performer knows their partner has their back, they can take risks.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The setup and the punchline</h3>
+                        <p>A good improviser knows: the best position is not the punchline, it's the setup. The setup makes the punchline possible. When you generously do the setup work, your partner gets the laugh. You look good because you're smart enough to know that generosity compounds. Everyone benefits.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Listening as gift</h3>
+                        <p>When you truly listen to your partner (not planning your next line), they feel heard. That safety makes them braver. They go deeper. And then their scene is more powerful. Your gift was attention, and it made them perform better.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The spotlight shift</h3>
+                        <p>A scene is about two people. A selfish performer tries to stay in the spotlight. A generous performer shifts the spotlight to their partner when it serves the scene. The audience notices this kindness, even subconsciously, and respects both performers more.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h3>🎭 The Funny Take</h3>
+                <p>This is the secret to charisma. Charismatic people aren't trying to be impressive; they're making the other person feel impressive. In improv terms: they're making their scene partner look good. And so everyone around them wants to work with them. Generosity is literally the most selfish thing you can do, because it creates loyalty and reputation.</p>
+            </div>
+
+            <div class="ai-box">
+                <h3>🤖 AI Connection: Cooperative Multi-Agent Systems</h3>
+                <p>In game theory and multi-agent AI, agents that cooperate (making other agents look good, succeeding together) outperform agents that compete. A system where each agent tries to maximize its own score fails. A system where agents try to help each other succeed—that's the winning strategy.</p>
+                <p>Johnstone's principle maps directly: in a multi-agent model, the agent that supports the other agent's success also increases overall system performance. The paradox is that by prioritizing your partner's success, you maximize your own. This is the principle underlying successful AI collaboration frameworks.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Cross-Book Connection: Influence by Robert Cialdini</h4>
+                <p>Cialdini's principle of liking says: we like people who like us. In improv, generosity (making your partner look good) communicates that you like them. They reciprocate by supporting your brilliance. Mutual liking amplifies both performances.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">If you want to be a star, make everyone else shine first.</div>
+                <div class="quote-author">— Keith Johnstone</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 10: FAILING CHEERFULLY -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <span class="lesson-badge">Lesson 10</span>
+            <h2>Failing Cheerfully: The Courage of Improv</h2>
+
+            <div class="lesson-flex">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Anxious performer -->
+                        <circle cx="80" cy="100" r="30" fill="#A06CD5" opacity="0.6"/>
+                        <path d="M 80 140 L 80 200 M 60 160 L 100 160" stroke="#A06CD5" stroke-width="3"/>
+                        <path d="M 65 130 L 75 130 M 85 130 L 95 130" stroke="#E17055" stroke-width="2"/>
+                        <text x="55" y="250" font-size="12" fill="#E17055" font-weight="bold">FEAR</text>
+                        <text x="45" y="270" font-size="10" fill="#666">Afraid to fail</text>
+
+                        <!-- Arrow of transformation -->
+                        <path d="M 120 150 L 260 150" stroke="#FFE66D" stroke-width="4" marker-end="url(#arrowhead6)"/>
+
+                        <!-- Brave performer after failure -->
+                        <circle cx="320" cy="100" r="30" fill="#55EFC4" opacity="0.7"/>
+                        <path d="M 320 140 L 320 200 M 300 160 L 340 160" stroke="#55EFC4" stroke-width="3"/>
+                        <path d="M 310 130 Q 320 140 330 130" stroke="#00B894" stroke-width="2"/>
+                        <text x="295" y="250" font-size="12" fill="#00B894" font-weight="bold">FREEDOM</text>
+                        <text x="290" y="270" font-size="10" fill="#666">Willing to fail</text>
+
+                        <!-- Growth indicator -->
+                        <path d="M 80 310 L 320 310" stroke="#FD79A8" stroke-width="3" marker-end="url(#arrowhead7)"/>
+                        <text x="170" y="330" font-size="11" fill="#FD79A8" font-weight="bold">GROWTH TRAJECTORY</text>
+
+                        <defs>
+                            <marker id="arrowhead6" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#FFE66D"/>
+                            </marker>
+                            <marker id="arrowhead7" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#FD79A8"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="card">
+                        <span class="card-label">KEY LESSON</span>
+                        <h3>Failure is data, not judgment</h3>
+                        <p>Improvisers who are afraid to fail play it safe and boring. Improvisers who accept failure as part of the process take risks and create brilliance. The shift in mindset: a bad scene isn't a statement about your worth. It's feedback about what works. Cheerful failure is how you learn.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The joke that doesn't land</h3>
+                        <p>You try something bold and weird. Silence instead of laughter. An anxious improviser dies internally and plays small for the rest of the show. A cheerful improviser thinks "Okay, that word choice didn't work" and adjusts next time. Same failure; different relationship to it.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Permission to be bad</h3>
+                        <p>The best improvisers give themselves permission to bomb. And so they take risks that timid improvisers won't. Those risks sometimes fail, but sometimes they create miracles. A willingness to fail is actually a competitive advantage.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Recovering with grace</h3>
+                        <p>When a scene goes wrong, the good improviser doesn't pretend it didn't happen. They acknowledge it cheerfully and pivot. The audience respects the honesty more than they care about the initial failure. This is recovery and it's a skill.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h3>🎭 The Funny Take</h3>
+                <p>We're taught that failure is shameful. But improvisers learn that failure is entertainment and education. The worst scenes are often the most fun to talk about afterward because there's so much to learn. People who never fail are never really learning—they're just executing a predetermined script. Improvisers who fail cheerfully are living scientists.</p>
+            </div>
+
+            <div class="ai-box">
+                <h3>🤖 AI Connection: Training Through Error Signals</h3>
+                <p>Neural networks learn through backpropagation: the error signal (how wrong the prediction was) drives learning. If there's no error, there's no learning signal. Cheerfully failing is like providing rich error signals to yourself. You try something, it doesn't work, you update your model. That's learning.</p>
+                <p>Agents that are penalized for any failure become risk-averse and suboptimal. Agents that treat failure as learning signal become adaptive and capable. Johnstone's principle: cheerful failure is the same as a well-tuned learning rate. It's how you stay in the sweet spot of exploration and exploitation.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Cross-Book Connection: Mindset by Carol Dweck</h4>
+                <p>Growth mindset embraces failure as information. Fixed mindset sees failure as permanent identity. Johnstone's cheerful failure is the lived practice of growth mindset. You fail, you note it, you move on. No shame, just data.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">The willingness to fail is the willingness to learn.</div>
+                <div class="quote-author">— Keith Johnstone</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 11: THE AUDIENCE WANTS YOU TO SUCCEED -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <span class="lesson-badge">Lesson 11</span>
+            <h2>The Audience Wants You to Succeed: The Gift of Goodwill</h2>
+
+            <div class="lesson-flex">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Performer on stage -->
+                        <rect x="140" y="50" width="120" height="100" fill="none" stroke="#FDCB6E" stroke-width="3"/>
+                        <circle cx="200" cy="100" r="20" fill="#A06CD5" opacity="0.7"/>
+                        <path d="M 200 120 L 200 160 M 180 140 L 220 140" stroke="#A06CD5" stroke-width="2"/>
+                        <text x="165" y="180" font-size="11" fill="#A06CD5" font-weight="bold">PERFORMER</text>
+
+                        <!-- Audience -->
+                        <!-- Row 1 -->
+                        <circle cx="60" cy="250" r="12" fill="#4ECDC4" opacity="0.6"/>
+                        <circle cx="120" cy="260" r="12" fill="#4ECDC4" opacity="0.6"/>
+                        <circle cx="180" cy="255" r="12" fill="#4ECDC4" opacity="0.6"/>
+                        <circle cx="240" cy="260" r="12" fill="#4ECDC4" opacity="0.6"/>
+                        <circle cx="300" cy="250" r="12" fill="#4ECDC4" opacity="0.6"/>
+                        <circle cx="360" cy="260" r="12" fill="#4ECDC4" opacity="0.6"/>
+
+                        <!-- Row 2 -->
+                        <circle cx="80" cy="310" r="12" fill="#4ECDC4" opacity="0.6"/>
+                        <circle cx="140" cy="320" r="12" fill="#4ECDC4" opacity="0.6"/>
+                        <circle cx="200" cy="315" r="12" fill="#4ECDC4" opacity="0.6"/>
+                        <circle cx="260" cy="320" r="12" fill="#4ECDC4" opacity="0.6"/>
+                        <circle cx="320" cy="310" r="12" fill="#4ECDC4" opacity="0.6"/>
+
+                        <!-- Goodwill arrows -->
+                        <path d="M 80 290 L 190 180" stroke="#55EFC4" stroke-width="2" opacity="0.4" marker-end="url(#arrowhead8)"/>
+                        <path d="M 200 330 L 200 180" stroke="#55EFC4" stroke-width="2" opacity="0.4" marker-end="url(#arrowhead8)"/>
+                        <path d="M 340 290 L 210 180" stroke="#55EFC4" stroke-width="2" opacity="0.4" marker-end="url(#arrowhead8)"/>
+
+                        <text x="150" y="370" font-size="12" fill="#4ECDC4" font-weight="bold">AUDIENCE (GOODWILL)</text>
+
+                        <defs>
+                            <marker id="arrowhead8" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#55EFC4"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="card">
+                        <span class="card-label">KEY LESSON</span>
+                        <h3>The audience is rooting for you</h3>
+                        <p>Johnstone made a radical observation: audiences show up wanting the performers to succeed. They've paid money or given time. They *want* to have fun. This is a gift. If you perform with the assumption that the audience is against you, you'll be defensive and closed. If you trust their goodwill, you can be open and generous.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Anxiety reversal</h3>
+                        <p>An anxious performer thinks "What if they don't like me?" The reframe: "They came here hoping to like this. They want me to be good. I can trust that." This changes everything. Instead of defending against judgment, you're receiving support.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Vulnerability becomes connection</h3>
+                        <p>A performer makes a mistake on stage. They can hide it (seems defensive, kills trust). Or they can acknowledge it with a smile (seems brave, increases trust). The audience was already on their side; acknowledging the mistake confirms they were right to be.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Generosity is rewarded</h3>
+                        <p>A performer shares energy generously, seems like they're having fun, invites the audience to join. The audience feels this generosity and reciprocates with laughter and attention. The performer assumed goodwill and got goodwill back.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h3>🎭 The Funny Take</h3>
+                <p>This works in life too. People generally like you until proven otherwise. If you assume everyone is judging you, you'll behave defensively and create the very judgment you feared. If you assume people are rooting for you, you'll be more open, and they'll actually root for you. It's a self-fulfilling prophecy, but in the good direction.</p>
+            </div>
+
+            <div class="ai-box">
+                <h3>🤖 AI Connection: Alignment and Human Intent</h3>
+                <p>In AI alignment, we assume the user wants the AI to be helpful and honest. The AI should operate with the assumption that the human is trying to collaborate, not trick it. An AI that assumes adversarial intent will be defensive and unhelpful. An AI that assumes collaborative intent will be generous and open.</p>
+                <p>Johnstone's principle: trust the audience's goodwill and you'll give your best. In human-AI interaction, this maps perfectly: humans and AIs working together should each assume the other wants success. That assumption changes the entire dynamic.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Cross-Book Connection: Influence by Robert Cialdini</h4>
+                <p>Cialdini's principle of liking states: people like those who like them. An performer who trusts the audience's goodwill will radiate liking, and the audience will like them back. Mutual goodwill amplifies.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">The audience wants you to succeed. They came to have a good time. Don't rob them of that.</div>
+                <div class="quote-author">— Keith Johnstone</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 12: OVERCOMING THE "BE ORIGINAL" TRAP -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <span class="lesson-badge">Lesson 12</span>
+            <h2>The "Be Original" Trap: Finding Freedom in Patterns</h2>
+
+            <div class="lesson-flex">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Trying to be original -->
+                        <g id="trap">
+                            <circle cx="100" cy="150" r="30" fill="#E17055" opacity="0.6"/>
+                            <path d="M 100 190 L 100 250 M 80 210 L 120 210" stroke="#E17055" stroke-width="2"/>
+                            <!-- Constraint lines around them -->
+                            <rect x="50" y="80" width="100" height="200" fill="none" stroke="#E17055" stroke-width="2" stroke-dasharray="5,5"/>
+                            <text x="60" y="310" font-size="12" fill="#E17055" font-weight="bold">STUCK</text>
+                            <text x="45" y="330" font-size="10" fill="#666">Over-thinking</text>
+                        </g>
+
+                        <!-- Liberation through patterns -->
+                        <g id="free">
+                            <circle cx="300" cy="150" r="30" fill="#55EFC4" opacity="0.7"/>
+                            <path d="M 300 190 L 300 250 M 280 210 L 320 210" stroke="#55EFC4" stroke-width="2"/>
+                            <!-- Open space -->
+                            <path d="M 250 80 L 250 280 M 350 80 L 350 280" stroke="#55EFC4" stroke-width="1" opacity="0.3"/>
+                            <text x="270" y="310" font-size="12" fill="#55EFC4" font-weight="bold">FREE</text>
+                            <text x="265" y="330" font-size="10" fill="#666">In the patterns</text>
+                        </g>
+
+                        <!-- Arrow -->
+                        <path d="M 140 200 L 260 200" stroke="#FFE66D" stroke-width="4" marker-end="url(#arrowhead9)"/>
+                        <text x="170" y="190" font-size="11" fill="#FFE66D" font-weight="bold">EMBRACE PATTERNS</text>
+
+                        <defs>
+                            <marker id="arrowhead9" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#FFE66D"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="card">
+                        <span class="card-label">KEY LESSON</span>
+                        <h3>Originality comes from mastering patterns, not avoiding them</h3>
+                        <p>Young improvisers think "I must be original!" and so they reject every obvious idea. This creates paralysis. You can't think of anything because you're blocking all the normal thoughts. Johnstone discovered: master the patterns, and then your variations on them will be genuinely original. You can't be creative in a vacuum.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The musician paradox</h3>
+                        <p>Jazz innovators like Miles Davis knew every standard inside out. They mastered the patterns. Then their deviations were subtle, sophisticated, and revolutionary. A musician who tries to be original without knowing the form just sounds bad. Originality sits on top of deep pattern knowledge.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>The archetypes</h3>
+                        <p>There are archetypal characters: the trickster, the mentor, the hero. Improvisers who try to avoid them are fighting human psychology. Improvisers who master them and then twist them create something fresh. "I'll play a mentor who's actually a coward" is original because it plays against a known pattern.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">EXAMPLE</span>
+                        <h3>Constraints enable creativity</h3>
+                        <p>A scene with a clear pattern (A asks B for help, B refuses, A persists) gives you structure to play within. You're not inventing from nothing. You're improvising *around* the pattern. This is liberating. The pattern holds you up; you add the originality.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <h3>🎭 The Funny Take</h3>
+                <p>We're told to "think outside the box," but the box exists for a reason. The box is the collective knowledge of what works. You can think outside it, but you'll be working from ignorance. Better to know the box so well that you can play with it, break it, recombine it. That's where real originality lives.</p>
+            </div>
+
+            <div class="ai-box">
+                <h3>🤖 AI Connection: Generalization Through Pattern Mastery</h3>
+                <p>Language models don't generate "original" tokens from nothing. They learn statistical patterns from training data and then sample from the probability distribution. The patterns are the model's knowledge. Originality emerges from recombination of learned patterns in novel contexts.</p>
+                <p>An LLM that tries to avoid all common patterns would struggle. An LLM that has mastered patterns and then applies them in new combinations generates novel, meaningful text. Johnstone's principle: constraints (patterns) enable rather than limit creativity.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Cross-Book Connection: Influence by Robert Cialdini</h4>
+                <p>Cialdini shows that people follow patterns (authority, scarcity, social proof). Persuasive communicators don't ignore these patterns—they understand them and work with them. Originality in influence comes from sophisticated pattern knowledge, not pattern rejection.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">If you want to be original, first master the obvious. Then your variations will actually be interesting.</div>
+                <div class="quote-author">— Keith Johnstone</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY SPOTLIGHT 1 -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; text-align: center; margin-bottom: 3rem;">Story Spotlights</h2>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h3>The Lowball and the Miser</h3>
+                    <p>Johnstone describes a scene where one character is a miserly homeowner and the other is a lowball offer for their house. In the hands of inexperienced improvisers, this is just two people arguing about price. But Johnstone illustrates how status transactions transform it.</p>
+                    <p>When the lowball realizer they're playing low status (deferential) and leans into it—"I know my offer is insulting, but I'm desperate"—the miser suddenly has to make a choice. Stay high status and heartless? Or drop status and show sympathy? The scene becomes about character transformation, not just negotiation. Status transactions made it human.</p>
+                </div>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h3>The Mask Work Revelation</h3>
+                    <p>Johnstone tells of watching a young woman who was painfully shy put on a commedia mask. Her entire body changed. She became wild, physical, uninhibited. When she took it off, she was shy again. The mask didn't change her—it changed her permission structure.</p>
+                    <p>He realized: we're all always wearing masks (social conditioning). The theatre mask simply makes it visible and voluntary. The revelation was that the "shy" person and the "wild" person were both the same person. The mask revealed that her shyness was a chosen constraint, not her essence. Once seen, it couldn't be unseen.</p>
+                </div>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h3>The Journalist and the Bishop</h3>
+                    <p>In one of his teaching examples, Johnstone sets up an interview: a journalist (played low status—nervous, eager to please) and a bishop (high status—authoritative, confident). The scene was dull because status never shifted. The bishop remained in control.</p>
+                    <p>Then he reframed it: "What if the journalist asks something that pierces the bishop's authority? What if the bishop drops a little status?" Suddenly the bishop became human—vulnerable beneath the robes. The journalist's persistence created cracks in the authority. By status seesaw, both characters became real.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHEATSHEET -->
+    <section class="cheatsheet">
+        <h2>Quick Reference: Impro Principles</h2>
+        <div class="cheatsheet-inner">
+            <div class="cheatsheet-item">
+                <h3>Status Transactions</h3>
+                <ul>
+                    <li>Every interaction is high/low status negotiation</li>
+                    <li>Master status to read any room</li>
+                    <li>Seesaws create interesting scenes</li>
+                    <li>Notice who controls the conversation</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-item">
+                <h3>Block vs Accept</h3>
+                <ul>
+                    <li>Blocking = denying partner's reality</li>
+                    <li>Accepting = saying yes to the world</li>
+                    <li>Acceptance creates momentum</li>
+                    <li>Blocks kill scenes dead</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-item">
+                <h3>Spontaneity Rules</h3>
+                <ul>
+                    <li>First impulse is the best impulse</li>
+                    <li>Thinking kills spontaneity</li>
+                    <li>Uncensored mind is more interesting</li>
+                    <li>Trust your instinct before critique</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-item">
+                <h3>Education & Creativity</h3>
+                <ul>
+                    <li>Schools teach compliance, not creativity</li>
+                    <li>Unlearn fear of being wrong</li>
+                    <li>Embrace the weird idea</li>
+                    <li>Growth mindset over fixed mindset</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-item">
+                <h3>Mask Work</h3>
+                <ul>
+                    <li>Mask gives permission to be yourself</li>
+                    <li>Persona enables authenticity</li>
+                    <li>Trance dissolves self-consciousness</li>
+                    <li>Character work is permission work</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-item">
+                <h3>Narrative Structures</h3>
+                <ul>
+                    <li>Stories have invisible patterns</li>
+                    <li>Setup, conflict, climax, resolution</li>
+                    <li>Callbacks create satisfaction</li>
+                    <li>Three-beat structure resonates</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-item">
+                <h3>Yes, And Mastery</h3>
+                <ul>
+                    <li>"Yes" accepts partner's reality</li>
+                    <li>"And" contributes something new</li>
+                    <li>Together = exponential growth</li>
+                    <li>"Yes, but" is death in disguise</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-item">
+                <h3>Being Changed</h3>
+                <ul>
+                    <li>Surrender to scene logic</li>
+                    <li>Let partner transform your plan</li>
+                    <li>Rigidity loses; adaptation wins</li>
+                    <li>Character emerges, not imposed</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-item">
+                <h3>Make Partner Look Good</h3>
+                <ul>
+                    <li>Setup work > punchline delivery</li>
+                    <li>Generosity compounds returns</li>
+                    <li>Listen as gift</li>
+                    <li>Spotlight shifts create magic</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-item">
+                <h3>Failing Cheerfully</h3>
+                <ul>
+                    <li>Failure is learning signal</li>
+                    <li>Bad scenes teach best</li>
+                    <li>Willingness to fail = superpower</li>
+                    <li>Recovery with grace > hiding</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-item">
+                <h3>Audience Goodwill</h3>
+                <ul>
+                    <li>Audience wants you to succeed</li>
+                    <li>They paid for your success</li>
+                    <li>Assume goodwill, receive it</li>
+                    <li>Vulnerability = connection</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-item">
+                <h3>Pattern Mastery</h3>
+                <ul>
+                    <li>Originality = pattern mastery + variation</li>
+                    <li>Avoid patterns = paralysis</li>
+                    <li>Constraints enable creativity</li>
+                    <li>Know the box, play with the box</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p><strong>Impro: Improvisation and the Theatre</strong> by Keith Johnstone</p>
+        <p>This illustrated guide synthesizes Johnstone's revolutionary insights on human creativity, spontaneity, and performance.</p>
+        <p>The book is fundamentally about psychology disguised as improv instruction. Every principle applies to life, relationships, learning, and human potential.</p>
+        <p>Created with insights for performers, leaders, educators, and anyone interested in unlocking human creativity.</p>
+    </footer>
+
+    <!-- Floating particles -->
+    <div class="particle" style="left: 5%; top: 10%; animation-delay: 0s;">🎭</div>
+    <div class="particle" style="left: 15%; top: 20%; animation-delay: 2s;">✨</div>
+    <div class="particle" style="left: 85%; top: 15%; animation-delay: 4s;">🎪</div>
+    <div class="particle" style="left: 90%; top: 30%; animation-delay: 1s;">🎨</div>
+    <div class="particle" style="left: 10%; top: 50%; animation-delay: 3s;">🎬</div>
+    <div class="particle" style="left: 80%; top: 60%; animation-delay: 5s;">💡</div>
+</body>
+</html>

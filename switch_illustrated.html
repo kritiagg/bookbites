@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch: How to Change Things When Change Is Hard - Illustrated Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==================== COVER ==================== */
+        .cover {
+            background: linear-gradient(135deg, var(--forest) 0%, var(--teal) 50%, var(--sky) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            bottom: -80px;
+            left: -80px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .cover-illustration {
+            margin-bottom: 40px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .cover svg {
+            max-width: 300px;
+            width: 100%;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+        }
+
+        .cover h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin-bottom: 20px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .cover-subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .cover-cta {
+            margin-top: 40px;
+        }
+
+        .cover-cta a {
+            display: inline-block;
+            background: var(--sunny);
+            color: var(--dark);
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cover-cta a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--teal), var(--forest));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 0 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--teal);
+        }
+
+        /* ==================== SECTIONS ==================== */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        section.alt {
+            background: rgba(74, 205, 196, 0.05);
+        }
+
+        section.toc {
+            background: linear-gradient(135deg, rgba(74, 205, 196, 0.1) 0%, rgba(255, 102, 107, 0.05) 100%);
+        }
+
+        section.ai-connection {
+            background: linear-gradient(135deg, rgba(160, 108, 213, 0.08) 0%, rgba(9, 132, 227, 0.08) 100%);
+        }
+
+        section h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 50px;
+            text-align: center;
+            color: var(--dark);
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal), var(--forest));
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ==================== CARDS & LESSONS ==================== */
+        .lesson {
+            background: white;
+            border-radius: 16px;
+            padding: 0;
+            margin-bottom: 40px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--teal);
+        }
+
+        .lesson:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            transform: translateY(-5px);
+        }
+
+        .lesson-inner {
+            padding: 40px;
+        }
+
+        .lesson h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .lesson-badge {
+            display: inline-block;
+            background: var(--sunny);
+            color: var(--dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .lesson.rider .lesson-badge {
+            background: var(--sky);
+            color: white;
+        }
+
+        .lesson.elephant .lesson-badge {
+            background: var(--warm-red);
+            color: white;
+        }
+
+        .lesson.path .lesson-badge {
+            background: var(--forest);
+            color: white;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(74, 205, 196, 0.1) 0%, rgba(255, 255, 255, 0.5) 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid rgba(74, 205, 196, 0.2);
+        }
+
+        .card-label {
+            font-weight: 700;
+            color: var(--teal);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ==================== QUOTE BOX ==================== */
+        .quote-box {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--forest) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 6px solid var(--sunny);
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(74, 205, 196, 0.2);
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 4rem;
+            opacity: 0.1;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+        }
+
+        .quote-attribution {
+            margin-top: 20px;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        /* ==================== FUNNY BOX ==================== */
+        .funny-box {
+            background: linear-gradient(135deg, var(--pink) 0%, var(--coral) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            font-weight: 500;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .funny-label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            opacity: 0.95;
+        }
+
+        /* ==================== AI BOX ==================== */
+        .ai-box {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--deep-blue) 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 5px solid var(--mint);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.2);
+        }
+
+        .ai-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: var(--mint);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ai-title::before {
+            content: '⚡';
+            font-size: 1.2rem;
+        }
+
+        /* ==================== CONNECT BOX ==================== */
+        .connect-box {
+            background: linear-gradient(135deg, rgba(255, 102, 107, 0.1) 0%, rgba(255, 230, 109, 0.1) 100%);
+            border: 2px solid var(--coral);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .connect-label {
+            font-weight: 700;
+            color: var(--coral);
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .connect-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .connect-box li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .connect-box li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+            font-weight: 700;
+        }
+
+        /* ==================== STORY CARDS ==================== */
+        .story {
+            background: linear-gradient(135deg, rgba(116, 185, 255, 0.1) 0%, rgba(84, 239, 196, 0.1) 100%);
+            border: 2px solid var(--sky);
+            border-radius: 12px;
+            padding: 0;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+
+        .story-label {
+            background: var(--sky);
+            color: white;
+            padding: 12px 25px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .story-inner {
+            padding: 25px;
+            line-height: 1.8;
+        }
+
+        .story-inner strong {
+            color: var(--deep-blue);
+        }
+
+        /* ==================== CHEATSHEET ==================== */
+        .cheatsheet {
+            background: linear-gradient(135deg, var(--cream) 0%, rgba(255, 230, 109, 0.3) 100%);
+            border-radius: 12px;
+            padding: 0;
+            margin: 30px 0;
+            overflow: hidden;
+            border: 2px solid var(--orange);
+        }
+
+        .cheatsheet-label {
+            background: var(--orange);
+            color: var(--dark);
+            padding: 15px 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cheatsheet-inner {
+            padding: 30px;
+        }
+
+        .cheatsheet-inner ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .cheatsheet-inner li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .cheatsheet-inner li:last-child {
+            border-bottom: none;
+        }
+
+        .cheatsheet-inner li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        /* ==================== ILLUSTRATIONS ==================== */
+        .illustration-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            min-height: 200px;
+        }
+
+        .illustration-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.1));
+        }
+
+        /* ==================== TWO COLUMN ==================== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== TOC ==================== */
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .toc-item {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid var(--teal);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .toc-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .toc-item.rider {
+            border-left-color: var(--sky);
+        }
+
+        .toc-item.elephant {
+            border-left-color: var(--warm-red);
+        }
+
+        .toc-item.path {
+            border-left-color: var(--forest);
+        }
+
+        .toc-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .toc-item .number {
+            display: inline-block;
+            background: var(--teal);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .toc-item.rider .number {
+            background: var(--sky);
+        }
+
+        .toc-item.elephant .number {
+            background: var(--warm-red);
+        }
+
+        .toc-item.path .number {
+            background: var(--forest);
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0;
+            margin-top: 80px;
+        }
+
+        footer .container {
+            text-align: center;
+        }
+
+        footer h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        footer p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* ==================== PARTICLE ANIMATION ==================== */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            section {
+                padding: 50px 0;
+            }
+
+            .lesson-inner {
+                padding: 25px;
+            }
+
+            nav ul {
+                gap: 15px;
+                font-size: 0.8rem;
+            }
+
+            .cover h1 {
+                font-size: 2rem;
+            }
+
+            .cover svg {
+                max-width: 200px;
+            }
+        }
+
+        /* ==================== UTILITIES ==================== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-40 {
+            margin-top: 40px;
+        }
+
+        .mb-40 {
+            margin-bottom: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== NAVIGATION ==================== -->
+<nav>
+    <div class="container">
+        <div class="logo">SWITCH</div>
+        <ul>
+            <li><a href="#framework">Framework</a></li>
+            <li><a href="#lessons">Lessons</a></li>
+            <li><a href="#cases">Case Studies</a></li>
+            <li><a href="#ai">AI Connection</a></li>
+            <li><a href="#cross">Cross-Book</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ==================== COVER ==================== -->
+<section class="cover">
+    <div class="cover-content">
+        <div class="cover-illustration">
+            <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
+                <!-- Path -->
+                <defs>
+                    <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#FFE66D;stop-opacity:0.5" />
+                        <stop offset="100%" style="stop-color:#55EFC4;stop-opacity:0.5" />
+                    </linearGradient>
+                </defs>
+
+                <!-- Winding path -->
+                <path d="M 30 200 Q 50 180 70 190 Q 90 200 110 170 Q 130 150 150 160 Q 170 170 190 140 Q 210 120 230 130 Q 250 140 270 110"
+                      stroke="url(#pathGrad)" stroke-width="40" fill="none" stroke-linecap="round"/>
+
+                <!-- Path direction indicator -->
+                <circle cx="270" cy="110" r="8" fill="#FFE66D"/>
+
+                <!-- Elephant body -->
+                <ellipse cx="140" cy="160" rx="35" ry="28" fill="#E17055"/>
+
+                <!-- Elephant head -->
+                <circle cx="165" cy="145" r="20" fill="#E17055"/>
+
+                <!-- Elephant trunk -->
+                <path d="M 170 155 Q 185 160 190 180" stroke="#E17055" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+                <!-- Elephant ear -->
+                <ellipse cx="150" cy="135" rx="12" ry="18" fill="#D86A4B"/>
+
+                <!-- Elephant eye -->
+                <circle cx="172" cy="142" r="3" fill="#2D3436"/>
+
+                <!-- Elephant legs -->
+                <rect x="130" y="185" width="8" height="30" fill="#E17055" rx="4"/>
+                <rect x="155" y="185" width="8" height="30" fill="#E17055" rx="4"/>
+
+                <!-- Rider body -->
+                <circle cx="140" cy="115" r="12" fill="#74B9FF"/>
+
+                <!-- Rider head -->
+                <circle cx="140" cy="100" r="8" fill="#FDBCB4"/>
+
+                <!-- Rider arms -->
+                <line x1="132" y1="120" x2="120" y2="130" stroke="#FDBCB4" stroke-width="4" stroke-linecap="round"/>
+                <line x1="148" y1="120" x2="160" y2="130" stroke="#FDBCB4" stroke-width="4" stroke-linecap="round"/>
+
+                <!-- Rider reins -->
+                <line x1="135" y1="128" x2="160" y2="148" stroke="#FFE66D" stroke-width="2" stroke-dasharray="3,3"/>
+                <line x1="145" y1="128" x2="165" y2="143" stroke="#FFE66D" stroke-width="2" stroke-dasharray="3,3"/>
+
+                <!-- Switchboard metaphor -->
+                <g opacity="0.3">
+                    <rect x="80" y="20" width="140" height="50" fill="none" stroke="#FFE66D" stroke-width="2" rx="4"/>
+                    <circle cx="100" cy="35" r="5" fill="#FFE66D"/>
+                    <circle cx="120" cy="45" r="5" fill="#FFE66D"/>
+                    <circle cx="140" cy="35" r="5" fill="#FFE66D"/>
+                    <circle cx="160" cy="45" r="5" fill="#FFE66D"/>
+                    <circle cx="180" cy="35" r="5" fill="#FFE66D"/>
+                    <circle cx="200" cy="45" r="5" fill="#FFE66D"/>
+                </g>
+            </svg>
+        </div>
+
+        <h1>SWITCH</h1>
+        <p class="cover-subtitle">How to Change Things When Change Is Hard</p>
+        <div class="cover-meta">
+            <span>📖 Chip & Dan Heath</span>
+            <span>⚡ Illustrated Guide</span>
+            <span>🧠 The Rider-Elephant-Path Framework</span>
+        </div>
+
+        <div class="cover-cta">
+            <a href="#framework">Start Exploring ↓</a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== INTRODUCTION ==================== -->
+<section id="intro">
+    <div class="container">
+        <h2>Why Change Is So Hard (And How to Make It Easier)</h2>
+
+        <p style="font-size: 1.1rem; margin: 40px 0; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+            You want to change. You really do. But willpower feels insufficient. Diet fails. Goals stall. Teams resist. Why? Because change isn't a problem of information—it's a problem of motivation and direction. <strong>Switch</strong> reveals the hidden structure of successful change through the metaphor of a rider guiding an elephant down a path.
+        </p>
+
+        <div class="quote-box">
+            What looks like laziness is often exhaustion. What looks like resistance is often lack of clarity.
+            <div class="quote-attribution">— The Heath Brothers</div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FRAMEWORK OVERVIEW ==================== -->
+<section id="framework" class="alt">
+    <div class="container">
+        <h2>The Rider-Elephant-Path Framework</h2>
+        <p style="text-align: center; max-width: 700px; margin: 30px auto 50px; font-size: 1.05rem;">
+            Every person is both a Rider (rational mind) and an Elephant (emotional drive). The Path is the environment. To change behavior, you must direct the Rider, motivate the Elephant, and shape the Path.
+        </p>
+
+        <div class="two-col">
+            <div class="card">
+                <div class="card-label">🎯 The Rider</div>
+                <h3>Rational Analysis & Planning</h3>
+                <p>The Rider is your conscious, analytical self. It loves data, plans, and logic. But it can also overthink and become paralyzed by choice.</p>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li>Analyzes situations</li>
+                    <li>Can be indecisive</li>
+                    <li>Needs clear destination</li>
+                    <li>Gets fatigued easily</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-label">💪 The Elephant</div>
+                <h3>Emotion & Instinct</h3>
+                <p>The Elephant is your feeling, instinctive self. It's powerful, drives behavior, but can be stubborn and fear-driven.</p>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li>Feels deeply</li>
+                    <li>Habits & emotions drive action</li>
+                    <li>Needs emotional appeal</li>
+                    <li>Can override Rider</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <div class="card">
+                <div class="card-label">🛣️ The Path</div>
+                <h3>Environment & Circumstances</h3>
+                <p>The Path is not about willpower—it's about design. When you shape the environment (habits, defaults, social norms), the Rider and Elephant naturally move forward.</p>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li>Removes friction & obstacles</li>
+                    <li>Makes good choices the default</li>
+                    <li>Leverages social proof</li>
+                    <li>Builds reinforcing habits</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="illustration-container" style="margin-top: 60px;">
+            <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; width: 500px;">
+                <!-- Rider -->
+                <g>
+                    <circle cx="80" cy="80" r="25" fill="#74B9FF"/>
+                    <text x="80" y="90" text-anchor="middle" font-weight="bold" fill="white" font-size="12">RIDER</text>
+                    <text x="80" y="130" text-anchor="middle" fill="#2D3436" font-size="11" font-weight="600">Find Destination</text>
+                    <text x="80" y="145" text-anchor="middle" fill="#2D3436" font-size="11" font-weight="600">Bright Spots</text>
+                </g>
+
+                <!-- Arrow -->
+                <path d="M 120 80 L 160 80" stroke="#4ECDC4" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- Elephant -->
+                <g>
+                    <circle cx="240" cy="80" r="30" fill="#E17055"/>
+                    <text x="240" y="90" text-anchor="middle" font-weight="bold" fill="white" font-size="12">ELEPHANT</text>
+                    <text x="240" y="130" text-anchor="middle" fill="#2D3436" font-size="11" font-weight="600">Find Feeling</text>
+                    <text x="240" y="145" text-anchor="middle" fill="#2D3436" font-size="11" font-weight="600">Shrink Change</text>
+                </g>
+
+                <!-- Arrow -->
+                <path d="M 280 80 L 320 80" stroke="#4ECDC4" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- Path -->
+                <g>
+                    <circle cx="410" cy="80" r="30" fill="#00B894"/>
+                    <text x="410" y="90" text-anchor="middle" font-weight="bold" fill="white" font-size="12">PATH</text>
+                    <text x="410" y="130" text-anchor="middle" fill="#2D3436" font-size="11" font-weight="600">Tweak Environment</text>
+                    <text x="410" y="145" text-anchor="middle" fill="#2D3436" font-size="11" font-weight="600">Build Habits</text>
+                </g>
+
+                <!-- Arrow marker definition -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                        <polygon points="0 0, 10 5, 0 10" fill="#4ECDC4"/>
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+
+        <p style="text-align: center; margin-top: 40px; font-size: 0.95rem; color: #666;">
+            <strong>To create lasting change, you need all three.</strong> A brilliant plan (Rider) without emotional buy-in (Elephant) fails. An excited team (Elephant) without clear direction (Rider) spins in circles. The best path design in the world (Path) can't overcome a stubborn Rider and scared Elephant.
+        </p>
+    </div>
+</section>
+
+<!-- ==================== TABLE OF CONTENTS ==================== -->
+<section id="lessons" class="toc">
+    <div class="container">
+        <h2>The 12 Essential Lessons</h2>
+
+        <div class="toc-grid">
+            <!-- RIDER LESSONS -->
+            <div class="toc-item rider">
+                <div class="number">1</div>
+                <h4>Find the Bright Spots</h4>
+                <p>Instead of diagnosing problems, study what's working and replicate it.</p>
+            </div>
+
+            <div class="toc-item rider">
+                <div class="number">2</div>
+                <h4>Script the Critical Moves</h4>
+                <p>Remove ambiguity. Specify exactly what people should do.</p>
+            </div>
+
+            <div class="toc-item rider">
+                <div class="number">3</div>
+                <h4>Point to the Destination</h4>
+                <p>Paint a vivid, concrete picture of the future state.</p>
+            </div>
+
+            <!-- ELEPHANT LESSONS -->
+            <div class="toc-item elephant">
+                <div class="number">4</div>
+                <h4>Find the Feeling</h4>
+                <p>Appeal to emotion. Logic alone won't sustain change.</p>
+            </div>
+
+            <div class="toc-item elephant">
+                <div class="number">5</div>
+                <h4>Shrink the Change</h4>
+                <p>Break change into small, winnable goals.</p>
+            </div>
+
+            <div class="toc-item elephant">
+                <div class="number">6</div>
+                <h4>Grow Your People</h4>
+                <p>Build confidence through small wins and identity shift.</p>
+            </div>
+
+            <!-- PATH LESSONS -->
+            <div class="toc-item path">
+                <div class="number">7</div>
+                <h4>Tweak the Environment</h4>
+                <p>Remove friction. Make good choices the path of least resistance.</p>
+            </div>
+
+            <div class="toc-item path">
+                <div class="number">8</div>
+                <h4>Build Habits</h4>
+                <p>Automate behavior through action triggers and routines.</p>
+            </div>
+
+            <div class="toc-item path">
+                <div class="number">9</div>
+                <h4>Rally the Herd</h4>
+                <p>Leverage social proof and peer pressure for good.</p>
+            </div>
+
+            <!-- ADVANCED LESSONS -->
+            <div class="toc-item rider">
+                <div class="number">10</div>
+                <h4>Bright Spots as Few-Shot Learning</h4>
+                <p>Extract patterns from successes; apply principles broadly.</p>
+            </div>
+
+            <div class="toc-item elephant">
+                <div class="number">11</div>
+                <h4>Identity-Based Change</h4>
+                <p>Shift identity, not just behavior. Become the change.</p>
+            </div>
+
+            <div class="toc-item path">
+                <div class="number">12</div>
+                <h4>When Your Elephant Won't Cooperate</h4>
+                <p>Advanced tactics for resistance, fear, and the Fundamental Attribution Error.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LESSON 1: BRIGHT SPOTS ==================== -->
+<section>
+    <div class="container">
+        <h2>Lesson 1: Find the Bright Spots</h2>
+
+        <div class="lesson rider">
+            <div class="lesson-inner">
+                <div class="lesson-badge">Rider | Direct the Mind</div>
+                <h3>🌟 Discover What's Already Working</h3>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    Most change initiatives start by diagnosing what's wrong. Budget overruns. Customer churn. Poor health outcomes. We analyze problems, create strategic plans, and demand change.
+                </p>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    The Bright Spots approach flips this. Instead of studying what's broken, study what's working—even if it's small.
+                </p>
+
+                <div class="quote-box">
+                    "Instead of asking 'What's the problem?' ask 'What's the solution?'" — Jerry Sternin
+                </div>
+
+                <!-- STORY: Jerry Sternin in Vietnam -->
+                <div class="story">
+                    <div class="story-label">📖 Case Study: Jerry Sternin's Malnutrition Miracle in Vietnam</div>
+                    <div class="story-inner">
+                        <p>In the 1990s, Jerry Sternin arrived in Vietnam to tackle childhood malnutrition—a systemic problem across the country. Conventional wisdom: build better hospitals, provide more food aid, educate mothers.</p>
+                        <p style="margin-top: 15px;"><strong>But Sternin did something radical:</strong> He visited villages and found the bright spots—families with well-nourished children despite poverty. He interviewed these families and discovered differences:</p>
+                        <ul style="margin: 15px 0 15px 20px;">
+                            <li><strong>Timing of meals:</strong> Successful families fed children more frequently (4x vs 2x daily)</li>
+                            <li><strong>Variety:</strong> They mixed rice with sweet potato, greens, and shrimp paste</li>
+                            <li><strong>Active feeding:</strong> Mothers hand-fed children rather than letting them self-feed</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>The result:</strong> Not a single new resource was added. Instead, Sternin trained malnourished mothers to adopt behaviors from successful neighbors. Within months, 65% of children in target villages grew out of malnutrition. The model scaled to 265 villages across Vietnam and eventually globally.</p>
+                        <p style="margin-top: 15px; color: var(--warm-red); font-weight: 600;">Why it worked: The Rider got a clear, specific destination (copy these 3 behaviors). The Elephant felt the proof (it worked for my neighbor). The Path made it feasible (use foods already in the village).</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">✓ How to Find Bright Spots</div>
+                    <ol style="margin-top: 15px; padding-left: 20px;">
+                        <li><strong>Identify the problem:</strong> What's the gap between current and desired state?</li>
+                        <li><strong>Look for exceptions:</strong> Who's succeeding despite similar constraints?</li>
+                        <li><strong>Interview them closely:</strong> What are they actually doing differently?</li>
+                        <li><strong>Extract principles:</strong> What can be replicated and scaled?</li>
+                        <li><strong>Teach, don't tell:</strong> Show others how neighbors solved it.</li>
+                    </ol>
+                </div>
+
+                <div class="funny-box">
+                    <div class="funny-label">🎭 The Humor</div>
+                    Most change consultants charge $500/hour to tell you what you're doing wrong. Jerry Sternin showed you what your village neighbor is doing right—for free. The irony: the solution was already there, hiding in plain sight, waiting for someone to notice.
+                </div>
+
+                <div class="card">
+                    <div class="card-label">💡 Real-World Application</div>
+                    <p><strong>In business:</strong> Instead of analyzing why customer retention is low, interview your most loyal customers. What do you do differently for them?</p>
+                    <p style="margin-top: 12px;"><strong>In health:</strong> Instead of preaching about diet, study who maintains healthy weight in their community and replicate.</p>
+                    <p style="margin-top: 12px;"><strong>In parenting:</strong> Instead of reading self-help books, study a parent whose kids have good behavior and ask what they're doing.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LESSON 2: SCRIPT CRITICAL MOVES ==================== -->
+<section>
+    <div class="container">
+        <h2>Lesson 2: Script the Critical Moves</h2>
+
+        <div class="lesson rider">
+            <div class="lesson-inner">
+                <div class="lesson-badge">Rider | Remove Ambiguity</div>
+                <h3>📋 Eliminate Decision Paralysis</h3>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    The Rider loves options. The Elephant gets paralyzed by them. When you leave behavior undefined—"be more customer-centric" or "improve collaboration"—people default to whatever they're already doing.
+                </p>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    Scripting critical moves means specifying the exact actions people should take. Not guidelines. Not principles. Concrete steps.
+                </p>
+
+                <!-- STORY: Rackspace Customer Service -->
+                <div class="story">
+                    <div class="story-label">📖 Case Study: Rackspace's "Customer Fanaticism" Script</div>
+                    <div class="story-inner">
+                        <p><strong>Challenge:</strong> Rackspace (cloud hosting company) wanted to become known for "fanatical customer service." But what does that mean operationally?</p>
+                        <p style="margin-top: 15px;"><strong>The script they created for support engineers:</strong></p>
+                        <ul style="margin: 15px 0 15px 20px;">
+                            <li>When a customer calls with an issue, you own it end-to-end (don't transfer)</li>
+                            <li>Work on it immediately, even if you're technically off-duty</li>
+                            <li>Call them back (don't wait for them to call you)</li>
+                            <li>Explain what you found in plain English</li>
+                            <li>Ask if they need anything else before closing</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Result:</strong> Not abstract values, but behavior. Engineers knew exactly what to do. The culture shifted not because of a memo, but because the script made behavior clear and achievable.</p>
+                    </div>
+                </div>
+
+                <div class="cheatsheet">
+                    <div class="cheatsheet-label">✓ How to Script Critical Moves</div>
+                    <div class="cheatsheet-inner">
+                        <ul>
+                            <li><strong>Identify 2-3 critical behaviors:</strong> Not 10, not 20. The 2-3 behaviors that matter most.</li>
+                            <li><strong>Write them as if-then rules:</strong> "If customer seems upset, then stay on the call until they're calm."</li>
+                            <li><strong>Use concrete language:</strong> "Hold meetings standing up" beats "be more efficient."</li>
+                            <li><strong>Test with skeptics:</strong> If someone says "I don't get it," your script isn't clear enough.</li>
+                            <li><strong>Make them visible:</strong> Print them. Post them. Repeat them.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ai-box">
+                    <div class="ai-title">⚡ AI Connection: Prompt Engineering</div>
+                    <p>When you prompt GPT, you're scripting the critical moves you want the model to perform. "Be helpful" is vague. "Answer in bullet points, cite sources, limit to 150 words" is a script. The more precisely you script, the better the output. Your brain works the same way—scripting removes the ambiguity that triggers analysis paralysis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LESSON 3: DESTINATION POSTCARD ==================== -->
+<section>
+    <div class="container">
+        <h2>Lesson 3: Point to the Destination</h2>
+
+        <div class="lesson rider">
+            <div class="lesson-inner">
+                <div class="lesson-badge">Rider | Paint a Vision</div>
+                <h3>🎨 Create a Concrete Future State</h3>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    The Rider needs to see the destination. Not abstract goals like "improve innovation" but vivid, concrete pictures of the future. The more specific and sensory, the more compelling.
+                </p>
+
+                <div class="card">
+                    <div class="card-label">❌ Vague Destination</div>
+                    <p>"We want to be a customer-focused organization."</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">The Rider has no idea what this looks like. Is it a process change? A cultural shift? The Elephant feels no excitement.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">✅ Concrete Destination</div>
+                    <p>"In two years, customers can get a refund without calling support—just click 'return' in their account. We respond to support emails in under 2 hours, always. Our customer satisfaction score is 85%+. People laugh at how easy we make things."</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: var(--forest); font-weight: 600;">Now both Rider and Elephant can see it, feel it, and move toward it.</p>
+                </div>
+
+                <div class="cheatsheet">
+                    <div class="cheatsheet-label">✓ How to Write a Destination Postcard</div>
+                    <div class="cheatsheet-inner">
+                        <ul>
+                            <li>Use <strong>present tense, future timeline:</strong> "In one year, we are..."</li>
+                            <li>Be <strong>specific and measurable:</strong> Not "better," but "85% satisfaction" or "2-hour response."</li>
+                            <li>Include <strong>emotional/sensory details:</strong> "People will say it feels like magic."</li>
+                            <li>Make it <strong>picture-able:</strong> Can someone literally visualize the future state?</li>
+                            <li>Limit to <strong>one page:</strong> Long vision statements kill motivation.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <div class="funny-label">🎭 The Humor</div>
+                    "Our vision is to be a world-class organization that leverages synergies to create paradigm shifts through customer-centric, value-driven innovation." Translation: We have no idea what we're doing, but it sounds impressive. The Rider is still lost. The Elephant is asleep.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LESSON 4: FIND THE FEELING ==================== -->
+<section class="alt">
+    <div class="container">
+        <h2>Lesson 4: Find the Feeling</h2>
+
+        <div class="lesson elephant">
+            <div class="lesson-inner">
+                <div class="lesson-badge">Elephant | Appeal to Emotion</div>
+                <h3>❤️ Tap into What Matters Emotionally</h3>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    You can have the best plan and clearest destination. But if the Elephant doesn't feel something, change won't stick. The Elephant doesn't run on logic. It runs on emotion, identity, and values.
+                </p>
+
+                <div class="quote-box">
+                    "People don't resist change. They resist loss." — The Heath Brothers
+                </div>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    Finding the feeling means identifying what the change means emotionally. What will people gain? What will they miss? What does it say about who they are?
+                </p>
+
+                <div class="story">
+                    <div class="story-label">📖 Case Study: The Robyn Waters Target Redesign</div>
+                    <div class="story-inner">
+                        <p>In the late 1990s, Robyn Waters at Target noticed something: housewares in other stores were boring and dated. She had a vision: high-design products at low prices. But Target's buying team wasn't convinced.</p>
+                        <p style="margin-top: 15px;"><strong>Instead of showing spreadsheets, she appealed to feeling:</strong> She gathered designers and product managers, then took them to a local Target. She pointed to a beige plastic colander and asked, "Would you use this in your home?"</p>
+                        <p style="margin-top: 15px;">The answer was no. She then showed them design sketches and said, "This is who we can be. We're not a discount store. We're a store for people who have taste but not unlimited budgets."</p>
+                        <p style="margin-top: 15px;"><strong>Result:</strong> This emotional shift—identity-based change—launched the "design for all" movement at Target. They brought in Karim Rashid, Michael Graves, and other renowned designers. Sales soared.</p>
+                        <p style="margin-top: 15px; color: var(--warm-red); font-weight: 600;">Why it worked: Not "the data shows design sells," but "you have taste, and now customers can access it through Target."</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">💡 Finding the Feeling (Questions to Ask)</div>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li><strong>What's the core emotion here?</strong> Fear? Excitement? Belonging?</li>
+                        <li><strong>What's at stake?</strong> Identity? Status? Values?</li>
+                        <li><strong>How will people feel when they succeed?</strong> Proud? Belonging? Powerful?</li>
+                        <li><strong>What story are they telling about themselves?</strong> "I'm the kind of person who..."</li>
+                    </ul>
+                </div>
+
+                <div class="funny-box">
+                    <div class="funny-label">🎭 The Humor</div>
+                    Corporate: "We're implementing a new CRM system to optimize customer data utilization." Translation: Your job is about to be harder. Employees check out. Compare to: "This tool will help you actually remember your customers' names and what matters to them. You'll feel less like a ticket machine." Same system, completely different emotional response.
+                </div>
+
+                <div class="ai-box">
+                    <div class="ai-title">⚡ AI Connection: Learned Heuristics</div>
+                    <p>Your Elephant operates through learned emotional heuristics—shortcuts that feel true. "Healthy food is boring." "Change is threatening." "I'm not a creative person." The Elephant stores these as emotion-backed beliefs. To change them, you don't argue with logic. You reframe the emotion: "Look how delicious this healthy food is." "This change protects what you love." "You just created X—you're more creative than you think."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LESSON 5: SHRINK THE CHANGE ==================== -->
+<section>
+    <div class="container">
+        <h2>Lesson 5: Shrink the Change</h2>
+
+        <div class="lesson elephant">
+            <div class="lesson-inner">
+                <div class="lesson-badge">Elephant | Make It Manageable</div>
+                <h3>📉 Break Big Goals into Tiny Wins</h3>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    "Lose 100 pounds." "Save $50,000." "Become an expert programmer." These are Elephant-terrifying. The gap between current and desired state is so vast that the Elephant refuses to engage.
+                </p>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    Shrinking the change means reducing the perception of the gap. Make the first step so small that the Elephant can't say no.
+                </p>
+
+                <!-- STORY: 5-Minute Room Rescue -->
+                <div class="story">
+                    <div class="story-label">📖 Case Study: The 5-Minute Room Rescue</div>
+                    <div class="story-inner">
+                        <p><strong>Challenge:</strong> You haven't cleaned your room in weeks. It's a disaster. Your Elephant looks at it and shuts down. Too big. Too overwhelming.</p>
+                        <p style="margin-top: 15px;"><strong>Shrink the change:</strong> "Spend 5 minutes picking up. That's it. Just 5 minutes."</p>
+                        <p style="margin-top: 15px;">What happens? You start. Within 5 minutes, your Elephant feels progress. You've moved some stuff. It looks slightly better. You feel a small win. Your brain now wants to keep going.</p>
+                        <p style="margin-top: 15px;">Often, you end up cleaning for 20 minutes. Not because you planned to, but because the Elephant got a taste of progress and wanted more. This is the magic of shrinking: the first small win builds momentum.</p>
+                    </div>
+                </div>
+
+                <!-- STORY: Debt Snowball -->
+                <div class="story">
+                    <div class="story-label">📖 Case Study: The Debt Snowball Method</div>
+                    <div class="story-inner">
+                        <p><strong>Challenge:</strong> You have $50,000 in debt across 5 credit cards. The Elephant looks at this and despairs. The goal feels impossible.</p>
+                        <p style="margin-top: 15px;"><strong>Shrink the change (Debt Snowball):</strong></p>
+                        <ul style="margin: 15px 0 15px 20px;">
+                            <li>Rank debts by <strong>size</strong> (not interest rate—this is important for psychology)</li>
+                            <li>Pay minimums on all except the smallest debt</li>
+                            <li>Attack the smallest debt with all extra money</li>
+                            <li>When it's gone, celebrate and move to the next smallest debt</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Why it works:</strong> Paying off the smallest debt in 3-6 months gives the Elephant a quick win. That win builds confidence and momentum. By the time you're halfway through the debt, the behavior is habitual. You're not fighting exhaustion—you're riding momentum.</p>
+                        <p style="margin-top: 15px;"><strong>Note:</strong> Mathematically, the "Debt Avalanche" (paying highest interest first) saves more money. But emotionally, the Snowball wins because it gives quick wins. The Elephant beats the Rider here.</p>
+                    </div>
+                </div>
+
+                <div class="cheatsheet">
+                    <div class="cheatsheet-label">✓ How to Shrink the Change</div>
+                    <div class="cheatsheet-inner">
+                        <ul>
+                            <li><strong>Start ridiculously small:</strong> "Write one page" beats "write a book."</li>
+                            <li><strong>Redefine success for phase one:</strong> "Show up 3x this week" beats "exercise daily."</li>
+                            <li><strong>Celebrate quick wins loudly:</strong> The Elephant needs to feel progress.</li>
+                            <li><strong>Build on momentum:</strong> Once one small win happens, the next goal feels more achievable.</li>
+                            <li><strong>Track visible progress:</strong> Checkboxes, progress bars, point totals—visibility matters to the Elephant.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <div class="funny-label">🎭 The Humor</div>
+                    The Rider says, "I'm going to run a marathon." The Elephant says, "LOL, no." The Rider says, "Fine, I'll just put on running shoes and walk to the mailbox." The Elephant says, "Okay, I can do that." Three months later, the Elephant has run 10 miles. The Rider was right; the Elephant just needed to take it one step at a time.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LESSON 6: GROW YOUR PEOPLE ==================== -->
+<section class="alt">
+    <div class="container">
+        <h2>Lesson 6: Grow Your People</h2>
+
+        <div class="lesson elephant">
+            <div class="lesson-inner">
+                <div class="lesson-badge">Elephant | Build Confidence</div>
+                <h3>🌱 Identity Shift & Competence Building</h3>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    The Elephant doesn't just need to feel good about the change. It needs to feel like the change fits with who it is. Identity-based change is the most durable form of change.
+                </p>
+
+                <div class="quote-box">
+                    "You don't rise to the level of your goals. You fall to the level of your identity." — James Clear
+                </div>
+
+                <div class="card">
+                    <div class="card-label">🧠 Identity-Based Change</div>
+                    <p><strong>Behavior-based change:</strong> "I will exercise more." (willpower-dependent, fragile)</p>
+                    <p style="margin-top: 12px;"><strong>Identity-based change:</strong> "I am an athlete." (internalized, durable)</p>
+                    <p style="margin-top: 12px;">When you shift identity, behavior follows naturally. A person who identifies as "an athlete" will find exercise; a person who "should exercise" will find excuses.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">💪 Building Competence Through Micro-Wins</div>
+                    <p>To grow identity, you need evidence. Small wins provide that evidence. Each time you do the thing, your Elephant collects data: "I'm the kind of person who does this."</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>Write one paragraph → "I'm a writer"</li>
+                        <li>Do a 5-minute meditation → "I'm someone who practices mindfulness"</li>
+                        <li>Have one difficult conversation → "I'm honest with people I care about"</li>
+                    </ul>
+                </div>
+
+                <div class="ai-box">
+                    <div class="ai-title">⚡ AI Connection: Fine-Tuning</div>
+                    <p>In ML, fine-tuning a model means adjusting its weights based on new data to shift its behavior. Growing people works the same way. Each micro-win adjusts the identity-weights in the Elephant's neural network. After enough small wins, the identity shifts permanently.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LESSON 7: TWEAK THE ENVIRONMENT ==================== -->
+<section>
+    <div class="container">
+        <h2>Lesson 7: Tweak the Environment</h2>
+
+        <div class="lesson path">
+            <div class="lesson-inner">
+                <div class="lesson-badge">Path | Design for Success</div>
+                <h3>🛣️ Remove Friction & Make Good Choices Obvious</h3>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    Both Rider and Elephant are lazy. If you want behavior to change, stop relying on willpower. Change the environment instead.
+                </p>
+
+                <div class="quote-box">
+                    "You don't have a willpower problem. You have an environment problem." — The Path principle
+                </div>
+
+                <div class="card">
+                    <div class="card-label">🎯 Reducing Friction (Examples)</div>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li><strong>Want healthier eating?</strong> Remove junk food from your house (friction for bad choice increases)</li>
+                        <li><strong>Want more exercise?</strong> Put your gym bag by the door (friction for good choice decreases)</li>
+                        <li><strong>Want better email habits?</strong> Remove email app from your phone (friction for bad habit increases)</li>
+                        <li><strong>Want to save money?</strong> Auto-transfer to savings before you see the money (friction for good choice disappears)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">🎯 Making Good Choices Default</div>
+                    <p>The power of defaults is underestimated. In one famous study, countries with opt-in organ donation had 5-15% participation. Countries with opt-out had 85-95% participation. Same choice, different default. People default to "no action" unless action is already taken.</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li><strong>Instead of:</strong> "Employees can choose to contribute to 401k" → <strong>Make it:</strong> "Employees auto-enroll at 3% (can opt out)"</li>
+                        <li><strong>Instead of:</strong> "You should eat the healthy option" → <strong>Make it:</strong> "Healthy is what we serve by default; junk requires asking"</li>
+                    </ul>
+                </div>
+
+                <div class="funny-box">
+                    <div class="funny-label">🎭 The Humor</div>
+                    New Year's Resolution: "I'm going to eat healthier." Then you go to the office kitchen and there's a box of donuts right next to the coffee. Your willpower lasts 20 minutes. The Rider was sincere; the Path was working against you the whole time.
+                </div>
+
+                <div class="ai-box">
+                    <div class="ai-title">⚡ AI Connection: Prompt Engineering & System Design</div>
+                    <p>When you design an AI system prompt, you're tweaking the environment for AI behavior. A good system prompt removes friction ("answer concisely") and makes good outputs the default path. Your brain works the same way. Environment shapes behavior more than intention ever will.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LESSON 8: BUILD HABITS (ACTION TRIGGERS) ==================== -->
+<section class="alt">
+    <div class="container">
+        <h2>Lesson 8: Build Habits Through Action Triggers</h2>
+
+        <div class="lesson path">
+            <div class="lesson-inner">
+                <div class="lesson-badge">Path | Automate Behavior</div>
+                <h3>⚙️ If-Then Programming for Your Brain</h3>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    Habits are the ultimate path design. Once behavior becomes automatic, it requires zero willpower.
+                </p>
+
+                <div class="card">
+                    <div class="card-label">🔗 Action Triggers (If-Then Statements)</div>
+                    <p>Instead of relying on motivation, create if-then triggers:</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li><strong>If</strong> I finish my morning coffee, <strong>then</strong> I meditate for 5 minutes.</li>
+                        <li><strong>If</strong> I sit down at my desk, <strong>then</strong> I write 100 words.</li>
+                        <li><strong>If</strong> I feel stressed, <strong>then</strong> I take three deep breaths.</li>
+                        <li><strong>If</strong> I'm about to order food, <strong>then</strong> I ask "Am I actually hungry?"</li>
+                    </ul>
+                </div>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    These aren't vague commitments. They're <strong>implementation intentions</strong>—concrete rules that chain the new behavior to an existing habit or environmental trigger.
+                </p>
+
+                <div class="story">
+                    <div class="story-label">📖 Case Study: The 1% Milk Campaign</div>
+                    <div class="story-inner">
+                        <p><strong>Challenge:</strong> Public health authorities wanted people to switch from whole milk (4% fat) to 1% milk. Direct appeal ("It's healthier!") wasn't working.</p>
+                        <p style="margin-top: 15px;"><strong>The action trigger approach:</strong> Instead of trying to change minds, they created an if-then trigger: "If you normally buy whole milk, try 1% milk once." They advertised this specific, tiny trigger.</p>
+                        <p style="margin-top: 15px;"><strong>Result:</strong> Once people tried 1% milk and didn't notice a huge taste difference, they often kept buying it. The trigger got them to try; habit took over.</p>
+                        <p style="margin-top: 15px;"><strong>Why it worked:</strong> The Path was shaped to make the experiment easy. Once the experiment happened, the new habit took root.</p>
+                    </div>
+                </div>
+
+                <div class="cheatsheet">
+                    <div class="cheatsheet-label">✓ How to Create Action Triggers</div>
+                    <div class="cheatsheet-inner">
+                        <ul>
+                            <li><strong>Identify an existing habit:</strong> Something you already do automatically (morning coffee, arriving at work).</li>
+                            <li><strong>Chain the new behavior to it:</strong> "After X, I will do Y."</li>
+                            <li><strong>Keep it small:</strong> The new behavior should take less than 2 minutes initially.</li>
+                            <li><strong>Repeat consistently:</strong> The trigger strengthens with repetition.</li>
+                            <li><strong>Gradually expand:</strong> Once it's automatic, the 2-minute version becomes the default, and you can expand.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ai-box">
+                    <div class="ai-title">⚡ AI Connection: If-Then Programming</div>
+                    <p>This is literally if-then programming. In code: `if (context == morning_coffee) { then execute(meditate) }`. Your brain is a biological computer. When you repeat an if-then long enough, it compiles into a single operation (habit). No more decision-making needed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LESSON 9: RALLY THE HERD ==================== -->
+<section>
+    <div class="container">
+        <h2>Lesson 9: Rally the Herd</h2>
+
+        <div class="lesson path">
+            <div class="lesson-inner">
+                <div class="lesson-badge">Path | Social Proof & Peer Pressure</div>
+                <h3>👥 Leverage the Power of "Everyone's Doing It"</h3>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    The Elephant is deeply social. It cares what others think and what others do. This isn't a weakness—it's a powerful lever for change.
+                </p>
+
+                <div class="quote-box">
+                    "The Mere Exposure Effect: Repeated exposure to something makes us like it more. But seeing others doing it is even more powerful."
+                </div>
+
+                <div class="card">
+                    <div class="card-label">📊 The Mere Exposure Effect</div>
+                    <p>Simply seeing others adopt a behavior increases adoption. This is different from being told the behavior is good. Seeing your friend at the gym, your colleague meditating, your neighbor buying electric cars—all of these increase your likelihood of adopting too.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">💪 Leveraging Social Proof</div>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li><strong>Make the change visible:</strong> If people doing the right thing are visible, others will follow. (Think: bike lanes fill when neighbors bike.)</li>
+                        <li><strong>Highlight the believers:</strong> Show the people who've already switched. Their testimonials matter more than messaging.</li>
+                        <li><strong>Normalize it:</strong> "Everyone on this team is learning Python" (true or not, this shifts perception).</li>
+                        <li><strong>Create a community:</strong> People change faster when they're part of a group doing it together.</li>
+                    </ul>
+                </div>
+
+                <div class="funny-box">
+                    <div class="funny-label">🎭 The Humor</div>
+                    Marketing says: "Our product has 47 antioxidants and 23 vitamins." You don't care. Marketing says: "1.2 million people have bought this product." Now you're interested. It's not the antioxidants; it's the herd.
+                </div>
+
+                <div class="ai-box">
+                    <div class="ai-title">⚡ AI Connection: Few-Shot Learning Through Examples</div>
+                    <p>When you give an AI model examples (few-shot learning), it performs better on new tasks. Your brain works the same way. Seeing examples of others succeeding teaches you better than instructions alone. The Elephant learns through observation—rally the herd and let your Elephant watch.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LESSON 10: BRIGHT SPOTS AS FEW-SHOT LEARNING ==================== -->
+<section class="alt">
+    <div class="container">
+        <h2>Lesson 10: Bright Spots as Few-Shot Learning</h2>
+
+        <div class="lesson rider">
+            <div class="lesson-inner">
+                <div class="lesson-badge">Rider | Extract & Replicate Patterns</div>
+                <h3>🔍 Learn from Successes, Not Failures</h3>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    The key to bright spots is extraction. You don't just celebrate a win; you analyze it, extract the principles, and teach others to replicate it.
+                </p>
+
+                <div class="card">
+                    <div class="card-label">📚 How to Extract Principles from Bright Spots</div>
+                    <ol style="margin-top: 15px; padding-left: 20px;">
+                        <li><strong>Describe the success in detail:</strong> What exactly is different about this case?</li>
+                        <li><strong>Ask "Why?"</strong> Repeatedly. What's the root cause?</li>
+                        <li><strong>Abstract the principle:</strong> What could apply broadly?</li>
+                        <li><strong>Test it elsewhere:</strong> Does the principle hold in other contexts?</li>
+                        <li><strong>Teach it:</strong> Help others replicate using bright-spot logic, not abstract rules.</li>
+                    </ol>
+                </div>
+
+                <div class="story">
+                    <div class="story-label">📖 Sternin's Extraction Method Revisited</div>
+                    <div class="story-inner">
+                        <p>Remember Sternin in Vietnam? He didn't just note that some families had healthy kids. He extracted the principles:</p>
+                        <ul style="margin: 15px 0 15px 20px;">
+                            <li><strong>Principle 1:</strong> Feed more frequently (problem = kids didn't eat enough in one sitting)</li>
+                            <li><strong>Principle 2:</strong> Add nutritious variety (problem = limited diet diversity)</li>
+                            <li><strong>Principle 3:</strong> Active parent feeding (problem = kids stopped eating when full for a meal)</li>
+                        </ul>
+                        <p style="margin-top: 15px;">Each principle addressed a specific constraint. When taught to other mothers, they could apply them immediately because they understood the why.</p>
+                    </div>
+                </div>
+
+                <div class="ai-box">
+                    <div class="ai-title">⚡ AI Connection: Few-Shot Learning in ML</div>
+                    <p>Few-shot learning means: given a few examples of a pattern, infer the general rule. Bright spots work the same way. Show people 2-3 examples of success, and their brain extracts the pattern. A 500-slide PowerPoint about change management teaches less than watching one peer succeed and asking them how.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LESSON 11: IDENTITY-BASED CHANGE ==================== -->
+<section>
+    <div class="container">
+        <h2>Lesson 11: Identity-Based Change (Deep Dive)</h2>
+
+        <div class="lesson elephant">
+            <div class="lesson-inner">
+                <div class="lesson-badge">Elephant | Become the Change</div>
+                <h3>👤 Shift Identity, Not Just Behavior</h3>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    The most durable changes happen when people shift their identity. Not "I will drink less alcohol" but "I'm not a heavy drinker." Not "I'll exercise" but "I'm an athlete."
+                </p>
+
+                <div class="card">
+                    <div class="card-label">🎭 How Identity Shapes Behavior</div>
+                    <p><strong>Identity filter:</strong> When faced with a choice, people unconsciously ask "Is this something my identity allows?"</p>
+                    <p style="margin-top: 15px;">If your identity is "I'm healthy," you're more likely to refuse cake at a party. If your identity is "I'm a writer," you're more likely to write daily. If your identity is "I'm honest," you're more likely to admit mistakes.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">🔄 Building Identity Through Micro-Commitments</div>
+                    <p>Identity doesn't form through big decisions; it forms through repeated micro-actions.</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>Do the thing once → "That was interesting"</li>
+                        <li>Do it three times → "This is something I do"</li>
+                        <li>Do it 30 times → "This is who I am"</li>
+                    </ul>
+                </div>
+
+                <div class="quote-box">
+                    "Every action is a vote for the kind of person you wish to become." — James Clear
+                </div>
+
+                <div class="funny-box">
+                    <div class="funny-label">🎭 The Humor</div>
+                    You don't become a runner by deciding to run a marathon. You become a runner by running for 5 minutes, then 10 minutes. Each time you run, you vote: "I'm the kind of person who runs." After enough votes, the identity sticks. Your brain is tally-ing the evidence.
+                </div>
+
+                <div class="ai-box">
+                    <div class="ai-title">⚡ AI Connection: Fine-Tuning as Identity</div>
+                    <p>In ML, fine-tuning a model means adjusting its weights based on training data, shifting how it responds. Identity-based change is self-fine-tuning. Each micro-action adjusts your internal weights: "What kind of person am I?" After enough examples, a new identity emerges, and behavior follows.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LESSON 12: WHEN ELEPHANT WON'T COOPERATE ==================== -->
+<section class="alt">
+    <div class="container">
+        <h2>Lesson 12: When Your Elephant Won't Cooperate</h2>
+
+        <div class="lesson elephant">
+            <div class="lesson-inner">
+                <div class="lesson-badge">Elephant | Handle Resistance & Fear</div>
+                <h3>⚠️ Advanced Tactics for the Stubborn Elephant</h3>
+
+                <p style="font-size: 1.05rem; margin: 25px 0;">
+                    Sometimes the Elephant is scared. Sometimes it's protecting something you haven't identified yet. When direct approaches fail, you need deeper tactics.
+                </p>
+
+                <!-- FUNDAMENTAL ATTRIBUTION ERROR -->
+                <div class="card">
+                    <div class="card-label">🎯 The Fundamental Attribution Error</div>
+                    <p><strong>What it is:</strong> We blame people's resistance to change on their personality ("They're stubborn," "They don't get it") when the real cause is usually environmental or situational.</p>
+                    <p style="margin-top: 15px;"><strong>Example:</strong> "Sales won't adopt the new CRM system. They're resistant to change." (Blame: personality)</p>
+                    <p style="margin-top: 15px;"><strong>Actual reason:</strong> The new system takes twice as long to enter a lead, and they're judged on calls-per-hour. The system design made the old behavior more rational. (The cause: environment, not personality)</p>
+                    <p style="margin-top: 15px;"><strong>The fix:</strong> Change the environment (make the system faster, change the metric), not the person.</p>
+                </div>
+
+                <!-- ANXIETY & LOSS AVERSION -->
+                <div class="card">
+                    <div class="card-label">😟 Understanding the Elephant's Anxiety</div>
+                    <p><strong>Loss aversion:</strong> We feel losses 2x stronger than equivalent gains. So when someone resists change, they're not just missing opportunity—they're protecting against loss.</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>"Will I lose my job?" (Fear of replacement)</li>
+                        <li>"Will I lose status?" (Fear of being "the old person")</li>
+                        <li>"Will I lose competence?" (Fear of starting over as a novice)</li>
+                        <li>"Will I lose identity?" (Fear of who I'll become)</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>The fix:</strong> Name the fear explicitly. Address the loss. Promise to protect what matters: "Your job is secure. We're adding a new skill, not replacing you."</p>
+                </div>
+
+                <!-- FORCING FUNCTION -->
+                <div class="card">
+                    <div class="card-label">⚡ The Forcing Function</div>
+                    <p>Sometimes the Elephant won't move because there's no real pressure. Change feels optional. A forcing function creates real stakes.</p>
+                    <p style="margin-top: 15px;"><strong>Examples:</strong></p>
+                    <ul style="margin-top: 12px; padding-left: 20px;">
+                        <li><strong>Deadline:</strong> "The old system shuts down March 31st. Everyone must migrate by then."</li>
+                        <li><strong>Public commitment:</strong> "I'm announcing to the team that I'm changing. I'm going on record."</li>
+                        <li><strong>Skin in the game:</strong> "If we hit our weight loss goal, I'll donate $500 to charity."</li>
+                    </ul>
+                    <p style="margin-top: 15px;">Forcing functions work because they remove optionality. The Elephant can no longer pretend the change is optional.</p>
+                </div>
+
+                <div class="funny-box">
+                    <div class="funny-label">🎭 The Humor</div>
+                    You: "You should try the new process. It's better." Them: "Nah, I'm good." You (two months later): "Sorry, the old process is being discontinued." Them: "Oh! Okay, I'll learn the new one!" Same person. Same resistance. Different forcing function.
+                </div>
+
+                <!-- HOPE & COMPETENCE -->
+                <div class="card">
+                    <div class="card-label">🌟 Building Hope & Competence</div>
+                    <p>The Elephant resists change when it doubts two things:</p>
+                    <ol style="margin-top: 15px; padding-left: 20px;">
+                        <li><strong>Hope:</strong> "Does this change actually help? Can I trust this will work?"</li>
+                        <li><strong>Competence:</strong> "Can I actually do this? Am I capable?"</li>
+                    </ol>
+                    <p style="margin-top: 15px;"><strong>The fix:</strong></p>
+                    <ul style="margin-top: 12px; padding-left: 20px;">
+                        <li><strong>For hope:</strong> Show bright spots. Prove it works elsewhere.</li>
+                        <li><strong>For competence:</strong> Shrink the change. Provide training. Start with easy wins.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== AI CONNECTION DEEP DIVE ==================== -->
+<section id="ai" class="ai-connection">
+    <div class="container">
+        <h2>🧠 The AI Connection: How the Brain & Machines Learn Alike</h2>
+
+        <p style="text-align: center; max-width: 800px; margin: 30px auto 50px; font-size: 1.05rem;">
+            <strong>Switch</strong> isn't just about human change. It reveals how brains and machines learn, decide, and change. The parallels are striking.
+        </p>
+
+        <div class="grid-3">
+            <!-- RIDER AS DELIBERATE REASONING -->
+            <div class="card">
+                <div class="card-label">🎯 Rider = Deliberate Reasoning</div>
+                <p><strong>Human:</strong> Conscious thought, logic, planning. Slow and deliberate.</p>
+                <p style="margin-top: 12px;"><strong>AI:</strong> Chain-of-thought reasoning. GPT explicitly working through a problem step-by-step instead of pattern-matching.</p>
+                <p style="margin-top: 12px;"><strong>Key insight:</strong> Both are powerful but slow and energy-intensive. Both get fatigued. Both need clear goals to work well.</p>
+            </div>
+
+            <!-- ELEPHANT AS LEARNED HEURISTICS -->
+            <div class="card">
+                <div class="card-label">💪 Elephant = Learned Heuristics</div>
+                <p><strong>Human:</strong> Emotions, intuitions, habits. Fast pattern recognition learned through experience.</p>
+                <p style="margin-top: 12px;"><strong>AI:</strong> Neural network weights. Patterns learned from training data that activate instantly.</p>
+                <p style="margin-top: 12px;"><strong>Key insight:</strong> Both drive most behavior. Both are powerful and efficient. Both can be wrong in consistent ways.</p>
+            </div>
+
+            <!-- PATH AS ENVIRONMENT DESIGN -->
+            <div class="card">
+                <div class="card-label">🛣️ Path = Environment Design</div>
+                <p><strong>Human:</strong> Physical/social environment, defaults, friction.</p>
+                <p style="margin-top: 12px;"><strong>AI:</strong> System prompts, temperature settings, context windows, reward functions.</p>
+                <p style="margin-top: 12px;"><strong>Key insight:</strong> Environmental design is the most powerful lever. Change the environment, behavior follows.</p>
+            </div>
+
+            <!-- BRIGHT SPOTS AS FEW-SHOT LEARNING -->
+            <div class="card">
+                <div class="card-label">✨ Bright Spots = Few-Shot Learning</div>
+                <p><strong>Human:</strong> Learning from examples. One success story teaches more than ten lectures.</p>
+                <p style="margin-top: 12px;"><strong>AI:</strong> Few-shot learning. Give GPT 2-3 examples and it infers the pattern better than with detailed instructions.</p>
+                <p style="margin-top: 12px;"><strong>Key insight:</strong> Examples are the most efficient teaching medium. Show, don't tell.</p>
+            </div>
+
+            <!-- IDENTITY AS FINE-TUNING -->
+            <div class="card">
+                <div class="card-label">🎭 Identity = Fine-Tuning</div>
+                <p><strong>Human:</strong> Repeated actions adjust internal identity weights. "I'm a writer" after 100 writing sessions.</p>
+                <p style="margin-top: 12px;"><strong>AI:</strong> Fine-tuning adjusts model weights on new training data. Same architecture, different weights = different behavior.</p>
+                <p style="margin-top: 12px;"><strong>Key insight:</strong> Deep change comes from repeated calibration, not one-time instruction.</p>
+            </div>
+
+            <!-- ACTION TRIGGERS AS IF-THEN PROGRAMMING -->
+            <div class="card">
+                <div class="card-label">⚙️ Action Triggers = If-Then Programming</div>
+                <p><strong>Human:</strong> "If morning coffee, then meditate." Automatic behavior without decision.</p>
+                <p style="margin-top: 12px;"><strong>AI:</strong> "If user asks X, then do Y." Conditional logic that routes behavior.</p>
+                <p style="margin-top: 12px;"><strong>Key insight:</strong> Removing decision points makes behavior automatic. This is true for both brains and code.</p>
+            </div>
+
+            <!-- PROMPT ENGINEERING AS PATH DESIGN -->
+            <div class="card">
+                <div class="card-label">💬 Prompt Engineering = Path Design</div>
+                <p><strong>Human:</strong> Clear instructions reduce ambiguity and decision paralysis.</p>
+                <p style="margin-top: 12px;"><strong>AI:</strong> Well-designed prompts guide model output toward desired behavior.</p>
+                <p style="margin-top: 12px;"><strong>Key insight:</strong> Environment (including instructions) shapes behavior more than raw capability.</p>
+            </div>
+
+            <!-- MERE EXPOSURE EFFECT IN NETWORKS -->
+            <div class="card">
+                <div class="card-label">👥 Mere Exposure = Training Distribution</div>
+                <p><strong>Human:</strong> Repeated exposure to a behavior increases likelihood of adoption.</p>
+                <p style="margin-top: 12px;"><strong>AI:</strong> Models overfit to training distribution. Repeated examples become "default" behavior.</p>
+                <p style="margin-top: 12px;"><strong>Key insight:</strong> Exposure is one of the most underestimated forces in learning.</p>
+            </div>
+
+            <!-- SHRINKING CHANGE AS CURRICULUM LEARNING -->
+            <div class="card">
+                <div class="card-label">📉 Shrinking Change = Curriculum Learning</div>
+                <p><strong>Human:</strong> Small wins build momentum and confidence.</p>
+                <p style="margin-top: 12px;"><strong>AI:</strong> Curriculum learning: start with easy examples, gradually increase difficulty.</p>
+                <p style="margin-top: 12px;"><strong>Key insight:</strong> Both brains and models learn faster when difficulty is carefully calibrated.</p>
+            </div>
+        </div>
+
+        <div class="quote-box" style="margin-top: 50px;">
+            "Your brain is not a computer. But it's also not magic. It's a learning system shaped by experience, environment, and incentives—just like a neural network. <strong>Switch</strong> reveals the design principles that work for both."
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CROSS-BOOK CONNECTIONS ==================== -->
+<section id="cross">
+    <div class="container">
+        <h2>📚 Cross-Book Connections: The Change Ecosystem</h2>
+
+        <p style="text-align: center; max-width: 800px; margin: 30px auto 50px; font-size: 1.05rem;">
+            <strong>Switch</strong> doesn't exist in isolation. It builds on a rich ecosystem of behavioral science research. Here's how it connects:
+        </p>
+
+        <div class="connect-box">
+            <div class="connect-label">🎯 Switch + Atomic Habits (James Clear)</div>
+            <ul style="margin-top: 15px;">
+                <li><strong>Switch says:</strong> Change behavior through the Rider-Elephant-Path framework</li>
+                <li><strong>Atomic Habits says:</strong> Build identity through tiny habits (same concept, different entry point)</li>
+                <li><strong>Together:</strong> Switch gives you the why and when; Atomic Habits gives you the how for daily execution</li>
+                <li><strong>Use:</strong> Shrink the change → Design tiny habits → Let identity follow</li>
+            </ul>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🧠 Switch + Thinking Fast and Slow (Daniel Kahneman)</div>
+            <ul style="margin-top: 15px;">
+                <li><strong>Switch says:</strong> The Rider is System 2 (deliberate), the Elephant is System 1 (intuitive)</li>
+                <li><strong>Fast & Slow says:</strong> System 1 is automatic and emotional; System 2 is analytical but lazy</li>
+                <li><strong>Together:</strong> They're describing the same cognitive architecture from different angles</li>
+                <li><strong>Use:</strong> Understand how decisions actually get made; respect System 1's power</li>
+            </ul>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🎁 Switch + Nudge (Thaler & Sunstein)</div>
+            <ul style="margin-top: 15px;">
+                <li><strong>Switch says:</strong> Shape the Path to make good choices easier</li>
+                <li><strong>Nudge says:</strong> Small environmental tweaks drive behavior change without restricting choice</li>
+                <li><strong>Together:</strong> Path design is tactical nudging at scale</li>
+                <li><strong>Use:</strong> Default settings, choice architecture, opt-out instead of opt-in</li>
+            </ul>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🔄 Switch + The Power of Habit (Charles Duhigg)</div>
+            <ul style="margin-top: 15px;">
+                <li><strong>Switch says:</strong> Build habits through action triggers and environment design</li>
+                <li><strong>Power of Habit says:</strong> Habits = cue → routine → reward (the habit loop)</li>
+                <li><strong>Together:</strong> Habits are the permanent solution; make them the focus early</li>
+                <li><strong>Use:</strong> Identify the cue (if-then trigger), design the routine, cement with reward</li>
+            </ul>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">💰 Switch + Influence (Robert Cialdini)</div>
+            <ul style="margin-top: 15px;">
+                <li><strong>Switch says:</strong> Rally the herd; leverage social proof and the Mere Exposure effect</li>
+                <li><strong>Influence says:</strong> Social proof is one of six universal principles of persuasion</li>
+                <li><strong>Together:</strong> Path design includes social path design</li>
+                <li><strong>Use:</strong> Make others' behavior visible; show that "normal people" do this</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CASE STUDIES SUMMARY ==================== -->
+<section id="cases" class="alt">
+    <div class="container">
+        <h2>📖 Case Studies Summary</h2>
+
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-label">🌍 Jerry Sternin in Vietnam</div>
+                <p><strong>Problem:</strong> Childhood malnutrition across villages</p>
+                <p style="margin-top: 12px;"><strong>Solution:</strong> Bright spots approach—found families with healthy kids despite poverty</p>
+                <p style="margin-top: 12px;"><strong>Result:</strong> 65% of malnourished children reached normal weight in months; scaled to 265 villages</p>
+                <p style="margin-top: 12px;"><strong>Framework:</strong> Rider (script behaviors) + Elephant (prove it works) + Path (use local resources)</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">🎯 Robyn Waters at Target</div>
+                <p><strong>Problem:</strong> Target's housewares were boring and dated</p>
+                <p style="margin-top: 12px;"><strong>Solution:</strong> Emotional appeal—shift identity from "discount store" to "design for all"</p>
+                <p style="margin-top: 12px;"><strong>Result:</strong> Brought in renowned designers; sales soared; became Target's identity</p>
+                <p style="margin-top: 12px;"><strong>Framework:</strong> Find the feeling (identity shift) + Rider (clear destination)</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">👥 Rackspace Customer Service</div>
+                <p><strong>Problem:</strong> "Fanatical customer service" was vague and inconsistent</p>
+                <p style="margin-top: 12px;"><strong>Solution:</strong> Script critical moves—exact behaviors for "fanatical" service</p>
+                <p style="margin-top: 12px;"><strong>Result:</strong> Clearer execution; stronger culture; better retention</p>
+                <p style="margin-top: 12px;"><strong>Framework:</strong> Script critical moves (Rider clarity)</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FINAL CHEATSHEET ==================== -->
+<section>
+    <div class="container">
+        <h2>🎯 The Ultimate Change Cheatsheet</h2>
+
+        <div class="two-col">
+            <div>
+                <h3 style="color: var(--sky); margin-bottom: 20px;">Direction the Rider</h3>
+                <div class="cheatsheet">
+                    <div class="cheatsheet-label">1️⃣ Find the Bright Spots</div>
+                    <div class="cheatsheet-inner">
+                        <p>Who's succeeding despite the same constraints? Study them. Replicate them.</p>
+                    </div>
+                </div>
+
+                <div class="cheatsheet">
+                    <div class="cheatsheet-label">2️⃣ Script Critical Moves</div>
+                    <div class="cheatsheet-inner">
+                        <p>What are the 2-3 exact behaviors that matter? Make them concrete, not vague.</p>
+                    </div>
+                </div>
+
+                <div class="cheatsheet">
+                    <div class="cheatsheet-label">3️⃣ Point to the Destination</div>
+                    <div class="cheatsheet-inner">
+                        <p>Paint a vivid, specific picture of the future state. Make it real.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="color: var(--warm-red); margin-bottom: 20px;">Motivate the Elephant</h3>
+                <div class="cheatsheet">
+                    <div class="cheatsheet-label">4️⃣ Find the Feeling</div>
+                    <div class="cheatsheet-inner">
+                        <p>What emotional lever will move people? Identity, belonging, progress?</p>
+                    </div>
+                </div>
+
+                <div class="cheatsheet">
+                    <div class="cheatsheet-label">5️⃣ Shrink the Change</div>
+                    <div class="cheatsheet-inner">
+                        <p>Make the first step so small the Elephant can't refuse. Build momentum.</p>
+                    </div>
+                </div>
+
+                <div class="cheatsheet">
+                    <div class="cheatsheet-label">6️⃣ Grow Your People</div>
+                    <div class="cheatsheet-inner">
+                        <p>Build identity through micro-wins. Let people become the change.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <h3 style="color: var(--forest); margin-bottom: 20px;">Shape the Path</h3>
+            <div class="two-col">
+                <div class="cheatsheet">
+                    <div class="cheatsheet-label">7️⃣ Tweak the Environment</div>
+                    <div class="cheatsheet-inner">
+                        <p>Remove friction for good choices. Make bad choices harder. Design defaults.</p>
+                    </div>
+                </div>
+
+                <div class="cheatsheet">
+                    <div class="cheatsheet-label">8️⃣ Build Habits</div>
+                    <div class="cheatsheet-inner">
+                        <p>Create if-then triggers. Chain new behavior to existing habits. Automate.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cheatsheet" style="margin-top: 25px;">
+                <div class="cheatsheet-label">9️⃣ Rally the Herd</div>
+                <div class="cheatsheet-inner">
+                    <p>Make change visible. Leverage social proof. Show that "people like me" do this.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CONCLUSION ==================== -->
+<section class="alt">
+    <div class="container">
+        <h2>🌟 The Ultimate Truth About Change</h2>
+
+        <div style="max-width: 800px; margin: 0 auto; background: linear-gradient(135deg, rgba(84, 239, 196, 0.1) 0%, rgba(116, 185, 255, 0.1) 100%); padding: 40px; border-radius: 12px; border-left: 5px solid var(--teal);">
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
+                Change isn't a mystery. It's not magic. It's not about willpower or motivation or being the "right kind of person."
+            </p>
+
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
+                Change is a problem of direction (Rider), motivation (Elephant), and environment (Path). When all three align, change happens. When any one is missing, change stalls.
+            </p>
+
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
+                The people who change things aren't different. They're just more strategic about how they approach the problem. They direct their Rider, motivate their Elephant, and shape their Path.
+            </p>
+
+            <p style="font-size: 1.1rem; line-height: 1.8; font-weight: 600; color: var(--teal);">
+                You can do the same. Right now. With what you have. One small step at a time.
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 300px; width: 100%;">
+                    <!-- Success path -->
+                    <defs>
+                        <linearGradient id="successGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#4ECDC4;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B894;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Winding path to top -->
+                    <path d="M 30 180 Q 70 140 110 150 Q 150 160 170 100 Q 190 40 270 30"
+                          stroke="url(#successGrad)" stroke-width="50" fill="none" stroke-linecap="round" opacity="0.3"/>
+
+                    <!-- Path direction -->
+                    <circle cx="270" cy="30" r="12" fill="var(--sunny)"/>
+                    <text x="270" y="35" text-anchor="middle" font-size="18" font-weight="bold">🎯</text>
+
+                    <!-- Elephant and rider reaching peak -->
+                    <g transform="translate(270, 30)">
+                        <!-- Celebration elephant -->
+                        <ellipse cx="-20" cy="20" rx="25" ry="20" fill="#E17055"/>
+                        <circle cx="-5" cy="5" r="15" fill="#E17055"/>
+                        <circle cx="0" cy="0" r="4" fill="#2D3436"/>
+
+                        <!-- Celebration rider -->
+                        <circle cx="0" cy="-15" r="10" fill="#74B9FF"/>
+                        <circle cx="0" cy="-28" r="6" fill="#FDBCB4"/>
+                        <line x1="-8" y1="-10" x2="-18" y2="0" stroke="#FDBCB4" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="8" y1="-10" x2="18" y2="0" stroke="#FDBCB4" stroke-width="3" stroke-linecap="round"/>
+
+                        <!-- Celebration marks -->
+                        <text x="-40" y="-5" font-size="20">✨</text>
+                        <text x="40" y="-5" font-size="20">✨</text>
+                        <text x="0" y="-50" text-anchor="middle" font-size="16">🎉</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+    <div class="container">
+        <h3>Switch: How to Change Things When Change Is Hard</h3>
+        <p>By Chip Heath & Dan Heath</p>
+        <p style="font-size: 0.9rem; margin-top: 25px;">This illustrated guide synthesizes the core frameworks and case studies from <em>Switch</em>, connecting them to modern behavioral science, AI/ML concepts, and practical application.</p>
+        <p style="margin-top: 25px; font-size: 0.85rem; opacity: 0.7;">Created with deep comprehensive illustrations • Teal • Forest • Sunny palette</p>
+        <p style="margin-top: 30px; font-size: 0.85rem;">The Rider-Elephant-Path framework: <strong>Direct the Rider</strong> | <strong>Motivate the Elephant</strong> | <strong>Shape the Path</strong></p>
+    </div>
+</footer>
+
+</body>
+</html>

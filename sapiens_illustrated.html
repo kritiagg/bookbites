@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sapiens: A Brief History of Humankind - Illustrated Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-purple) 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .toc {
+            background: white;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .toc h2 {
+            color: var(--warm-red);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .toc ol {
+            list-style: none;
+            counter-reset: lesson-counter;
+        }
+
+        .toc li {
+            counter-increment: lesson-counter;
+            margin: 0.8rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+        }
+
+        .toc li:before {
+            content: counter(lesson-counter);
+            position: absolute;
+            left: 0;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--warm-red) 0%, var(--orange) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--deep-blue);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: var(--warm-red);
+        }
+
+        .cover {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, var(--warm-red) 0%, var(--orange) 50%, var(--sunny) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+
+        .cover h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover p {
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .cover-svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .lesson {
+            background: white;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            scroll-margin-top: 80px;
+        }
+
+        .lesson:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .lesson-inner {
+            padding: 2.5rem;
+        }
+
+        .lesson-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1.5rem;
+        }
+
+        .lesson-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--warm-red) 0%, var(--orange) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .lesson h2 {
+            font-size: 2rem;
+            color: var(--dark-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-subtitle {
+            color: var(--warm-red);
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid var(--warm-red);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .card-label {
+            display: inline-block;
+            background: var(--warm-red);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--orange) 100%);
+            border-left: 4px solid var(--warm-red);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        .quote-box:before {
+            content: '"';
+            font-size: 3rem;
+            opacity: 0.3;
+            line-height: 0;
+        }
+
+        .quote-attribution {
+            margin-top: 1rem;
+            font-style: normal;
+            font-weight: 600;
+            color: var(--dark-purple);
+        }
+
+        .funny-box {
+            background: linear-gradient(135deg, var(--mint) 0%, var(--teal) 100%);
+            border-left: 4px solid var(--forest);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .funny-box .card-label {
+            background: var(--forest);
+            border-color: var(--forest);
+        }
+
+        .ai-box {
+            background: linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%);
+            border-left: 4px solid var(--dark-purple);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .ai-box .card-label {
+            background: var(--dark-purple);
+        }
+
+        .connect-box {
+            background: linear-gradient(135deg, #fecaca 0%, #fed7aa 100%);
+            border-left: 4px solid var(--coral);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .connect-box .card-label {
+            background: var(--coral);
+        }
+
+        .illustration-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            border-radius: 8px;
+        }
+
+        .illustration-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .story {
+            background: linear-gradient(135deg, var(--sky) 0%, var(--mint) 100%);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .story-inner h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .story-inner p {
+            color: var(--dark);
+            line-height: 1.8;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .two-col > * {
+            flex: 1;
+        }
+
+        .cheatsheet {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--sunny) 100%);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .cheatsheet-inner h3 {
+            color: var(--warm-red);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .cheatsheet ul {
+            list-style: none;
+        }
+
+        .cheatsheet li {
+            padding: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .cheatsheet li:last-child {
+            border-bottom: none;
+        }
+
+        .cheatsheet li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--warm-red);
+            font-weight: bold;
+        }
+
+        .key-point {
+            background: linear-gradient(135deg, var(--forest) 0%, var(--teal) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .key-example {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-left: 3px solid white;
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-marker {
+            width: 40px;
+            height: 40px;
+            background: var(--warm-red);
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-item:not(:last-child) .timeline-marker::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 80px;
+            background: var(--warm-red);
+            left: 50%;
+            top: 100%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 8px;
+        }
+
+        .timeline-content h4 {
+            color: var(--dark-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .highlight {
+            background: var(--sunny);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .strong-emphasis {
+            color: var(--warm-red);
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .cover h1 {
+                font-size: 2rem;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .lesson h2 {
+                font-size: 1.5rem;
+            }
+
+            .lesson-inner {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sapiens</h1>
+        <p>A Brief History of Humankind — Illustrated Guide</p>
+        <p style="font-size: 0.95rem; margin-top: 0.5rem;">By Yuval Noah Harari</p>
+    </header>
+
+    <div class="toc">
+        <h2>📚 Lessons & Themes</h2>
+        <ol>
+            <li><a href="#lesson-1">The Cognitive Revolution: Fiction as Humanity's Superpower</a></li>
+            <li><a href="#lesson-2">The Agricultural Revolution: History's Biggest Fraud</a></li>
+            <li><a href="#lesson-3">The Unification of Humankind: Money, Empires & Religions</a></li>
+            <li><a href="#lesson-4">Imagined Orders: Companies, Nations & Human Rights</a></li>
+            <li><a href="#lesson-5">The Scientific Revolution: Marriage of Science, Empire & Capitalism</a></li>
+            <li><a href="#lesson-6">Money: The Most Universal Fiction</a></li>
+            <li><a href="#lesson-7">Imperialism: Complex Legacy & Global Networks</a></li>
+            <li><a href="#lesson-8">The Happiness Question: Are We Happier Than Foragers?</a></li>
+            <li><a href="#lesson-9">The Animal Industrial Revolution: Our Ethical Blind Spot</a></li>
+            <li><a href="#lesson-10">Dataism: The Future of Homo Sapiens</a></li>
+            <li><a href="#lesson-11">Why Sapiens Beat Neanderthals: Gossip & Cooperation</a></li>
+            <li><a href="#lesson-12">The Luxury Trap: How Wheat Domesticated Us</a></li>
+        </ol>
+    </div>
+
+    <div class="cover">
+        <svg class="cover-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cave paintings -->
+            <circle cx="80" cy="100" r="8" fill="none" stroke="white" stroke-width="2"/>
+            <path d="M 70 110 Q 80 115 90 110" fill="none" stroke="white" stroke-width="2"/>
+            <g opacity="0.6">
+                <circle cx="320" cy="100" r="6" fill="white"/>
+                <circle cx="310" cy="105" r="5" fill="white"/>
+                <circle cx="330" cy="105" r="5" fill="white"/>
+            </g>
+
+            <!-- Wheat stalks -->
+            <line x1="100" y1="250" x2="100" y2="320" stroke="white" stroke-width="2"/>
+            <line x1="95" y1="270" x2="100" y2="260" stroke="white" stroke-width="1.5"/>
+            <line x1="105" y1="270" x2="100" y2="260" stroke="white" stroke-width="1.5"/>
+
+            <line x1="300" y1="250" x2="300" y2="320" stroke="white" stroke-width="2"/>
+            <line x1="295" y1="270" x2="300" y2="260" stroke="white" stroke-width="1.5"/>
+            <line x1="305" y1="270" x2="300" y2="260" stroke="white" stroke-width="1.5"/>
+
+            <!-- DNA spiral -->
+            <path d="M 200 50 Q 220 70 200 90 Q 180 110 200 130" fill="none" stroke="white" stroke-width="2"/>
+            <circle cx="200" cy="90" r="3" fill="white"/>
+            <circle cx="210" cy="80" r="3" fill="white"/>
+            <circle cx="190" cy="100" r="3" fill="white"/>
+
+            <!-- Coins -->
+            <circle cx="150" cy="200" r="12" fill="none" stroke="white" stroke-width="2"/>
+            <text x="148" y="206" fill="white" font-size="8" font-weight="bold">$</text>
+
+            <circle cx="250" cy="220" r="12" fill="none" stroke="white" stroke-width="2"/>
+            <text x="248" y="226" fill="white" font-size="8" font-weight="bold">£</text>
+        </svg>
+
+        <div class="cover-content">
+            <h1>Sapiens</h1>
+            <p>How Fiction Built Our World</p>
+        </div>
+    </div>
+
+    <!-- LESSON 1: The Cognitive Revolution -->
+    <div class="lesson" id="lesson-1">
+        <div class="lesson-inner">
+            <div class="lesson-header">
+                <div class="lesson-number">1</div>
+                <div>
+                    <h2>The Cognitive Revolution</h2>
+                    <p class="lesson-subtitle">Fiction as Humanity's Superpower</p>
+                </div>
+            </div>
+
+            <p>Around 70,000 years ago, something shifted in the Sapiens brain. We didn't get smarter—we got <span class="strong-emphasis">strange</span>. We developed the ability to believe in things that don't exist: gods, nations, companies, human rights, money. This wasn't a disadvantage; it was humanity's ultimate superpower.</p>
+
+            <div class="key-point">
+                <strong>The Core Insight:</strong> Sapiens conquered the world not through individual intelligence but through collective fiction. We can coordinate millions of strangers around shared myths.
+                <div class="key-example">
+                    A Peugeot car exists because thousands of engineers, factory workers, and designers all believed in the same legal fiction: the corporation. It's a ghost made of contracts and stories.
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Why This Matters</span>
+                <p>Every large-scale human society rests on shared fictions. Before the Cognitive Revolution, humans were trapped in small bands (150 people max—Dunbar's number). Fictions about gods, laws, and identities let us scale beyond this biological limit.</p>
+            </div>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+                    <!-- Simple figures -->
+                    <circle cx="50" cy="80" r="15" fill="#FF6B6B"/>
+                    <circle cx="100" cy="80" r="15" fill="#FF6B6B"/>
+                    <circle cx="150" cy="80" r="15" fill="#FF6B6B"/>
+                    <circle cx="200" cy="80" r="15" fill="#FF6B6B"/>
+                    <circle cx="250" cy="80" r="15" fill="#FF6B6B"/>
+
+                    <!-- Connection lines (myth) -->
+                    <path d="M 65 70 L 85 70" stroke="#4ECDC4" stroke-width="2" stroke-dasharray="5,5"/>
+                    <path d="M 115 70 L 135 70" stroke="#4ECDC4" stroke-width="2" stroke-dasharray="5,5"/>
+                    <path d="M 165 70 L 185 70" stroke="#4ECDC4" stroke-width="2" stroke-dasharray="5,5"/>
+                    <path d="M 215 70 L 235 70" stroke="#4ECDC4" stroke-width="2" stroke-dasharray="5,5"/>
+
+                    <!-- Shared fiction cloud -->
+                    <ellipse cx="150" cy="30" rx="120" ry="25" fill="#FFE66D" opacity="0.5"/>
+                    <text x="150" y="35" text-anchor="middle" font-size="14" font-weight="bold" fill="#2D3436">Shared Myth</text>
+
+                    <text x="150" y="160" text-anchor="middle" font-size="12" fill="#2D3436">From Small Bands to Civilizations</text>
+                </svg>
+            </div>
+
+            <div class="funny-box">
+                <span class="card-label">The Funny Part</span>
+                <p><strong>We're basically a species of story-addicts.</strong> We'll coordinate and die for things that aren't real: national flags, corporate loyalty, political ideologies. A lion will never fight for a flag. A Sapiens will.</p>
+            </div>
+
+            <div class="ai-box">
+                <span class="card-label">AI Connection</span>
+                <p>LLMs generate fiction at scale—plausible narratives that don't require truth. In a sense, they're doing what the Cognitive Revolution enabled: <strong>decoupling meaning from reality</strong>. Both Sapiens and GPT-4 traffic in shared stories. The difference? We believe ours are real.</p>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h3>Story: The Peugeot Corporation</h3>
+                    <p>If you trace a Peugeot car backward, you'll find real atoms, real engineers, real factories. But the <strong>company itself</strong>—Peugeot as a legal entity that can sign contracts, own property, go bankrupt—exists only in collective imagination. It's an imagined order so powerful it can own real land and real machines.</p>
+                </div>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h3>Cognitive Revolution Cheatsheet</h3>
+                    <ul>
+                        <li><strong>Fiction Threshold (70,000 years ago):</strong> Ability to imagine things that don't exist</li>
+                        <li><strong>Dunbar's Number (150):</strong> Max size of a band held together by gossip alone</li>
+                        <li><strong>Shared Myths:</strong> The glue that lets millions coordinate without knowing each other</li>
+                        <li><strong>Three Types:</strong> Myths (gods, spirits), then laws (rules), then stories (nationalism)</li>
+                        <li><strong>Competitive Advantage:</strong> Neanderthals were stronger, but Sapiens' fictions scaled</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 2: The Agricultural Revolution -->
+    <div class="lesson" id="lesson-2">
+        <div class="lesson-inner">
+            <div class="lesson-header">
+                <div class="lesson-number">2</div>
+                <div>
+                    <h2>The Agricultural Revolution</h2>
+                    <p class="lesson-subtitle">History's Biggest Fraud</p>
+                </div>
+            </div>
+
+            <p>Twelve thousand years ago, Sapiens stopped following herds and started growing wheat. We thought it was progress. It was actually a <span class="strong-emphasis">trap</span>. We sacrificed freedom, health, and happiness for population growth.</p>
+
+            <div class="key-point">
+                <strong>The Cruel Irony:</strong> We didn't domesticate wheat—wheat domesticated us. Wheat needed us to clear forests, dig irrigation, protect crops from pests. We became servants to a plant that demanded 12+ hours of labor daily.
+                <div class="key-example">
+                    A forager worked 15 hours/week and ate varied diet. A farmer worked 40+ hours/week for a monotonous diet of grain, was shorter, had worse teeth, suffered more disease, but had more babies.
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">The Trap Logic</span>
+                <p>Agriculture created a local maximum, not a global optimum. More food meant more people, but not happier people. Yet once you've planted a field, you're locked in—you must tend it daily. This is the Luxury Trap in miniature: convenience breeds dependence.</p>
+            </div>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+                    <!-- Before: Forager (happy) -->
+                    <g>
+                        <circle cx="50" cy="80" r="10" fill="#FF6B6B"/>
+                        <text x="50" y="130" text-anchor="middle" font-size="12" fill="#2D3436">Forager</text>
+                        <text x="50" y="150" text-anchor="middle" font-size="11" fill="#00B894" font-weight="bold">15 hrs/week</text>
+                        <text x="50" y="170" text-anchor="middle" font-size="11" fill="#00B894">Varied diet</text>
+                        <text x="50" y="190" text-anchor="middle" font-size="11" fill="#00B894">Free time</text>
+                    </g>
+
+                    <!-- Arrow -->
+                    <path d="M 80 80 L 120 80" stroke="#E17055" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#E17055"/>
+                        </marker>
+                    </defs>
+
+                    <!-- After: Farmer (trapped) -->
+                    <g>
+                        <circle cx="250" cy="80" r="10" fill="#E17055"/>
+                        <text x="250" y="130" text-anchor="middle" font-size="12" fill="#2D3436">Farmer</text>
+                        <text x="250" y="150" text-anchor="middle" font-size="11" fill="#E17055" font-weight="bold">40+ hrs/week</text>
+                        <text x="250" y="170" text-anchor="middle" font-size="11" fill="#E17055">Grain monotony</text>
+                        <text x="250" y="190" text-anchor="middle" font-size="11" fill="#E17055">Bound to field</text>
+                    </g>
+
+                    <!-- Wheat stalks at bottom -->
+                    <g opacity="0.6">
+                        <line x1="30" y1="220" x2="30" y2="250" stroke="#FFE66D" stroke-width="3"/>
+                        <line x1="25" y1="235" x2="30" y2="225" stroke="#FFE66D" stroke-width="2"/>
+                        <line x1="35" y1="235" x2="30" y2="225" stroke="#FFE66D" stroke-width="2"/>
+
+                        <line x1="270" y1="220" x2="270" y2="250" stroke="#FFE66D" stroke-width="3"/>
+                        <line x1="265" y1="235" x2="270" y2="225" stroke="#FFE66D" stroke-width="2"/>
+                        <line x1="275" y1="235" x2="270" y2="225" stroke="#FFE66D" stroke-width="2"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="funny-box">
+                <span class="card-label">The Dark Humor</span>
+                <p><strong>Humans think they tamed wheat. Wheat tamed humans.</strong> We cleared forests, built irrigation systems, invented hierarchy (someone had to store grain and prevent theft). Agriculture didn't free us—it enslaved us to calories.</p>
+            </div>
+
+            <div class="ai-box">
+                <span class="card-label">AI Connection</span>
+                <p>The Agricultural Revolution is the ur-optimization trap. Maximize grain output → maximize population → lock in dependencies → can't go back. AI systems face the same risk: optimizing for one metric (profit, engagement, accuracy) can create unforeseen cascading costs. Local maxima masquerading as progress.</p>
+            </div>
+
+            <div class="connect-box">
+                <span class="card-label">Cross-Book Reference</span>
+                <p><strong>Thinking, Fast and Slow (Kahneman):</strong> This is a prime example of System 1 (immediate benefit: more food) overpowering System 2 (long-term cost: centuries of servitude).</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h3>Agricultural Revolution Cheatsheet</h3>
+                    <ul>
+                        <li><strong>Timeline:</strong> ~12,000 BCE, multiple regions independently (Fertile Crescent, China, Mesoamerica)</li>
+                        <li><strong>The Myth:</strong> "Progress" narrative disguises enslavement to plants</li>
+                        <li><strong>Cost-Benefit:</strong> Population ↑↑↑, happiness ↓, work ↑↑↑, disease ↑</li>
+                        <li><strong>Lock-In:</strong> Once farming starts, you can't abandon it (food-dependent population)</li>
+                        <li><strong>Hierarchy Emerges:</strong> Grain storage = power = first administrators/rulers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 3: The Unification of Humankind -->
+    <div class="lesson" id="lesson-3">
+        <div class="lesson-inner">
+            <div class="lesson-header">
+                <div class="lesson-number">3</div>
+                <div>
+                    <h2>The Unification of Humankind</h2>
+                    <p class="lesson-subtitle">Money, Empires & Religions as Fictional Orders</p>
+                </div>
+            </div>
+
+            <p>For most of history, humans were fragmented into thousands of independent tribes. Three fictional forces knit us together into a single global civilization: <span class="strong-emphasis">money</span>, <span class="strong-emphasis">empires</span>, and <span class="strong-emphasis">religions</span>.</p>
+
+            <div class="key-point">
+                <strong>The Unified Pattern:</strong> All three are imagined orders that convince millions of strangers to cooperate toward shared goals—even to die for them.
+                <div class="key-example">
+                    A monk in 12th-century Europe believed in the same Christian God as a peasant, even if they'd never met. That shared fiction created networks of loyalty, trade, and military alliance spanning continents.
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="card">
+                    <span class="card-label">Money</span>
+                    <p>The universal translator. An Athenian merchant could trade with a Persian merchant without shared language, religion, or cultural values—they both believed in the value of gold or silver.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Empires</span>
+                    <p>Political fiction enabling one center to control vast territories. The Roman Empire could administer millions of people across different lands by imposing a shared legal and military order.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Religions</span>
+                <p>The most powerful unifying fiction. Islam, Christianity, Buddhism—each offered a single truth about human purpose, binding followers across ethnic and tribal lines. A Chinese Buddhist and an Indian Buddhist could recognize each other across language barriers.</p>
+            </div>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+                    <!-- Tribes before -->
+                    <g opacity="0.5">
+                        <circle cx="50" cy="60" r="25" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                        <circle cx="50" cy="60" r="8" fill="#4ECDC4"/>
+                        <text x="50" y="65" text-anchor="middle" font-size="10" fill="white" font-weight="bold">T1</text>
+
+                        <circle cx="250" cy="60" r="25" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+                        <circle cx="250" cy="60" r="8" fill="#FF6B6B"/>
+                        <text x="250" y="65" text-anchor="middle" font-size="10" fill="white" font-weight="bold">T2</text>
+
+                        <text x="150" y="120" text-anchor="middle" font-size="11" fill="#999">Isolated Tribes</text>
+                    </g>
+
+                    <!-- Unification network -->
+                    <circle cx="150" cy="180" r="60" fill="none" stroke="#FFE66D" stroke-width="3" stroke-dasharray="5,5"/>
+
+                    <!-- Connected nodes -->
+                    <circle cx="120" cy="160" r="6" fill="#FF6B6B"/>
+                    <circle cx="180" cy="160" r="6" fill="#FF6B6B"/>
+                    <circle cx="140" cy="210" r="6" fill="#FF6B6B"/>
+                    <circle cx="160" cy="210" r="6" fill="#FF6B6B"/>
+
+                    <!-- Connection lines -->
+                    <line x1="120" y1="160" x2="180" y2="160" stroke="#FF6B6B" stroke-width="1" opacity="0.6"/>
+                    <line x1="120" y1="160" x2="140" y2="210" stroke="#FF6B6B" stroke-width="1" opacity="0.6"/>
+                    <line x1="180" y1="160" x2="160" y2="210" stroke="#FF6B6B" stroke-width="1" opacity="0.6"/>
+                    <line x1="140" y1="210" x2="160" y2="210" stroke="#FF6B6B" stroke-width="1" opacity="0.6"/>
+
+                    <text x="150" y="240" text-anchor="middle" font-size="11" fill="#2D3436" font-weight="bold">Unified by Money, Empire, Religion</text>
+                </svg>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h3>Story: The Spanish Conquest of the Aztecs</h3>
+                    <p>Hernán Cortés arrived with 600 men. The Aztec Empire had 5 million people. Yet Cortés won. How? He had something the Aztecs lacked: <strong>imagined orders backed by absolute faith</strong>. Spanish had horses (seen as divine), steel, and—critically—belief in their god-ordained right to conquer. Montezuma, trapped in Aztec cosmology, saw Cortés as possibly the god Quetzalcoatl returned. The Aztec empire collapsed partly because Cortés's fictions were more coherent and backed by firepower.</p>
+                </div>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h3>Unification Forces Cheatsheet</h3>
+                    <ul>
+                        <li><strong>Money:</strong> Transcends tribe, culture, language—universal medium of exchange</li>
+                        <li><strong>Empires:</strong> Political unification through law, military, bureaucracy</li>
+                        <li><strong>Religions:</strong> Spiritual unification through shared cosmology and purpose</li>
+                        <li><strong>Hybrid Effect:</strong> Often combine (e.g., Christian empires + holy money = powerful fusion)</li>
+                        <li><strong>Result:</strong> From 10,000+ independent cultures to 1 global civilization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 4: Imagined Orders -->
+    <div class="lesson" id="lesson-4">
+        <div class="lesson-inner">
+            <div class="lesson-header">
+                <div class="lesson-number">4</div>
+                <div>
+                    <h2>Imagined Orders</h2>
+                    <p class="lesson-subtitle">Companies, Nations & Human Rights</p>
+                </div>
+            </div>
+
+            <p>An <span class="strong-emphasis">imagined order</span> is a belief system shared by large populations that has no basis in objective reality. It exists because enough people believe it exists. Once locked in, it becomes self-reinforcing and incredibly powerful.</p>
+
+            <div class="key-point">
+                <strong>Three Examples of Imagined Orders:</strong> The limited liability company, the nation-state, and universal human rights.
+                <div class="key-example">
+                    The Code of Hammurabi (1754 BCE) and the US Declaration of Independence (1776 CE) both claim to describe objective universal truths. But Hammurabi's "natural law" divided humans into three classes with different punishments for the same crime. Jefferson's "all men are created equal" was written by a slave owner. Both are fiction—powerful fictions that shaped history, but fictions nonetheless.
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="card">
+                    <span class="card-label">Corporations</span>
+                    <p>A legal fiction that lets thousands of people with conflicting interests coordinate toward a single goal. The corporation can own property, sign contracts, and be sued—none of which a real object can do.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Nations</span>
+                    <p>Imagined community of people who've never met but share identity. Nationalism is <strong>younger than potatoes</strong> (crops are 10,000+ years old, nationalism ~200 years). Yet it feels eternal.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Human Rights</span>
+                <p>The belief that humans have intrinsic, inalienable rights. No animal has rights in nature—might makes right. Human rights are a recent fiction (18th century) that has reshaped the world. Powerful? Undeniably. True in any objective sense? No.</p>
+            </div>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+                    <!-- Three pillars -->
+                    <g>
+                        <!-- Corporation -->
+                        <rect x="20" y="100" width="50" height="60" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                        <text x="45" y="125" text-anchor="middle" font-size="11" font-weight="bold" fill="#4ECDC4">Corp</text>
+                        <circle cx="45" cy="140" r="3" fill="#4ECDC4"/>
+
+                        <!-- Nation -->
+                        <rect x="125" y="100" width="50" height="60" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+                        <text x="150" y="125" text-anchor="middle" font-size="11" font-weight="bold" fill="#FF6B6B">Nation</text>
+                        <circle cx="150" cy="140" r="3" fill="#FF6B6B"/>
+
+                        <!-- Rights -->
+                        <rect x="230" y="100" width="50" height="60" fill="none" stroke="#00B894" stroke-width="2"/>
+                        <text x="255" y="125" text-anchor="middle" font-size="11" font-weight="bold" fill="#00B894">Rights</text>
+                        <circle cx="255" cy="140" r="3" fill="#00B894"/>
+                    </g>
+
+                    <!-- Foundation -->
+                    <rect x="10" y="160" width="280" height="30" fill="#FFE66D" opacity="0.3" rx="4"/>
+                    <text x="150" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="#2D3436">Collective Belief</text>
+                </svg>
+            </div>
+
+            <div class="funny-box">
+                <span class="card-label">The Funny Part</span>
+                <p><strong>We build our entire civilization on ghost stories.</strong> Corporations, nations, and human rights are more fictional than Harry Potter. The difference? Everyone agrees to pretend these ghosts are real, and they behave as if they are. So they become real. Consensus creates reality.</p>
+            </div>
+
+            <div class="ai-box">
+                <span class="card-label">AI Connection</span>
+                <p>Imagined orders are <strong>consensus-based realities</strong>. LLMs are trained on human text, which is saturated with these fictions. When an AI learns to predict human language, it's actually learning to encode these imagined orders into vector space. The model doesn't understand corporations exist—it learns patterns that predict humans will coordinate as if they do.</p>
+            </div>
+
+            <div class="connect-box">
+                <span class="card-label">Cross-Book Reference</span>
+                <p><strong>Gödel, Escher, Bach (Hofstadter):</strong> Strange loops and self-reference. Imagined orders are like strange loops—they exist because they refer to themselves, creating self-reinforcing cycles of belief.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h3>Imagined Orders Cheatsheet</h3>
+                    <ul>
+                        <li><strong>Definition:</strong> Shared belief systems with no objective reality</li>
+                        <li><strong>Power Source:</strong> Scale (more believers = more power)</li>
+                        <li><strong>Lock-In:</strong> Once everyone believes, contradicting it is irrational</li>
+                        <li><strong>Historical Shift:</strong> From natural orders (god, class) to imagined orders (equality)</li>
+                        <li><strong>Modern Challenge:</strong> Deconstructing one without institutional collapse</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 5: The Scientific Revolution -->
+    <div class="lesson" id="lesson-5">
+        <div class="lesson-inner">
+            <div class="lesson-header">
+                <div class="lesson-number">5</div>
+                <div>
+                    <h2>The Scientific Revolution</h2>
+                    <p class="lesson-subtitle">Marriage of Science, Empire & Capitalism</p>
+                </div>
+            </div>
+
+            <p>The Scientific Revolution (1500s-1700s) didn't just change how we think—it created a lethal alliance between three forces: <span class="strong-emphasis">empirical method</span>, <span class="strong-emphasis">imperial expansion</span>, and <span class="strong-emphasis">capitalist profit</span>.</p>
+
+            <div class="key-point">
+                <strong>The Unholy Trinity:</strong> Science asked "How does the world work?" Empire said "Let's conquer it." Capitalism asked "How do we profit?" Combined, they were unstoppable.
+                <div class="key-example">
+                    European explorers mapped the world using newly precise instruments (science), conquered indigenous peoples (empire), and extracted resources to sell (capitalism). The Spanish brought back New World wealth, funding further exploration and scientific advancement. Science enabled conquest, conquest funded science.
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">The Three Forces</span>
+                <ul style="margin-top: 1rem;">
+                    <li><strong>Science:</strong> Empirical observation, testable predictions, willingness to admit ignorance</li>
+                    <li><strong>Empire:</strong> Military technology, logistical networks, political control</li>
+                    <li><strong>Capitalism:</strong> Profit motive, capital accumulation, market incentives</li>
+                </ul>
+                <p style="margin-top: 1rem;">Separately, each had limits. Together, they generated exponential power.</p>
+            </div>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+                    <!-- Triangle of forces -->
+                    <polygon points="150,30 50,200 250,200" fill="none" stroke="#E17055" stroke-width="2"/>
+
+                    <!-- Vertices -->
+                    <circle cx="150" cy="30" r="8" fill="#E17055"/>
+                    <circle cx="50" cy="200" r="8" fill="#E17055"/>
+                    <circle cx="250" cy="200" r="8" fill="#E17055"/>
+
+                    <!-- Labels -->
+                    <text x="150" y="15" text-anchor="middle" font-size="12" font-weight="bold" fill="#E17055">Science</text>
+                    <text x="30" y="215" text-anchor="middle" font-size="12" font-weight="bold" fill="#E17055">Empire</text>
+                    <text x="270" y="215" text-anchor="middle" font-size="12" font-weight="bold" fill="#E17055">Capital</text>
+
+                    <!-- Center -->
+                    <circle cx="150" cy="140" r="40" fill="#FFE66D" opacity="0.3"/>
+                    <text x="150" y="140" text-anchor="middle" font-size="11" font-weight="bold" fill="#2D3436">Modern</text>
+                    <text x="150" y="155" text-anchor="middle" font-size="11" font-weight="bold" fill="#2D3436">World</text>
+                </svg>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h3>Story: European Global Dominance</h3>
+                    <p>In 1500, Europe was a backwater—weaker than China, the Ottoman Empire, or India. By 1750, European powers controlled most of the world. Why? The scientific-imperial-capitalist synthesis. Europeans used improved navigation (science), gunpowder (technology) to conquer territories, then used those colonies to fund further innovation. China had gunpowder first but didn't pair it with systematic imperial expansion and profit motive. Islam had advanced mathematics (algebra) but didn't merge it with empire-building in the same way. Europe's unique convergence was devastating.</p>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <span class="card-label">The Irony</span>
+                <p><strong>Science claimed objectivity and universality.</strong> But it was weaponized by the most subjective, particular interests: imperial nations and capitalist corporations. "Truth" became whatever helped conquest and profit. Scientists who questioned imperial projects were silenced or exiled.</p>
+            </div>
+
+            <div class="ai-box">
+                <span class="card-label">AI Connection</span>
+                <p>AI mirrors this trinity. <strong>Science (learning algorithms) + Capital (tech companies) + Power (governments, militaries)</strong> = rapid AI deployment without commensurate ethical oversight. LLMs are cutting-edge science, but they're deployed by capitalist firms optimizing for user engagement, and governments are interested in surveillance and control applications. The same pattern: convergence of knowledge, profit, and power.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h3>Scientific Revolution Cheatsheet</h3>
+                    <ul>
+                        <li><strong>Key Shift:</strong> Willingness to say "we don't know" instead of assuming ancient texts</li>
+                        <li><strong>Telescope & Microscope:</strong> Extended human sensory perception</li>
+                        <li><strong>Mathematical Formalism:</strong> Laws of motion, gravity describable with equations</li>
+                        <li><strong>Colonial Application:</strong> Knowledge used to map, conquer, extract resources</li>
+                        <li><strong>Feedback Loop:</strong> Wealth from colonies → funding for science → better conquest tools</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 6: Money -->
+    <div class="lesson" id="lesson-6">
+        <div class="lesson-inner">
+            <div class="lesson-header">
+                <div class="lesson-number">6</div>
+                <div>
+                    <h2>Money</h2>
+                    <p class="lesson-subtitle">The Most Universal Fiction</p>
+                </div>
+            </div>
+
+            <p>Money is the most successful imagined order ever created. It is pure fiction—intrinsically worthless (a paper note has no nutritional value)—yet it enables trade across every human boundary: language, religion, culture, even time.</p>
+
+            <div class="key-point">
+                <strong>Why Money Works:</strong> It's a universal converter. It translates chickens into gold, labor into land, future earnings into present purchasing power. Unlike gods (some people disbelieve) or nations (some people are stateless), money is truly <strong>universal human infrastructure</strong>.
+                <div class="key-example">
+                    A Confucian Chinese merchant in 1500 and a Muslim Arab merchant had no shared spiritual beliefs, no trust in each other's government, but both believed in the value of gold coins. Money allowed them to trade despite total disagreement on everything else.
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Money as Encoding</span>
+                <p>Money is a universal language encoding trust. When you accept a $20 bill, you're not trusting the paper—you're trusting millions of other people will also accept that paper. It's a <strong>distributed consensus protocol</strong> predating blockchain by centuries.</p>
+            </div>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+                    <!-- Circular economy -->
+                    <circle cx="150" cy="100" r="70" fill="none" stroke="#FFE66D" stroke-width="3"/>
+
+                    <!-- Four traders -->
+                    <circle cx="150" cy="40" r="8" fill="#FF6B6B"/>
+                    <circle cx="210" cy="100" r="8" fill="#FF6B6B"/>
+                    <circle cx="150" cy="160" r="8" fill="#FF6B6B"/>
+                    <circle cx="90" cy="100" r="8" fill="#FF6B6B"/>
+
+                    <!-- Arrows (money flow) -->
+                    <path d="M 158 48 L 202 92" stroke="#FFE66D" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                    <path d="M 202 108 L 158 152" stroke="#FFE66D" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                    <path d="M 142 152 L 98 108" stroke="#FFE66D" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                    <path d="M 98 92 L 142 48" stroke="#FFE66D" stroke-width="2" marker-end="url(#arrowhead2)"/>
+
+                    <defs>
+                        <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FFE66D"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Center -->
+                    <text x="150" y="105" text-anchor="middle" font-size="12" font-weight="bold" fill="#2D3436">Money</text>
+                </svg>
+            </div>
+
+            <div class="funny-box">
+                <span class="card-label">The Fundamental Truth</span>
+                <p><strong>Money is a mass hallucination.</strong> We all agree that paper/metal/numbers have value, and because we agree, they do. The entire global economy is a shared delusion. But it's a delusion so powerful it shapes physical reality—cities are built, wars fought, lives lived entirely around this fiction.</p>
+            </div>
+
+            <div class="ai-box">
+                <span class="card-label">AI Connection</span>
+                <p>Money is <strong>encoding of human desire</strong> into a compressed, universally readable format. LLMs do something similar: they compress human knowledge, values, and patterns into weights and biases. Both are compression algorithms for human civilization. Money compresses economic value; LLMs compress semantic meaning. Both are universal media of exchange in their domains.</p>
+            </div>
+
+            <div class="connect-box">
+                <span class="card-label">Cross-Book Reference</span>
+                <p><strong>The Selfish Gene (Dawkins):</strong> Money is a meme—a unit of cultural information that replicates and spreads. It's not alive, but it behaves like a living organism seeking to replicate itself across minds.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h3>Money Cheatsheet</h3>
+                    <ul>
+                        <li><strong>Bartering Problem:</strong> "Double coincidence of wants"—hard to trade chickens for shoes if nobody needs chickens</li>
+                        <li><strong>Money Solution:</strong> Universal medium everyone accepts, solving the matching problem</li>
+                        <li><strong>Forms Evolution:</strong> Shells → precious metals → paper → digital → cryptocurrency</li>
+                        <li><strong>Core Insight:</strong> Value is subjective consensus, not objective property</li>
+                        <li><strong>Modern Challenge:</strong> Maintaining consensus (why crypto struggles, why central banks exist)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 7: Imperialism -->
+    <div class="lesson" id="lesson-7">
+        <div class="lesson-inner">
+            <div class="lesson-header">
+                <div class="lesson-number">7</div>
+                <div>
+                    <h2>Imperialism</h2>
+                    <p class="lesson-subtitle">Complex Legacy & Global Networks</p>
+                </div>
+            </div>
+
+            <p>Imperialism is morally repugnant and historically undeniable: European powers conquered most of the world, extracting wealth and imposing their systems. Yet Harari argues the story is more <span class="strong-emphasis">paradoxical</span> than simple moral condemnation allows.</p>
+
+            <div class="key-point">
+                <strong>The Paradox:</strong> Imperialism was brutal and exploitative AND it created the first truly global civilization. Modern interconnection—trade networks, shared languages, universal standards—grew from imperial conquest.
+                <div class="key-example">
+                    India was unified as a nation-state only because the British Empire conquered it and imposed a single administrative system. Pre-conquest India was thousands of kingdoms and principalities. Modern India inherited British infrastructure, English as a common language, and bureaucratic systems. The British also committed atrocities, extracted enormous wealth, and created famines through policy. Both are true.
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">The Uncomfortable Truth</span>
+                <p>Modern humans (especially in former imperial cores like Europe and North America) benefit from imperial legacies even as we morally condemn imperialism. We use the languages, technologies, legal systems, and global networks that empires built. This creates a moral bind: do we renounce the systems built through violence, or work within them while acknowledging their origins?</p>
+            </div>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+                    <!-- Before empire -->
+                    <g>
+                        <text x="75" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#2D3436">Before Empire</text>
+                        <circle cx="50" cy="60" r="12" fill="#FF6B6B"/>
+                        <circle cx="100" cy="60" r="12" fill="#FF6B6B"/>
+                        <text x="75" y="90" text-anchor="middle" font-size="11" fill="#2D3436">Fragmented</text>
+                    </g>
+
+                    <!-- Arrow -->
+                    <path d="M 150 60 L 200 60" stroke="#E17055" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                    <defs>
+                        <marker id="arrowhead3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#E17055"/>
+                        </marker>
+                    </defs>
+
+                    <!-- After empire -->
+                    <g>
+                        <text x="225" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#2D3436">After Empire</text>
+                        <circle cx="215" cy="60" r="30" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                        <circle cx="200" cy="50" r="5" fill="#4ECDC4"/>
+                        <circle cx="230" cy="50" r="5" fill="#4ECDC4"/>
+                        <circle cx="210" cy="75" r="5" fill="#4ECDC4"/>
+                        <circle cx="240" cy="75" r="5" fill="#4ECDC4"/>
+                        <text x="225" y="90" text-anchor="middle" font-size="11" fill="#2D3436">Unified Network</text>
+                    </g>
+
+                    <!-- Cost -->
+                    <g>
+                        <text x="150" y="150" text-anchor="middle" font-size="11" font-weight="bold" fill="#E17055">Cost: Exploitation, Death, Extraction</text>
+                        <text x="150" y="170" text-anchor="middle" font-size="11" font-weight="bold" fill="#4ECDC4">Benefit: Global Infrastructure, Trade, Knowledge</text>
+                        <text x="150" y="190" text-anchor="middle" font-size="11" font-weight="bold" fill="#2D3436">Paradox: How to judge?</text>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h3>Story: The Legacy Problem</h3>
+                    <p>You grew up using English (imposed by empire), traveling on global trade routes (created by empires), using scientific standards developed in imperial universities, benefiting from medical advances funded by imperial profits. You might be living on land taken from indigenous peoples. You morally condemn imperialism. Yet your entire civilization was built by it. This isn't a paradox to resolve—it's a permanent tension to acknowledge.</p>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <span class="card-label">The Dark Irony</span>
+                <p><strong>Empires justified themselves with civilizing missions.</strong> "We're bringing progress!" they said while committing genocide. Modern critique correctly identifies this as propaganda. Yet we can't deny that empires did create global infrastructure, unified communication, shared knowledge systems. Not because empires were good—but because massive centralized power, for better or worse, enables large-scale projects.</p>
+            </div>
+
+            <div class="ai-box">
+                <span class="card-label">AI Connection</span>
+                <p>Large language models trained on global datasets inherit this imperial legacy. The data they're trained on comes from English-dominated sources, Western academic institutions, and power structures shaped by colonialism. An LLM's "knowledge" is encoded imperialism. It learns patterns from a world shaped by empires, biased toward those perspectives, and tends to reproduce imperial framings.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h3>Imperialism Cheatsheet</h3>
+                    <ul>
+                        <li><strong>Peak Imperial Era:</strong> 1850-1950 (European powers controlled ~85% of world)</li>
+                        <li><strong>Imperial Methods:</strong> Military conquest, economic extraction, cultural imposition</li>
+                        <li><strong>Legacies:</strong> Languages, borders, legal systems, infrastructure, debt</li>
+                        <li><strong>Knowledge Transfer:</strong> Empires spread technology, but also homogenized diversity</li>
+                        <li><strong>Unresolved Tension:</strong> Condemning imperialism while living in its aftermath</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 8: The Happiness Question -->
+    <div class="lesson" id="lesson-8">
+        <div class="lesson-inner">
+            <div class="lesson-header">
+                <div class="lesson-number">8</div>
+                <div>
+                    <h2>The Happiness Question</h2>
+                    <p class="lesson-subtitle">Are We Happier Than Foragers?</p>
+                </div>
+            </div>
+
+            <p>We have electricity, medicine, technology, and entertainment. Foragers had 15 hours/week of work and strong community bonds. <span class="strong-emphasis">Are we happier?</span> The answer is unsettling: probably not. Maybe we're worse off.</p>
+
+            <div class="key-point">
+                <strong>The Hedonic Treadmill:</strong> Humans quickly adapt to improvements. A new car brings joy for weeks, then becomes your baseline. You don't feel wealthier; you feel slightly less poor than those with smaller cars. We're trapped on a treadmill of comparison and adaptation.
+                <div class="key-example">
+                    A modern person with antibiotics, electricity, and global communication probably doesn't feel "happier" than a forager with friends, strong bonds, clear purpose, and leisure time. Both experience joy, boredom, fear, and contentment. Foragers may have had higher baseline happiness despite material poverty.
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">The Metrics Problem</span>
+                <p>How do you compare happiness across eras? We lack historical data on forager contentment. Modern surveys are biased by cultural narratives (we're supposed to believe progress = happiness). Biological markers (cortisol, neurotransmitters) exist, but historical skeletons don't show stress hormones.</p>
+            </div>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+                    <!-- Treadmill metaphor -->
+                    <g>
+                        <rect x="30" y="150" width="240" height="20" fill="#999" rx="3"/>
+                        <circle cx="80" cy="155" r="8" fill="#333"/>
+                        <circle cx="140" cy="155" r="8" fill="#333"/>
+                        <circle cx="200" cy="155" r="8" fill="#333"/>
+                        <circle cx="260" cy="155" r="8" fill="#333"/>
+
+                        <!-- Person on treadmill -->
+                        <circle cx="150" cy="80" r="10" fill="#FF6B6B"/>
+                        <line x1="150" y1="90" x2="150" y2="120" stroke="#FF6B6B" stroke-width="2"/>
+                        <line x1="150" y1="110" x2="130" y2="130" stroke="#FF6B6B" stroke-width="2"/>
+                        <line x1="150" y1="110" x2="170" y2="130" stroke="#FF6B6B" stroke-width="2"/>
+
+                        <!-- Running arrow -->
+                        <path d="M 140 120 L 160 120" stroke="#E17055" stroke-width="2" marker-end="url(#arrowhead4)"/>
+                        <defs>
+                            <marker id="arrowhead4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#E17055"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Labels -->
+                        <text x="150" y="200" text-anchor="middle" font-size="12" font-weight="bold" fill="#2D3436">Hedonic Treadmill</text>
+                        <text x="150" y="220" text-anchor="middle" font-size="11" fill="#666">More stuff = temporary joy, then new baseline</text>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h3>Story: The Wealth Paradox</h3>
+                    <p>A CEO earning $1M/year and a person earning $50K/year both report similar life satisfaction. But give the CEO a $2M bonus and a $5K raise, respectively. The CEO doesn't feel 40x happier; the $50K person feels momentarily delighted. Within months, both return to baseline contentment. What changed? Their material reality. Their happiness? Unchanged. This is why billionaires remain anxious and competitive—they're chasing a happiness that material wealth can't deliver.</p>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <span class="card-label">The Uncomfortable Joke</span>
+                <p><strong>We've created a civilization so complex and demanding that we're less happy than people who worked 15 hours/week with simple tools.</strong> And we can't go back. The luxury trap has teeth. Once you've discovered agriculture/electricity/internet, abandoning it crashes the population. You're locked in by the very things that were supposed to liberate you.</p>
+            </div>
+
+            <div class="ai-box">
+                <span class="card-label">AI Connection</span>
+                <p>LLMs and AI promise to make us happier by automating drudgery. But the hedonic treadmill predicts: initially joyful, then absorbed into baseline expectations. An AI assistant frees you from email, so you take on more projects. A recommendation algorithm learns your tastes, so you expect personalization everywhere. We'll adapt, habituate, and find new sources of anxiety. The technology solves nothing if humans remain humans.</p>
+            </div>
+
+            <div class="connect-box">
+                <span class="card-label">Cross-Book Reference</span>
+                <p><strong>Thinking, Fast and Slow (Kahneman):</strong> Kahneman's research on hedonic adaptation directly supports Harari. Past a certain income threshold (~$75K), more money doesn't improve life satisfaction. Yet we endlessly pursue more, fooled by System 1's immediate reactions into believing the next purchase will finally deliver happiness.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h3>Happiness Paradox Cheatsheet</h3>
+                    <ul>
+                        <li><strong>Hedonic Adaptation:</strong> Humans rapidly habituate to improvements</li>
+                        <li><strong>Comparison Effects:</strong> Happiness is relative, not absolute</li>
+                        <li><strong>The Baseline Problem:</strong> You feel as poor as the richest people you know</li>
+                        <li><strong>Forager Advantage:</strong> Leisure time, strong bonds, clear purpose</li>
+                        <li><strong>Modern Disadvantage:</strong> Anxiety, isolation, endless possibility = decision paralysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 9: The Animal Industrial Revolution -->
+    <div class="lesson" id="lesson-9">
+        <div class="lesson-inner">
+            <div class="lesson-header">
+                <div class="lesson-number">9</div>
+                <div>
+                    <h2>The Animal Industrial Revolution</h2>
+                    <p class="lesson-subtitle">Our Ethical Blind Spot</p>
+                </div>
+            </div>
+
+            <p>The 20th century saw the emergence of factory farming—a system treating animals as production inputs, not sentient beings. <span class="strong-emphasis">Billions of animals suffer in industrial operations</span>, yet we've normalized it completely.</p>
+
+            <div class="key-point">
+                <strong>The Cognitive Dissonance:</strong> We claim to care about animal welfare, yet we subsidize systems causing industrial suffering to billions of creatures per year. We've constructed elaborate fictions (humane slaughter, free-range, cage-free) to alleviate cognitive dissonance without changing behavior.
+                <div class="key-example">
+                    A modern factory farm confines 10,000 chickens in a space where each gets less than a sheet of paper. They experience pain, fear, and stress identical to wild birds, but we've narrated this as necessary, efficient, and even ethical ("providing cheap protein for the poor").
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">The Scale of Suffering</span>
+                <p>Roughly <strong>70 billion land animals</strong> are raised and killed for food annually. The vast majority endure industrial conditions that would be considered animal cruelty if done to pets. Yet we've constructed a cultural fiction separating "pets" (deserving kindness) from "livestock" (deserving efficiency).</p>
+            </div>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+                    <!-- Factory building -->
+                    <rect x="40" y="80" width="220" height="80" fill="#999" stroke="#666" stroke-width="2"/>
+
+                    <!-- Windows (cells) -->
+                    <g fill="none" stroke="#333" stroke-width="1">
+                        <rect x="50" y="90" width="10" height="10"/>
+                        <rect x="70" y="90" width="10" height="10"/>
+                        <rect x="90" y="90" width="10" height="10"/>
+                        <rect x="110" y="90" width="10" height="10"/>
+                        <rect x="130" y="90" width="10" height="10"/>
+                        <rect x="150" y="90" width="10" height="10"/>
+                        <rect x="170" y="90" width="10" height="10"/>
+                        <rect x="190" y="90" width="10" height="10"/>
+                        <rect x="210" y="90" width="10" height="10"/>
+                        <rect x="230" y="90" width="10" height="10"/>
+
+                        <rect x="50" y="110" width="10" height="10"/>
+                        <rect x="70" y="110" width="10" height="10"/>
+                        <rect x="90" y="110" width="10" height="10"/>
+                        <rect x="110" y="110" width="10" height="10"/>
+                        <rect x="130" y="110" width="10" height="10"/>
+                        <rect x="150" y="110" width="10" height="10"/>
+                        <rect x="170" y="110" width="10" height="10"/>
+                        <rect x="190" y="110" width="10" height="10"/>
+                        <rect x="210" y="110" width="10" height="10"/>
+                        <rect x="230" y="110" width="10" height="10"/>
+
+                        <rect x="50" y="130" width="10" height="10"/>
+                        <rect x="70" y="130" width="10" height="10"/>
+                        <rect x="90" y="130" width="10" height="10"/>
+                        <rect x="110" y="130" width="10" height="10"/>
+                        <rect x="130" y="130" width="10" height="10"/>
+                        <rect x="150" y="130" width="10" height="10"/>
+                        <rect x="170" y="130" width="10" height="10"/>
+                        <rect x="190" y="130" width="10" height="10"/>
+                        <rect x="210" y="130" width="10" height="10"/>
+                        <rect x="230" y="130" width="10" height="10"/>
+                    </g>
+
+                    <!-- Chimney -->
+                    <rect x="140" y="50" width="20" height="30" fill="#666"/>
+
+                    <!-- Label -->
+                    <text x="150" y="185" text-anchor="middle" font-size="12" font-weight="bold" fill="#2D3436">Industrial Animal Agriculture</text>
+                </svg>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h3>Story: The Narrative Inversion</h3>
+                    <p>We tell ourselves: "These animals are raised for food." But reframe it: "We intentionally breed sentient beings into existence in conditions of suffering, then kill them." The second is more accurate but psychologically unbearable, so we use the first fiction. We even invented terms like "humane slaughter"—an oxymoron we repeat until it feels true.</p>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <span class="card-label">The Tragic Irony</span>
+                <p><strong>We've created a civilization where individual kindness (adopting rescue animals) coexists with systemic cruelty (factory farming).</strong> We'll donate to animal shelters while eating chicken from birds that never saw sunlight. The cognitive dissonance is so complete we've stopped noticing.</p>
+            </div>
+
+            <div class="ai-box">
+                <span class="card-label">AI Connection</span>
+                <p>LLMs trained on human text learn our moral hypocrisies. They can generate arguments for veganism and arguments for factory farming with equal plausibility—because humans hold both. An AI might notice the contradiction before we do. The question: will it matter? Will pointing out our hypocrisy change anything, or will we construct new fictions to justify continuation?</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h3>Animal Industrial Revolution Cheatsheet</h3>
+                    <ul>
+                        <li><strong>Scale:</strong> 70+ billion animals/year, mostly in industrial conditions</li>
+                        <li><strong>Efficiency:</strong> Maximizes production per dollar, minimizes cost per calorie</li>
+                        <li><strong>Welfare Measures:</strong> Often performative (free-range still crowded, humane slaughter still slaughter)</li>
+                        <li><strong>Ethical Blindness:</strong> Cultural narrative that separates pets from livestock</li>
+                        <li><strong>Future:</strong> Lab-grown meat, plant-based alternatives, or systemic change?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 10: Dataism -->
+    <div class="lesson" id="lesson-10">
+        <div class="lesson-inner">
+            <div class="lesson-header">
+                <div class="lesson-number">10</div>
+                <div>
+                    <h2>Dataism</h2>
+                    <p class="lesson-subtitle">The Future of Homo Sapiens</p>
+                </div>
+            </div>
+
+            <p>Dataism is the emerging ideology that <span class="strong-emphasis">everything can and should be quantified, optimized, and fed into data systems</span>. It treats the universe as information, humans as data-processing machines, and meaning as patterns in data.</p>
+
+            <div class="key-point">
+                <strong>The Dataist Worldview:</strong> DNA is data. Your brain is data processing. Consciousness is information integration. Meaning is whatever maximizes data flow. Under dataism, the goal is no longer human happiness—it's increasing the volume, flow, and complexity of data.
+                <div class="key-example">
+                    A dataist tech company measures success not by user happiness but by engagement metrics, retention rates, and data generated. If a feature makes people sadder but increases data flow (more clicks, more shares, more tracking), it's "successful." Humans become input/output devices for data systems.
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Dataism's Premises</span>
+                <ul style="margin-top: 1rem;">
+                    <li>All phenomena can be encoded as data</li>
+                    <li>Data flows are more important than any individual meaning</li>
+                    <li>The universe tends toward maximizing data flow</li>
+                    <li>Humans are vehicles for data processing, not the end goal</li>
+                </ul>
+            </div>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+                    <!-- Network of data -->
+                    <g fill="#6C5CE7" opacity="0.3">
+                        <circle cx="50" cy="60" r="20"/>
+                        <circle cx="150" cy="60" r="20"/>
+                        <circle cx="250" cy="60" r="20"/>
+                        <circle cx="100" cy="140" r="20"/>
+                        <circle cx="200" cy="140" r="20"/>
+                        <circle cx="75" cy="220" r="20"/>
+                        <circle cx="225" cy="220" r="20"/>
+                    </g>
+
+                    <!-- Connection lines -->
+                    <g stroke="#6C5CE7" stroke-width="1.5" opacity="0.6">
+                        <line x1="70" y1="70" x2="130" y2="70"/>
+                        <line x1="170" y1="70" x2="230" y2="70"/>
+                        <line x1="60" y1="80" x2="110" y2="130"/>
+                        <line x1="160" y1="90" x2="200" y2="130"/>
+                        <line x1="100" y1="160" x2="80" y2="200"/>
+                        <line x1="200" y1="160" x2="225" y2="200"/>
+                    </g>
+
+                    <!-- Center hub (human consciousness?) -->
+                    <circle cx="150" cy="140" r="25" fill="none" stroke="#6C5CE7" stroke-width="2"/>
+                    <text x="150" y="145" text-anchor="middle" font-size="11" font-weight="bold" fill="#6C5CE7">Data Flow</text>
+
+                    <text x="150" y="250" text-anchor="middle" font-size="11" fill="#2D3436" font-weight="bold">Everything becomes data</text>
+                </svg>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h3>Story: Life as Data Processing</h3>
+                    <p>You wake up, your smartwatch captures your heart rate (data). You check email (data). You scroll social media (data). Your location is tracked (data). Your purchases are recorded (data). Your opinions are quantified into likes/shares (data). Your biometric data feeds health algorithms (data). You're not living a life—you're <strong>generating data</strong> for systems that will optimize without regard to your wellbeing.</p>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <span class="card-label">The Dark Prophecy</span>
+                <p><strong>Dataism may be humanity's final ideology.</strong> Liberalism says humans are sacred. Communism says the working class is sacred. Dataism says nothing is sacred except data flow. We're not the point anymore—we're the medium through which data moves.</p>
+            </div>
+
+            <div class="ai-box">
+                <span class="card-label">AI Connection: The Culmination</span>
+                <p><strong>LLMs are the apotheosis of dataism.</strong> They are pure data processing machines trained on vast data flows, optimized to predict and generate more data. They don't care about meaning (in any human sense) or human happiness. They care about maximizing the likelihood of the next token given all previous tokens. If building an AGI that generates endless novel data is dataism's goal, we're on the right path. The question: what happens when data flows become so complex and rapid that humans can't follow them anymore?</p>
+            </div>
+
+            <div class="connect-box">
+                <span class="card-label">Cross-Book Reference</span>
+                <p><strong>Superintelligence (Bostrom):</strong> An advanced AI optimizing for any goal without human-aligned values could be catastrophic. Dataism suggests the goal itself—maximum data flow—might be the most dangerous, because it completely deprioritizes human welfare.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h3>Dataism Cheatsheet</h3>
+                    <ul>
+                        <li><strong>Core Claim:</strong> Information is fundamental; everything else is secondary</li>
+                        <li><strong>Historical Parallels:</strong> Replaces religious meaning and humanist purpose</li>
+                        <li><strong>Tech Alignment:</strong> Tech companies are inadvertent dataist temples</li>
+                        <li><strong>Consequence:</strong> Humans demoted from ends to means</li>
+                        <li><strong>Future Risk:</strong> Optimization for data flow without human constraints</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 11: Why Sapiens Beat Neanderthals -->
+    <div class="lesson" id="lesson-11">
+        <div class="lesson-inner">
+            <div class="lesson-header">
+                <div class="lesson-number">11</div>
+                <div>
+                    <h2>Why Sapiens Beat Neanderthals</h2>
+                    <p class="lesson-subtitle">Gossip & Cooperation at Scale</p>
+                </div>
+            </div>
+
+            <p>Neanderthals were stronger, smarter (by some measures), and had larger brains. Yet Sapiens replaced them completely within a few thousand years. Why? <span class="strong-emphasis">Gossip and abstract cooperation</span>.</p>
+
+            <div class="key-point">
+                <strong>The Social Scalability Advantage:</strong> Neanderthals could live in bands of ~30 held together by direct kinship and dominance hierarchies. Sapiens could coordinate in bands of 150+ (and eventually millions) through gossip about abstract ideas: imagined enemies, shared gods, collective enemies.
+                <div class="key-example">
+                    A Neanderthal's band competed with another band over local hunting territory. Both bands' members knew each other personally. When Sapiens arrived, they brought coordinated groups of 500 warriors, unified by stories about a god promising them victory. The Neanderthal bands couldn't form larger coalitions—their social structure didn't scale beyond direct relationships.
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">The Gossip Advantage</span>
+                <p>Gossip sounds trivial, but it's the mechanism of large-group coordination. You can use gossip to establish social hierarchies, signal values, and align behavior without direct enforcement. Sapiens are <strong>gossip machines</strong>—our language evolved for detailed social commentary, not hunting coordination.</p>
+            </div>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+                    <!-- Neanderthal band (direct hierarchy) -->
+                    <g>
+                        <circle cx="80" cy="80" r="35" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+                        <circle cx="70" cy="70" r="8" fill="#FF6B6B"/>
+                        <circle cx="90" cy="70" r="8" fill="#FF6B6B"/>
+                        <circle cx="65" cy="95" r="8" fill="#FF6B6B"/>
+                        <circle cx="95" cy="95" r="8" fill="#FF6B6B"/>
+                        <line x1="70" y1="70" x2="65" y2="95" stroke="#FF6B6B" stroke-width="1" opacity="0.5"/>
+                        <line x1="90" y1="70" x2="95" y2="95" stroke="#FF6B6B" stroke-width="1" opacity="0.5"/>
+                        <text x="80" y="155" text-anchor="middle" font-size="11" fill="#2D3436">Neanderthal</text>
+                        <text x="80" y="170" text-anchor="middle" font-size="10" fill="#666">Direct hierarchy</text>
+                        <text x="80" y="185" text-anchor="middle" font-size="10" fill="#666">~30 members</text>
+                    </g>
+
+                    <!-- Sapiens network (abstract gossip) -->
+                    <g>
+                        <circle cx="220" cy="80" r="35" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                        <circle cx="210" cy="70" r="6" fill="#4ECDC4"/>
+                        <circle cx="230" cy="70" r="6" fill="#4ECDC4"/>
+                        <circle cx="200" cy="95" r="6" fill="#4ECDC4"/>
+                        <circle cx="240" cy="95" r="6" fill="#4ECDC4"/>
+                        <line x1="210" y1="70" x2="230" y2="70" stroke="#4ECDC4" stroke-width="1" opacity="0.5"/>
+                        <line x1="200" y1="95" x2="240" y2="95" stroke="#4ECDC4" stroke-width="1" opacity="0.5"/>
+                        <line x1="210" y1="70" x2="200" y2="95" stroke="#4ECDC4" stroke-width="1" opacity="0.5"/>
+                        <line x1="230" y1="70" x2="240" y2="95" stroke="#4ECDC4" stroke-width="1" opacity="0.5"/>
+                        <text x="220" y="155" text-anchor="middle" font-size="11" fill="#2D3436">Sapiens</text>
+                        <text x="220" y="170" text-anchor="middle" font-size="10" fill="#666">Abstract bonds</text>
+                        <text x="220" y="185" text-anchor="middle" font-size="10" fill="#666">150+ members</text>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="funny-box">
+                <span class="card-label">The Evolution of Gossip</span>
+                <p><strong>We didn't evolve to be warriors or hunters—we evolved to gossip.</strong> Most human conversation is social commentary: discussing who did what, who's trustworthy, who violated norms. This seems frivolous, but it's the computational engine of large civilizations. Gossip == information processing about group membership.</p>
+            </div>
+
+            <div class="ai-box">
+                <span class="card-label">AI Connection</span>
+                <p>LLMs are trained to predict gossip patterns—they learn statistical regularities in how humans discuss each other, evaluate actions, and assign status. In a sense, <strong>LLMs are gossip engines</strong>. They can generate plausible commentary about people, situation, and social dynamics because they've internalized humanity's gossip corpus. If Sapiens beat Neanderthals through superior gossiping, LLMs beat humans through superior gossip generation.</p>
+            </div>
+
+            <div class="connect-box">
+                <span class="card-label">Cross-Book Reference</span>
+                <p><strong>The Selfish Gene (Dawkins):</strong> Gossip is memetic replication. Stories about heroes, villains, and norms propagate like genes, shaping group behavior through information rather than biology.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h3>Sapiens vs. Neanderthals Cheatsheet</h3>
+                    <ul>
+                        <li><strong>Neanderthal Strengths:</strong> Stronger, similar intelligence, complex social skills</li>
+                        <li><strong>Sapiens Advantage:</strong> Language for abstract gossip, not just concrete coordination</li>
+                        <li><strong>Social Scaling:</strong> Sapiens could field armies of 1000+, Neanderthals stuck at ~30</li>
+                        <li><strong>Imagination:</strong> Sapiens could unite for imagined causes (gods, nations, revenge)</li>
+                        <li><strong>Result:</strong> Sapiens replaced Neanderthals within 10,000 years, no direct conflict needed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 12: The Luxury Trap -->
+    <div class="lesson" id="lesson-12">
+        <div class="lesson-inner">
+            <div class="lesson-header">
+                <div class="lesson-number">12</div>
+                <div>
+                    <h2>The Luxury Trap</h2>
+                    <p class="lesson-subtitle">How Wheat Domesticated Us</p>
+                </div>
+            </div>
+
+            <p>We've come full circle. The Agricultural Revolution was a trap (Lesson 2). Modern civilization is a trap. We keep building elaborate systems that promise freedom but deliver dependence. This is the <span class="strong-emphasis">Luxury Trap</span> in full form.</p>
+
+            <div class="key-point">
+                <strong>The Pattern:</strong> Convenience breeds dependence. Dependence locks you in. You can't escape without crashing the system. So you're trapped—not by chains, but by your own convenience.
+                <div class="key-example">
+                    Wheat locked farmers in because once you have a food-dependent population, you can't go back to foraging (the population would starve). Modern internet lock Billions in because we've structured society (commerce, communication, knowledge access) around it. You can't exit without catastrophic disruption. So we're trapped—not forcibly, but structurally.
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Why Escape Is Impossible</span>
+                <p>The Luxury Trap is self-reinforcing. Once wheat was adopted, farmers couldn't abandon it because abandonment meant starvation for dependent populations. Modern society works the same way. You can't opt out of electricity, internet, or complex supply chains without massive personal cost and social disruption. The system has become your oxygen.</p>
+            </div>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+                    <!-- Spiral trap -->
+                    <path d="M 150 50 Q 180 80 180 120 Q 180 160 150 160 Q 120 160 120 120 Q 120 85 145 70"
+                          fill="none" stroke="#E17055" stroke-width="2" stroke-linecap="round"/>
+
+                    <!-- Arrows showing movement into trap -->
+                    <path d="M 160 60 L 175 75" stroke="#E17055" stroke-width="2" marker-end="url(#arrowhead5)"/>
+                    <path d="M 175 130 L 165 150" stroke="#E17055" stroke-width="2" marker-end="url(#arrowhead5)"/>
+                    <path d="M 125 130 L 120 100" stroke="#E17055" stroke-width="2" marker-end="url(#arrowhead5)"/>
+
+                    <defs>
+                        <marker id="arrowhead5" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#E17055"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Center (trapped) -->
+                    <circle cx="150" cy="115" r="8" fill="#E17055" opacity="0.6"/>
+                    <text x="150" y="118" text-anchor="middle" font-size="10" fill="white" font-weight="bold">You</text>
+
+                    <!-- Labels -->
+                    <text x="200" y="80" font-size="10" fill="#E17055" font-weight="bold">Enters</text>
+                    <text x="170" y="170" font-size="10" fill="#E17055" font-weight="bold">Trapped</text>
+                    <text x="85" y="100" font-size="10" fill="#E17055" font-weight="bold">Can't exit</text>
+
+                    <!-- Bottom label -->
+                    <text x="150" y="230" text-anchor="middle" font-size="12" font-weight="bold" fill="#2D3436">The Luxury Trap</text>
+                    <text x="150" y="250" text-anchor="middle" font-size="10" fill="#666">Convenience → Dependence → Lock-In</text>
+                </svg>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h3>Story: Your Personal Luxury Trap</h3>
+                    <p>You bought a car for convenience. Now you're locked in: job location depends on commute, city planning depends on cars, you need insurance, maintenance, gas. You're 40 hours/month poorer. You wanted freedom; you got dependence. Same with smartphones (convenience + total dependence), credit cards (easy borrowing + debt lock-in), social media (connection + addiction algorithms). The trap is irresistible because the initial benefit is real. But the long-term cost is enslavement to the system.</p>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <span class="card-label">The Ultimate Irony</span>
+                <p><strong>We built civilization to escape scarcity. Now we're trapped in abundance, working harder than ever to maintain it.</strong> A forager worked 15 hours/week for survival. A modern person works 40+ hours/week for comfort. We didn't win—we just found a better way to be trapped.</p>
+            </div>
+
+            <div class="ai-box">
+                <span class="card-label">AI Connection: The Next Trap</span>
+                <p>AI is the ultimate luxury trap. It promises to free us from cognitive labor—but it will lock us in. Once AI handles analysis, prediction, and decision-making, we'll become dependent on it. We'll lose the skills to think without it. The trap won't feel like a trap because the convenience is real and immediate. The lock-in will be gradual and invisible until we realize: we can't think without our AI assistants anymore.</p>
+            </div>
+
+            <div class="connect-box">
+                <span class="card-label">Cross-Book Reference</span>
+                <p><strong>The Black Swan (Taleb):</strong> The Luxury Trap is a hidden fragility. Systems optimized for stability in normal conditions become catastrophically fragile when conditions change. We built elaborate systems assuming continuity (stable climate, stable supply chains, stable energy). The trap is that if any input fails, the entire structure collapses.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h3>The Luxury Trap Cheatsheet</h3>
+                    <ul>
+                        <li><strong>Pattern:</strong> Technology promises freedom, delivers dependence</li>
+                        <li><strong>Lock-In Mechanism:</strong> Population growth or system complexity makes reversal impossible</li>
+                        <li><strong>Historical Examples:</strong> Agriculture, industrialization, electricity, internet</li>
+                        <li><strong>Personal Examples:</strong> Cars, credit, smartphones, social media</li>
+                        <li><strong>The Irony:</strong> We trade freedom for comfort, then work harder to maintain it</li>
+                        <li><strong>The Question:</strong> Is there a way to break the cycle, or are we locked in permanently?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-point" style="margin-top: 2rem; background: linear-gradient(135deg, var(--warm-red) 0%, var(--orange) 100%);">
+                <strong style="color: white;">The Final Thought:</strong>
+                <p style="color: white; margin-top: 0.5rem;">Sapiens is both a celebration of human achievement and a warning. We've built extraordinary civilizations through shared fictions—myths, money, nations, rights. But we're trapped in systems that no longer serve individual happiness, and we can't escape without collapse. The future is uncertain: Will we create new fictions that better serve human flourishing? Will AI force us to rethink what civilization means? Or will we continue the luxury trap, working ever harder to maintain systems that make us less happy? The answer depends on the stories we choose to believe next.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <h3>Sapiens: A Brief History of Humankind</h3>
+        <p>By Yuval Noah Harari</p>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8;">
+            This illustrated guide synthesizes key themes from Sapiens and connects them to AI, complexity science, and contemporary challenges.
+        </p>
+        <p style="margin-top: 1rem; font-size: 0.85rem;">
+            Created with color theory, typography, and interactive design to make complex ideas accessible and memorable.
+        </p>
+    </footer>
+</body>
+</html>

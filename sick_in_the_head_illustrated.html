@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sick in the Head: Illustrated Guide - Judd Apatow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: #f8f9fa;
+            line-height: 1.6;
+        }
+
+        /* ===== COVER ===== */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--deep-blue) 50%, var(--teal) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 230, 109, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-30px) translateX(20px); }
+        }
+
+        .particle-1 { width: 40px; height: 40px; background: var(--sunny); top: 10%; left: 10%; animation-delay: 0s; }
+        .particle-2 { width: 30px; height: 30px; background: var(--mint); top: 20%; right: 15%; animation-delay: 1s; }
+        .particle-3 { width: 50px; height: 50px; background: var(--coral); bottom: 20%; left: 20%; animation-delay: 2s; }
+        .particle-4 { width: 35px; height: 35px; background: var(--pink); bottom: 30%; right: 25%; animation-delay: 1.5s; }
+
+        .cover-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            line-height: 1.1;
+        }
+
+        .cover p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .cover-svg {
+            width: 280px;
+            height: 280px;
+            margin: 3rem auto;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        .cover-meta {
+            font-size: 1rem;
+            opacity: 0.9;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+
+        /* ===== LESSONS ===== */
+        .lesson {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .lesson:nth-child(even) {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(160, 108, 213, 0.1) 100%);
+        }
+
+        .lesson:nth-child(odd) {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.08) 0%, rgba(255, 230, 109, 0.08) 100%);
+        }
+
+        .lesson-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .lesson:nth-child(even) .lesson-inner {
+            direction: rtl;
+        }
+
+        .lesson:nth-child(even) .lesson-inner > * {
+            direction: ltr;
+        }
+
+        .lesson-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .lesson-badge {
+            display: inline-block;
+            background: var(--sunny);
+            color: var(--dark);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lesson h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+
+        .illustration-container {
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .illustration-svg {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+        }
+
+        /* ===== CARD (KEY LESSON) ===== */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 6px solid var(--teal);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-label {
+            display: inline-block;
+            background: var(--mint);
+            color: var(--dark);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-purple);
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-example {
+            background: #f5f5f5;
+            border-left: 4px solid var(--coral);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #666;
+        }
+
+        /* ===== FUNNY BOX ===== */
+        .funny-box {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--orange) 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: var(--dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .funny-box::before {
+            content: '😄';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.15;
+            right: -20px;
+            top: -20px;
+        }
+
+        .funny-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+
+        .funny-box p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ===== AI CONNECTION BOX ===== */
+        .ai-box {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--purple) 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-box::before {
+            content: '🤖';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.1;
+            right: -20px;
+            top: -20px;
+        }
+
+        .ai-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--mint);
+        }
+
+        .ai-box p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+
+        /* ===== CROSS-BOOK CONNECTION ===== */
+        .connect-box {
+            background: linear-gradient(135deg, var(--forest) 0%, var(--teal) 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .connect-box::before {
+            content: '📚';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.1;
+            right: -20px;
+            top: -20px;
+        }
+
+        .connect-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--sunny);
+        }
+
+        .connect-box p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+
+        .connect-books {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .book-link {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .book-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ===== QUOTE BOX ===== */
+        .quote-box {
+            background: white;
+            border-left: 6px solid var(--warm-red);
+            padding: 2rem;
+            margin: 3rem 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--dark);
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .quote-attribution {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 1rem;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        /* ===== STORIES ===== */
+        .story {
+            background: linear-gradient(135deg, var(--mint) 0%, var(--sky) 100%);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 3rem 0;
+            color: var(--dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story::before {
+            content: '✨';
+            position: absolute;
+            font-size: 5rem;
+            opacity: 0.1;
+            right: -20px;
+            top: -20px;
+        }
+
+        .story-inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        .story h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-purple);
+        }
+
+        .story p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== CHEATSHEET ===== */
+        .cheatsheet {
+            background: linear-gradient(135deg, var(--pink) 0%, var(--coral) 100%);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cheatsheet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 0, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cheatsheet-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cheatsheet h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .cheatsheet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cheatsheet-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .cheatsheet-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .cheatsheet-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cheatsheet-item li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .cheatsheet-item li::before {
+            content: '➜';
+            position: absolute;
+            left: 0;
+            color: var(--sunny);
+        }
+
+        /* ===== TWO COLUMN ===== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .lesson-inner {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+
+            .lesson:nth-child(even) .lesson-inner {
+                direction: ltr;
+            }
+
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            .lesson h2 {
+                font-size: 2rem;
+            }
+
+            .lesson-badge {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* ===== DECORATIVE LINES ===== */
+        .accent-line {
+            width: 60px;
+            height: 4px;
+            background: var(--teal);
+            margin: 1.5rem 0;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== COVER ===== -->
+    <section class="cover">
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+        <div class="particle particle-4"></div>
+
+        <div class="cover-content">
+            <h1>Sick in the Head</h1>
+            <p>Conversations About Life and Comedy</p>
+
+            <svg class="cover-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Two chairs facing each other -->
+                <circle cx="50" cy="100" r="8" fill="#FFE66D" opacity="0.8"/>
+                <circle cx="150" cy="100" r="8" fill="#FFE66D" opacity="0.8"/>
+
+                <!-- Microphone left -->
+                <line x1="50" y1="80" x2="50" y2="40" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="50" cy="35" r="6" fill="#FF6B6B"/>
+
+                <!-- Microphone right -->
+                <line x1="150" y1="80" x2="150" y2="40" stroke="#4ECDC4" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="150" cy="35" r="6" fill="#4ECDC4"/>
+
+                <!-- Speech bubbles -->
+                <path d="M 30 120 Q 25 130 35 135" stroke="#FD79A8" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M 170 120 Q 175 130 165 135" stroke="#55EFC4" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+                <!-- Cassette tape -->
+                <rect x="70" y="110" width="60" height="30" rx="4" fill="#A06CD5" opacity="0.7"/>
+                <circle cx="85" cy="125" r="8" fill="#2D3436" opacity="0.5"/>
+                <circle cx="115" cy="125" r="8" fill="#2D3436" opacity="0.5"/>
+            </svg>
+
+            <div class="cover-meta">
+                <p>By Judd Apatow</p>
+                <p>A Comprehensive Illustrated Guide to Interviews, Lessons & Connections</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LESSON 1: THE OBSESSIVE FAN AS ORIGIN STORY ===== -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <div class="lesson-content">
+                <span class="lesson-badge">Lesson 1</span>
+                <h2>The Obsessive Fan as Origin Story</h2>
+
+                <div class="card">
+                    <span class="card-label">Key Lesson</span>
+                    <h3>Passion Drives Everything</h3>
+                    <p>Judd's origin story begins not as a natural comedian, but as an obsessive 15-year-old fan who snuck into a Garry Shandling taping, followed him, and eventually became his mentee. This teaches us that sometimes the path to mastery starts with radical fandom.</p>
+                    <div class="card-example">
+                        Judd's relentless pursuit of Shandling—showing up at his performances, studying his craft—demonstrates how genuine curiosity and persistence can open doors. The interview reveals how mentorship flows from authentic passion.
+                    </div>
+                    <div class="card-example">
+                        This obsession mirrors how many great comedians began: not with natural talent alone, but with an almost unhealthy fascination with the greats before them. Apatow's career is built on this foundation.
+                    </div>
+                    <div class="card-example">
+                        The interviews show that comedy lineage matters—learning from your heroes, understanding their process, and eventually finding your own voice through that dialogue.
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h3>The Funny Take</h3>
+                    <p>Imagine if every ambitious person acted like a 15-year-old obsessive fan of their industry. Venture capitalists camping outside Steve Jobs' door. Aspiring novelists following Toni Morrison to grocery stores. Maybe we'd have more genuine passion and fewer LinkedIn optimization strategies.</p>
+                </div>
+
+                <div class="ai-box">
+                    <h3>AI Connection</h3>
+                    <p>The obsessive fan mentality mirrors how modern AI systems are "trained"—exposure to massive amounts of high-quality examples, pattern recognition, and iterative refinement. Judd's apprenticeship under Shandling is like fine-tuning: taking a general interest and focusing intensely on a specific master.</p>
+                    <p>In machine learning terms, Apatow's early years represent "supervised learning"—learning directly from a mentor (Shandling as the labeled examples). Later, his independent comedy work becomes "unsupervised learning"—discovering patterns and creating original work.</p>
+                </div>
+
+                <div class="connect-box">
+                    <h3>Cross-Book Connection</h3>
+                    <p>This parallels the mentorship theme in Bossypants by Tina Fey, where she similarly credits learning from her comedy heroes. Both books emphasize that mastery requires obsessive study and the willingness to apprentice yourself to greatness.</p>
+                    <div class="connect-books">
+                        <div class="book-link">Bossypants</div>
+                        <div class="book-link">Born Standing Up</div>
+                        <div class="book-link">Grit</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Young fan figure -->
+                    <circle cx="150" cy="80" r="25" fill="#FD79A8"/>
+                    <rect x="130" y="110" width="40" height="60" rx="5" fill="#FFE66D"/>
+                    <line x1="130" y1="140" x2="100" y2="180" stroke="#2D3436" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="170" y1="140" x2="200" y2="180" stroke="#2D3436" stroke-width="4" stroke-linecap="round"/>
+
+                    <!-- Binoculars -->
+                    <circle cx="145" cy="55" r="8" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                    <circle cx="155" cy="55" r="8" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                    <rect x="145" y="48" width="10" height="5" fill="#4ECDC4"/>
+
+                    <!-- Stars showing obsession -->
+                    <text x="220" y="100" font-size="30">⭐</text>
+                    <text x="80" y="120" font-size="30">⭐</text>
+                    <text x="250" y="180" font-size="30">⭐</text>
+
+                    <!-- Path/arrows showing pursuit -->
+                    <path d="M 150 200 Q 130 250 120 300" stroke="#A06CD5" stroke-width="3" fill="none" stroke-dasharray="5,5" stroke-linecap="round"/>
+                    <text x="100" y="320" font-size="40">🎤</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LESSON 2: CRAFT AND DISCIPLINE (Jerry Seinfeld) ===== -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <div class="lesson-content">
+                <span class="lesson-badge">Lesson 2</span>
+                <h2>Craft and Discipline</h2>
+
+                <div class="card">
+                    <span class="card-label">Key Lesson</span>
+                    <h3>Comedy is Meticulous Work</h3>
+                    <p>Jerry Seinfeld's interview reveals that comedy is not inspiration—it's craft. Every joke is workshopped, tested, refined. He describes the obsessive process of writing jokes, testing them night after night, and perfecting the exact wording, timing, and delivery.</p>
+                    <div class="card-example">
+                        Seinfeld talks about how a joke might take months to perfect. The setup, the punch line, the callback—everything must be precisely calibrated. One wrong word can destroy the entire structure.
+                    </div>
+                    <div class="card-example">
+                        His discipline involves performing new material constantly, observing which parts get laughs, and relentlessly editing. This is empirical comedy—science, not art.
+                    </div>
+                    <div class="card-example">
+                        Seinfeld's meticulous approach contrasts with the myth of the naturally funny person. He's built his empire through discipline and systematic refinement.
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h3>The Funny Take</h3>
+                    <p>Jerry Seinfeld makes comedy seem like a manufacturing process—assembly line-grade refinement of observational humor. His notebooks are the blueprints. His stage is the testing facility. No spontaneous magic allowed. And yet, that discipline creates the magic.</p>
+                </div>
+
+                <div class="ai-box">
+                    <h3>AI Connection</h3>
+                    <p>Seinfeld's approach mirrors how machine learning models work: iterative refinement, testing on diverse data, tweaking parameters until results improve. His "testing material night after night" is precisely like training loss curves—measuring, adjusting, optimizing.</p>
+                    <p>The precision Seinfeld demands (exact word choice, timing) parallels the precision required in model architecture—a small change in one parameter cascades through the entire system. Both require empirical feedback loops.</p>
+                </div>
+
+                <div class="connect-box">
+                    <h3>Cross-Book Connection</h3>
+                    <p>This echoes the discipline themes in Born Standing Up by Steve Martin, where Martin similarly describes the meticulous craft of stand-up. Both comics emphasize that consistent work, not natural talent, separates good comedians from great ones.</p>
+                    <div class="connect-books">
+                        <div class="book-link">Born Standing Up</div>
+                        <div class="book-link">Mindset</div>
+                        <div class="book-link">Grit</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Notebook -->
+                    <rect x="50" y="80" width="200" height="250" rx="8" fill="#FFEAA7" stroke="#2D3436" stroke-width="2"/>
+                    <line x1="50" y1="110" x2="250" y2="110" stroke="#2D3436" stroke-width="1" opacity="0.3"/>
+                    <line x1="50" y1="140" x2="250" y2="140" stroke="#2D3436" stroke-width="1" opacity="0.3"/>
+                    <line x1="50" y1="170" x2="250" y2="170" stroke="#2D3436" stroke-width="1" opacity="0.3"/>
+                    <line x1="50" y1="200" x2="250" y2="200" stroke="#2D3436" stroke-width="1" opacity="0.3"/>
+
+                    <!-- Checkmarks -->
+                    <path d="M 70 115 L 75 125 L 85 105" stroke="#00B894" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 70 145 L 75 155 L 85 135" stroke="#00B894" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 70 175 L 75 185 L 85 165" stroke="#FF6B6B" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+                    <!-- Text lines -->
+                    <line x1="100" y1="120" x2="220" y2="120" stroke="#2D3436" stroke-width="2" opacity="0.6"/>
+                    <line x1="100" y1="150" x2="220" y2="150" stroke="#2D3436" stroke-width="2" opacity="0.6"/>
+
+                    <!-- Stopwatch -->
+                    <circle cx="150" cy="310" r="30" fill="none" stroke="#4ECDC4" stroke-width="3"/>
+                    <line x1="150" y1="290" x2="150" y2="310" stroke="#4ECDC4" stroke-width="2"/>
+                    <line x1="150" y1="310" x2="165" y2="325" stroke="#4ECDC4" stroke-width="2"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LESSON 3: FEARLESS TRUTH-TELLING ===== -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <div class="lesson-content">
+                <span class="lesson-badge">Lesson 3</span>
+                <h2>Fearless Truth-Telling</h2>
+
+                <div class="card">
+                    <span class="card-label">Key Lesson</span>
+                    <h3>The Courage to Offend</h3>
+                    <p>Chris Rock's interview is a masterclass in fearless comedy. He discusses how the best comedy often makes people uncomfortable because it's telling uncomfortable truths. Rock refuses to soften his message or pander to audiences.</p>
+                    <div class="card-example">
+                        Rock talks about performing material that challenges his audience's assumptions. He doesn't care if people are offended—if the truth is funny and the observation is sharp, he'll say it.
+                    </div>
+                    <div class="card-example">
+                        This approach requires immense confidence and a clear moral compass. Rock knows what he believes and doesn't compromise for laughs—which paradoxically makes his comedy stronger.
+                    </div>
+                    <div class="card-example">
+                        The interviews reveal that great comedians have a core identity and aren't trying to please everyone. That specificity is what makes their voice distinctive.
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h3>The Funny Take</h3>
+                    <p>Chris Rock proves that the formula for comedy isn't "say what people want to hear"—it's "say the unsayable with such precision and timing that people can't help but laugh at their own discomfort." It's truth as comedy's primary fuel.</p>
+                </div>
+
+                <div class="ai-box">
+                    <h3>AI Connection</h3>
+                    <p>Rock's fearless approach represents what's called "model confidence" in AI—the system has clear parameters and sticks to them rather than optimizing for every input. There's no attempt to please all users equally.</p>
+                    <p>In content generation, the temptation is always to be agreeable, to average toward consensus. But Rock's comedy works because it has a sharp point of view—much like how the most effective AI systems have clear objectives, not contradictory ones.</p>
+                </div>
+
+                <div class="connect-box">
+                    <h3>Cross-Book Connection</h3>
+                    <p>This connects to the vulnerability discussed in Bossypants and the authenticity emphasized in The Moth. Both show that truth-telling, even when uncomfortable, creates the strongest audience connection.</p>
+                    <div class="connect-books">
+                        <div class="book-link">Bossypants</div>
+                        <div class="book-link">The Moth</div>
+                        <div class="book-link">Mindset</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Microphone stand -->
+                    <line x1="150" y1="50" x2="150" y2="200" stroke="#2D3436" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="150" cy="45" r="10" fill="#FF6B6B"/>
+                    <rect x="100" y="195" width="100" height="20" rx="3" fill="#2D3436"/>
+
+                    <!-- Lightning bolt (power/energy) -->
+                    <path d="M 200 80 L 230 120 L 210 120 L 240 180" stroke="#FFE66D" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+                    <!-- Audience reactions -->
+                    <circle cx="80" cy="300" r="15" fill="#FD79A8" opacity="0.7"/>
+                    <path d="M 75 295 L 78 298 L 85 290" stroke="#2D3436" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+                    <circle cx="220" cy="320" r="15" fill="#4ECDC4" opacity="0.7"/>
+                    <path d="M 220 315 L 225 320 L 220 325" stroke="#2D3436" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+                    <!-- Truth symbol (target) -->
+                    <circle cx="50" cy="150" r="40" fill="none" stroke="#A06CD5" stroke-width="2"/>
+                    <circle cx="50" cy="150" r="30" fill="none" stroke="#A06CD5" stroke-width="2"/>
+                    <circle cx="50" cy="150" r="20" fill="none" stroke="#A06CD5" stroke-width="2"/>
+                    <circle cx="50" cy="150" r="10" fill="#A06CD5"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LESSON 4: VULNERABILITY AS STRENGTH ===== -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <div class="lesson-content">
+                <span class="lesson-badge">Lesson 4</span>
+                <h2>Vulnerability as Strength</h2>
+
+                <div class="card">
+                    <span class="card-label">Key Lesson</span>
+                    <h3>Opening Your Wounds for Laughs</h3>
+                    <p>Amy Schumer's interview explores how vulnerability—sharing your insecurities, failures, and pain—becomes comedy's most powerful tool. She doesn't hide behind characters or observations; she offers herself as the target of the joke.</p>
+                    <div class="card-example">
+                        Schumer talks about mining her own dating disasters, body image struggles, and relationship failures for material. The vulnerability is genuine, which makes the comedy land harder.
+                    </div>
+                    <div class="card-example">
+                        This approach requires more courage than safe observational humor. It's saying, "I'm flawed, and here's proof." The audience recognizes the honesty and connects deeply.
+                    </div>
+                    <div class="card-example">
+                        The interviews show that audiences crave authenticity—they'd rather hear about real struggles than polished, manufactured jokes about neutral topics.
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h3>The Funny Take</h3>
+                    <p>Amy Schumer transformed comedy by essentially saying, "Here are all the ways I'm a disaster," and it turned out that audiences found this refreshing. Turns out, we're all disasters. We just needed permission to laugh about it.</p>
+                </div>
+
+                <div class="ai-box">
+                    <h3>AI Connection</h3>
+                    <p>Schumer's vulnerability approach mirrors how modern AI systems work best with transparent limitations. Systems that acknowledge "Here are my weaknesses" build more trust than those claiming flawless performance.</p>
+                    <p>In machine learning, this relates to calibration—models that accurately represent uncertainty are more useful than overconfident ones. Schumer's comedy is "calibrated" to her actual experience, which creates resonance.</p>
+                </div>
+
+                <div class="connect-box">
+                    <h3>Cross-Book Connection</h3>
+                    <p>This directly connects to Bossypants, where Tina Fey similarly uses self-deprecation and vulnerability. Both comics show that strength comes from admitting weakness, not hiding it.</p>
+                    <div class="connect-books">
+                        <div class="book-link">Bossypants</div>
+                        <div class="book-link">The Moth</div>
+                        <div class="book-link">Grit</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Heart breaking open -->
+                    <path d="M 150 80 L 170 100 L 160 150 L 150 170 L 140 150 L 130 100 Z" fill="#FF6B6B" opacity="0.6"/>
+                    <path d="M 150 90 L 160 100 L 155 150 L 150 165 L 145 150 L 140 100 Z" fill="white"/>
+
+                    <!-- Cracks spreading -->
+                    <line x1="150" y1="85" x2="120" y2="60" stroke="#FF6B6B" stroke-width="2" opacity="0.7"/>
+                    <line x1="150" y1="85" x2="180" y2="60" stroke="#FF6B6B" stroke-width="2" opacity="0.7"/>
+                    <line x1="150" y1="170" x2="130" y2="210" stroke="#FF6B6B" stroke-width="2" opacity="0.7"/>
+
+                    <!-- Light coming through -->
+                    <circle cx="150" cy="150" r="30" fill="#FFE66D" opacity="0.4"/>
+
+                    <!-- Support/healing symbols -->
+                    <path d="M 80 280 Q 90 270 100 280" stroke="#4ECDC4" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 200 280 Q 210 270 220 280" stroke="#55EFC4" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+                    <!-- Ascending line (growth) -->
+                    <path d="M 70 320 L 100 300 L 130 280 L 160 260 L 190 240 L 220 220" stroke="#A06CD5" stroke-width="3" fill="none" stroke-linecap="round"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LESSON 5: THE LONELINESS OF SUCCESS ===== -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <div class="lesson-content">
+                <span class="lesson-badge">Lesson 5</span>
+                <h2>The Loneliness of Success</h2>
+
+                <div class="card">
+                    <span class="card-label">Key Lesson</span>
+                    <h3>Fame Isolates Even as It Connects</h3>
+                    <p>Steve Martin's interview in the book is a meditation on the paradox of success: you work to reach an audience, but that same success creates isolation. Martin discusses how fame can be profoundly lonely because your relationships become transactional.</p>
+                    <div class="card-example">
+                        Martin talks about the difficulty of trusting people's motives once you're famous. Are they interested in you, or your celebrity? This creates a barrier even in intimate relationships.
+                    </div>
+                    <div class="card-example">
+                        The interviews reveal that many successful comedians struggle with depression, anxiety, and loneliness despite their public success. The stage is connection; offstage can be profound isolation.
+                    </div>
+                    <div class="card-example">
+                        Martin's honesty about this struggle normalizes the mental health challenges that often accompany achievement. Success isn't a cure-all; sometimes it's the problem.
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h3>The Funny Take</h3>
+                    <p>The comedic irony: you make people laugh for a living, you're beloved by millions, and you're absolutely alone. It's like being a doctor who heals others but can't fix themselves. Steve Martin nailed it: success is a weird pyramid scheme where the top is the loneliest.</p>
+                </div>
+
+                <div class="ai-box">
+                    <h3>AI Connection</h3>
+                    <p>Martin's experience parallels discussions in AI ethics about systems that perform well in deployment but struggle with distributional shifts. Success metrics don't capture everything—an AI system might optimize for popularity but fail at robustness.</p>
+                    <p>The loneliness of success also mirrors the "alignment problem"—systems that achieve their stated goals but lose sight of actual human flourishing. Martin achieved his goals (fame, audiences) but found that wasn't what he actually wanted.</p>
+                </div>
+
+                <div class="connect-box">
+                    <h3>Cross-Book Connection</h3>
+                    <p>Born Standing Up by Steve Martin explicitly addresses these themes of isolation and the costs of ambition. This interview deepens that conversation, showing how success doesn't solve the problems that drive ambitious people.</p>
+                    <div class="connect-books">
+                        <div class="book-link">Born Standing Up</div>
+                        <div class="book-link">Mindset</div>
+                        <div class="book-link">The Moth</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Large crowd -->
+                    <circle cx="150" cy="100" r="60" fill="none" stroke="#4ECDC4" stroke-width="2" opacity="0.5"/>
+                    <circle cx="150" cy="100" r="45" fill="none" stroke="#4ECDC4" stroke-width="2" opacity="0.5"/>
+                    <circle cx="150" cy="100" r="30" fill="none" stroke="#4ECDC4" stroke-width="2" opacity="0.5"/>
+
+                    <!-- Single figure at center -->
+                    <circle cx="150" cy="100" r="8" fill="#FF6B6B"/>
+                    <line x1="150" y1="108" x2="150" y2="140" stroke="#FF6B6B" stroke-width="2"/>
+                    <line x1="150" y1="120" x2="130" y2="140" stroke="#FF6B6B" stroke-width="2"/>
+                    <line x1="150" y1="120" x2="170" y2="140" stroke="#FF6B6B" stroke-width="2"/>
+
+                    <!-- Distance/gap -->
+                    <path d="M 150 155 L 150 220" stroke="#A06CD5" stroke-width="2" stroke-dasharray="5,5"/>
+
+                    <!-- Empty space below -->
+                    <rect x="80" y="230" width="140" height="100" rx="8" fill="#FFEAA7" opacity="0.3"/>
+                    <text x="150" y="280" font-size="40" text-anchor="middle" opacity="0.4">🪑</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LESSON 6: FEARLESSNESS IN COMEDY ===== -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <div class="lesson-content">
+                <span class="lesson-badge">Lesson 6</span>
+                <h2>Fearlessness in Comedy</h2>
+
+                <div class="card">
+                    <span class="card-label">Key Lesson</span>
+                    <h3>Mel Brooks' Fearless Approach</h3>
+                    <p>Mel Brooks' interview is a masterclass in how fearlessness fuels creativity. Brooks built an empire by making fun of sacred cows—religion, Nazis, authority itself. He didn't apologize; he didn't worry about who he'd offend.</p>
+                    <div class="card-example">
+                        Brooks talks about how the secret to great comedy is the willingness to go where others won't. His films (Blazing Saddles, The Producers) tackled taboo subjects with humor that was both sharp and humane.
+                    </div>
+                    <div class="card-example">
+                        The interviews reveal that fearlessness isn't arrogance—it's a commitment to truth and artistry above comfort. Brooks feared mediocrity more than he feared offending people.
+                    </div>
+                    <div class="card-example">
+                        His approach shows that the most daring comedy often becomes timeless, while safe comedy is immediately forgotten. Fearlessness is a strategic advantage.
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h3>The Funny Take</h3>
+                    <p>Mel Brooks proved that you can make fun of literally anything if you do it with enough skill, love, and absurdity. His playbook: Take the most serious subject possible. Make it ridiculous. Add Nazis. Success.</p>
+                </div>
+
+                <div class="ai-box">
+                    <h3>AI Connection</h3>
+                    <p>Brooks' fearlessness relates to what researchers call "robustness" in AI—the ability to handle edge cases and unusual inputs without failing. He didn't optimize for the average audience; he created work that could handle any reaction.</p>
+                    <p>This also connects to the concept of "adversarial robustness"—systems designed to work even when challenged or when expectations are violated. Brooks built comedy that was robust against offense, criticism, and time.</p>
+                </div>
+
+                <div class="connect-box">
+                    <h3>Cross-Book Connection</h3>
+                    <p>Mel Brooks' approach echoes themes in Bossypants about standing your ground creatively. Both show that lasting art comes from conviction, not consensus-seeking.</p>
+                    <div class="connect-books">
+                        <div class="book-link">Bossypants</div>
+                        <div class="book-link">Born Standing Up</div>
+                        <div class="book-link">Mindset</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Shield -->
+                    <path d="M 150 50 L 220 90 L 220 200 Q 150 260 150 280 Q 150 260 80 200 L 80 90 Z" fill="none" stroke="#A06CD5" stroke-width="3"/>
+
+                    <!-- Sword (humor) -->
+                    <rect x="145" y="120" width="10" height="120" fill="#FFE66D"/>
+                    <path d="M 140 120 L 150 100 L 160 120" fill="#FFE66D"/>
+                    <rect x="140" y="240" width="20" height="15" fill="#2D3436"/>
+
+                    <!-- Lightning around (challenges) -->
+                    <path d="M 80 150 L 60 140 L 75 160 L 55 175" stroke="#FF6B6B" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <path d="M 220 170 L 240 160 L 225 180 L 245 195" stroke="#FF6B6B" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+                    <!-- Fire/passion at base -->
+                    <path d="M 130 270 Q 120 290 130 310 Q 140 290 140 310" fill="#FDCB6E" opacity="0.8"/>
+                    <path d="M 150 270 Q 140 290 150 310 Q 160 290 160 310" fill="#FDCB6E" opacity="0.8"/>
+                    <path d="M 170 270 Q 160 290 170 310 Q 180 290 180 310" fill="#FDCB6E" opacity="0.8"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LESSON 7: TABOO AS COMEDY CURRENCY ===== -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <div class="lesson-content">
+                <span class="lesson-badge">Lesson 7</span>
+                <h2>Taboo as Comedy Currency</h2>
+
+                <div class="card">
+                    <span class="card-label">Key Lesson</span>
+                    <h3>Sacred Cows Make the Best Targets</h3>
+                    <p>Sarah Silverman's interview explores how taboo topics—religion, sex, identity, death—are where comedy finds its power. By touching what others won't touch, comedians break the tension that exists around those topics.</p>
+                    <div class="card-example">
+                        Silverman discusses how her willingness to discuss controversial topics comes from a place of genuine curiosity and fearlessness. She's not trying to shock; she's trying to illuminate what's usually hidden.
+                    </div>
+                    <div class="card-example">
+                        The interviews show that taboo comedy isn't offensive for its own sake—the best comedians use taboo topics to make larger points about society, morality, and human behavior.
+                    </div>
+                    <div class="card-example">
+                        Silverman's approach reveals that audiences are hungry for conversations about taboo topics. Comedy becomes a safe space to discuss the dangerous, the embarrassing, the forbidden.
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h3>The Funny Take</h3>
+                    <p>Sarah Silverman figured out that the topics everyone whispers about are actually hilarious if you say them loud and smart enough. It turns out, sacred cows are mostly made of comedy gold—we just needed permission to laugh.</p>
+                </div>
+
+                <div class="ai-box">
+                    <h3>AI Connection</h3>
+                    <p>Taboo comedy relates to the concept of "training data bias" in AI systems. What's considered acceptable or unacceptable in comedians' material is learned from exposure—just as bias in AI systems comes from training data.</p>
+                    <p>Silverman's approach represents what researchers call "debiasing"—consciously examining and challenging assumptions about what's acceptable. By tackling taboo, she forces audiences to examine their own biases.</p>
+                </div>
+
+                <div class="connect-box">
+                    <h3>Cross-Book Connection</h3>
+                    <p>This echoes Sarah Silverman's own memoir and the vulnerability themes in The Moth. Both emphasize that the most powerful stories involve the topics we usually hide.</p>
+                    <div class="connect-books">
+                        <div class="book-link">The Moth</div>
+                        <div class="book-link">Bossypants</div>
+                        <div class="book-link">Mindset</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Locked door (taboo) -->
+                    <rect x="80" y="100" width="140" height="160" rx="8" fill="none" stroke="#2D3436" stroke-width="3"/>
+                    <circle cx="210" cy="180" r="12" fill="none" stroke="#2D3436" stroke-width="2"/>
+                    <line x1="222" y1="180" x2="235" y2="180" stroke="#2D3436" stroke-width="2"/>
+
+                    <!-- Key (laughter/comedy) -->
+                    <rect x="240" y="150" width="30" height="8" fill="#FFE66D"/>
+                    <circle cx="270" cy="154" r="6" fill="#FFE66D"/>
+                    <rect x="248" y="130" width="4" height="30" fill="#FFE66D"/>
+
+                    <!-- Light breaking through -->
+                    <path d="M 100 120 L 80 80 L 120 100" fill="#FD79A8" opacity="0.6"/>
+                    <path d="M 180 120 L 200 80 L 160 100" fill="#FD79A8" opacity="0.6"/>
+                    <circle cx="150" cy="180" r="35" fill="#FFE66D" opacity="0.3"/>
+
+                    <!-- Chains breaking -->
+                    <line x1="90" y1="90" x2="70" y2="70" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="5,5"/>
+                    <line x1="210" y1="90" x2="230" y2="70" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="5,5"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LESSON 8: COMEDY AS SPIRITUAL PRACTICE ===== -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <div class="lesson-content">
+                <span class="lesson-badge">Lesson 8</span>
+                <h2>Comedy as Spiritual Practice</h2>
+
+                <div class="card">
+                    <span class="card-label">Key Lesson</span>
+                    <h3>Garry Shandling's Inner Work</h3>
+                    <p>Garry Shandling's interview reveals comedy as a form of spiritual practice—a way to examine the self, understand suffering, and connect with something larger. His influence on Apatow is profound, showing how mentorship works when both mentor and student are serious about growth.</p>
+                    <div class="card-example">
+                        Shandling discusses how comedy isn't separate from his spiritual practice—meditation, therapy, and comedy performance are all part of the same journey toward self-understanding.
+                    </div>
+                    <div class="card-example">
+                        The interview reveals Shandling's "The Larry Sanders Show" as not just entertainment but an exploration of ego, authenticity, and the performance of self. Comedy becomes philosophy.
+                    </div>
+                    <div class="card-example">
+                        Shandling's influence on Apatow shows how mentorship isn't just about craft—it's about values, growth, and asking bigger questions about why we do what we do.
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h3>The Funny Take</h3>
+                    <p>Garry Shandling took the idea of comedy as therapy very literally. While most comedians are performing their neuroses, Shandling was performing his enlightenment journey. No wonder he influenced everyone serious about their craft.</p>
+                </div>
+
+                <div class="ai-box">
+                    <h3>AI Connection</h3>
+                    <p>Shandling's approach relates to what's called "interpretability" in AI—the effort to understand what's actually happening inside a system, what it values, how it makes decisions.</p>
+                    <p>Just as Shandling used comedy to understand himself better, AI researchers use interpretability tools to understand what their models have learned. Both are efforts to make the invisible visible.</p>
+                </div>
+
+                <div class="connect-box">
+                    <h3>Cross-Book Connection</h3>
+                    <p>This connects to Mindset by Carol Dweck, which emphasizes growth and self-understanding. Shandling embodies the growth mindset, constantly examining his work and himself.</p>
+                    <div class="connect-books">
+                        <div class="book-link">Mindset</div>
+                        <div class="book-link">Bossypants</div>
+                        <div class="book-link">Grit</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Meditation figure -->
+                    <circle cx="150" cy="100" r="20" fill="#A06CD5" opacity="0.7"/>
+                    <ellipse cx="150" cy="140" rx="35" ry="50" fill="none" stroke="#A06CD5" stroke-width="2"/>
+                    <line x1="115" y1="160" x2="100" y2="200" stroke="#A06CD5" stroke-width="2"/>
+                    <line x1="185" y1="160" x2="200" y2="200" stroke="#A06CD5" stroke-width="2"/>
+
+                    <!-- Light from within -->
+                    <circle cx="150" cy="140" r="25" fill="#FFE66D" opacity="0.3"/>
+                    <circle cx="150" cy="140" r="40" fill="none" stroke="#FFE66D" stroke-width="1" opacity="0.5"/>
+
+                    <!-- Spiraling energy -->
+                    <path d="M 150 60 Q 180 80 170 120 Q 150 140 130 120 Q 120 100 150 60" stroke="#4ECDC4" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+                    <!-- Ascending path -->
+                    <path d="M 150 220 Q 130 260 150 300 Q 170 340 150 360" stroke="#55EFC4" stroke-width="3" fill="none" stroke-dasharray="5,5" stroke-linecap="round"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LESSON 9: HONESTY IN MATERIAL ===== -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <div class="lesson-content">
+                <span class="lesson-badge">Lesson 9</span>
+                <h2>Honesty in Material</h2>
+
+                <div class="card">
+                    <span class="card-label">Key Lesson</span>
+                    <h3>Louis C.K. on Authentic Vulnerability</h3>
+                    <p>Louis C.K.'s interview emphasizes that the best comedy comes from absolute honesty about failure, pain, and the human condition. He refuses to present himself as successful or together; instead, he mines his worst moments for material.</p>
+                    <div class="card-example">
+                        Louis talks about how comedians shouldn't hide their struggles or present a sanitized version of their lives. The audience can smell inauthenticity; they respond to truth.
+                    </div>
+                    <div class="card-example">
+                        His approach involves detailed observations of small, mundane moments and failures. He doesn't joke about abstract concepts; he jokes about what actually happened to him.
+                    </div>
+                    <div class="card-example">
+                        The interviews reveal that honesty requires courage—it means revealing things about yourself that you'd normally hide. But that vulnerability is precisely what makes comedy resonate.
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h3>The Funny Take</h3>
+                    <p>Louis C.K. mastered the art of making fun of himself so thoroughly that audiences rooted for him despite (or because of) his failures. It turns out, admitting you're a mess is more likable than pretending you're together.</p>
+                </div>
+
+                <div class="ai-box">
+                    <h3>AI Connection</h3>
+                    <p>Louis' emphasis on absolute honesty relates to the concept of "transparency" in AI systems. Systems that admit their limitations and uncertainties are more trustworthy than those claiming perfection.</p>
+                    <p>This also connects to the idea of "honest communication"—algorithms that accurately represent what they know versus what they don't know. Louis does this for comedians: he shows his actual thought process, failures and all.</p>
+                </div>
+
+                <div class="connect-box">
+                    <h3>Cross-Book Connection</h3>
+                    <p>This echoes the authenticity themes in The Moth and Bossypants. All emphasize that real stories—messy, embarrassing, true—resonate more than polished narratives.</p>
+                    <div class="connect-books">
+                        <div class="book-link">The Moth</div>
+                        <div class="book-link">Bossypants</div>
+                        <div class="book-link">Born Standing Up</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cracked mirror (honesty) -->
+                    <rect x="80" y="80" width="140" height="160" rx="8" fill="#FFEAA7" stroke="#2D3436" stroke-width="2"/>
+                    <path d="M 150 80 L 150 240" stroke="#2D3436" stroke-width="1.5" opacity="0.5"/>
+                    <path d="M 120 160 L 180 160" stroke="#2D3436" stroke-width="1.5" opacity="0.5"/>
+
+                    <!-- Reflections (multiple perspectives) -->
+                    <circle cx="120" cy="140" r="8" fill="#FF6B6B" opacity="0.6"/>
+                    <circle cx="180" cy="140" r="8" fill="#FF6B6B" opacity="0.6"/>
+                    <circle cx="150" cy="110" r="8" fill="#FF6B6B" opacity="0.6"/>
+                    <circle cx="150" cy="190" r="8" fill="#FF6B6B" opacity="0.6"/>
+
+                    <!-- Light of truth -->
+                    <circle cx="150" cy="160" r="50" fill="#FFE66D" opacity="0.2"/>
+                    <circle cx="150" cy="160" r="70" fill="none" stroke="#FFE66D" stroke-width="1" opacity="0.3" stroke-dasharray="5,5"/>
+
+                    <!-- Ripples (impact) -->
+                    <circle cx="150" cy="280" r="30" fill="none" stroke="#4ECDC4" stroke-width="1"/>
+                    <circle cx="150" cy="280" r="50" fill="none" stroke="#4ECDC4" stroke-width="1" opacity="0.5"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LESSON 10: COMEDY AS THERAPY ===== -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <div class="lesson-content">
+                <span class="lesson-badge">Lesson 10</span>
+                <h2>Comedy as Therapy and Coping</h2>
+
+                <div class="card">
+                    <span class="card-label">Key Lesson</span>
+                    <h3>Laughter as Survival</h3>
+                    <p>Throughout the interviews, a consistent theme emerges: many comedians used humor as a coping mechanism for pain, depression, rejection, and trauma. Comedy becomes therapy—a way to process, survive, and ultimately transcend difficulty.</p>
+                    <div class="card-example">
+                        Multiple comedians discuss childhood challenges, family trauma, or mental health struggles that drove them to make people laugh. The stage became a healing space.
+                    </div>
+                    <div class="card-example">
+                        The interviews show that comedy isn't just entertainment—it's a form of emotional processing. By making something funny, you gain some control over its pain.
+                    </div>
+                    <div class="card-example">
+                        Apatow himself discusses how making movies and interviewing comedians has been part of his own psychological growth. Comedy and connection are intertwined with healing.
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h3>The Funny Take</h3>
+                    <p>It turns out that making people laugh is the perfect therapy—it's cathartic for the performer, validating for the audience, and it's billable. Comedians basically discovered cognitive behavioral therapy and monetized it.</p>
+                </div>
+
+                <div class="ai-box">
+                    <h3>AI Connection</h3>
+                    <p>Comedy as therapy relates to how AI systems can help process difficult information. Just as humor provides emotional distance from pain, AI can help organize and make sense of overwhelming data.</p>
+                    <p>This also connects to "hedonic adaptation"—humans are resilient but need support. Comedy and AI both provide mechanisms for processing, understanding, and finding meaning in difficulty.</p>
+                </div>
+
+                <div class="connect-box">
+                    <h3>Cross-Book Connection</h3>
+                    <p>This deeply connects to the resilience themes in Grit by Angela Duckworth and the growth mindset in Mindset. All show how people overcome adversity through persistence and reframing.</p>
+                    <div class="connect-books">
+                        <div class="book-link">Grit</div>
+                        <div class="book-link">Mindset</div>
+                        <div class="book-link">The Moth</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Storm cloud (pain/difficulty) -->
+                    <ellipse cx="150" cy="80" rx="70" ry="40" fill="#2D3436" opacity="0.4"/>
+                    <circle cx="120" cy="90" r="30" fill="#2D3436" opacity="0.4"/>
+                    <circle cx="180" cy="90" r="30" fill="#2D3436" opacity="0.4"/>
+
+                    <!-- Rain becoming laughter -->
+                    <line x1="130" y1="120" x2="120" y2="160" stroke="#74B9FF" stroke-width="2"/>
+                    <line x1="150" y1="120" x2="150" y2="160" stroke="#74B9FF" stroke-width="2"/>
+                    <line x1="170" y1="120" x2="180" y2="160" stroke="#74B9FF" stroke-width="2"/>
+
+                    <!-- Transformation (rain to laughter) -->
+                    <text x="120" y="180" font-size="28">😢</text>
+                    <text x="150" y="180" font-size="28">😄</text>
+                    <text x="180" y="180" font-size="28">🎉</text>
+
+                    <!-- Rising sun (healing) -->
+                    <circle cx="150" cy="280" r="35" fill="#FFE66D" opacity="0.7"/>
+                    <line x1="150" y1="235" x2="150" y2="210" stroke="#FFE66D" stroke-width="3"/>
+                    <line x1="195" y1="280" x2="220" y2="280" stroke="#FFE66D" stroke-width="3"/>
+                    <line x1="105" y1="280" x2="80" y2="280" stroke="#FFE66D" stroke-width="3"/>
+                    <line x1="190" y1="225" x2="210" y2="205" stroke="#FFE66D" stroke-width="3"/>
+                    <line x1="110" y1="335" x2="90" y2="355" stroke="#FFE66D" stroke-width="3"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LESSON 11: MENTORSHIP AND LINEAGE ===== -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <div class="lesson-content">
+                <span class="lesson-badge">Lesson 11</span>
+                <h2>Mentorship and Comedy Lineage</h2>
+
+                <div class="card">
+                    <span class="card-label">Key Lesson</span>
+                    <h3>Standing on the Shoulders of Giants</h3>
+                    <p>The entire book is structured around mentorship—Apatow's relationship with Shandling, and how each comedian was influenced by those who came before. The interviews reveal that comedy isn't created in isolation; it's a lineage, a conversation across generations.</p>
+                    <div class="card-example">
+                        The book shows how comedians study their heroes, absorb their techniques, and then create their own synthesis. It's how artistic traditions develop and evolve.
+                    </div>
+                    <div class="card-example">
+                        Several interviews discuss the debt comedians feel to those who paved the way. Recognizing that debt, and passing on knowledge to the next generation, is a sacred responsibility.
+                    </div>
+                    <div class="card-example">
+                        Apatow's project itself—interviewing these comedians, publishing their conversations—is an act of mentorship. He's creating a record of how comedy is made, for future generations.
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h3>The Funny Take</h3>
+                    <p>Comedy lineage works like this: Someone's hilarious. Everyone copies them. Then someone else is hilarious in a slightly different way. Repeat for 80 years. Result: the art form grows. It's mentorship as evolutionary process.</p>
+                </div>
+
+                <div class="ai-box">
+                    <h3>AI Connection</h3>
+                    <p>Comedy mentorship is essentially "knowledge distillation" in AI—taking the complex insights of a master (Shandling) and condensing them into principles that can be taught (Apatow learning, then teaching through his films).</p>
+                    <p>This also relates to "transfer learning"—using knowledge from one domain or teacher and applying it to new contexts. Each comedy generation builds on the previous through absorbed patterns.</p>
+                </div>
+
+                <div class="connect-box">
+                    <h3>Cross-Book Connection</h3>
+                    <p>This connects to Mindset, which emphasizes learning and growth through models. It also echoes Born Standing Up, where Steve Martin discusses his debt to those who came before.</p>
+                    <div class="connect-books">
+                        <div class="book-link">Born Standing Up</div>
+                        <div class="book-link">Mindset</div>
+                        <div class="book-link">Grit</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Chain/lineage of figures -->
+                    <circle cx="150" cy="80" r="15" fill="#FF6B6B"/>
+                    <line x1="150" y1="95" x2="150" y2="135" stroke="#A06CD5" stroke-width="3"/>
+
+                    <circle cx="150" cy="150" r="15" fill="#4ECDC4"/>
+                    <line x1="150" y1="165" x2="150" y2="205" stroke="#A06CD5" stroke-width="3"/>
+
+                    <circle cx="150" cy="220" r="15" fill="#FFE66D"/>
+                    <line x1="150" y1="235" x2="150" y2="275" stroke="#A06CD5" stroke-width="3"/>
+
+                    <circle cx="150" cy="290" r="15" fill="#55EFC4"/>
+
+                    <!-- Arrows showing influence -->
+                    <path d="M 130 100 Q 100 120 120 160" stroke="#FD79A8" stroke-width="2" fill="none" stroke-linecap="round" marker-end="url(#arrowhead)"/>
+                    <path d="M 170 170 Q 200 190 180 240" stroke="#FD79A8" stroke-width="2" fill="none" stroke-linecap="round" marker-end="url(#arrowhead)"/>
+
+                    <!-- Light connecting all -->
+                    <circle cx="150" cy="180" r="60" fill="#FFE66D" opacity="0.1"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LESSON 12: PERSISTENCE THROUGH REJECTION ===== -->
+    <section class="lesson">
+        <div class="lesson-inner">
+            <div class="lesson-content">
+                <span class="lesson-badge">Lesson 12</span>
+                <h2>Persistence Through Rejection</h2>
+
+                <div class="card">
+                    <span class="card-label">Key Lesson</span>
+                    <h3>The Long, Difficult Path</h3>
+                    <p>Nearly every comedian in Sick in the Head discusses years of rejection, failed projects, empty clubs, and moments of doubt. The book emphasizes that success isn't quick or easy—it requires relentless persistence through repeated failure.</p>
+                    <div class="card-example">
+                        The interviews show comedians working for years in small clubs, bombing regularly, sleeping in cars, facing constant rejection. This wasn't a phase—it was the norm.
+                    </div>
+                    <div class="card-example">
+                        The key insight: everyone who became successful experienced the same failures as those who quit. The difference was purely in their willingness to continue despite rejection.
+                    </div>
+                    <div class="card-example">
+                        Apatow's own journey—from unpaid intern to director—involved constant rejection and years of struggle. The book teaches that this struggle is inevitable, not a sign you're on the wrong path.
+                    </div>
+                </div>
+
+                <div class="funny-box">
+                    <h3>The Funny Take</h3>
+                    <p>If you want to be a successful comedian, your career path involves becoming very, very familiar with the word "no." Lots of it. So much "no." It's rejection as a business model, and somehow it works out.</p>
+                </div>
+
+                <div class="ai-box">
+                    <h3>AI Connection</h3>
+                    <p>Persistence through rejection mirrors how machine learning works—training through thousands of iterations, each one partially failing, gradually improving. "Overfitting" and "underfitting" are just failures on the way to success.</p>
+                    <p>This also relates to "gradient descent"—the process of iteratively moving toward a better solution, often taking steps that seem like failures but are actually progress. Comedians do this with jokes and career moves.</p>
+                </div>
+
+                <div class="connect-box">
+                    <h3>Cross-Book Connection</h3>
+                    <p>This is the core message of Grit by Angela Duckworth—that persistence and resilience matter more than talent. Born Standing Up also emphasizes the decades of struggle before success.</p>
+                    <div class="connect-books">
+                        <div class="book-link">Grit</div>
+                        <div class="book-link">Born Standing Up</div>
+                        <div class="book-link">Mindset</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="illustration-container">
+                <svg class="illustration-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Mountain climb (struggle) -->
+                    <path d="M 50 300 L 100 200 L 150 250 L 200 150 L 250 200 L 280 100" stroke="#A06CD5" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+                    <!-- Figure climbing -->
+                    <circle cx="100" cy="200" r="8" fill="#FF6B6B"/>
+
+                    <!-- Falling rocks (rejection) -->
+                    <circle cx="130" cy="180" r="5" fill="#2D3436" opacity="0.6"/>
+                    <circle cx="140" cy="210" r="5" fill="#2D3436" opacity="0.6"/>
+                    <circle cx="170" cy="190" r="5" fill="#2D3436" opacity="0.6"/>
+
+                    <!-- Flag at top (success) -->
+                    <rect x="270" y="80" width="4" height="50" fill="#2D3436"/>
+                    <path d="M 274 80 L 280 80 L 280 95 Z" fill="#FFE66D"/>
+
+                    <!-- Footprints marking progress -->
+                    <ellipse cx="75" cy="270" rx="3" ry="5" fill="#4ECDC4" opacity="0.5"/>
+                    <ellipse cx="125" cy="240" rx="3" ry="5" fill="#4ECDC4" opacity="0.5"/>
+                    <ellipse cx="175" cy="210" rx="3" ry="5" fill="#4ECDC4" opacity="0.5"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STORY SPOTLIGHT 1 ===== -->
+    <section class="story">
+        <div class="story-inner">
+            <h3>Story Spotlight: The Night Everything Changed</h3>
+            <p>Judd Apatow's story of sneaking into Garry Shandling's comedy taping at 15 is the origin myth of the entire book. It represents something crucial: sometimes the most important moment in your life isn't something you earned or deserved—it's something you pursued with such obsession that you made it happen.</p>
+            <p>Apatow didn't know that night would define his career. He was just a kid who loved comedy, who wanted to be near someone he admired. That willingness to pursue your obsession without knowing the outcome—that's where transformation begins. The book is structured around this insight: that mentorship, lineage, and growth all begin with genuine fandom.</p>
+        </div>
+    </section>
+
+    <!-- ===== STORY SPOTLIGHT 2 ===== -->
+    <section class="story">
+        <div class="story-inner">
+            <h3>Story Spotlight: The Empirical Approach to Jokes</h3>
+            <p>Seinfeld's description of testing material night after night, tracking which words get laughs, which premises work—this is the story of comedy as science. It shatters the myth that great comedians are naturally funny. Instead, they're empiricists, testing hypotheses on stage, refining based on audience response.</p>
+            <p>This spotlight shows that mastery in any field requires the same approach: observation, hypothesis, testing, refinement. It's the scientific method applied to humor. And paradoxically, this rigor is what makes the comedy feel effortless.</p>
+        </div>
+    </section>
+
+    <!-- ===== STORY SPOTLIGHT 3 ===== -->
+    <section class="story">
+        <div class="story-inner">
+            <h3>Story Spotlight: Vulnerability as Power</h3>
+            <p>Amy Schumer's willingness to admit her insecurities, her dating failures, her body image struggles—this represents a seismic shift in comedy. Instead of pretending to be above human weakness, she centered it. And audiences responded by seeing themselves in her.</p>
+            <p>This spotlight reveals that the most powerful art often comes from admitting what you'd normally hide. The vulnerability isn't a weakness in the performance—it's the entire point. It creates permission for audiences to be vulnerable too.</p>
+        </div>
+    </section>
+
+    <!-- ===== CHEATSHEET ===== -->
+    <section class="cheatsheet">
+        <div class="cheatsheet-inner">
+            <h2>Quick Reference Cheatsheet</h2>
+
+            <div class="cheatsheet-grid">
+                <div class="cheatsheet-item">
+                    <h4>The Obsessive Fan</h4>
+                    <ul>
+                        <li>Fandom as fuel</li>
+                        <li>Mentorship begins</li>
+                        <li>Obsession = advantage</li>
+                        <li>Study your heroes</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Craft & Discipline</h4>
+                    <ul>
+                        <li>Comedy is meticulous</li>
+                        <li>Test everything</li>
+                        <li>Perfect the details</li>
+                        <li>Empirical approach</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Fearless Truth</h4>
+                    <ul>
+                        <li>Tell uncomfortable truths</li>
+                        <li>Don't pander</li>
+                        <li>Have a point of view</li>
+                        <li>Sharpness over safety</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Vulnerability</h4>
+                    <ul>
+                        <li>Admit weakness</li>
+                        <li>Share real struggles</li>
+                        <li>Audience craves honesty</li>
+                        <li>Connection through exposure</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Loneliness of Success</h4>
+                    <ul>
+                        <li>Fame isolates</li>
+                        <li>Trust becomes hard</li>
+                        <li>Success ≠ happiness</li>
+                        <li>Mental health matters</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Fearlessness</h4>
+                    <ul>
+                        <li>Sacred cows are targets</li>
+                        <li>Go where others won't</li>
+                        <li>Fearlessness ≠ arrogance</li>
+                        <li>Daring = timeless</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Taboo Comedy</h4>
+                    <ul>
+                        <li>Taboos = power</li>
+                        <li>Break tension</li>
+                        <li>Illuminate hidden truths</li>
+                        <li>Safe space for danger</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Spiritual Practice</h4>
+                    <ul>
+                        <li>Comedy = self-exploration</li>
+                        <li>Performance as meditation</li>
+                        <li>Mentorship as growth</li>
+                        <li>Bigger questions matter</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Honest Material</h4>
+                    <ul>
+                        <li>Absolute authenticity</li>
+                        <li>Audiences detect lies</li>
+                        <li>Mundane = universal</li>
+                        <li>Failures are relatable</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Comedy as Therapy</h4>
+                    <ul>
+                        <li>Humor heals</li>
+                        <li>Laughter = coping</li>
+                        <li>Processing through art</li>
+                        <li>Connection restores</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Mentorship & Lineage</h4>
+                    <ul>
+                        <li>Stand on giants' shoulders</li>
+                        <li>Know your debt</li>
+                        <li>Pass it forward</li>
+                        <li>Art is conversation</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Persistence</h4>
+                    <ul>
+                        <li>Years of rejection</li>
+                        <li>Everyone fails equally</li>
+                        <li>Difference = willingness</li>
+                        <li>Struggle is inevitable</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accent-line" style="margin-top: 3rem;"></div>
+            <p style="margin-top: 2rem; font-size: 1rem; text-align: center; line-height: 1.8;">
+                Remember: These lessons aren't just about comedy. They're about any creative pursuit, any mentorship relationship, any path to mastery. The interviews in Sick in the Head reveal universal truths about growth, authenticity, and the strange joy of making people laugh.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p><strong>Sick in the Head: Conversations About Life and Comedy</strong></p>
+        <p>By Judd Apatow | Published 2015</p>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.8;">
+            This illustrated guide synthesizes the key lessons, stories, and connections from the book. It's designed as both a learning resource and a reference guide for returning to these powerful conversations.
+        </p>
+        <p style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.7;">
+            For cross-book learning, explore: Born Standing Up (Steve Martin), Bossypants (Tina Fey), The Moth, Mindset (Carol Dweck), and Grit (Angela Duckworth).
+        </p>
+    </footer>
+
+    <svg width="0" height="0">
+        <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#FD79A8" />
+            </marker>
+        </defs>
+    </svg>
+
+</body>
+</html>

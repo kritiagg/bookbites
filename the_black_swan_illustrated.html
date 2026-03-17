@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Black Swan - Illustrated</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .cover {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2D3436 50%, #0d0d0d 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .cover p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--coral);
+            margin-bottom: 0.5rem;
+        }
+
+        .cover-svg {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-top: 2rem;
+        }
+
+        .content-section {
+            background: white;
+        }
+
+        .content-section:nth-child(even) {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8e8e8 100%);
+        }
+
+        .content-wrapper {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--coral);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .lesson-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--coral);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .lesson-card p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .examples {
+            background: rgba(255, 107, 107, 0.05);
+            border-left: 3px solid var(--coral);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .examples h4 {
+            color: var(--coral);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .examples ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .examples li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .examples li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--coral);
+            font-weight: bold;
+        }
+
+        .funny-take, .ai-connection, .cross-connection {
+            background: rgba(78, 205, 196, 0.08);
+            border-left: 3px solid var(--teal);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .funny-take h4, .ai-connection h4, .cross-connection h4 {
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--coral), var(--sunny));
+            border-radius: 2px;
+        }
+
+        .story-card {
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .story-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--coral);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .svg-illustration {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            margin: 0 auto 2rem;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 1.5rem;
+            }
+
+            .lesson-card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- COVER SECTION -->
+    <section class="cover">
+        <div class="cover-content">
+            <h1>The Black Swan</h1>
+            <p>The Impact of the Highly Improbable</p>
+            <svg class="cover-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Bell curve broken -->
+                <path d="M 50 200 Q 200 50 350 200" stroke="var(--coral)" stroke-width="3" fill="none" opacity="0.3"/>
+                <path d="M 50 200 Q 200 80 250 200" stroke="var(--coral)" stroke-width="2" fill="none"/>
+                <line x1="250" y1="200" x2="280" y2="150" stroke="var(--coral)" stroke-width="2" opacity="0.6"/>
+                <line x1="280" y1="150" x2="310" y2="220" stroke="var(--coral)" stroke-width="2" opacity="0.6"/>
+
+                <!-- Black swan silhouette -->
+                <ellipse cx="320" cy="160" rx="30" ry="35" fill="#000000"/>
+                <circle cx="335" cy="120" r="18" fill="#000000"/>
+                <path d="M 340 115 Q 350 100 360 95" stroke="#000000" stroke-width="3" fill="none"/>
+                <path d="M 315 190 Q 310 210 315 230" stroke="#000000" stroke-width="2.5" fill="none"/>
+                <path d="M 320 190 Q 318 210 320 230" stroke="#000000" stroke-width="2.5" fill="none"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- LESSON 1: Black Swan Events -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>1. Black Swan Events</h3>
+                <p>Events that are rare, have extreme impact, and are easy to explain only after they occur. They shape history yet remain invisible beforehand.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>9/11: Unimaginable before 2001, triggered wars and security paradigm shifts</li>
+                        <li>COVID-19: Completely unpredicted by mainstream forecasting models</li>
+                        <li>Internet: Few predicted its omnipresence in 1990</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>We're all confident peacocks until the black swan arrives. Then we become experts in "obvious" hindsight.</p>
+                </div>
+                <div class="ai-connection">
+                    <h4>AI Connection</h4>
+                    <p>Distribution shift: models trained on historical data fail when encountering black swan events outside training distribution.</p>
+                </div>
+                <div class="cross-connection">
+                    <h4>Cross-Book Connection</h4>
+                    <p><strong>Thinking, Fast & Slow:</strong> We use heuristics instead of statistics to assess tail risks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 2: Turkey Problem -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>2. The Turkey Problem</h3>
+                <p>A turkey is fed every day for 1000 days, building conviction it will never be harmed. On day 1001, it's Thanksgiving. The problem: inductive reasoning fails near structural breaks.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Lehman Brothers: 100+ years without major crisis until 2008</li>
+                        <li>Risk models: assumed "normal" until markets crashed 20% in a day</li>
+                        <li>Your job: "stable" until automation arrives</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>The turkey is the world's most confident data scientist until statistics meet reality.</p>
+                </div>
+                <div class="ai-connection">
+                    <h4>AI Connection</h4>
+                    <p>Training on historical data creates overconfident models. The past doesn't guarantee the future in deployment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 3: Narrative Fallacy -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>3. Narrative Fallacy</h3>
+                <p>We craft coherent stories from random data, creating false causal chains. The myth: "Steve Jobs dropped out and became a genius." Reality: mostly luck and timing.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Stock analysts: "Apple went up because..." (pure confabulation)</li>
+                        <li>Biographies: retroactively explain success with neat narratives</li>
+                        <li>Your life story: you think you "chose" your path, but randomness shaped it</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>We're all unreliable narrators of our own lives, turning chaos into bestsellers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 4: Mediocristan vs Extremistan -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>4. Mediocristan vs Extremistan</h3>
+                <p>Mediocristan: heights follow bell curves (no individual dominates the average). Extremistan: wealth follows power laws (few outliers dominate).</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Height: tallest person ≈ 8ft (doesn't break statistics)</li>
+                        <li>Wealth: richest person could be thousands of times richer than average</li>
+                        <li>Book sales: one bestseller outsells 100 average books</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>In Mediocristan, everyone's average-ish. In Extremistan, someone always wins by absurd magnitude.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 5: Ludic Fallacy -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>5. The Ludic Fallacy</h3>
+                <p>We apply casino rules (known distributions, clear rules) to real life (unknown unknowns, no reset). Real markets are riskier than roulette.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Risk management: uses casino models that don't fit market reality</li>
+                        <li>VaR models: ignore tail risks until they happen</li>
+                        <li>Sports: you can't simulate a 2008 crash in practice</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>We use a roulette wheel to predict tsunamis, then act shocked when math fails.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 6: Silent Evidence -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>6. Silent Evidence (Survivorship Bias)</h3>
+                <p>We see the winners and forget the losers. The graveyard is silent. 99% of startups failed, but you only hear about the one that didn't.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Dolphins in WWII: thought to save pilots after accidents, weren't there before</li>
+                        <li>Mutual funds: worst performers disappear, leaving only winners</li>
+                        <li>Business books: written by survivors, not by the thousands who failed similarly</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Dead men tell no tales, and dead companies don't write memoirs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 7: Problem of Induction -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>7. The Problem of Induction</h3>
+                <p>All observed swans were white until Europeans discovered Australian black swans. One counterexample breaks infinite induction.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Ancient belief: "All swans are white" → falsified</li>
+                        <li>Markets: "Bonds never crash" → 2008</li>
+                        <li>Science: Newtonian physics seemed universal until relativity</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Confidence in past patterns is what gets you eaten by the black swan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 8: Scalability -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>8. Scalability</h3>
+                <p>Dentists earn by time (non-scalable). Authors earn by copies (scalable). Small random improvements compound into massive asymmetries.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Dentist: capped at ~50 patients/week</li>
+                        <li>Author: one good idea scales to millions of readers</li>
+                        <li>Software: one engineer's code runs on billions of devices</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Become scalable or cap your income. There's no middle ground in Extremistan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 9: Barbell Strategy -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>9. Barbell Strategy</h3>
+                <p>Concentrate 85% in safe, boring positions. Put 15% in hyper-aggressive bets. The middle ground is mediocrity with no upside.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Taleb's trading: losses on boring positions, gains from rare explosions</li>
+                        <li>Career: stable job (85%) + wild side projects (15%)</li>
+                        <li>Portfolio: bonds + deep OTM options, not balanced mutual funds</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>The barbell says: be boring AND ambitious, never just mediocre.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 10: Epistemic Humility -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>10. Epistemic Humility</h3>
+                <p>Accept what you don't know. Black swans live in the space of unknowns. Confidence itself is dangerous; humility is the only rational response to uncertainty.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Expert predictions: economists missed every major recession</li>
+                        <li>Risk officers: said 2008 was impossible</li>
+                        <li>Your future: truly unforecastable beyond 5 years</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>The more you know, the more you should distrust your certainty.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 11: Fourth Quadrant -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>11. The Fourth Quadrant</h3>
+                <p>High impact + Low probability = our worst knowledge blind spot. AI safety, pandemics, financial collapse live here. Theory fails us; only robust, adaptive strategies work.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Nuclear war: immense impact, tiny probability, unmodelable</li>
+                        <li>AI: transformative upside/downside, barely tested at scale</li>
+                        <li>Bioengineering: one mistake could be catastrophic</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>We're planning for the wrong quadrant while catastrophe waits in the fourth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 12: Antifragility Preview -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>12. Antifragility Preview</h3>
+                <p>Beyond robustness lies antifragility: systems that gain from disorder. Black swans don't hurt antifragile things; they strengthen them.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Optionality: unlimited upside, limited downside</li>
+                        <li>Redundancy: "wasting" resources becomes defense against tail risk</li>
+                        <li>Trial-and-error: embrace small failures to discover big wins</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Stop trying to predict the black swan. Instead, become the kind of thing it makes richer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORIES: CASINO THAT MISSED THE BLACK SWAN -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="story-card">
+                <h3>Story: Casino That Missed the Black Swan</h3>
+                <p>A major Las Vegas casino meticulously modeled risk: card counting, chip theft, drunk brawls—everything in their historical data. Their risk officers were confident. Then two events:</p>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li><strong>Tiger incident:</strong> A circus tiger mauled the entertainer, causing $100M+ in settlements and PR damage. Nothing in the model.</li>
+                    <li><strong>Tax fine:</strong> An arcane regulation violation cost $30M. Nobody predicted it.</li>
+                </ul>
+                <p style="margin-top: 1.5rem;">The lesson: they optimized for known risks and were blindsided by unknowns. Black swans aren't rare because you're smart; they're rare because they're by definition outside your mental model.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORIES: TALEB'S TRADING DESK -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="story-card">
+                <h3>Story: Taleb's Trading Desk</h3>
+                <p>Taleb's approach seems insane to ordinary traders: lose money almost every day on boring positions (tail risk hedges), then make a fortune on rare crashes.</p>
+                <p>In 1987, while the market soared, his desk bled red. But on Black Monday, when the crash happened and everyone else was liquidating, his tail hedges exploded in value. A few days of losses = millions in gains.</p>
+                <p>The beauty: his losses were small and predictable. His gains were huge and unpredictable. He'd rather be wrong often and occasionally catastrophically right than right often and occasionally catastrophically wrong.</p>
+                <p>This is how you profit from black swans: stop predicting them. Instead, position yourself to be harmed by their absence, not their presence.</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The War of Art: Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: #f8f6f2;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Cover */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 50%, var(--warm-red) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--coral) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            opacity: 0.2;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--forest) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -50px;
+            left: -50px;
+            opacity: 0.15;
+        }
+
+        .illustration-container {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.4);
+            max-width: 600px;
+            line-height: 1.1;
+            z-index: 2;
+            position: relative;
+        }
+
+        .cover .subtitle {
+            font-size: 1.3rem;
+            color: var(--coral);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 500;
+            z-index: 2;
+            position: relative;
+        }
+
+        .cover .author {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 2;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .cover .cta {
+            background: var(--coral);
+            color: #fff;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 2;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .cover .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255, 107, 107, 0.4);
+            background: var(--warm-red);
+        }
+
+        /* Main container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        /* Lessons */
+        .lesson {
+            margin-bottom: 80px;
+            scroll-margin-top: 80px;
+        }
+
+        .lesson-inner {
+            background: #fff;
+            border-radius: 12px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border-left: 8px solid var(--coral);
+            position: relative;
+        }
+
+        .lesson:nth-child(3n+2) .lesson-inner {
+            border-left-color: var(--forest);
+            background: linear-gradient(135deg, rgba(0, 184, 148, 0.03) 0%, transparent 100%);
+        }
+
+        .lesson:nth-child(3n) .lesson-inner {
+            border-left-color: var(--deep-blue);
+            background: linear-gradient(135deg, rgba(9, 132, 227, 0.03) 0%, transparent 100%);
+        }
+
+        .lesson h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: var(--coral);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            margin-right: 10px;
+        }
+
+        .lesson:nth-child(3n+2) .lesson-number {
+            background: var(--forest);
+        }
+
+        .lesson:nth-child(3n) .lesson-number {
+            background: var(--deep-blue);
+        }
+
+        .lesson .subtitle {
+            color: var(--warm-red);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .lesson p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: linear-gradient(135deg, var(--sunny) 0%, rgba(255, 230, 109, 0.5) 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid rgba(255, 230, 109, 0.3);
+            position: relative;
+        }
+
+        .card-label {
+            display: inline-block;
+            background: var(--coral);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%);
+            color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 6px solid var(--coral);
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 4rem;
+            opacity: 0.1;
+            color: var(--coral);
+        }
+
+        .quote-source {
+            margin-top: 15px;
+            font-style: normal;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 15px;
+        }
+
+        /* Funny Box */
+        .funny-box {
+            background: linear-gradient(135deg, var(--pink) 0%, rgba(253, 121, 168, 0.5) 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid rgba(253, 121, 168, 0.3);
+            border-left: 6px solid var(--pink);
+        }
+
+        .funny-box strong {
+            color: var(--dark);
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .funny-box p {
+            margin: 0;
+            color: var(--dark);
+        }
+
+        /* AI Box */
+        .ai-box {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, rgba(9, 132, 227, 0.15) 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border: 2px solid rgba(9, 132, 227, 0.2);
+            border-left: 6px solid var(--deep-blue);
+        }
+
+        .ai-box strong {
+            display: block;
+            color: var(--deep-blue);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .ai-box p {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .ai-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Connect Box */
+        .connect-box {
+            background: linear-gradient(135deg, var(--forest) 0%, rgba(0, 184, 148, 0.15) 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border: 2px solid rgba(0, 184, 148, 0.2);
+            border-left: 6px solid var(--forest);
+        }
+
+        .connect-box strong {
+            display: block;
+            color: var(--forest);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .connect-box p {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .connect-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Stories */
+        .story {
+            background: linear-gradient(135deg, var(--purple) 0%, rgba(160, 108, 213, 0.1) 100%);
+            border-radius: 12px;
+            padding: 50px;
+            margin: 60px 0;
+            box-shadow: 0 10px 40px rgba(160, 108, 213, 0.15);
+            border-left: 8px solid var(--purple);
+        }
+
+        .story h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .story-inner {
+            color: #444;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .story-inner p {
+            margin-bottom: 15px;
+        }
+
+        .story-inner strong {
+            color: var(--dark);
+        }
+
+        /* Cheatsheet */
+        .cheatsheet {
+            background: linear-gradient(135deg, var(--coral) 0%, var(--warm-red) 100%);
+            border-radius: 12px;
+            padding: 50px;
+            margin: 80px 0;
+            color: #fff;
+            box-shadow: 0 15px 50px rgba(255, 107, 107, 0.3);
+        }
+
+        .cheatsheet h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        .cheatsheet-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .cheatsheet-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cheatsheet-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--sunny);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .cheatsheet-section ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .cheatsheet-section li {
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .cheatsheet-section li::before {
+            content: '⚔';
+            position: absolute;
+            left: 0;
+            color: var(--sunny);
+            font-weight: bold;
+        }
+
+        /* Battle SVG Hero */
+        .battle-hero {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: #fff;
+            text-align: center;
+            padding: 40px;
+            margin-top: 80px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lesson {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        .lesson:nth-child(1) { animation-delay: 0s; }
+        .lesson:nth-child(2) { animation-delay: 0.1s; }
+        .lesson:nth-child(3) { animation-delay: 0.2s; }
+        .lesson:nth-child(4) { animation-delay: 0.3s; }
+        .lesson:nth-child(5) { animation-delay: 0.4s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .lesson-inner {
+                padding: 30px;
+            }
+
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            .lesson h2 {
+                font-size: 1.6rem;
+            }
+
+            .cheatsheet {
+                padding: 30px;
+            }
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #fff;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 60px 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .toc h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 30px;
+        }
+
+        .toc ol {
+            columns: 2;
+            gap: 30px;
+            list-style: none;
+            counter-reset: item;
+        }
+
+        @media (max-width: 768px) {
+            .toc ol {
+                columns: 1;
+            }
+        }
+
+        .toc li {
+            counter-increment: item;
+            margin-bottom: 20px;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .toc li::before {
+            content: counter(item);
+            position: absolute;
+            left: 0;
+            background: var(--coral);
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .toc li:nth-child(3n+2)::before {
+            background: var(--forest);
+        }
+
+        .toc li:nth-child(3n)::before {
+            background: var(--deep-blue);
+        }
+    </style>
+</head>
+<body>
+    <!-- COVER -->
+    <div class="cover">
+        <svg class="illustration-container" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Shield -->
+            <defs>
+                <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#E17055;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="swordGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FFE66D;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#FDCB6E;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+
+            <!-- Shield base -->
+            <path d="M 150 20 L 200 50 L 200 130 Q 200 180 150 220 Q 100 180 100 130 L 100 50 Z" fill="url(#shieldGrad)" stroke="#fff" stroke-width="2"/>
+
+            <!-- Shield design -->
+            <circle cx="150" cy="110" r="35" fill="none" stroke="#fff" stroke-width="2" opacity="0.6"/>
+            <path d="M 150 75 L 165 105 L 150 115 L 135 105 Z" fill="#fff" opacity="0.8"/>
+
+            <!-- Sword behind shield -->
+            <rect x="145" y="10" width="10" height="200" fill="url(#swordGrad)" stroke="#DAA520" stroke-width="1.5" opacity="0.8"/>
+            <polygon points="150,5 145,15 155,15" fill="url(#swordGrad)"/>
+
+            <!-- Paintbrush crossed -->
+            <g opacity="0.7">
+                <line x1="120" y1="140" x2="180" y2="100" stroke="#55EFC4" stroke-width="8" stroke-linecap="round"/>
+                <circle cx="120" cy="140" r="12" fill="#55EFC4"/>
+            </g>
+
+            <!-- Decorative elements -->
+            <circle cx="150" cy="250" r="3" fill="#FFE66D" opacity="0.6"/>
+            <circle cx="120" cy="260" r="2" fill="#55EFC4" opacity="0.6"/>
+            <circle cx="180" cy="265" r="2.5" fill="#FF6B6B" opacity="0.6"/>
+        </svg>
+
+        <h1>The War of Art</h1>
+        <p class="subtitle">Break Through the Blocks and Win Your Inner Creative Battles</p>
+        <p class="author">by Steven Pressfield</p>
+        <button class="cta" onclick="document.querySelector('.container').scrollIntoView({behavior: 'smooth'})">Start Reading</button>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <!-- Introduction Section -->
+        <section class="lesson" id="intro">
+            <div class="lesson-inner">
+                <div>
+                    <span class="lesson-number">0</span>
+                    <h2>Understanding The War</h2>
+                </div>
+                <p style="margin-top: 20px;">
+                    <strong>The War of Art</strong> is not a book about writing, painting, or music. It's a book about Resistance—the invisible enemy that keeps us from doing our most meaningful work. Whether you're an artist, entrepreneur, parent, or human being trying to live fully, you face the same opponent: the force that pulls you toward distraction, procrastination, and the unlived life.
+                </p>
+                <p>
+                    Steven Pressfield's three-part exploration is deceptively simple: first, he names the enemy (Resistance). Second, he shows how professionals defeat it by turning pro. Third, he reveals that assistance comes from beyond—from a muse, from the universe, from the collective unconscious. This guide breaks down the essential lessons and shows you how to win your creative war, whether you're building software, writing novels, or revolutionizing your life.
+                </p>
+                <div class="quote-box">
+                    The most important thing about art is that it teaches us who we are. It also teaches us that we are not alone. It gives us permission to be human, to be imperfect, to fail, and to keep trying anyway.
+                    <div class="quote-source">Steven Pressfield, The War of Art</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h2>Lessons in This Guide</h2>
+            <ol>
+                <li>Resistance Is Real (And It's Your Greatest Enemy)</li>
+                <li>The Nature of Resistance: Its Tactics and Weapons</li>
+                <li>Resistance's Greatest Hits: Procrastination, Doubt, Drama</li>
+                <li>The Professional vs. The Amateur</li>
+                <li>Turning Pro: The Shift That Changes Everything</li>
+                <li>The Muse Rewards Those Who Show Up</li>
+                <li>Doing the Work for Its Own Sake (Territory vs. Hierarchy)</li>
+                <li>Self-Sabotage: Resistance's Favorite Tool</li>
+                <li>Start Before You're Ready</li>
+                <li>Fear as a Compass: What You Fear Most Is What You Must Do</li>
+                <li>The Unlived Life Inside You</li>
+                <li>The Higher Self and the Crash of the Hierarchy</li>
+            </ol>
+        </div>
+
+        <!-- LESSON 1 -->
+        <section class="lesson" id="lesson1">
+            <div class="lesson-inner">
+                <span class="lesson-number">1</span>
+                <h2>Resistance Is Real (And It's Your Greatest Enemy)</h2>
+                <p class="subtitle">The Universal Force Blocking Your Creative Path</p>
+
+                <p>
+                    <strong>Resistance is not a metaphor. It's real.</strong> It's an entity, a tangible presence that opposes you whenever you attempt to do work that matters. Every human being who has ever created something—or attempted to—has felt it. It's the voice that says "maybe tomorrow," the weight that keeps you scrolling instead of writing, the doubt that whispers you're not good enough.
+                </p>
+
+                <p>
+                    What makes Resistance insidious is that it feels like you. It doesn't announce itself as an external force; it masquerades as your own thoughts, your own wisdom, your own protection. It says things like "You'll fail," "Everyone will laugh," "You should focus on making money first," or simply, "You're tired." You don't recognize it as the enemy because it sounds like common sense.
+                </p>
+
+                <div class="card">
+                    <span class="card-label">Key Insight</span>
+                    <p>Resistance feeds on three things: fear, self-doubt, and the comfort of the known. It grows stronger the more important the work is to your soul.</p>
+                </div>
+
+                <p>
+                    The moment you decide to pursue something creative—a novel, a startup, a painting, a completely authentic life—Resistance mobilizes against you. It doesn't care if your goal is noble or small. If it matters to you, Resistance will fight it. The higher the stakes (for your soul), the more fierce the resistance becomes.
+                </p>
+
+                <div class="two-col">
+                    <div>
+                        <h4 style="color: var(--dark); margin-bottom: 15px;">Where Resistance Lives</h4>
+                        <p>Resistance is not external. It lives inside you. It's not your enemy trying to harm you from outside; it's the part of you that wants to stay safe, comfortable, and invisible. It's the reptilian brain saying "don't take risks."</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--dark); margin-bottom: 15px;">Why It's So Powerful</h4>
+                        <p>Because you've internalized it as yourself. You don't fight it; you surrender to it. You don't name it; you accept it as truth. You don't recognize it as an opponent; you treat it as an advisor.</p>
+                    </div>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection: Resistance as Adversarial Loss</strong>
+                    <p>In machine learning, adversarial loss measures how well a model foolsthe discriminator—how effectively it generates novel, unexpected outputs. Resistance is the internal adversarial loss in human creativity. It's the force that says "don't deviate from the known patterns, don't risk being wrong, don't surprise anyone." Overcoming Resistance means learning to optimize for growth and innovation, even when it feels unsafe. Professional creators accept the loss and iterate anyway.</p>
+                </div>
+
+                <div class="quote-box">
+                    We know that Resistance is real. We feel it in the morning when we wake and must go off to do work we don't care about. We experience it in our bodies. We feel the heaviness in our limbs. We feel it in our stomach as nausea. We feel it in our minds as fogginess, a daze.
+                    <div class="quote-source">Steven Pressfield</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 2 -->
+        <section class="lesson" id="lesson2">
+            <div class="lesson-inner">
+                <span class="lesson-number">2</span>
+                <h2>The Nature of Resistance: Tactics & Weapons</h2>
+                <p class="subtitle">How Your Invisible Enemy Operates</p>
+
+                <p>
+                    Resistance doesn't attack directly. It's a strategic opponent that uses sophisticated psychological warfare. Understanding its tactics is the first step to defending against them. Pressfield identifies the specific weapons Resistance deploys:
+                </p>
+
+                <div style="background: rgba(255, 107, 107, 0.08); padding: 30px; border-radius: 10px; margin: 25px 0; border-left: 6px solid var(--coral);">
+                    <h4 style="color: var(--dark); margin-bottom: 15px;">The Arsenal of Resistance</h4>
+                    <ul style="margin-left: 20px; color: #444;">
+                        <li style="margin-bottom: 12px;"><strong>Fear</strong> — of failure, success, judgment, the unknown, and the fully realized self</li>
+                        <li style="margin-bottom: 12px;"><strong>Self-doubt</strong> — whispering that you're not talented enough, educated enough, worthy enough</li>
+                        <li style="margin-bottom: 12px;"><strong>Distraction</strong> — infinite rabbit holes, urgent-but-unimportant tasks, other people's needs</li>
+                        <li style="margin-bottom: 12px;"><strong>Rationalization</strong> — logical-sounding reasons why now isn't the right time</li>
+                        <li style="margin-bottom: 12px;"><strong>Self-importance</strong> — grandiosity about your work that prevents you from starting (it must be perfect)</li>
+                        <li style="margin-bottom: 12px;"><strong>Victimhood</strong> — convincing you that external circumstances prevent your success</li>
+                        <li style="margin-bottom: 12px;"><strong>Addiction</strong> — using substances, media, relationships, or anything to numb the discomfort</li>
+                    </ul>
+                </div>
+
+                <p>
+                    What's crucial to understand: <strong>Resistance is smart.</strong> It knows exactly what will derail you. If you're ambitious, it attacks through self-importance. If you're sensitive, it attacks through self-doubt. If you're social, it attacks through needing approval. It's personalized to your psychology.
+                </p>
+
+                <div class="funny-box">
+                    <strong>The Resistance Paradox</strong>
+                    <p>Resistance is most powerful when you don't recognize it. The moment you name it—"Oh, this is Resistance, not me"—its power diminishes by 80%. Your brain can't be fooled by an opponent it's clearly identified.</p>
+                </div>
+
+                <p>
+                    Another tactical genius of Resistance: <strong>it's not always stopping you from working. Sometimes it's making you work on the wrong things.</strong> You're "productive" all day, but on tasks that don't matter. You're busy, but not on your art. You're solving problems, but not the ones that would transform your life. Resistance loves when you're exhausted by activity that doesn't move you toward your real work.
+                </p>
+
+                <div class="ai-box">
+                    <strong>AI Connection: Gradient Noise and Training Instability</strong>
+                    <p>In deep learning, noisy gradients or unstable training can push a model away from true loss minima, trapping it in local optima or causing erratic behavior. Resistance works similarly—it injects noise and instability into your creative process. It creates gradient noise by making you question every step, introducing uncertainty and doubt. The professional learns to recognize this noise and optimize through it, trusting the long-term direction over short-term signal chaos.</p>
+                </div>
+
+                <div class="quote-box">
+                    The answer is: Don't think. Act. We get paid to show up and do our work. Period. A professional is a civilian who has committed to being at the desk, whether he feels inspired or not.
+                    <div class="quote-source">Steven Pressfield</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 3 -->
+        <section class="lesson" id="lesson3">
+            <div class="lesson-inner">
+                <span class="lesson-number">3</span>
+                <h2>Resistance's Greatest Hits</h2>
+                <p class="subtitle">Procrastination, Self-Doubt, Drama & Victimhood</p>
+
+                <p>
+                    While Resistance has infinite weapons, a few hit particularly hard. These are the techniques that stop the most people, that feel most justified, most reasonable, most like reality rather than enemy tactics.
+                </p>
+
+                <h4 style="color: var(--dark); margin: 30px 0 15px 0; border-bottom: 2px solid var(--coral); padding-bottom: 10px;">Procrastination: Delay as a Weapon</h4>
+                <p>
+                    Procrastination is Resistance's favorite tactic because it doesn't feel like failure—it feels like prudence. You're not avoiding your work; you're being responsible. You're waiting for more time, better conditions, more inspiration. You're going to start tomorrow, next week, next month. By then you'll be more confident, more prepared, less tired.
+                </p>
+                <p>
+                    The insidious part: procrastination actually works in the short term. You avoid the anxiety of the blank page, the fear of judgment, the discomfort of doing hard work. You get a hit of relief. This negative reinforcement makes procrastination addictive.
+                </p>
+
+                <h4 style="color: var(--dark); margin: 30px 0 15px 0; border-bottom: 2px solid var(--forest); padding-bottom: 10px;">Self-Doubt: The Voice of Impostor Syndrome</h4>
+                <p>
+                    Self-doubt is perhaps Resistance's most sophisticated weapon because it masquerades as humility or realism. It says you're not skilled enough, not educated enough, not special enough. Everyone else is more talented. You don't have the credentials. You'll be exposed as a fraud.
+                </p>
+                <p>
+                    What Pressfield discovered: every professional—every single one—has experienced this doubt. Famous writers still worry they can't write. Accomplished artists still question their ability. The difference is they've learned to separate self-doubt (a thought) from reality (what they can actually do).
+                </p>
+
+                <h4 style="color: var(--dark); margin: 30px 0 15px 0; border-bottom: 2px solid var(--deep-blue); padding-bottom: 10px;">Drama: Creating Emergency & Chaos</h4>
+                <p>
+                    Some people unconsciously create crisis and drama because it justifies why they can't work on their real passion. A family emergency. A crisis at work. A relationship drama. There's always something urgent that pushes aside the important.
+                </p>
+                <p>
+                    The cruel truth: sometimes these crises are real. But sometimes Resistance creates them by manipulating your attention, attracting chaos, or making you unconsciously seek out emergency to avoid the quiet, focused work your art requires.
+                </p>
+
+                <h4 style="color: var(--dark); margin: 30px 0 15px 0; border-bottom: 2px solid var(--warm-red); padding-bottom: 10px;">Victimhood: Blaming External Circumstances</h4>
+                <p>
+                    The ultimate Resistance play: convince yourself that you're powerless, that external circumstances prevent you from doing your work. You don't have enough time, money, support, education, or luck. Everyone else had advantages you didn't. The world is against you.
+                </p>
+                <p>
+                    Victimhood feels true because circumstances do matter. But Pressfield's point is brutal: everyone has obstacles. The professional doesn't wait for perfect circumstances; they work with what they have. They acknowledge the constraint and work within it.
+                </p>
+
+                <div class="funny-box">
+                    <strong>The Procrastinator's Creed</strong>
+                    <p>"I'll start when I'm less busy. I'll start when I feel inspired. I'll start when I understand the whole thing. I'll start when conditions are perfect. I'll start next year. I'll definitely start tomorrow." — What Resistance wants to hear every single day</p>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection: Optimization Sabotage and Local Minima</strong>
+                    <p>Procrastination, doubt, drama, and victimhood are ways the mind stays in local minima—comfortable, familiar patterns of thinking and behavior. The deep learning equivalent is gradient descent getting stuck in a local optimum instead of finding the global one. Professional creators use momentum, consistency, and external structure to escape these local minima. They're willing to move through uncomfortable gradient regions because they trust the broader optimization trajectory.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">The Real Cost</span>
+                    <p>Every time you don't do the work, Resistance wins a battle and grows stronger for the next one. Every time you procrastinate, self-doubt finds more evidence. Every time you accept a false excuse, victimhood becomes more real to you.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 4 -->
+        <section class="lesson" id="lesson4">
+            <div class="lesson-inner">
+                <span class="lesson-number">4</span>
+                <h2>The Professional vs. The Amateur</h2>
+                <p class="subtitle">Two Completely Different Creatures</p>
+
+                <p>
+                    <strong>The distinction between professional and amateur is not about money, credentials, or fame.</strong> A professional can be a mother writing during naptime, an accountant building a startup on weekends, a teenager creating music in their bedroom. An amateur can be a published author or a working artist who still hasn't made the internal shift.
+                </p>
+
+                <p>
+                    The difference is purely psychological: how they relate to Resistance, how they show up to their work, and what they're willing to endure for their art.
+                </p>
+
+                <div class="two-col">
+                    <div style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.08) 0%, transparent 100%); padding: 25px; border-radius: 10px; border-left: 6px solid var(--coral);">
+                        <h4 style="color: var(--coral); margin-bottom: 15px;">The Amateur</h4>
+                        <ul style="margin-left: 20px; color: #444;">
+                            <li style="margin-bottom: 10px;">Works when inspired</li>
+                            <li style="margin-bottom: 10px;">Quits when rejected</li>
+                            <li style="margin-bottom: 10px;">Needs external permission</li>
+                            <li style="margin-bottom: 10px;">Does it for recognition</li>
+                            <li style="margin-bottom: 10px;">Blames circumstances</li>
+                            <li style="margin-bottom: 10px;">Avoids feedback</li>
+                            <li style="margin-bottom: 10px;">Treats work as hobby</li>
+                        </ul>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(0, 184, 148, 0.08) 0%, transparent 100%); padding: 25px; border-radius: 10px; border-left: 6px solid var(--forest);">
+                        <h4 style="color: var(--forest); margin-bottom: 15px;">The Professional</h4>
+                        <ul style="margin-left: 20px; color: #444;">
+                            <li style="margin-bottom: 10px;">Shows up regardless of feeling</li>
+                            <li style="margin-bottom: 10px;">Welcomes rejection as learning</li>
+                            <li style="margin-bottom: 10px;">Gives themselves permission</li>
+                            <li style="margin-bottom: 10px;">Does it for the work itself</li>
+                            <li style="margin-bottom: 10px;">Takes responsibility</li>
+                            <li style="margin-bottom: 10px;">Hunts for feedback</li>
+                            <li style="margin-bottom: 10px;">Treats work as sacred</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p style="margin-top: 30px;">
+                    What separates them most critically: <strong>the amateur waits for permission to be professional. The professional doesn't.</strong>
+                </p>
+
+                <p>
+                    The amateur believes inspiration must come before action. The professional knows action generates inspiration. The amateur sees obstacles as proof they shouldn't proceed. The professional sees obstacles as part of the process. The amateur defines themselves by results. The professional defines themselves by commitment.
+                </p>
+
+                <div class="funny-box">
+                    <strong>Amateur Logic</strong>
+                    <p>"If I were a real professional, I'd feel more confident. If I were talented, this would be easier. If I were meant to do this, it wouldn't feel so hard." — Meanwhile, real professionals are sitting down and doing it anyway, feeling exactly the same doubt.</p>
+                </div>
+
+                <div class="connect-box">
+                    <strong>Cross-Book Connection: Atomic Habits</strong>
+                    <p>James Clear's concept of "identity-based habits" aligns perfectly here. The amateur is identity-less (or identifies as "not a real artist"). The professional has already internalized their identity. They don't have to decide whether to write; they've already decided they're a writer. This identity shift—from amateur to pro—is the foundation of everything that follows.</p>
+                </div>
+
+                <div class="quote-box">
+                    The professional has learned, after years of trial and error, to be impatient with himself or herself only on quality. He has learned to be patient with the process. The professional understands delayed gratification.
+                    <div class="quote-source">Steven Pressfield</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 5 -->
+        <section class="lesson" id="lesson5">
+            <div class="lesson-inner">
+                <span class="lesson-number">5</span>
+                <h2>Turning Pro: The Shift That Changes Everything</h2>
+                <p class="subtitle">How to Cross the Line from Amateur to Professional</p>
+
+                <p>
+                    <strong>Turning pro is not a destination. It's a decision.</strong> It happens in a moment. You decide that your creative work is not optional. You decide that you're committed regardless of external validation, financial reward, or guarantee of success. You decide that the work itself is enough.
+                </p>
+
+                <p>
+                    This decision has concrete consequences. When you turn pro, you accept certain principles:
+                </p>
+
+                <div style="background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%); color: #fff; padding: 35px; border-radius: 10px; margin: 30px 0; border-left: 6px solid var(--coral);">
+                    <h4 style="color: var(--coral); margin-bottom: 20px;">The Professional's Covenant</h4>
+                    <ol style="margin-left: 20px; line-height: 2;">
+                        <li><strong>You show up every day</strong> — whether inspired or not. There is no "writer's block" exemption. The professional knows that blocks dissolve through action.</li>
+                        <li><strong>You show up for the long haul</strong> — not for a day or a week, but for years and decades. You're building a body of work, not chasing a single project.</li>
+                        <li><strong>You give yourself permission</strong> — you don't wait for someone to validate you. You validate yourself. You're an artist because you say so.</li>
+                        <li><strong>You accept your work will be criticized</strong> — and you care more about growth than approval. Rejection doesn't stop you.</li>
+                        <li><strong>You honor the work above everything</strong> — above convenience, comfort, other people's expectations, and the fear of failure.</li>
+                    </ol>
+                </div>
+
+                <p>
+                    What happens when you turn pro? Resistance rises to meet you immediately. It gets more fierce because you've just declared war on it. Your stakes have increased. But here's the secret: you've also shifted from reactive to proactive.
+                </p>
+
+                <p>
+                    Before turning pro, Resistance controls the pace. It decides when you work (rarely) and when you rest (constantly). After turning pro, you control the pace. You decide to show up at your desk at 9 AM, and you show up. You're no longer negotiating with Resistance; you're implementing your own system against it.
+                </p>
+
+                <div class="ai-box">
+                    <strong>AI Connection: Supervised Learning to Self-Directed Optimization</strong>
+                    <p>An amateur is like a model in supervised learning mode—they wait for external feedback, validation, and direction to know if they're doing it right. A professional switches to self-directed optimization. They set their own loss function (the work itself, not external approval). They iterate independently, trusting that their internal compass is more reliable than external noise. This shift from external validation to internal criteria is what "turning pro" actually means.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Action Step</span>
+                    <p>Name yourself. Right now, before you go further. Say: "I am a [writer/artist/creator/entrepreneur]." Feel the difference between that identity and your current one. That's the feeling of turning pro.</p>
+                </div>
+
+                <div class="funny-box">
+                    <strong>Pro Move</strong>
+                    <p>A professional reads books on their craft not to delay starting, but to integrate insights while actively creating. They write while learning. They paint while studying. They don't wait for mastery before beginning; they achieve mastery by beginning.</p>
+                </div>
+
+                <div class="quote-box">
+                    The professional is the amateur plus one thing: commitment. Yet that one thing changes everything. The professional shows up even when it's hard. Especially when it's hard.
+                    <div class="quote-source">Steven Pressfield, paraphrased</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 6 -->
+        <section class="lesson" id="lesson6">
+            <div class="lesson-inner">
+                <span class="lesson-number">6</span>
+                <h2>The Muse Rewards Those Who Show Up</h2>
+                <p class="subtitle">Inspiration Is Not a Prerequisite; It's a Consequence</p>
+
+                <p>
+                    One of the most liberating insights in The War of Art: <strong>you don't need to feel inspired to do your work. But you do need to show up consistently, because that's when the muse arrives.</strong>
+                </p>
+
+                <p>
+                    The amateur waits for inspiration to strike. They believe great work comes from flashes of genius, divine intervention, or the stars aligning. So they sit around waiting, hoping the muse will visit. The professional knows something different: the muse doesn't visit the unmotivated. The muse visits those who are already at work.
+                </p>
+
+                <p>
+                    Think of it like a phone line. The muse is always transmitting, but you have to be connected to receive the signal. You connect by showing up. By sitting down. By starting, even if you have nothing. By putting your hand on the keyboard or the brush to the canvas. The moment you're engaged—really present—the muse can reach you.
+                </p>
+
+                <div class="two-col">
+                    <div>
+                        <h4 style="color: var(--dark); margin-bottom: 15px;">The Myth: Inspiration Comes First</h4>
+                        <p>Wait for the perfect idea. Wait for the mood. Wait to feel ready. Wait for external permission. Wait, wait, wait. The work never starts.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--dark); margin-bottom: 15px;">The Reality: Action Comes First</h4>
+                        <p>Sit down. Open the project. Write the first sentence. Make a mark. Fail. Try again. The muse meets you mid-attempt and suddenly you're connected.</p>
+                    </div>
+                </div>
+
+                <p style="margin-top: 30px;">
+                    Pressfield talks about the muse in almost spiritual terms, but you can understand it neurologically too. When you engage in focused work, your brain enters a flow state. Your prefrontal cortex—the doubting, fearing, judging part—quiets down. Your default mode network (associated with creativity) activates. You're suddenly connected to solutions, inspiration, and creative force that wasn't available when you were anxious and scattered.
+                </p>
+
+                <div class="quote-box">
+                    The muse doesn't come when you call. She comes when you're already working. She doesn't wait for ideal conditions. She shows up because you showed up.
+                    <div class="quote-source">Steven Pressfield</div>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection: Emergence Through Consistent Computation</strong>
+                    <p>In deep learning, a model's true capabilities don't emerge until it's trained extensively. You can't "wait" for a language model to become intelligent; you have to train it first. Novel behaviors emerge from repeated optimization iterations. The muse is exactly this: emergent properties that appear when you consistently engage with the work. It's not magic; it's the natural result of sustained, focused computation on your creative problem space.</p>
+                </div>
+
+                <div class="connect-box">
+                    <strong>Cross-Book Connection: Flow (Csikszentmihalyi)</strong>
+                    <p>Mihaly Csikszentmihalyi's concept of "flow" is the muse in operational terms. Flow emerges when challenge matches skill, when you're fully engaged, when distractions fade. The professional knows how to trigger flow: show up regularly, work at the edge of competence, create conditions of focused attention. The muse is flow. And flow comes to those who consistently show up.</p>
+                </div>
+
+                <div class="funny-box">
+                    <strong>The Inspiration Paradox</strong>
+                    <p>You think: "I'll write when I feel inspired." But it works the other way. You write because you committed to it, and in the writing, inspiration arrives. The people who feel most inspired are those who are already working. Success creates the conditions for inspiration, not the reverse.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Daily Practice</span>
+                    <p>Show up at the same time every day. Even if you only have 30 minutes. Even if you don't feel like it. Even if the work is mediocre. The consistency trains your muse to meet you there.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- STORY SPOTLIGHT 1 -->
+        <div class="story">
+            <h3>Story Spotlight: The Blocked Novelist</h3>
+            <div class="story-inner">
+                <p>
+                    <strong>Sarah had been planning her novel for seven years.</strong> She had a beautiful premise, a full character arc, an outline. She told everyone she was writing a book. But she never wrote it. Not one page.
+                </p>
+                <p>
+                    She had perfectly rational reasons: she was too busy with her job, her kids, her parents' health issues. She needed to wait until she had a sabbatical. She needed to take a writing course first. She needed to read more classics so she wouldn't write something mediocre. She needed to wait until she felt truly inspired.
+                </p>
+                <p>
+                    <strong>When she discovered Pressfield, she recognized Resistance immediately.</strong> All her reasons were Resistance wearing a reasonable mask. The excuses felt true because they contained fragments of truth. But they weren't the real reason. The real reason was fear: fear of failure, fear of discovering she wasn't actually a writer, fear of the judgment that would come if she tried and fell short.
+                </p>
+                <p>
+                    She made a decision: she was going to write. Not when she had time. Not when she was ready. Not when she felt inspired. Now. She gave herself permission to write badly. She committed to 500 words a day. Some days they were garbage. Some days she wrote "I don't know what to write" fifty times before an idea arrived.
+                </p>
+                <p>
+                    <strong>Six months later, she had a rough draft.</strong> It wasn't good. But it existed. And something shifted in her: she was a writer now. Not because the draft was brilliant, but because she'd shown up consistently and created something from nothing.
+                </p>
+                <p>
+                    That shift—from "I want to write a novel" to "I am a writer"—changed everything. It changed how she made decisions (prioritizing writing time). It changed her identity (she was no longer waiting to become something; she already was). It changed her relationship to Resistance (she recognized it now and ignored it).
+                </p>
+            </div>
+        </div>
+
+        <!-- LESSON 7 -->
+        <section class="lesson" id="lesson7">
+            <div class="lesson-inner">
+                <span class="lesson-number">7</span>
+                <h2>Territory vs. Hierarchy</h2>
+                <p class="subtitle">Do Your Work for Itself or for Approval?</p>
+
+                <p>
+                    This is perhaps the deepest lesson in The War of Art, and the one that most clearly separates the true artist from the pretender:
+                </p>
+
+                <p>
+                    <strong>Territory is work done for its own sake.</strong> You create because the work itself matters. Because the process is fulfilling. Because you're exploring something true and needed, regardless of whether anyone appreciates it. Territory is intrinsic.
+                </p>
+
+                <p>
+                    <strong>Hierarchy is work done for approval, status, and position.</strong> You create to impress someone, to win a reward, to climb a ladder. You care less about the work and more about how it's received. Hierarchy is extrinsic.
+                </p>
+
+                <p>
+                    The professional operates from territory. They care about making the best work possible because the work deserves their best effort, not because it will make them famous or wealthy. (Ironically, working from territory often leads to exactly those outcomes. But they're byproducts, not the goal.)
+                </p>
+
+                <div class="card">
+                    <span class="card-label">The Core Difference</span>
+                    <p><strong>Territory:</strong> "I'm writing this novel because this story needs to be told." <strong>Hierarchy:</strong> "I'm writing this novel so people will think I'm talented."</p>
+                </div>
+
+                <p>
+                    The moment you shift to hierarchy—the moment you're doing work for someone else's approval—Resistance gains massive power. Because now the outcome is outside your control. Your critic might hate it. Your boss might dismiss it. Your peers might not get it. You can't control these things, so you become anxious and defensive.
+                </p>
+
+                <p>
+                    But when you work from territory, you control the outcome: did I do my honest best? Did I make this work as true as I could make it? These are questions only you can answer. You're not dependent on anyone else's judgment.
+                </p>
+
+                <div class="funny-box">
+                    <strong>The Hierarchy Trap</strong>
+                    <p>You spend 6 months writing the "perfect" book hoping to impress an agent. They reject it. Your entire motivation evaporates because the approval you were seeking didn't materialize. But if you'd been writing from territory, you would have learned from the rejection and kept writing. The work continues regardless of external response.</p>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection: Intrinsic vs. Extrinsic Reward Signals</strong>
+                    <p>In reinforcement learning, you can train a model on extrinsic rewards (environmental feedback) or design intrinsic reward signals (self-generated metrics). An agent optimizing purely for extrinsic rewards becomes brittle—dependent on the environment staying consistent. But an agent with strong intrinsic rewards can explore and innovate independently. Territory is intrinsic reward optimization: you've defined your own success metric (making true work) and you optimize for that. Hierarchy is extrinsic reward dependence: you're chasing signals from outside and become fragile.</p>
+                </div>
+
+                <div class="connect-box">
+                    <strong>Cross-Book Connection: Big Magic (Elizabeth Gilbert)</strong>
+                    <p>Elizabeth Gilbert emphasizes doing your creative work "because you love it," not because you expect it to make you rich or famous. That's territory. She talks about releasing the pressure on your work to justify your life—when you need your art to pay the bills or prove your worth, you're in hierarchy mode. When you do it because the thing itself matters, you're in territory.</p>
+                </div>
+
+                <div class="quote-box">
+                    The professional has internalized Resistance. The professional has learned how to work from territory, not hierarchy. The professional knows that the work itself is the reward.
+                    <div class="quote-source">Steven Pressfield</div>
+                </div>
+
+                <div class="card" style="margin-top: 30px;">
+                    <span class="card-label">Practice</span>
+                    <p>For the next week, notice: are you doing your work from territory or hierarchy? Are you creating because it matters or because you want approval? Just notice. Awareness itself begins to shift the dynamic.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 8 -->
+        <section class="lesson" id="lesson8">
+            <div class="lesson-inner">
+                <span class="lesson-number">8</span>
+                <h2>Self-Sabotage: Resistance's Favorite Tool</h2>
+                <p class="subtitle">Why We Destroy Our Own Success</p>
+
+                <p>
+                    <strong>One of Resistance's most sophisticated strategies is to make you sabotage yourself.</strong> Just when you're making real progress, just when success is within reach, you find a way to undermine it. You miss a deadline. You pick a fight. You go on a bender. You create a crisis. You second-guess the entire project and start over.
+                </p>
+
+                <p>
+                    This is not accident or bad luck. This is Resistance, operating from deep inside you, protecting you from success because success would mean change, exposure, and the fulfillment of your potential.
+                </p>
+
+                <p>
+                    Why would you sabotage yourself? Because deep down—below consciousness—you have a belief that you don't deserve success. Or that success will isolate you from the people you love. Or that success will expose you as a fraud. Or that success means you'll have to maintain that level forever and you'll fail.
+                </p>
+
+                <div style="background: linear-gradient(135deg, var(--warm-red) 0%, rgba(225, 112, 85, 0.15) 100%); padding: 30px; border-radius: 10px; margin: 25px 0; border-left: 6px solid var(--warm-red);">
+                    <h4 style="color: var(--warm-red); margin-bottom: 15px;">Forms of Self-Sabotage</h4>
+                    <ul style="margin-left: 20px; color: #444;">
+                        <li style="margin-bottom: 12px;"><strong>The perfectionism sabotage</strong> — you keep revising instead of finishing. The work never ships.</li>
+                        <li style="margin-bottom: 12px;"><strong>The drama sabotage</strong> — you unconsciously create conflict that pulls your attention away from the verge of completion.</li>
+                        <li style="margin-bottom: 12px;"><strong>The addiction sabotage</strong> — you drink, use, or distract heavily right before potential breakthrough.</li>
+                        <li style="margin-bottom: 12px;"><strong>The self-doubt sabotage</strong> — you convince yourself it's garbage and don't submit it.</li>
+                        <li style="margin-bottom: 12px;"><strong>The success sabotage</strong> — after achieving something, you immediately undo it with reckless choices.</li>
+                    </ul>
+                </div>
+
+                <p>
+                    Pressfield's insight: <strong>you can't sabotage yourself if you're not close to success.</strong> Self-sabotage only activates when you're genuinely approaching your potential. It's a sign you're getting close to the truth.
+                </p>
+
+                <p>
+                    The professional recognizes this pattern and plans for it. They know that around the 80% mark—when the work is nearly done—Resistance will intensify. So they structure their life to handle it. They tell a trusted friend about their project so someone else can see through the sabotage. They commit to a deadline that's public. They build accountability.
+                </p>
+
+                <div class="funny-box">
+                    <strong>The Sabotage Tell</strong>
+                    <p>If your inner voice suddenly gets VERY convincing right before you finish something, you know Resistance is operating. It will sound wise, reasonable, truthful. "Actually, this whole idea is stupid." "I should completely rewrite it." "Everyone will hate it." These thoughts arrive with incredible certainty. But their timing—right before completion—reveals their true nature.</p>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection: Overtraining, Overfitting, and Regularization Failure</strong>
+                    <p>In machine learning, systems can overfit just before they're about to perform well on novel data. There's often an unstable region right before generalization happens. Self-sabotage is like this: the system (your psyche) becomes unstable right before it's about to evolve. The professional applies "regularization"—external structure and accountability—to get through this unstable zone without collapsing.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Warning Sign</span>
+                    <p>When you're 80-90% done with anything important, expect Resistance to get very loud. Plan for it. Build in accountability. Tell someone. The more you expect self-sabotage, the less power it has.</p>
+                </div>
+
+                <div class="quote-box">
+                    Resistance will tell you anything to keep you from doing your work. It will lie, fabricate, seduce. Believe none of it. Keep working.
+                    <div class="quote-source">Steven Pressfield</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 9 -->
+        <section class="lesson" id="lesson9">
+            <div class="lesson-inner">
+                <span class="lesson-number">9</span>
+                <h2>Start Before You're Ready</h2>
+                <p class="subtitle">Readiness Is a Myth; Beginning Is Everything</p>
+
+                <p>
+                    <strong>One of the most beautiful and paradoxical lessons:</strong> waiting to be ready is a permanent state of waiting. There is no "ready." There is only "begin."
+                </p>
+
+                <p>
+                    The amateur waits: I'll start when I'm more skilled. When I understand the whole thing. When I have more time. When the market is right. When conditions align. When I feel confident. When I get the degree. When I have enough money. When someone gives me permission.
+                </p>
+
+                <p>
+                    The professional knows: you become ready by beginning. You don't learn to write by studying writing theory; you learn by writing, failing, and writing again. You don't become a musician by understanding music; you become one by playing, badly, then less badly, then well.
+                </p>
+
+                <p>
+                    The dirty secret: <strong>every master was once a disaster.</strong> Every published author wrote terrible first drafts. Every accomplished artist made garbage before they made art. Every successful entrepreneur started with an idea they weren't ready for. The readiness came through the doing, not before it.
+                </p>
+
+                <div class="two-col">
+                    <div>
+                        <h4 style="color: var(--dark); margin-bottom: 15px;">What Waiting Looks Like</h4>
+                        <p>Research more. Take another course. Read more books. Get the expensive tools. Build the perfect workspace. Figure out the entire strategy. Get the degree. Build the platform. Network more. Wait.</p>
+                        <p style="margin-top: 15px; color: var(--warm-red); font-weight: 600;">Result: nothing created.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--dark); margin-bottom: 15px;">What Beginning Looks Like</h4>
+                        <p>Start now. With what you have. Where you are. Do the work badly. Learn from mistakes. Create something. Refine it. Do it again. You're not ready, and that's perfect.</p>
+                        <p style="margin-top: 15px; color: var(--forest); font-weight: 600;">Result: competence develops.</p>
+                    </div>
+                </div>
+
+                <p style="margin-top: 30px;">
+                    This isn't a platitude. It's neurological. Your brain learns through doing. When you begin—even badly—your brain starts building neural pathways specific to that skill. You're literally rewiring yourself. But you can't rewire yourself by thinking about it. You can only do it by doing it.
+                </p>
+
+                <p>
+                    There's also a practical aspect: <strong>you can't know if something is right for you until you try it.</strong> You can't know if you're a writer until you write. You can't know if you're an entrepreneur until you start something. You can't know if you want to paint until you paint. Thinking about it is not enough. Your body has to engage.
+                </p>
+
+                <div class="funny-box">
+                    <strong>The "I'm Not Ready" Paradox</strong>
+                    <p>The people most likely to say "I'm not ready" are actually the ones most likely to succeed, because they have high standards. But the cost of perfectionism is that you never ship. The professional trades perfectionism for progress. Done and imperfect beats perfect and never-done.</p>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection: Cold Start and Curriculum Learning</strong>
+                    <p>In machine learning, the cold start problem is real: how do you train a model when you have no data? The answer is you start with something—synthetic data, transfer learning, a simpler version of the problem. You don't wait for perfect conditions. You start training and improve iteratively. Professional creators use the same strategy: start with the most basic version, learn from feedback, iterate. The data (experience) is generated by beginning, not by waiting.</p>
+                </div>
+
+                <div class="connect-box">
+                    <strong>Cross-Book Connection: Bird by Bird (Anne Lamott)</strong>
+                    <p>Anne Lamott's advice to write "bird by bird"—one small task at a time—is exactly this principle. You don't write a novel; you write a scene. You don't master painting; you paint one canvas. You don't need to be ready for the whole thing; you just need to be ready for the next small step. And you don't need to be ready for that either. You just take it.</p>
+                </div>
+
+                <div class="quote-box">
+                    The starting point is always the middle of things. You never begin at the beginning. You begin in the middle and you figure out the beginning and the end by working forward and backward from that middle.
+                    <div class="quote-source">Steven Pressfield</div>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">This Week</span>
+                    <p>Identify one thing you've been waiting to start. Now start it. Not perfectly. Not when you're ready. Just start. The beginning is the only readiness you need.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 10 -->
+        <section class="lesson" id="lesson10">
+            <div class="lesson-inner">
+                <span class="lesson-number">10</span>
+                <h2>Fear as a Compass</h2>
+                <p class="subtitle">What You Fear Most Is Exactly What You Must Do</p>
+
+                <p>
+                    <strong>Pressfield makes a radical claim: your deepest fear is pointing you toward your most important work.</strong>
+                </p>
+
+                <p>
+                    This is not true for all fears. You can be afraid of spiders and not need to become an entomologist. But <strong>creative fear—fear about your work, your talent, your ability to create—is not warning you away. It's pointing you toward your destiny.</strong>
+                </p>
+
+                <p>
+                    Think about it: what would happen if you did the thing you're most afraid of? If you wrote the book you're terrified to write. If you started the business you're scared to start. If you made the art you're afraid to make. What's the actual worst outcome? You fail. You learn something. You try again.
+                </p>
+
+                <p>
+                    But the unconscious mind isn't logical. It says: you'll fail, you'll be humiliated, you'll be exposed as a fraud, you'll disappoint everyone, you'll lose what safety you have. These fear narratives are so compelling because they seem real. But they're not predictions; they're Resistance.
+                </p>
+
+                <div class="quote-box">
+                    The more important a call or action is to our soul's evolution, the more Resistance we will feel toward pursuing it. This is why so many people never do anything meaningful in their lives.
+                    <div class="quote-source">Steven Pressfield</div>
+                </div>
+
+                <p>
+                    Here's the flip side of this truth: <strong>what you DON'T fear, you don't need to do.</strong> If you're not scared, it probably isn't aligned with your highest potential. Safe work is work that doesn't require you to grow.
+                </p>
+
+                <p>
+                    The professional has learned to read fear as a compass. When they feel afraid, they ask: "Is this fear warning me away from actual danger, or is it Resistance?" In almost all creative matters, it's Resistance. So they move toward it.
+                </p>
+
+                <div class="two-col">
+                    <div>
+                        <h4 style="color: var(--dark); margin-bottom: 15px;">Physical Danger Fear</h4>
+                        <p>Run from a burning building. Don't pet the snake. These fears exist to protect you.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--dark); margin-bottom: 15px;">Creative Fear</h4>
+                        <p>Fear of judgment, failure, exposure. These fears don't protect you; they imprison you. Move toward them.</p>
+                    </div>
+                </div>
+
+                <p style="margin-top: 30px;">
+                    What Pressfield discovered through years of creative work: <strong>the fear doesn't go away when you succeed. The fear is always there. But the successful person has learned to act despite it.</strong>
+                </p>
+
+                <p>
+                    Famous writers are terrified. Accomplished artists doubt their talent. Successful entrepreneurs feel imposter syndrome. But they've learned one thing the amateur hasn't: <strong>you don't need to feel brave to act bravely. You just do it despite the fear.</strong>
+                </p>
+
+                <div class="funny-box">
+                    <strong>The Fear Menu</strong>
+                    <p>Fear of failure, fear of success, fear of judgment, fear of exposure, fear of disappointing people, fear of being alone, fear of irrelevance. Pick your poison. Every one of these fears exists because you matter. Small people don't get big fears.</p>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection: Gradient Signals and Steepest Ascent</strong>
+                    <p>In optimization, the gradient points toward maximum loss/minimum loss. Fear is the gradient signal of your psyche. It's pointing toward where the steepest learning curve is. The direction you're most afraid to go is the direction of maximum growth potential. The professional trusts the gradient even when it feels wrong. They optimize toward the fear, not away from it.</p>
+                </div>
+
+                <div class="connect-box">
+                    <strong>Cross-Book Connection: Mindset (Carol Dweck)</strong>
+                    <p>Carol Dweck's growth mindset—the belief that abilities can be developed—enables you to see fear differently. In a fixed mindset, fear means "you can't do this." In a growth mindset, fear means "you can't do this yet, but you can learn." The compass of fear only works if you believe growth is possible.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">The Compass Test</span>
+                    <p>What are you most afraid to create? Most afraid to say? Most afraid to try? Write it down. That's your compass. That's where the work is. Move toward the fear, not because you want to, but because it's the only path to becoming who you're meant to be.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- STORY SPOTLIGHT 2 -->
+        <div class="story">
+            <h3>Story Spotlight: The Entrepreneur Who Almost Didn't Start</h3>
+            <div class="story-inner">
+                <p>
+                    <strong>Marcus had the idea for a tech startup for three years.</strong> It was a good idea—he knew it. His friends thought it was brilliant. Market research showed demand. But he didn't start.
+                </p>
+                <p>
+                    The reasons seemed practical: he was making good money at his day job. He didn't want to risk financial security. He needed to wait until he had a co-founder. He should learn more about startups before beginning. He needed to save up more capital.
+                </p>
+                <p>
+                    But the real reason was deeper: he was terrified. What if it failed? What if he quit a stable job and burned through his savings for nothing? What if he wasn't cut out for entrepreneurship? What if people thought he was crazy?
+                </p>
+                <p>
+                    <strong>When he read about fear as a compass, something clicked.</strong> The fact that he was so terrified meant this was important to him. The fact that he'd been fantasizing about it for three years meant it wasn't a whim. The fact that he kept reading about startups despite the fear meant he was drawn to it.
+                </p>
+                <p>
+                    He made a decision: he was going to start. Not when he felt ready. Not when the market was perfect. Not when he had all the knowledge. Now. Part-time at first. One evening, one weekend at a time.
+                </p>
+                <p>
+                    <strong>The first version was rough.</strong> He made mistakes. He learned things the hard way. But he shipped something. He got users. He got feedback. He iterated. After a year, he had something viable. Two years later, he'd raised funding.
+                </p>
+                <p>
+                    But the real win wasn't the funding or the business. The win was the shift in identity. He was no longer "thinking about starting a company." He was a founder. The fear didn't disappear—it got bigger as the stakes increased. But the fear no longer paralyzed him because he'd learned through action that fear is just Resistance, not truth.
+                </p>
+            </div>
+        </div>
+
+        <!-- LESSON 11 -->
+        <section class="lesson" id="lesson11">
+            <div class="lesson-inner">
+                <span class="lesson-number">11</span>
+                <h2>The Unlived Life Inside You</h2>
+                <p class="subtitle">What Happens When You Deny Your True Self</p>
+
+                <p>
+                    <strong>This is the tragedy at the heart of The War of Art:</strong> every time you surrender to Resistance, you're not just postponing work. You're denying an entire version of yourself—the version that was meant to exist.
+                </p>
+
+                <p>
+                    There's a life inside you that wants to be lived. A story that wants to be told. An art that wants to be made. A contribution that wants to be given. This is not arrogance. This is the truth of what it means to be human.
+                </p>
+
+                <p>
+                    When you say no to your work, you're not just delaying. You're denying your own becoming. You're feeding Resistance and starving your potential. You're choosing safety over destiny.
+                </p>
+
+                <p>
+                    And here's the cruelest part: <strong>the unlived life doesn't disappear. It turns into depression, anxiety, bitterness, envy.</strong> You watch other people create and feel the sting of what you didn't do. You see someone else tell the story you were meant to tell, and you feel a grief that has no name. You grow old and realize you spent your life preventing yourself from becoming.
+                </p>
+
+                <div class="quote-box">
+                    The unlived life is the one you would have lived if you had had the courage. It's the one that exists only in your imagination, your fantasy, your dreams. And the more years you let pass, the more real it becomes in imagination and the more unreal it becomes in potential.
+                    <div class="quote-source">Steven Pressfield, paraphrased</div>
+                </div>
+
+                <p>
+                    But here's the redemptive part: <strong>it's not too late.</strong> Right now, at this moment, you can make the choice. You can turn toward your work. You can turn pro. You can defeat Resistance. You can birth the unlived life into the world.
+                </p>
+
+                <p>
+                    The moment you do, something shifts. You're no longer divided against yourself. You're not pretending to be smaller than you are. You're not lying to yourself about your potential. You're finally becoming the person you were meant to be.
+                </p>
+
+                <div class="funny-box">
+                    <strong>The Deathbed Test</strong>
+                    <p>You're 80 years old, looking back on your life. What would you rather regret: trying and failing, or never trying at all? Now, knowing your answer, what does that tell you about what you should do today?</p>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection: Divergence Between Training Objective and True Potential</strong>
+                    <p>Sometimes a neural network is trained toward a proxy objective instead of the true objective. It optimizes brilliantly but in the wrong direction. The human psyche does this: you optimize toward "being safe" or "being liked" or "not failing," and you become excellent at those things while your true potential remains dormant. The unlived life is the divergence between what you're optimizing for and what you could be optimizing for. Changing your loss function changes everything.</p>
+                </div>
+
+                <div class="connect-box">
+                    <strong>Cross-Book Connection: On Writing (Stephen King)</strong>
+                    <p>Stephen King talks about writing as a moral obligation. You have something that needs to be expressed, and if you don't express it, the world loses it. The unlived life is that unrealized gift. King writes despite the terror because the alternative—a world without your contribution—is unacceptable.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">Reflection</span>
+                    <p>What is the unlived life inside you? What version of yourself have you not allowed to exist? Name it. Grieve it if you need to. Then decide: are you going to let it stay unlived, or are you going to birth it into being?</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 12 -->
+        <section class="lesson" id="lesson12">
+            <div class="lesson-inner">
+                <span class="lesson-number">12</span>
+                <h2>The Higher Self and Assistance</h2>
+                <p class="subtitle">You're Not Alone in This War</p>
+
+                <p>
+                    <strong>The final and most profound lesson:</strong> you are not fighting Resistance alone. There is an opposing force that wants you to succeed just as much as Resistance wants you to fail.
+                </p>
+
+                <p>
+                    Pressfield calls this force the Muse. Some might call it inspiration, intuition, the unconscious mind, the divine, the quantum field, or the universe itself. The name doesn't matter as much as the recognition: <strong>there is assistance available if you're willing to receive it.</strong>
+                </p>
+
+                <p>
+                    But this assistance only comes when you've committed. It only arrives when you've made the decision to turn pro and show up consistently. It's as if the moment you stop waiting and start acting, the universe conspires to help you. Doors open. People appear. Ideas flow. Synchronicities multiply.
+                </p>
+
+                <p>
+                    This isn't mysticism. It's practical. When you've decided your work is non-negotiable, your brain becomes primed to notice opportunities you would have missed. Your heightened awareness attracts mentors. Your commitment gives others permission to help. You're tuned to a frequency that broadcast your intention, and like-minded people respond.
+                </p>
+
+                <div class="two-col">
+                    <div>
+                        <h4 style="color: var(--dark); margin-bottom: 15px;">When You Wait</h4>
+                        <p>The universe holds back. People sense your ambivalence. Opportunities don't find you because you haven't found yourself.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--dark); margin-bottom: 15px;">When You Commit</h4>
+                        <p>The universe aligns. People sense your seriousness. Opportunities emerge from unexpected places. Mentors appear. Ideas flow.</p>
+                    </div>
+                </div>
+
+                <p style="margin-top: 30px;">
+                    Pressfield talks about "hierarchy" collapsing when you're truly doing the work. The hierarchy—the external structure of achievement and status—becomes irrelevant because you've moved into something deeper: a direct relationship with your work and with the creative force that wants to express itself through you.
+                </p>
+
+                <p>
+                    <strong>The crash of the hierarchy is when you stop needing external validation entirely.</strong> You're free because you've stopped looking for approval from anyone. Your work is enough. Your commitment is enough. Your becoming is enough.
+                </p>
+
+                <div class="quote-box">
+                    When we align ourselves with the higher self, we gain access to information and inspiration that we couldn't access before. We move from trying to create from our limited ego perspective to channeling something far greater than ourselves.
+                    <div class="quote-source">Steven Pressfield, adapted</div>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection: Emergence of Collective Intelligence</strong>
+                    <p>When individual nodes in a network align and work consistently, patterns emerge at a higher level that no individual node could generate alone. This is emergence. When you commit to your work, you're not just using your individual intelligence; you're tapping into collective patterns that emerge from consistent, focused intention. The muse is emergence. The universe is a network, and your commitment tunes you to frequencies you couldn't access alone.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">The Recognition</span>
+                    <p>You don't have to believe in the muse or the universe or divine assistance. You just have to recognize: every great creator throughout history has reported that assistance comes. The practical response is to show up and see what happens.</p>
+                </div>
+
+                <div class="funny-box">
+                    <strong>The Help You Didn't Ask For</strong>
+                    <p>You commit to writing. Suddenly your friend mentions a book that solves the exact problem you were stuck on. A person reaches out offering mentorship. An idea arrives in the shower. This isn't coincidence. This is what happens when you become serious enough to be useful to the universe.</p>
+                </div>
+
+                <div class="connect-box">
+                    <strong>Cross-Book Connection: Deep Work (Cal Newport)</strong>
+                    <p>Cal Newport emphasizes that deep work—sustained focus on difficult cognitive tasks—is increasingly rare and valuable. When you commit to deep work, you align with forces (technological change, collective evolution) that reward that alignment. The higher self is the intelligence that emerges when you're in flow, fully focused, tapping into the accumulated patterns of human knowledge and creativity.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- STORY SPOTLIGHT 3 -->
+        <div class="story">
+            <h3>Story Spotlight: The Artist Who Found Her Voice</h3>
+            <div class="story-inner">
+                <p>
+                    <strong>Elena had been painting for 20 years without finding her voice.</strong> She was technically skilled, but her work felt derivative. She was either copying her favorite artists or chasing trends. Nothing felt true.
+                </p>
+                <p>
+                    She was waiting for inspiration to arrive. She was waiting to discover her style. She was waiting for someone to validate her as a "real artist." She was in amateur mode—talented, but not professional.
+                </p>
+                <p>
+                    Then she understood Resistance. She realized she'd been waiting for permission that would never come. No one was going to crown her a real artist. No external force would grant her the right to have a voice. She had to claim it.
+                </p>
+                <p>
+                    <strong>She made a decision: she was going to paint what mattered to her, not what she thought would impress people.</strong> She was going to stop trying to be innovative and start trying to be honest. She committed to painting one piece a week, completely outside the commercial market, just to see what wanted to emerge.
+                </p>
+                <p>
+                    The first months were awkward. But around month three, something shifted. The work got strange, raw, powerful. It didn't fit any category. It looked like nothing but itself. And paradoxically, that's when people responded. When she stopped trying to make good art and started making true art, the right people found it.
+                </p>
+                <p>
+                    <strong>Her voice had been inside her the whole time.</strong> But she couldn't find it by waiting or studying. She found it by committing, by showing up consistently, by turning pro, and by making the work itself the goal instead of the approval.
+                </p>
+            </div>
+        </div>
+
+        <!-- CHEATSHEET -->
+        <div class="cheatsheet">
+            <h2>⚔ The War of Art: Quick Reference</h2>
+            <div class="cheatsheet-inner">
+                <div class="cheatsheet-section">
+                    <h3>What Resistance Does</h3>
+                    <ul>
+                        <li>Whispers you're not good enough</li>
+                        <li>Makes procrastination feel wise</li>
+                        <li>Creates fake urgency on unimportant tasks</li>
+                        <li>Gets louder as you approach breakthrough</li>
+                        <li>Masquerades as your own thoughts</li>
+                        <li>Attacks through your specific psychology</li>
+                        <li>Makes you sabotage success</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-section">
+                    <h3>How Professionals Fight Back</h3>
+                    <ul>
+                        <li>Name it: "This is Resistance, not reality"</li>
+                        <li>Show up daily regardless of feeling</li>
+                        <li>Do the work for the work itself</li>
+                        <li>Give themselves permission</li>
+                        <li>Build external accountability</li>
+                        <li>Start before they're ready</li>
+                        <li>Trust that the muse rewards consistency</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-section">
+                    <h3>The Professional's Creed</h3>
+                    <ul>
+                        <li>I show up every day (period)</li>
+                        <li>I work from territory, not hierarchy</li>
+                        <li>I move toward fear, not away from it</li>
+                        <li>I finish what I start</li>
+                        <li>I welcome feedback and criticism</li>
+                        <li>I care more about the work than approval</li>
+                        <li>I am committed for the long haul</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-section">
+                    <h3>Red Flags (Resistance in Disguise)</h3>
+                    <ul>
+                        <li>Finding urgent reasons to delay the important</li>
+                        <li>Feeling convinced you're not talented enough</li>
+                        <li>Creating drama right before completion</li>
+                        <li>Perfectionism preventing you from shipping</li>
+                        <li>Blaming external circumstances</li>
+                        <li>Needing to feel inspired before acting</li>
+                        <li>Saying "I'm not ready yet" (you'll never be)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Closing Section -->
+        <section class="lesson" id="conclusion">
+            <div class="lesson-inner">
+                <div>
+                    <h2>Your Declaration</h2>
+                </div>
+                <p style="margin-top: 20px; font-size: 1.15rem; line-height: 2;">
+                    <strong>You now understand what stands between you and your work.</strong> You know its tactics. You know its weapons. You know how it operates and why. You understand the difference between professional and amateur. You know that turning pro is a decision you can make right now.
+                </p>
+
+                <p>
+                    Most importantly: <strong>you know that you're not alone.</strong> Every creator who has ever mattered has fought the same enemy. Every artist, entrepreneur, inventor, and human being pursuing their purpose has felt the same Resistance. And the ones who prevailed did so not through talent or luck, but through commitment.
+                </p>
+
+                <div class="quote-box">
+                    The problem is not in ourselves. The problem is Resistance. And the solution is one step: declaration. Declare war. Declare that you're taking your creative work seriously. Declare that you're turning pro. Declare that Resistance has no power over you.
+                    <div class="quote-source">Steven Pressfield, The War of Art</div>
+                </div>
+
+                <p>
+                    What you do next is up to you. You can close this guide and return to your comfortable life, surrendering to Resistance one more time. Or you can make a decision.
+                </p>
+
+                <p>
+                    You can declare war on Resistance. You can claim your identity as a creator. You can commit to showing up tomorrow, and the day after that, and the day after that. You can birth the unlived life inside you into the world.
+                </p>
+
+                <p>
+                    The work is waiting. The muse is ready to meet you. All that remains is your choice.
+                </p>
+
+                <div class="card" style="margin-top: 40px; background: linear-gradient(135deg, var(--coral) 0%, var(--warm-red) 100%); border: none;">
+                    <p style="color: #fff; font-size: 1.2rem; line-height: 1.8;">
+                        <strong>This week, identify your most important work. The work you're afraid to do. The work that represents your unlived life. Then, commit to one action: spend one hour on it. Not perfectly. Not when you're ready. This week.</strong>
+                    </p>
+                </div>
+
+                <p style="margin-top: 40px; color: var(--warm-red); font-weight: 600; font-size: 1.1rem;">
+                    The war is real. But so is your ability to win it.
+                </p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 40px; color: var(--dark); font-size: 0.95rem; line-height: 1.8;">
+            <p><strong>The War of Art</strong> by Steven Pressfield is essential reading for anyone engaged in creative work.</p>
+            <p style="margin-top: 15px; color: #666;">This illustrated guide synthesizes the key lessons and connects them to machine learning concepts, related books, and practical applications. For the full depth, read Pressfield's original work.</p>
+            <p style="margin-top: 25px; color: #999; font-style: italic;">Created as a comprehensive study guide for deep engagement with creative practice and the universal battle against Resistance.</p>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Particle background effect
+        function createParticles() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#00B894', '#0984E3'];
+            for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = (Math.random() * 100 + 50) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.opacity = Math.random() * 0.1 + 0.02;
+                particle.style.borderRadius = '50%';
+                particle.style.animation = `float ${(Math.random() * 20 + 10)}s infinite`;
+                document.body.appendChild(particle);
+            }
+        }
+
+        createParticles();
+    </script>
+</body>
+</html>

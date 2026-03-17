@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Undoing Project: A Friendship That Changed Our Minds</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f3ff 0%, #fff9e6 100%);
+            color: var(--dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-purple);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--deep-blue), var(--teal), var(--sunny));
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--purple);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-size: 1.4rem;
+            color: var(--deep-blue);
+            margin-top: 1.2rem;
+        }
+
+        p {
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--deep-blue) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(108, 92, 231, 0.2);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 230, 109, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .book-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .book-subtitle {
+            font-size: 1.6rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .author-info {
+            font-size: 1.2rem;
+            color: var(--sunny);
+            margin-top: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-purple);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            background: var(--sunny);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--deep-blue), var(--teal));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Sections */
+        section {
+            margin: 4rem 0;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, rgba(255, 230, 109, 0.1) 0%, rgba(78, 205, 196, 0.05) 100%);
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--deep-blue);
+        }
+
+        /* SVG Visualizations */
+        svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2rem auto;
+        }
+
+        .svg-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin: 2rem 0;
+        }
+
+        /* Content Cards */
+        .card {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid var(--deep-blue);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-teal {
+            border-left-color: var(--teal);
+        }
+
+        .card-coral {
+            border-left-color: var(--coral);
+        }
+
+        .card-sunny {
+            border-left-color: var(--sunny);
+        }
+
+        .card-purple {
+            border-left-color: var(--purple);
+        }
+
+        .card-forest {
+            border-left-color: var(--forest);
+        }
+
+        /* Lesson Cards */
+        .lesson-card {
+            background: linear-gradient(135deg, white 0%, rgba(255, 255, 255, 0.8) 100%);
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid;
+            transition: all 0.3s ease;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .lesson-1 { border-top-color: var(--deep-blue); }
+        .lesson-2 { border-top-color: var(--teal); }
+        .lesson-3 { border-top-color: var(--coral); }
+        .lesson-4 { border-top-color: var(--purple); }
+        .lesson-5 { border-top-color: var(--sunny); }
+        .lesson-6 { border-top-color: var(--warm-red); }
+        .lesson-7 { border-top-color: var(--pink); }
+        .lesson-8 { border-top-color: var(--forest); }
+        .lesson-9 { border-top-color: var(--orange); }
+        .lesson-10 { border-top-color: var(--sky); }
+        .lesson-11 { border-top-color: var(--mint); }
+        .lesson-12 { border-top-color: var(--dark-purple); }
+
+        .lesson-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--deep-blue), var(--dark-purple));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Experiment Boxes */
+        .experiment {
+            background: linear-gradient(135deg, #f8f9fa 0%, #f0f3ff 100%);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            border: 2px dashed var(--deep-blue);
+            position: relative;
+        }
+
+        .experiment-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark-purple);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .experiment-title::before {
+            content: '🧪';
+            font-size: 1.5rem;
+        }
+
+        .experiment-setup {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--teal);
+        }
+
+        .experiment-result {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--coral);
+            background: rgba(255, 107, 107, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .experiment-insight {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(160, 108, 213, 0.1);
+            border-left: 4px solid var(--purple);
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        /* Highlight Boxes */
+        .highlight {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--cream) 100%);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            border-left: 5px solid var(--orange);
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.9;
+        }
+
+        .highlight-key {
+            background: linear-gradient(135deg, var(--deep-blue), var(--dark-purple));
+            color: white;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.3);
+        }
+
+        /* Quote Box */
+        .quote {
+            border-left: 5px solid var(--coral);
+            padding: 2rem;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            font-style: italic;
+            background: rgba(255, 107, 107, 0.05);
+            border-radius: 8px;
+            color: var(--dark-purple);
+        }
+
+        .quote-author {
+            margin-top: 1rem;
+            font-weight: 600;
+            font-style: normal;
+            color: var(--deep-blue);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
+        }
+
+        /* AI Connection Section */
+        .ai-section {
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.08) 0%, rgba(9, 132, 227, 0.08) 100%);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 2px solid var(--dark-purple);
+        }
+
+        .ai-parallels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .parallel-card {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid var(--deep-blue);
+        }
+
+        .parallel-card h4 {
+            color: var(--dark-purple);
+            margin-bottom: 0.8rem;
+        }
+
+        .parallel-concept {
+            font-weight: 600;
+            color: var(--purple);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Cross-Book References */
+        .cross-ref {
+            background: linear-gradient(135deg, var(--mint) 0%, var(--sky) 100%);
+            padding: 1.8rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            color: var(--dark);
+            border-left: 5px solid var(--forest);
+        }
+
+        .cross-ref-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dark-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .book-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .book-item {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid var(--deep-blue);
+        }
+
+        .book-title-item {
+            font-weight: 700;
+            color: var(--dark-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .book-author {
+            color: var(--purple);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-purple) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-link {
+            color: var(--sunny);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .book-title {
+                font-size: 2.5rem;
+            }
+
+            .book-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .nav-container {
+                gap: 1rem;
+            }
+
+            .nav-link {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .ai-parallels {
+                grid-template-columns: 1fr;
+            }
+
+            .book-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .card, .lesson-card {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <h1 class="book-title">The Undoing Project</h1>
+            <p class="book-subtitle">A Friendship That Changed Our Minds</p>
+            <p class="author-info">by Michael Lewis</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#overview" class="nav-link">Overview</a>
+            <a href="#friendship" class="nav-link">The Friendship</a>
+            <a href="#lessons" class="nav-link">12 Key Lessons</a>
+            <a href="#experiments" class="nav-link">Experiments</a>
+            <a href="#ai" class="nav-link">AI Connection</a>
+            <a href="#crossref" class="nav-link">Cross-Book</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Overview Section -->
+        <section id="overview">
+            <div class="intro-section">
+                <h2>Overview: How Two Minds Changed Everything</h2>
+                <p>
+                    In 1969, an Israeli psychologist named Daniel Kahneman and an American mathematician named Amos Tversky met at the Hebrew University of Jerusalem. What began as an unlikely friendship would fundamentally transform how we understand human decision-making, earning them a Nobel Prize and reshaping fields from medicine to economics to law.
+                </p>
+                <p>
+                    The Undoing Project chronicles this extraordinary partnership—a tale of intellectual brilliance, creative collaboration, and the tragic dissolution of one of the most productive friendships in the history of science. Together, they proved that human judgment is systematically irrational, filled with predictable biases and shortcuts that lead us astray.
+                </p>
+            </div>
+
+            <!-- Visual: Two Minds Merging -->
+            <div class="svg-container">
+                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <defs>
+                        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f5f3ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#fff9e6;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="mindLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#0984E3;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#6C5CE7;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="mindRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#A06CD5;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#4ECDC4;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="600" height="400" fill="url(#bgGrad)"/>
+
+                    <!-- Left Mind (Kahneman) -->
+                    <circle cx="150" cy="150" r="80" fill="url(#mindLeft)" opacity="0.8"/>
+                    <circle cx="120" cy="120" r="25" fill="#FFE66D" opacity="0.6"/>
+                    <circle cx="180" cy="130" r="20" fill="#74B9FF" opacity="0.6"/>
+                    <circle cx="150" cy="180" r="15" fill="#FF6B6B" opacity="0.6"/>
+
+                    <!-- Right Mind (Tversky) -->
+                    <circle cx="450" cy="150" r="80" fill="url(#mindRight)" opacity="0.8"/>
+                    <circle cx="480" cy="120" r="25" fill="#FD79A8" opacity="0.6"/>
+                    <circle cx="420" cy="130" r="20" fill="#55EFC4" opacity="0.6"/>
+                    <circle cx="450" cy="180" r="15" fill="#FDCB6E" opacity="0.6"/>
+
+                    <!-- Connection/Merging Lines -->
+                    <path d="M 230 150 Q 300 120 370 150" stroke="#FF6B6B" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+                    <path d="M 230 170 Q 300 200 370 170" stroke="#4ECDC4" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+                    <path d="M 240 140 Q 300 100 360 140" stroke="#FFE66D" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+                    <!-- Central Node (Friendship) -->
+                    <circle cx="300" cy="150" r="40" fill="white" stroke="#6C5CE7" stroke-width="3"/>
+                    <text x="300" y="160" text-anchor="middle" font-size="24" fill="#6C5CE7" font-weight="bold">∩</text>
+
+                    <!-- Labels -->
+                    <text x="150" y="280" text-anchor="middle" font-size="16" font-weight="bold" fill="#0984E3">Kahneman</text>
+                    <text x="150" y="305" text-anchor="middle" font-size="12" fill="#2D3436">Psychologist</text>
+                    <text x="450" y="280" text-anchor="middle" font-size="16" font-weight="bold" fill="#A06CD5">Tversky</text>
+                    <text x="450" y="305" text-anchor="middle" font-size="12" fill="#2D3436">Mathematician</text>
+
+                    <!-- Impact Lines -->
+                    <line x1="300" y1="190" x2="300" y2="350" stroke="#E17055" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+                    <text x="300" y="380" text-anchor="middle" font-size="14" font-weight="bold" fill="#E17055">Transformed Human Understanding</text>
+                </svg>
+            </div>
+
+            <p>
+                Their partnership wasn't just about publishing papers—it was a daily conversation, a shared intellectual space where ideas evolved, challenged each other, and ultimately revealed fundamental truths about how our minds work. They discovered systematic patterns in human irrationality and proved that our brains are not calculating machines, but devices shaped by evolution that make consistent, predictable errors.
+            </p>
+        </section>
+
+        <!-- The Friendship Section -->
+        <section id="friendship">
+            <h2>The Unlikely Friendship: Psychology Meets Mathematics</h2>
+
+            <div class="card card-teal">
+                <h3>A Meeting of Opposites</h3>
+                <p>
+                    Kahneman was introspective, quiet, and deeply psychological. Born in Estonia and educated in the behavioral sciences, he looked at human behavior as a psychologist—observing, questioning, seeking patterns in the human condition. Tversky was confident, mathematical, and precise. A born logician, he approached problems like a mathematician—rigorously, analytically, always seeking elegant proofs.
+                </p>
+                <p>
+                    What made them perfect partners was precisely this difference. Kahneman would observe human behavior and generate hypotheses. Tversky would formalize them mathematically and design experiments to test them. Together, they created a feedback loop of intellectual creativity that neither could have achieved alone.
+                </p>
+            </div>
+
+            <div class="card card-purple">
+                <h3>The Daily Ritual</h3>
+                <p>
+                    Michael Lewis describes their friendship as operating like a married couple. They had their favorite coffee shop. They had their routines. They thought together, talked together, argued together. When one had an idea, the other would immediately spot the flaw or see how to extend it further. They co-wrote papers, but more importantly, they co-thought—they shared a intellectual space so completely that it became difficult to separate whose idea was whose.
+                </p>
+                <p>
+                    This closeness extended beyond work. They were friends who understood each other deeply. Their conversations ranged from the technical details of probability theory to the personal struggles of their lives. The partnership was complete—intellectual and emotional.
+                </p>
+            </div>
+
+            <!-- Israeli Military Context -->
+            <div class="svg-container">
+                <svg viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="desertGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FFE66D;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#FDCB6E;stop-opacity:0.3" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Sky -->
+                    <rect width="600" height="150" fill="#74B9FF" opacity="0.3"/>
+                    <!-- Desert -->
+                    <rect y="150" width="600" height="200" fill="url(#desertGrad)"/>
+
+                    <!-- Sun -->
+                    <circle cx="100" cy="70" r="50" fill="#FFE66D" opacity="0.8"/>
+
+                    <!-- Hebrew University -->
+                    <rect x="250" y="180" width="100" height="80" fill="#FF6B6B" opacity="0.8" rx="5"/>
+                    <polygon points="300,180 270,140 330,140" fill="#E17055"/>
+                    <rect x="270" y="200" width="15" height="40" fill="#2D3436"/>
+                    <rect x="305" y="200" width="15" height="40" fill="#2D3436"/>
+
+                    <!-- Military Installation -->
+                    <circle cx="500" cy="240" r="40" fill="#00B894" opacity="0.7"/>
+                    <path d="M 490 220 L 510 220 L 510 240 Q 500 260 490 240 Z" fill="#55EFC4" opacity="0.8"/>
+
+                    <!-- Connection -->
+                    <path d="M 350 220 Q 420 200 460 240" stroke="#6C5CE7" stroke-width="3" stroke-dasharray="5,5" opacity="0.7"/>
+
+                    <!-- Labels -->
+                    <text x="300" y="290" text-anchor="middle" font-size="14" font-weight="bold" fill="#2D3436">Hebrew University</text>
+                    <text x="300" y="310" text-anchor="middle" font-size="12" fill="#2D3436">Where Kahneman & Tversky met</text>
+
+                    <text x="500" y="320" text-anchor="middle" font-size="14" font-weight="bold" fill="#2D3436">Israeli Military</text>
+                    <text x="500" y="340" text-anchor="middle" font-size="12" fill="#2D3436">Real-world testing ground</text>
+                </svg>
+            </div>
+
+            <div class="card card-coral">
+                <h3>The Israeli Military Connection</h3>
+                <p>
+                    Their most famous collaboration came when they were asked to consult with the Israeli military. The military wanted to understand how commanders made decisions under stress, in real time, with incomplete information. This wasn't a laboratory setting—it was the actual world where lives and strategic objectives depended on the quality of human judgment.
+                </p>
+                <p>
+                    Kahneman and Tversky observed that commanders fell into predictable patterns. They anchored too heavily on initial information. They saw patterns that weren't there. They overweighted recent information. They made decisions as if the world was more predictable than it actually was.
+                </p>
+                <p>
+                    This real-world testing ground became a laboratory for understanding human judgment. The military context gave their work urgency and practical significance. It showed that their theoretical insights about irrationality had real consequences—decisions made by commanders affected military outcomes, which affected lives.
+                </p>
+            </div>
+        </section>
+
+        <!-- 12 Key Lessons -->
+        <section id="lessons">
+            <h2>The 12 Key Lessons from The Undoing Project</h2>
+            <p>
+                These lessons represent the core insights from Kahneman and Tversky's groundbreaking work. Together, they form a comprehensive theory of human decision-making and the systematic biases that shape how we think.
+            </p>
+
+            <!-- Lesson 1: The Friendship Revolution -->
+            <div class="lesson-card lesson-1">
+                <div class="lesson-number">1</div>
+                <h3>The Kahneman-Tversky Friendship: How Two Opposites Revolutionized Thinking</h3>
+                <p>
+                    The central insight of The Undoing Project is that intellectual breakthroughs often come from partnership between different types of minds. Kahneman brought psychological intuition and observational skill. Tversky brought mathematical rigor and logical precision. Neither could have made these discoveries alone. The friendship itself was the innovation.
+                </p>
+                <p>
+                    This has profound implications for how we approach science and problem-solving. It's a lesson about the power of genuine intellectual collaboration—not just co-authorship, but shared thinking, where both partners contribute equally and the ideas become inseparable from the partnership.
+                </p>
+                <div class="highlight">
+                    <strong>Key Takeaway:</strong> Breakthrough discoveries often require partnerships between complementary minds. The collaboration itself is where the magic happens.
+                </div>
+            </div>
+
+            <!-- Lesson 2: Prospect Theory -->
+            <div class="lesson-card lesson-2">
+                <div class="lesson-number">2</div>
+                <h3>Prospect Theory: Losses Hurt More Than Gains Feel Good</h3>
+                <p>
+                    One of their most important discoveries was prospect theory—a mathematical description of how people actually make decisions when facing risk, as opposed to how rational economic theory says they should.
+                </p>
+                <p>
+                    The key finding: <strong>losses loom larger than gains</strong>. If you lose $100, the pain is significantly greater than the pleasure of gaining $100. This asymmetry is fundamental to human psychology and explains much of our seemingly irrational behavior.
+                </p>
+                <p>
+                    Prospect theory also describes how people evaluate outcomes relative to a reference point (usually their current state). We don't think in absolute terms—we think in terms of gains and losses relative to where we are. This reference dependence explains phenomena like why people are reluctant to sell stocks at a loss (loss aversion) and why they prefer certainty to a gamble with better odds (the certainty effect).
+                </p>
+                <div class="highlight-key">
+                    <strong>The Asymmetry:</strong> A loss of $100 causes roughly 2-2.5 times more pain than a gain of $100 causes pleasure. This "loss aversion" is hardwired into our psychology.
+                </div>
+            </div>
+
+            <!-- Lesson 3: Availability Heuristic -->
+            <div class="lesson-card lesson-3">
+                <div class="lesson-number">3</div>
+                <h3>The Availability Heuristic: We Overweight What We Can Easily Recall</h3>
+                <p>
+                    When estimating the frequency or likelihood of something, people rely heavily on how easily examples come to mind. If a particular event is recent, vivid, or emotionally salient, we overestimate how common it is.
+                </p>
+                <p>
+                    This explains why people overestimate the likelihood of dramatic, visible events (plane crashes, terrorist attacks) while underestimating less visible but statistically more common risks (car accidents, heart disease). It also explains why lottery winners become more common in our perception right after the lottery draws big winners, or why we overestimate divorce rates if we've recently been through a divorce ourselves.
+                </p>
+                <p>
+                    The availability heuristic is a mental shortcut—a quick way to estimate probability using memory retrieval as a proxy. It's usually useful, but it systematically misleads us when recent or vivid events aren't representative of actual frequency.
+                </p>
+                <div class="experiment">
+                    <div class="experiment-title">Availability in Action</div>
+                    <div class="experiment-setup">
+                        <strong>Setup:</strong> Ask people to estimate the percentage of words in English that start with the letter K versus words where K is the third letter.
+                    </div>
+                    <div class="experiment-result">
+                        <strong>Result:</strong> Most people estimate more words start with K. In reality, there are roughly 2x more words with K as the third letter, but K-starting words are much easier to recall (kitchen, kangaroo, king), so they seem more common.
+                    </div>
+                    <div class="experiment-insight">
+                        The ease of recall determines our probability estimates, not actual frequency. This is why marketing works—repetition makes things seem more common than they are.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 4: Representativeness and Base Rate Neglect -->
+            <div class="lesson-card lesson-4">
+                <div class="lesson-number">4</div>
+                <h3>Representativeness Heuristic: We Judge by Similarity, Ignoring Base Rates</h3>
+                <p>
+                    People assess the probability that something belongs to a category by judging how similar it is to the typical member of that category. This sounds reasonable, but it leads to systematic errors because it ignores base rates—the actual frequency of the category in the population.
+                </p>
+                <p>
+                    The classic example is the "Linda problem"—perhaps the most famous experiment in judgment and decision-making research. The representativeness heuristic explains why we make errors in probability judgment and why we are bad at understanding base rates, one of the most important concepts in statistics and medicine.
+                </p>
+                <div class="experiment">
+                    <div class="experiment-title">The Linda Problem (The Conjunction Fallacy)</div>
+                    <div class="experiment-setup">
+                        <strong>Setup:</strong> Linda is 31 years old, single, outspoken, and very bright. She majored in philosophy. As a student, she was deeply concerned with issues of discrimination and social justice, and also participated in anti-nuclear demonstrations.<br><br>Which is more probable?<br>
+                        A) Linda is a bank teller<br>
+                        B) Linda is a bank teller AND a feminist
+                    </div>
+                    <div class="experiment-result">
+                        <strong>Result:</strong> About 85% of people choose B. This is mathematically impossible. The probability of two events both occurring (Linda is a bank teller AND a feminist) cannot be higher than the probability of one of those events occurring alone. Yet Linda "represents" a feminist activist, so people judge that category as more likely.
+                    </div>
+                    <div class="experiment-insight">
+                        We use representativeness (how well Linda "looks like" a feminist) instead of base rates (how many bank tellers are feminists? The base rate is quite low, which makes "feminist bank teller" unlikely even if Linda seems like one).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 5: Anchoring -->
+            <div class="lesson-card lesson-5">
+                <div class="lesson-number">5</div>
+                <h3>Anchoring: We're Imprisoned by Irrelevant Numbers</h3>
+                <p>
+                    When making numerical estimates, people rely too heavily on the first number they see—the "anchor"—even when that number is irrelevant or randomly generated. This anchor then influences their judgment, pulling their estimates toward it.
+                </p>
+                <p>
+                    Anchoring affects everything from salary negotiations (the first offer disproportionately influences the final result) to real estate valuations (the asking price serves as an anchor that influences what buyers think something should cost) to jury decisions about damages.
+                </p>
+                <div class="experiment">
+                    <div class="experiment-title">The Spinning Wheel Anchoring Study</div>
+                    <div class="experiment-setup">
+                        <strong>Setup:</strong> Spin a wheel that generates a random number (1-100). Then estimate what percentage of African countries are in the UN. The wheel is clearly random and irrelevant to African UN membership.
+                    </div>
+                    <div class="experiment-result">
+                        <strong>Result:</strong> People who spin a high number (say, 65) estimate higher percentages (~45%). People who spin a low number (say, 10) estimate lower percentages (~25%). The random number anchors the judgment, and people only insufficiently adjust away from it.
+                    </div>
+                    <div class="experiment-insight">
+                        Even when we know an anchor is irrelevant or random, it still influences our thinking. We adjust away from anchors, but we don't adjust enough—a phenomenon called "insufficient adjustment."
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 6: The Psychology of Undoing -->
+            <div class="lesson-card lesson-6">
+                <div class="lesson-number">6</div>
+                <h3>The Psychology of Undoing: Counterfactual Thinking Shapes Emotion and Regret</h3>
+                <p>
+                    "Undoing" is the human tendency to mentally undo events that have happened—to imagine how things could have been different if only we had made a different choice. This counterfactual thinking is central to how we experience regret, blame, and emotional response to outcomes.
+                </p>
+                <p>
+                    The title of Lewis's book refers to this concept. We spend a lot of mental energy undoing what has happened, imagining how we could have acted differently. The fascinating insight is that our emotions and sense of responsibility depend not just on what happened, but on how easily we can imagine an alternative outcome.
+                </p>
+                <div class="experiment">
+                    <div class="experiment-title">The Maternity Ward Problem</div>
+                    <div class="experiment-setup">
+                        <strong>Setup:</strong> Imagine a woman gives birth to twins. The first twin is born on December 31st, just before midnight. The second twin is born on January 1st, just after midnight.<br><br>Which event is more surprising or surprising enough to "undo"?
+                    </div>
+                    <div class="experiment-result">
+                        <strong>Result:</strong> Most people find the second event surprising—the twins born in different calendar years. Yet actually, the probability that any two consecutive births would have different calendar years is very high (~99.7%). The twins being born on different years is actually quite normal.<br><br>But the calendar boundary makes it easy to imagine an alternative (if the second twin had been born just one minute earlier, it would have been 12/31), so people find it more surprising and more worthy of attention/undoing.
+                    </div>
+                    <div class="experiment-insight">
+                        How easy it is to imagine an alternative outcome determines how surprising or regrettable we find an event. Outcomes that are close to counterfactual alternatives ("almost" outcomes) generate stronger emotional reactions.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 7: Framing Effects -->
+            <div class="lesson-card lesson-7">
+                <div class="lesson-number">7</div>
+                <h3>Framing Effects: How Problems Are Presented Changes Decisions</h3>
+                <p>
+                    The exact same decision problem presented differently produces different choices. This "framing effect" shows that decision-making is not about the actual objective situation, but about how that situation is described to us.
+                </p>
+                <p>
+                    When options are framed in terms of gains, people tend to be risk-averse (preferring certainty). When the same options are framed in terms of losses, people become risk-seeking (willing to gamble). This reveals that our preferences are not stable—they depend on how information is presented.
+                </p>
+                <div class="experiment">
+                    <div class="experiment-title">The Asian Disease Problem</div>
+                    <div class="experiment-setup">
+                        <strong>Setup:</strong> The U.S. is preparing for an outbreak of an unusual disease expected to kill 600 people. Two alternative programs are proposed.<br><br>
+                        <strong>Gain Frame:</strong><br>
+                        Program A: 200 people will definitely be saved.<br>
+                        Program B: 1/3 probability 600 will be saved, 2/3 probability no one will be saved.<br><br>
+                        <strong>Loss Frame (same programs, different description):</strong><br>
+                        Program A: 400 people will definitely die.<br>
+                        Program B: 1/3 probability no one will die, 2/3 probability 600 will die.
+                    </div>
+                    <div class="experiment-result">
+                        <strong>Result:</strong> In the gain frame, 72% choose Program A (risk-averse). In the loss frame, 78% choose Program B (risk-seeking). The programs are mathematically identical; only the presentation changed.
+                    </div>
+                    <div class="experiment-insight">
+                        We are not rational calculators of utility. We are sensitive to how choices are framed. The same objective outcome produces different preferences depending on whether it's described as a gain or a loss.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 8: Israeli Military Decision-Making -->
+            <div class="lesson-card lesson-8">
+                <div class="lesson-number">8</div>
+                <h3>Real-World Decision-Making: The Israeli Military Case Study</h3>
+                <p>
+                    The theoretical insights about human irrationality have profound real-world consequences. When the Israeli military consulted Kahneman and Tversky, they weren't looking for abstract theory—they wanted to understand how commanders made decisions that affected lives and military outcomes.
+                </p>
+                <p>
+                    Kahneman and Tversky discovered that military commanders made the same predictable errors in judgment that laboratory subjects did. They anchored on initial intelligence assessments. They overweighted recent information. They failed to properly account for base rates. They sought information that confirmed their beliefs rather than challenged them.
+                </p>
+                <p>
+                    This real-world validation was crucial. It showed that the cognitive biases weren't just laboratory curiosities—they were fundamental to human judgment in high-stakes, real-world situations where accurate decision-making truly mattered.
+                </p>
+                <div class="highlight">
+                    <strong>Key Insight:</strong> The same biases that appear in laboratory experiments also appear in high-stakes military decisions. Human judgment is systematically biased not just in psychology labs, but in the real world where it counts most.
+                </div>
+            </div>
+
+            <!-- Lesson 9: Nobel Prize and Dissolution -->
+            <div class="lesson-card lesson-9">
+                <div class="lesson-number">9</div>
+                <h3>The Nobel Prize: Triumph and the Beginning of the End</h3>
+                <p>
+                    In 1994, Kahneman and Tversky's decades of work were recognized with the Nobel Prize in Economic Sciences. The prize acknowledged the profound impact their research had on economics, finance, and medicine.
+                </p>
+                <p>
+                    But the Nobel Prize came with a tragedy. Tversky had been diagnosed with cancer years earlier, and by the time of the award, his health was failing. Officially, the Nobel Prize goes only to living recipients. Tversky would not live to see the ceremony.
+                </p>
+                <p>
+                    The Nobel Prize recognition also marked a poignant inflection point in their friendship. As their individual careers took different directions and Tversky's health declined, the daily collaboration that had sustained their work for decades began to diminish. The very partnership that had revolutionized psychology and economics was coming to an end.
+                </p>
+                <div class="quote">
+                    "If the Nobel Prize had been awarded a couple of years earlier, Amos would have been there. If it had been awarded a couple of years later, I wouldn't have accepted it."
+                    <div class="quote-author">— Daniel Kahneman</div>
+                </div>
+            </div>
+
+            <!-- Lesson 10: Impact Across Fields -->
+            <div class="lesson-card lesson-10">
+                <div class="lesson-number">10</div>
+                <h3>One Friendship Changed Everything: From Medicine to Law to Sports</h3>
+                <p>
+                    The work of Kahneman and Tversky didn't stay confined to academic psychology. It rippled outward, transforming how decisions are made across fields:
+                </p>
+                <ul>
+                    <li><strong>Medicine:</strong> Doctors make biased diagnoses based on representativeness and anchoring. Understanding these biases helps improve clinical decision-making and patient outcomes.</li>
+                    <li><strong>Law:</strong> Judges and juries are subject to anchoring, availability bias, and framing effects. Legal outcomes depend partly on how evidence is presented, not just on the evidence itself.</li>
+                    <li><strong>Economics & Finance:</strong> Market behavior is driven by loss aversion, mental accounting, and other cognitive biases. Prospect theory explains phenomena like the equity premium puzzle that rational economic theory cannot explain.</li>
+                    <li><strong>Business & Marketing:</strong> Consumer behavior is heavily influenced by framing, anchoring, and availability. Marketing uses these biases strategically to influence purchasing decisions.</li>
+                    <li><strong>Sports:</strong> As described in Michael Lewis's Moneyball, baseball teams can exploit market inefficiencies caused by cognitive biases. When other teams overweight recent performance or apply anchors to player valuations, smart teams can find undervalued players.</li>
+                </ul>
+                <div class="highlight">
+                    <strong>The Multiplier Effect:</strong> One friendship's insights revolutionized not just psychology, but how we make decisions across medicine, law, finance, business, and sports.
+                </div>
+            </div>
+
+            <!-- Lesson 11: Power of Intellectual Partnership -->
+            <div class="lesson-card lesson-11">
+                <div class="lesson-number">11</div>
+                <h3>The Power of Intellectual Partnership: The Hinton-LeCun-Bengio Parallel</h3>
+                <p>
+                    The Kahneman-Tversky partnership offers lessons for contemporary intellectual work. In artificial intelligence, we see similar dynamics with Geoffrey Hinton, Yann LeCun, and Yoshua Bengio—three researchers with different perspectives who together revolutionized deep learning.
+                </p>
+                <p>
+                    Just as Kahneman's psychological insights and Tversky's mathematical rigor created something neither could achieve alone, Hinton's interest in biological plausibility, LeCun's work on convolutional neural networks, and Bengio's contributions to recurrent networks and attention mechanisms combined to create modern deep learning.
+                </p>
+                <p>
+                    Both cases reveal a fundamental truth: the most impactful intellectual work often comes from genuine partnerships where different minds challenge and extend each other's ideas. These partnerships require trust, genuine collaboration, and complementary strengths.
+                </p>
+                <div class="highlight-key">
+                    <strong>The Partnership Principle:</strong> Revolutionary discoveries often require partnerships between complementary minds. The collaboration itself is where breakthrough insights emerge. Two minds working together, deeply, genuinely engaged, can accomplish what ten isolated geniuses cannot.
+                </div>
+            </div>
+
+            <!-- Lesson 12: Regression to the Mean -->
+            <div class="lesson-card lesson-12">
+                <div class="lesson-number">12</div>
+                <h3>Regression to the Mean: Why Success is Followed by Disappointment</h3>
+                <p>
+                    One of the most important—and most misunderstood—concepts in statistics is regression to the mean. When you observe an extreme value in some measurement, the next observation is likely to be less extreme, closer to the average. This isn't because of any cause—it's purely due to chance and variation.
+                </p>
+                <p>
+                    But human psychology doesn't understand this. We see an extremely good performance and assume the cause was the person's high ability or our intervention. We see an extremely bad performance and assume they need punishment or retraining. In reality, much of the variation is random, and regression to the mean would occur anyway.
+                </p>
+                <p>
+                    This explains many false discoveries in education (a teacher praised students for good performance, performance regressed, so praise seemed counterproductive), business (a CEO's great year is followed by a worse year, so we think they lost their touch), and medicine (a patient's extreme symptoms improve naturally through regression to the mean, but the treatment gets the credit).
+                </p>
+                <p>
+                    Kahneman and Tversky showed that people are poor intuitive statisticians. We have a deep tendency to attribute outcomes to skill or effort, even when those outcomes are largely determined by chance and regression to the mean.
+                </p>
+                <div class="experiment">
+                    <div class="experiment-title">The Regressing Athlete</div>
+                    <div class="experiment-setup">
+                        <strong>Setup:</strong> A basketball player has an unusually hot game, shooting 8 of 10 three-pointers. What will happen in their next game?
+                    </div>
+                    <div class="experiment-result">
+                        <strong>Result:</strong> Their next game, they'll likely shoot closer to their normal percentage. This is regression to the mean—random variation in skill performance tends to be followed by average performance. But commentators will say "they looked rattled" or "the pressure got to them" when really it's just statistics.
+                    </div>
+                    <div class="experiment-insight">
+                        We are poor at understanding randomness and regression to the mean. We attribute regression to mean performance to causal factors (losing motivation, getting complacent, adjusting strategy) when it's really just statistical variation.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experiments Deep Dive -->
+        <section id="experiments">
+            <h2>The Cab Problem: A Classic Example</h2>
+            <p>
+                One of the most famous experiments demonstrates multiple biases at once. It's called the "Cab Problem," and it beautifully illustrates how our intuitions about probability lead us systematically astray.
+            </p>
+
+            <div class="experiment">
+                <div class="experiment-title">The Cab Problem: Base Rates, Representativeness, and Probability</div>
+                <div class="experiment-setup">
+                    <strong>Setup:</strong><br>
+                    A taxi cab was involved in a hit-and-run accident. Two cab companies operate in the city: the Blue Cab Company (85% of cabs) and the Green Cab Company (15% of cabs). A witness saw the cab and said it was green. The court tested the witness's ability to identify colors under the nighttime conditions of the accident. The results: the witness correctly identified colors 80% of the time and misidentified them 20% of the time.<br><br>
+                    Question: What is the probability that the cab was actually green (as the witness said) rather than blue?
+                </div>
+                <div class="experiment-result">
+                    <strong>Result:</strong> Most people intuitively estimate 80%. The logic: the witness was 80% accurate, so there's an 80% chance they were right about the green cab.<br><br>
+                    But this is wrong. The correct answer is about 41%. Here's why (using Bayes' theorem):<br><br>
+                    There's an 85% chance it was blue. The witness misidentifies blue as green 20% of the time. So there's an 85% × 20% = 17% chance the witness said "green" when it was actually blue.<br><br>
+                    There's a 15% chance it was actually green. The witness correctly identifies green 80% of the time. So there's a 15% × 80% = 12% chance the witness correctly said "green."<br><br>
+                    The ratio of these two scenarios: 12% / (12% + 17%) = 12/29 ≈ 41%.<br><br>
+                    People focus on the witness's accuracy (80%) and neglect the base rate (85% of cabs are blue). Base rates matter enormously in probability, but our intuitions ignore them.
+                </div>
+                <div class="experiment-insight">
+                    This problem reveals how we fail at Bayesian reasoning. We overweight the apparent evidence (the witness said green) and underweight the base rate information (most cabs are blue). This is called "representativeness"—the witness's statement is highly representative of a green cab, so we overestimate its probability, despite the strong base rate evidence to the contrary.
+                </div>
+            </div>
+
+            <!-- The Surgeon Study -->
+            <div class="experiment">
+                <div class="experiment-title">The Surgeon Study: Anchoring and Adjustment in Medical Diagnosis</div>
+                <div class="experiment-setup">
+                    <strong>Setup:</strong> Doctors are given information about a patient and asked to estimate the probability of a serious condition. Half the doctors are given a random anchor (say, a 20% probability) and asked to adjust from that number. The other half are given a different random anchor (say, 70%) and asked to adjust from that number. The anchors are clearly irrelevant—just random numbers chosen by the experimenter.
+                </div>
+                <div class="experiment-result">
+                    <strong>Result:</strong> Doctors who started with a 20% anchor end up estimating significantly lower probabilities (around 25-30%) than doctors who started with a 70% anchor (around 55-60%), despite having identical clinical information. The random number biased their judgment.
+                </div>
+                <div class="experiment-insight">
+                    Even experts in high-stakes domains like medicine are subject to anchoring. They adjust from an anchor, but they don't adjust enough. This means that diagnostic estimates in medicine can be biased by irrelevant factors like what the previous patient's diagnosis was or what number happens to appear on a test.
+                </div>
+            </div>
+        </section>
+
+        <!-- Funny Take -->
+        <section>
+            <h2>The Funny Side: How We're All Irrational (and That's Okay)</h2>
+
+            <div class="card card-pink">
+                <h3>A Humorous Tour of Human Irrationality</h3>
+                <p>
+                    If Kahneman and Tversky's work teaches us anything, it's that we are all deeply, consistently irrational. And there's something liberating about that. We're not broken—we're just designed by evolution to be irrational in very specific, predictable ways.
+                </p>
+                <p>
+                    Consider loss aversion. Why do we hold onto losing stocks, hoping to "get back to even"? Why do we refuse to sell a house at a loss even when selling and moving would be better for our lives? It's not rational, but it's perfectly human. Our minds evolved when losing something could mean dying, so loss aversion served us well. Now it just means we can't let go of bad investments.
+                </p>
+                <p>
+                    Or consider the availability heuristic. Why do people fear flying more than driving, despite driving being statistically far more dangerous? Because plane crashes are vivid, recent, and easy to recall. Driving deaths are boring and routine. Our minds didn't evolve to calculate probabilities—they evolved to remember scary, unusual things.
+                </p>
+                <p>
+                    Here's a personal example from decision-making: Why do we keep buying lottery tickets despite the terrible odds? Why do we put off uncomfortable medical visits despite knowing early detection saves lives? Because our brains are excellent at generating emotionally vivid future scenarios (imagine winning the lottery!) and terrible at managing abstract probabilities.
+                </p>
+                <div class="highlight">
+                    <strong>The Funny Truth:</strong> We're not irrational because we're stupid. We're irrational because our minds evolved to solve the problems of a ancestral environment, not the abstract probability problems we face today. Our irrationality is a feature, not a bug—a feature that made sense for our ancestors and now just makes us predictably wrong.
+                </div>
+            </div>
+
+            <div class="card card-sunny">
+                <h3>Self-Aware Irrationality</h3>
+                <p>
+                    Here's the really funny part: knowing about these biases doesn't actually eliminate them. Even Kahneman and Tversky, who literally discovered these biases, fell prey to them. Kahneman has written about how he still finds himself subject to the heuristics and biases they identified.
+                </p>
+                <p>
+                    You could spend your entire life studying loss aversion and still feel intense pain when losing $100. You could design experiments proving that anchoring affects judgment and still be influenced by a random number someone shows you. Knowledge of the bias doesn't immunize you against it.
+                </p>
+                <p>
+                    This is where humor enters the picture. The entire field of behavioral economics is essentially a chronicle of human delusion. And the delusion isn't accidental or ignorant—it's systematic, universal, and persistent even in the face of evidence. There's something deeply funny about that.
+                </p>
+            </div>
+        </section>
+
+        <!-- AI Connection Section -->
+        <section id="ai">
+            <h2>The AI Connection: How Kahneman-Tversky Anticipated Modern AI</h2>
+
+            <div class="ai-section">
+                <h3>From Human Cognition to Machine Learning: The Surprising Parallels</h3>
+                <p>
+                    The most remarkable aspect of Kahneman and Tversky's work is how naturally it maps onto modern machine learning and artificial intelligence. They discovered biases in human judgment decades before we built algorithms, yet those biases are surprisingly similar to limitations we now see in AI systems.
+                </p>
+                <p>
+                    Here are the striking parallels between their discoveries and how neural networks actually work:
+                </p>
+            </div>
+
+            <div class="ai-parallels">
+                <div class="parallel-card">
+                    <h4>Prospect Theory as Asymmetric Loss Functions</h4>
+                    <div class="parallel-concept">Kahneman-Tversky Insight:</div>
+                    <p>Losses hurt more than gains feel good. The psychological value function is steeper for losses than gains.</p>
+                    <div class="parallel-concept" style="margin-top: 1rem;">Modern AI Parallel:</div>
+                    <p>In machine learning, we often use asymmetric loss functions. For safety-critical applications, false positives (false alarms) might be weighted differently than false negatives (missed dangers). The loss function encodes relative costs, just like the psychological value function encodes relative pain.</p>
+                </div>
+
+                <div class="parallel-card">
+                    <h4>Availability Heuristic as Frequency-Based Retrieval</h4>
+                    <div class="parallel-concept">Kahneman-Tversky Insight:</div>
+                    <p>We estimate probability based on how easily examples come to mind. Frequent examples are easier to recall.</p>
+                    <div class="parallel-concept" style="margin-top: 1rem;">Modern AI Parallel:</div>
+                    <p>Language models estimate word probabilities based on frequency in training data. They're essentially learning availability heuristics from text. They assign higher probability to frequent patterns and lower probability to rare ones, exactly mirroring how human minds work when using the availability heuristic.</p>
+                </div>
+
+                <div class="parallel-card">
+                    <h4>Representativeness as Pattern Matching Without Priors</h4>
+                    <div class="parallel-concept">Kahneman-Tversky Insight:</div>
+                    <p>We judge probability by similarity to a prototype, ignoring base rates and statistical information.</p>
+                    <div class="parallel-concept" style="margin-top: 1rem;">Modern AI Parallel:</div>
+                    <p>Neural networks classify objects based on pattern matching to learned prototypes without explicitly reasoning about base rates. When trained on imbalanced datasets, they replicate the base rate neglect error that humans make. This is the "Linda problem" all over again—deep networks match patterns without proper Bayesian reasoning about class probabilities.</p>
+                </div>
+
+                <div class="parallel-card">
+                    <h4>Anchoring as Initialization Bias</h4>
+                    <div class="parallel-concept">Kahneman-Tversky Insight:</div>
+                    <p>Initial information disproportionately influences judgment; we adjust insufficiently from anchors.</p>
+                    <div class="parallel-concept" style="margin-top: 1rem;">Modern AI Parallel:</div>
+                    <p>Neural networks are sensitive to their initialization weights. The initial state influences the trajectory through weight space, and optimization doesn't fully escape the influence of starting conditions. This is initialization bias in deep learning—the anchoring effect in disguise.</p>
+                </div>
+
+                <div class="parallel-card">
+                    <h4>Framing Effects as Prompt Sensitivity</h4>
+                    <div class="parallel-concept">Kahneman-Tversky Insight:</div>
+                    <p>The same problem presented differently produces different choices. Preference is not stable across framings.</p>
+                    <div class="parallel-concept" style="margin-top: 1rem;">Modern AI Parallel:</div>
+                    <p>Large language models show dramatic differences in outputs based on how prompts are phrased ("be creative" vs "be accurate"). The same underlying system produces different behaviors depending on framing. This is the framing effect in AI—proof that neither human nor machine cognition is truly "rational" in the economic sense.</p>
+                </div>
+
+                <div class="parallel-card">
+                    <h4>Counterfactual Thinking as Contrastive Learning</h4>
+                    <div class="parallel-concept">Kahneman-Tversky Insight:</div>
+                    <p>We mentally simulate "undoing" events, comparing what happened to what could have happened. Emotional reactions depend on counterfactual alternatives.</p>
+                    <div class="parallel-concept" style="margin-top: 1rem;">Modern AI Parallel:</div>
+                    <p>Modern AI systems use contrastive learning, where they learn representations by contrasting similar and dissimilar examples. They're essentially learning counterfactual thinking—"what would be different if..." This is how self-supervised learning works, and it mirrors the human psychology of undoing and counterfactual thought.</p>
+                </div>
+            </div>
+
+            <div class="highlight-key">
+                <h3>The Deep Connection</h3>
+                <p>
+                    Kahneman and Tversky studied human cognition, but they were really discovering fundamental principles about how any information processor—biological or artificial—makes decisions under uncertainty with limited resources. Their work anticipated key aspects of how modern neural networks actually function, decades before those networks existed.
+                </p>
+                <p>
+                    This suggests something profound: there may be universal principles of bounded rationality. Systems forced to make decisions with limited information, limited time, and limited computational resources will make systematic errors. Those errors won't be random—they'll be predictable, structured errors that reflect the underlying constraints of the system.
+                </p>
+                <p>
+                    Human minds and artificial neural networks are different substrates, but they're solving similar problems under similar constraints. No wonder they make similar mistakes.
+                </p>
+            </div>
+
+            <div class="card card-sky">
+                <h3>From Kahneman-Tversky to Hinton-LeCun-Bengio</h3>
+                <p>
+                    Just as Kahneman and Tversky revolutionized psychology by revealing the systematic irrationality of human judgment, modern AI researchers are discovering the systematic "irrationality" of neural networks—the adversarial examples that fool networks, the spurious correlations they learn, the ways they fail in predictable patterns.
+                </p>
+                <p>
+                    Hinton, LeCun, and Bengio didn't set out to replicate human biases. But in building systems to learn from data, they inevitably replicated many of the same patterns. This isn't a failure of AI—it's a feature, reflecting the fundamental challenges of learning from limited, biased data.
+                </p>
+                <p>
+                    Understanding Kahneman and Tversky's work helps us understand why AI systems behave the way they do. And understanding AI systems helps us understand human cognition better. The connection flows both ways.
+                </p>
+            </div>
+        </section>
+
+        <!-- Cross-Book References -->
+        <section id="crossref">
+            <h2>The Broader Landscape: Cross-Book Connections</h2>
+
+            <div class="cross-ref">
+                <div class="cross-ref-title">How The Undoing Project Connects to the Broader Literature on Human Decision-Making</div>
+                <p>
+                    The Undoing Project sits at the center of a constellation of books about human judgment, irrationality, and decision-making. Understanding these connections reveals the full scope of insights from Kahneman and Tversky's work.
+                </p>
+            </div>
+
+            <div class="book-list">
+                <div class="book-item">
+                    <div class="book-title-item">Thinking, Fast and Slow</div>
+                    <div class="book-author">by Daniel Kahneman</div>
+                    <p>
+                        Kahneman's magnum opus, synthesizing 50 years of research. The "fast thinking" system operates through heuristics (like availability and representativeness). The "slow thinking" system is logical and deliberate but limited. Understanding which system is operating reveals when and why we make errors.
+                    </p>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-title-item">Predictably Irrational</div>
+                    <div class="book-author">by Dan Ariely</div>
+                    <p>
+                        Builds on Kahneman-Tversky's foundations with new experiments in behavioral economics. Ariely shows that irrationality isn't random—it's systematic and predictable. We make the same mistakes repeatedly, which means we can design interventions to prevent them.
+                    </p>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-title-item">The Black Swan</div>
+                    <div class="book-author">by Nassim Nicholas Taleb</div>
+                    <p>
+                        Taleb explores how we systematically underestimate extreme events (black swans) and overestimate our understanding of the world. This is the flip side of availability bias—rare, extreme events are by definition not available in our memory, so we underestimate their probability until they happen.
+                    </p>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-title-item">Moneyball</div>
+                    <div class="book-author">by Michael Lewis</div>
+                    <p>
+                        Lewis's book about the Oakland Athletics shows how baseball teams can exploit cognitive biases in player valuation. The same anchoring and availability biases that affect human judgment affect how general managers value players, creating arbitrage opportunities for teams that understand the biases.
+                    </p>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-title-item">Stumbling on Happiness</div>
+                    <div class="book-author">by Daniel Gilbert</div>
+                    <p>
+                        Gilbert explores how we systematically misjudge our own future happiness. We make decisions based on affective forecasts (predictions about how we'll feel) that are often wildly inaccurate. This is the undoing problem at the emotional level—we imagine counterfactual futures that don't match reality.
+                    </p>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-title-item">Nudge</div>
+                    <div class="book-author">by Richard Thaler & Cass Sunstein</div>
+                    <p>
+                        The practical application of behavioral economics and cognitive biases. Thaler and Sunstein show how understanding human irrationality allows us to design choice architecture that helps people make better decisions—all while preserving their freedom to choose.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Decision Tree Visualization -->
+            <div class="svg-container">
+                <svg viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="treeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#0984E3;stop-opacity:0.1" />
+                            <stop offset="100%" style="stop-color:#6C5CE7;stop-opacity:0.1" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="700" height="500" fill="url(#treeGrad)"/>
+
+                    <!-- Root: The Undoing Project -->
+                    <circle cx="350" cy="50" r="35" fill="#6C5CE7" opacity="0.9"/>
+                    <text x="350" y="60" text-anchor="middle" font-size="12" fill="white" font-weight="bold">Undoing</text>
+                    <text x="350" y="75" text-anchor="middle" font-size="10" fill="white">Project</text>
+
+                    <!-- Branch 1: Psychology/Decision Science -->
+                    <line x1="350" y1="85" x2="200" y2="140"/>
+                    <circle cx="200" cy="160" r="30" fill="#0984E3" opacity="0.8"/>
+                    <text x="200" y="170" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Decision</text>
+                    <text x="200" y="183" text-anchor="middle" font-size="10" fill="white">Science</text>
+
+                    <!-- Branch 2: Applied Economics -->
+                    <line x1="350" y1="85" x2="350" y2="140"/>
+                    <circle cx="350" cy="160" r="30" fill="#A06CD5" opacity="0.8"/>
+                    <text x="350" y="170" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Behavioral</text>
+                    <text x="350" y="183" text-anchor="middle" font-size="10" fill="white">Economics</text>
+
+                    <!-- Branch 3: Sports/Finance -->
+                    <line x1="350" y1="85" x2="500" y2="140"/>
+                    <circle cx="500" cy="160" r="30" fill="#FF6B6B" opacity="0.8"/>
+                    <text x="500" y="170" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Market</text>
+                    <text x="500" y="183" text-anchor="middle" font-size="10" fill="white">Applications</text>
+
+                    <!-- Psychology sub-branches -->
+                    <line x1="200" y1="190" x2="120" y2="240"/>
+                    <circle cx="120" cy="270" r="25" fill="#4ECDC4" opacity="0.8"/>
+                    <text x="120" y="280" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Thinking,</text>
+                    <text x="120" y="292" text-anchor="middle" font-size="8" fill="white">Fast & Slow</text>
+
+                    <line x1="200" y1="190" x2="200" y2="240"/>
+                    <circle cx="200" cy="270" r="25" fill="#4ECDC4" opacity="0.8"/>
+                    <text x="200" y="282" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Predictably</text>
+                    <text x="200" y="294" text-anchor="middle" font-size="8" fill="white">Irrational</text>
+
+                    <line x1="200" y1="190" x2="280" y2="240"/>
+                    <circle cx="280" cy="270" r="25" fill="#4ECDC4" opacity="0.8"/>
+                    <text x="280" y="282" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Stumbling on</text>
+                    <text x="280" y="294" text-anchor="middle" font-size="8" fill="white">Happiness</text>
+
+                    <!-- Economics sub-branches -->
+                    <line x1="350" y1="190" x2="280" y2="240"/>
+                    <circle cx="280" cy="320" r="25" fill="#FFE66D" opacity="0.8"/>
+                    <text x="280" y="328" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Nudge</text>
+
+                    <line x1="350" y1="190" x2="350" y2="240"/>
+                    <circle cx="350" cy="320" r="25" fill="#FFE66D" opacity="0.8"/>
+                    <text x="350" y="330" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Prospect</text>
+                    <text x="350" y="342" text-anchor="middle" font-size="8" fill="white">Theory</text>
+
+                    <line x1="350" y1="190" x2="420" y2="240"/>
+                    <circle cx="420" cy="320" r="25" fill="#FFE66D" opacity="0.8"/>
+                    <text x="420" y="330" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Black</text>
+                    <text x="420" y="342" text-anchor="middle" font-size="8" fill="white">Swan</text>
+
+                    <!-- Markets sub-branches -->
+                    <line x1="500" y1="190" x2="420" y2="240"/>
+                    <circle cx="420" cy="370" r="25" fill="#FDCB6E" opacity="0.8"/>
+                    <text x="420" y="378" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Moneyball</text>
+
+                    <line x1="500" y1="190" x2="500" y2="240"/>
+                    <circle cx="500" cy="370" r="25" fill="#FDCB6E" opacity="0.8"/>
+                    <text x="500" y="378" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Market</text>
+                    <text x="500" y="390" text-anchor="middle" font-size="8" fill="white">Anomalies</text>
+
+                    <line x1="500" y1="190" x2="580" y2="240"/>
+                    <circle cx="580" cy="370" r="25" fill="#FDCB6E" opacity="0.8"/>
+                    <text x="580" y="378" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Behavioral</text>
+                    <text x="580" y="390" text-anchor="middle" font-size="8" fill="white">Finance</text>
+
+                    <!-- Impact Summary at bottom -->
+                    <rect x="50" y="430" width="600" height="50" fill="white" opacity="0.8" rx="5"/>
+                    <text x="350" y="455" text-anchor="middle" font-size="13" fill="#6C5CE7" font-weight="bold">
+                        From One Friendship: A Revolution in How We Understand Human Choice
+                    </text>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section>
+            <h2>Conclusion: The Power of Thinking Together</h2>
+
+            <div class="highlight-key">
+                <p>
+                    The Undoing Project is fundamentally a book about intellectual partnership. It's a love story between two minds—a psychologist and a mathematician who discovered that together they could see things neither could see alone.
+                </p>
+                <p>
+                    Their work transformed our understanding of how humans make decisions. They proved that we are systematically irrational, but not randomly so. Our irrationality follows patterns. It's predictable. It's describable mathematically. And understanding it allows us to make better decisions and design better systems.
+                </p>
+                <p>
+                    Most importantly, they showed that breakthrough intellectual work often requires genuine partnership. Not just collaboration, but real friendship, daily engagement, mutual challenge, and complementary strengths. In our age of individual achievement and specialization, their story reminds us that some of the most important work happens when two brilliant minds decide to think together.
+                </p>
+                <p>
+                    They proved it's possible. Kahneman and Tversky changed how we understand human minds. They changed economics, medicine, law, and business. And they did it together, as friends, thinking daily about how human judgment actually works.
+                </p>
+            </div>
+        </section>
+
+        <!-- Key Lessons Summary -->
+        <section>
+            <h2>Quick Reference: The 12 Lessons at a Glance</h2>
+            <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                <ol style="columns: 2; column-gap: 2rem;">
+                    <li><strong>The Friendship:</strong> Two complementary minds together revolutionized thinking</li>
+                    <li><strong>Prospect Theory:</strong> Losses hurt more than gains feel good (loss aversion)</li>
+                    <li><strong>Availability Heuristic:</strong> We overweight what we easily recall</li>
+                    <li><strong>Representativeness:</strong> We judge by similarity, ignoring base rates</li>
+                    <li><strong>Anchoring:</strong> Irrelevant numbers bias our judgments</li>
+                    <li><strong>Undoing/Counterfactual:</strong> We imagine alternatives; emotions depend on how easy that is</li>
+                    <li><strong>Framing Effects:</strong> Same problem, different presentation, different choices</li>
+                    <li><strong>Real-World Application:</strong> These biases affect actual decisions with real consequences</li>
+                    <li><strong>The Nobel Prize:</strong> Triumph and tragedy; recognition and dissolution</li>
+                    <li><strong>Impact Across Fields:</strong> Medicine, law, economics, business, sports all transformed</li>
+                    <li><strong>Intellectual Partnership:</strong> The Hinton-LeCun-Bengio parallel in AI</li>
+                    <li><strong>Regression to the Mean:</strong> We attribute change to causes when it's often just statistics</li>
+                </ol>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>The Undoing Project: A Friendship That Changed Our Minds</h3>
+            <p>by Michael Lewis</p>
+            <p style="margin-top: 2rem; font-size: 0.95rem;">
+                A comprehensive illustrated guide exploring the groundbreaking work of Daniel Kahneman and Amos Tversky,
+                their revolutionary insights into human decision-making, and the profound impact of their intellectual partnership.
+            </p>
+            <p style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.8;">
+                This guide synthesizes insights from behavioral economics, cognitive psychology, and the philosophy of
+                human judgment. It connects classical behavioral economics to modern artificial intelligence and explores
+                how understanding human irrationality helps us understand both ourselves and the systems we build.
+            </p>
+            <p style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.85rem;">
+                Created as a deep dive into one of the most important intellectual partnerships in modern science.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

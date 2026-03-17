@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gödel, Escher, Bach Illustrated - Douglas Hofstadter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 30px;
+        }
+
+        .section:nth-child(odd) {
+            background: linear-gradient(135deg, #0F172E 0%, #1A2747 100%);
+            color: white;
+        }
+
+        .section:nth-child(even) {
+            background: linear-gradient(135deg, #F5F0E8 0%, #E8DBCE 100%);
+            color: var(--dark);
+        }
+
+        .cover {
+            background: linear-gradient(135deg, #0F0E1E 0%, #1A1435 50%, #2D1B5E 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            letter-spacing: -1px;
+        }
+
+        .cover p {
+            font-size: 1.3rem;
+            color: var(--sunny);
+            font-weight: 500;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 900px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .section:nth-child(odd) .lesson-card {
+            background: #1E1E1E;
+            color: white;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--deep-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section:nth-child(odd) .lesson-title {
+            color: var(--sunny);
+        }
+
+        .lesson-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--dark-purple), var(--deep-blue));
+            color: white;
+            border-radius: 50%;
+            font-weight: 900;
+            font-size: 1.3rem;
+        }
+
+        .lesson-content {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .examples {
+            background: rgba(9,132,227,0.05);
+            padding: 20px;
+            border-left: 4px solid var(--deep-blue);
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .section:nth-child(odd) .examples {
+            background: rgba(9,132,227,0.1);
+        }
+
+        .examples strong {
+            color: var(--deep-blue);
+        }
+
+        .section:nth-child(odd) .examples strong {
+            color: var(--sunny);
+        }
+
+        .examples ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .examples li {
+            margin: 8px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .examples li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--deep-blue);
+        }
+
+        .section:nth-child(odd) .examples li:before {
+            color: var(--sunny);
+        }
+
+        .funny-take {
+            background: linear-gradient(135deg, rgba(255,230,109,0.1), rgba(160,108,213,0.05));
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-style: italic;
+            border-left: 4px solid var(--dark-purple);
+        }
+
+        .ai-connection {
+            background: rgba(108,92,231,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--dark-purple);
+        }
+
+        .ai-connection strong {
+            color: var(--dark-purple);
+        }
+
+        .cross-book {
+            background: rgba(9,132,227,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+            border-left: 4px solid var(--deep-blue);
+        }
+
+        .section:nth-child(odd) .cross-book {
+            background: rgba(255,230,109,0.05);
+            border-color: var(--sunny);
+        }
+
+        .cross-book strong {
+            color: var(--deep-blue);
+        }
+
+        .section:nth-child(odd) .cross-book strong {
+            color: var(--sunny);
+        }
+
+        .quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--dark-purple);
+            margin: 20px 0;
+            padding: 20px;
+            border-left: 4px solid var(--dark-purple);
+            text-align: center;
+        }
+
+        .section:nth-child(odd) .quote {
+            color: var(--sunny);
+            border-color: var(--sunny);
+        }
+
+        svg {
+            width: 100%;
+            max-width: 500px;
+            margin: 30px 0;
+        }
+
+        .svg-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 40px 20px;
+            }
+
+            .lesson-card {
+                padding: 25px;
+            }
+
+            .cover h1 {
+                font-size: 2.2rem;
+            }
+
+            .lesson-title {
+                font-size: 1.4rem;
+            }
+
+            .quote {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- COVER -->
+    <section class="section cover">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 600px; position: absolute; opacity: 0.25;">
+            <!-- Impossible staircase (Escher style) -->
+            <g>
+                <!-- Stair 1 -->
+                <polygon points="80,100 130,100 130,130 80,130" fill="none" stroke="#FFE66D" stroke-width="2"/>
+                <polygon points="130,100 180,80 180,110 130,130" fill="none" stroke="#FFE66D" stroke-width="2"/>
+                <!-- Stair 2 -->
+                <polygon points="130,130 180,110 180,140 130,160" fill="none" stroke="#FFE66D" stroke-width="2"/>
+                <polygon points="180,110 230,90 230,120 180,140" fill="none" stroke="#FFE66D" stroke-width="2"/>
+                <!-- Stair 3 -->
+                <polygon points="180,140 230,120 230,150 180,170" fill="none" stroke="#FFE66D" stroke-width="2"/>
+                <polygon points="230,120 280,100 280,130 230,150" fill="none" stroke="#FFE66D" stroke-width="2"/>
+                <!-- Stair 4 (impossible loop) -->
+                <polygon points="230,150 280,130 280,160 230,180" fill="none" stroke="#FFE66D" stroke-width="2"/>
+                <polygon points="280,160 330,140 330,170 280,190" fill="none" stroke="#FFE66D" stroke-width="2"/>
+                <!-- Loop back -->
+                <polygon points="280,100 330,80 330,110 280,130" fill="none" stroke="#FFE66D" stroke-width="2" stroke-dasharray="5,5"/>
+            </g>
+            <!-- Music notes -->
+            <text x="150" y="250" font-size="24" fill="#FFE66D">♪ ♫</text>
+            <text x="250" y="200" font-size="24" fill="#FFE66D">♪</text>
+            <!-- Math symbols -->
+            <text x="320" y="320" font-size="20" fill="#FFE66D">∞</text>
+            <text x="80" y="320" font-size="20" fill="#FFE66D">∑</text>
+        </svg>
+        <div class="cover-content">
+            <h1>Gödel, Escher, Bach</h1>
+            <p>An Eternal Golden Braid</p>
+            <p style="margin-top: 15px; font-size: 1rem; color: #AAAAAA;">Douglas Hofstadter</p>
+        </div>
+    </section>
+
+    <!-- LESSON 1: STRANGE LOOPS -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">1</div>
+                <span>Strange Loops: Self-Reference & Consciousness</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Central loop -->
+                    <circle cx="200" cy="150" r="60" fill="none" stroke="#0984E3" stroke-width="3"/>
+                    <!-- Self-reference arrow -->
+                    <path d="M 260 150 Q 300 100 260 50 Q 220 10 200 50" fill="none" stroke="#0984E3" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+                    <!-- Inner loop -->
+                    <circle cx="200" cy="150" r="35" fill="none" stroke="#A06CD5" stroke-width="2"/>
+                    <!-- Even more inner -->
+                    <circle cx="200" cy="150" r="15" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                    <!-- Labels -->
+                    <text x="200" y="160" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Self</text>
+                    <text x="200" y="230" font-size="11" text-anchor="middle" fill="white" font-weight="bold">Strange Loop</text>
+                    <!-- Consciousness indicator -->
+                    <text x="200" y="260" font-size="10" text-anchor="middle" fill="#A06CD5">= Consciousness</text>
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#0984E3"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>A strange loop occurs when, in the process of following the instructions implicit in a system, you end up back where you started, having risen by one level. Self-referential systems that loop back on themselves create something new: consciousness. You are not your neurons; you are the strange loop they form.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Gödel's incompleteness theorem: formal systems refer to themselves, creating undecidable truths</li>
+                    <li>Your brain: billions of neurons create a system that observes itself observing itself</li>
+                    <li>This sentence: "This sentence is true" creates self-reference → consciousness moment</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Your brain is a strange loop that thinks it's observing things, but it's really just watching itself think about watching itself. You're not in your brain; you ARE your brain's strange loop."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Self-attention in transformers creates loops where tokens refer to themselves and each other. This is a primitive form of strange looping—computation that references its own computation.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Thinking Fast & Slow explores self-awareness and metacognition, which are strange loops of thought.
+            </div>
+            <div class="quote">"I am a strange loop, a tangled hierarchy of thoughts about thoughts."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 2: GÖDEL'S INCOMPLETENESS -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">2</div>
+                <span>Gödel's Incompleteness: Truths Beyond Proof</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- System box -->
+                    <rect x="50" y="60" width="300" height="180" fill="rgba(9,132,227,0.1)" stroke="#0984E3" stroke-width="3" rx="8"/>
+                    <text x="200" y="85" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Formal System</text>
+                    <!-- Provable statements inside -->
+                    <rect x="80" y="110" width="120" height="40" fill="#00B894" stroke="#2D3436" stroke-width="2" rx="5"/>
+                    <text x="140" y="140" font-size="11" text-anchor="middle" fill="white" font-weight="bold">Provable Truths</text>
+                    <!-- True but unprovable -->
+                    <circle cx="300" cy="150" r="25" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                    <text x="300" y="160" font-size="12" text-anchor="middle" fill="white" font-weight="bold">True</text>
+                    <text x="300" y="175" font-size="10" text-anchor="middle" fill="white">But</text>
+                    <text x="300" y="188" font-size="10" text-anchor="middle" fill="white">Unprovable</text>
+                    <!-- Arrow showing escape -->
+                    <path d="M 200 140 L 270 150" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowhead)"/>
+                    <!-- Conclusion -->
+                    <rect x="80" y="270" width="240" height="20" fill="#A06CD5" rx="4"/>
+                    <text x="200" y="285" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Every consistent system has unprovable truths</text>
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FF6B6B"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>Gödel proved that any consistent formal system is incomplete: there are true statements that cannot be proven within the system. This means logic can't be fully self-contained. You must always step outside the system to verify certain truths. Incompleteness isn't a flaw; it's a fundamental feature of complex systems.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Mathematics: for any set of axioms, there exist true statements that can't be proven</li>
+                    <li>Legal systems: laws are internally consistent but can't prove their own validity</li>
+                    <li>Physics: the laws of physics can't prove they're the right laws—that requires stepping outside</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Gödel proved that any system smart enough to be interesting is too smart to understand itself completely. You can't be both consistent and complete. Pick one."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Language models are incomplete systems—they can't prove the validity of their own outputs through internal logic alone. This is why they need human feedback (RLHF).
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Thinking Fast & Slow explores the limits of logical reasoning and rationality.
+            </div>
+            <div class="quote">"This sentence is not provable in this system."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 3: ISOMORPHISM -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">3</div>
+                <span>Isomorphism: Deep Structures Across Domains</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Music pattern -->
+                    <rect x="20" y="50" width="150" height="100" fill="#FFE66D" stroke="#2D3436" stroke-width="2" rx="8"/>
+                    <text x="95" y="75" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Music</text>
+                    <text x="60" y="110" font-size="20">♪ ♫ ♪</text>
+                    <text x="95" y="135" font-size="10" text-anchor="middle" fill="#2D3436">Pattern: A B A</text>
+
+                    <!-- DNA pattern -->
+                    <rect x="230" y="50" width="150" height="100" fill="#4ECDC4" stroke="#2D3436" stroke-width="2" rx="8"/>
+                    <text x="305" y="75" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">DNA</text>
+                    <text x="280" y="110" font-size="16">C G C</text>
+                    <text x="305" y="135" font-size="10" text-anchor="middle" fill="#2D3436">Pattern: A B A</text>
+
+                    <!-- Structure below -->
+                    <rect x="20" y="180" width="360" height="100" fill="rgba(160,108,213,0.1)" stroke="#A06CD5" stroke-width="2" rx="8"/>
+                    <text x="200" y="205" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Isomorphism: Same Deep Structure</text>
+                    <text x="200" y="230" font-size="10" text-anchor="middle" fill="#A06CD5">Music, DNA, languages, brains, societies</text>
+                    <text x="200" y="250" font-size="10" text-anchor="middle" fill="#A06CD5">All exhibit recursive, self-similar patterns</text>
+                    <text x="200" y="270" font-size="10" text-anchor="middle" fill="#A06CD5">Understanding one domain illuminates another</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>Isomorphism means two systems have the same structure in different forms. A melody can have the same pattern as a DNA sequence. The brain's neural structure mirrors the structure of ecosystems. When you understand the structure, you understand multiple domains at once. This is why insights transfer across fields.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Math fractals: self-similar patterns repeat at different scales (coastlines, trees, galaxies)</li>
+                    <li>Social dynamics: group behavior mirrors individual neural behavior</li>
+                    <li>Hierarchies: organizational structures mirror biological hierarchies (cells→organs→organisms)</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Understand how a melody works and you understand how DNA works. Same structure, different medium. It's why physicists can understand music and musicians can understand physics."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Transfer learning works via isomorphism—the structure learned in one domain transfers to another because the deep structures are the same.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Thinking Fast & Slow shows how metaphor and analogy rely on structural isomorphism.
+            </div>
+            <div class="quote">"Isomorphism is the essence of understanding. If you understand the structure, you understand the system."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 4: RECURSION -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">4</div>
+                <span>Recursion: Stories Within Stories</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Level 1 (outermost) -->
+                    <rect x="30" y="30" width="340" height="240" fill="none" stroke="#0984E3" stroke-width="3" rx="8"/>
+                    <text x="50" y="55" font-size="11" fill="#0984E3" font-weight="bold">Level 1: Story</text>
+                    <!-- Level 2 -->
+                    <rect x="60" y="70" width="280" height="180" fill="none" stroke="#A06CD5" stroke-width="2" rx="6"/>
+                    <text x="75" y="90" font-size="10" fill="#A06CD5" font-weight="bold">Level 2: Story within Story</text>
+                    <!-- Level 3 -->
+                    <rect x="90" y="110" width="220" height="120" fill="none" stroke="#FFE66D" stroke-width="2" rx="4"/>
+                    <text x="105" y="130" font-size="9" fill="#FFE66D" font-weight="bold">Level 3: Recursive story</text>
+                    <!-- Level 4 (center) -->
+                    <circle cx="200" cy="170" r="40" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                    <text x="200" y="175" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Base case</text>
+                    <!-- Arrows showing descent -->
+                    <path d="M 200 70 L 200 120" stroke="#2D3436" stroke-width="1" stroke-dasharray="3,3"/>
+                    <path d="M 200 130 L 200 170" stroke="#2D3436" stroke-width="1" stroke-dasharray="3,3"/>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>Recursion is when something is defined in terms of itself at a smaller scale. A story about a character telling a story about a character. Each level goes deeper until you reach the base case. The Bach Crab Canon in GEB demonstrates this: the piece can be played forward and backward simultaneously, recursively referring to itself.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Russian nesting dolls: each doll contains a smaller version of itself</li>
+                    <li>"Once I dreamed I was a butterfly...": story within a story about dreaming</li>
+                    <li>Fractals in nature: each part contains the whole structure (trees, ferns, coastlines)</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "To understand recursion, you must first understand recursion. The joke works because the structure refers to itself, which is exactly what makes recursion both beautiful and confusing."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Language models use recursion in self-attention—each token attends to itself and other tokens, creating nested levels of representation.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Thinking Fast & Slow explores nested loops of thinking about thinking (metacognition).
+            </div>
+            <div class="quote">"To understand recursion, you must first understand recursion."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 5: FORMAL SYSTEMS & MEANING -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">5</div>
+                <span>Formal Systems & Meaning: Symbols vs Understanding</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Left: Symbol manipulation without understanding -->
+                    <rect x="20" y="60" width="160" height="140" fill="#FFE0E0" stroke="#FF6B6B" stroke-width="2" rx="8"/>
+                    <text x="100" y="85" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Syntax (symbols)</text>
+                    <text x="70" y="120" font-size="28" font-weight="bold">∑ ∏ ∫</text>
+                    <text x="100" y="155" font-size="10" text-anchor="middle" fill="#FF6B6B">Rules but no meaning</text>
+
+                    <!-- Right: Semantics (meaning) -->
+                    <rect x="220" y="60" width="160" height="140" fill="#E0F7E0" stroke="#00B894" stroke-width="2" rx="8"/>
+                    <text x="300" y="85" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Semantics (meaning)</text>
+                    <text x="300" y="125" font-size="24">= Understanding</text>
+                    <text x="300" y="155" font-size="10" text-anchor="middle" fill="#00B894">Interpretation matters</text>
+
+                    <!-- Arrow: Meaning emerges -->
+                    <path d="M 180 130 L 220 130" stroke="#A06CD5" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <text x="200" y="115" font-size="9" fill="#A06CD5" font-weight="bold">Context</text>
+
+                    <!-- Question -->
+                    <rect x="50" y="220" width="300" height="60" fill="rgba(160,108,213,0.1)" stroke="#A06CD5" stroke-width="1" rx="5"/>
+                    <text x="200" y="245" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Can a system of pure symbol manipulation ever understand?</text>
+                    <text x="200" y="265" font-size="10" text-anchor="middle" fill="#A06CD5">The Chinese Room problem: formal systems lack intrinsic meaning</text>
+
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#A06CD5"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>You can manipulate symbols according to formal rules without understanding their meaning. A system could follow all rules perfectly and still be meaningless. Meaning requires interpretation, context, and grounding in something beyond the symbols themselves. This is the heart of the Chinese Room debate: can syntax ever become semantics?</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Chinese Room: someone could manipulate Chinese characters without understanding Chinese</li>
+                    <li>Mathematics: you can follow rules perfectly without understanding what numbers mean</li>
+                    <li>Language models: they manipulate tokens flawlessly but don't "understand" in the human sense</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "A perfect symbol manipulator could speak fluent Chinese, solve complex math, and write poetry—and still not understand any of it. That's either profound or depressing."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Large language models are sophisticated symbol manipulators. Whether they achieve any real semantic understanding (meaning) remains an open philosophical question.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Thinking Fast & Slow explores how humans ground symbols in meaning through experience.
+            </div>
+            <div class="quote">"Syntax is what symbols do. Semantics is what they mean. Can syntax ever create semantics?"</div>
+        </div>
+    </section>
+
+    <!-- LESSON 6: LEVELS OF DESCRIPTION -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">6</div>
+                <span>Levels of Description: Neurons to Thoughts</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hierarchy -->
+                    <rect x="60" y="20" width="280" height="50" fill="#0984E3" stroke="#2D3436" stroke-width="2" rx="5"/>
+                    <text x="200" y="50" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Thoughts & Consciousness</text>
+
+                    <rect x="60" y="80" width="280" height="50" fill="#A06CD5" stroke="#2D3436" stroke-width="2" rx="5"/>
+                    <text x="200" y="110" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Neural Patterns & Circuits</text>
+
+                    <rect x="60" y="140" width="280" height="50" fill="#4ECDC4" stroke="#2D3436" stroke-width="2" rx="5"/>
+                    <text x="200" y="170" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Individual Neurons & Synapses</text>
+
+                    <rect x="60" y="200" width="280" height="50" fill="#FFE66D" stroke="#2D3436" stroke-width="2" rx="5"/>
+                    <text x="200" y="230" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Molecules & Chemistry</text>
+
+                    <!-- Arrows showing levels -->
+                    <path d="M 200 70 L 200 80" stroke="#2D3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 200 130 L 200 140" stroke="#2D3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 200 190 L 200 200" stroke="#2D3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                    <!-- Labels -->
+                    <text x="30" y="55" font-size="10" fill="#2D3436" font-weight="bold">Macro</text>
+                    <text x="30" y="235" font-size="10" fill="#2D3436" font-weight="bold">Micro</text>
+
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#2D3436"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>The same phenomenon can be described at multiple levels. Your thought is made of neurons, but the thought itself can't be described as "neuron behavior." Each level of description is valid and necessary. You can't reduce consciousness to chemistry without losing what makes consciousness consciousness. Different levels reveal different truths.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>A chess game: describable at molecular, neural, cognitive, and strategic levels</li>
+                    <li>A conversation: neurochemistry OR meaning-making, not reducible to either alone</li>
+                    <li>A poem: letters, words, sentences, meanings, emotions—each level reveals different beauty</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Your brain is just atoms following physics. Your mind is just neurons firing. But describing you as 'atoms following physics' is technically true and completely useless. You need multiple levels of description."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Large language models work at multiple levels—tokens, embeddings, attention patterns, representations, outputs. Understanding only one level misses the whole picture.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Thinking Fast & Slow operates at multiple levels—neural/System 1 and conscious/System 2.
+            </div>
+            <div class="quote">"You don't reduce music to sound waves. Different levels of description reveal different truths."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 7: THE MU PUZZLE -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">7</div>
+                <span>The MU Puzzle: Stepping Outside the System</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- System box (closed) -->
+                    <rect x="50" y="60" width="300" height="160" fill="rgba(9,132,227,0.1)" stroke="#0984E3" stroke-width="3" rx="8"/>
+                    <text x="200" y="85" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Formal System: MIU</text>
+
+                    <!-- Rules inside -->
+                    <rect x="70" y="110" width="260" height="80" fill="rgba(255,255,255,0.5)" stroke="#2D3436" stroke-width="1" rx="4"/>
+                    <text x="200" y="130" font-size="10" text-anchor="middle" fill="#2D3436" font-weight="bold">Rules within system:</text>
+                    <text x="90" y="150" font-size="9" fill="#2D3436">• MI → MII (add I)</text>
+                    <text x="90" y="165" font-size="9" fill="#2D3436">• M...I...U → M...IU...U (replace I with U)</text>
+                    <text x="280" y="150" font-size="9" fill="#2D3436">• III → U</text>
+                    <text x="280" y="165" font-size="9" fill="#2D3436">• Goal: reach MU</text>
+
+                    <!-- Question mark outside -->
+                    <circle cx="350" cy="160" r="30" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                    <text x="350" y="170" font-size="32" text-anchor="middle">?</text>
+                    <text x="350" y="210" font-size="9" text-anchor="middle" fill="#2D3436" font-weight="bold">Impossible to reach</text>
+                    <text x="350" y="223" font-size="8" text-anchor="middle" fill="#2D3436">(from inside)</text>
+
+                    <!-- Solution arrow -->
+                    <path d="M 350 120 L 350 80" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowhead)"/>
+                    <text x="370" y="100" font-size="9" fill="#FF6B6B" font-weight="bold">Exit & look</text>
+                    <text x="370" y="113" font-size="9" fill="#FF6B6B" font-weight="bold">from outside</text>
+
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FF6B6B"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>The MU Puzzle asks: given the rules of the MIU system, can you derive "MU" from "MI"? The answer is no—not because you're not clever enough, but because MU is unreachable using only the system's rules. To prove it's impossible, you must step outside the system and count the number of I's. Problems can be unsolvable within their context but solvable from outside.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>You can't solve a paradox from within its logic; you must step outside and reframe</li>
+                    <li>Optical illusions: solvable only by recognizing the trick (stepping outside the visual system)</li>
+                    <li>Dogmatic belief: unsolvable from within; requires stepping outside the belief system to see it</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "The MU Puzzle is about the impossibility of solving a problem using only the tools within the system that created the problem. Sometimes you need to exit the game to win it."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Language models are trapped within their training context. Problems requiring knowledge from outside training data are unsolvable—they need new information from outside the system.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Thinking Fast & Slow explores how we get trapped in problem frames and need to step back to reframe.
+            </div>
+            <div class="quote">"Some problems can only be solved by stepping outside the system."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 8: TANGLED HIERARCHIES -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">8</div>
+                <span>Tangled Hierarchies: Blurred Boundaries</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Escher-style impossible hierarchy -->
+                    <circle cx="100" cy="80" r="30" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                    <text x="100" y="90" font-size="14" text-anchor="middle">1</text>
+                    <text x="100" y="125" font-size="9" text-anchor="middle" fill="#2D3436">Top</text>
+
+                    <circle cx="200" cy="150" r="30" fill="#A06CD5" stroke="#2D3436" stroke-width="2"/>
+                    <text x="200" y="160" font-size="14" text-anchor="middle">2</text>
+                    <text x="200" y="190" font-size="9" text-anchor="middle" fill="#2D3436">Middle</text>
+
+                    <circle cx="300" cy="80" r="30" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                    <text x="300" y="90" font-size="14" text-anchor="middle">3</text>
+                    <text x="300" y="125" font-size="9" text-anchor="middle" fill="#2D3436">Where?</text>
+
+                    <!-- Tangled arrows (impossible hierarchy) -->
+                    <path d="M 130 95 Q 160 110 170 135" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="3,3"/>
+                    <path d="M 230 165 Q 260 150 270 100" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="3,3"/>
+                    <path d="M 270 60 Q 200 20 130 60" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="3,3"/>
+
+                    <!-- Explanation box -->
+                    <rect x="40" y="230" width="320" height="60" fill="rgba(160,108,213,0.1)" stroke="#A06CD5" stroke-width="1" rx="5"/>
+                    <text x="200" y="250" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Tangled Hierarchy: System is both superior and subordinate to itself</text>
+                    <text x="200" y="268" font-size="9" text-anchor="middle" fill="#A06CD5">Writer writes a story; character writes the writer's story. Who controls whom?</text>
+                    <text x="200" y="283" font-size="9" text-anchor="middle" fill="#A06CD5">Level boundaries dissolve in strange loops.</text>
+
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FF6B6B"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>A tangled hierarchy occurs when a system is both superior and subordinate to itself. The observer and the observed become entangled. Escher's drawings show this impossibly—stairs that end up where they started. In consciousness, the mind observes itself observing itself. Control and subordination blur.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Escher drawings: impossible staircases where up becomes down becomes up</li>
+                    <li>Teacher-student: student eventually becomes the teacher's teacher through ideas</li>
+                    <li>Parent-child: child influences parent's development; hierarchy becomes circular</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "In a tangled hierarchy, nothing is truly above anything else because everything loops back. It's like trying to find the top of an Escher staircase—there isn't one. It's all stairs."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> AI systems trained on human feedback create tangled hierarchies—humans train AI, but AI outputs influence what humans think, which influences future training.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Feedback loops create tangled hierarchies in complex systems.
+            </div>
+            <div class="quote">"When the boundary between levels dissolves, you get strange loops that transcend hierarchies."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 9: HOLISM VS REDUCTIONISM -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">9</div>
+                <span>Holism vs Reductionism: Both Are True</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Reductionist view (left) -->
+                    <rect x="20" y="50" width="150" height="150" fill="#FFE0E0" stroke="#FF6B6B" stroke-width="2" rx="8"/>
+                    <text x="95" y="75" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Reductionism</text>
+                    <circle cx="60" cy="110" r="12" fill="#FF6B6B"/>
+                    <circle cx="95" cy="110" r="12" fill="#FF6B6B"/>
+                    <circle cx="130" cy="110" r="12" fill="#FF6B6B"/>
+                    <circle cx="60" cy="145" r="12" fill="#FF6B6B"/>
+                    <circle cx="95" cy="145" r="12" fill="#FF6B6B"/>
+                    <circle cx="130" cy="145" r="12" fill="#FF6B6B"/>
+                    <text x="95" y="185" font-size="9" text-anchor="middle" fill="#FF6B6B">Parts → Whole</text>
+
+                    <!-- Holistic view (right) -->
+                    <rect x="230" y="50" width="150" height="150" fill="#E0F7E0" stroke="#00B894" stroke-width="2" rx="8"/>
+                    <text x="305" y="75" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Holism</text>
+                    <circle cx="305" cy="120" r="50" fill="#00B894" opacity="0.3" stroke="#00B894" stroke-width="2"/>
+                    <text x="305" y="130" font-size="24" text-anchor="middle">⊙</text>
+                    <text x="305" y="185" font-size="9" text-anchor="middle" fill="#00B894">Whole > Parts</text>
+
+                    <!-- Meeting in middle -->
+                    <rect x="60" y="220" width="280" height="60" fill="rgba(160,108,213,0.1)" stroke="#A06CD5" stroke-width="2" rx="5"/>
+                    <text x="200" y="245" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Both are valid perspectives—different levels reveal different truths</text>
+                    <text x="200" y="263" font-size="9" text-anchor="middle" fill="#A06CD5">Atoms describe the particles; consciousness describes the system. Both true, neither complete.</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>The reductionist sees the whole as nothing but the sum of its parts. The holist sees the whole as transcending its parts. Both are right and both are wrong. A pile of atoms is just atoms (reductionism), but describing consciousness as "just atoms" loses what makes consciousness consciousness (holism). You need both perspectives.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Love: chemically just neurotransmitters, but that description misses what love IS</li>
+                    <li>Music: physically just sound waves, but that misses the meaning and emotion</li>
+                    <li>Life: biologically just chemistry, but the organization creates something qualitatively different</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Reducing love to dopamine is like reducing the Mona Lisa to pigment distribution. Technically true, utterly missing the point. You need both parts and wholes."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Language models can be described reductively (token prediction) or holistically (meaning generation). Both descriptions are incomplete without the other.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Thinking Fast & Slow shows how reducing psychology to brain states misses the meaningful level of mental phenomena.
+            </div>
+            <div class="quote">"A symphony is nothing but sound waves, yet it is far more than the sum of its sound waves."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 10: ANT FUGUE -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">10</div>
+                <span>Ant Fugue: Emergent Intelligence</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Individual ant -->
+                    <circle cx="70" cy="80" r="8" fill="#FF6B6B" stroke="#2D3436" stroke-width="1"/>
+                    <line x1="70" y1="88" x2="65" y2="100" stroke="#2D3436" stroke-width="1"/>
+                    <text x="70" y="120" font-size="9" text-anchor="middle" fill="#2D3436">Ant</text>
+                    <text x="70" y="135" font-size="8" text-anchor="middle" fill="#FF6B6B">Simple rules</text>
+
+                    <!-- Colony (many ants) -->
+                    <g id="ants">
+                        <circle cx="150" cy="60" r="6" fill="#FF6B6B" opacity="0.6"/>
+                        <circle cx="170" cy="70" r="6" fill="#FF6B6B" opacity="0.6"/>
+                        <circle cx="180" cy="50" r="6" fill="#FF6B6B" opacity="0.6"/>
+                        <circle cx="160" cy="90" r="6" fill="#FF6B6B" opacity="0.6"/>
+                        <circle cx="190" cy="80" r="6" fill="#FF6B6B" opacity="0.6"/>
+                    </g>
+                    <rect x="120" y="40" width="100" height="100" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5" rx="4"/>
+                    <text x="170" y="160" font-size="9" text-anchor="middle" fill="#2D3436">Colony</text>
+                    <text x="170" y="175" font-size="8" text-anchor="middle" fill="#FF6B6B">Complex behavior</text>
+
+                    <!-- Emergence arrow -->
+                    <path d="M 110 90 L 120 90" stroke="#A06CD5" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                    <!-- Intelligence emerges -->
+                    <circle cx="300" cy="90" r="40" fill="#A06CD5" stroke="#2D3436" stroke-width="2"/>
+                    <text x="300" y="100" font-size="20" text-anchor="middle">🧠</text>
+                    <text x="300" y="150" font-size="9" text-anchor="middle" fill="#2D3436" font-weight="bold">Emergent</text>
+                    <text x="300" y="163" font-size="9" text-anchor="middle" fill="#2D3436" font-weight="bold">Intelligence</text>
+
+                    <!-- Description -->
+                    <rect x="30" y="210" width="340" height="70" fill="rgba(160,108,213,0.1)" stroke="#A06CD5" stroke-width="1" rx="5"/>
+                    <text x="200" y="235" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Emergence: Complex behavior without centralized control</text>
+                    <text x="200" y="253" font-size="9" text-anchor="middle" fill="#A06CD5">Ants follow simple chemical rules. Collective behavior is intelligent.</text>
+                    <text x="200" y="268" font-size="9" text-anchor="middle" fill="#A06CD5">No ant understands. The system understands.</text>
+
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#A06CD5"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>A single ant is simple: follow pheromone trails, carry food, avoid obstacles. But 20,000 ants together solve problems no single ant could comprehend. Intelligence emerges from simple rules interacting at scale. The colony is intelligent not because it has a brain, but because its structure allows complex behavior without centralized control.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Ant colonies: no central planner, yet they optimize foraging and nest design</li>
+                    <li>Human brains: individual neurons are dumb; consciousness emerges from their interaction</li>
+                    <li>Markets: individual buyers and sellers follow simple rules; markets efficiently allocate resources</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "An ant is stupid. Twenty thousand ants together are genius. That's emergence: intelligence without anyone being smart."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Transformers are ant colonies of attention mechanisms. No single token is intelligent, but billions of parameter interactions create emergent intelligence.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Emergence appears in complex systems from Black Swan to Flow.
+            </div>
+            <div class="quote">"Intelligence in the aggregate emerges from stupidity in the individual."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 11: TYPOGRAPHICAL NUMBER THEORY -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">11</div>
+                <span>Typographical Number Theory: Encoding Meaning</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Symbols (top) -->
+                    <rect x="30" y="30" width="340" height="60" fill="#FFE0E0" stroke="#FF6B6B" stroke-width="2" rx="8"/>
+                    <text x="200" y="55" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Symbols: −, 0, 1, =, +, ×</text>
+                    <text x="200" y="75" font-size="11" text-anchor="middle" fill="#FF6B6B">Just marks on paper</text>
+
+                    <!-- Rules (middle) -->
+                    <rect x="30" y="110" width="340" height="60" fill="#A06CD5" stroke="#2D3436" stroke-width="2" rx="8"/>
+                    <text x="200" y="135" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Rules: What can follow what</text>
+                    <text x="200" y="155" font-size="11" text-anchor="middle" fill="white">Apply rules = Typographical Number Theory</text>
+
+                    <!-- Meaning emerges (bottom) -->
+                    <rect x="30" y="190" width="340" height="90" fill="#E0F7E0" stroke="#00B894" stroke-width="2" rx="8"/>
+                    <text x="200" y="215" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Meaning Emerges</text>
+                    <text x="200" y="238" font-size="11" text-anchor="middle" fill="#2D3436">Following the rules of "+" reveals addition</text>
+                    <text x="200" y="258" font-size="11" text-anchor="middle" fill="#2D3436">The meaning isn't in symbols or rules alone</text>
+                    <text x="200" y="273" font-size="11" text-anchor="middle" fill="#00B894">It emerges from the whole system</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>TNT shows how meaning can be encoded in pure symbol manipulation. You start with arbitrary symbols and rules for combining them. But following those rules, the symbols come to represent numbers, operations, and truths about mathematics. Meaning doesn't need to be "baked in"—it emerges from structure and rules.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>DNA: just four chemical bases (A, T, G, C) + rules = entire biological code</li>
+                    <li>Computer code: arbitrary symbols "0" and "1" + logic gates = any computation</li>
+                    <li>Language: arbitrary sounds + grammar = infinite meaning</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "You have squiggles and rules for combining squiggles. Follow the rules long enough and you've discovered the structure of mathematics. Meaning was never in the squiggles; it was in the pattern."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Language models are TNT systems—tokens (arbitrary symbols) + attention rules = emergence of linguistic meaning from pure structure.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Information theory explores how meaning emerges from structure.
+            </div>
+            <div class="quote">"Meaning is not intrinsic to symbols. It emerges from structure and rules."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 12: SELF-REFERENTIAL SENTENCES -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">12</div>
+                <span>Self-Referential Sentences: The Bridge</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sentence pointing to itself -->
+                    <rect x="80" y="80" width="240" height="60" fill="#FFE66D" stroke="#2D3436" stroke-width="2" rx="8"/>
+                    <text x="200" y="110" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">"This sentence has five words"</text>
+                    <text x="200" y="128" font-size="10" text-anchor="middle" fill="#2D3436">(actually has six...paradox!)</text>
+
+                    <!-- Arrow looping back -->
+                    <path d="M 140 80 Q 100 50 140 30 Q 170 20 200 80" fill="none" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="3,3"/>
+                    <text x="110" y="55" font-size="10" fill="#FF6B6B" font-weight="bold">Self-reference</text>
+
+                    <!-- Three examples -->
+                    <rect x="30" y="170" width="340" height="110" fill="rgba(160,108,213,0.1)" stroke="#A06CD5" stroke-width="1" rx="5"/>
+                    <text x="200" y="190" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Self-Referential Examples:</text>
+                    <text x="200" y="210" font-size="9" text-anchor="middle" fill="#2D3436">"This sentence is false" - Russell's paradox, unsolvable within logic</text>
+                    <text x="200" y="228" font-size="9" text-anchor="middle" fill="#2D3436">"I think, therefore I am" - consciousness observing itself</text>
+                    <text x="200" y="246" font-size="9" text-anchor="middle" fill="#A06CD5">Self-reference creates strange loops that enable consciousness</text>
+                    <text x="200" y="261" font-size="9" text-anchor="middle" fill="#A06CD5">Bridge between meaningless symbols and meaningful thoughts</text>
+
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FF6B6B"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>Self-referential sentences are the key to understanding consciousness. When a system refers to itself, it creates a strange loop. This is how meaning arises from meaningless symbols. When symbols can refer to the rules that govern them, and those rules can create thoughts about thoughts, consciousness emerges. The bridge between matter and mind is self-reference.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>"This statement is false" → Russell's paradox, infinite loop</li>
+                    <li>Your consciousness → your brain observing its own processes</li>
+                    <li>Gödel's theorem → formal systems referring to themselves</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "You are a sentence that reads itself. A formal system that refers to its own structure. That self-reference is what makes you conscious. You're not made of consciousness; you ARE consciousness—a strange loop of self-observation."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Language models that reason about their own reasoning create self-referential loops. Chain-of-thought prompting creates artificial strange loops in silicon.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> All consciousness explorations fundamentally rely on self-reference.
+            </div>
+            <div class="quote">"I am a strange loop. You are a strange loop. Consciousness is strange loops all the way down."</div>
+        </div>
+    </section>
+</body>
+</html>

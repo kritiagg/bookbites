@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blink: The Power of Thinking Without Thinking - Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== COVER SECTION ===== */
+        .cover {
+            background: linear-gradient(135deg, var(--sky) 0%, var(--purple) 50%, var(--coral) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-content {
+            text-align: center;
+            z-index: 2;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .cover-icon {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .cover-icon svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .cover .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .cover .author {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 40px;
+        }
+
+        .cover-decoration {
+            position: absolute;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .decoration-left {
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+        }
+
+        .decoration-right {
+            bottom: -150px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+        }
+
+        /* ===== INTRO SECTION ===== */
+        .intro {
+            background: white;
+            padding: 80px 40px;
+            margin: 60px 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--purple);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        .intro-text h3 {
+            font-size: 1.4rem;
+            color: var(--coral);
+            margin-bottom: 15px;
+        }
+
+        .intro-text p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .intro-icon {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .intro-icon svg {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+        }
+
+        /* ===== LESSONS GRID ===== */
+        .lessons {
+            padding: 80px 40px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+        }
+
+        .lessons h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--dark);
+            margin-bottom: 60px;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--sky);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .lesson-card.lesson-1 { border-left-color: var(--coral); }
+        .lesson-card.lesson-2 { border-left-color: var(--teal); }
+        .lesson-card.lesson-3 { border-left-color: var(--purple); }
+        .lesson-card.lesson-4 { border-left-color: var(--sunny); }
+        .lesson-card.lesson-5 { border-left-color: var(--deep-blue); }
+        .lesson-card.lesson-6 { border-left-color: var(--warm-red); }
+        .lesson-card.lesson-7 { border-left-color: var(--forest); }
+        .lesson-card.lesson-8 { border-left-color: var(--pink); }
+        .lesson-card.lesson-9 { border-left-color: var(--orange); }
+        .lesson-card.lesson-10 { border-left-color: var(--dark-purple); }
+        .lesson-card.lesson-11 { border-left-color: var(--sky); }
+        .lesson-card.lesson-12 { border-left-color: var(--coral); }
+
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, currentColor, transparent);
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: var(--sky);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .lesson-1 .lesson-number { background: var(--coral); }
+        .lesson-2 .lesson-number { background: var(--teal); }
+        .lesson-3 .lesson-number { background: var(--purple); }
+        .lesson-4 .lesson-number { background: var(--sunny); color: var(--dark); }
+        .lesson-5 .lesson-number { background: var(--deep-blue); }
+        .lesson-6 .lesson-number { background: var(--warm-red); }
+        .lesson-7 .lesson-number { background: var(--forest); }
+        .lesson-8 .lesson-number { background: var(--pink); }
+        .lesson-9 .lesson-number { background: var(--orange); color: var(--dark); }
+        .lesson-10 .lesson-number { background: var(--dark-purple); }
+        .lesson-11 .lesson-number { background: var(--sky); }
+        .lesson-12 .lesson-number { background: var(--coral); }
+
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .lesson-description {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .lesson-key-point {
+            background: linear-gradient(135deg, rgba(74, 205, 196, 0.1) 0%, rgba(164, 108, 213, 0.1) 100%);
+            border-left: 3px solid var(--teal);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--dark);
+            margin-top: 15px;
+        }
+
+        /* ===== KEY LESSONS SECTION ===== */
+        .key-lessons {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--dark-purple) 100%);
+            padding: 80px 40px;
+            color: white;
+            margin: 60px 0;
+            border-radius: 20px;
+        }
+
+        .key-lessons h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .key-lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .key-lesson-box {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .key-lesson-box:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-5px);
+        }
+
+        .key-lesson-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .key-lesson-box .emoji {
+            font-size: 1.5rem;
+        }
+
+        .key-lesson-box p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        /* ===== STORIES SECTION ===== */
+        .stories {
+            padding: 80px 40px;
+            background: white;
+        }
+
+        .stories h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--dark);
+            margin-bottom: 60px;
+        }
+
+        .story {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.05) 0%, rgba(164, 108, 213, 0.05) 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--coral);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .story h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--coral);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .story p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .story .punchline {
+            background: var(--sunny);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--dark);
+            font-style: italic;
+        }
+
+        /* ===== AI CONNECTION SECTION ===== */
+        .ai-connection {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 40px;
+            color: white;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .ai-connection h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .ai-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .ai-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .ai-box p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        .ai-connection .code-block {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+
+        /* ===== CROSS-BOOK SECTION ===== */
+        .cross-books {
+            padding: 80px 40px;
+            background: white;
+        }
+
+        .cross-books h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--dark);
+            margin-bottom: 60px;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-top: 5px solid var(--sky);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .book-card:nth-child(2) { border-top-color: var(--purple); }
+        .book-card:nth-child(3) { border-top-color: var(--coral); }
+        .book-card:nth-child(4) { border-top-color: var(--teal); }
+        .book-card:nth-child(5) { border-top-color: var(--orange); }
+
+        .book-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .book-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .book-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .book-author {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .book-connection {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* ===== CONCLUSION SECTION ===== */
+        .conclusion {
+            background: linear-gradient(135deg, var(--coral) 0%, var(--orange) 50%, var(--sunny) 100%);
+            padding: 80px 40px;
+            color: white;
+            border-radius: 20px;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .conclusion h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .conclusion p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--coral);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        footer .footer-credit {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            .cover .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .cover-icon {
+                width: 150px;
+                height: 150px;
+            }
+
+            .intro-content {
+                grid-template-columns: 1fr;
+            }
+
+            .intro, .lessons, .stories, .cross-books {
+                padding: 40px 20px;
+            }
+
+            .lessons h2, .cross-books h2, .key-lessons h2, .stories h2, .ai-connection h2, .conclusion h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== COVER ===== -->
+    <section class="cover">
+        <svg class="cover-decoration decoration-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="white" opacity="0.1"/>
+            <path d="M50 20 L70 80 L30 80 Z" fill="white" opacity="0.1"/>
+        </svg>
+
+        <div class="cover-content">
+            <svg class="cover-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Iris/Eye -->
+                <circle cx="100" cy="100" r="80" fill="white"/>
+                <!-- Pupil -->
+                <circle cx="100" cy="100" r="50" fill="#2D3436"/>
+                <!-- Iris detail -->
+                <circle cx="100" cy="100" r="45" fill="none" stroke="white" stroke-width="2" opacity="0.5"/>
+                <!-- Highlight -->
+                <circle cx="85" cy="85" r="15" fill="white" opacity="0.8"/>
+                <!-- Eyelids -->
+                <path d="M 40 100 Q 100 50 160 100" fill="white"/>
+                <path d="M 40 100 Q 100 150 160 100" fill="white"/>
+                <!-- Lightning bolts for snap judgment -->
+                <g fill="#FF6B6B" opacity="0.9">
+                    <path d="M 120 60 L 130 80 L 115 80 L 135 110 M 125 50 L 135 70 L 120 70 L 140 100"/>
+                    <path d="M 70 110 L 65 135 L 80 120 L 60 150"/>
+                </g>
+            </svg>
+
+            <h1>BLINK</h1>
+            <p class="subtitle">The Power of Thinking Without Thinking</p>
+            <p class="author">By Malcolm Gladwell</p>
+        </div>
+
+        <svg class="cover-decoration decoration-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="20" width="60" height="60" fill="white" opacity="0.1"/>
+            <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="3" opacity="0.1"/>
+        </svg>
+    </section>
+
+    <!-- ===== INTRO ===== -->
+    <div class="container">
+        <section class="intro">
+            <h2>What is Blink?</h2>
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h3>The Art of Making Better Decisions</h3>
+                    <p>Blink reveals the profound power of our unconscious mind to make better decisions than our conscious deliberation. Malcolm Gladwell takes us on a fascinating journey through the science of snap judgment and thin-slice perception.</p>
+                    <p>From art experts immediately detecting a forged statue to psychologist John Gottman predicting divorce in 15 minutes, Gladwell shows that our instincts—when properly trained—are remarkably accurate instruments for understanding the world.</p>
+                    <p>This guide explores the hidden forces that shape our perceptions, the stories that changed our understanding of human decision-making, and how we can harness the power of our adaptive unconscious.</p>
+                </div>
+                <div class="intro-icon">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Thin slice visualization -->
+                        <circle cx="100" cy="100" r="90" fill="none" stroke="#4ECDC4" stroke-width="2" opacity="0.3"/>
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="#A06CD5" stroke-width="2" opacity="0.3"/>
+                        <circle cx="100" cy="100" r="50" fill="none" stroke="#FF6B6B" stroke-width="2" opacity="0.3"/>
+                        <!-- Pie slices -->
+                        <path d="M 100 100 L 100 30 A 70 70 0 0 1 170 100" fill="#FF6B6B" opacity="0.2"/>
+                        <path d="M 100 100 L 170 100 A 70 70 0 0 1 100 170" fill="#4ECDC4" opacity="0.2"/>
+                        <path d="M 100 100 L 100 170 A 70 70 0 0 1 30 100" fill="#A06CD5" opacity="0.2"/>
+                        <!-- Center point -->
+                        <circle cx="100" cy="100" r="8" fill="#2D3436"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== 12 KEY LESSONS ===== -->
+    <section class="lessons">
+        <div class="container">
+            <h2>12 Core Lessons from Blink</h2>
+            <div class="lessons-grid">
+                <!-- Lesson 1 -->
+                <div class="lesson-card lesson-1">
+                    <div class="lesson-number">1</div>
+                    <h3 class="lesson-title">Thin-Slicing</h3>
+                    <p class="lesson-description">The ability to make accurate judgments from very small pieces of experience. Our brain can extract meaningful patterns from minimal data.</p>
+                    <div class="lesson-key-point">⚡ You can assess chemistry, culture fit, or authenticity in seconds—and be right.</div>
+                </div>
+
+                <!-- Lesson 2 -->
+                <div class="lesson-card lesson-2">
+                    <div class="lesson-number">2</div>
+                    <h3 class="lesson-title">The Adaptive Unconscious</h3>
+                    <p class="lesson-description">Your unconscious mind processes vastly more information than your conscious mind. It's a supercomputer running in the background.</p>
+                    <div class="lesson-key-point">🧠 Your gut feelings are often the product of sophisticated, parallel processing.</div>
+                </div>
+
+                <!-- Lesson 3 -->
+                <div class="lesson-card lesson-3">
+                    <div class="lesson-number">3</div>
+                    <h3 class="lesson-title">The Getty Kouros</h3>
+                    <p class="lesson-description">Art experts instantly knew a fake Greek statue was wrong without conscious reasoning. Intuitive expertise trumps analysis.</p>
+                    <div class="lesson-key-point">🎨 When you're trained in a domain, your unconscious detects subtle inconsistencies instantly.</div>
+                </div>
+
+                <!-- Lesson 4 -->
+                <div class="lesson-card lesson-4">
+                    <div class="lesson-number">4</div>
+                    <h3 class="lesson-title">The Locked Door</h3>
+                    <p class="lesson-description">The unconscious mind is often inaccessible—we can't always explain why we know what we know. Some decisions remain opaque even to ourselves.</p>
+                    <div class="lesson-key-point">🔒 Perfect introspection is impossible; trust your gut even when you can't explain it.</div>
+                </div>
+
+                <!-- Lesson 5 -->
+                <div class="lesson-card lesson-5">
+                    <div class="lesson-number">5</div>
+                    <h3 class="lesson-title">Gottman's Marriage Lab</h3>
+                    <p class="lesson-description">Psychologist John Gottman predicts divorce with 90% accuracy by analyzing just 15 minutes of couple interaction. Patterns reveal everything.</p>
+                    <div class="lesson-key-point">💔 Thin-slices of relationship behavior are predictive of long-term outcomes.</div>
+                </div>
+
+                <!-- Lesson 6 -->
+                <div class="lesson-card lesson-6">
+                    <div class="lesson-number">6</div>
+                    <h3 class="lesson-title">The Warren Harding Error</h3>
+                    <p class="lesson-description">We judge people on appearance and superficial traits, sometimes catastrophically. First impressions can be dangerously misleading.</p>
+                    <div class="lesson-key-point">👤 Looking presidential ≠ being presidential. Appearance hijacks judgment.</div>
+                </div>
+
+                <!-- Lesson 7 -->
+                <div class="lesson-card lesson-7">
+                    <div class="lesson-number">7</div>
+                    <h3 class="lesson-title">Priming & Implicit Association</h3>
+                    <p class="lesson-description">Subtle cues unconsciously influence our thoughts and preferences. The IAT (Implicit Association Test) reveals hidden biases we didn't know we had.</p>
+                    <div class="lesson-key-point">🎯 Exposure to certain words/images activates unconscious associations and shapes behavior.</div>
+                </div>
+
+                <!-- Lesson 8 -->
+                <div class="lesson-card lesson-8">
+                    <div class="lesson-number">8</div>
+                    <h3 class="lesson-title">The Pepsi Challenge Paradox</h3>
+                    <p class="lesson-description">People prefer Pepsi in blind taste tests but Coke in branded tests. Context, emotion, and unconscious brand associations trump objective taste.</p>
+                    <div class="lesson-key-point">💙 What we prefer consciously differs from what our senses prefer unconsciously.</div>
+                </div>
+
+                <!-- Lesson 9 -->
+                <div class="lesson-card lesson-9">
+                    <div class="lesson-number">9</div>
+                    <h3 class="lesson-title">Less is More</h3>
+                    <p class="lesson-description">Too much information clutters judgment. More data sometimes leads to worse decisions. Simplicity improves accuracy.</p>
+                    <div class="lesson-key-point">📉 Overwhelming the conscious mind with data impairs the adaptive unconscious.</div>
+                </div>
+
+                <!-- Lesson 10 -->
+                <div class="lesson-card lesson-10">
+                    <div class="lesson-number">10</div>
+                    <h3 class="lesson-title">When Thin-Slicing Fails: Amadou Diallo</h3>
+                    <p class="lesson-description">Four officers fired 41 bullets in 4 seconds on an innocent man based on unconscious bias. Snap judgments can have tragic consequences.</p>
+                    <div class="lesson-key-point">⚠️ Rapid cognition without awareness of bias leads to injustice. Context shapes everything.</div>
+                </div>
+
+                <!-- Lesson 11 -->
+                <div class="lesson-card lesson-11">
+                    <div class="lesson-number">11</div>
+                    <h3 class="lesson-title">Structured Interviews > Unstructured</h3>
+                    <p class="lesson-description">Standardized interview questions with consistent scoring yield better hiring decisions than gut-feeling interviews where bias runs wild.</p>
+                    <div class="lesson-key-point">📋 Structure constraints our unconscious biases and improves decision quality.</div>
+                </div>
+
+                <!-- Lesson 12 -->
+                <div class="lesson-card lesson-12">
+                    <div class="lesson-number">12</div>
+                    <h3 class="lesson-title">The Power of Deliberate Ignorance</h3>
+                    <p class="lesson-description">Sometimes not knowing certain details helps you see clearly. Filtering information can enhance intuitive judgment and reduce cognitive biases.</p>
+                    <div class="lesson-key-point">🙈 Strategic ignorance—knowing what to ignore—is a superpower.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KEY LESSONS WITH STORIES ===== -->
+    <div class="container">
+        <section class="key-lessons">
+            <h2>Signature Stories & Ideas</h2>
+            <div class="key-lessons-grid">
+                <div class="key-lesson-box">
+                    <h3><span class="emoji">🎨</span> The Getty Kouros</h3>
+                    <p>Art experts instantly detected a $10M forgery through intuitive expertise. Their unconscious minds recognized subtle wrongness their conscious minds couldn't articulate.</p>
+                </div>
+                <div class="key-lesson-box">
+                    <h3><span class="emoji">💔</span> Gottman's Divorce Prediction</h3>
+                    <p>In 15 minutes of observation, Gottman predicts divorce with 90% accuracy by reading micro-expressions and tone. Pattern recognition at its finest.</p>
+                </div>
+                <div class="key-lesson-box">
+                    <h3><span class="emoji">🎵</span> Kenna the Musician</h3>
+                    <p>Music executive played 10 songs for producers in 10 seconds. Those who thin-sliced and trusted gut instinct made better picks than those who overthought.</p>
+                </div>
+                <div class="key-lesson-box">
+                    <h3><span class="emoji">🚨</span> The Amadou Diallo Tragedy</h3>
+                    <p>Unconscious racial bias converted a wallet into a gun in split-second perception. Thin-slicing without awareness is dangerous; context is destiny.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== SIGNATURE STORIES ===== -->
+    <section class="stories">
+        <div class="container">
+            <h2>The Stories That Made Blink</h2>
+
+            <div class="story">
+                <h3>🎨 The Getty Kouros: Instant Authenticity Detection</h3>
+                <p>In 1983, the Getty Museum acquired a Greek statue—a kouros—for $9.1 million. It looked perfect. But experts like Thomas Hoving, the former director of the Metropolitan Museum, took one look and said something was wrong. They couldn't immediately explain why, but their unconscious minds had detected subtle errors in proportion, patina, and style that the conscious eye missed.</p>
+                <p>The kouros was indeed a forgery, created in the 1970s. The story perfectly illustrates how trained intuition—thin-slicing—can be more accurate than careful analysis. Experts developed pattern-recognition expertise through years of exposure that their conscious minds couldn't articulate.</p>
+                <div class="punchline">"I don't know how I know, but I know this is fake."</div>
+            </div>
+
+            <div class="story">
+                <h3>💔 Gottman's Marriage Lab: 15 Minutes to Divorce Prediction</h3>
+                <p>Psychologist John Gottman watches couples interact for 15 minutes and predicts with 90% accuracy whether they'll divorce. He doesn't ask relationship questions; he observes micro-expressions, tone of voice, body language, and reaction patterns to conflict.</p>
+                <p>Gottman identified the "Four Horsemen" of relationship apocalypse: criticism, contempt, defensiveness, and stonewalling. By thin-slicing these patterns in brief interactions, he can see the future of a marriage. His work shows that your unconscious mind is constantly pattern-matching—reading signals that your conscious mind ignores.</p>
+                <div class="punchline">Gottman watches couples bicker over dishes and predicts their divorce. Thin-slices reveal everything.</div>
+            </div>
+
+            <div class="story">
+                <h3>🎵 Kenna's Hit Single: The 10-Second Verdict</h3>
+                <p>A music executive played 10 clips of songs—each just 10 seconds long—to producers, asking them to predict which would be a hit. Those who trusted their first instinct and didn't overthink made better predictions than those who deliberated extensively.</p>
+                <p>The unconscious mind can extract the essence of a song in seconds. Once you add deliberation, you start second-guessing and letting bias creep in. Sometimes less thinking is better thinking.</p>
+                <div class="punchline">10 seconds of listening beats 10 minutes of analysis. Your gut knows before your mind does.</div>
+            </div>
+
+            <div class="story">
+                <h3>🚨 Amadou Diallo: When Thin-Slicing Fails Tragically</h3>
+                <p>On February 4, 1999, four plainclothes NYPD officers fired 41 bullets at Amadou Diallo in the Bronx. Diallo was innocent—he had a pager, not a gun. In split-second perception, the officers' unconscious minds converted a harmless object into a weapon. Racial bias, priming, and the fear environment hijacked their adaptive unconscious.</p>
+                <p>This is Blink's dark shadow: thin-slicing without awareness of unconscious bias is dangerous. Context matters. Who you are, where you grew up, and what stereotypes you've internalized all shape your snap judgments—sometimes catastrophically.</p>
+                <div class="punchline">Thin-slicing isn't always right. When unconscious bias enters, it can be deadly.</div>
+            </div>
+        </section>
+    </section>
+
+    <!-- ===== AI CONNECTION ===== -->
+    <section class="ai-connection">
+        <div class="container">
+            <h2>The AI Connection: Blink Meets Machine Learning</h2>
+            <div class="ai-grid">
+                <div class="ai-box">
+                    <h3>⚡ Thin-Slicing ↔ Few-Shot Learning</h3>
+                    <p>Gladwell's thin-slicing is conceptually identical to few-shot learning in AI. Large language models and vision systems learn powerful patterns from small amounts of data, just as humans extract meaning from thin slices of information.</p>
+                    <div class="code-block">// Thin-slice: extract signal from noise
+feature_extraction = compact_representation(data)
+prediction = model(feature_extraction)</div>
+                </div>
+
+                <div class="ai-box">
+                    <h3>🧠 Adaptive Unconscious ↔ Pretrained Representations</h3>
+                    <p>Your unconscious mind is like a pretrained neural network. Years of experience create internal models (representations) that operate without conscious access. Similarly, transformer models develop rich internal representations through training that enable rapid pattern matching.</p>
+                    <div class="code-block">// Pretrained knowledge: learned patterns
+embeddings = transformer(input)
+unconscious_decision = pattern_matcher(embeddings)</div>
+                </div>
+
+                <div class="ai-box">
+                    <h3>🔒 The Locked Door ↔ Uninterpretable Hidden Layers</h3>
+                    <p>Gladwell notes we can't always explain why we know what we know. This mirrors AI interpretability challenges: large neural networks make accurate predictions via hidden layers we can't fully interpret. The "locked door" of consciousness parallels the black box of deep learning.</p>
+                    <div class="code-block">// Opaque reasoning
+output = neural_network(input)
+explanation = "magic" // we don't know why</div>
+                </div>
+
+                <div class="ai-box">
+                    <h3>💔 Gottman's Patterns ↔ Sequence Recognition</h3>
+                    <p>Gottman's ability to predict divorce from behavioral sequences mirrors sequence models (RNNs, Transformers) that learn temporal patterns. Both human intuition and AI excel at reading sequences and predicting outcomes from pattern history.</p>
+                    <div class="code-block">// Sequence learning
+behaviors = [criticism, contempt, defense]
+divorce_likelihood = rnn(sequence(behaviors))</div>
+                </div>
+
+                <div class="ai-box">
+                    <h3>⚖️ Implicit Association Test ↔ Measuring Embedded Bias</h3>
+                    <p>The IAT reveals unconscious biases by measuring reaction times to associated concepts. AI systems similarly embed biases from training data—word embeddings reflect gender/racial associations, and we can measure these biases through semantic similarity just as the IAT does.</p>
+                    <div class="code-block">// Measuring embedded bias
+similarity(doctor, male) > similarity(nurse, male)
+// Model learned stereotypes from data</div>
+                </div>
+
+                <div class="ai-box">
+                    <h3>💙 Pepsi Challenge ↔ Evaluation Methodology Failure</h3>
+                    <p>The Pepsi Challenge shows that objective metrics (taste, accuracy) diverge from real-world preference (brand, context). Similarly, AI models optimized for one metric (accuracy, BLEU score) often fail at real-world tasks. The evaluation methodology shapes the outcome, not reality.</p>
+                    <div class="code-block">// Right metric? Wrong metric?
+blind_test_accuracy = 0.95 // objective
+real_world_preference = 0.45 // contextual</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CROSS-BOOK CONNECTIONS ===== -->
+    <section class="cross-books">
+        <div class="container">
+            <h2>Read Alongside These Books</h2>
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-icon">🧠</div>
+                    <div class="book-title">Thinking, Fast and Slow</div>
+                    <div class="book-author">Daniel Kahneman</div>
+                    <div class="book-connection">Kahneman formalizes the two-system brain that Gladwell intuitively explores. Fast thinking = adaptive unconscious; slow thinking = conscious deliberation.</div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-icon">🔮</div>
+                    <div class="book-title">Incognito</div>
+                    <div class="book-author">David Eagleman</div>
+                    <div class="book-connection">Deep dive into the unconscious brain. While Blink shows what the unconscious can do, Incognito reveals how the brain's hidden machinery actually works at the neural level.</div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-icon">🎯</div>
+                    <div class="book-title">Influence: The Psychology of Persuasion</div>
+                    <div class="book-author">Robert Cialdini</div>
+                    <div class="book-connection">Cialdini explores how unconscious triggers (reciprocity, scarcity, authority) influence decisions. These are the mechanisms behind snap judgments Gladwell describes.</div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-icon">📊</div>
+                    <div class="book-title">Predictably Irrational</div>
+                    <div class="book-author">Dan Ariely</div>
+                    <div class="book-connection">Ariely catalogs the systematic biases and heuristics that undermine rational choice. These explain when and why Blink's thin-slicing leads us astray.</div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-icon">🤫</div>
+                    <div class="book-title">Quiet: The Power of Introverts</div>
+                    <div class="book-author">Susan Cain</div>
+                    <div class="book-connection">Cain argues introverts' reflective nature is an advantage. While Gladwell celebrates snap judgment, Cain balances with the power of deliberation and internal processing.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONCLUSION ===== -->
+    <section class="conclusion">
+        <div class="container">
+            <h2>The Power in Your Snap Judgments</h2>
+            <p>Blink teaches us that our conscious mind is not the star of the show—our adaptive unconscious is. Years of experience, pattern recognition, and subtle cue-reading happen beneath awareness, and they're often right.</p>
+            <p>But the book's darker lesson is equally important: without awareness of bias, context, and the forces shaping our snap judgments, we can be dangerously wrong. The path forward is harnessing intuitive expertise while building structures and awareness to catch our blind spots.</p>
+            <p>In a world of big data and endless analysis, Gladwell reminds us: sometimes your first instinct is your best. Sometimes less is more. And sometimes, the decision that matters most is made in the blink of an eye.</p>
+            <a href="#" class="cta-button">Get the Book</a>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p><strong>Blink: The Power of Thinking Without Thinking</strong></p>
+        <p>By Malcolm Gladwell</p>
+        <p class="footer-credit">Interactive Illustrated Guide | Created with comprehensive analysis of Gladwell's groundbreaking work on intuition and snap judgment</p>
+    </footer>
+</body>
+</html>

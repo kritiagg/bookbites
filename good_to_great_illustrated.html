@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good to Great: Illustrated Guide by Jim Collins</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .book-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* COVER SECTION */
+        .cover-section {
+            background: linear-gradient(135deg, var(--forest) 0%, var(--deep-blue) 50%, var(--dark-purple) 100%);
+            border-radius: 20px;
+            padding: 80px 40px;
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-30px) translateX(20px); }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .book-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+            line-height: 1.1;
+        }
+
+        .book-subtitle {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .book-author {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .cover-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .flywheel-svg {
+            width: 180px;
+            height: 180px;
+            animation: spin 8s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hedgehog-svg {
+            width: 180px;
+            height: 180px;
+            animation: bounce 3s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .bus-svg {
+            width: 200px;
+            height: 120px;
+            animation: slide 4s ease-in-out infinite;
+        }
+
+        @keyframes slide {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+        }
+
+        /* LESSONS GRID */
+        .lessons-section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8em;
+            margin-bottom: 50px;
+            text-align: center;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--forest), var(--deep-blue), var(--purple));
+            border-radius: 2px;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            border-left: 5px solid var(--forest);
+            cursor: pointer;
+            transform: translateY(0);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .lesson-card.teal { border-left-color: var(--teal); }
+        .lesson-card.sunny { border-left-color: var(--sunny); }
+        .lesson-card.purple { border-left-color: var(--purple); }
+        .lesson-card.sky { border-left-color: var(--sky); }
+        .lesson-card.mint { border-left-color: var(--mint); }
+        .lesson-card.pink { border-left-color: var(--pink); }
+        .lesson-card.orange { border-left-color: var(--orange); }
+        .lesson-card.coral { border-left-color: var(--coral); }
+        .lesson-card.warm-red { border-left-color: var(--warm-red); }
+        .lesson-card.cream { border-left-color: var(--cream); }
+        .lesson-card.deep-blue { border-left-color: var(--deep-blue); }
+
+        .lesson-header {
+            padding: 30px 25px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: var(--forest);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+        }
+
+        .lesson-card.teal .lesson-number { background: var(--teal); }
+        .lesson-card.sunny .lesson-number { background: var(--sunny); color: var(--dark); }
+        .lesson-card.purple .lesson-number { background: var(--purple); }
+        .lesson-card.sky .lesson-number { background: var(--sky); }
+        .lesson-card.mint .lesson-number { background: var(--mint); color: var(--dark); }
+        .lesson-card.pink .lesson-number { background: var(--pink); }
+        .lesson-card.orange .lesson-number { background: var(--orange); color: var(--dark); }
+        .lesson-card.coral .lesson-number { background: var(--coral); }
+        .lesson-card.warm-red .lesson-number { background: var(--warm-red); }
+        .lesson-card.cream .lesson-number { background: var(--cream); color: var(--dark); }
+        .lesson-card.deep-blue .lesson-number { background: var(--deep-blue); }
+
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .lesson-subtitle {
+            font-size: 0.9em;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .lesson-body {
+            padding: 25px;
+        }
+
+        .lesson-description {
+            margin-bottom: 16px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .key-point {
+            background: #f0f8ff;
+            padding: 12px 15px;
+            border-left: 3px solid var(--deep-blue);
+            margin-bottom: 14px;
+            border-radius: 4px;
+            font-size: 0.95em;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .company-example {
+            background: #fef5e7;
+            padding: 12px 15px;
+            border-left: 3px solid var(--orange);
+            margin-bottom: 14px;
+            border-radius: 4px;
+            font-size: 0.95em;
+            color: #333;
+        }
+
+        .company-name {
+            font-weight: 700;
+            color: var(--warm-red);
+        }
+
+        .ai-connection {
+            background: #f3e5f5;
+            padding: 12px 15px;
+            border-left: 3px solid var(--purple);
+            margin-top: 14px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #333;
+            font-style: italic;
+        }
+
+        .funny-take {
+            background: #fff3e0;
+            padding: 12px 15px;
+            border-left: 3px solid var(--sunny);
+            margin-top: 14px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* DEEP DIVE SECTIONS */
+        .deep-dive {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .deep-dive-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: var(--dark);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .deep-dive-title::before {
+            content: '';
+            width: 6px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--forest), var(--deep-blue));
+            border-radius: 3px;
+        }
+
+        .deep-dive-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .deep-dive-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .deep-dive-text h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: var(--forest);
+        }
+
+        .deep-dive-text p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--sunny) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid var(--orange);
+        }
+
+        .highlight-box strong {
+            color: var(--warm-red);
+        }
+
+        /* VISUAL ELEMENTS */
+        .visual-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .level-5-pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .pyramid-level {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            color: white;
+            font-size: 0.9em;
+            text-align: center;
+            padding: 12px;
+            border-radius: 4px;
+            min-width: 200px;
+        }
+
+        .pyramid-l5 {
+            background: var(--dark);
+            width: 250px;
+        }
+
+        .pyramid-l4 {
+            background: var(--deep-blue);
+            width: 220px;
+        }
+
+        .pyramid-l3 {
+            background: var(--forest);
+            width: 190px;
+        }
+
+        .pyramid-l2 {
+            background: var(--teal);
+            width: 160px;
+        }
+
+        .pyramid-l1 {
+            background: var(--sunny);
+            color: var(--dark);
+            width: 130px;
+        }
+
+        /* CROSS-BOOK CONNECTIONS */
+        .connections-section {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8f0ff 100%);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 60px;
+        }
+
+        .connections-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: var(--dark);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .connections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .connection-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border-top: 4px solid var(--deep-blue);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .connection-card h3 {
+            color: var(--forest);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .connection-card p {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* COMPARISON TABLE */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(90deg, var(--forest), var(--deep-blue));
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:hover {
+            background: #f9fafb;
+        }
+
+        .success { color: var(--forest); font-weight: 600; }
+        .failure { color: var(--coral); font-weight: 600; }
+        .mixed { color: var(--orange); font-weight: 600; }
+
+        /* FOOTER */
+        .footer-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-purple) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .footer-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .book-title {
+                font-size: 2.2em;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .deep-dive-title {
+                font-size: 1.7em;
+            }
+
+            .cover-section {
+                padding: 50px 25px;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <!-- COVER SECTION -->
+        <section class="cover-section">
+            <div class="cover-content">
+                <h1 class="book-title">Good to Great</h1>
+                <p class="book-subtitle">Why Some Companies Make the Leap and Others Don't</p>
+                <p class="book-author">by Jim Collins</p>
+
+                <div class="cover-visual">
+                    <!-- Flywheel SVG -->
+                    <svg class="flywheel-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="90" fill="none" stroke="white" stroke-width="2" opacity="0.3"/>
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="white" stroke-width="2" opacity="0.5"/>
+                        <circle cx="100" cy="100" r="50" fill="none" stroke="white" stroke-width="3"/>
+
+                        <!-- Flywheel segments -->
+                        <g id="wheel">
+                            <path d="M 100 100 L 150 80 A 50 50 0 0 1 120 150 Z" fill="#FFE66D" opacity="0.8"/>
+                            <path d="M 100 100 L 50 80 A 50 50 0 0 0 80 150 Z" fill="#FF6B6B" opacity="0.8"/>
+                            <path d="M 100 100 L 130 40 A 50 50 0 0 1 170 100 Z" fill="#55EFC4" opacity="0.8"/>
+                            <path d="M 100 100 L 70 40 A 50 50 0 0 0 30 100 Z" fill="#4ECDC4" opacity="0.8"/>
+                            <path d="M 100 100 L 150 120 A 50 50 0 0 1 100 160 Z" fill="#A06CD5" opacity="0.8"/>
+                            <path d="M 100 100 L 50 120 A 50 50 0 0 0 100 160 Z" fill="#74B9FF" opacity="0.8"/>
+                        </g>
+
+                        <!-- Center hub -->
+                        <circle cx="100" cy="100" r="15" fill="white"/>
+                        <text x="100" y="107" font-size="10" font-weight="bold" text-anchor="middle" fill="#2D3436">FW</text>
+                    </svg>
+
+                    <!-- Hedgehog SVG -->
+                    <svg class="hedgehog-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Body -->
+                        <ellipse cx="100" cy="120" rx="50" ry="45" fill="#55EFC4"/>
+                        <!-- Head -->
+                        <circle cx="100" cy="70" r="35" fill="#55EFC4"/>
+                        <!-- Ears -->
+                        <circle cx="80" cy="45" r="12" fill="#55EFC4"/>
+                        <circle cx="120" cy="45" r="12" fill="#55EFC4"/>
+                        <!-- Eyes -->
+                        <circle cx="90" cy="65" r="5" fill="#2D3436"/>
+                        <circle cx="110" cy="65" r="5" fill="#2D3436"/>
+                        <!-- Nose -->
+                        <circle cx="100" cy="80" r="4" fill="#FF6B6B"/>
+                        <!-- Spines -->
+                        <line x1="70" y1="45" x2="50" y2="20" stroke="#FFE66D" stroke-width="8" stroke-linecap="round"/>
+                        <line x1="85" y1="35" x2="70" y2="5" stroke="#FF6B6B" stroke-width="8" stroke-linecap="round"/>
+                        <line x1="100" y1="32" x2="100" y2="0" stroke="#FD79A8" stroke-width="8" stroke-linecap="round"/>
+                        <line x1="115" y1="35" x2="130" y2="5" stroke="#A06CD5" stroke-width="8" stroke-linecap="round"/>
+                        <line x1="130" y1="45" x2="150" y2="20" stroke="#74B9FF" stroke-width="8" stroke-linecap="round"/>
+                    </svg>
+
+                    <!-- Bus SVG -->
+                    <svg class="bus-svg" viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Bus body -->
+                        <rect x="20" y="60" width="260" height="80" rx="10" fill="#0984E3"/>
+                        <!-- Windows -->
+                        <rect x="35" y="70" width="35" height="30" rx="3" fill="#74B9FF"/>
+                        <rect x="80" y="70" width="35" height="30" rx="3" fill="#74B9FF"/>
+                        <rect x="125" y="70" width="35" height="30" rx="3" fill="#74B9FF"/>
+                        <rect x="170" y="70" width="35" height="30" rx="3" fill="#74B9FF"/>
+                        <rect x="215" y="70" width="35" height="30" rx="3" fill="#74B9FF"/>
+                        <!-- Door -->
+                        <rect x="260" y="75" width="15" height="50" rx="2" fill="#00B894"/>
+                        <!-- Wheels -->
+                        <circle cx="60" cy="150" r="15" fill="#2D3436"/>
+                        <circle cx="240" cy="150" r="15" fill="#2D3436"/>
+                        <!-- Hubcaps -->
+                        <circle cx="60" cy="150" r="8" fill="#FFE66D"/>
+                        <circle cx="240" cy="150" r="8" fill="#FFE66D"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE 12 KEY LESSONS -->
+        <section class="lessons-section">
+            <h2 class="section-title">The 12 Core Lessons</h2>
+
+            <div class="lessons-grid">
+                <!-- Lesson 1 -->
+                <div class="lesson-card forest">
+                    <div class="lesson-header">
+                        <div class="lesson-number">1</div>
+                        <h3 class="lesson-title">Level 5 Leadership</h3>
+                        <p class="lesson-subtitle">Humility + Fierce Resolve</p>
+                    </div>
+                    <div class="lesson-body">
+                        <p class="lesson-description">
+                            The rarest form of leadership combines extreme personal humility with an indomitable will to succeed. Level 5 leaders give credit to others and blame themselves, yet drive the company to greatness through sheer determination.
+                        </p>
+                        <div class="key-point">
+                            <strong>Darwin Smith (Kimberly-Clark):</strong> Overlooked successor who quietly transformed a paper company into a consumer goods giant, never seeking personal accolades.
+                        </div>
+                        <div class="company-example">
+                            <span class="company-name">Kimberly-Clark:</span> Went from coated paper to world-leading personal hygiene products. Smith's humility masked an iron will.
+                        </div>
+                        <div class="ai-connection">
+                            <strong>AI Connection:</strong> Alignment without ego — the best AI systems (like those trained with RLHF) improve through humble feedback loops and relentless optimization toward distant goals.
+                        </div>
+                        <div class="funny-take">
+                            <strong>Funny Take:</strong> Level 5 leaders would never post their wins on LinkedIn. They'd just make the company 10x better while everyone wonders who's behind the curtain.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 2 -->
+                <div class="lesson-card teal">
+                    <div class="lesson-header">
+                        <div class="lesson-number">2</div>
+                        <h3 class="lesson-title">First Who, Then What</h3>
+                        <p class="lesson-subtitle">Get the Right People on the Bus</p>
+                    </div>
+                    <div class="lesson-body">
+                        <p class="lesson-description">
+                            Great companies don't start by figuring out where to go. They start by getting the right people on the bus (and the wrong people off). The "who" precedes the "what."
+                        </p>
+                        <div class="key-point">
+                            <strong>Core Insight:</strong> If you have the right people, they'll figure out the strategy. If you have the wrong people, no strategy will save you.
+                        </div>
+                        <div class="company-example">
+                            <span class="company-name">Walgreens:</span> Focused on hiring people who embodied the culture of customer-centric excellence. Strategy followed naturally.
+                        </div>
+                        <div class="ai-connection">
+                            <strong>AI Connection:</strong> Team composition > architecture. The best ML teams have strong people who can iterate and improve models. Architecture matters less than talent.
+                        </div>
+                        <div class="funny-take">
+                            <strong>Funny Take:</strong> "Hire slowly, fire fast" is Silicon Valley's version of this. Collins says you need people who are not just competent but aligned with your core mission.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 3 -->
+                <div class="lesson-card sunny">
+                    <div class="lesson-header">
+                        <div class="lesson-number">3</div>
+                        <h3 class="lesson-title">The Hedgehog Concept</h3>
+                        <p class="lesson-subtitle">Focus on Your Core</p>
+                    </div>
+                    <div class="lesson-body">
+                        <p class="lesson-description">
+                            Great companies understand the intersection of three circles: what you're deeply passionate about, what you can be the best in the world at, and what drives your economic engine. Simplicity on the far side of complexity.
+                        </p>
+                        <div class="key-point">
+                            <strong>The Three Circles:</strong> Passion × Competence × Economics = Your hedgehog concept (singular, clear, compelling direction).
+                        </div>
+                        <div class="company-example">
+                            <span class="company-name">Wells Fargo:</span> Became great by focusing on "community banking." Everything flowed from this simple, unifying concept.
+                        </div>
+                        <div class="ai-connection">
+                            <strong>AI Connection:</strong> Finding your AI niche is like finding your hedgehog concept. Don't try to be best at everything—specialize. Strong vertical expertise beats shallow horizontal coverage.
+                        </div>
+                        <div class="funny-take">
+                            <strong>Funny Take:</strong> A hedgehog doesn't try to run like a cheetah or climb like a squirrel. It curls into a ball. Know your defensive specialization and own it completely.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 4 -->
+                <div class="lesson-card purple">
+                    <div class="lesson-header">
+                        <div class="lesson-number">4</div>
+                        <h3 class="lesson-title">The Flywheel Effect</h3>
+                        <p class="lesson-subtitle">Momentum from Cumulative Effort</p>
+                    </div>
+                    <div class="lesson-body">
+                        <p class="lesson-description">
+                            Good-to-great companies build momentum through a series of consistent decisions that push the flywheel incrementally. Each push compounds the next. No silver bullets; instead, massive momentum from small, focused actions.
+                        </p>
+                        <div class="key-point">
+                            <strong>The Sequence Matters:</strong> Build disciplined action → measure results → reinforce what works → repeat. The flywheel accelerates gradually, then explosively.
+                        </div>
+                        <div class="company-example">
+                            <span class="company-name">Nucor Steel:</span> Incremental improvements in production efficiency, coupled with a culture of responsibility, created unstoppable momentum in a commodity business.
+                        </div>
+                        <div class="ai-connection">
+                            <strong>AI Connection:</strong> The flywheel is how you get compounding gains in AI training: data collection → model improvement → better predictions → more training examples. Each iteration accelerates the next.
+                        </div>
+                        <div class="funny-take">
+                            <strong>Funny Take:</strong> It's the opposite of a hockey stick. You push, push, push for years with nothing happening, then suddenly you're doing a 360-degree loop. The magic is in the patience.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 5 -->
+                <div class="lesson-card mint">
+                    <div class="lesson-header">
+                        <div class="lesson-number">5</div>
+                        <h3 class="lesson-title">Confront the Brutal Facts</h3>
+                        <p class="lesson-subtitle">The Stockdale Paradox</p>
+                    </div>
+                    <div class="lesson-body">
+                        <p class="lesson-description">
+                            Confront the most brutal facts of your current reality while maintaining unwavering faith that you will ultimately prevail. This paradox—brutal honesty + relentless optimism—separates great from mediocre.
+                        </p>
+                        <div class="key-point">
+                            <strong>Stockdale Paradox:</strong> Named after Admiral James Stockdale (Vietnam POW). Never lose faith that you'll survive AND confront the worst reality. Both are essential.
+                        </div>
+                        <div class="company-example">
+                            <span class="company-name">Circuit City:</span> Failed because they ignored brutal facts about competition while remaining complacent. Good-to-great companies face reality head-on.
+                        </div>
+                        <div class="ai-connection">
+                            <strong>AI Connection:</strong> Optimistic loss curves in deep learning. You face brutal facts (the model sucks today) while maintaining faith (it'll improve with more data and iterations). Both mindsets drive progress.
+                        </div>
+                        <div class="funny-take">
+                            <strong>Funny Take:</strong> It's not "think positive." It's "think ruthlessly honest, but act with relentless determination." You need both the pessimist's eye and the entrepreneur's heart.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 6 -->
+                <div class="lesson-card sky">
+                    <div class="lesson-header">
+                        <div class="lesson-number">6</div>
+                        <h3 class="lesson-title">The Culture of Discipline</h3>
+                        <p class="lesson-subtitle">Disciplined People, Thought & Action</p>
+                    </div>
+                    <div class="lesson-body">
+                        <p class="lesson-description">
+                            Greatness comes not from imposing constraints through bureaucracy, but through building a culture where disciplined people engage in disciplined thinking and disciplined action without being told.
+                        </p>
+                        <div class="key-point">
+                            <strong>Three Elements:</strong> Disciplined people (who self-reinforce standards) → disciplined thought (rigorous analysis) → disciplined action (aligned execution).
+                        </div>
+                        <div class="company-example">
+                            <span class="company-name">Gillette:</span> Built a culture where everyone understood quality standards and owned excellence. Discipline became organic, not imposed.
+                        </div>
+                        <div class="ai-connection">
+                            <strong>AI Connection:</strong> Consistent training regimen beats chaotic experimentation. Discipline in data labeling, validation, and iteration compounds into superior models. The culture matters as much as the technique.
+                        </div>
+                        <div class="funny-take">
+                            <strong>Funny Take:</strong> Rule-based companies need 100 rules. Discipline-based companies need none. If people truly understand the standard, they enforce it themselves.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 7 -->
+                <div class="lesson-card pink">
+                    <div class="lesson-header">
+                        <div class="lesson-number">7</div>
+                        <h3 class="lesson-title">Technology Accelerators</h3>
+                        <p class="lesson-subtitle">Not Creators of Strategy</p>
+                    </div>
+                    <div class="lesson-body">
+                        <p class="lesson-description">
+                            Good-to-great companies view technology as an accelerator, not a driver of strategy. Technology amplifies what you do well; it doesn't create your hedgehog or replace leadership.
+                        </p>
+                        <div class="key-point">
+                            <strong>Key Principle:</strong> If you don't have a clear strategy, new technology will just amplify your confusion faster.
+                        </div>
+                        <div class="company-example">
+                            <span class="company-name">Fannie Mae:</span> Eventually failed despite investing heavily in technology, because the core strategy was flawed. Tech can't fix a broken foundation.
+                        </div>
+                        <div class="ai-connection">
+                            <strong>AI Connection:</strong> Modern AI is a tool, not a strategy. Companies that chase AI hype without understanding their hedgehog concept will fail. AI accelerates what works; it doesn't create what works.
+                        </div>
+                        <div class="funny-take">
+                            <strong>Funny Take:</strong> "We'll pivot to AI!" is the new "We'll go mobile!" A decade ago. Great companies use AI to accelerate their hedgehog, not to replace thinking.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 8 -->
+                <div class="lesson-card orange">
+                    <div class="lesson-header">
+                        <div class="lesson-number">8</div>
+                        <h3 class="lesson-title">The Doom Loop</h3>
+                        <p class="lesson-subtitle">How Comparison Companies Fail</p>
+                    </div>
+                    <div class="lesson-body">
+                        <p class="lesson-description">
+                            Failed companies cycle through a predictable pattern: new leader with a bold vision → dramatic action → mediocre results → new leader → repeat. This doom loop prevents disciplined focus.
+                        </p>
+                        <div class="key-point">
+                            <strong>The Cycle:</strong> Charismatic leader chases silver bullet → chaos → short-term results → crisis → new leader → repeat. Never gaining momentum.
+                        </div>
+                        <div class="company-example">
+                            <span class="company-name">Circuit City:</span> Cycled through strategy after strategy without the discipline to execute any single hedgehog. The doom loop killed momentum.
+                        </div>
+                        <div class="ai-connection">
+                            <strong>AI Connection:</strong> Companies that change architecture every quarter are in a doom loop. Consistent investment + patient iteration > constant pivoting. Discipline beats novelty-seeking.
+                        </div>
+                        <div class="funny-take">
+                            <strong>Funny Take:</strong> "New leader, new strategy" is exciting in a press release. It's devastating to a company. The greatest leaders aren't the ones chasing the next big thing—they're the ones patient enough to see the current thing through.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 9 -->
+                <div class="lesson-card coral">
+                    <div class="lesson-header">
+                        <div class="lesson-number">9</div>
+                        <h3 class="lesson-title">The 20 Mile March</h3>
+                        <p class="lesson-subtitle">Consistency Over Cycles</p>
+                    </div>
+                    <div class="lesson-body">
+                        <p class="lesson-description">
+                            Great companies set and meet consistent milestones regardless of external conditions. They march 20 miles a day—no more, no less. This predictable progress compounds more than sporadic bursts.
+                        </p>
+                        <div class="key-point">
+                            <strong>The Discipline:</strong> Commit to a measurable target, hit it in good times and bad, and watch compounding momentum build. It's not exciting; it's relentless.
+                        </div>
+                        <div class="company-example">
+                            <span class="company-name">Wells Fargo:</span> Set and hit consistent growth targets through market booms and busts. The discipline created trust and momentum.
+                        </div>
+                        <div class="ai-connection">
+                            <strong>AI Connection:</strong> The 20-mile march is consistent training. A little bit of improvement every day beats sporadic leaps. Compound learning > breakthrough moments. Discipline > luck.
+                        </div>
+                        <div class="funny-take">
+                            <strong>Funny Take:</strong> Boring is beautiful. Boring companies that march 20 miles a day beat exciting companies that sprint, then collapse. Consistency is the least celebrated form of genius.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 10 -->
+                <div class="lesson-card warm-red">
+                    <div class="lesson-header">
+                        <div class="lesson-number">10</div>
+                        <h3 class="lesson-title">Clock Building vs Time Telling</h3>
+                        <p class="lesson-subtitle">Building Systems That Outlast You</p>
+                    </div>
+                    <div class="lesson-body">
+                        <p class="lesson-description">
+                            Time tellers are charismatic leaders who get results through force of personality. Clock builders create systems and cultures that generate greatness without them. Great companies are clocks, not time tellers.
+                        </p>
+                        <div class="key-point">
+                            <strong>The Difference:</strong> Time teller: company succeeds when leader is present. Clock builder: company succeeds because systems work, whether leader is there or not.
+                        </div>
+                        <div class="company-example">
+                            <span class="company-name">Kimberly-Clark (Darwin Smith):</span> Built a clock so strong that the company continued to thrive after his departure. Legacy was the system, not the man.
+                        </div>
+                        <div class="ai-connection">
+                            <strong>AI Connection:</strong> Building systems (pipelines, data infrastructure, training loops) beats hiring a "unicorn" AI engineer. Systems compound; individuals plateau. Build the clock.
+                        </div>
+                        <div class="funny-take">
+                            <strong>Funny Take:</strong> CEOs who say "the company is unthinkable without me" are time tellers. CEOs who say "I'm trying to make myself obsolete" are clock builders. Guess which ones build lasting empires?
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 11 -->
+                <div class="lesson-card cream">
+                    <div class="lesson-header">
+                        <div class="lesson-number">11</div>
+                        <h3 class="lesson-title">The Role of Luck</h3>
+                        <p class="lesson-subtitle">Return on Luck</p>
+                    </div>
+                    <div class="lesson-body">
+                        <p class="lesson-description">
+                            Good luck and bad luck happen to every company equally. What matters is your "return on luck"—how you respond to random events. Great companies convert luck into compounding advantage.
+                        </p>
+                        <div class="key-point">
+                            <strong>Key Insight:</strong> You can't control luck, but you can control your preparation. The prepared company gets more value from the same random event.
+                        </div>
+                        <div class="company-example">
+                            <span class="company-name">Nucor Steel:</span> When Korean steel dumped into the U.S. market, Nucor's culture of efficiency allowed them to thrive. Same event; different return on luck.
+                        </div>
+                        <div class="ai-connection">
+                            <strong>AI Connection:</strong> Luck accelerates well-structured teams. Random breakthroughs (new papers, new hardware) matter, but only if your team is prepared to capitalize. Preparation = return on luck.
+                        </div>
+                        <div class="funny-take">
+                            <strong>Funny Take:</strong> "We got lucky" is an excuse. "We were positioned to capitalize on luck" is a strategy. Great companies prepare for luck they don't yet know about.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 12 -->
+                <div class="lesson-card deep-blue">
+                    <div class="lesson-header">
+                        <div class="lesson-number">12</div>
+                        <h3 class="lesson-title">Good Is the Enemy of Great</h3>
+                        <p class="lesson-subtitle">The Complacency Trap</p>
+                    </div>
+                    <div class="lesson-body">
+                        <p class="lesson-description">
+                            This is the ultimate lesson. Most companies are "good enough." The pressure to become great is low because the pain of being merely good is manageable. Greatness requires obsession.
+                        </p>
+                        <div class="key-point">
+                            <strong>The Trap:</strong> If you're doing well enough, you have no urgency to do better. The comfortable ceiling is the greatest enemy of the ambitious future.
+                        </div>
+                        <div class="company-example">
+                            <span class="company-name">Circuit City:</span> Was "good" in the 1980s, so there was no hunger to fundamentally reinvent. Best Buy had that hunger. Best Buy won.
+                        </div>
+                        <div class="ai-connection">
+                            <strong>AI Connection:</strong> A model that's 85% accurate feels "good." But the obsession with 95% is what separates commodity from moat. Good enough = stagnant. Greatness requires discomfort.
+                        </div>
+                        <div class="funny-take">
+                            <strong>Funny Take:</strong> "Good to Great" is kind of a depressing title because it implies most of us will be "good" and accept it. The real title should be "Obsessed to Great: Why Comfort Is Your Biggest Enemy."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEEP DIVE: THE FLYWHEEL IN DETAIL -->
+        <section class="deep-dive">
+            <h2 class="deep-dive-title">The Flywheel: Deep Dive</h2>
+            <div class="deep-dive-content">
+                <div class="deep-dive-text">
+                    <h3>From Good to Great Companies</h3>
+                    <p>
+                        The flywheel effect is perhaps the most powerful concept in Collins' framework. Unlike a doom loop (which spirals downward), the flywheel spirals upward through disciplined, cumulative action.
+                    </p>
+                    <p>
+                        Each small improvement compounds the next. For example: hire better people → improve execution → deliver better results → attract better customers → reinvest → hire even better people. The momentum accelerates exponentially over time.
+                    </p>
+                    <div class="highlight-box">
+                        <strong>Key Insight:</strong> The flywheel is invisible for the first 18-24 months. Then it becomes unstoppable. Most companies quit before they see compounding returns.
+                    </div>
+                    <h3>Why Flywheels Succeed</h3>
+                    <p>
+                        Flywheels succeed because they align internal and external incentives. Every stakeholder (employees, customers, investors) benefits from the same direction. There are no conflicts; only reinforcement.
+                    </p>
+                    <p>
+                        The flywheel doesn't require heroic effort once it's spinning. A 5% improvement in execution, repeated 100 times, becomes transformational. Most leaders abandon after one spin because it feels like failure.
+                    </p>
+                </div>
+                <div class="visual-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="width: 250px; height: 250px;">
+                        <!-- Outer circle -->
+                        <circle cx="150" cy="150" r="120" fill="none" stroke="#2D3436" stroke-width="2"/>
+
+                        <!-- Flywheel segments with labels -->
+                        <g id="segment1">
+                            <path d="M 150 30 A 120 120 0 0 1 234.85 54.23 L 199.57 92.6 A 80 80 0 0 0 150 70 Z" fill="#00B894" opacity="0.7"/>
+                            <text x="200" y="50" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Right</text>
+                            <text x="200" y="65" font-size="12" font-weight="bold" fill="white" text-anchor="middle">People</text>
+                        </g>
+
+                        <g id="segment2">
+                            <path d="M 234.85 54.23 A 120 120 0 0 1 270 150 L 230 150 A 80 80 0 0 0 199.57 92.6 Z" fill="#0984E3" opacity="0.7"/>
+                            <text x="250" y="110" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Better</text>
+                            <text x="250" y="125" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Results</text>
+                        </g>
+
+                        <g id="segment3">
+                            <path d="M 270 150 A 120 120 0 0 1 234.85 245.77 L 199.57 207.4 A 80 80 0 0 0 230 150 Z" fill="#6C5CE7" opacity="0.7"/>
+                            <text x="250" y="200" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Customer</text>
+                            <text x="250" y="215" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Loyalty</text>
+                        </g>
+
+                        <g id="segment4">
+                            <path d="M 234.85 245.77 A 120 120 0 0 1 150 270 L 150 230 A 80 80 0 0 0 199.57 207.4 Z" fill="#A06CD5" opacity="0.7"/>
+                            <text x="190" y="250" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Investment</text>
+                            <text x="190" y="265" font-size="12" font-weight="bold" fill="white" text-anchor="middle">in Growth</text>
+                        </g>
+
+                        <g id="segment5">
+                            <path d="M 150 270 A 120 120 0 0 1 65.15 245.77 L 100.43 207.4 A 80 80 0 0 0 150 230 Z" fill="#FF6B6B" opacity="0.7"/>
+                            <text x="100" y="250" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Disciplined</text>
+                            <text x="100" y="265" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Action</text>
+                        </g>
+
+                        <g id="segment6">
+                            <path d="M 65.15 245.77 A 120 120 0 0 1 30 150 L 70 150 A 80 80 0 0 0 100.43 207.4 Z" fill="#FFE66D" opacity="0.7"/>
+                            <text x="40" y="200" font-size="12" font-weight="bold" fill="#2D3436" text-anchor="middle">Attract</text>
+                            <text x="40" y="215" font-size="12" font-weight="bold" fill="#2D3436" text-anchor="middle">Talent</text>
+                        </g>
+
+                        <g id="segment7">
+                            <path d="M 30 150 A 120 120 0 0 1 65.15 54.23 L 100.43 92.6 A 80 80 0 0 0 70 150 Z" fill="#4ECDC4" opacity="0.7"/>
+                            <text x="40" y="100" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Hedgehog</text>
+                            <text x="40" y="115" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Focus</text>
+                        </g>
+
+                        <!-- Center hub -->
+                        <circle cx="150" cy="150" r="30" fill="#2D3436"/>
+                        <text x="150" y="155" font-size="14" font-weight="bold" fill="white" text-anchor="middle">MOMENTUM</text>
+
+                        <!-- Arrows showing rotation -->
+                        <g opacity="0.6">
+                            <path d="M 220 40 L 235 55" stroke="#FF6B6B" stroke-width="3" fill="none" stroke-linecap="round"/>
+                            <polygon points="235,55 245,48 240,60" fill="#FF6B6B"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEEP DIVE: LEVEL 5 LEADERSHIP PYRAMID -->
+        <section class="deep-dive">
+            <h2 class="deep-dive-title">Level 5 Leadership Pyramid</h2>
+            <div class="deep-dive-content">
+                <div class="visual-container">
+                    <div class="level-5-pyramid">
+                        <div class="pyramid-l5 pyramid-level">
+                            <strong>Level 5:</strong> Executive Leader<br/><small>(Humility + Fierce Resolve)</small>
+                        </div>
+                        <div class="pyramid-l4 pyramid-level">
+                            <strong>Level 4:</strong> Effective Leader<br/><small>(Catalyzes commitment to clear vision)</small>
+                        </div>
+                        <div class="pyramid-l3 pyramid-level">
+                            <strong>Level 3:</strong> Competent Manager<br/><small>(Organizes people for objectives)</small>
+                        </div>
+                        <div class="pyramid-l2 pyramid-level">
+                            <strong>Level 2:</strong> Contributing Team Member<br/><small>(Works effectively with others)</small>
+                        </div>
+                        <div class="pyramid-l1 pyramid-level">
+                            <strong>Level 1:</strong> Highly Capable Individual<br/><small>(Makes productive contributions)</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="deep-dive-text">
+                    <h3>Understanding Level 5</h3>
+                    <p>
+                        Level 5 leadership is rare because it requires two seemingly contradictory traits: personal humility and an indomitable will to create greatness. These leaders are reluctant celebrities—they'd rather the company succeed than receive personal credit.
+                    </p>
+                    <p>
+                        Darwin Smith at Kimberly-Clark exemplified this. He was passed over as the "obvious" successor, yet quietly transformed the company into a consumer goods powerhouse. He gave credit to others, blamed himself for failures, and maintained an iron determination to win. That's Level 5.
+                    </p>
+                    <div class="highlight-box">
+                        <strong>The Paradox:</strong> The leaders who seem least ambitious about personal advancement are the ones who build the greatest legacies. They're ambitious for the company, indifferent to personal acclaim.
+                    </div>
+                    <h3>Why It Matters</h3>
+                    <p>
+                        Level 5 leaders build clocks (systems), not time-telling personalities. They focus on getting the right people, understanding the hedgehog concept, and establishing discipline. Once those are in place, greatness follows. The leader becomes almost invisible because the system is so strong.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPANY COMPARISON TABLE -->
+        <section class="deep-dive">
+            <h2 class="deep-dive-title">The Companies: Success & Failure</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Industry</th>
+                        <th>Status</th>
+                        <th>Key Success Factor</th>
+                        <th>Current Status (2026)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Kimberly-Clark</strong></td>
+                        <td>Consumer Products</td>
+                        <td><span class="success">✓ Great</span></td>
+                        <td>Level 5 leadership (Darwin Smith); hedgehog focus on personal hygiene</td>
+                        <td>Still thriving as consumer staple leader</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Walgreens</strong></td>
+                        <td>Retail Pharmacy</td>
+                        <td><span class="success">✓ Great</span></td>
+                        <td>Customer-centric culture; disciplined expansion</td>
+                        <td>Facing challenges from Amazon/digital, but still major player</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Wells Fargo</strong></td>
+                        <td>Banking</td>
+                        <td><span class="success">✓ Great (initially)</span></td>
+                        <td>Community banking hedgehog; consistent 20-mile marches</td>
+                        <td><span class="failure">⚠ Collapsed 2016+ (scandal)</span> — A cautionary tale</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nucor Steel</strong></td>
+                        <td>Steel Manufacturing</td>
+                        <td><span class="success">✓ Great</span></td>
+                        <td>Mini-mill hedgehog; culture of responsibility and efficiency</td>
+                        <td>Still leading in steel, adapting to decarbonization</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Circuit City</strong></td>
+                        <td>Consumer Electronics</td>
+                        <td><span class="failure">✗ Failed</span></td>
+                        <td>None—doom loop prevented focus</td>
+                        <td><span class="failure">Bankruptcy 2009</span> — Outpaced by Best Buy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gillette</strong></td>
+                        <td>Consumer Products</td>
+                        <td><span class="success">✓ Great</span></td>
+                        <td>Hedgehog on men's grooming; disciplined innovation</td>
+                        <td><span class="mixed">Mixed</span> — Part of Procter & Gamble, facing subscription disruption</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fannie Mae</strong></td>
+                        <td>Mortgage Finance</td>
+                        <td><span class="failure">✗ Failed</span></td>
+                        <td>Technology investments couldn't overcome flawed strategy</td>
+                        <td><span class="failure">2008 financial crisis</span> — Government conservatorship</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best Buy</strong></td>
+                        <td>Consumer Electronics</td>
+                        <td><span class="success">✓ Great</span></td>
+                        <td>Customer-centric (Geek Squad); hedgehog on service</td>
+                        <td><span class="mixed">Stable</span> — Defending against Amazon; surviving, not thriving</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- CROSS-BOOK CONNECTIONS -->
+        <section class="connections-section">
+            <h2>Cross-Book Connections</h2>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 1.05em; color: var(--dark);">
+                How "Good to Great" resonates with and complements other transformational business books.
+            </p>
+            <div class="connections-grid">
+                <div class="connection-card">
+                    <h3>Zero to One (Peter Thiel)</h3>
+                    <p>
+                        <strong>Synergy:</strong> Thiel's focus on finding your vertical monopoly aligns with Collins' hedgehog concept. Both argue for specialization over generalization. Zero to One provides the "how to innovate uniquely"; Good to Great provides the "how to build momentum once you have uniqueness."
+                    </p>
+                </div>
+
+                <div class="connection-card">
+                    <h3>The Innovator's Dilemma (Clayton Christensen)</h3>
+                    <p>
+                        <strong>Synergy:</strong> Christensen shows why great companies fail (disruption blindness). Collins would say they failed because they lost their hedgehog focus or ignored brutal facts. Together: discipline prevents complacency, but you still need to see disruptive threats coming.
+                    </p>
+                </div>
+
+                <div class="connection-card">
+                    <h3>Atomic Habits (James Clear)</h3>
+                    <p>
+                        <strong>Synergy:</strong> Clear's 1% improvement compounds into extraordinary results. This is the flywheel at the individual level. Collins' 20-mile march is Atomic Habits at the organizational level. Both prove small consistent actions compound into transformation.
+                    </p>
+                </div>
+
+                <div class="connection-card">
+                    <h3>Grit (Angela Duckworth)</h3>
+                    <p>
+                        <strong>Synergy:</strong> Duckworth shows why grit (persistence) matters more than talent. Collins' Level 5 leaders have grit—they push through the invisible period of the flywheel when nothing seems to be working. Grit is what keeps you moving when momentum is invisible.
+                    </p>
+                </div>
+
+                <div class="connection-card">
+                    <h3>Antifragile (Nassim Taleb)</h3>
+                    <p>
+                        <strong>Synergy:</strong> Taleb argues for optionality and resilience. Collins' focus on discipline and focus looks rigid, but the Stockdale Paradox (confront brutal facts + maintain faith) creates antifragility. Disciplined flexibility beats both rigidity and chaos.
+                    </p>
+                </div>
+
+                <div class="connection-card">
+                    <h3>Thinking, Fast and Slow (Daniel Kahneman)</h3>
+                    <p>
+                        <strong>Synergy:</strong> Kahneman shows how biases cloud judgment. Collins' focus on confronting brutal facts (System 2 thinking) is the antidote to overconfidence and hindsight bias. Good to Great requires slow, rigorous thinking.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPECIAL SECTION: WELLS FARGO CAUTIONARY TALE -->
+        <section class="deep-dive" style="background: linear-gradient(135deg, #ffe8e8 0%, #fff0f0 100%);">
+            <h2 class="deep-dive-title" style="color: var(--warm-red);">⚠ Cautionary Tale: Wells Fargo</h2>
+            <div class="deep-dive-content">
+                <div class="deep-dive-text">
+                    <h3>From Great to Scandal</h3>
+                    <p>
+                        Wells Fargo was highlighted in "Good to Great" as the exemplar of Level 5 leadership, hedgehog focus (community banking), and the 20-mile march. It was a stunning success story.
+                    </p>
+                    <p>
+                        Then, in 2016, it unraveled: employees were pressured to open fake accounts to meet sales targets. The scandal destroyed the company's reputation and revealed something Collins perhaps underestimated—<strong>culture of discipline can mask ethical corruption if the discipline is misaligned.</strong>
+                    </p>
+                    <div class="highlight-box">
+                        <strong>The Lesson:</strong> Discipline without ethical foundation is dangerous. A culture of discipline around the wrong goals (hitting sales targets at any cost) becomes toxic. Level 5 leaders must also model and enforce ethical discipline.
+                    </div>
+                    <h3>What This Teaches Us</h3>
+                    <p>
+                        Wells Fargo didn't lack discipline. It had fierce discipline—toward corrupt goals. This suggests Collins' framework, while powerful, assumed good intent. The best frameworks also need guardrails against misuse.
+                    </p>
+                    <p>
+                        <strong>Key Takeaway:</strong> A great company without ethical anchors can become a cautionary tale. The 20-mile march must march toward values, not just metrics. Discipline without integrity is just institutional corruption.
+                    </p>
+                </div>
+                <div class="visual-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="width: 200px; height: 200px;">
+                        <!-- Warning symbol -->
+                        <circle cx="150" cy="150" r="130" fill="none" stroke="#E17055" stroke-width="3"/>
+                        <path d="M 150 80 L 180 220 L 120 220 Z" fill="#E17055" opacity="0.3"/>
+                        <path d="M 150 90 L 175 220 L 125 220 Z" fill="#E17055"/>
+
+                        <!-- Exclamation mark -->
+                        <circle cx="150" cy="140" r="8" fill="white"/>
+                        <rect x="147" y="155" width="6" height="35" fill="white"/>
+
+                        <!-- Text -->
+                        <text x="150" y="270" font-size="14" font-weight="bold" text-anchor="middle" fill="#E17055">
+                            Discipline Requires Integrity
+                        </text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI & MODERN APPLICATIONS -->
+        <section class="deep-dive" style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);">
+            <h2 class="deep-dive-title">AI & Modern Applications</h2>
+            <div class="deep-dive-content">
+                <div class="deep-dive-text">
+                    <h3>How Collins Speaks to the AI Age</h3>
+                    <p>
+                        "Good to Great" was written in 2001, before smartphones, cloud computing, or modern AI. Yet its lessons are eerily relevant to how companies should think about AI transformation.
+                    </p>
+
+                    <h3>Level 5 Leadership in AI</h3>
+                    <p>
+                        <strong>The Problem:</strong> Many companies are hiring "AI officers" or "Chief AI Officers" to magically transform the company. This is time-telling, not clock-building.
+                    </p>
+                    <p>
+                        <strong>The Collins Answer:</strong> Level 5 leadership that builds the organizational systems first. Your AI strategy should amplify your existing strengths, not replace them. Get the right people in the room (data engineers, domain experts, AI researchers) and let them define the hedgehog.
+                    </p>
+
+                    <h3>The Hedgehog for AI Companies</h3>
+                    <p>
+                        The best AI companies (Anthropic, DeepMind, OpenAI) have a clear hedgehog: intersection of research capability, economic viability, and passionate mission. They don't try to be best at everything. They find their focus and dominate it.
+                    </p>
+                    <p>
+                        Companies that fail at AI usually fail because they chase every trend (LLMs, then diffusion, then agents) without finding their core focus.
+                    </p>
+
+                    <h3>The Flywheel for AI Training</h3>
+                    <p>
+                        Data → Better Model → Better Predictions → More Training Examples → Better Data Pipeline → Repeat. This is the AI flywheel. It's invisible for 18 months, then explodes in capability. Most companies abandon before seeing compounding returns.
+                    </p>
+
+                    <h3>Discipline in AI Development</h3>
+                    <p>
+                        The culture of discipline applies perfectly to AI: disciplined data annotation, disciplined evaluation metrics, disciplined architecture decisions. Companies with sloppy discipline in these areas fall behind. The tortoise (disciplined incremental improvement) beats the hare (chasing novel architectures).
+                    </p>
+                </div>
+                <div class="visual-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="width: 220px; height: 220px;">
+                        <!-- Brain + gear -->
+                        <circle cx="150" cy="150" r="100" fill="none" stroke="#6C5CE7" stroke-width="2" opacity="0.3"/>
+
+                        <!-- Brain left hemisphere -->
+                        <path d="M 80 150 Q 70 120 80 90 Q 90 80 110 85 Q 100 110 110 140 Q 100 160 90 170 Q 75 175 80 150" fill="#6C5CE7" opacity="0.6"/>
+
+                        <!-- Gear right side -->
+                        <circle cx="200" cy="150" r="35" fill="none" stroke="#6C5CE7" stroke-width="3" opacity="0.7"/>
+                        <g opacity="0.7">
+                            <rect x="192" y="105" width="6" height="15" fill="#6C5CE7" transform="rotate(0 197.5 120)"/>
+                            <rect x="192" y="105" width="6" height="15" fill="#6C5CE7" transform="rotate(45 197.5 120)"/>
+                            <rect x="192" y="105" width="6" height="15" fill="#6C5CE7" transform="rotate(90 197.5 120)"/>
+                            <rect x="192" y="105" width="6" height="15" fill="#6C5CE7" transform="rotate(135 197.5 120)"/>
+                        </g>
+                        <circle cx="200" cy="150" r="15" fill="white"/>
+                        <circle cx="200" cy="150" r="12" fill="#6C5CE7" opacity="0.7"/>
+
+                        <!-- Arrow connecting -->
+                        <path d="M 130 150 L 160 150" stroke="#6C5CE7" stroke-width="2" fill="none"/>
+                        <polygon points="160,150 168,146 168,154" fill="#6C5CE7"/>
+
+                        <text x="150" y="280" font-size="12" font-weight="bold" text-anchor="middle" fill="#6C5CE7">
+                            Discipline + Innovation
+                        </text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL SUMMARY -->
+        <section class="deep-dive">
+            <h2 class="deep-dive-title">The Core Insight</h2>
+            <div style="max-width: 100%; margin-top: 25px;">
+                <p style="font-size: 1.05em; line-height: 1.8; color: #555; margin-bottom: 20px;">
+                    Collins spent five years researching why some companies make the leap from good to great while others remain stuck or fail. His conclusion: <strong>greatness is not a giant leap, but the result of disciplined decisions, humble leadership, and relentless focus on a clear hedgehog concept.</strong>
+                </p>
+                <p style="font-size: 1.05em; line-height: 1.8; color: #555; margin-bottom: 20px;">
+                    There are no silver bullets. There are no revolutionary moments. Just disciplined people, making disciplined decisions, pushing the flywheel in a consistent direction, for years on end. When the flywheel finally hits critical velocity, greatness looks inevitable. But it wasn't. It required patience, focus, and the willingness to be "merely good" at some things to be exceptional at others.
+                </p>
+                <div class="highlight-box" style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left-color: var(--forest);">
+                    <strong>The Final Paradox:</strong> The companies that achieved greatness never explicitly tried to be great. They tried to understand their hedgehog. They tried to get the right people on the bus. They tried to build discipline. Greatness was the byproduct of these obsessions, not the goal itself.
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer-section">
+            <h2>About This Guide</h2>
+            <p>
+                This illustrated guide captures the core concepts from Jim Collins' "Good to Great: Why Some Companies Make the Leap and Others Don't" (2001).
+            </p>
+            <p>
+                <strong>Key Takeaway:</strong> Greatness is built through disciplined focus on what you can be exceptional at, led by humble leaders with fierce resolve, pushing the flywheel relentlessly forward until momentum becomes unstoppable.
+            </p>
+            <p style="margin-top: 25px; opacity: 0.85; font-size: 0.9em;">
+                This guide was created to make Collins' framework visual and accessible. For the complete analysis, research, and case studies, read the original book.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incognito: The Secret Lives of the Brain - Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: linear-gradient(135deg, #0f1c3f 0%, #1a2847 100%);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, rgba(15, 28, 63, 0.9) 0%, rgba(26, 40, 71, 0.85) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(78,205,196,0.03)" stroke-width="1"/></pattern></defs><rect width="1200" height="800" fill="url(%23grid)"/></svg>');
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(78, 205, 196, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, 30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .iceberg-svg {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 40px;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 900;
+            margin: 20px 0;
+            background: linear-gradient(135deg, var(--teal) 0%, var(--sky) 50%, var(--mint) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 15px 0;
+        }
+
+        .hero .author {
+            font-style: italic;
+            color: var(--teal);
+            margin-top: 20px;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--teal);
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav-sticky {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 28, 63, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--teal);
+            z-index: 100;
+            padding: 15px 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: var(--teal);
+            color: var(--dark);
+            border-color: var(--teal);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .content-wrapper {
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 80px 0;
+        }
+
+        .section {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--purple) 100%);
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            flex-shrink: 0;
+            box-shadow: 0 10px 30px rgba(160, 108, 213, 0.3);
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            color: var(--dark);
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--teal);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-left-color: var(--deep-blue);
+        }
+
+        .lesson-card-header {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--purple) 100%);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .lesson-card-body {
+            padding: 25px;
+        }
+
+        .lesson-card-body h3 {
+            color: var(--dark-purple);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .lesson-card-body p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(160, 108, 213, 0.1), rgba(78, 205, 196, 0.1));
+            border-left: 4px solid var(--dark-purple);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .highlight h4 {
+            color: var(--dark-purple);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .highlight p {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .highlight ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlight li {
+            color: #555;
+            padding-left: 25px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .highlight li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+            font-weight: bold;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, rgba(160, 108, 213, 0.05), rgba(78, 205, 196, 0.05));
+            border: 2px dashed var(--teal);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .example-box h4 {
+            color: var(--deep-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .example-box h4::before {
+            content: '💡';
+            font-size: 1.3rem;
+        }
+
+        .example-box p {
+            color: #444;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .ai-connection {
+            background: linear-gradient(135deg, rgba(9, 132, 227, 0.08), rgba(160, 108, 213, 0.08));
+            border-left: 5px solid var(--deep-blue);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .ai-connection h4 {
+            color: var(--deep-blue);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .ai-connection h4::before {
+            content: '🤖';
+            font-size: 1.3rem;
+        }
+
+        .ai-connection p {
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--purple) 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: rgba(160, 108, 213, 0.02);
+        }
+
+        .visual-section {
+            margin: 40px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.08), rgba(160, 108, 213, 0.08));
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .visual-section h3 {
+            color: var(--dark-purple);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .svg-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .brain-network {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
+
+        /* ===== CROSS-REFERENCES ===== */
+        .cross-ref {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.08), rgba(253, 121, 168, 0.08));
+            border-left: 5px solid var(--coral);
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .cross-ref h5 {
+            color: var(--warm-red);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .cross-ref p {
+            color: #444;
+            font-size: 0.9rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: linear-gradient(135deg, #0f1c3f 0%, #1a2847 100%);
+            color: white;
+            padding: 60px 0;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--teal);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--teal);
+        }
+
+        .footer-divider {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .lesson-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-content {
+                gap: 10px;
+            }
+
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-40 {
+            margin-top: 40px;
+        }
+
+        .mb-40 {
+            margin-bottom: 40px;
+        }
+
+        .color-coral { color: var(--coral); }
+        .color-teal { color: var(--teal); }
+        .color-purple { color: var(--dark-purple); }
+        .color-blue { color: var(--deep-blue); }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--purple) 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+
+        .badge.ai {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sky) 100%);
+        }
+
+        .badge.eagleman {
+            background: linear-gradient(135deg, var(--warm-red) 0%, var(--coral) 100%);
+        }
+
+        .icon-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .icon-text .icon {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <svg class="iceberg-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="icebergGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#74B9FF;stop-opacity:1" />
+                        <stop offset="40%" style="stop-color:#4ECDC4;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#0984E3;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1a2847;stop-opacity:0.5" />
+                        <stop offset="100%" style="stop-color:#0f1c3f;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+
+                <!-- Ocean -->
+                <rect width="300" height="400" fill="url(#oceanGrad)"/>
+
+                <!-- Waterline -->
+                <line x1="0" y1="120" x2="300" y2="120" stroke="#4ECDC4" stroke-width="2" opacity="0.6"/>
+
+                <!-- Visible Iceberg Tip -->
+                <polygon points="150,60 100,120 200,120" fill="url(#icebergGrad)" stroke="#74B9FF" stroke-width="2"/>
+
+                <!-- Labels for visible part -->
+                <text x="150" y="95" font-family="Inter, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="600">CONSCIOUS</text>
+
+                <!-- Hidden Iceberg (underwater) -->
+                <path d="M 100 120 L 50 200 L 80 280 L 220 280 L 250 200 L 200 120 Z" fill="url(#icebergGrad)" opacity="0.7" stroke="#0984E3" stroke-width="2"/>
+
+                <!-- Brain neural patterns in hidden part -->
+                <circle cx="110" cy="160" r="3" fill="#FFE66D" opacity="0.8"/>
+                <circle cx="160" cy="180" r="3" fill="#FFE66D" opacity="0.8"/>
+                <circle cx="190" cy="150" r="3" fill="#FFE66D" opacity="0.8"/>
+                <circle cx="140" cy="220" r="3" fill="#FFE66D" opacity="0.8"/>
+                <circle cx="170" cy="240" r="3" fill="#FFE66D" opacity="0.8"/>
+
+                <!-- Neural connections -->
+                <line x1="110" y1="160" x2="160" y2="180" stroke="#FFE66D" stroke-width="1" opacity="0.6"/>
+                <line x1="160" y1="180" x2="190" y2="150" stroke="#FFE66D" stroke-width="1" opacity="0.6"/>
+                <line x1="140" y1="220" x2="170" y2="240" stroke="#FFE66D" stroke-width="1" opacity="0.6"/>
+
+                <!-- Labels for hidden part -->
+                <text x="150" y="200" font-family="Inter, sans-serif" font-size="11" fill="white" text-anchor="middle" font-weight="600" opacity="0.9">UNCONSCIOUS</text>
+
+                <!-- Brain icon in deepest part -->
+                <circle cx="150" cy="250" r="12" fill="none" stroke="#55EFC4" stroke-width="1.5" opacity="0.8"/>
+                <text x="150" y="255" font-family="Inter, sans-serif" font-size="14" fill="#55EFC4" text-anchor="middle" opacity="0.8">🧠</text>
+            </svg>
+
+            <h1>Incognito</h1>
+            <p class="color-teal" style="font-size: 1.1rem;">The Secret Lives of the Brain</p>
+            <p class="author">By David Eagleman</p>
+            <p>Discover what happens beneath the surface of consciousness—the hidden neural processes that drive your decisions, shape your reality, and define who you really are.</p>
+        </div>
+        <div class="scroll-hint">↓ Scroll to explore 12 transformative lessons ↓</div>
+    </section>
+
+    <!-- STICKY NAVIGATION -->
+    <nav class="nav-sticky">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#lesson-1" class="nav-link">Consciousness</a>
+                <a href="#lesson-2" class="nav-link">Team of Rivals</a>
+                <a href="#lesson-3" class="nav-link">Constructed Reality</a>
+                <a href="#lesson-4" class="nav-link">Unconscious</a>
+                <a href="#lesson-5" class="nav-link">Implicit Bias</a>
+                <a href="#lesson-6" class="nav-link">Reward Systems</a>
+                <a href="#lesson-7" class="nav-link">Criminal Brain</a>
+                <a href="#lesson-8" class="nav-link">Identity Gap</a>
+                <a href="#lesson-9" class="nav-link">Time</a>
+                <a href="#lesson-10" class="nav-link">Limited Senses</a>
+                <a href="#lesson-11" class="nav-link">Plasticity</a>
+                <a href="#lesson-12" class="nav-link">Neurolaw</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="content-wrapper">
+        <div class="container">
+
+            <!-- LESSON 1: CONSCIOUSNESS IS THE TIP OF THE ICEBERG -->
+            <section class="section" id="lesson-1">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2>Consciousness is the Tip of the Iceberg</h2>
+                </div>
+
+                <div class="lesson-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Core Insight</div>
+                        <div class="lesson-card-body">
+                            <h3>A Tiny Window</h3>
+                            <p>Your consciousness—that feeling of "I" that narrates your life—is merely a small fraction of your brain's operations. The vast majority of your mental life happens unconsciously, invisibly, without your awareness or permission.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Humbling Truth</div>
+                        <div class="lesson-card-body">
+                            <h3>The Hidden Machinery</h3>
+                            <p>Your brain is constantly running: processing sensory input, making decisions, forming memories, controlling body functions, and generating emotions—all while you're aware of only the final output. You're not in control; you're along for the ride.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h4>Eagleman's Key Example: The Inattentional Blindness Experiments</h4>
+                    <p>In famous experiments, viewers watching a video of people playing basketball are so focused on counting ball passes that they fail to notice a person in a gorilla suit walk across the screen. Your consciousness selects what to pay attention to, but this selection happens unconsciously. You don't consciously decide what to see—your brain does, and then reports back to your awareness.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Funny Take: Your Brain as a Sneaky Boss</h4>
+                    <p>Imagine your consciousness as a CEO in the top office, completely out of touch. Your unconscious brain is like the entire company—thousands of workers processing, building, deciding—while the CEO only finds out about the major decisions after they're already made. The CEO then takes credit: "I decided to avoid that gorilla."</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Parallel: Hidden Layers in Neural Networks</h4>
+                    <p>In deep learning, the vast majority of processing happens in hidden layers that we can't directly observe. A neural network's final output (what we "see") is the result of billions of computations in layers we never inspect. Similarly, your consciousness is like the output layer—the final prediction—while your brain's hidden layers do the real work.</p>
+                </div>
+
+                <div class="cross-ref">
+                    <h5>📚 Cross-Reference</h5>
+                    <p><strong>Thinking, Fast and Slow (Kahneman):</strong> System 1 (unconscious, automatic) vs. System 2 (conscious, deliberate). Most of life runs on System 1.</p>
+                </div>
+            </section>
+
+            <!-- LESSON 2: YOUR BRAIN IS A TEAM OF RIVALS -->
+            <section class="section" id="lesson-2">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2>Your Brain is a Team of Rivals</h2>
+                </div>
+
+                <div class="lesson-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Competing Neural Processes</div>
+                        <div class="lesson-card-body">
+                            <h3>Many Minds, One Brain</h3>
+                            <p>Your brain isn't unified. It's a parliament of competing neural systems—different regions, different modules, all vying for control. Your visual cortex has its own agenda. Your limbic system (emotion) fights with your prefrontal cortex (reason). You're not singular; you're a coalition.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Winner Takes Consciousness</div>
+                        <div class="lesson-card-body">
+                            <h3>Who Gets to Report?</h3>
+                            <p>Whichever neural process "wins" the competition for control gets to broadcast its output to consciousness. You then experience that winner as "you," not realizing that you're just the spokesperson for whatever coalition happened to take control at that moment.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Conflict</div>
+                        <div class="lesson-card-body">
+                            <h3>Fighting with Yourself</h3>
+                            <p>Ever felt conflicted? Want dessert but know you shouldn't eat it? That's not you being weak—that's two rival systems literally fighting for control. Your reward system (wanting the cake) is battling your prefrontal cortex (long-term goals). Both are equally "you."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h4>Eagleman's Key Example: Split-Brain Patients</h4>
+                    <p>The most famous case: Phineas Gage, whose personality changed drastically after a railroad spike damaged his prefrontal cortex. But even more revealing are split-brain patients—people whose corpus callosum (connecting the two hemispheres) is severed. The left and right hemispheres can be made to disagree, want different things. Which one is the "real" you?</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Funny Take: Corporate Politics in Your Skull</h4>
+                    <p>Your brain is like a dysfunctional corporation. Marketing (emotion/reward) and Finance (prefrontal cortex) are constantly at war. Consciousness is the PR department, spinning whatever decision won and making it sound intentional. "We decided to eat pizza" (no you didn't—Marketing won a boardroom brawl).</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Parallel: Ensemble Methods</h4>
+                    <p>Modern AI uses ensemble methods—combining many different models or "weak learners," each with different strengths, and letting them vote on the output. Your brain does this naturally. Different neural modules compete and cooperate. The final decision is emergent from this competition, not from some unified "you."</p>
+                </div>
+
+                <table class="comparison-table">
+                    <tr>
+                        <th>Rival System</th>
+                        <th>Goal</th>
+                        <th>Personality</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Limbic System (Emotion)</strong></td>
+                        <td>Immediate reward, survival, reproduction</td>
+                        <td>Impulsive, wants NOW</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prefrontal Cortex (Logic)</strong></td>
+                        <td>Long-term planning, delayed gratification</td>
+                        <td>Patient, strategic</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Visual System</strong></td>
+                        <td>Interpret and construct visual reality</td>
+                        <td>Creative, sometimes deceptive</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Motor System</strong></td>
+                        <td>Execute movement automatically</td>
+                        <td>Efficient, unconscious</td>
+                    </tr>
+                </table>
+
+                <div class="cross-ref">
+                    <h5>📚 Cross-Reference</h5>
+                    <p><strong>Behave (Robert Sapolsky):</strong> Explores how different brain regions (from ancient reptilian brain to modern cortex) drive conflicting behaviors.</p>
+                </div>
+            </section>
+
+            <!-- LESSON 3: YOU CONSTRUCT REALITY -->
+            <section class="section" id="lesson-3">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2>You Construct Reality (Visual Illusions Prove It)</h2>
+                </div>
+
+                <div class="lesson-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Illusion of Perception</div>
+                        <div class="lesson-card-body">
+                            <h3>Not Passive Reception</h3>
+                            <p>You don't passively receive the world like a camera. Your brain actively constructs your experience of reality based on predictions, expectations, and sparse sensory data. What you "see" is a constructed hallucination that usually matches the world—but not always.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Filling in the Gaps</div>
+                        <div class="lesson-card-body">
+                            <h3>The Blind Spot</h3>
+                            <p>You have a blind spot in each eye—a place where the optic nerve exits and there are no photoreceptors. You can't see in that spot. Yet you never notice it because your brain fills it in, constructing what it thinks should be there. You're literally blind, but your construction is seamless.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Expectations Dominate</div>
+                        <div class="lesson-card-body">
+                            <h3>Seeing What You Expect</h3>
+                            <p>Your brain heavily weights predictions and expectations. Show someone an ambiguous image—is it a duck or a rabbit?—and it shifts based on what they expect to see. Context, prior knowledge, and your current mental state all shape what you construct as "reality."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visual-section">
+                    <h3>The Power of Construction: Visual Illusions</h3>
+                    <svg class="brain-network" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#A06CD5;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#4ECDC4;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Title -->
+                        <text x="200" y="25" font-family="Playfair Display, serif" font-size="20" font-weight="700" text-anchor="middle" fill="#2D3436">Necker Cube Illusion</text>
+
+                        <!-- Necker Cube -->
+                        <g transform="translate(100, 80)">
+                            <line x1="0" y1="0" x2="60" y2="0" stroke="url(#grad1)" stroke-width="2.5"/>
+                            <line x1="60" y1="0" x2="60" y2="60" stroke="url(#grad1)" stroke-width="2.5"/>
+                            <line x1="60" y1="60" x2="0" y2="60" stroke="url(#grad1)" stroke-width="2.5"/>
+                            <line x1="0" y1="60" x2="0" y2="0" stroke="url(#grad1)" stroke-width="2.5"/>
+
+                            <line x1="20" y1="20" x2="80" y2="20" stroke="url(#grad1)" stroke-width="2.5"/>
+                            <line x1="80" y1="20" x2="80" y2="80" stroke="url(#grad1)" stroke-width="2.5"/>
+                            <line x1="80" y1="80" x2="20" y2="80" stroke="url(#grad1)" stroke-width="2.5"/>
+                            <line x1="20" y1="80" x2="20" y2="20" stroke="url(#grad1)" stroke-width="2.5"/>
+
+                            <line x1="0" y1="0" x2="20" y2="20" stroke="url(#grad1)" stroke-width="2.5"/>
+                            <line x1="60" y1="0" x2="80" y2="20" stroke="url(#grad1)" stroke-width="2.5"/>
+                            <line x1="60" y1="60" x2="80" y2="80" stroke="url(#grad1)" stroke-width="2.5"/>
+                            <line x1="0" y1="60" x2="20" y2="80" stroke="url(#grad1)" stroke-width="2.5"/>
+                        </g>
+
+                        <text x="200" y="220" font-family="Inter, sans-serif" font-size="13" text-anchor="middle" fill="#2D3436">Stare at the cube—it flips! Your brain</text>
+                        <text x="200" y="240" font-family="Inter, sans-serif" font-size="13" text-anchor="middle" fill="#2D3436">constructs two different 3D interpretations</text>
+                        <text x="200" y="260" font-family="Inter, sans-serif" font-size="13" text-anchor="middle" fill="#2D3436">of the same 2D lines. Same input, different reality.</text>
+                    </svg>
+                </div>
+
+                <div class="highlight">
+                    <h4>Eagleman's Key Example: Change Blindness</h4>
+                    <p>In classic experiments, people watching a scene miss dramatic changes—a person disappears and reappears, an object changes color—because their brain constructs what it expects to see, not what's actually there. Change blindness reveals that your conscious experience is a constructed narrative, not a complete and accurate recording of reality.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Funny Take: Your Brain as a Lazy Artist</h4>
+                    <p>Your brain is like an overworked movie set designer. It can't afford to render every detail accurately (too computationally expensive), so it cheats: it sketches in the main outlines, fills in the rest with predictions, and hopes you don't notice the gaps. Most of the time you don't. But when you catch the mistakes—that's cognitive dissonance, that's fun.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Parallel: Generative Models Constructing Reality</h4>
+                    <p>Modern AI uses generative models (like GANs and diffusion models) that don't record reality—they learn to construct plausible versions of it. Your visual cortex does the same. It's predicting the next frame, not passively recording. This is why illusions work: you're fooling the generative model into constructing something inconsistent with the actual sensory input.</p>
+                </div>
+
+                <div class="cross-ref">
+                    <h5>📚 Cross-Reference</h5>
+                    <p><strong>Stumbling on Happiness (Daniel Gilbert):</strong> We construct a version of the future the same way—predictions, not accurate forecasts.</p>
+                </div>
+            </section>
+
+            <!-- LESSON 4: THE UNCONSCIOUS RUNS THE SHOW -->
+            <section class="section" id="lesson-4">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2>The Unconscious Runs the Show</h2>
+                </div>
+
+                <div class="lesson-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Most Decisions Are Made Before You Know It</div>
+                        <div class="lesson-card-body">
+                            <h3>The Lag of Awareness</h3>
+                            <p>Neuroscientists have shown that your brain initiates decisions milliseconds before your consciousness becomes aware of them. Your sense that "you" decided is an illusion. Your unconscious makes the decision; consciousness observes the outcome and takes credit.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Expertise Operates Unconsciously</div>
+                        <div class="lesson-card-body">
+                            <h3>The Master's No-Think</h3>
+                            <p>When you become an expert—pianist, chess player, driver—your skills move into the unconscious. You don't think about individual movements; they flow automatically. Expertise isn't about conscious deliberation; it's about training your unconscious to do the right thing.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Consciousness is a Weak Controller</div>
+                        <div class="lesson-card-body">
+                            <h3>The Narrating Passenger</h3>
+                            <p>Consciousness can't even maintain focus for more than a few seconds without effort. You can't control which thoughts pop into your head. You're not commanding your brain; you're running a very limited operating system on top of vastly more powerful unconscious processes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h4>Eagleman's Key Example: The Libet Experiments</h4>
+                    <p>Benjamin Libet showed that the brain initiates action 300 milliseconds before consciousness reports the decision to act. Your conscious mind isn't deciding; it's catching up to a decision already made. Consciousness is like a secretary who finds the report on her desk and sends it out, thinking she wrote it.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Funny Take: You're the Boring Narrator of Someone Else's Movie</h4>
+                    <p>Imagine a movie where the actual protagonist (your unconscious) does everything, and then a voiceover (your consciousness) narrates what's happening, convincing you that the narrator is in control. You watch the movie and believe the narrator's story. That's your life.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Parallel: Gradient Descent in the Dark</h4>
+                    <p>Neural networks optimize through backpropagation—a process that's invisible to the "conscious" output layer. Similarly, your brain has vast unconscious optimization processes (learning, memory consolidation, emotional regulation) that operate without your awareness. Your consciousness only sees the final output, not the training process.</p>
+                </div>
+
+                <div class="cross-ref">
+                    <h5>📚 Cross-Reference</h5>
+                    <p><strong>Thinking, Fast and Slow (Kahneman):</strong> System 1 (unconscious) is fast, automatic, and usually right. System 2 (conscious) is slow and lazy.</p>
+                </div>
+            </section>
+
+            <!-- LESSON 5: IMPLICIT BIAS (AUTOMATIC CATEGORIZATION) -->
+            <section class="section" id="lesson-5">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2>Implicit Bias: Your Brain Categorizes Automatically</h2>
+                </div>
+
+                <div class="lesson-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Unconscious Stereotyping</div>
+                        <div class="lesson-card-body">
+                            <h3>Automatic Judgments</h3>
+                            <p>Your brain evolved to quickly categorize things: safe or dangerous, friend or foe, in-group or out-group. This happens in milliseconds, unconsciously, before your conscious mind even registers the stimulus. You can't turn it off—it's hardwired.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">You Can't Be Aware of It</div>
+                        <div class="lesson-card-body">
+                            <h3>Bias Below Awareness</h3>
+                            <p>Implicit bias happens faster than consciousness can detect. You might genuinely believe in equality while your amygdala (emotion center) responds with fear or distrust to certain groups. Good intentions don't matter; your unconscious has already categorized.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Cultural Conditioning</div>
+                        <div class="lesson-card-body">
+                            <h3>Learning from Environment</h3>
+                            <p>These biases aren't inherited; they're learned from your environment. If your brain was exposed to certain stereotypes (through media, family, community), it absorbed those patterns as "normal" categorizations. You literally can't help it—your training data was biased.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h4>Eagleman's Key Example: Implicit Association Tests (IATs)</h4>
+                    <p>The Implicit Association Test reveals unconscious biases that subjects consciously deny. Show someone a black face next to a weapon, then a white face next to a tool, repeatedly, and their reaction times reveal unconscious associations. People who would swear they have no biases show measurable implicit biases in millisecond-level responses.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Funny Take: Your Brain is a Trained Parrot</h4>
+                    <p>You want to be fair and unbiased, but your brain is like a parrot trained by society. It squawks out its automatic responses before you can stop it. You don't blame the parrot; it was just repeating what it learned. But the squawking still happens, and it affects how you treat people.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Parallel: Bias in Training Data</h4>
+                    <p>Machine learning models reproduce biases in their training data. Feed a model images labeled with stereotypes, and it learns those associations. Your brain is trained on 30+ years of social "data"—media, interactions, observations. If the training data (your culture) is biased, your model (your brain) will be too. Both are equally "unfair"—they're just reflecting what they were taught.</p>
+                </div>
+
+                <div class="cross-ref">
+                    <h5>📚 Cross-Reference</h5>
+                    <p><strong>The Selfish Gene (Dawkins):</strong> We evolved tribalism—preferring in-group members. Implicit bias is the neural manifestation of ancient evolutionary logic.</p>
+                </div>
+            </section>
+
+            <!-- LESSON 6: THE BRAIN'S REWARD SYSTEMS AND ADDICTION -->
+            <section class="section" id="lesson-6">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2>The Brain's Reward Systems and Addiction</h2>
+                </div>
+
+                <div class="lesson-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Dopamine Hijack</div>
+                        <div class="lesson-card-body">
+                            <h3>Not Pleasure, but Wanting</h3>
+                            <p>Dopamine isn't the pleasure neurotransmitter—it's the "wanting" neurotransmitter. It creates motivation, drive, craving. Addictive substances hijack this system, making your brain obsessively want something. Cocaine doesn't make you happy; it makes you desperately want more cocaine.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Predictive Coding in Reward</div>
+                        <div class="lesson-card-body">
+                            <h3>The Mismatch That Motivates</h3>
+                            <p>Your brain predicts how good something will be. If reality exceeds the prediction, dopamine surges. If reality disappoints, dopamine drops. Addiction works by disrupting this system—a drug gives you far more dopamine than you predicted, resetting your expectations upward. Now normal life feels empty.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Learning by Association</div>
+                        <div class="lesson-card-body">
+                            <h3>Cues Become Triggers</h3>
+                            <p>Your brain learns to associate cues (the smell of alcohol, the sight of a lighter) with the reward. These cues alone trigger dopamine release and craving. You don't even need the drug; the environmental trigger is enough. This is why environment matters so much in addiction recovery.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h4>Eagleman's Key Example: The Slot Machine Brain</h4>
+                    <p>Slot machines are addictive because they trigger exactly the right dopamine response pattern: unpredictable rewards. Your brain evolved to be motivated by uncertain outcomes—hunting, mating, exploration. A slot machine exploits this ancient reward system, making your dopamine system go haywire chasing the next jackpot that never comes.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Funny Take: Your Brain as a Junkie Designer</h4>
+                    <p>Tech companies employ neuroscientists specifically to addict you. They know how dopamine works. They design notifications (unpredictable rewards), achievements (level-up slots), and social feedback (variable reinforcement) to hijack your reward system. You're not weak-willed; you're playing against opponents who understand your neurobiology better than you do.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Parallel: Reward Shaping in Reinforcement Learning</h4>
+                    <p>In reinforcement learning, agents learn to maximize reward signals. Poorly designed reward functions lead to agents obsessively pursuing the metric—ignoring everything else, gaming the system, becoming "addicted" to gaming the reward. Similarly, your reward system can be hijacked by things it never evolved to handle (sugar, drugs, social media).</p>
+                </div>
+
+                <div class="cross-ref">
+                    <h5>📚 Cross-Reference</h5>
+                    <p><strong>Stumbling on Happiness (Gilbert):</strong> We're notoriously bad at predicting what will make us happy. Addictive substances exploit this gap between prediction and reality.</p>
+                </div>
+            </section>
+
+            <!-- LESSON 7: CRIMINAL BEHAVIOR AND THE BROKEN BRAIN -->
+            <section class="section" id="lesson-7">
+                <div class="section-header">
+                    <div class="section-number">7</div>
+                    <h2>Criminal Behavior and Neuroscience: Should We Punish Broken Brains?</h2>
+                </div>
+
+                <div class="lesson-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Neurobiology of Crime</div>
+                        <div class="lesson-card-body">
+                            <h3>Not Moral Failure, But Brain Damage</h3>
+                            <p>Many violent criminals have measurable brain abnormalities: damage to the prefrontal cortex (impulse control), overactive amygdala (fear/aggression), low serotonin (aggression). These aren't character flaws; they're neurological problems. A tumor, a head injury, or a genetic predisposition can make someone violent.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Legal Problem</div>
+                        <div class="lesson-card-body">
+                            <h3>Punishing the Unpunishable</h3>
+                            <p>If someone's brain is literally broken—incapable of impulse control—is punishment justice or cruelty? Punishment assumes moral agency and the ability to choose differently. But if someone's neurobiology removed that ability, you're punishing them for being sick, not for choosing evil.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Future: Neurolaw</div>
+                        <div class="lesson-card-body">
+                            <h3>Beyond Blame</h3>
+                            <p>Eagleman suggests moving beyond guilt/innocence toward a system focused on risk assessment and rehabilitation. If a brain scan shows structural damage affecting impulse control, the legal system might demand treatment, not prison time. We might create neurological risk profiles instead of moral judgments.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h4>Eagleman's Key Example: Charles Whitman</h4>
+                    <p>In 1966, Charles Whitman climbed a tower and killed 14 people before being shot. An autopsy revealed a tumor in his brain. He had written in his journal about violent thoughts he couldn't control. Was he a monster or a patient? The ambiguity reveals the legal system's fundamental problem: it assumes a clear distinction between biological and moral responsibility that neuroscience shows doesn't exist.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Funny Take: The Uncomfortable Truth About Justice</h4>
+                    <p>We like to believe people are responsible for their actions. But if the brain is a machine, and machines can break, then criminals aren't evil—they're malfunctioning. This is deeply unsettling because it removes the comforting fiction that everyone has equal choice. Some people's brains broke before they even knew it.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Parallel: Debugging Misbehaving Agents</h4>
+                    <p>If an AI system misbehaves, we debug it—we don't punish it. We identify the faulty weights, the bad training data, the misaligned reward function. We fix the system. Eagleman suggests we should do the same with human brains: identify the neural deficit, provide treatment, manage risk. Not punishment, but repair.</p>
+                </div>
+
+                <div class="cross-ref">
+                    <h5>📚 Cross-Reference</h5>
+                    <p><strong>Behave (Sapolsky):</strong> Comprehensively explores how biology (genes, hormones, neural circuits) influences behavior, making moral judgment more complex.</p>
+                </div>
+            </section>
+
+            <!-- LESSON 8: THE IDENTITY GAP -->
+            <section class="section" id="lesson-8">
+                <div class="section-header">
+                    <div class="section-number">8</div>
+                    <h2>The Gap Between Who You Think You Are and Who You Actually Are</h2>
+                </div>
+
+                <div class="lesson-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">You Don't Know Yourself</div>
+                        <div class="lesson-card-body">
+                            <h3>The Blind Spot Inside</h3>
+                            <p>You have access to your conscious thoughts and behaviors, but not to your motivations, biases, or the unconscious processes driving you. You confidently explain your actions with reasons that feel true but are often false. You're a stranger to yourself, narrating a story about someone you don't understand.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Confabulation</div>
+                        <div class="lesson-card-body">
+                            <h3>Making Up Explanations</h3>
+                            <p>Your brain is a confabulation machine. It makes decisions unconsciously, then consciousness invents plausible explanations. You think you chose the red shirt because it matches your eyes (false). You actually chose it because it was on top of the pile. But your brain fills in a coherent narrative.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Personality Is Unstable</div>
+                        <div class="lesson-card-body">
+                            <h3>Context Changes You</h3>
+                            <p>You're not a unified personality—you're a collection of responses to contexts. You're kind with your mother, aggressive with competitors, playful with children, professional with colleagues. Which is the "real" you? None of them. You're all of them, depending on the context that calls them out.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h4>Eagleman's Key Example: Patient H.M. and Memory</h4>
+                    <p>Patient H.M. had his hippocampus removed and could no longer form new memories. He would meet the same person multiple times and not recognize them. Yet his personality seemed intact—until you realized that personality itself depends on memory. Without memory, identity becomes fragmented. You are, literally, your memories.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Funny Take: You're Method Acting Your Own Life</h4>
+                    <p>Actors develop characters by studying behavior and context. You're doing the same, but the character you're method acting is "yourself." Different contexts call out different characters. The problem is you actually believe you're a unified character instead of recognizing you're a repertory actor playing many roles.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Parallel: Emergent vs. Essential Identity</h4>
+                    <p>In AI, there's no central "self" making decisions—behavior emerges from the interaction of many modules. Your identity emerges from the interaction of many brain systems. The question "what is the real me?" is like asking "what is the real AI?"—there is no real one, just emergent patterns in different contexts.</p>
+                </div>
+
+                <div class="cross-ref">
+                    <h5>📚 Cross-Reference</h5>
+                    <p><strong>Stumbling on Happiness (Gilbert):</strong> We're notoriously bad at knowing ourselves—our tastes, what will make us happy, our own motivations.</p>
+                </div>
+            </section>
+
+            <!-- LESSON 9: TIME PERCEPTION IS MANUFACTURED -->
+            <section class="section" id="lesson-9">
+                <div class="section-header">
+                    <div class="section-number">9</div>
+                    <h2>Time Perception is Manufactured</h2>
+                </div>
+
+                <div class="lesson-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">No Objective Now</div>
+                        <div class="lesson-card-body">
+                            <h3>The Illusion of Present</h3>
+                            <p>Your sense of "now" is an illusion. Your brain takes in signals from different sensory systems (vision, touch, sound) that arrive at slightly different times, and it synchronizes them into a unified "present moment." But there's no actual "now"—just your brain's construction of simultaneity.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Specious Present</div>
+                        <div class="lesson-card-body">
+                            <h3>Stretching the Moment</h3>
+                            <p>Your conscious "present" isn't an instant—it's stretched over about 3 seconds. Your brain integrates the last few seconds of sensory data into a single experiential moment. This is why time feels fluid in the present but sharp in memory—you compress extended experience into a unified conscious moment.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Time Speeds and Slows</div>
+                        <div class="lesson-card-body">
+                            <h3>Attention Distorts Duration</h3>
+                            <p>When you're focused and engaged, time flies (few clock-checks). When you're bored and clock-watching, time crawls. Your subjective experience of duration depends on attention, memory formation, and emotional arousal—not on actual elapsed time. Time is elastic.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h4>Eagleman's Key Example: Flash Lag Illusion</h4>
+                    <p>A moving object and a flashing light appear to occur at the same place, but they actually don't—the flash is slightly behind. Your brain unconsciously predicts where the moving object will be and "backdates" the conscious perception of the flash to align with the motion. You see the timeline wrong because your brain aligns events that should be slightly offset.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Funny Take: Your Brain is Bad at Physics</h4>
+                    <p>Time, causation, simultaneity—these aren't things your brain passively detects. Your brain is constantly predicting and constructing them. And it's surprisingly bad at physics. Show your brain two events, and it will tell you which caused which based on your expectations, not on actual temporal or causal relationships.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Parallel: Temporal Prediction in Generative Models</h4>
+                    <p>Video generation models must predict the next frame based on current and past frames. They create coherent "time" even when the true physics is ambiguous. Your visual cortex does the same: it predicts the next moment based on what you've seen, creating your experience of temporal flow. Time is a prediction, not an observation.</p>
+                </div>
+
+                <div class="cross-ref">
+                    <h5>📚 Cross-Reference</h5>
+                    <p><strong>The Selfish Gene (Dawkins):</strong> Evolution doesn't care about objective time—only about the propagation of genes. Our brains evolved to perceive time in ways useful for survival, not in ways that match physics.</p>
+                </div>
+            </section>
+
+            <!-- LESSON 10: YOUR SENSES ARE LIMITED (UMWELT) -->
+            <section class="section" id="lesson-10">
+                <div class="section-header">
+                    <div class="section-number">10</div>
+                    <h2>Your Senses Are Limited: Each Species Experiences a Different Reality (Umwelt)</h2>
+                </div>
+
+                <div class="lesson-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">You Can't Perceive Most of Reality</div>
+                        <div class="lesson-card-body">
+                            <h3>Blind to the Electromagnetic Spectrum</h3>
+                            <p>Humans perceive a tiny slice of the electromagnetic spectrum (visible light). You're blind to ultraviolet, infrared, and radio waves. But bees see ultraviolet patterns on flowers you can't fathom. Snakes sense heat via infrared. You share the world but live in different sensory universes.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Umwelt: Your Perceptual World</div>
+                        <div class="lesson-card-body">
+                            <h3>The Reality You Can Perceive</h3>
+                            <p>The biologist Jakob von Uexküll called this "umwelt"—the perceptual world of an organism. A tick has an umwelt defined by smell (butyric acid from mammals), temperature, and touch. That's its reality. A bat's reality is defined by echolocation. Your reality is defined by your sensory limitations. You're trapped in your umwelt.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">You Construct Your Reality from Limited Data</div>
+                        <div class="lesson-card-body">
+                            <h3>Making Sense of Sensory Poverty</h3>
+                            <p>Your brain is constantly filling in what you can't perceive. You assume objects continue to exist when hidden. You assume the world is stable and continuous. These assumptions are useful for survival, but they're not true. The world is much stranger than your umwelt allows you to perceive.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visual-section">
+                    <h3>The Spectrum of Perception</h3>
+                    <svg class="brain-network" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="spectrumGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#E17055;stop-opacity:1" />
+                                <stop offset="20%" style="stop-color:#D63031;stop-opacity:1" />
+                                <stop offset="40%" style="stop-color:#00B894;stop-opacity:1" />
+                                <stop offset="60%" style="stop-color:#0984E3;stop-opacity:1" />
+                                <stop offset="80%" style="stop-color:#6C5CE7;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#A06CD5;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Spectrum bar -->
+                        <rect x="50" y="40" width="400" height="30" fill="url(#spectrumGrad)" rx="5"/>
+
+                        <!-- Labels -->
+                        <text x="50" y="85" font-family="Inter, sans-serif" font-size="11" text-anchor="end" fill="#2D3436" font-weight="600">Infrared</text>
+                        <text x="200" y="85" font-family="Inter, sans-serif" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="600">Visible (Human)</text>
+                        <text x="450" y="85" font-family="Inter, sans-serif" font-size="11" text-anchor="start" fill="#2D3436" font-weight="600">UV</text>
+
+                        <!-- Human range indicator -->
+                        <rect x="150" y="30" width="200" height="10" fill="none" stroke="#FD79A8" stroke-width="2" stroke-dasharray="5,5"/>
+                        <text x="250" y="25" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="#FD79A8" font-weight="600">Your Window</text>
+                    </svg>
+                </div>
+
+                <div class="highlight">
+                    <h4>Eagleman's Key Example: The Invisible World</h4>
+                    <p>Right now, radio waves are passing through your body. Your phone is communicating with satellites via signals you can't sense. Bees are navigating by the Earth's magnetic field. A snake is hunting using infrared heat signatures. You share the planet, but you're all living in different perceptual realities. You're not aware of most of what's happening around you.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Funny Take: You're Locked in a Sensory Prison</h4>
+                    <p>Imagine a prisoner in a cell with one small window. The prisoner can only see a tiny corner of the city outside. The prisoner believes that corner is the whole world. You're that prisoner. Your senses are the window. Everything outside your umwelt doesn't exist in your conscious experience. Other species look out different windows and see completely different worlds.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Parallel: Different Model Architectures = Different Realities</h4>
+                    <p>A language model trained on text operates in a different reality than a vision model trained on images. They don't share the same umwelt. Give a language model an image and it sees nothing (unless you convert it to text). Different architectures perceive different feature spaces, constructing different realities. Your brain is specialized for human umwelt; it can't perceive what other species do.</p>
+                </div>
+
+                <div class="cross-ref">
+                    <h5>📚 Cross-Reference</h5>
+                    <p><strong>The Selfish Gene (Dawkins):</strong> Evolution shapes perception. You perceive what increased your ancestors' survival—not objective reality.</p>
+                </div>
+            </section>
+
+            <!-- LESSON 11: BRAIN PLASTICITY AND REWIRING -->
+            <section class="section" id="lesson-11">
+                <div class="section-header">
+                    <div class="section-number">11</div>
+                    <h2>Brain Plasticity: Experience Rewires You</h2>
+                </div>
+
+                <div class="lesson-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Your Brain is Constantly Rewiring</div>
+                        <div class="lesson-card-body">
+                            <h3>Neuroplasticity</h3>
+                            <p>Your brain isn't fixed. Every experience rewires your neural circuits. Learn to play guitar and your motor cortex reorganizes. Study hard and your prefrontal connections strengthen. Get injured and other brain regions take over lost functions. You're literally becoming a different brain with every day that passes.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Critical Periods</div>
+                        <div class="lesson-card-body">
+                            <h3>Windows for Possibility</h3>
+                            <p>There are critical periods in development when the brain is especially plastic and ready to learn. Language learning is easiest as a child. After puberty, retraining is much harder. But it's never impossible. Neuroplasticity continues throughout life—it just requires more effort, repetition, and dedication.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">You Shape Your Own Brain</div>
+                        <div class="lesson-card-body">
+                            <h3>Taking Control</h3>
+                            <p>This is the hopeful lesson: your brain isn't destiny. If you engage in deliberate practice, meditation, or cognitive training, you physically rewire yourself. You become what you practice. This is why expertise is possible, why recovery from brain injury happens, why you can break bad habits—if you're willing to do the work.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h4>Eagleman's Key Example: London Taxi Drivers</h4>
+                    <p>Neuroscientists studied London taxi drivers who memorize the entire city (a feat called "The Knowledge"). Their hippocampi—the memory center—grew physically larger and more connected. Experience didn't just make them better at navigation; it literally changed the anatomy of their brains. You are the sum of your practices.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Funny Take: You're a Sculptor With Your Own Clay</h4>
+                    <p>Every habit, every thought pattern, every practice session is you sculpting your own brain. Spend 10,000 hours on guitar and you carve yourself into a musician. Spend 10,000 hours scrolling and you carve yourself into someone with an attention span of a goldfish. You're not victims of your brains—you're the artists shaping them.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Parallel: Fine-Tuning and Transfer Learning</h4>
+                    <p>Neural networks can be fine-tuned: take a model trained on one task and train it further on a new task. The existing weights adjust but retain what they learned. Your brain does the same. Practice reinforces pathways; disuse prunes them. Both biological and artificial neural networks optimize through repeated exposure to data (experience).</p>
+                </div>
+
+                <div class="cross-ref">
+                    <h5>📚 Cross-Reference</h5>
+                    <p><strong>Thinking, Fast and Slow (Kahneman):</strong> Expertise develops through deliberate practice that trains your intuitive System 1 to make better automatic decisions.</p>
+                </div>
+            </section>
+
+            <!-- LESSON 12: THE FUTURE OF NEUROSCIENCE AND THE LAW -->
+            <section class="section" id="lesson-12">
+                <div class="section-header">
+                    <div class="section-number">12</div>
+                    <h2>The Future: Neuroscience and the Law (Neurolaw)</h2>
+                </div>
+
+                <div class="lesson-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Crisis of Free Will</div>
+                        <div class="lesson-card-body">
+                            <h3>Legal Systems Built on Assumption</h3>
+                            <p>Criminal law assumes free will: people choose to commit crimes and deserve punishment. But neuroscience reveals that choice is more complex. Brain damage, genetics, environmental factors, and unconscious processing all constrain choice. If free will is more limited than we thought, what happens to the entire legal system?</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">Neurolaw: A New Paradigm</div>
+                        <div class="lesson-card-body">
+                            <h3>Beyond Guilt and Punishment</h3>
+                            <p>Eagleman proposes neurolaw: using neuroscience to reform the legal system. Instead of asking "is someone guilty?" ask "what is their neural risk profile? Are they likely to reoffend?" Use neuroscience for rehabilitation, management, and prevention—not for moral blame.</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-card-header">The Practical Implications</div>
+                        <div class="lesson-card-body">
+                            <h3>How It Changes Things</h3>
+                            <p>Brain imaging might become evidence: a tumor affecting impulse control could reduce sentences. Genetic predispositions might inform treatment plans. The goal shifts from retribution to intervention. This is more humane but also more unsettling—it removes the comfort of moral judgment.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h4>Eagleman's Vision: Rehabilitative Justice</h4>
+                    <p>Instead of asking "how many years should we lock someone up?" ask "what treatment will reduce their risk of reoffending? What brain interventions would help? Can we rewire the damaged neural circuits?" This requires admitting that criminal behavior has neural roots and that punishment alone doesn't address the underlying problem. It's uncomfortable but more scientifically honest.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Funny Take: The Future Is Therapy, Not Jail</h4>
+                    <p>In the future, sentences might look like: "Brain scan shows prefrontal damage affecting impulse control. Mandatory rehabilitation involving cognitive training, medication if needed, and environmental management. Reoffend and we reassess the neural intervention." No emotional satisfaction of "punishment," but actually addressing the problem instead of just warehousing broken people.</p>
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Parallel: Interpretability and Accountability</h4>
+                    <p>As AI systems make more consequential decisions (loans, parole, sentencing), we need interpretability: understanding why the model decided. Similarly, neurolaw requires understanding the neurobiology of decisions. Both raise uncomfortable questions: if the decision-maker (human or AI) is acting on factors beyond conscious control, how do we assign responsibility?</p>
+                </div>
+
+                <div class="cross-ref">
+                    <h5>📚 Cross-Reference</h5>
+                    <p><strong>Behave (Sapolsky):</strong> Makes the case that biology determines behavior more completely than we want to admit, challenging free will at every level.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- SYNTHESIS SECTION -->
+    <section class="section" style="background: linear-gradient(135deg, rgba(106, 92, 231, 0.05), rgba(78, 205, 196, 0.05)); padding: 80px 0; margin-top: 40px;">
+        <div class="container">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; text-align: center; margin-bottom: 50px; color: var(--dark-purple);">The Big Picture: Hidden Layers of Mind</h2>
+
+            <div class="lesson-grid">
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);">
+                    <h3 style="color: var(--dark-purple); margin-bottom: 15px;">The Core Metaphor</h3>
+                    <p style="color: #555; line-height: 1.8;">Your brain is an iceberg. Consciousness is the visible tip, representing perhaps 5% of mental activity. Beneath the waterline, vast networks of unconscious processing—prediction, learning, categorization, decision-making—silently drive everything you do. You're aware of the output but blind to the machinery.</p>
+                </div>
+
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);">
+                    <h3 style="color: var(--deep-blue); margin-bottom: 15px;">The Uncomfortable Truth</h3>
+                    <p style="color: #555; line-height: 1.8;">You're not in control of your brain. You think you decide, but your brain decides first. You think you see reality, but you construct it. You think you're unified, but you're a coalition of competing processes. Your conscious mind is a passenger narrating a story about a vehicle it doesn't drive.</p>
+                </div>
+
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);">
+                    <h3 style="color: var(--warm-red); margin-bottom: 15px;">The Hopeful Path</h3>
+                    <p style="color: #555; line-height: 1.8;">While you can't control your brain directly, you can shape it through practice, attention, and experience. Neuroplasticity means you're never locked into your current pattern. By understanding how your brain works—its biases, its blind spots, its hidden processes—you gain power over your future. Self-knowledge is the first step to self-direction.</p>
+                </div>
+            </div>
+
+            <div class="highlight" style="margin-top: 50px; border-left: 5px solid var(--dark-purple); background: linear-gradient(135deg, rgba(160, 108, 213, 0.1), rgba(78, 205, 196, 0.1));">
+                <h3 style="color: var(--dark-purple); margin-bottom: 20px; font-size: 1.3rem;">Why This Book Matters</h3>
+                <p style="color: #333; margin-bottom: 15px;"><strong>Eagleman achieves something rare: scientific humility paired with accessible wonder.</strong> He doesn't oversimplify neuroscience, but he makes it viscerally clear why it matters. Every lesson challenges a comfortable assumption: that you're in control, that you know yourself, that reality is what you perceive, that justice can be based on moral blame.</p>
+                <p style="color: #333;">By understanding your brain's hidden operations, you gain:</p>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li style="color: #555; margin-bottom: 10px;"><strong>Self-compassion:</strong> Your biases and failures aren't personal failings—they're features of your neurobiology.</li>
+                    <li style="color: #555; margin-bottom: 10px;"><strong>Intellectual humility:</strong> Your consciousness doesn't see the full picture. Remain open to what you're missing.</li>
+                    <li style="color: #555; margin-bottom: 10px;"><strong>Better decision-making:</strong> Knowing your blind spots and biases helps you compensate for them.</li>
+                    <li style="color: #555; margin-bottom: 10px;"><strong>Compassion for others:</strong> Difficult people aren't necessarily evil—their brains might just be broken or differently wired.</li>
+                    <li style="color: #555;"><strong>Direction for growth:</strong> Understanding neuroplasticity shows that change is always possible through deliberate practice.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About This Guide</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 15px;">A comprehensive illustrated exploration of David Eagleman's "Incognito: The Secret Lives of the Brain," revealing how your hidden neural processes construct your reality, drive your decisions, and define who you are.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Key Concepts</h3>
+                    <ul>
+                        <li><a href="#lesson-1">Consciousness as the Iceberg Tip</a></li>
+                        <li><a href="#lesson-2">Team of Rivals Architecture</a></li>
+                        <li><a href="#lesson-3">Constructed Reality</a></li>
+                        <li><a href="#lesson-4">Unconscious Processing</a></li>
+                        <li><a href="#lesson-5">Implicit Bias</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Cross-References</h3>
+                    <ul>
+                        <li><a href="#">Thinking, Fast and Slow (Kahneman)</a></li>
+                        <li><a href="#">Behave (Sapolsky)</a></li>
+                        <li><a href="#">Stumbling on Happiness (Gilbert)</a></li>
+                        <li><a href="#">Phantoms in the Brain (Ramachandran)</a></li>
+                        <li><a href="#">The Selfish Gene (Dawkins)</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Author</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 15px;"><strong>David Eagleman</strong> is a neuroscientist, author, and advocate for incorporating neuroscience into law and policy. His work bridges cutting-edge brain research and philosophical questions about consciousness, identity, and moral responsibility.</p>
+                    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">Director of the Center for Brain and Cognition at Stanford University.</p>
+                </div>
+            </div>
+
+            <div class="footer-divider">
+                <p>This illustrated guide synthesizes the central themes of "Incognito" with contemporary neuroscience, AI parallels, and philosophical implications.</p>
+                <p style="margin-top: 15px;">Created as an interactive learning resource. All concepts rooted in peer-reviewed neuroscience and Eagleman's published work.</p>
+                <p style="margin-top: 20px; color: rgba(255, 255, 255, 0.5);">© 2026 Educational Resource | Incognito by David Eagleman | Illustrations and Design Original</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll behavior for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Fade in effect on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.6s ease-in forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.lesson-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .lesson-card {
+                animation: fadeIn 0.6s ease-in forwards;
+                opacity: 0;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

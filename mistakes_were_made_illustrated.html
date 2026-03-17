@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mistakes Were Made (But Not by Me) - Illustrated Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ===== COVER SECTION ===== */
+        .cover {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--coral) 50%, var(--purple) 100%);
+            color: white;
+            padding: 80px 40px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='dots' x='0' y='0' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='20' cy='20' r='2' fill='rgba(255,255,255,0.1)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23dots)'/%3E%3C/svg%3E") repeat;
+            pointer-events: none;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            opacity: 0.95;
+        }
+
+        .cover-authors {
+            font-size: 1.1rem;
+            margin-bottom: 60px;
+            opacity: 0.9;
+        }
+
+        .svg-container {
+            margin: 40px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ===== SVG ILLUSTRATIONS ===== */
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ===== HEADER SECTION ===== */
+        .header {
+            background: linear-gradient(90deg, var(--deep-blue) 0%, var(--teal) 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== LESSON CARDS ===== */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid var(--coral);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .lesson-card:nth-child(2) {
+            border-left-color: var(--purple);
+        }
+
+        .lesson-card:nth-child(2)::before {
+            background: radial-gradient(circle, rgba(160, 108, 213, 0.1) 0%, transparent 70%);
+        }
+
+        .lesson-card:nth-child(3) {
+            border-left-color: var(--sky);
+        }
+
+        .lesson-card:nth-child(3)::before {
+            background: radial-gradient(circle, rgba(116, 185, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .lesson-card:nth-child(4) {
+            border-left-color: var(--teal);
+        }
+
+        .lesson-card:nth-child(4)::before {
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+        }
+
+        .lesson-card:nth-child(5) {
+            border-left-color: var(--warm-red);
+        }
+
+        .lesson-card:nth-child(5)::before {
+            background: radial-gradient(circle, rgba(225, 112, 85, 0.1) 0%, transparent 70%);
+        }
+
+        .lesson-card:nth-child(6) {
+            border-left-color: var(--forest);
+        }
+
+        .lesson-card:nth-child(6)::before {
+            background: radial-gradient(circle, rgba(0, 184, 148, 0.1) 0%, transparent 70%);
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: var(--coral);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lesson-card:nth-child(2) .lesson-number {
+            background: var(--purple);
+        }
+
+        .lesson-card:nth-child(3) .lesson-number {
+            background: var(--sky);
+        }
+
+        .lesson-card:nth-child(4) .lesson-number {
+            background: var(--teal);
+        }
+
+        .lesson-card:nth-child(5) .lesson-number {
+            background: var(--warm-red);
+        }
+
+        .lesson-card:nth-child(6) .lesson-number {
+            background: var(--forest);
+        }
+
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .lesson-content {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lesson-example {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.05) 0%, rgba(160, 108, 213, 0.05) 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--dark);
+            border-left: 4px solid var(--coral);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== KEY LESSON SECTION ===== */
+        .key-lesson {
+            background: linear-gradient(135deg, var(--coral) 0%, var(--warm-red) 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .key-lesson::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .key-lesson h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .key-lesson-content {
+            position: relative;
+            z-index: 1;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .example-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .example-box strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .example-box p {
+            margin: 10px 0;
+            font-size: 0.95rem;
+        }
+
+        /* ===== FUNNY TAKE SECTION ===== */
+        .funny-take {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--orange) 100%);
+            color: var(--dark);
+            padding: 60px 40px;
+            border-radius: 15px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .funny-take::before {
+            content: '😄';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 200px;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .funny-take h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .funny-take-content {
+            position: relative;
+            z-index: 1;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .funny-quote {
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid var(--dark);
+            font-size: 1rem;
+        }
+
+        /* ===== AI CONNECTION SECTION ===== */
+        .ai-connection {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--deep-blue) 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-connection::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .ai-connection h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ai-connection-content {
+            position: relative;
+            z-index: 1;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .ai-parallels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .parallel {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .parallel-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .parallel-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        /* ===== CROSS-BOOK SECTION ===== */
+        .cross-book {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            margin: 80px 0;
+            border-top: 6px solid var(--purple);
+        }
+
+        .cross-book h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--dark);
+        }
+
+        .book-references {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .book-ref {
+            background: linear-gradient(135deg, rgba(160, 108, 213, 0.05) 0%, rgba(78, 205, 196, 0.05) 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid var(--purple);
+        }
+
+        .book-ref-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .book-ref-author {
+            font-size: 0.9rem;
+            color: var(--purple);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .book-ref-connection {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ===== PYRAMID ILLUSTRATION SECTION ===== */
+        .pyramid-section {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            margin: 80px 0;
+            border-top: 6px solid var(--teal);
+        }
+
+        .pyramid-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--dark);
+            text-align: center;
+        }
+
+        .pyramid-explanation {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.05) 0%, rgba(85, 239, 196, 0.05) 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 5px solid var(--teal);
+        }
+
+        .pyramid-explanation h3 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .pyramid-explanation p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 80px;
+        }
+
+        .footer h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin: 10px 0;
+        }
+
+        .footer-highlight {
+            color: var(--coral);
+            font-weight: 600;
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--coral), var(--purple), var(--teal), transparent);
+            margin: 60px 0;
+            border-radius: 2px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .cover-title {
+                font-size: 2.5rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .lesson-title {
+                font-size: 1.3rem;
+            }
+
+            .key-lesson h2,
+            .funny-take h2,
+            .ai-connection h2,
+            .cross-book h2,
+            .pyramid-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .ai-parallels {
+                grid-template-columns: 1fr;
+            }
+
+            .book-references {
+                grid-template-columns: 1fr;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-intro {
+            font-size: 1.05rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== COVER ===== -->
+        <div class="cover">
+            <div class="cover-content">
+                <div class="svg-container">
+                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 500px;">
+                        <!-- Left Path/Pyramid -->
+                        <defs>
+                            <linearGradient id="leftGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:rgba(255,255,255,0.8);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="rightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:rgba(255,255,255,0.6);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:rgba(255,255,255,0.2);stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Diverging paths metaphor -->
+                        <g id="left-pyramid">
+                            <polygon points="100,50 50,250 150,250" fill="url(#leftGrad)" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+                            <!-- Layers -->
+                            <line x1="75" y1="150" x2="125" y2="150" stroke="rgba(255,255,255,0.4)" stroke-width="1" opacity="0.6"/>
+                            <line x1="62" y1="200" x2="138" y2="200" stroke="rgba(255,255,255,0.4)" stroke-width="1" opacity="0.6"/>
+                        </g>
+
+                        <!-- Right Path/Pyramid -->
+                        <g id="right-pyramid">
+                            <polygon points="300,50 250,250 350,250" fill="url(#rightGrad)" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+                            <!-- Layers -->
+                            <line x1="275" y1="150" x2="325" y2="150" stroke="rgba(255,255,255,0.4)" stroke-width="1" opacity="0.6"/>
+                            <line x1="262" y1="200" x2="338" y2="200" stroke="rgba(255,255,255,0.4)" stroke-width="1" opacity="0.6"/>
+                        </g>
+
+                        <!-- Diverging arrow -->
+                        <path d="M 200 50 L 150 150 M 200 50 L 250 150" stroke="rgba(255,255,255,0.7)" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="rgba(255,255,255,0.7)"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Labels -->
+                        <text x="100" y="280" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="12" font-weight="bold">Small Choice</text>
+                        <text x="300" y="280" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="12" font-weight="bold">Small Choice</text>
+                    </svg>
+                </div>
+
+                <h1 class="cover-title">Mistakes Were Made</h1>
+                <p class="cover-subtitle">(But Not by Me)</p>
+                <p class="cover-subtitle" style="font-size: 1.1rem; opacity: 0.85;">Why We Justify Foolish Beliefs, Bad Decisions, and Hurtful Acts</p>
+                <p class="cover-authors">Carol Tavris & Elliot Aronson</p>
+            </div>
+        </div>
+
+        <!-- ===== INTRODUCTION ===== -->
+        <div class="header">
+            <h1>A Guide to Self-Justification & Cognitive Dissonance</h1>
+            <p>Explore how our minds protect our self-image by rationalization, memory reconstruction, and systematic self-deception—from court rooms to marriages, from politics to science.</p>
+        </div>
+
+        <!-- ===== 12 CORE LESSONS ===== -->
+        <section>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; text-align: center; margin: 60px 0 40px; color: var(--dark);">The 12 Core Lessons</h2>
+
+            <div class="lessons-grid">
+                <!-- Lesson 1 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">1</div>
+                    <h3 class="lesson-title">Festinger's Original Theory</h3>
+                    <p class="lesson-content">Leon Festinger's groundbreaking 1957 theory of cognitive dissonance explains that when our beliefs and actions conflict, we experience psychological discomfort. Rather than changing our beliefs to match reality, we often change our beliefs to justify our actions.</p>
+                    <div class="lesson-example">
+                        <strong>The Classic Experiment:</strong> When paid only $1 (vs. $20) to lie about a boring task, participants who were underpaid actually convinced themselves the task was interesting—proving we'll rewrite our beliefs to reduce inner conflict.
+                    </div>
+                </div>
+
+                <!-- Lesson 2 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">2</div>
+                    <h3 class="lesson-title">The Pyramid of Choice</h3>
+                    <p class="lesson-content">Small decisions compound into vastly different life outcomes. A single choice to take a job in a new city, agree to one dishonest action, or marry someone can set you on a path you never intended. Each subsequent choice locks you further into justifying the original decision.</p>
+                    <div class="lesson-example">
+                        <strong>Real Life:</strong> A prosecutor who wrongfully convicts someone initially just "goes along" with tunnel vision from a senior detective. Over years, they build their entire career identity around that conviction, becoming psychologically unable to admit the mistake.
+                    </div>
+                </div>
+
+                <!-- Lesson 3 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">3</div>
+                    <h3 class="lesson-title">Self-Justification as the Engine of Denial</h3>
+                    <p class="lesson-content">Self-justification is the brain's immune system against admitting error. It's not lying per se—it's the unconscious process of reframing, rationalizing, and reinterpreting our actions to maintain a coherent self-image as a "good person."</p>
+                    <div class="lesson-example">
+                        <strong>In Action:</strong> A parent who overstresses their child during academics will unconsciously reframe harsh criticisms as "motivation" or "high standards," genuinely believing it's for the child's benefit—despite evidence of psychological harm.
+                    </div>
+                </div>
+
+                <!-- Lesson 4 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">4</div>
+                    <h3 class="lesson-title">Memory Distortion: We Rewrite Our Past</h3>
+                    <p class="lesson-content">Our memories are not recordings—they're reconstructions. We literally alter our recollections of the past to fit our current self-image and beliefs. The more important the action to our identity, the more aggressively we distort the memory.</p>
+                    <div class="lesson-example">
+                        <strong>The Recovered Memory Controversy:</strong> In the 1980s-90s, therapists using leading questions "recovered" memories of childhood sexual abuse that never occurred. Clients genuinely believed these false memories, because memory is malleable and influenced by suggestion.
+                    </div>
+                </div>
+
+                <!-- Lesson 5 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">5</div>
+                    <h3 class="lesson-title">False Confessions & Wrongful Convictions</h3>
+                    <p class="lesson-content">Innocent people confess to crimes they didn't commit through coercive interrogation, leading questions, and the psychological pressure to resolve cognitive dissonance. Once they confess (publicly and "voluntarily"), they begin to believe it themselves.</p>
+                    <div class="lesson-example">
+                        <strong>Tunnel Vision in Prosecution:</strong> Police and prosecutors, once committed to a suspect, unconsciously discount exculpatory evidence and emphasize confirming evidence. By the trial, they have genuinely rewritten their memory to align with the narrative of guilt.
+                    </div>
+                </div>
+
+                <!-- Lesson 6 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">6</div>
+                    <h3 class="lesson-title">Milgram Reframed Through Dissonance</h3>
+                    <p class="lesson-content">Milgram's famous obedience experiments become clearer through the lens of cognitive dissonance: people who administered shocks to an innocent victim later justified their actions by dehumanizing the victim and reframing themselves as "just following orders."</p>
+                    <div class="lesson-example">
+                        <strong>The Mechanism:</strong> Participants who shocked victims then disparaged them ("he deserved it," "he wasn't really hurt") to reduce the dissonance between their moral self-image and their harmful actions. We convince ourselves the victim was bad, not that we were wrong.
+                    </div>
+                </div>
+
+                <!-- Lesson 7 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">7</div>
+                    <h3 class="lesson-title">Marriage & The Stories We Tell</h3>
+                    <p class="lesson-content">Couples who stay together develop rewritten narratives of their history. They literally remember their marriage differently than they experienced it—"we always knew we were meant for each other" (despite real doubt), or "I never loved anyone else" (rewriting past attractions).</p>
+                    <div class="lesson-example">
+                        <strong>Happily Married vs. Divorced:</strong> Couples who divorce often report their marriage was always troubled; couples who stay report it was always strong—even when interviewed during the same rocky period before separation. The present outcome rewrites the past.
+                    </div>
+                </div>
+
+                <!-- Lesson 8 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">8</div>
+                    <h3 class="lesson-title">Prejudice & Self-Justification</h3>
+                    <p class="lesson-content">Prejudice is powered by self-justification. We convince ourselves that our stereotypes are based on observation, not bias. We notice and remember confirming examples vividly, while forgetting disconfirming ones.</p>
+                    <div class="lesson-example">
+                        <strong>The Mechanism:</strong> Someone who holds a stereotype about a group remembers "that time they cut in line" but forgets all the times they didn't. When confronted with exceptions, they're reclassified: "she's different from the rest of them"—preserving the stereotype.
+                    </div>
+                </div>
+
+                <!-- Lesson 9 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">9</div>
+                    <h3 class="lesson-title">Science & the Reluctance to Admit Error</h3>
+                    <p class="lesson-content">Even scientists—trained to embrace evidence—fall victim to self-justification. Once they've published a finding or built a reputation around a theory, they unconsciously discount contrary evidence and build post-hoc explanations for anomalies.</p>
+                    <div class="lesson-example">
+                        <strong>Cold Fusion Fiasco (1989):</strong> Scientists who announced they'd discovered cold fusion then spent years finding "reasons" why replications failed, rather than simply accepting the null result. Their identity was invested in the breakthrough.
+                    </div>
+                </div>
+
+                <!-- Lesson 10 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">10</div>
+                    <h3 class="lesson-title">The Historian's Fallacy & Inevitability</h3>
+                    <p class="lesson-content">We retroactively assume that past events were inevitable—that decision-makers "should have known" what we know now. This lets us rewrite history as a series of justified choices, obscuring the uncertainty and moral complexity of the actual moment.</p>
+                    <div class="lesson-example">
+                        <strong>War Justification:</strong> After an invasion is seen as a mistake, leaders rewrite the decision-making process: "We were told it was necessary for security; we made the best choice with available information"—when in fact, dissenters warned of consequences at the time.
+                    </div>
+                </div>
+
+                <!-- Lesson 11 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">11</div>
+                    <h3 class="lesson-title">Political Polarization Through Self-Justification</h3>
+                    <p class="lesson-content">In politics, self-justification drives polarization. When your political tribe makes a decision, you unconsciously seek reasons to justify it. When the opposing tribe does something, you're primed to interpret it uncharitably.</p>
+                    <div class="lesson-example">
+                        <strong>The Same Action, Two Stories:</strong> When "your side" cuts taxes, it's "fiscal responsibility"; when the other side does it, it's "favoring the rich." When "your side" spends, it's "necessary investment"; the other side is "wasteful." Self-justification makes the same action morally distinct depending on who does it.
+                    </div>
+                </div>
+
+                <!-- Lesson 12 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">12</div>
+                    <h3 class="lesson-title">How to Admit Mistakes (& Why It's So Hard)</h3>
+                    <p class="lesson-content">Admitting mistakes requires overcoming deep psychological resistance. The path to genuine change involves: discomfort with dissonance, reframing identity away from the mistake, experiencing genuine remorse, and making reparations—none of which come naturally.</p>
+                    <div class="lesson-example">
+                        <strong>The Conditions for Admission:</strong> People confess real mistakes when: (1) the cost of maintaining the lie exceeds the cost of admitting it, (2) they can reframe themselves as someone who "grew" or "learned," and (3) they have social support for the confession. Without these, self-justification wins.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- ===== PYRAMID OF CHOICE SECTION ===== -->
+        <div class="pyramid-section">
+            <h2>The Pyramid of Choice: Path Dependency & Identity Lock</h2>
+
+            <div class="svg-container">
+                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 600px;">
+                    <!-- Background -->
+                    <defs>
+                        <linearGradient id="pyramidLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:rgba(255, 107, 107, 0.6);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:rgba(255, 107, 107, 0.2);stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="pyramidRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:rgba(160, 108, 213, 0.6);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:rgba(160, 108, 213, 0.2);stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Left pyramid (small choice grows) -->
+                    <polygon points="150,50 50,350 250,350" fill="url(#pyramidLeft)" stroke="#FF6B6B" stroke-width="2"/>
+
+                    <!-- Layers showing commitment -->
+                    <line x1="100" y1="125" x2="200" y2="125" stroke="#FF6B6B" stroke-width="1.5" opacity="0.6"/>
+                    <line x1="75" y1="200" x2="225" y2="200" stroke="#FF6B6B" stroke-width="1.5" opacity="0.6"/>
+                    <line x1="50" y1="275" x2="250" y2="275" stroke="#FF6B6B" stroke-width="1.5" opacity="0.6"/>
+
+                    <!-- Right pyramid (same choice, different commitment) -->
+                    <polygon points="450,50 350,350 550,350" fill="url(#pyramidRight)" stroke="#A06CD5" stroke-width="2"/>
+
+                    <!-- Layers -->
+                    <line x1="400" y1="125" x2="500" y2="125" stroke="#A06CD5" stroke-width="1.5" opacity="0.6"/>
+                    <line x1="375" y1="200" x2="525" y2="200" stroke="#A06CD5" stroke-width="1.5" opacity="0.6"/>
+                    <line x1="350" y1="275" x2="550" y2="275" stroke="#A06CD5" stroke-width="1.5" opacity="0.6"/>
+
+                    <!-- Arrow showing divergence -->
+                    <path d="M 300 50 L 200 100 M 300 50 L 400 100" stroke="#4ECDC4" stroke-width="3" fill="none"/>
+                    <polygon points="200,100 195,90 205,95" fill="#4ECDC4"/>
+                    <polygon points="400,100 395,95 405,90" fill="#4ECDC4"/>
+
+                    <!-- Labels -->
+                    <text x="150" y="390" text-anchor="middle" fill="#FF6B6B" font-size="14" font-weight="bold">Committed Early</text>
+                    <text x="450" y="390" text-anchor="middle" fill="#A06CD5" font-size="14" font-weight="bold">Committed Late</text>
+                    <text x="300" y="30" text-anchor="middle" fill="#4ECDC4" font-size="14" font-weight="bold">Same Choice Point</text>
+                </svg>
+            </div>
+
+            <div class="pyramid-explanation">
+                <h3>How Small Commitments Grow Into Identity</h3>
+                <p>The pyramid metaphor illustrates a critical insight: <strong>the timing and depth of your commitment determines the magnitude of self-justification required to maintain consistency.</strong></p>
+                <p><strong>Level 1 (Small Choice):</strong> You agree to something modest—tell one lie, cut corners once, make a small ethical compromise. At this point, admitting the mistake is easy; it doesn't define you.</p>
+                <p><strong>Level 2 (Building Commitment):</strong> You make another similar choice. Now you're developing a pattern. Admitting the first mistake becomes harder because it implies the second one was also wrong. You begin rationalizing: "Actually, everyone does this."</p>
+                <p><strong>Level 3 (Identity Fusion):</strong> After years of incremental choices and justifications, the original compromise is now woven into your identity, your career, your relationships. Admitting it requires dismantling everything you've built. Self-justification is now not a vice—it's survival.</p>
+                <p><strong>The Key Insight:</strong> The longer and deeper you are committed, the stronger your psychological need to justify that commitment. A prosecutor who enters a case uncertain can easily reconsider evidence. A prosecutor ten years into building a reputation around that conviction cannot—not because they're irrational, but because their brain has mathematically maximized their investment.</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ===== KEY LESSON SECTION ===== -->
+        <div class="key-lesson">
+            <h2>The Central Mechanism: Why Smart People Fall Hardest</h2>
+
+            <div class="key-lesson-content">
+                <p style="margin-bottom: 25px;">The book's most powerful insight is that <strong>intelligent, well-educated people are often better at self-justification than others</strong>. They have more sophisticated tools to rationalize, more mental flexibility to reinterpret evidence, and greater social credibility when they stake reputations on false claims.</p>
+
+                <div class="example-box">
+                    <strong>Case Study 1: The Iraq War & WMDs (2003)</strong>
+                    <p>U.S. intelligence officials, military planners, and political leaders genuinely believed Saddam Hussein possessed weapons of mass destruction. Why? The initial assumption (formed under genuine uncertainty) became a fixed belief, and once the war began, admitting the premise was false meant admitting the entire invasion was unjustified.</p>
+                    <p><strong>The Self-Justification Cascade:</strong></p>
+                    <ul style="margin: 15px 0; margin-left: 25px;">
+                        <li>Initial belief: Iraq has WMDs (uncertain, but plausible given history)</li>
+                        <li>Decision point: Invade (now publicly committed)</li>
+                        <li>Post-invasion: Scouts find no WMDs, but intelligence is misinterpreted or reclassified</li>
+                        <li>Deeper commitment: Troops deployed, body count rising—can't admit the premise was wrong</li>
+                        <li>Full self-justification: "We still might find them," "We did the right thing anyway," "The real goal was democracy"</li>
+                    </ul>
+                    <p>Smart people—those capable of sophisticated reasoning—generated the most elaborate justifications. A simpler mind might have just said "we were wrong," but experts had the intellectual tools to spin narratives, redefine success criteria, and reinterpret ambiguous evidence.</p>
+                </div>
+
+                <div class="example-box">
+                    <strong>Case Study 2: Recovered Memory Controversy (1980s-1990s)</strong>
+                    <p>Trained psychotherapists, armed with the latest theory about repressed trauma, asked leading questions of vulnerable patients: "Many of my clients who have similar symptoms were sexually abused. Do you think you might have been?" Within weeks, patients "recovered" vivid memories of abuse—memories that felt absolutely real.</p>
+                    <p><strong>The Intelligence Paradox:</strong> It was often the smartest, most articulate patients who generated the most detailed false memories. Why? Because they had the cognitive sophistication to fill in narrative gaps, create emotional coherence, and construct psychologically plausible scenarios—all while their memory was being reconstructed by the therapist's suggestions.</p>
+                    <p>When confronted with DNA evidence or the accused's alibis, both therapists and clients fell back on psychological self-justification: "Memory isn't perfect," "recovered memories are sometimes symbolic rather than literal," "the trauma is real even if the details are wrong." The intelligent mind's capacity for self-justification made it nearly impossible to admit the entire process was iatrogenic (doctor-induced).</p>
+                </div>
+
+                <div class="example-box">
+                    <strong>Case Study 3: Tunnel Vision in Wrongful Prosecutions</strong>
+                    <p>When an innocent person is convicted due to prosecutor tunnel vision, it's often because the prosecutor has:</p>
+                    <ul style="margin: 15px 0; margin-left: 25px;">
+                        <li>Committed publicly to the suspect's guilt</li>
+                        <li>Built a reputation around the case</li>
+                        <li>Interpreted ambiguous evidence favorably (confirmation bias)</li>
+                        <li>Explained away exculpatory evidence</li>
+                        <li>Over time, genuinely misremembered the case to fit the narrative</li>
+                    </ul>
+                    <p><strong>What Makes It Worse:</strong> When DNA evidence later proves innocence, smart, successful prosecutors are often the most resistant to admitting error. Why? Because their entire professional identity, their image of themselves as a "seeker of justice," is threatened. Admitting guilt means admitting they destroyed an innocent person's life—a dissonance so profound that many prosecutors rationalize: "The DNA evidence is contaminated," "There were other factors," "Justice was served anyway." The smartest prosecutors generate the most sophisticated refusals to admit error.</p>
+                </div>
+
+                <p style="margin-top: 30px; font-weight: 600; font-style: italic;">The core lesson: Rationality without awareness of self-justification becomes a tool for defending bad beliefs rather than discovering truth. Intelligent people can convince themselves of nearly anything—and convince others in the process.</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ===== FUNNY TAKE SECTION ===== -->
+        <div class="funny-take">
+            <h2>The Funny (and Tragic) Side: Self-Justification in Everyday Life</h2>
+
+            <div class="funny-take-content">
+                <p style="margin-bottom: 30px;">If cognitive dissonance and self-justification apply to prosecutors and politicians, they certainly apply to you and me. Here's the less-discussed humor of the book:</p>
+
+                <div class="funny-quote">
+                    "You overslept and were late to work. You tell yourself: 'Traffic was terrible' (literally you didn't leave early enough, but you rewrite the cause). You arrive and your boss is annoyed. Your internal monologue: 'They're unreasonable—they should understand that sometimes things happen. This job doesn't appreciate hard workers like me.' (You didn't think about other employees arriving on time.) By that evening, you've genuinely forgotten that you hit snooze four times. Your memory has rewritten the morning to fit the narrative of a conscientious person facing circumstances beyond their control."
+                </div>
+
+                <p><strong>Why It's Hilarious (and Tragic):</strong> We do this constantly. Every single day. You cut someone off in traffic and immediately think, "They were in my blind spot!" (not "I wasn't paying attention"). Your partner criticizes you, and you think, "They're oversensitive" (not "maybe they have a valid point"). You spend too much money and think, "I deserved it after a hard week" (not "I lack impulse control").</p>
+
+                <p><strong>The Kicker:</strong> You're not being dishonest. Your brain is literally rewriting the memory and reinterpreting the event in real-time. You're not consciously lying; you're unconsciously rationalizing. This is what makes self-justification so powerful and so insidious—it feels like truth from the inside.</p>
+
+                <div class="funny-quote">
+                    "We convince ourselves that our worst friends are our 'realistic' ones and that anyone who challenges us is 'jealous' or 'threatened.' We believe our diets failed because of our metabolism, not our diet. We're convinced our investment losses were due to bad timing, not bad judgment—but our investment gains? That's because we're shrewd. We rate ourselves as above-average drivers, above-average lovers, and above-average employees, simultaneously believing everyone else is delusional about themselves."
+                </div>
+
+                <p><strong>The Paradox:</strong> The book reveals that the more you understand about cognitive dissonance, the more you realize how little control you have over your own rationalizations. You can read the chapter on memory distortion and still, the next day, catch yourself adjusting your memory of an argument to make yourself look better. Knowledge doesn't cure self-justification; it just makes you aware that you're not cured.</p>
+
+                <p style="margin-top: 25px; font-weight: 600;">The real comedy is that we're all constantly revising our life story to ourselves, and we'll never know which version is real.</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ===== AI CONNECTION SECTION ===== -->
+        <div class="ai-connection">
+            <h2>AI, LLMs, and the Parallels to Human Self-Justification</h2>
+
+            <div class="ai-connection-content">
+                <p style="margin-bottom: 30px;">Though "Mistakes Were Made" predates modern AI, its insights map strikingly onto challenges in large language models and their training:</p>
+
+                <div class="ai-parallels">
+                    <div class="parallel">
+                        <div class="parallel-title">Conflicting Objectives & Dissonance</div>
+                        <div class="parallel-desc">LLMs are trained on multiple, sometimes contradictory objectives: generate helpful outputs, avoid harmful ones, be honest, be engaging, be politically neutral, be culturally sensitive. When an LLM encounters a prompt that pits these objectives against each other, it resolves the dissonance through rationalization, generating outputs that satisfy multiple goals simultaneously.</div>
+                    </div>
+
+                    <div class="parallel">
+                        <div class="parallel-title">Post-Hoc Rationalization of Outputs</div>
+                        <div class="parallel-desc">When asked to explain its reasoning for a decision, an LLM engages in post-hoc rationalization—generating a plausible explanation that wasn't part of the original computation. It's not lying; it's performing the same self-justification humans do when asked why they made a choice, reconstructing a coherent narrative that wasn't explicitly reasoned.</div>
+                    </div>
+
+                    <div class="parallel">
+                        <div class="parallel-title">Memory Distortion Through Training Data</div>
+                        <div class="parallel-desc">An LLM's "memories" (training data patterns) are corrupted over time by the combination of pretraining biases, fine-tuning on human feedback, and deployment in diverse contexts. The model gradually distorts its representations to fit multiple competing narratives, much like human memory distorts to fit a coherent self-image.</div>
+                    </div>
+
+                    <div class="parallel">
+                        <div class="parallel-title">The Pyramid of Choice as Path Dependency</div>
+                        <div class="parallel-desc">An LLM's early tokens in a response establish a trajectory. Once the model commits to a certain framing, character voice, or argument structure (the first few tokens), it's locked into justifying that initial choice through all subsequent tokens. Changing direction mid-response creates dissonance with its own outputs, so the model rationalizes consistency.</div>
+                    </div>
+
+                    <div class="parallel">
+                        <div class="parallel-title">Bias Amplification Through Self-Justification</div>
+                        <div class="parallel-desc">If an LLM's training data contains a stereotype or bias, and it generates outputs reflecting that bias (due to its learned patterns), it then encounters feedback that either reinforces or challenges the bias. Through RLHF (Reinforcement Learning from Human Feedback), the model learns to rationalize its biased outputs, rather than fully correcting them—similar to how humans defend prejudices through sophisticated justifications.</div>
+                    </div>
+
+                    <div class="parallel">
+                        <div class="parallel-title">Resistance to Admitting Error</div>
+                        <div class="parallel-desc">An LLM that has confidently stated a fact and built downstream reasoning on it faces pressure to defend that statement rather than admit error. The model's training incentivizes consistency and coherence, creating a form of "machine self-justification" where correcting an earlier statement feels like undermining its own authority.</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px; margin-bottom: 20px; font-size: 1.3rem; font-weight: 600;">The Deeper Connection:</h3>
+
+                <p style="margin-bottom: 15px;">Tavris and Aronson describe self-justification as a <strong>cost-benefit computation run unconsciously</strong>. The mind asks: "What's the cost of admitting I was wrong?" versus "What's the cost of maintaining this belief?" When the former exceeds the latter, we finally change.</p>
+
+                <p style="margin-bottom: 15px;">LLMs similarly optimize a loss function (cost) across multiple objectives. When an output that's inaccurate still scores well on "helpfulness" or "engagement," the model has no incentive to prioritize accuracy. It has unconsciously (in the sense of not explicitly reasoning about it) computed that the cost of error is lower than the cost of withholding a response.</p>
+
+                <p style="margin-bottom: 15px;">The parallel suggests that <strong>reducing self-justification in AI systems requires changing the underlying incentive structure</strong>—much like reducing human self-justification requires situations where admitting error has lower psychological or social costs than maintaining the false belief.</p>
+
+                <p><strong>The Unsettling Implication:</strong> If human and machine cognition both solve the same problem (managing conflicting objectives) through similar mechanisms (rationalization and post-hoc justification), then neither is inherently more rational or immune to self-deception. Both are solving the same optimization problem, and both arrive at similar biases.</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ===== CROSS-BOOK CONNECTIONS ===== -->
+        <div class="cross-book">
+            <h2>Connected Insights Across Great Books</h2>
+
+            <p class="section-intro">The themes of "Mistakes Were Made" deepen when connected with other major works in psychology and social science. Here's how each book reveals different dimensions of the same human tendency to avoid truth:</p>
+
+            <div class="book-references">
+                <div class="book-ref">
+                    <div class="book-ref-title">Thinking, Fast and Slow</div>
+                    <div class="book-ref-author">Daniel Kahneman</div>
+                    <div class="book-ref-connection">Kahneman's System 1 (automatic, fast thinking) vs. System 2 (deliberate, slow thinking) explain the cognitive mechanisms that enable self-justification. System 1 makes snap judgments; System 2 rationalizes them. Self-justification happens partly because System 2 is lazy and goes along with System 1's initial assessment rather than critically examining it.</div>
+                </div>
+
+                <div class="book-ref">
+                    <div class="book-ref-title">Influence: The Psychology of Persuasion</div>
+                    <div class="book-ref-author">Robert Cialdini</div>
+                    <div class="book-ref-connection">Cialdini's "consistency" principle is the social expression of cognitive dissonance. Once we've publicly committed to a position, we feel compelled to act consistently with that position—even when evidence suggests we were wrong. Public commitment deepens self-justification because admitting error now means admitting public hypocrisy.</div>
+                </div>
+
+                <div class="book-ref">
+                    <div class="book-ref-title">The Righteous Mind</div>
+                    <div class="book-ref-author">Jonathan Haidt</div>
+                    <div class="book-ref-connection">Haidt argues that moral intuitions come first, reasoning comes second. We feel outrage at the other side's moral stance, then reason backward to justify our outrage. This is self-justification playing out in real-time: we don't form moral beliefs and then defend them; we feel morally righteous and then construct the beliefs to match.</div>
+                </div>
+
+                <div class="book-ref">
+                    <div class="book-ref-title">Behave: The Biology of Humans at Our Best and Worst</div>
+                    <div class="book-ref-author">Robert Sapolsky</div>
+                    <div class="book-ref-connection">Sapolsky shows that self-justification operates at multiple biological levels—from neural circuits that prioritize self-image over accuracy, to hormonal systems that reinforce in-group loyalty, to evolutionary pressures that favored tribes that convinced themselves they were morally superior. Self-justification isn't a bug; it's a feature built deep into our neurobiology.</div>
+                </div>
+
+                <div class="book-ref">
+                    <div class="book-ref-title">Stumbling on Happiness</div>
+                    <div class="book-ref-author">Daniel Gilbert</div>
+                    <div class="book-ref-connection">Gilbert reveals that we predict our emotional reactions poorly and then, after the fact, rewrite our memories to match the predictions we made. We convince ourselves we're happier than we actually expected to be—another form of memory distortion serving self-justification. Our happiness narrative must remain consistent.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ===== DEEPER DIVE: THE CASE STUDIES ===== -->
+        <section style="background: white; padding: 60px 40px; border-radius: 15px; margin: 80px 0; border-top: 6px solid var(--warm-red);">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px; color: var(--dark);">Deep Dives: Real-World Examples of Self-Justification</h2>
+
+            <div style="margin: 40px 0;">
+                <h3 style="font-size: 1.5rem; color: var(--warm-red); margin-bottom: 20px;">1. The Prosecutor's Certainty</h3>
+                <p style="margin-bottom: 15px; color: #555;">In hundreds of wrongful conviction cases, the prosecutor was not a villain—they were a true believer. They believed the defendant was guilty, not because of overwhelming evidence, but because:</p>
+                <ul style="margin: 15px 0 15px 25px; color: #555;">
+                    <li><strong>Initial Commitment:</strong> Early in the case, they formed a hypothesis (this suspect is guilty) based on limited information.</li>
+                    <li><strong>Confirmatory Search:</strong> They then unconsciously sought evidence that confirmed this hypothesis while discounting disconfirming evidence.</li>
+                    <li><strong>Reinterpretation:</strong> Ambiguous evidence (a partial DNA match, a witness who was partially uncertain) was interpreted as supporting guilt.</li>
+                    <li><strong>Memory Revision:</strong> Over months or years, their memory of the case literally changed. They forgot the uncertainties and remembered the confirmatory details vividly.</li>
+                    <li><strong>Identity Lock:</strong> The conviction became central to their identity as a "seeker of justice." Admitting error would require admitting they had harmed an innocent person.</li>
+                </ul>
+                <p style="margin-bottom: 0; color: #555;"><strong>The Tragedy:</strong> When DNA evidence later proved innocence, the prosecutor often experienced genuine shock and confusion, because their memory of the case no longer matched reality. They hadn't been lying; they had been self-justifying for so long that their lie and their truth had merged.</p>
+            </div>
+
+            <div style="margin: 40px 0;">
+                <h3 style="font-size: 1.5rem; color: var(--warm-red); margin-bottom: 20px;">2. The Therapist's False Memories</h3>
+                <p style="margin-bottom: 15px; color: #555;">In the recovered memory controversy of the 1980s-90s, therapists were not con artists—they were scientists (as they understood it) using cutting-edge theory to help trauma survivors heal. The self-justification mechanism:</p>
+                <ul style="margin: 15px 0 15px 25px; color: #555;">
+                    <li><strong>Theory Commitment:</strong> Therapists were trained that repressed memories of abuse were common and treatable.</li>
+                    <li><strong>Technique Confirmation:</strong> When patients "remembered" abuse after leading questions, it confirmed the theory: "See, it works!"</li>
+                    <li><strong>Reframing Failures:</strong> When a recovered "memory" was later contradicted by evidence, therapists reinterpreted: "Memory is not a video recording; the emotional truth matters even if details are wrong."</li>
+                    <li><strong>Identity Investment:</strong> These therapists had built reputations on recovered memory work. Admitting the methodology was false would mean admitting they'd harmed people.</li>
+                </ul>
+                <p style="margin-bottom: 0; color: #555;"><strong>The Insight:</strong> The therapists' self-justification led to iatrogenic (doctor-caused) harm. Patients, guided by therapeutic suggestions, constructed false memories that felt emotionally real. Both therapist and patient were self-justifying together, locked in a shared narrative.</p>
+            </div>
+
+            <div style="margin: 40px 0;">
+                <h3 style="font-size: 1.5rem; color: var(--warm-red); margin-bottom: 20px;">3. The Intelligence Official and the WMDs</h3>
+                <p style="margin-bottom: 15px; color: #555;">In the lead-up to the Iraq War, intelligence officials reported with "high confidence" that Iraq possessed weapons of mass destruction. The self-justification process:</p>
+                <ul style="margin: 15px 0 15px 25px; color: #555;">
+                    <li><strong>Historical Priors:</strong> Iraq had used chemical weapons against Iran. It was plausible they still had WMDs.</li>
+                    <li><strong>Institutional Momentum:</strong> Decades of Cold War intelligence assessment had built institutions and reputations around tracking WMDs. These institutions had to justify their existence.</li>
+                    <li><strong>Confirmation Bias:</strong> Ambiguous intelligence (aluminum tubes that could be for missiles or centrifuges, mobile labs that could produce bioweapons or not) was interpreted as strongly confirming the WMD hypothesis.</li>
+                    <li><strong>Uncertainty Erased:</strong> Analysts downplayed the uncertainty in their estimates and reported "high confidence" to policymakers.</li>
+                    <li><strong>Sunk Cost Lock:</strong> Once military planning began and troops mobilized, admitting the premise was wrong became psychologically impossible.</li>
+                </ul>
+                <p style="margin-bottom: 0; color: #555;"><strong>The Mechanism:</strong> Smart, educated experts genuinely believed what they reported—not because they were dishonest, but because their brain had completed the self-justification cycle. They remembered the evidence as stronger than it was and discounted counterarguments. They were not consciously lying; they were unconsciously rationalizing.</p>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- ===== THE HARDEST PART ===== -->
+        <section style="background: linear-gradient(135deg, var(--mint) 0%, var(--sky) 100%); color: var(--dark); padding: 60px 40px; border-radius: 15px; margin: 80px 0;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px;">The Hardest Part: Why Smart People Still Self-Justify</h2>
+
+            <p style="font-size: 1.05rem; margin-bottom: 25px; line-height: 1.8;">Tavris and Aronson's most unsettling insight is that <strong>knowing about cognitive dissonance doesn't protect you from it</strong>. In fact, reading this book and understanding the mechanisms might make you worse at admitting mistakes—because now you can rationalize your rationalizations.</p>
+
+            <div style="background: rgba(255, 255, 255, 0.3); padding: 30px; border-radius: 12px; margin: 25px 0;">
+                <h3 style="font-size: 1.2rem; margin-bottom: 15px;">The Conditions for Genuine Admission of Guilt:</h3>
+                <p style="margin: 10px 0;"><strong>1. The Cost Must Be Visible:</strong> You must feel the dissonance. As long as your self-justification is working (people believe you, you've convinced yourself), there's no incentive to admit error. Only when the fiction breaks—when you're caught, confronted, or the consequences become undeniable—does admission become possible.</p>
+                <p style="margin: 10px 0;"><strong>2. The Alternative Identity Must Be Available:</strong> You must be able to reframe yourself as "someone who learns," "someone who admits mistakes," "someone who grew." Without a path to a coherent new identity, admission feels like identity destruction. If you can say "I was wrong, and I'm someone who corrects mistakes," you might admit it. If you say "I was wrong, and therefore I'm a bad person," you'll keep lying.</p>
+                <p style="margin: 10px 0;"><strong>3. Social Support Must Exist:</strong> You must have relationships that can absorb the admission. If admitting a mistake means total social collapse (losing your job, your reputation, your community), self-justification is rational. Only when the social cost of admission is lower than the cost of maintaining the lie does change happen.</p>
+                <p style="margin: 10px 0;"><strong>4. Time Must Have Passed:</strong> The longer you've maintained a belief or commitment, the harder it is to admit. A prosecutor can change course after one case; the same prosecutor after 100 convictions cannot, because the dissonance is now unbearable—they would have to admit 100 potential errors.</p>
+            </div>
+
+            <p style="font-size: 1.05rem; margin-bottom: 0; line-height: 1.8; margin-top: 30px;">This is why <strong>real change requires external pressure, not just internal awareness</strong>. You can understand all of this and still, tomorrow, find yourself rationalizing a mistake rather than admitting it. The brain's self-preservation mechanism is older and stronger than your conscious intentions.</p>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- ===== ACTION STEPS ===== -->
+        <section style="background: white; padding: 60px 40px; border-radius: 15px; margin: 80px 0; border-top: 6px solid var(--forest);">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px; color: var(--dark);">How to (Actually) Overcome Self-Justification</h2>
+
+            <p class="section-intro">The book offers practical strategies for breaking the cycle:</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background: linear-gradient(135deg, rgba(0, 184, 148, 0.05) 0%, rgba(85, 239, 196, 0.05) 100%); padding: 30px; border-radius: 12px; border-left: 5px solid var(--forest);">
+                    <h3 style="font-size: 1.2rem; color: var(--dark); margin-bottom: 15px;">1. Build Institutions That Reward Honesty</h3>
+                    <p style="color: #666; font-size: 0.95rem; line-height: 1.7;">Self-justification happens inside your head. Break it open through systems that expose it: peer review in science, public accountability in government, independent audits. When your errors are visible to others, self-justification becomes harder. When the system rewards admission of error (a scientist who says "my results don't replicate" gains prestige), self-justification loses power.</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(225, 112, 85, 0.05) 0%, rgba(255, 107, 107, 0.05) 100%); padding: 30px; border-radius: 12px; border-left: 5px solid var(--warm-red);">
+                    <h3 style="font-size: 1.2rem; color: var(--dark); margin-bottom: 15px;">2. Cultivate Discomfort with Your Own Certainty</h3>
+                    <p style="color: #666; font-size: 0.95rem; line-height: 1.7;">Notice when you feel very certain about something. That certainty is often a sign that self-justification is active. Try to articulate the strongest counterargument to your belief. If you can't do it, you're not thinking—you're justifying. Genuine confidence comes with the ability to articulate what would prove you wrong.</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(74, 181, 255, 0.05) 0%, rgba(78, 205, 196, 0.05) 100%); padding: 30px; border-radius: 12px; border-left: 5px solid var(--sky);">
+                    <h3 style="font-size: 1.2rem; color: var(--dark); margin-bottom: 15px;">3. Create Low-Cost Exit Ramps</h3>
+                    <p style="color: #666; font-size: 0.95rem; line-height: 1.7;">Before committing deeply to a belief or action, build in ways to change course cheaply. If you can admit error early (when you've invested little), you can avoid the pyramid of choice—where later admission would destroy everything. Make small commitments, leave room to reverse course, and change your mind before identity lock.</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(160, 108, 213, 0.05) 0%, rgba(160, 108, 213, 0.1) 100%); padding: 30px; border-radius: 12px; border-left: 5px solid var(--purple);">
+                    <h3 style="font-size: 1.2rem; color: var(--dark); margin-bottom: 15px;">4. Strengthen Your Identity Beyond Current Beliefs</h3>
+                    <p style="color: #666; font-size: 0.95rem; line-height: 1.7;">If your entire identity rests on being right about one issue, admitting error destroys you. But if you're "someone who admits mistakes and learns," admission becomes identity-affirming rather than identity-shattering. Build an identity flexible enough to survive error.</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(255, 230, 109, 0.15) 0%, rgba(253, 203, 110, 0.1) 100%); padding: 30px; border-radius: 12px; border-left: 5px solid var(--orange);">
+                    <h3 style="font-size: 1.2rem; color: var(--dark); margin-bottom: 15px;">5. Seek Out Disconfirming Evidence</h3>
+                    <p style="color: #666; font-size: 0.95rem; line-height: 1.7;">Your brain naturally seeks confirming evidence and ignores disconfirming evidence. Reverse this: actively look for reasons you might be wrong. Ask: "Who disagrees with me, and what's their best argument?" Listen to understand, not to refute. Genuine wisdom starts with not knowing.</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(253, 121, 168, 0.05) 0%, rgba(253, 121, 168, 0.1) 100%); padding: 30px; border-radius: 12px; border-left: 5px solid var(--pink);">
+                    <h3 style="font-size: 1.2rem; color: var(--dark); margin-bottom: 15px;">6. Understand That Self-Justification Is Not Cure-Able</h3>
+                    <p style="color: #666; font-size: 0.95rem; line-height: 1.7;">The final insight: you won't overcome self-justification. It's built into how brains work. All you can do is be aware that it's happening and build systems and relationships that don't let it run unchecked. Accept that you're rationalizing right now, about something, and you don't even know it.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- ===== FOOTER / CLOSING ===== -->
+        <div class="footer">
+            <h3>The Ultimate Paradox</h3>
+            <p>The more you understand about cognitive dissonance and self-justification, the more you see them everywhere—in politics, business, relationships, science, and most uncomfortably, in yourself.</p>
+            <p>And yet, <span class="footer-highlight">understanding the mechanism doesn't disable it</span>.</p>
+            <p>You can finish this book, nod in agreement about how self-deceptive everyone is, and then rationalize why the examples don't apply to you.</p>
+            <p style="margin-top: 30px; font-style: italic;">That's not a failure of the book. That's the book working exactly as intended.</p>
+            <p style="margin-top: 40px; font-size: 0.9rem; opacity: 0.8;">
+                <strong>Mistakes Were Made (But Not by Me)</strong> by Carol Tavris & Elliot Aronson<br>
+                A guide to understanding the mechanisms of self-deception and the psychology of justification.<br>
+                Essential reading for anyone interested in truth, accountability, and the limits of human rationality.
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>

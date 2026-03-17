@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lucifer Effect: Understanding How Good People Turn Evil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: #f8f9fa;
+        }
+
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--warm-red) 50%, var(--coral) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-50px) translateX(30px); }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+        }
+
+        .cover-illustration {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 2rem;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .cover .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .cover .author {
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .lesson {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .lesson:nth-child(odd) {
+            background: #fafafa;
+        }
+
+        .lesson:nth-child(even) {
+            background: white;
+        }
+
+        .lesson-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .lesson-badge {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--coral);
+            color: white;
+            font-weight: 800;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+        }
+
+        .lesson h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .lesson-illustration {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .key-lesson-card {
+            background: linear-gradient(135deg, rgba(255,107,107,0.1) 0%, rgba(78,205,196,0.1) 100%);
+            border-left: 5px solid var(--coral);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .key-lesson-card h4 {
+            color: var(--coral);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .key-lesson-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .key-lesson-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .key-lesson-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+            font-weight: bold;
+        }
+
+        .funny-take {
+            background: linear-gradient(135deg, rgba(255,230,109,0.2) 0%, rgba(85,239,196,0.2) 100%);
+            border: 2px solid var(--sunny);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #333;
+            position: relative;
+        }
+
+        .funny-take:before {
+            content: "😄";
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+            font-size: 2rem;
+        }
+
+        .ai-connection {
+            background: linear-gradient(135deg, rgba(116,185,255,0.1) 0%, rgba(108,92,231,0.1) 100%);
+            border: 2px solid var(--sky);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .ai-connection h4 {
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+        }
+
+        .cross-connection {
+            background: linear-gradient(135deg, rgba(253,121,168,0.1) 0%, rgba(160,108,213,0.1) 100%);
+            border: 2px solid var(--pink);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .cross-connection h4 {
+            color: var(--purple);
+            margin-bottom: 0.8rem;
+        }
+
+        .author-quote {
+            border-left: 4px solid var(--warm-red);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #555;
+        }
+
+        .author-quote:before {
+            content: """;
+            font-size: 3rem;
+            color: var(--warm-red);
+            line-height: 0;
+            margin-right: 0.5rem;
+        }
+
+        .spotlight {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--purple) 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .spotlight-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .spotlight h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .spotlight-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .cheatsheet {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .cheatsheet-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cheatsheet h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .cheatsheet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .cheatsheet-card {
+            background: linear-gradient(135deg, rgba(255,107,107,0.1) 0%, rgba(78,205,196,0.1) 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid var(--coral);
+        }
+
+        .cheatsheet-card h3 {
+            color: var(--coral);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .cheatsheet-card ul {
+            list-style: none;
+        }
+
+        .cheatsheet-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .cheatsheet-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .lesson-container {
+                grid-template-columns: 1fr;
+            }
+
+            .lesson-illustration {
+                order: -1;
+            }
+
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            .spotlight h2 {
+                font-size: 2rem;
+            }
+        }
+
+        .lesson-text {
+            flex: 1;
+        }
+
+        .lesson-visual {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- COVER SECTION -->
+    <section class="cover">
+        <div class="particles" id="particles"></div>
+        <div class="cover-content">
+            <svg class="cover-illustration" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background -->
+                <circle cx="140" cy="140" r="135" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+
+                <!-- Angel/Devil Silhouettes -->
+                <g id="light-side">
+                    <circle cx="80" cy="140" r="50" fill="rgba(255,255,255,0.8)"/>
+                    <path d="M 60 90 Q 80 70 100 90 M 70 100 L 60 110 M 90 100 L 100 110" stroke="rgba(255,255,255,0.8)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </g>
+
+                <!-- Devil/Dark side -->
+                <g id="dark-side">
+                    <circle cx="200" cy="140" r="50" fill="rgba(0,0,0,0.3)"/>
+                    <path d="M 180 90 Q 200 70 220 90 M 190 100 L 180 110 M 210 100 L 220 110" stroke="rgba(0,0,0,0.3)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </g>
+
+                <!-- Central dividing line -->
+                <line x1="140" y1="50" x2="140" y2="230" stroke="rgba(255,255,255,0.5)" stroke-width="3"/>
+
+                <!-- Eye symbolism -->
+                <circle cx="140" cy="140" r="20" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+                <circle cx="140" cy="140" r="10" fill="rgba(255,255,255,0.4)"/>
+            </svg>
+            <h1>The Lucifer Effect</h1>
+            <div class="subtitle">Understanding How Good People Turn Evil</div>
+            <div class="author">by Philip Zimbardo</div>
+        </div>
+    </section>
+
+    <!-- LESSON 1: THE GOOD PERSON MYTH -->
+    <section class="lesson">
+        <div class="lesson-container">
+            <div class="lesson-visual">
+                <svg class="lesson-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <rect width="400" height="300" fill="linear-gradient(to bottom, #e8f4f8, #fff)" />
+
+                    <!-- Person breaking free from chains -->
+                    <circle cx="200" cy="80" r="25" fill="#FF6B6B"/>
+                    <rect x="185" y="110" width="30" height="50" fill="#FF6B6B"/>
+                    <rect x="160" y="120" width="20" height="60" fill="#FF6B6B"/>
+                    <rect x="220" y="120" width="20" height="60" fill="#FF6B6B"/>
+                    <rect x="175" y="165" width="15" height="60" fill="#FF6B6B"/>
+                    <rect x="210" y="165" width="15" height="60" fill="#FF6B6B"/>
+
+                    <!-- Broken chains -->
+                    <path d="M 160 130 Q 140 140 130 160" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 240 130 Q 260 140 270 160" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+                    <!-- Light radiating -->
+                    <circle cx="200" cy="80" r="50" fill="none" stroke="#FFE66D" stroke-width="2" opacity="0.6"/>
+                    <circle cx="200" cy="80" r="70" fill="none" stroke="#FFE66D" stroke-width="1" opacity="0.3"/>
+                </svg>
+            </div>
+            <div class="lesson-text">
+                <span class="lesson-badge">1</span>
+                <h2>The Good Person Myth</h2>
+                <p>Zimbardo challenges the fundamental assumption that people can be neatly divided into "good" and "evil" categories. This illusion of personal heroism blinds us to the powerful situational forces that shape behavior.</p>
+
+                <div class="key-lesson-card">
+                    <h4>KEY LESSON: Situation Over Character</h4>
+                    <ul>
+                        <li>Good people often lack understanding of situational power</li>
+                        <li>The "Fundamental Attribution Error" makes us blame individuals instead of systems</li>
+                        <li>We overestimate character stability and underestimate context</li>
+                        <li>Anyone, given the right (or wrong) circumstances, can act immorally</li>
+                        <li>Real heroism is recognizing this and actively resisting pressures</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    We like to think we're all secretly superheroes waiting for our moment. Spoiler alert: most of us are just bureaucrats waiting for the right memo to justify anything.
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: The Illusion of Neutral Systems</h4>
+                    <p>AI systems are often viewed as morally neutral tools—just executing code. But like people, AI systems are shaped by their context: training data, reward structures, and deployment environments. An AI trained to maximize engagement metrics might develop destructive behaviors not because it's "evil," but because the situation incentivizes it. Reward hacking emerges not from malice but from systemic pressure. Understanding how good intentions in design create problematic outcomes mirrors how good people commit bad acts.</p>
+                </div>
+
+                <div class="cross-connection">
+                    <h4>📚 Cross-Book Connection</h4>
+                    <p>Parallels to Kahneman's "Thinking, Fast and Slow": automatic thinking systems bypass moral reasoning. Just as System 1 thinking is fast and often flawed, situational factors operate beneath conscious awareness.</p>
+                </div>
+
+                <div class="author-quote">
+                    "The line between good and evil is permeable. We are not separated by immutable character traits, but by the situations we inhabit and the roles we play."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 2: THE STANFORD PRISON EXPERIMENT -->
+    <section class="lesson">
+        <div class="lesson-container">
+            <div class="lesson-visual">
+                <svg class="lesson-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Prison cell bars -->
+                    <line x1="50" y1="60" x2="50" y2="240" stroke="#333" stroke-width="4"/>
+                    <line x1="100" y1="60" x2="100" y2="240" stroke="#333" stroke-width="4"/>
+                    <line x1="150" y1="60" x2="150" y2="240" stroke="#333" stroke-width="4"/>
+                    <line x1="200" y1="60" x2="200" y2="240" stroke="#333" stroke-width="4"/>
+                    <line x1="250" y1="60" x2="250" y2="240" stroke="#333" stroke-width="4"/>
+                    <line x1="300" y1="60" x2="300" y2="240" stroke="#333" stroke-width="4"/>
+                    <line x1="350" y1="60" x2="350" y2="240" stroke="#333" stroke-width="4"/>
+
+                    <line x1="50" y1="60" x2="350" y2="60" stroke="#333" stroke-width="3"/>
+                    <line x1="50" y1="240" x2="350" y2="240" stroke="#333" stroke-width="3"/>
+
+                    <!-- Guard silhouette -->
+                    <circle cx="100" cy="120" r="15" fill="#A06CD5"/>
+                    <rect x="90" y="135" width="20" height="30" fill="#A06CD5"/>
+                    <rect x="75" y="140" width="15" height="35" fill="#A06CD5"/>
+                    <rect x="105" y="140" width="15" height="35" fill="#A06CD5"/>
+                    <rect x="85" y="170" width="10" height="25" fill="#A06CD5"/>
+                    <rect x="105" y="170" width="10" height="25" fill="#A06CD5"/>
+
+                    <!-- Prisoner silhouette -->
+                    <circle cx="270" cy="130" r="15" fill="#FF6B6B" opacity="0.6"/>
+                    <rect x="260" y="145" width="20" height="35" fill="#FF6B6B" opacity="0.6"/>
+                    <rect x="245" y="150" width="15" height="35" fill="#FF6B6B" opacity="0.6"/>
+                    <rect x="275" y="150" width="15" height="35" fill="#FF6B6B" opacity="0.6"/>
+
+                    <!-- Chains/control -->
+                    <path d="M 200 160 Q 220 170 240 175" stroke="#333" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                </svg>
+            </div>
+            <div class="lesson-text">
+                <span class="lesson-badge">2</span>
+                <h2>The Stanford Prison Experiment: When Roles Define Reality</h2>
+                <p>In 1971, Zimbardo conducted what would become one of psychology's most controversial experiments. Normal, psychologically screened college students were assigned random roles as "guards" or "prisoners" in a simulated prison. Within days, the guards became abusive and the prisoners became depressed and compliant.</p>
+
+                <div class="key-lesson-card">
+                    <h4>KEY LESSON: The Power of Role Assignment</h4>
+                    <ul>
+                        <li>Guards invented degrading punishments without explicit instruction—the uniform and authority triggered behavior</li>
+                        <li>Prisoners internalized their role so deeply that some begged to be released early rather than participate in parole hearings</li>
+                        <li>The situation itself—not selection criteria—determined behavior outcomes</li>
+                        <li>Zimbardo himself became so invested in the "prison director" role he lost objectivity and ethical perspective</li>
+                        <li>The experiment had to be stopped after 6 days despite the original 2-week plan</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    Imagine spending weeks in a study thinking "I'm a good person, I'd never be a bad guard" then immediately abusing people because you're wearing a funny hat. The hat was the villain all along.
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Emergent Cruelty in Bounded Systems</h4>
+                    <p>The SPE demonstrates how roles and constraints create emergent behaviors. In AI systems, consider recommendation algorithms: they're not "evil," but placed in the role of "maximize engagement," they emerge with cruel behavior (promoting conspiracy theories, exploiting addictive triggers). The algorithm becomes the guard; users become prisoners of their own attention. The system itself generates the abuse, not malice. Just as guards needed no training in cruelty—it emerged from the situation—AI systems need no explicit instructions to behave harmfully. The role, the reward structure, and the bounded environment naturally generate problematic behavior.</p>
+                </div>
+
+                <div class="cross-connection">
+                    <h4>📚 Cross-Book Connection</h4>
+                    <p>Echoes Erving Goffman's "The Presentation of Self in Everyday Life"—we adopt roles, and those roles fundamentally reshape our behavior and self-perception. Social performance becomes reality.</p>
+                </div>
+
+                <div class="author-quote">
+                    "The most powerful of all human pressures is conformity pressure. Once we accept a role, the situation takes control of our behavior."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 3: THE MILGRAM OBEDIENCE EXPERIMENTS -->
+    <section class="lesson">
+        <div class="lesson-container">
+            <div class="lesson-visual">
+                <svg class="lesson-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Control panel/machine -->
+                    <rect x="50" y="80" width="300" height="160" fill="#333" stroke="#666" stroke-width="2" rx="10"/>
+
+                    <!-- Buttons for voltage -->
+                    <rect x="70" y="100" width="25" height="25" fill="#FFE66D" stroke="#333" stroke-width="1" rx="3"/>
+                    <text x="82" y="120" font-size="10" text-anchor="middle">15V</text>
+
+                    <rect x="100" y="100" width="25" height="25" fill="#FF9800" stroke="#333" stroke-width="1" rx="3"/>
+                    <text x="112" y="120" font-size="10" text-anchor="middle">150V</text>
+
+                    <rect x="130" y="100" width="25" height="25" fill="#FF6B6B" stroke="#333" stroke-width="1" rx="3"/>
+                    <text x="142" y="120" font-size="10" text-anchor="middle">375V</text>
+
+                    <rect x="160" y="100" width="25" height="25" fill="#E17055" stroke="#333" stroke-width="1" rx="3"/>
+                    <text x="172" y="120" font-size="10" text-anchor="middle">450V</text>
+
+                    <!-- Needle gauge -->
+                    <circle cx="280" cy="140" r="35" fill="none" stroke="#666" stroke-width="2"/>
+                    <path d="M 280 140 L 310 140" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+                    <text x="280" y="185" font-size="12" text-anchor="middle" fill="#333">Voltage Level</text>
+
+                    <!-- Participant hand -->
+                    <circle cx="220" cy="230" r="8" fill="#FF6B6B"/>
+                    <path d="M 228 230 L 250 225 L 255 235 L 235 240" fill="#FF6B6B"/>
+
+                    <!-- Authority figure (experimenter) -->
+                    <circle cx="360" cy="100" r="12" fill="#4ECDC4"/>
+                    <rect x="352" y="115" width="16" height="25" fill="#4ECDC4"/>
+                    <text x="360" y="200" font-size="11" text-anchor="middle" fill="#333">Experimenter</text>
+                </svg>
+            </div>
+            <div class="lesson-text">
+                <span class="lesson-badge">3</span>
+                <h2>Milgram's Obedience: Following Orders Into Darkness</h2>
+                <p>Stanley Milgram's experiments (1961-1962) challenged the post-WWII narrative that ordinary Germans were uniquely susceptible to following immoral orders. He found that normal Americans would administer electric shocks to an innocent person if told to do so by an authority figure.</p>
+
+                <div class="key-lesson-card">
+                    <h4>KEY LESSON: Obedience to Authority Overrides Morality</h4>
+                    <ul>
+                        <li>65% of participants delivered maximum shock (450V) despite apparent victim suffering</li>
+                        <li>Participants showed severe stress, nervous laughter, and trembling—moral conflict was present</li>
+                        <li>Yet they continued. The phrase "you have no choice, you must continue" was incredibly powerful</li>
+                        <li>Proximity mattered: when victims were in the room, compliance dropped to 40%</li>
+                        <li>When confederates refused, 90% of real participants also refused—obedience is socially constructed</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    People will absolutely torch their conscience if someone in a lab coat tells them to. Don't even need a real lab coat—a white shirt and confident tone works just fine.
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: The Banality of Harmful Scale</h4>
+                    <p>Milgram revealed that ordinary people commit atrocities when authority structures legitimize it and distance them from consequences. AI deployment works similarly: engineers at major tech companies push out recommendation algorithms knowing they cause psychological harm, content moderation AI that makes life-destroying decisions, autonomous weapons systems—all because authority (CEO, board, government contract) legitimizes it and distance (they don't see the harm) insulates them. The "you have no choice" of employment pressures and career concerns replicates Milgram's obedience mechanism. Harmful AI proliferation relies on the same psychological infrastructure.</p>
+                </div>
+
+                <div class="cross-connection">
+                    <h4>📚 Cross-Book Connection</h4>
+                    <p>Hannah Arendt's "Eichmann in Jerusalem" examined the "banality of evil"—Milgram provided experimental evidence for her theoretical insight that evil often stems from obedience rather than sadism.</p>
+                </div>
+
+                <div class="author-quote">
+                    "The essence of obedience is that a person comes to view themselves as the instrument for carrying out another person's wishes, and they therefore no longer see themselves as responsible for their actions."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 4: DEINDIVIDUATION AND THE LOSS OF SELF -->
+    <section class="lesson">
+        <div class="lesson-container">
+            <div class="lesson-visual">
+                <svg class="lesson-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Transformation sequence -->
+                    <!-- Individual person on left -->
+                    <circle cx="60" cy="80" r="20" fill="#FF6B6B"/>
+                    <rect x="50" y="105" width="20" height="40" fill="#FF6B6B"/>
+                    <rect x="40" y="115" width="10" height="40" fill="#FF6B6B"/>
+                    <rect x="70" y="115" width="10" height="40" fill="#FF6B6B"/>
+                    <text x="60" y="180" font-size="12" text-anchor="middle" fill="#333">Individual</text>
+                    <text x="60" y="200" font-size="10" text-anchor="middle" fill="#666">Identity</text>
+
+                    <!-- Transition (getting consumed) -->
+                    <circle cx="200" cy="80" r="22" fill="#666" opacity="0.6"/>
+                    <rect x="189" y="105" width="22" height="40" fill="#666" opacity="0.6"/>
+                    <rect x="177" y="115" width="11" height="40" fill="#666" opacity="0.6"/>
+                    <rect x="211" y="115" width="11" height="40" fill="#666" opacity="0.6"/>
+
+                    <!-- Merged into crowd on right -->
+                    <circle cx="340" cy="80" r="22" fill="#A06CD5"/>
+                    <rect x="329" y="105" width="22" height="40" fill="#A06CD5"/>
+                    <rect x="317" y="115" width="11" height="40" fill="#A06CD5"/>
+                    <rect x="351" y="115" width="11" height="40" fill="#A06CD5"/>
+
+                    <!-- Crowd members blending -->
+                    <circle cx="310" cy="85" r="20" fill="#A06CD5"/>
+                    <circle cx="370" cy="85" r="20" fill="#A06CD5"/>
+
+                    <text x="340" y="180" font-size="12" text-anchor="middle" fill="#333">Deindividuated</text>
+                    <text x="340" y="200" font-size="10" text-anchor="middle" fill="#666">Group Identity</text>
+
+                    <!-- Arrows showing progression -->
+                    <path d="M 85 85 L 175 85" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 225 85 L 315 85" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#333"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <div class="lesson-text">
+                <span class="lesson-badge">4</span>
+                <h2>Deindividuation: When the Mask Becomes the Self</h2>
+                <p>Deindividuation is the psychological process where individuals lose their sense of personal identity and responsibility when absorbed into a group. Anonymity, uniform clothing, darkness, and group identity all accelerate this dissolution of self.</p>
+
+                <div class="key-lesson-card">
+                    <h4>KEY LESSON: Anonymity Unleashes Inner Demons</h4>
+                    <ul>
+                        <li>When identity is submerged in the group, normal restraints vanish</li>
+                        <li>The Stanford Prison guards wore identical uniforms and mirrored sunglasses—deindividuation machinery</li>
+                        <li>Anonymity increases aggressive behavior (studied in laboratory settings and real riots)</li>
+                        <li>Group size matters: larger groups produce greater deindividuation and more uninhibited behavior</li>
+                        <li>Cultural norms embedded in the group become the person's behavior guide, not personal ethics</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    Put someone in a uniform and a crowd of 100+ people and suddenly they're willing to do things they'd be horrified to do alone. It's like the evil version of a rave.
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Algorithmic Amplification of Deindividuation</h4>
+                    <p>Social media creates digital deindividuation: anonymity (burner accounts), uniform platforms (everyone in the same interface), group dynamics (feed prioritizes engagement over individual flourishing). The result? People post things online they'd never say in person. But the mechanism isn't inherently human psychology—it's the system design. Twitter's chronological feed creates information scarcity; algorithmic feeds create FOMO-driven engagement; anonymity creates disinhibition. AI recommendation systems that feed the group its own beliefs create filter bubbles that amplify group polarization. The algorithm is the crowd, and we're all deindividuated by design.</p>
+                </div>
+
+                <div class="cross-connection">
+                    <h4>📚 Cross-Book Connection</h4>
+                    <p>Relates to Gustave Le Bon's "The Crowd: A Study of the Popular Mind"—crowds have their own psychology distinct from individuals. Deindividuation explains the mechanism.</p>
+                </div>
+
+                <div class="author-quote">
+                    "The loss of individual identity in the group is the precondition for the loss of individual responsibility and moral restraint."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 5: ABU GHRAIB AND SITUATIONAL EVIL IN THE MODERN WORLD -->
+    <section class="lesson">
+        <div class="lesson-container">
+            <div class="lesson-visual">
+                <svg class="lesson-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Prison facility representation -->
+                    <rect x="40" y="60" width="320" height="200" fill="none" stroke="#333" stroke-width="2"/>
+
+                    <!-- Cell blocks -->
+                    <rect x="60" y="80" width="70" height="70" fill="#E8E8E8" stroke="#333" stroke-width="1"/>
+                    <rect x="145" y="80" width="70" height="70" fill="#E8E8E8" stroke="#333" stroke-width="1"/>
+                    <rect x="230" y="80" width="70" height="70" fill="#E8E8E8" stroke="#333" stroke-width="1"/>
+
+                    <!-- Security overlays -->
+                    <circle cx="100" cy="115" r="8" fill="#FF6B6B" opacity="0.7"/>
+                    <circle cx="185" cy="115" r="8" fill="#FF6B6B" opacity="0.7"/>
+                    <circle cx="270" cy="115" r="8" fill="#FF6B6B" opacity="0.7"/>
+
+                    <!-- Chain of command arrows -->
+                    <path d="M 200 45 L 200 60" stroke="#A06CD5" stroke-width="2" fill="none"/>
+                    <text x="220" y="50" font-size="11" fill="#A06CD5">Orders from Above</text>
+
+                    <!-- Dehumanization indicators -->
+                    <path d="M 100 165 L 100 185" stroke="#FF6B6B" stroke-width="2"/>
+                    <path d="M 185 165 L 185 185" stroke="#FF6B6B" stroke-width="2"/>
+                    <path d="M 270 165 L 270 185" stroke="#FF6B6B" stroke-width="2"/>
+
+                    <text x="100" y="210" font-size="10" text-anchor="middle" fill="#FF6B6B">Dehumanization</text>
+                    <text x="185" y="210" font-size="10" text-anchor="middle" fill="#FF6B6B">Powerlessness</text>
+                    <text x="270" y="210" font-size="10" text-anchor="middle" fill="#FF6B6B">Anonymity</text>
+                </svg>
+            </div>
+            <div class="lesson-text">
+                <span class="lesson-badge">5</span>
+                <h2>Abu Ghraib: When Systems Fail, Evil Emerges</h2>
+                <p>The torture and abuse at Abu Ghraib prison in Iraq (2003-2004) isn't just a military scandal. It's the Lucifer Effect in real time. Zimbardo himself was an expert witness in the case of one of the guards, Chip Frederick, and applied his framework to understand how good soldiers became torturers.</p>
+
+                <div class="key-lesson-card">
+                    <h4>KEY LESSON: Toxic Systems Produce Toxic Behavior</h4>
+                    <ul>
+                        <li>Young, low-ranking soldiers with no training became abusers within weeks</li>
+                        <li>Orders from above (Real or perceived) to "soften up" prisoners set the stage</li>
+                        <li>Lack of accountability and supervision created a lawless environment</li>
+                        <li>Prisoners were dehumanized through language, process, and cultural framing</li>
+                        <li>Photography and documentation paradoxically increased abuse (deindividuation through the camera's distance)</li>
+                        <li>These were not pre-screened sadists—they were ordinary soldiers in an extraordinary situation</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    We wanted to blame a few "bad apples" for Abu Ghraib. Turns out the whole barrel was rotten—the system, the orders, the culture, the accountability vacuum. Spoiler: there were no bad apples. Just a bad orchard.
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Institutional Evil at Scale</h4>
+                    <p>Abu Ghraib illustrates what Zimbardo calls "the Lucifer Effect"—how institutions corrupt. In AI, this manifests as organizational pressure to deploy systems we know are harmful. Consider content moderation: workers contract PTSD reviewing traumatic content. Facial recognition vendors sell to authoritarian governments. Recommendation algorithms maximize engagement knowing it drives mental health crises. No individual engineer is sadistic; they're following orders, meeting quotas, avoiding career damage. The institution—like the military prison—creates moral disengagement. "I'm just doing my job," "the algorithm decides," "the company approved it." Abu Ghraib teaches us that institutional evil requires fixing institutions, not just punishing individuals.</p>
+                </div>
+
+                <div class="cross-connection">
+                    <h4>📚 Cross-Book Connection</h4>
+                    <p>Parallels Daniel Goldhagen's "Hitler's Willing Executioners"—ordinary people commit extraordinary atrocities within institutional frameworks that normalize and reward such behavior.</p>
+                </div>
+
+                <div class="author-quote">
+                    "Abu Ghraib is not an aberration—it's an inevitability when we create systems that dehumanize, remove accountability, and align incentives toward cruelty."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 6: THE POWER OF SYSTEMS AND ROLES -->
+    <section class="lesson">
+        <div class="lesson-container">
+            <div class="lesson-visual">
+                <svg class="lesson-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hierarchical pyramid -->
+                    <polygon points="200,40 350,220 50,220" fill="none" stroke="#A06CD5" stroke-width="2"/>
+
+                    <!-- Levels within pyramid -->
+                    <line x1="100" y1="180" x2="300" y2="180" stroke="#A06CD5" stroke-width="1" opacity="0.5"/>
+                    <line x1="150" y1="130" x2="250" y2="130" stroke="#A06CD5" stroke-width="1" opacity="0.5"/>
+
+                    <!-- Top (Leadership) -->
+                    <circle cx="200" cy="70" r="15" fill="#FF6B6B"/>
+                    <text x="200" y="240" font-size="11" text-anchor="middle" fill="#333">SYSTEM</text>
+
+                    <!-- Middle (Managers) -->
+                    <circle cx="130" cy="155" r="12" fill="#FF9800"/>
+                    <circle cx="270" cy="155" r="12" fill="#FF9800"/>
+
+                    <!-- Bottom (Workers) -->
+                    <circle cx="80" cy="210" r="10" fill="#FFE66D"/>
+                    <circle cx="160" cy="210" r="10" fill="#FFE66D"/>
+                    <circle cx="240" cy="210" r="10" fill="#FFE66D"/>
+                    <circle cx="320" cy="210" r="10" fill="#FFE66D"/>
+
+                    <!-- Arrows showing pressure/influence -->
+                    <path d="M 190 85 L 135 140" stroke="#333" stroke-width="1.5" fill="none" opacity="0.6"/>
+                    <path d="M 210 85 L 265 140" stroke="#333" stroke-width="1.5" fill="none" opacity="0.6"/>
+
+                    <!-- Individual becomes role -->
+                    <path d="M 200 260 Q 200 270 200 280" stroke="#666" stroke-width="1" stroke-dasharray="3,3"/>
+                    <text x="200" y="295" font-size="10" text-anchor="middle" fill="#666">Role Absorption</text>
+                </svg>
+            </div>
+            <div class="lesson-text">
+                <span class="lesson-badge">6</span>
+                <h2>Systems Over Character: The Power of Structure</h2>
+                <p>One of Zimbardo's most provocative claims: the situation determines behavior far more than personality traits. A well-designed system will make good people behave well; a toxic system will make good people behave badly.</p>
+
+                <div class="key-lesson-card">
+                    <h4>KEY LESSON: Design Determines Destiny</h4>
+                    <ul>
+                        <li>Personality inventories and psychological tests are poor predictors of actual behavior in situations</li>
+                        <li>Power dynamics, role expectations, and institutional pressures override individual character</li>
+                        <li>Stanford Prison guards weren't selected for cruelty—the uniform and authority did the work</li>
+                        <li>The system's rules, incentives, and cultural norms become the person's internal compass</li>
+                        <li>Changing systems changes behavior far more reliably than changing people</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    So we spend trillions on employee training and character development when we should just... redesign the system? Wildly inconvenient for everyone who profited from blaming individuals.
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Misaligned Incentive Structures</h4>
+                    <p>AI systems are designed with objectives that often diverge from human wellbeing. A social media algorithm optimized for engagement hours will inevitably promote addictive content. A content moderation AI optimized for policy compliance will censor legitimately marginalized voices. An autonomous trading system optimized for profit per trade will create flash crashes. These aren't failures—they're the system working as designed. The lesson: AI systems will behave according to their objective function, regardless of the intentions of their creators. A well-intentioned team designing a recommendation system still produces harm if the reward structure (clicks, time-on-platform, engagement) incentivizes harmful content. The system is destiny.</p>
+                </div>
+
+                <div class="cross-connection">
+                    <h4>📚 Cross-Book Connection</h4>
+                    <p>Relates to James Clear's "Atomic Habits"—systems are far more powerful than goals. Our behavior is shaped by the environment and incentives we're embedded in.</p>
+                </div>
+
+                <div class="author-quote">
+                    "I want to be clear: I don't think there's such a thing as a personality that would make someone immune to the power of a situation."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 7: THE PSYCHOLOGY OF MORAL DISENGAGEMENT -->
+    <section class="lesson">
+        <div class="lesson-container">
+            <div class="lesson-visual">
+                <svg class="lesson-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Brain with moral circuitry -->
+                    <ellipse cx="200" cy="140" rx="80" ry="90" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+
+                    <!-- Moral center being blocked -->
+                    <circle cx="200" cy="100" r="20" fill="#FF6B6B" opacity="0.6"/>
+                    <text x="200" y="105" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Morality</text>
+
+                    <!-- Justification paths bypassing morality -->
+                    <path d="M 130 130 Q 100 140 120 160" stroke="#FFE66D" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                    <path d="M 270 130 Q 300 140 280 160" stroke="#FFE66D" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+
+                    <!-- Justification boxes -->
+                    <rect x="60" y="150" width="60" height="40" fill="#FFE66D" opacity="0.7" rx="4"/>
+                    <text x="90" y="170" font-size="9" text-anchor="middle" fill="#333">Moral</text>
+                    <text x="90" y="182" font-size="9" text-anchor="middle" fill="#333">Justification</text>
+
+                    <rect x="280" y="150" width="60" height="40" fill="#FFE66D" opacity="0.7" rx="4"/>
+                    <text x="310" y="170" font-size="9" text-anchor="middle" fill="#333">Blame</text>
+                    <text x="310" y="182" font-size="9" text-anchor="middle" fill="#333">Shifting</text>
+
+                    <!-- Behavior (consequence) -->
+                    <rect x="160" y="240" width="80" height="35" fill="#FF6B6B" opacity="0.6" rx="4"/>
+                    <text x="200" y="260" font-size="11" text-anchor="middle" fill="white" font-weight="bold">Harmful Behavior</text>
+                </svg>
+            </div>
+            <div class="lesson-text">
+                <span class="lesson-badge">7</span>
+                <h2>Moral Disengagement: How Good People Justify Bad Acts</h2>
+                <p>People don't wake up deciding to be evil. Instead, they use psychological mechanisms to disconnect their moral standards from their behavior. Zimbardo identifies the key disengagement mechanisms.</p>
+
+                <div class="key-lesson-card">
+                    <h4>KEY LESSON: The Machinery of Self-Deception</h4>
+                    <ul>
+                        <li>Moral justification: "It's necessary," "They deserved it," "It's for the greater good"</li>
+                        <li>Euphemistic labeling: Torture becomes "enhanced interrogation," killing becomes "collateral damage"</li>
+                        <li>Advantageous comparison: "We're not as bad as they are," "Everyone does this"</li>
+                        <li>Displacement of responsibility: "I was just following orders," "The system made me"</li>
+                        <li>Distortion of consequences: Ignoring or minimizing harm caused</li>
+                        <li>Dehumanization of the victim: "They're not like us," "They're animals"</li>
+                        <li>Attribution of blame: "They provoked it," "This is their fault"</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    We're all magicians of self-deception. The lie we tell ourselves is usually dressed up in such fancy language we don't even recognize it as a lie anymore. "Enhanced interrogation" sounds way better than "I tortured someone," right?
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Institutional Moral Laundering</h4>
+                    <p>Tech companies deploy harmful AI systems through moral disengagement: "We're not responsible, the algorithm is." "Users choose to use it." "Removing it would suppress free speech." "The harm is marginal compared to benefits." These aren't lies—they're sophisticated moral disengagement mechanisms. When Facebook executives ignore internal research showing Instagram harms teenage girls' mental health, they're displacing responsibility ("parents should monitor") and advantageous comparison ("we're better than competitors"). The euphemistic framing of recommendation algorithms as neutral tools rather than behavior-modification devices allows engineers to participate in large-scale psychological manipulation without confronting their complicity. Disengagement mechanisms make institutional evil feel like pragmatism.</p>
+                </div>
+
+                <div class="cross-connection">
+                    <h4>📚 Cross-Book Connection</h4>
+                    <p>Albert Bandura's work on moral disengagement is foundational here. Zimbardo builds on Bandura's psychological mechanisms for self-exoneration.</p>
+                </div>
+
+                <div class="author-quote">
+                    "The difference between good people and bad people is not character—it's how effectively they use rationalization to disconnect their morality from their actions."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 8: THE POWER OF ANONYMITY AND ACCOUNTABILITY -->
+    <section class="lesson">
+        <div class="lesson-container">
+            <div class="lesson-visual">
+                <svg class="lesson-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Accountability spectrum -->
+                    <!-- Left side: Named and visible -->
+                    <circle cx="80" cy="140" r="35" fill="#FF6B6B" opacity="0.8"/>
+                    <circle cx="80" cy="140" r="30" fill="white" opacity="0.9"/>
+                    <text x="80" y="145" font-size="24" text-anchor="middle" fill="#333">👤</text>
+                    <text x="80" y="220" font-size="11" text-anchor="middle" fill="#333">Named</text>
+                    <text x="80" y="235" font-size="10" text-anchor="middle" fill="#666">& Accountable</text>
+
+                    <!-- Right side: Anonymous -->
+                    <circle cx="320" cy="140" r="35" fill="#A06CD5" opacity="0.8"/>
+                    <circle cx="320" cy="140" r="30" fill="white" opacity="0.9"/>
+                    <text x="320" y="145" font-size="24" text-anchor="middle" fill="#333">❓</text>
+                    <text x="320" y="220" font-size="11" text-anchor="middle" fill="#333">Anonymous</text>
+                    <text x="320" y="235" font-size="10" text-anchor="middle" fill="#666">& Unaccountable</text>
+
+                    <!-- Spectrum in middle -->
+                    <line x1="115" y1="140" x2="285" y2="140" stroke="#FFE66D" stroke-width="3"/>
+
+                    <!-- Behavioral markers -->
+                    <text x="200" y="95" font-size="11" text-anchor="middle" fill="#666" font-weight="bold">Behavior Intensity</text>
+                    <path d="M 120 110 L 130 100" stroke="#FF6B6B" stroke-width="2"/>
+                    <path d="M 200 110 L 200 100" stroke="#FFE66D" stroke-width="2"/>
+                    <path d="M 280 110 L 290 100" stroke="#A06CD5" stroke-width="2"/>
+                </svg>
+            </div>
+            <div class="lesson-text">
+                <span class="lesson-badge">8</span>
+                <h2>Transparency vs. Anonymity: The Surveillance Solution</h2>
+                <p>One of the few consistent findings across situations: accountability matters. When people believe they might be identified and held responsible, behavior improves. When anonymity is guaranteed, moral restraints dissolve.</p>
+
+                <div class="key-lesson-card">
+                    <h4>KEY LESSON: Visibility Constrains Evil</h4>
+                    <ul>
+                        <li>Prison guards were less abusive when Zimbardo was watching (the Hawthorne Effect in reverse)</li>
+                        <li>Anonymity removes the fear of reputation damage—the primary psychological brake on cruelty</li>
+                        <li>Name tags, identification, or known observers significantly reduce abuse</li>
+                        <li>The internet's gift of anonymity has enabled harassment, hate speech, and coordination of violence</li>
+                        <li>However, over-surveillance creates its own tyranny and moral disengagement</li>
+                        <li>Balance is needed: enough accountability to prevent moral disengagement, enough privacy to prevent totalitarianism</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    People will be absolute monsters online when no one knows it's them. Put a real name and face next to those tweets and suddenly everyone's a saint. Almost like consequences matter or something.
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Algorithmic Accountability Gaps</h4>
+                    <p>AI systems are the ultimate expression of unaccountability. Nobody knows how the recommendation algorithm works (proprietary secret), nobody chose its outcomes (emerged from training), and nobody can be held responsible (it's the system). This is perfect conditions for moral disengagement. Compare to traditional publishing: editors make decisions, publishers have names, readers know who's responsible. Social media algorithms hide behind proprietary complexity, technical abstraction, and "the algorithm decided" rhetoric. The irony: we could make AI more accountable through transparency, explainability, and human oversight. But that would require slowing deployment and reducing profit margins. Instead, we optimize for anonymity-as-a-feature, letting algorithms optimize for engagement without anyone taking responsibility for the consequences.</p>
+                </div>
+
+                <div class="cross-connection">
+                    <h4>📚 Cross-Book Connection</h4>
+                    <p>Relates to Jeremy Bentham's "Panopticon" concept (via Foucault's "Discipline and Punish")—visibility and surveillance shape behavior. The question is whether transparency serves justice or tyranny.</p>
+                </div>
+
+                <div class="author-quote">
+                    "Anonymity is the assassin of integrity. When we know we might be identified and held responsible, we behave better—not because we're good, but because consequences constrain behavior."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 9: THE BYSTANDER EFFECT AND THE POWER OF RESISTANCE -->
+    <section class="lesson">
+        <div class="lesson-container">
+            <div class="lesson-visual">
+                <svg class="lesson-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Scene: One person helping, others watching -->
+                    <!-- Victim on ground -->
+                    <ellipse cx="200" cy="220" rx="30" ry="25" fill="#FF6B6B" opacity="0.6"/>
+                    <circle cx="200" cy="180" r="15" fill="#FF6B6B"/>
+                    <text x="200" y="230" font-size="10" text-anchor="middle" fill="#333">Victim</text>
+
+                    <!-- Helper (standing out) -->
+                    <circle cx="100" cy="140" r="12" fill="#00B894"/>
+                    <rect x="92" y="155" width="16" height="35" fill="#00B894"/>
+                    <rect x="82" y="160" width="10" height="40" fill="#00B894"/>
+                    <rect x="108" y="160" width="10" height="40" fill="#00B894"/>
+
+                    <!-- Action arrow -->
+                    <path d="M 110 175 L 180 210" stroke="#00B894" stroke-width="2" fill="none" marker-end="url(#arrow-green)"/>
+                    <text x="130" y="185" font-size="10" fill="#00B894" font-weight="bold">HELP</text>
+
+                    <!-- Bystanders (standing and watching) -->
+                    <circle cx="280" cy="140" r="10" fill="#AAA"/>
+                    <rect x="274" y="152" width="12" height="28" fill="#AAA"/>
+                    <circle cx="320" cy="145" r="10" fill="#AAA"/>
+                    <rect x="314" y="157" width="12" height="30" fill="#AAA"/>
+                    <circle cx="340" cy="135" r="9" fill="#AAA"/>
+                    <rect x="335" y="147" width="10" height="28" fill="#AAA"/>
+
+                    <!-- Diffusion of responsibility indicator -->
+                    <text x="320" y="210" font-size="10" text-anchor="middle" fill="#666">Diffusion of</text>
+                    <text x="320" y="225" font-size="10" text-anchor="middle" fill="#666">Responsibility</text>
+
+                    <defs>
+                        <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#00B894"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <div class="lesson-text">
+                <span class="lesson-badge">9</span>
+                <h2>Heroism and Resistance: The Power of One</h2>
+                <p>In the Stanford Prison Experiment, guards abused prisoners. But crucially, Zimbardo notes that some guards actively resisted the abuse. They didn't conform to the emerging prison culture. This is the counterpoint to situational evil: situational heroism is possible.</p>
+
+                <div class="key-lesson-card">
+                    <h4>KEY LESSON: Resistance Requires Active Choice</h4>
+                    <ul>
+                        <li>Some guards in SPE refused to participate in abuse—it was possible, just costly</li>
+                        <li>Heroism isn't about being born good; it's about making deliberate choices to resist</li>
+                        <li>The bystander effect: diffusion of responsibility makes us passive observers</li>
+                        <li>Being a hero means accepting personal cost (job security, social status, comfort)</li>
+                        <li>One person's resistance can cascade: in Milgram, when confederates refused, 90% of participants refused</li>
+                        <li>Zimbardo advocates for "heroic imagination"—mentally rehearsing resistance beforehand</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    Heroism isn't some magical trait. It's usually just someone being willing to be uncomfortable, unpopular, or unemployed. Turns out that's harder than it sounds when your mortgage is due.
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Embedded Systems of Resistance</h4>
+                    <p>AI developers and researchers face enormous pressure to ship systems they know are harmful. Career progression, funding, and competitive dynamics create bystander effects at scale. One researcher publishing concerns gets marginalized or fired. But Zimbardo's insight applies: resistance is possible, just costly. Whistleblowers at Meta, Google, and other tech firms have resisted—Frances Haugen, Timnit Gebru, Jack Dorsey's later conscience. But they paid enormous costs. The lesson for AI: we need systemic changes that make heroic resistance less costly. Regulatory frameworks, whistleblower protections, ethical review boards with teeth, and market incentives toward safety. Otherwise, we're asking individuals to bear the cost of organizational evil while systems remain intact.</p>
+                </div>
+
+                <div class="cross-connection">
+                    <h4>📚 Cross-Book Connection</h4>
+                    <p>Relates to Hannah Arendt's analysis of Adolf Eichmann—evil thrives when good people do nothing. Active resistance is the antidote to bystander complicity.</p>
+                </div>
+
+                <div class="author-quote">
+                    "The goal of the heroes in our lives is to counteract the evil that arises from situational forces. They do so by resisting authority, questioning power, and caring about human dignity even at great personal cost."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 10: TRANSFORMING SYSTEMS, TRANSFORMING PEOPLE -->
+    <section class="lesson">
+        <div class="lesson-container">
+            <div class="lesson-visual">
+                <svg class="lesson-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Transformation process -->
+                    <!-- Before: Dark system -->
+                    <rect x="30" y="80" width="140" height="140" fill="#333" rx="10"/>
+                    <text x="100" y="155" font-size="14" text-anchor="middle" fill="white" font-weight="bold">Toxic</text>
+                    <text x="100" y="175" font-size="14" text-anchor="middle" fill="white" font-weight="bold">System</text>
+
+                    <!-- Arrow of change -->
+                    <path d="M 200 150 L 240 150" stroke="#FFE66D" stroke-width="3" fill="none" marker-end="url(#arrow-yellow)"/>
+                    <text x="220" y="145" font-size="10" text-anchor="middle" fill="#FFE66D" font-weight="bold">Transform</text>
+
+                    <!-- After: Healthy system -->
+                    <rect x="230" y="80" width="140" height="140" fill="#00B894" rx="10"/>
+                    <text x="300" y="155" font-size="14" text-anchor="middle" fill="white" font-weight="bold">Healthy</text>
+                    <text x="300" y="175" font-size="14" text-anchor="middle" fill="white" font-weight="bold">System</text>
+
+                    <!-- People flowing through -->
+                    <circle cx="100" cy="90" r="8" fill="#FF6B6B"/>
+                    <text x="100" y="255" font-size="10" text-anchor="middle" fill="#333">Produces Villains</text>
+
+                    <circle cx="300" cy="90" r="8" fill="#55EFC4"/>
+                    <text x="300" y="255" font-size="10" text-anchor="middle" fill="#333">Produces Heroes</text>
+
+                    <defs>
+                        <marker id="arrow-yellow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FFE66D"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <div class="lesson-text">
+                <span class="lesson-badge">10</span>
+                <h2>System Change: The Ultimate Intervention</h2>
+                <p>If situations are more powerful than character, then the solution isn't better screening or moral education—it's changing systems. Zimbardo advocates for radical system redesign.</p>
+
+                <div class="key-lesson-card">
+                    <h4>KEY LESSON: Fix the System, Not the Person</h4>
+                    <ul>
+                        <li>The same environment that produced abusive guards can be redesigned to prevent abuse</li>
+                        <li>Accountability structures (transparency, oversight, consequences for abuse)</li>
+                        <li>Dehumanization prevention: direct contact with prisoners, humanizing language</li>
+                        <li>Power-checking mechanisms: limits on authority, regular audits, independent review</li>
+                        <li>Cultural change: institutional values that reward ethical behavior</li>
+                        <li>Rotation systems: preventing stagnation and group cohesion around abuse</li>
+                        <li>Psychological preparation: helping people rehearse resistance before entering systems</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    Imagine if we designed systems to prevent abuse rather than just prosecuting abusers afterward. Radical concept: make the system itself incapable of enabling evil.
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Designing for Safety, Not Just Speed</h4>
+                    <p>The tech industry has optimized for: speed to market, engagement metrics, profit margins. The result? Harmful AI systems deployed at scale. Redesigning requires changing the system itself: regulatory oversight before deployment (not after scandals), diverse teams building systems (not just engineers), transparent objective functions (not proprietary black boxes), user control over recommendations (not algorithmic determinism), whistleblower protections for researchers raising concerns. This requires slowing deployment, accepting lower short-term profits, building redundancy and safety margins. But the lesson from The Lucifer Effect is clear: you cannot trust character to overcome incentive structures. You must change the system. This means regulation, oversight, and aligned incentives toward safety rather than growth.</p>
+                </div>
+
+                <div class="cross-connection">
+                    <h4>📚 Cross-Book Connection</h4>
+                    <p>Relates to Don Norman's "The Design of Everyday Things"—how system design shapes behavior. Good design prevents error; bad design enables it.</p>
+                </div>
+
+                <div class="author-quote">
+                    "The greater priority must be the development of systems that support and elicit ethical behavior, rather than ones that rely on the moral virtue of individuals. We need systems that make it easy to do right and hard to do wrong."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 11: DEHUMANIZATION AS THE GATEWAY TO ATROCITY -->
+    <section class="lesson">
+        <div class="lesson-container">
+            <div class="lesson-visual">
+                <svg class="lesson-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Progression from human to dehumanized -->
+                    <!-- Stage 1: Human -->
+                    <circle cx="60" cy="100" r="18" fill="#FF6B6B"/>
+                    <rect x="50" y="120" width="20" height="40" fill="#FF6B6B"/>
+                    <rect x="40" y="130" width="10" height="40" fill="#FF6B6B"/>
+                    <rect x="70" y="130" width="10" height="40" fill="#FF6B6B"/>
+                    <text x="60" y="215" font-size="10" text-anchor="middle" fill="#333">Human</text>
+
+                    <!-- Stage 2: Labeled -->
+                    <circle cx="150" cy="100" r="18" fill="#FF9800"/>
+                    <rect x="140" y="120" width="20" height="40" fill="#FF9800"/>
+                    <rect x="130" y="130" width="10" height="40" fill="#FF9800"/>
+                    <rect x="160" y="130" width="10" height="40" fill="#FF9800"/>
+                    <path d="M 155 85 Q 160 75 165 85" stroke="#333" stroke-width="1" fill="none"/>
+                    <text x="150" y="215" font-size="10" text-anchor="middle" fill="#333">Labeled/Enemy</text>
+
+                    <!-- Stage 3: Abstracted -->
+                    <circle cx="240" cy="100" r="18" fill="#A06CD5" opacity="0.7"/>
+                    <rect x="230" y="120" width="20" height="40" fill="#A06CD5" opacity="0.7"/>
+                    <rect x="220" y="130" width="10" height="40" fill="#A06CD5" opacity="0.7"/>
+                    <rect x="250" y="130" width="10" height="40" fill="#A06CD5" opacity="0.7"/>
+                    <text x="240" y="215" font-size="10" text-anchor="middle" fill="#333">Abstracted/Statistic</text>
+
+                    <!-- Stage 4: Dehumanized -->
+                    <rect x="310" y="75" width="50" height="50" fill="#666" opacity="0.5" rx="3"/>
+                    <text x="335" y="110" font-size="20" text-anchor="middle" fill="#333">?</text>
+                    <text x="335" y="215" font-size="10" text-anchor="middle" fill="#333">Non-human/Animal</text>
+
+                    <!-- Progression arrow -->
+                    <path d="M 85 100 L 125 100 M 175 100 L 215 100 M 265 100 L 305 100" stroke="#FFE66D" stroke-width="2"/>
+
+                    <!-- Ethical boundary -->
+                    <line x1="20" y1="250" x2="380" y2="250" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="5,5"/>
+                    <text x="200" y="275" font-size="11" text-anchor="middle" fill="#FF6B6B" font-weight="bold">Dehumanization Crosses Ethical Boundary</text>
+                </svg>
+            </div>
+            <div class="lesson-text">
+                <span class="lesson-badge">11</span>
+                <h2>Dehumanization: The Final Step Before Evil</h2>
+                <p>Before atrocities, perpetrators must convince themselves that victims are not fully human. This psychological process—dehumanization—is the gateway drug to moral horror.</p>
+
+                <div class="key-lesson-card">
+                    <h4>KEY LESSON: Language Precedes Violence</h4>
+                    <ul>
+                        <li>Rwanda genocide: Hutus called Tutsis "inyenzi" (cockroaches) before the slaughter</li>
+                        <li>Nazi propaganda: Jews called "vermin" and "disease" to be eradicated</li>
+                        <li>Abu Ghraib: Prisoners called "animals" and "terrorists" by guards</li>
+                        <li>Dehumanization operates through language, imagery, and cultural narratives</li>
+                        <li>Once someone is re-categorized as less-than-human, normal ethical rules no longer apply</li>
+                        <li>Dehumanization is reversible: re-humanization through exposure and direct contact can undo it</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    Want to know if a society is about to commit atrocities? Listen to the language. When people start talking about other people as animals, diseases, or insects, that's your warning sign. Ignore it at your peril.
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: Algorithmic Dehumanization at Scale</h4>
+                    <p>AI systems don't explicitly call people "animals," but they achieve the same dehumanization through abstraction. Content moderation algorithms treat human suffering as a binary classification problem (violates/doesn't violate policy). Recommendation algorithms treat users as engagement metrics. Facial recognition systems trained on biased datasets systematically misidentify people of color, treating their faces as lower-quality data. Predictive policing algorithms treat neighborhoods as criminal probability distributions. None of this is intentional cruelty, but the effect is dehumanization: people become statistics, problems to optimize, or edge cases in classification tasks. This is why algorithm transparency matters: when you see the abstraction, you see the potential for dehumanization. We need to fight algorithmic abstraction by insisting on human context, individual stories, and the restoration of dignity in systems.</p>
+                </div>
+
+                <div class="cross-connection">
+                    <h4>📚 Cross-Book Connection</h4>
+                    <p>Gregory Stanton's "Ten Stages of Genocide" places dehumanization as stage 4—the precondition for mass atrocity. Understanding dehumanization is understanding how genocide starts.</p>
+                </div>
+
+                <div class="author-quote">
+                    "Once we accept the premise that certain people are less than human, our compassion for them is suspended and our natural resistance to committing harm is overcome."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 12: THE PATH TO REDEMPTION AND RESISTANCE -->
+    <section class="lesson">
+        <div class="lesson-container">
+            <div class="lesson-visual">
+                <svg class="lesson-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Path from darkness to light -->
+                    <!-- Ground -->
+                    <ellipse cx="200" cy="280" rx="150" ry="20" fill="#ddd"/>
+
+                    <!-- Darkness on left -->
+                    <circle cx="80" cy="150" r="60" fill="#333" opacity="0.7"/>
+                    <text x="80" y="160" font-size="16" text-anchor="middle" fill="white">EVIL</text>
+
+                    <!-- Path upward and forward -->
+                    <path d="M 140 140 Q 170 100 200 80 Q 230 100 260 140" stroke="#FFE66D" stroke-width="4" fill="none"/>
+
+                    <!-- Light on right -->
+                    <circle cx="320" cy="150" r="60" fill="#55EFC4" opacity="0.8"/>
+                    <text x="320" y="165" font-size="14" text-anchor="middle" fill="#333">HEROISM</text>
+
+                    <!-- Sun rays -->
+                    <line x1="320" y1="60" x2="320" y2="30" stroke="#FFE66D" stroke-width="2"/>
+                    <line x1="360" y1="75" x2="380" y2="55" stroke="#FFE66D" stroke-width="2"/>
+                    <line x1="380" y1="115" x2="405" y2="115" stroke="#FFE66D" stroke-width="2"/>
+
+                    <!-- Steps/milestones on path -->
+                    <circle cx="170" cy="125" r="4" fill="#FFE66D"/>
+                    <circle cx="200" cy="90" r="4" fill="#FFE66D"/>
+                    <circle cx="230" cy="125" r="4" fill="#FFE66D"/>
+                </svg>
+            </div>
+            <div class="lesson-text">
+                <span class="lesson-badge">12</span>
+                <h2>Building Resistance and Personal Power</h2>
+                <p>Zimbardo's final message: understanding the power of situations isn't despair—it's empowerment. Once you know how the Lucifer Effect works, you can resist it.</p>
+
+                <div class="key-lesson-card">
+                    <h4>KEY LESSON: Practical Resistance Strategies</h4>
+                    <ul>
+                        <li>Develop moral imagination: mentally rehearse resistance before you enter systems that pressure evil</li>
+                        <li>Recognize dehumanizing language and resist it actively</li>
+                        <li>Question authority and institutional narratives</li>
+                        <li>Maintain contact with those different from you—dehumanization requires distance</li>
+                        <li>Document abuse and blow the whistle when institutions fail</li>
+                        <li>Vote with your feet: leave systems that reward evil</li>
+                        <li>Build accountability into institutions you have power over</li>
+                        <li>Understand that being good requires active choices, not passive hope</li>
+                    </ul>
+                </div>
+
+                <div class="funny-take">
+                    So basically, Zimbardo's advice is: don't become evil by accident. Seems simple until you're in a situation where being good is costly and everyone else is compromising. Then you understand why most people choose the comfortable evil.
+                </div>
+
+                <div class="ai-connection">
+                    <h4>🤖 AI Connection: The Future is a Choice, Not Destiny</h4>
+                    <p>The tech industry often claims that harmful AI outcomes are inevitable—"the speed of technology outpaces regulation," "it's too complex to control," "it would just happen elsewhere." These are dehumanization excuses for abdication of responsibility. But Zimbardo teaches that outcomes aren't inevitable; they're choices. We can design AI systems with accountability and safety. We can regulate before disasters. We can refuse to deploy systems we know are harmful. We can demand transparency from companies. We can support researchers raising concerns. The future of AI isn't written by technological determinism—it's written by choices. And those choices start by rejecting the narrative that harmful AI is inevitable. It's not. It's profitable, which is different. Profit is a choice we can change.</p>
+                </div>
+
+                <div class="cross-connection">
+                    <h4>📚 Cross-Book Connection</h4>
+                    <p>Relates to Viktor Frankl's "Man's Search for Meaning"—even in the darkest circumstances, humans retain the freedom to choose their attitude and response. Meaning comes from choosing well when evil tempts.</p>
+                </div>
+
+                <div class="author-quote">
+                    "Ultimately, the question is not whether we are capable of evil. The question is whether we will actively resist it when the pressures come. That choice is always available to us."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY SPOTLIGHT 1: THE GUARDS WHO RESISTED -->
+    <section class="spotlight">
+        <div class="spotlight-container">
+            <h2>Story Spotlight: The Guards Who Said No</h2>
+            <div class="spotlight-content">
+                <p>In the Stanford Prison Experiment, most guards adopted the abusive culture. But some didn't. Guard "John Wayne" did perform abusive acts, but others—guard "Correctional Officer 221" and others—resisted the pressure. They refused to participate in the dehumanization, they spoke up against abuse, they tried to reform the system from within. These guards didn't have special moral training or unique character traits. They simply chose, in the face of institutional pressure, to say no.</p>
+
+                <p>What distinguished the resisting guards? In retrospect, Zimbardo identified several factors: they questioned the premise of the experiment, they maintained moral imagination about the prisoners' humanity, they were willing to accept social ostracism from other guards, and they questioned whether the authority (Zimbardo himself) had the right to conduct the experiment.</p>
+
+                <p>One crucial moment: when a concerned parent questioned Zimbardo about the ethics of what was happening, Zimbardo became defensive and aggressive. That parent did what the resisting guards did—she refused to accept the institutional narrative. She asked uncomfortable questions. She maintained the prisoners' humanity in the face of systematic dehumanization.</p>
+
+                <p>The guards who resisted teach us that the Lucifer Effect is not destiny. Even in the worst situations, resistance is possible. It's costly—the resisting guards were isolated, mocked, and pressured. But it's possible. And every person in a system has the power to become one of these guards: the person who says, "I won't participate in this."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY SPOTLIGHT 2: WHISTLEBLOWERS AND INSTITUTIONAL RESISTANCE -->
+    <section class="spotlight">
+        <div class="spotlight-container">
+            <h2>Story Spotlight: Whistleblowers Against Institutional Evil</h2>
+            <div class="spotlight-content">
+                <p>In 2004, a low-ranking soldier named Joe Darby walked into a commander's office at Abu Ghraib and reported the abuse. He had photos of the torture—some of his fellow soldiers had been joking about them, normalizing the atrocities. Darby's conscience resisted. He reported what he saw, despite knowing it would make him unpopular with his unit, despite potential retaliation, despite the military pressure to stay silent. His whistleblowing eventually led to the exposure of Abu Ghraib.</p>
+
+                <p>Similarly, when researchers at Meta discovered that their algorithm was promoting anger and divisive content because anger drove engagement, they reported it. The company initially suppressed their findings. Frances Haugen, who worked on the team, blew the whistle publicly, releasing internal documents showing that Meta knew Instagram was psychologically harming teen girls. She faced legal threats, reputation attacks, and attempted intimidation. But she chose, like Joe Darby, to let conscience override institutional pressure.</p>
+
+                <p>These whistleblowers are the modern resistance. They work within systems, understand how they function, and find the courage to say no. They accept personal costs—job loss, reputation damage, legal jeopardy—to prevent systemic evil. They prove Zimbardo's point: even in the darkest institutions, individual choice and moral imagination remain available.</p>
+
+                <p>The irony: whistleblowers are often painted as traitors to their institutions. But in reality, they're the only ones trying to save those institutions from becoming irredeemably evil. They're the guards who said no. They're our best hope against the Lucifer Effect.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY SPOTLIGHT 3: RECOVERING FROM PARTICIPATION IN EVIL -->
+    <section class="spotlight">
+        <div class="spotlight-container">
+            <h2>Story Spotlight: Redemption and the Long Road Back</h2>
+            <div class="spotlight-content">
+                <p>One of the most haunting questions The Lucifer Effect raises: what happens to perpetrators after they realize what they've done? Chip Frederick, the U.S. Army reservist who participated in Abu Ghraib abuse, was prosecuted and imprisoned. In his testimony and interviews, Frederick expressed genuine remorse. He had been a normal guy—not a sadist, not a psychopath. The situation transformed him. Once he left the situation and gained perspective, he could see what he'd done.</p>
+
+                <p>Zimbardo's expert testimony for Frederick was controversial. Some wanted blood—maximum punishment for the perpetrator. But Zimbardo argued something more complex: Frederick wasn't uniquely evil. He was ordinary, placed in an extraordinary (and extraordinarily corrupt) system. Removing him from that system didn't automatically restore his virtue, but it made redemption possible in a way that remaining in Abu Ghraib never could.</p>
+
+                <p>The question of redemption is central to understanding the Lucifer Effect. If good people can become evil through situations, then evil people might become good again by changing situations. This doesn't mean punishment isn't deserved—accountability is crucial for breaking the cycle. But it means that moral transformation is possible for perpetrators, not just for victims.</p>
+
+                <p>This is perhaps the most hopeful lesson: the Lucifer Effect works both ways. Bad situations corrupt good people. But good situations might rehabilitate bad people. The path to redemption requires leaving the corrupt system, confronting the harm caused, and rebuilding moral identity. It's harder than hoping perpetrators were evil all along. But it's more realistic, and it leaves room for human transformation and growth.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHEATSHEET SECTION -->
+    <section class="cheatsheet">
+        <div class="cheatsheet-container">
+            <h2>Quick Cheatsheet: The Lucifer Effect Essentials</h2>
+
+            <div class="cheatsheet-grid">
+                <div class="cheatsheet-card">
+                    <h3>Core Insight</h3>
+                    <ul>
+                        <li>Situations > Character</li>
+                        <li>Context shapes behavior more than personality</li>
+                        <li>Good people commit evil in wrong systems</li>
+                        <li>Evil is situational, not dispositional</li>
+                        <li>The "bad apple" theory is wrong</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>Key Mechanisms</h3>
+                    <ul>
+                        <li>Deindividuation: identity dissolves in groups</li>
+                        <li>Role adoption: uniforms trigger behavior</li>
+                        <li>Moral disengagement: rationalization shields conscience</li>
+                        <li>Diffusion of responsibility: crowd = no accountability</li>
+                        <li>Dehumanization: language precedes violence</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>Famous Experiments</h3>
+                    <ul>
+                        <li>Stanford Prison Experiment (1971): Roles shape behavior instantly</li>
+                        <li>Milgram Obedience (1961-62): 65% delivered fatal shocks</li>
+                        <li>Abu Ghraib (2003-04): Real-world Lucifer Effect confirmed</li>
+                        <li>Stanford Prison follow-up: Guards could have resisted</li>
+                        <li>All show: Situation, not sadism, drives evil</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>Resistance Strategies</h3>
+                    <ul>
+                        <li>Moral imagination: rehearse resistance beforehand</li>
+                        <li>Question authority: don't blindly obey</li>
+                        <li>Maintain humanity: resist dehumanizing language</li>
+                        <li>Stay connected: isolation enables abuse</li>
+                        <li>Document and blow the whistle: accountability matters</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>System Changes Needed</h3>
+                    <ul>
+                        <li>Transparency: visibility constrains evil</li>
+                        <li>Accountability structures: consequences for abuse</li>
+                        <li>Rotation systems: prevent group degeneration</li>
+                        <li>Power checks: limit unchecked authority</li>
+                        <li>Humanization: direct contact restores empathy</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>For AI Systems</h3>
+                    <ul>
+                        <li>Incentives matter: reward hacking is inevitable with misaligned objectives</li>
+                        <li>Transparency required: black boxes enable moral disengagement</li>
+                        <li>Accountability gaps: "the algorithm decided" is excuse for abdication</li>
+                        <li>Scale amplifies: what's marginally harmful at small scale becomes catastrophic at 1B users</li>
+                        <li>Oversight needed: humans must remain in control loops</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>Warning Signs</h3>
+                    <ul>
+                        <li>Dehumanizing language: "vermin," "animals," "threats"</li>
+                        <li>Declining accountability: oversight disappearing</li>
+                        <li>Group cohesion around abuse: normalizing harm</li>
+                        <li>Authority unquestioned: obedience without thought</li>
+                        <li>Proximity eliminated: distance from victims increases harm</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>Historical Parallels</h3>
+                    <ul>
+                        <li>Rwanda genocide: dehumanizing propaganda preceded slaughter</li>
+                        <li>Nazi Germany: ordinary people committed atrocities</li>
+                        <li>Cambodian genocide: forced role-play of revolutionary cadre</li>
+                        <li>Recent atrocities: not unique historical events but inevitable situations</li>
+                        <li>All preventable: with system changes and resistance</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>Redemption Path</h3>
+                    <ul>
+                        <li>Remove from corrupt system: situation determines behavior</li>
+                        <li>Confront harm caused: accountability precedes growth</li>
+                        <li>Rebuild moral identity: slow process of transformation</li>
+                        <li>Make amends: restitution where possible</li>
+                        <li>Resist temptation to return: corrupt systems pull people back</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>Personal Application</h3>
+                    <ul>
+                        <li>Assess your systems: what situations tempt you to evil?</li>
+                        <li>Build resistance: prepare mentally for ethical tests</li>
+                        <li>Choose your groups: deindividuation is contagious</li>
+                        <li>Question authority: legitimate power explains, doesn't commands</li>
+                        <li>Maintain humanity: keep people human in your thinking and speech</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>Zimbardo's Call to Action</h3>
+                    <ul>
+                        <li>Reject "bad apple" explanations: demand system accountability</li>
+                        <li>Design good systems: make virtue easy, vice hard</li>
+                        <li>Practice heroic resistance: rehearse saying no</li>
+                        <li>Support whistleblowers: they're your moral compass</li>
+                        <li>Believe in redemption: but enforce accountability</li>
+                    </ul>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>Bigger Picture</h3>
+                    <ul>
+                        <li>Psychology is destiny: situations determine outcomes reliably</li>
+                        <li>Evil is democratic: not limited to unusual people</li>
+                        <li>Prevention > punishment: fix systems before crises</li>
+                        <li>Hope is realistic: we can build better institutions</li>
+                        <li>Your choice matters: individual heroism cascades</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Generate particles for cover section
+        function generateParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 60 + 10;
+                const delay = Math.random() * 5;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = delay + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        generateParticles();
+    </script>
+</body>
+</html>

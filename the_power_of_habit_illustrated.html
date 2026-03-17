@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Power of Habit - Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* COVER SECTION */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--teal) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 700px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+
+        .cover-author {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 60px;
+            font-style: italic;
+        }
+
+        .habit-loop-svg {
+            margin: 40px auto;
+            display: block;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+            max-width: 400px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* LESSON CARDS */
+        .lesson {
+            background: white;
+            border-radius: 12px;
+            margin: 60px auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lesson-inner {
+            padding: 60px 40px;
+            position: relative;
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: var(--coral);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .lesson h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1.1rem;
+            color: var(--teal);
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lesson p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .lesson ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .lesson li {
+            margin-bottom: 12px;
+            color: #555;
+        }
+
+        /* CARD LAYOUT */
+        .card {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--cream) 100%);
+            border-left: 5px solid var(--orange);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .card-label {
+            display: inline-block;
+            background: var(--orange);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        /* QUOTE BOX */
+        .quote-box {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--mint) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-align: center;
+            font-style: italic;
+            border-left: 5px solid var(--forest);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.3);
+        }
+
+        .quote-author {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            font-style: normal;
+            opacity: 0.9;
+        }
+
+        /* FUNNY BOX */
+        .funny-box {
+            background: linear-gradient(135deg, var(--pink) 0%, #FF9FF3 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 5px solid var(--warm-red);
+            position: relative;
+        }
+
+        .funny-box::before {
+            content: '😄';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        /* AI CONNECTION BOX */
+        .ai-box {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sky) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 5px solid var(--dark-purple);
+            position: relative;
+        }
+
+        .ai-box::before {
+            content: '🤖';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        .ai-box strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        /* CONNECTION BOX */
+        .connect-box {
+            background: linear-gradient(135deg, var(--purple) 0%, #D1A3FF 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 5px solid var(--dark-purple);
+        }
+
+        .connect-box strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .connect-box p {
+            color: white !important;
+        }
+
+        /* STORY CARDS */
+        .story {
+            background: linear-gradient(135deg, #FFF5E6 0%, white 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 25px 0;
+            border-left: 5px solid var(--warm-red);
+            box-shadow: 0 4px 15px rgba(225, 112, 85, 0.1);
+        }
+
+        .story-inner strong {
+            display: block;
+            color: var(--warm-red);
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        .story p {
+            color: #555;
+        }
+
+        /* CHEATSHEET */
+        .cheatsheet {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid var(--teal);
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.15);
+        }
+
+        .cheatsheet-inner h3 {
+            color: var(--teal);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .cheatsheet-inner ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .cheatsheet-inner li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+
+        .cheatsheet-inner li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* ILLUSTRATION CONTAINER */
+        .illustration-container {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--mint) 100%);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .illustration-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* TWO COLUMN LAYOUT */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .two-col > div {
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        /* PARTICLE ANIMATION */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .footer h3 {
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        /* TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: var(--teal);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #f9f9f9;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            .cover-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .lesson-inner {
+                padding: 40px 20px;
+            }
+
+            .lesson h2 {
+                font-size: 2rem;
+            }
+
+            .habit-loop-svg {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+    <div class="cover-content">
+        <h1>The Power of Habit</h1>
+        <p class="cover-subtitle">Why We Do What We Do in Life and Business</p>
+        <p class="cover-author">by Charles Duhigg</p>
+
+        <svg class="habit-loop-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background -->
+            <circle cx="200" cy="150" r="140" fill="rgba(255,255,255,0.1)" stroke="white" stroke-width="2"/>
+
+            <!-- CUE (Top) -->
+            <circle cx="200" cy="40" r="35" fill="#FFE66D" stroke="white" stroke-width="3"/>
+            <text x="200" y="48" font-size="20" font-weight="bold" fill="#2D3436" text-anchor="middle">CUE</text>
+
+            <!-- ROUTINE (Right) -->
+            <circle cx="320" cy="150" r="35" fill="#FF6B6B" stroke="white" stroke-width="3"/>
+            <text x="320" y="158" font-size="16" font-weight="bold" fill="white" text-anchor="middle">ROUTINE</text>
+
+            <!-- REWARD (Left) -->
+            <circle cx="80" cy="150" r="35" fill="#4ECDC4" stroke="white" stroke-width="3"/>
+            <text x="80" y="158" font-size="18" font-weight="bold" fill="white" text-anchor="middle">REWARD</text>
+
+            <!-- Arrows -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="white"/>
+                </marker>
+            </defs>
+
+            <!-- CUE to ROUTINE -->
+            <path d="M 230 75 Q 280 100 310 120" stroke="white" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+            <text x="270" y="85" font-size="12" fill="white" font-weight="bold">triggers</text>
+
+            <!-- ROUTINE to REWARD -->
+            <path d="M 310 185 Q 200 220 110 185" stroke="white" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+            <text x="200" y="225" font-size="12" fill="white" font-weight="bold" text-anchor="middle">creates craving for</text>
+
+            <!-- REWARD to CUE -->
+            <path d="M 110 115 Q 150 60 170 55" stroke="white" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+            <text x="120" y="70" font-size="12" fill="white" font-weight="bold">reinforces</text>
+
+            <!-- Center text -->
+            <text x="200" y="155" font-size="14" fill="white" text-anchor="middle" opacity="0.9">THE HABIT LOOP</text>
+        </svg>
+
+        <p style="color: white; opacity: 0.85; margin-top: 40px; font-size: 0.95rem;">An illustrated journey through the science of behavior change</p>
+    </div>
+
+    <div class="scroll-indicator">↓</div>
+</section>
+
+<div class="container">
+
+<!-- LESSON 1: THE HABIT LOOP -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-number">1</div>
+        <p class="lesson-subtitle">Foundation</p>
+        <h2>The Habit Loop: Cue, Routine, Reward</h2>
+
+        <p>Every habit follows a neurological pattern called the Habit Loop, discovered through studying brain scans and behavioral patterns. This three-part structure explains why habits are so powerful—and how to change them.</p>
+
+        <div class="card">
+            <span class="card-label">The Three Parts</span>
+            <p><strong>CUE:</strong> A trigger that signals your brain to go into automatic mode. This might be a time of day, a location, an emotion, or another person.</p>
+            <p><strong>ROUTINE:</strong> The behavior itself—the habit you perform. It can be physical, mental, or emotional.</p>
+            <p><strong>REWARD:</strong> The benefit your brain gains from performing the routine. This can be physiological (dopamine hit) or psychological (satisfaction, relief).</p>
+        </div>
+
+        <div class="quote-box">
+            "The habit loop is a neurological pattern: when you see a cue, your brain predicts a reward. If the reward comes, your brain stores the memory and creates a craving loop."
+            <div class="quote-author">— Charles Duhigg, The Power of Habit</div>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">Key Insight: Eugene Pauly's Story</h3>
+        <div class="story">
+            <div class="story-inner">
+                <strong>The Amnesia Patient Who Still Had Habits</strong>
+                <p>Eugene Pauly suffered from amnesia that destroyed his ability to form new memories. He couldn't remember what he ate for breakfast or who visited him yesterday. Yet researchers discovered something remarkable: Eugene could still learn new habits.</p>
+                <p>His brain could form cue-routine-reward patterns, even though his conscious mind couldn't access these memories. He learned to navigate the hospital without being able to recall doing so. He could perform tasks he'd never consciously "remember" learning. This proved that habit formation operates in a completely different neural system than conscious memory—older, deeper, more automatic.</p>
+                <p>This discovery revolutionized our understanding: habits are powerful because they're managed by a different part of the brain than consciousness.</p>
+            </div>
+        </div>
+
+        <div class="ai-box">
+            <strong>AI Connection: The Habit Loop as Reinforcement Learning</strong>
+            In machine learning, reinforcement learning follows the exact same pattern: state (cue) → action (routine) → reward. The algorithm learns to repeat actions that maximize reward. Your brain works like a trained neural network, strengthening pathways that lead to rewards. Habits are your brain's way of automating behaviors through reward-driven learning—the same mechanism powering game-playing AIs.
+        </div>
+
+        <div class="two-col">
+            <div>
+                <h4 style="color: var(--coral); margin-bottom: 12px;">Habit Loop Example: Morning Coffee</h4>
+                <p><strong>CUE:</strong> Alarm goes off at 7am</p>
+                <p><strong>ROUTINE:</strong> Walk to kitchen, make coffee</p>
+                <p><strong>REWARD:</strong> Caffeine boost + morning ritual comfort</p>
+            </div>
+            <div>
+                <h4 style="color: var(--coral); margin-bottom: 12px;">Habit Loop Example: Procrastination</h4>
+                <p><strong>CUE:</strong> Receive difficult task</p>
+                <p><strong>ROUTINE:</strong> Check email, scroll social media</p>
+                <p><strong>REWARD:</strong> Temporary relief from anxiety</p>
+            </div>
+        </div>
+
+        <div class="funny-box">
+            Your brain is basically a really sophisticated vending machine. Put in a cue (money), press a routine (button), get a reward (snacks). The only difference is your brain has been conditioning itself for years, while the vending machine is innocent and doesn't judge.
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 2: THE CRAVING BRAIN -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-number">2</div>
+        <p class="lesson-subtitle">Neuroscience</p>
+        <h2>The Craving Brain: Why Habits Stick</h2>
+
+        <p>Habits aren't just about doing something repeatedly. They're about creating a craving in your brain. The reward isn't the final piece—the anticipation of the reward is what makes the habit loop spin faster and faster.</p>
+
+        <div class="card">
+            <span class="card-label">How Neuroscience Works</span>
+            <p>When researchers scan brains during habits, they see something fascinating: the brain actually stops working hard. Consciously performed actions light up the brain like a Christmas tree. But habitual actions? The cortex goes quiet while the basal ganglia—the ancient reptilian part of your brain—takes over.</p>
+            <p>This is why habits are so energy efficient. Your brain outsources the task to the autopilot, saving cognitive resources for new challenges.</p>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">The Craving Makes the Habit</h3>
+        <p>A routine without a craving eventually fades. But a routine paired with a craving? That's indestructible. Your brain needs to anticipate the reward. Without that anticipation, without that dopamine-driven craving, the behavior won't become truly habitual.</p>
+
+        <div class="story">
+            <div class="story-inner">
+                <strong>The Fermentation Science: How Kodak Missed Digital</strong>
+                <p>In the 1970s, Kodak invented the digital camera but dismissed it. Why? They were stuck in a habit loop around film fermentation—the chemical process they'd mastered for decades. The cue was "customers want photos," the routine was "process film," the reward was "$$$." Their brain (as a company) had created such a strong craving for film revenue that they couldn't see the digital future.</p>
+                <p>The habit loop they'd built became a cognitive blindness. They were so addicted to the film reward that they discounted digital's potential. Habits don't just control individuals—they imprison organizations.</p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "Cravings are what drive habits. And cravings are hardwired into our basal ganglia. Once a craving is formed, it doesn't really go away. It becomes part of the architecture of your brain."
+            <div class="quote-author">— Neuroscience research cited in The Power of Habit</div>
+        </div>
+
+        <div class="ai-box">
+            <strong>AI Connection: Reward Prediction and Dopamine</strong>
+            Dopamine in the brain works exactly like reward signals in AI. It's not about the reward itself—it's about the prediction of the reward. When a cue appears, your brain releases dopamine in anticipation of the reward, not when the reward arrives. This is why gamblers keep pulling slot machine levers (the brain expects reward based on the cue). Modern AI systems use temporal difference learning—predicting future rewards based on current signals—mimicking this exact dopamine mechanism.
+        </div>
+
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <h3>Why Habits Stick (The Neuroscience Summary)</h3>
+                <ul>
+                    <li>Basal ganglia = autopilot system (efficient, powerful, unconscious)</li>
+                    <li>Cravings = dopamine predictions that strengthen neural pathways</li>
+                    <li>Brain activity decreases as habits solidify (less thinking required)</li>
+                    <li>Rewards must be consistent to build strong cravings</li>
+                    <li>Cravings persist even after the habit is broken</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 3: THE GOLDEN RULE OF HABIT CHANGE -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-number">3</div>
+        <p class="lesson-subtitle">The Game Changer</p>
+        <h2>The Golden Rule: Keep the Cue & Reward, Change the Routine</h2>
+
+        <p>This is the breakthrough insight. You don't need to destroy your habit. You need to redirect it. The cue and reward are burned into your brain's neural pathways. But the routine—the behavior itself—is remarkably flexible.</p>
+
+        <div class="card">
+            <span class="card-label">The Formula</span>
+            <p><strong>Bad Habit:</strong> CUE → bad routine → reward</p>
+            <p><strong>Good Habit:</strong> CUE → NEW routine → same reward</p>
+            <p>The trick is finding a new routine that provides the same reward the original routine was delivering.</p>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">Real Example: The Afternoon Snack Habit</h3>
+        <div class="two-col">
+            <div style="background: linear-gradient(135deg, #FFE5E5 0%, white 100%); border-left: 4px solid var(--warm-red);">
+                <h4 style="color: var(--warm-red); margin-bottom: 10px;">❌ Old Habit</h4>
+                <p><strong>CUE:</strong> 3pm hits, feeling tired</p>
+                <p><strong>ROUTINE:</strong> Buy cookie from vending machine</p>
+                <p><strong>REWARD:</strong> Sugar boost + comfort + break from work</p>
+            </div>
+            <div style="background: linear-gradient(135deg, #E5F5E5 0%, white 100%); border-left: 4px solid var(--forest);">
+                <h4 style="color: var(--forest); margin-bottom: 10px;">✓ New Habit</h4>
+                <p><strong>CUE:</strong> 3pm hits (SAME)</p>
+                <p><strong>ROUTINE:</strong> Walk to water fountain, chat with colleague</p>
+                <p><strong>REWARD:</strong> Caffeine alternative + comfort + break from work (SAME)</p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "The Golden Rule of habit change: You can't eliminate a bad habit, but you can replace it. And you've got to use the same cue, provide the same reward, but change the routine in between."
+            <div class="quote-author">— Charles Duhigg</div>
+        </div>
+
+        <div class="story">
+            <div class="story-inner">
+                <strong>Alcoholics Anonymous: Cracking the Habit Loop Without Willpower</strong>
+                <p>AA works through this exact principle. Alcoholics typically drink to cope with anxiety, boredom, or social awkwardness (the reward is emotional numbness or social connection). AA doesn't tell people to never feel those feelings. Instead, it provides:</p>
+                <p><strong>New Routine:</strong> Call a sponsor or go to a meeting instead of drinking.</p>
+                <p><strong>Same Reward:</strong> Social connection, community support, emotional regulation.</p>
+                <p>The cue (anxiety, social situation) stays the same. The reward (social connection and emotional regulation) stays the same. Only the routine changes. This is why AA works for people when willpower has failed them completely.</p>
+            </div>
+        </div>
+
+        <div class="ai-box">
+            <strong>AI Connection: Transfer Learning</strong>
+            In machine learning, transfer learning means taking what a neural network learned in one context and applying it to another. Habit change is transfer learning: the brain already knows how to deliver the reward, it just needs to find a new path to get there. You're retraining the network to take a different route through the same reward zone.
+        </div>
+
+        <div class="funny-box">
+            If your brain is a GPS and your bad habit is the route to Junk Food City, the Golden Rule doesn't involve destroying the GPS. It's about programming it to take a different path that still gets you the same dopamine destination.
+        </div>
+
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <h3>Steps to Apply the Golden Rule</h3>
+                <ul>
+                    <li>Identify your cue (time, location, emotion, person, preceding action)</li>
+                    <li>Identify the actual reward you're getting (not always obvious)</li>
+                    <li>Brainstorm alternative routines that deliver the same reward</li>
+                    <li>Test and iterate until new routine feels as satisfying</li>
+                    <li>Belief matters: you need to believe the new routine will work</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 4: KEYSTONE HABITS -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-number">4</div>
+        <p class="lesson-subtitle">The Domino Effect</p>
+        <h2>Keystone Habits: Small Habits That Cascade Into Life Change</h2>
+
+        <p>Some habits are more powerful than others. Keystone habits are the architectural habits that, once changed, cause other habits to shift automatically. They're the first domino that knocks down all the others.</p>
+
+        <div class="card">
+            <span class="card-label">What Makes a Keystone Habit</span>
+            <p>Keystone habits create structural changes in your life. They provide small wins that build momentum. They establish patterns that influence other behaviors. When you change a keystone habit, you don't need willpower for everything else—the cascade handles it.</p>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">The Alcoa Safety Transformation: Paul O'Neill's Story</h3>
+        <div class="story">
+            <div class="story-inner">
+                <strong>How Obsessing Over Worker Safety Transformed an Entire Company</strong>
+                <p>In 1987, Paul O'Neill became CEO of Alcoa, the aluminum company. Wall Street expected him to announce profit improvement plans. Instead, he announced he was making worker safety the top priority. Wall Street analysts were confused—how does safety improve profits?</p>
+                <p>O'Neill wasn't naive. He knew that if he obsessed over safety, it would force changes in communication, accountability, and process improvement. Safety became the keystone habit.</p>
+                <p><strong>The results:</strong> Within a decade, Alcoa's profits quintupled. How? The safety obsession cascaded:</p>
+                <ul style="margin: 15px 0;">
+                    <li>To prevent injuries, managers had to understand every process deeply</li>
+                    <li>To improve processes, workers had to communicate with engineers</li>
+                    <li>New communication systems improved efficiency everywhere</li>
+                    <li>Accountability increased across all departments</li>
+                    <li>Quality improved because people cared about details</li>
+                </ul>
+                <p>One keystone habit (safety focus) transformed the entire culture. It wasn't that safety directly improved profits. It was that the habit of focusing on safety forced hundreds of other good habits to develop.</p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "Keystone habits say that success doesn't require perfect discipline. It requires identifying a few key priorities and fashioning your life around them."
+            <div class="quote-author">— Charles Duhigg</div>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">Common Keystone Habits</h3>
+        <div class="illustration-container">
+            <table>
+                <tr>
+                    <th>Keystone Habit</th>
+                    <th>Why It Cascades</th>
+                    <th>Downstream Effects</th>
+                </tr>
+                <tr>
+                    <td><strong>Exercise</strong></td>
+                    <td>Provides sense of control and discipline</td>
+                    <td>Better sleep, healthier eating, reduced stress</td>
+                </tr>
+                <tr>
+                    <td><strong>Making Your Bed</strong></td>
+                    <td>First accomplishment of the day</td>
+                    <td>Increased productivity, motivation, tidiness</td>
+                </tr>
+                <tr>
+                    <td><strong>Meditation</strong></td>
+                    <td>Builds awareness and self-regulation</td>
+                    <td>Better decision-making, emotional control, focus</td>
+                </tr>
+                <tr>
+                    <td><strong>Tracking Finances</strong></td>
+                    <td>Brings awareness to spending patterns</td>
+                    <td>Reduced debt, better planning, healthier behaviors</td>
+                </tr>
+                <tr>
+                    <td><strong>Family Dinner</strong></td>
+                    <td>Creates communication and connection</td>
+                    <td>Academic improvement, reduced substance abuse, better mental health</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="ai-box">
+            <strong>AI Connection: Transfer Learning at Scale</strong>
+            Keystone habits are like training a neural network on one powerful task. Once the network learns this core task, that learning transfers to related tasks automatically. The base model improves everything built on top of it. Similarly, changing one keystone habit retrains your entire behavioral network.
+        </div>
+
+        <div class="funny-box">
+            Finding your keystone habit is like finding the load-bearing wall in your life. Remove it, and suddenly the whole house has structural problems. Strengthen it, and the whole house becomes more sound. Except instead of a house, it's your life, and instead of contractors, it's just you procrastinating productively.
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 5: WILLPOWER AS A MUSCLE -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-number">5</div>
+        <p class="lesson-subtitle">The Marshmallow Science</p>
+        <h2>Willpower as a Muscle: It Gets Tired, It Can Be Trained</h2>
+
+        <p>Willpower isn't some mystical moral quality. It's a biological resource that depletes and recovers. Treating it like a muscle—exercising it, resting it, knowing when it's fatigued—changes everything about self-control.</p>
+
+        <div class="card">
+            <span class="card-label">The Science</span>
+            <p>Willpower is powered by glucose in your bloodstream. When you exercise self-control—resisting temptation, making decisions, concentrating—your glucose drops. As glucose depletes, willpower weakens. This is why you make poor decisions when hungry or tired.</p>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">Baumeister's Marshmallow Studies</h3>
+        <div class="story">
+            <div class="story-inner">
+                <strong>The Research That Revealed Willpower's Limits</strong>
+                <p>Roy Baumeister ran a famous experiment: subjects came into a lab where they'd just completed a self-control task (resisting cookies, for example). Then they faced a second willpower challenge. Their performance tanked.</p>
+                <p>Even a small act of self-control depletes the glucose that willpower needs. Resist one temptation, and your ability to resist the next one drops. This happens repeatedly until your willpower "muscle" has recovered.</p>
+                <p>But here's what's more interesting: people who regularly exercise willpower have better willpower. Like any muscle, it gets stronger with training. And—crucially—willpower improves across different domains. If you build willpower discipline through exercise, you're more likely to control your diet, manage your finances, and focus on work.</p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "Willpower is like a muscle. It gets tired from exertion, but it can also be strengthened with practice."
+            <div class="quote-author">— Roy Baumeister</div>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">The Implications</h3>
+        <div class="two-col">
+            <div style="background: linear-gradient(135deg, var(--orange) 0%, var(--cream) 100%); border-left: 4px solid var(--orange);">
+                <h4 style="color: var(--dark); margin-bottom: 10px;">Don't Do This</h4>
+                <p>• Rely on willpower at the end of the day when glucose is depleted</p>
+                <p>• Try to resist multiple temptations in quick succession</p>
+                <p>• Make important decisions when exhausted</p>
+                <p>• Expect willpower to work when you're hungry or sleep-deprived</p>
+            </div>
+            <div style="background: linear-gradient(135deg, var(--mint) 0%, var(--teal) 100%); color: white; border-left: 4px solid var(--teal);">
+                <h4 style="color: white; margin-bottom: 10px;">Do This Instead</h4>
+                <p>• Remove temptation from your environment (don't buy junk food)</p>
+                <p>• Replenish glucose (eat regularly, especially before willpower tasks)</p>
+                <p>• Build willpower through daily practice</p>
+                <p>• Use habits to bypass willpower (make good behavior automatic)</p>
+            </div>
+        </div>
+
+        <div class="ai-box">
+            <strong>AI Connection: Willpower as Compute Budget</strong>
+            Willpower is like a compute budget in AI systems. Attention is a limited resource—transformers can only process so much information at once. When you're using your "compute" on one task (resisting cookies), you have less compute for other tasks (being patient with a colleague). Training your willpower is like optimizing your neural network's efficiency, so it can do more with the same computational budget.
+        </div>
+
+        <div class="funny-box">
+            Your brain at 11pm: "Let me make a major life decision and start a new diet." Your brain at 11am after making 47 micro-decisions: "...I can't decide if coffee should be hot or iced." Willpower is real and it's spectacular at abandoning you at the worst times.
+        </div>
+
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <h3>Maximizing Willpower</h3>
+                <ul>
+                    <li>Sleep well: depleted sleep = depleted willpower</li>
+                    <li>Eat regularly: glucose is willpower's fuel</li>
+                    <li>Exercise daily: trains your willpower muscle</li>
+                    <li>Remove temptation: why waste willpower on things you don't need to resist?</li>
+                    <li>Automate decisions: use habits, routines, and systems instead</li>
+                    <li>Batch difficult tasks: do them when glucose is high (morning)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 6: ORGANIZATIONAL HABITS -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-number">6</div>
+        <p class="lesson-subtitle">Business Systems</p>
+        <h2>Organizational Habits: Companies Run on Routine</h2>
+
+        <p>Companies are just collections of people. And collections of people run on habits. When you understand organizational habits, you understand why some companies are efficient empires and others are chaotic messes.</p>
+
+        <div class="card">
+            <span class="card-label">The Pattern</span>
+            <p>Organizations have habits just like brains. Meeting at 2pm every Tuesday? That's an organizational habit. How you respond to customer complaints? Organizational habit. Whether people collaborate or compete? Organizational habit. These habits become encoded in systems, procedures, and culture.</p>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">Why Habits Matter in Organizations</h3>
+        <ul style="margin-bottom: 30px;">
+            <li><strong>Efficiency:</strong> Habits let organizations run without constant decision-making. Standardized processes mean less cognitive load.</li>
+            <li><strong>Scale:</strong> You can't manage thousands of employees through personal oversight. Habits (culture, processes) are how you scale.</li>
+            <li><strong>Resilience:</strong> When crisis hits, organizations fall back on habits. Companies with good habits survive; those with bad habits collapse.</li>
+            <li><strong>Identity:</strong> Company culture is just a collection of habits. What behaviors are rewarded? What's considered normal? These are organizational habits.</li>
+        </ul>
+
+        <div class="story">
+            <div class="story-inner">
+                <strong>Southwest Airlines: The Power of Organizational Habits</strong>
+                <p>Southwest Airlines has different habits than most airlines. They turn planes around in 25 minutes (industry average: 45). They don't assigned seats. They don't charge for checked bags. Employees sing and joke with passengers.</p>
+                <p>Why? These aren't policies—they're habits. Over decades, Southwest built organizational habits around efficiency and fun. These habits became self-reinforcing:</p>
+                <p>Quick turnarounds → more flights per plane → lower costs → lower prices → more customers → more efficient operations → faster turnarounds. The organizational habit created a virtuous cycle.</p>
+                <p>Meanwhile, legacy airlines with habits of bureaucracy, hierarchy, and cost-cutting end up slower, less profitable, and worse for customers. Same industry, completely different outcomes, all driven by organizational habits.</p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "Good organizational habits are the bedrock of corporate success. They're how you scale, how you survive crises, and how you build cultures that outlast individual leaders."
+            <div class="quote-author">— Corporate Culture Research</div>
+        </div>
+
+        <div class="ai-box">
+            <strong>AI Connection: Institutional Memory and Training Data</strong>
+            Organizations are like neural networks. Their habits are their training data. What behaviors get rewarded? That's what the network learns to do. Change the training data (new incentives, new habits), and the network learns different behavior. But inherited institutional habits are like pre-trained weights—they persist even when they're outdated.
+        </div>
+
+        <div class="funny-box">
+            Companies think they have brilliant strategies. Actually, they just have deeply embedded habits. Try to change them and you'll discover that nobody remembers why they started the habit in the first place, but everyone defends it like their life depends on it.
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 7: THE POWER OF CRISIS -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-number">7</div>
+        <p class="lesson-subtitle">Windows of Opportunity</p>
+        <h2>The Power of Crisis: When Institutional Habits Can Change</h2>
+
+        <p>Organizations are notoriously resistant to change. Habits are powerful. But crises create a brief window where the old habits can be disrupted and new ones installed. Understanding this window is the key to transforming organizations.</p>
+
+        <div class="card">
+            <span class="card-label">The Crisis Paradox</span>
+            <p>During normal times, changing habits is nearly impossible. People are comfortable, resistant to new ways. But during crisis? The old habits suddenly feel inadequate. The organizational brain becomes plastic, malleable. This is the moment to install new habits.</p>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">The Window Closes Quickly</h3>
+        <p>The key is timing. The crisis creates momentum for change, but people revert to habits quickly. The leader who understands this uses the crisis window to codify new habits through systems, training, and reinforcement. Once the new habits are installed, they persist.</p>
+
+        <div class="story">
+            <div class="story-inner">
+                <strong>Rhode Island Hospital: Crisis Forces Culture Change</strong>
+                <p>Rhode Island Hospital had a catastrophic accident: surgeons operated on the wrong side of a patient's brain. This was a wake-up call. The hospital leadership realized their organizational habits around communication and double-checking were lax.</p>
+                <p>In the crisis that followed, they had a window. They used it to install new organizational habits: mandatory checklists, required verbal confirmations, new communication protocols. They made these habits mandatory across all departments.</p>
+                <p>The crisis made change possible. The leadership made change stick by encoding new habits into systems. Now those habits are just "the way we work."</p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "During moments of crisis, people are more open to change. But the window closes quickly. The secret is using that window to install new habits and make them stick before reverting to old patterns."
+            <div class="quote-author">— Organizational Change Research</div>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">How to Capitalize on Crisis Windows</h3>
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <ul>
+                    <li>Act quickly: the window closes within weeks, not months</li>
+                    <li>Frame the new habit clearly: "This is how we prevent disasters"</li>
+                    <li>Make it easy: systems and checklists, not willpower</li>
+                    <li>Assign responsibility: someone owns the new habit</li>
+                    <li>Reward the new behavior: celebrate when new habits work</li>
+                    <li>Reinforce repeatedly: the habit will fade unless you keep reinforcing it</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="ai-box">
+            <strong>AI Connection: Retraining Neural Networks</strong>
+            Retraining a neural network is expensive and slow. But when you introduce new loss functions (the "crisis"), the network becomes plastic and can learn new patterns quickly. However, if you don't reinforce the new patterns, the network reverts. Crisis is like introducing new loss functions—it opens a window where rapid learning becomes possible.
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 8: STARBUCKS AND WILLPOWER TRAINING -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-number">8</div>
+        <p class="lesson-subtitle">Practical Application</p>
+        <h2>Starbucks' LATTE Method: Training Willpower in Practice</h2>
+
+        <p>Starbucks discovered something brilliant: they could train employees' willpower. Not through motivation or inspiration, but through a simple framework called LATTE. This framework became a habit-building system that transformed customer service.</p>
+
+        <div class="card">
+            <span class="card-label">The LATTE Framework</span>
+            <ul style="margin-top: 12px; margin-left: 0; list-style: none;">
+                <li><strong>L – Listen:</strong> Hear what the customer is saying (and what they're not saying)</li>
+                <li><strong>A – Acknowledge:</strong> Show you understand their perspective</li>
+                <li><strong>T – Take action:</strong> Do something to address their concern</li>
+                <li><strong>T – Thank them:</strong> Express gratitude for bringing it to your attention</li>
+                <li><strong>E – Explain:</strong> Tell them what you're doing to prevent it from happening again</li>
+            </ul>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">How This Trains Willpower</h3>
+        <p>When an angry customer comes in, the natural reaction is defensive. LATTE gives employees a routine. By following the routine, employees train their willpower muscle. They practice self-control, patience, and empathy. This training transfers to other areas of their work and life.</p>
+
+        <div class="story">
+            <div class="story-inner">
+                <strong>The Transformation at Starbucks</strong>
+                <p>Before LATTE, Starbucks had the same problem as most companies: customer service varied wildly. Some employees were great, others were awful. You couldn't rely on willpower or personality.</p>
+                <p>After implementing LATTE as a routine habit, everything changed. Employees had a cue-routine-reward system:</p>
+                <p><strong>CUE:</strong> Difficult customer interaction</p>
+                <p><strong>ROUTINE:</strong> Execute LATTE</p>
+                <p><strong>REWARD:</strong> Resolved customer, positive interaction, sense of accomplishment</p>
+                <p>The routine became automatic. Over time, employees who practiced LATTE got better at it. Their willpower muscle strengthened. They became better problem-solvers everywhere, not just with customers.</p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "By teaching employees a framework for handling difficult situations, we weren't relying on their willpower or mood. We were giving them a habit—a reliable routine that would work regardless of their emotional state."
+            <div class="quote-author">— Starbucks Leadership</div>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">Apply This to Your Own Life</h3>
+        <div class="illustration-container">
+            <h4 style="margin-bottom: 20px;">Design Routines for Your Keystone Behaviors</h4>
+            <table>
+                <tr>
+                    <th>Difficult Situation</th>
+                    <th>Your LATTE Equivalent</th>
+                    <th>What You're Training</th>
+                </tr>
+                <tr>
+                    <td>Stressful meeting at work</td>
+                    <td>Pause before responding, ask clarifying questions, acknowledge others' points, propose solution, confirm understanding</td>
+                    <td>Emotional regulation, listening, communication</td>
+                </tr>
+                <tr>
+                    <td>Impulse to check phone</td>
+                    <td>Notice the urge, pause for 10 seconds, ask "why do I want to check?", identify a better action</td>
+                    <td>Self-awareness, impulse control</td>
+                </tr>
+                <tr>
+                    <td>Conflict with friend</td>
+                    <td>Listen to their perspective, acknowledge their feelings, take action to repair, express that you value them</td>
+                    <td>Empathy, conflict resolution</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="ai-box">
+            <strong>AI Connection: Fine-tuning Models with Behavioral Routines</strong>
+            LATTE is essentially fine-tuning. You take a general employee and fine-tune their behavior with a specific routine. Each time they execute the routine, the parameters get adjusted (their brain strengthens the new pathway). By the time they've done LATTE 100 times, it's baked into their baseline behavior—they don't need willpower anymore.
+        </div>
+
+        <div class="funny-box">
+            Starbucks figured out what therapists charge thousands of dollars to explain: if you give people a script and a framework, they suddenly have magical willpower and emotional intelligence they didn't have before. It's not magic. It's just habit-backed by design.
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 9: SOCIAL HABITS AND MOVEMENTS -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-number">9</div>
+        <p class="lesson-subtitle">Collective Power</p>
+        <h2>Social Habits and Movements: How Change Spreads</h2>
+
+        <p>Individual habits are powerful. But social habits—the patterns that spread through groups—can transform entire societies. Understanding how social habits form and spread is understanding how social movements become inevitable.</p>
+
+        <div class="card">
+            <span class="card-label">Three Elements of Social Change</span>
+            <p><strong>1. Individual Habits:</strong> Personal behavioral changes must come first. Someone decides to change.</p>
+            <p><strong>2. Social Habits:</strong> The change must be adopted by friends, communities. It spreads through social networks.</p>
+            <p><strong>3. Belief Change:</strong> People must believe change is possible. Without belief, adoption won't stick.</p>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">Rosa Parks and the Montgomery Bus Boycott</h3>
+        <div class="story">
+            <div class="story-inner">
+                <strong>How a Personal Decision Ignited a Social Movement</strong>
+                <p>Rosa Parks was arrested on December 1, 1955, for refusing to give up her bus seat to a white passenger. This wasn't spontaneous. Rosa was a trained activist. The NAACP had been planning this moment.</p>
+                <p>But why did it work? Why did this moment spark a 381-day boycott that changed America?</p>
+                <p>Rosa had social ties. She was connected to community leaders, ministers, and activists. The habit of carpooling, of mutual aid, of church community already existed. When the boycott began, it spread through existing social networks—the habits of cooperation and community.</p>
+                <p>Most importantly, Rosa was a respected figure with weak ties to many groups. Her courage activated pre-existing social habits. People already trusted her because she was involved in the community.</p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "Rosa Parks' arrest sparked a revolution not because she was a brave person, but because she was embedded in a social network with existing habits of community and cooperation."
+            <div class="quote-author">— Social Movement Research</div>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">Weak Ties and Strong Networks</h3>
+        <p>Social habits spread through what researchers call "weak ties"—acquaintances rather than close friends. Weak ties expose you to new information and new habits. Strong ties (close friends) reinforce existing habits. Both matter, but weak ties are how new behaviors spread.</p>
+
+        <div class="two-col">
+            <div style="background: linear-gradient(135deg, var(--warm-red) 0%, var(--orange) 100%); color: white; border-left: 4px solid var(--warm-red);">
+                <h4 style="color: white; margin-bottom: 10px;">Strong Ties</h4>
+                <p>• Close friends, family</p>
+                <p>• High trust, frequent contact</p>
+                <p>• Reinforce existing behavior</p>
+                <p>• Provide emotional support</p>
+                <p>• Limited diversity of ideas</p>
+            </div>
+            <div style="background: linear-gradient(135deg, var(--teal) 0%, var(--mint) 100%); color: white; border-left: 4px solid var(--teal);">
+                <h4 style="color: white; margin-bottom: 10px;">Weak Ties</h4>
+                <p>• Acquaintances, colleagues</p>
+                <p>• Lower frequency of contact</p>
+                <p>• Spread new behaviors</p>
+                <p>• Expose you to new information</p>
+                <p>• High diversity of ideas</p>
+            </div>
+        </div>
+
+        <div class="story">
+            <div class="story-inner">
+                <strong>The Peer Pressure Phenomenon</strong>
+                <p>Peer pressure is a social habit. It works through both strong and weak ties. Close friends apply direct social pressure. But strangers matter too—if you see someone doing something (smoking, exercising, recycling), you're more likely to do it too.</p>
+                <p>This is peer pressure through observation. The habit spreads because it becomes normalized. "Everyone's doing it" is a powerful cue that activates social habits.</p>
+            </div>
+        </div>
+
+        <div class="ai-box">
+            <strong>AI Connection: Information Diffusion in Networks</strong>
+            Social habits spread like information through networks. Graph neural networks model exactly this: how signals propagate through connections. Weak ties are like random shortcuts in a graph that drastically reduce the distance information has to travel. Strong ties are densely connected clusters. Both are necessary for efficient information spread.
+        </div>
+
+        <div class="funny-box">
+            We pretend we make independent choices, but honestly, we're just copying what our weak ties are doing and then convincing ourselves it was our idea all along. Humans are just very chatty sheep.
+        </div>
+
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <h3>How Social Habits Change</h3>
+                <ul>
+                    <li>Weak ties are key to spreading new behaviors (acquaintances matter)</li>
+                    <li>Strong ties provide social support to make change stick</li>
+                    <li>Peer pressure works through observation, not just direct pressure</li>
+                    <li>Communities with strong internal ties but many weak external ties spread change most effectively</li>
+                    <li>Belief matters: if you believe "people like us" do this, you're more likely to do it</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 10: THE NEUROLOGY OF FREE WILL -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-number">10</div>
+        <p class="lesson-subtitle">The Philosophy</p>
+        <h2>The Neurology of Free Will: Are We in Control?</h2>
+
+        <p>This is the unsettling section. If habits are automatic and unconscious, where does free will come in? Are you even making choices, or are you just a collection of autopilot programs?</p>
+
+        <div class="card">
+            <span class="card-label">The Paradox</span>
+            <p>Habits are powerful, automatic, and hard to change. But humans have the unique ability to override them. We can choose to change our habits. Yet that choice itself feels automatic, habitual. So where's the freedom?</p>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">The Sleepwalking Murder Case</h3>
+        <div class="story">
+            <div class="story-inner">
+                <strong>When Habits Are Truly Unconscious</strong>
+                <p>There was a case of a man who drove drunk, had an accident, and went home. While sleepwalking that night, he drove again—to his girlfriend's house, got a knife, and killed her.</p>
+                <p>In court, the defense argued: he was sleepwalking, completely unconscious. The prosecution argued: but he made a choice to get in the car. The court had to decide: is someone who commits a crime while sleepwalking responsible?</p>
+                <p>The answer matters because it reveals something profound about habits and free will. The man clearly didn't consciously decide to drive. His brain, operating on pure habit and automatic patterns, did these things. But did he have a choice?</p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "Are we sleepwalkers through life, unconsciously executing habits? Or do we have the capacity to wake up and choose differently? The truth is probably both."
+            <div class="quote-author">— Neuroscience and Philosophy</div>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">The Resolution</h3>
+        <p>Most of what we do is habitual, automatic, unconscious. But humans have something other animals don't: the ability to reflect on our habits and consciously choose to change them. We can wake up. We can decide that our automatic behaviors don't match our values. And we can use the tools in this book—understanding the habit loop, finding keystone habits, leveraging crises—to build new habits that align with our intentions.</p>
+
+        <p>Free will might not be about escaping habits. It might be about consciously choosing which habits to cultivate.</p>
+
+        <div class="quote-box">
+            "Most decisions happen outside our awareness. But once you know a habit exists, you're able to exert control over it. Awareness is the first step to change."
+            <div class="quote-author">— Charles Duhigg</div>
+        </div>
+
+        <div class="ai-box">
+            <strong>AI Connection: The Illusion of Consciousness in Neural Networks</strong>
+            Neural networks don't have consciousness, but they make decisions. Are those decisions "free"? In a sense, the network is just executing its training. But when you fine-tune it, when you introduce new information, it adapts. You're not fully conscious of most of your decisions either—your brain executes millions of predictions per second, most unconsciously. Maybe consciousness is just the ability to override automatic processes when you become aware of them.
+        </div>
+
+        <div class="funny-box">
+            You're not truly conscious of 99% of your decisions. Your unconscious brain is running the show. This is either a depressing realization that you have no free will, or a liberating realization that you can reprogram your autopilot and then go on vacation. I choose to be optimistic.
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 11: TARGET'S PREGNANCY PREDICTION ALGORITHM -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-number">11</div>
+        <p class="lesson-subtitle">Data & Habits</p>
+        <h2>Target's Pregnancy Prediction: When Habits Become Data</h2>
+
+        <p>This is perhaps the most chilling application of habit understanding: Target's data science team built a predictive model that could identify which customers were pregnant before they'd even told their families.</p>
+
+        <div class="card">
+            <span class="card-label">How It Works</span>
+            <p>Pregnancy creates habit changes. Pregnant women buy different products: unscented lotions (for sensitive pregnancy skin), supplements (calcium, iron), odorless items. They stop buying their usual cosmetics. They buy larger sizes of toilet paper. These behavioral patterns combine into a "pregnancy index."</p>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">The Story That Exploded Everything</h3>
+        <div class="story">
+            <div class="story-inner">
+                <strong>When Target Predicted Pregnancy Better Than the Customer</strong>
+                <p>Target's algorithm predicted a teenager was pregnant. Target started sending her coupons for baby stuff. Her father came into the store furious—how dare Target suggest his daughter was pregnant? A few weeks later, he called back with an apology. She was indeed pregnant, and Target had known before he did.</p>
+                <p>This story revealed something profound: your habits leak data. Your behavior, seemingly private, broadcasts your intentions to anyone with the data science skills to listen. Target could read your future from your past purchases.</p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "You can extract from habits a wealth of information. Everything from your basic demographics to what you like to do in your free time. And once a company has that, they can predict your future behavior with remarkable accuracy."
+            <div class="quote-author">— Target Data Science Team</div>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">The Implications</h3>
+        <div class="illustration-container">
+            <h4 style="margin-bottom: 20px;">Habit Data: The Most Powerful Information</h4>
+            <table>
+                <tr>
+                    <th>What You Tell Companies</th>
+                    <th>What Your Habits Tell Them</th>
+                    <th>What They Can Predict</th>
+                </tr>
+                <tr>
+                    <td>"I don't use credit"</td>
+                    <td>Purchasing patterns, payment timing, product choices</td>
+                    <td>Your actual credit risk, income level, financial habits</td>
+                </tr>
+                <tr>
+                    <td>"I don't care about politics"</td>
+                    <td>Which websites you visit, which news you click, who you follow</td>
+                    <td>Your political leanings better than any survey</td>
+                </tr>
+                <tr>
+                    <td>"I'm healthy"</td>
+                    <td>Product purchases, browsing history, location data</td>
+                    <td>Health risks, medical conditions, life expectancy</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="ai-box">
+            <strong>AI Connection: Pattern Recognition at Scale</strong>
+            Target's algorithm is early-stage machine learning in production. It recognizes patterns in massive datasets that humans can't see. It's essentially a recommendation system that says "based on your habits, you're likely pregnant" rather than "you'll like this product." Modern machine learning does this billions of times per day—predicting your next action based on your historical patterns (habits).
+        </div>
+
+        <div class="funny-box">
+            Companies know you better than you know yourself. While you're debating your life choices, they've already predicted what you'll buy, who you'll marry, and when you'll die. Welcome to the data-driven future where your habits are more honest than your words.
+        </div>
+
+        <div class="connect-box">
+            <strong>Connected Idea: "Predictably Irrational" by Dan Ariely</strong>
+            Ariely shows how our decisions are predictably irrational—they follow patterns. Companies exploit these patterns. Your habits make you predictable. Understanding your own irrationality is the first step to avoiding exploitation.
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 12: HOW MOVEMENTS HAPPEN -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-number">12</div>
+        <p class="lesson-subtitle">The Grand Synthesis</p>
+        <h2>How Movements Happen: The Complete Pattern</h2>
+
+        <p>We've covered individual habits, organizational habits, social habits. Now we zoom out and see the complete pattern: how individual habit changes cascade into social movements that reshape society.</p>
+
+        <div class="card">
+            <span class="card-label">Three Levels of Habit Change</span>
+            <p><strong>Individual Level:</strong> One person changes their habit using the Golden Rule (keep cue and reward, change routine).</p>
+            <p><strong>Organizational Level:</strong> Systems and structures reinforce the new habit until it becomes normal.</p>
+            <p><strong>Social Level:</strong> The new behavior spreads through networks via weak ties. Eventually, it becomes "how people like us behave."</p>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">The Montgomery Bus Boycott: The Complete Pattern</h3>
+        <div class="story">
+            <div class="story-inner">
+                <strong>How One Person's Decision Became a Movement</strong>
+                <p><strong>Individual Habit Change:</strong> Rosa Parks decided to sit in the white section. Same cue (riding the bus), different routine (refusing to move), new reward (dignity, courage).</p>
+                <p><strong>Organizational Habit:</strong> Ministers, organizers, and activists created a system: organized carpools, church networks, clear messaging. The boycott became a habit—daily, repeated, organized.</p>
+                <p><strong>Social Habit Change:</strong> Weak ties spread the story. People who didn't know Rosa Parks heard about her. The habit of support spread through social networks. Soon "supporting the boycott" became what respectable people did in the community.</p>
+                <p><strong>Belief Change:</strong> As the movement grew, people's belief changed: "We can change this. Our generation can win." This belief then spread the habit further—now people weren't just following a habit, they believed in the cause.</p>
+                <p>Result: 381 days of boycott that led to desegregation of Montgomery buses and eventually the Civil Rights movement.</p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            "A movement is a habit that becomes belief. It starts with a decision, spreads through social networks, gets reinforced by organizations, and eventually transforms how people think."
+            <div class="quote-author">— The Power of Habit Framework</div>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">The Four Requirements for Movements</h3>
+        <div class="illustration-container">
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>What It Requires</th>
+                    <th>Example from Montgomery</th>
+                </tr>
+                <tr>
+                    <td><strong>Habit</strong></td>
+                    <td>A new behavior that spreads through a network</td>
+                    <td>Boycotting buses, organizing carpools</td>
+                </tr>
+                <tr>
+                    <td><strong>Structure</strong></td>
+                    <td>Organizations that make the habit easy and systematic</td>
+                    <td>Churches, community leaders, clear schedules</td>
+                </tr>
+                <tr>
+                    <td><strong>Belief</strong></td>
+                    <td>A reason to care about the habit; something bigger than yourself</td>
+                    <td>"We deserve equal treatment" + religious faith</td>
+                </tr>
+                <tr>
+                    <td><strong>Weak Ties</strong></td>
+                    <td>Networks of acquaintances that spread the message</td>
+                    <td>Word of mouth, church announcements, community connections</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="quote-box">
+            "A movement requires a cause you believe in, friends you trust, an organization that makes change possible, and a habit that becomes part of your identity."
+            <div class="quote-author">— Movement Science</div>
+        </div>
+
+        <div class="ai-box">
+            <strong>AI Connection: Viral Information Cascades</strong>
+            Information spread is a cascade. In social networks, some ideas go viral while others don't. The difference isn't the quality of the idea—it's the structure of the network and the strength of the ties. Weak-tie networks with community structure spread information fastest. This is exactly how social movements work, and exactly how AI systems can predict which ideas will go viral.
+        </div>
+
+        <div class="funny-box">
+            Rosa Parks didn't start a movement by herself. She started a movement by changing her habit, at exactly the right moment, embedded in the right community structure, with people who believed in the same cause. In other words, she did everything right, at the right time, with the right people. Luck? Sure. But "luck" is just hitting the intersection of preparation and perfect circumstance.
+        </div>
+
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <h3>Creating a Movement (Or Just a Habit That Spreads)</h3>
+                <ul>
+                    <li>Start with a habit: a specific, repeatable behavior</li>
+                    <li>Embed it in community: find or create an organization that reinforces it</li>
+                    <li>Connect to belief: show how the habit serves a bigger purpose</li>
+                    <li>Leverage weak ties: spread through acquaintances and networks</li>
+                    <li>Make it easy: remove friction, create clear cues and rewards</li>
+                    <li>Find your Rosa Parks moment: wait for or create a crisis that opens the window for change</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MASTER CHEATSHEET -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <p class="lesson-subtitle">The Essentials</p>
+        <h2>Master Cheatsheet: The Power of Habit in One Page</h2>
+
+        <div class="illustration-container">
+            <h3 style="color: var(--dark); margin-bottom: 20px;">The Three-Level Framework</h3>
+
+            <table style="margin-bottom: 30px;">
+                <tr>
+                    <th>Level</th>
+                    <th>Mechanism</th>
+                    <th>How to Change</th>
+                    <th>Tools</th>
+                </tr>
+                <tr>
+                    <td><strong>Individual</strong></td>
+                    <td>Cue → Routine → Reward</td>
+                    <td>Golden Rule: keep cue & reward, change routine</td>
+                    <td>Identify cue, find new routine, verify reward</td>
+                </tr>
+                <tr>
+                    <td><strong>Organizational</strong></td>
+                    <td>Systems → Culture → Performance</td>
+                    <td>Keystone habits that cascade</td>
+                    <td>Design systems, use crises as windows, measure repeatedly</td>
+                </tr>
+                <tr>
+                    <td><strong>Social</strong></td>
+                    <td>Weak Ties → Belief → Movement</td>
+                    <td>Create habits people believe in</td>
+                    <td>Build community, leverage networks, connect to values</td>
+                </tr>
+            </table>
+
+            <h3 style="color: var(--dark); margin-bottom: 20px;">The Essential Habits to Build</h3>
+            <table>
+                <tr>
+                    <th>Habit Type</th>
+                    <th>Why It Matters</th>
+                    <th>How to Start</th>
+                </tr>
+                <tr>
+                    <td><strong>Keystone Habit</strong></td>
+                    <td>Cascades into other good habits</td>
+                    <td>Pick one: exercise, meditation, sleep, family dinner</td>
+                </tr>
+                <tr>
+                    <td><strong>Willpower Training</strong></td>
+                    <td>Strengthens self-control across all domains</td>
+                    <td>Small daily commitment: meditation, exercise, cold shower</td>
+                </tr>
+                <tr>
+                    <td><strong>Organizational Habit</strong></td>
+                    <td>Creates reliable systems you don't think about</td>
+                    <td>Design routines: morning routine, meeting structure, daily review</td>
+                </tr>
+                <tr>
+                    <td><strong>Community Habit</strong></td>
+                    <td>Spreads change to others through weak ties</td>
+                    <td>Publicly commit, involve acquaintances, make it easy to join</td>
+                </tr>
+            </table>
+        </div>
+
+        <h3 style="color: var(--dark); margin-top: 40px; margin-bottom: 20px;">The Golden Questions</h3>
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <ul>
+                    <li><strong>What's my cue?</strong> What triggers the habit? (Time, location, emotion, person, preceding action?)</li>
+                    <li><strong>What reward am I actually seeking?</strong> (Not always obvious. Satisfaction? Relief? Comfort? Status?)</li>
+                    <li><strong>What routine could give me the same reward?</strong> (Brainstorm alternatives that are easier, healthier, or better aligned with values)</li>
+                    <li><strong>Do I believe this will work?</strong> (Belief matters. Without it, you'll revert when willpower is low)</li>
+                    <li><strong>What organizational structure supports this habit?</strong> (Environment, systems, people—don't rely on willpower alone)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="funny-box">
+            So in summary: you're a bundle of unconscious habits running on ancient brain circuits, controlled largely by cues you didn't choose and rewards you didn't design. But here's the good news: knowing this is the first step to changing it. You're not helpless. You're just usually asleep. And these tools are the alarm clock.
+        </div>
+
+        <div class="connect-box">
+            <strong>Recommended Reading Connections</strong>
+            <p><strong>Atomic Habits by James Clear:</strong> Practical, step-by-step system for building habits (tiny changes, compound interest).</p>
+            <p><strong>Thinking, Fast and Slow by Daniel Kahneman:</strong> How automatic thinking (System 1) controls most of our decisions.</p>
+            <p><strong>Nudge by Thaler & Sunstein:</strong> How small environmental changes create large behavioral shifts.</p>
+            <p><strong>Influence by Robert Cialdini:</strong> How persuasion works through social proof and reciprocity (all habit-driven).</p>
+            <p><strong>Predictably Irrational by Dan Ariely:</strong> How our irrationality follows predictable patterns (habits again).</p>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<section class="footer">
+    <h3>The Power of Habit: Illustrated Guide</h3>
+    <p>A comprehensive exploration of behavioral change through habit loops, neuroscience, and organizational systems.</p>
+    <p style="margin-top: 30px; font-size: 0.9rem; opacity: 0.8;">
+        Based on "The Power of Habit: Why We Do What We Do in Life and Business" by Charles Duhigg
+    </p>
+    <p style="font-size: 0.85rem; opacity: 0.7;">
+        Illustrated guide created with insights from behavioral psychology, neuroscience, and organizational theory
+    </p>
+</section>
+
+</body>
+</html>

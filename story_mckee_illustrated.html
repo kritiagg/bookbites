@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story: Substance, Structure, Style, and the Principles of Screenwriting by Robert McKee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--dark);
+            background: #FAFAFA;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin: 2.5rem 0 1.5rem 0;
+        }
+
+        h3 {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            margin: 2rem 0 1rem 0;
+        }
+
+        h4 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.8rem 0;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        a {
+            color: var(--warm-red);
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            border-bottom-color: var(--warm-red);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--warm-red) 0%, var(--dark) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--sunny);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .hero-author {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+        }
+
+        /* Story Arc SVG Container */
+        .story-arc-container {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin: 2rem auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            max-width: 900px;
+        }
+
+        .story-arc-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--warm-red);
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .card-highlight {
+            background: linear-gradient(135deg, rgba(255,107,107,0.05) 0%, rgba(225,112,85,0.05) 100%);
+        }
+
+        .card-film {
+            border-left-color: var(--dark-purple);
+            background: linear-gradient(135deg, rgba(160,108,213,0.03) 0%, rgba(108,92,231,0.03) 100%);
+        }
+
+        .card-ai {
+            border-left-color: var(--deep-blue);
+            background: linear-gradient(135deg, rgba(9,132,227,0.03) 0%, rgba(74,185,255,0.03) 100%);
+        }
+
+        .card-cross {
+            border-left-color: var(--forest);
+            background: linear-gradient(135deg, rgba(0,184,148,0.03) 0%, rgba(85,239,196,0.03) 100%);
+        }
+
+        /* Lessons Grid */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border-top: 4px solid var(--warm-red);
+            transition: all 0.3s ease;
+        }
+
+        .lesson-card:nth-child(2) {
+            border-top-color: var(--dark-purple);
+        }
+
+        .lesson-card:nth-child(3) {
+            border-top-color: var(--forest);
+        }
+
+        .lesson-card:nth-child(4) {
+            border-top-color: var(--deep-blue);
+        }
+
+        .lesson-card:nth-child(5) {
+            border-top-color: var(--teal);
+        }
+
+        .lesson-card:nth-child(6) {
+            border-top-color: var(--coral);
+        }
+
+        .lesson-card:nth-child(7) {
+            border-top-color: var(--sunny);
+        }
+
+        .lesson-card:nth-child(8) {
+            border-top-color: var(--pink);
+        }
+
+        .lesson-card:nth-child(9) {
+            border-top-color: var(--purple);
+        }
+
+        .lesson-card:nth-child(10) {
+            border-top-color: var(--mint);
+        }
+
+        .lesson-card:nth-child(11) {
+            border-top-color: var(--sky);
+        }
+
+        .lesson-card:nth-child(12) {
+            border-top-color: var(--orange);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: var(--warm-red);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-card:nth-child(2) .lesson-number {
+            background: var(--dark-purple);
+        }
+
+        .lesson-card:nth-child(3) .lesson-number {
+            background: var(--forest);
+        }
+
+        .lesson-card:nth-child(4) .lesson-number {
+            background: var(--deep-blue);
+        }
+
+        .lesson-card:nth-child(5) .lesson-number {
+            background: var(--teal);
+        }
+
+        .lesson-card:nth-child(6) .lesson-number {
+            background: var(--coral);
+        }
+
+        .lesson-card:nth-child(7) .lesson-number {
+            background: var(--sunny);
+            color: var(--dark);
+        }
+
+        .lesson-card:nth-child(8) .lesson-number {
+            background: var(--pink);
+        }
+
+        .lesson-card:nth-child(9) .lesson-number {
+            background: var(--purple);
+        }
+
+        .lesson-card:nth-child(10) .lesson-number {
+            background: var(--mint);
+            color: var(--dark);
+        }
+
+        .lesson-card:nth-child(11) .lesson-number {
+            background: var(--sky);
+        }
+
+        .lesson-card:nth-child(12) .lesson-number {
+            background: var(--orange);
+            color: var(--dark);
+        }
+
+        .lesson-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .lesson-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        /* Section Colors */
+        .section-archplot {
+            background: linear-gradient(135deg, rgba(225,112,85,0.08) 0%, rgba(255,107,107,0.08) 100%);
+        }
+
+        .section-three-act {
+            background: linear-gradient(135deg, rgba(160,108,213,0.08) 0%, rgba(108,92,231,0.08) 100%);
+        }
+
+        .section-inciting {
+            background: linear-gradient(135deg, rgba(0,184,148,0.08) 0%, rgba(85,239,196,0.08) 100%);
+        }
+
+        .section-gap {
+            background: linear-gradient(135deg, rgba(9,132,227,0.08) 0%, rgba(74,185,255,0.08) 100%);
+        }
+
+        /* Film Examples */
+        .film-example {
+            background: white;
+            border-left: 5px solid var(--dark-purple);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .film-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .film-year {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .film-text {
+            color: #333;
+            line-height: 1.8;
+        }
+
+        /* AI Connection */
+        .ai-connection {
+            background: linear-gradient(135deg, rgba(9,132,227,0.1) 0%, rgba(74,185,255,0.1) 100%);
+            border-left: 5px solid var(--deep-blue);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+
+        .ai-connection h3 {
+            color: var(--deep-blue);
+            margin-top: 0;
+        }
+
+        .ai-connection p {
+            color: #333;
+        }
+
+        /* Three Act Structure */
+        .three-act-diagram {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .act {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            text-align: center;
+            position: relative;
+        }
+
+        .act-1 {
+            border-top: 4px solid var(--warm-red);
+        }
+
+        .act-2 {
+            border-top: 4px solid var(--dark-purple);
+        }
+
+        .act-3 {
+            border-top: 4px solid var(--forest);
+        }
+
+        .act-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .act-content {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .act-percent {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0,0,0,0.05);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Funny Takes */
+        .funny-box {
+            background: linear-gradient(135deg, #FFE66D 0%, #FDCB6E 100%);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            color: var(--dark);
+            border-left: 5px solid #FF9800;
+        }
+
+        .funny-box::before {
+            content: '💡';
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .funny-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .funny-text {
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        /* Cross-Book References */
+        .cross-book {
+            background: linear-gradient(135deg, rgba(0,184,148,0.08) 0%, rgba(85,239,196,0.08) 100%);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            border-left: 5px solid var(--forest);
+        }
+
+        .cross-book h3 {
+            color: var(--forest);
+            margin-top: 0;
+        }
+
+        .book-ref {
+            background: white;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border-left: 3px solid var(--mint);
+            border-radius: 4px;
+        }
+
+        .book-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .book-author {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .book-connection {
+            color: #333;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-bottom: 3px solid transparent;
+            padding-bottom: 0.3rem;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--warm-red);
+            border-bottom-color: var(--warm-red);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container, .wrapper {
+                padding: 1rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .three-act-diagram {
+                gap: 1rem;
+                flex-direction: column;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Special Elements */
+        .highlight {
+            background: var(--sunny);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            color: var(--dark);
+        }
+
+        .quote {
+            border-left: 4px solid var(--warm-red);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        .pull-quote {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--warm-red);
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .pull-quote p {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--dark);
+            margin: 0;
+        }
+
+        .pull-quote-author {
+            text-align: right;
+            margin-top: 1rem;
+            color: #999;
+            font-style: normal;
+            font-size: 0.95rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            border-radius: 12px;
+        }
+
+        .section-header h2 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-intro {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        /* Film Reel SVG */
+        .film-reel-section {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        /* Climax Peak Diagram */
+        .climax-peak {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 2rem 0;
+        }
+
+        .tension-curve {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            display: block;
+            margin: 2rem auto;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: rgba(100, 100, 100, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #666;
+            margin: 1.5rem 0;
+        }
+
+        .info-box strong {
+            color: var(--dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#structure">Story Structure</a></li>
+            <li><a href="#lessons">12 Core Lessons</a></li>
+            <li><a href="#films">Film Examples</a></li>
+            <li><a href="#ai">AI Connection</a></li>
+            <li><a href="#cross-books">Cross-References</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Story</h1>
+            <p class="hero-subtitle">Substance, Structure, Style, and the Principles of Screenwriting</p>
+            <p class="hero-author">by Robert McKee</p>
+            <p style="color: rgba(255,255,255,0.8); font-size: 1.05rem;">A comprehensive guide to crafting compelling narratives that move audiences to tears, laughter, and action.</p>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="wrapper">
+        <h2>The Bible of Screenwriting</h2>
+        <p>Robert McKee's <em>Story</em> is considered the definitive guide to screenwriting and narrative structure. Since its publication in 1997, it has influenced countless writers, filmmakers, and storytellers across mediums. McKee distills decades of analyzing thousands of films into a master class on what makes stories work.</p>
+
+        <p>The book is grounded in a simple truth: <strong>audiences are moved not by plot, but by character under pressure.</strong> Everything in this guide flows from that principle.</p>
+
+        <div class="story-arc-container">
+            <h3 style="text-align: center; margin-top: 0;">The Story Arc: Three Acts and the Climax</h3>
+            <svg class="story-arc-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background -->
+                <defs>
+                    <linearGradient id="arcGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FFE66D;stop-opacity:0.1" />
+                        <stop offset="100%" style="stop-color:#E17055;stop-opacity:0.1" />
+                    </linearGradient>
+                </defs>
+                <rect width="800" height="400" fill="url(#arcGrad)"/>
+
+                <!-- Grid -->
+                <line x1="50" y1="350" x2="750" y2="350" stroke="#ddd" stroke-width="2"/>
+                <line x1="50" y1="50" x2="50" y2="350" stroke="#ddd" stroke-width="2"/>
+
+                <!-- Story Arc Path -->
+                <path d="M 70 320 Q 200 280 250 240 L 250 240 L 400 120 L 550 200 Q 700 300 730 330"
+                      stroke="#E17055" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+                <!-- Act Divisions -->
+                <line x1="250" y1="50" x2="250" y2="350" stroke="#A06CD5" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+                <line x1="550" y1="50" x2="550" y2="350" stroke="#A06CD5" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+
+                <!-- Key Points -->
+                <!-- Inciting Incident -->
+                <circle cx="250" cy="240" r="6" fill="#4ECDC4"/>
+                <text x="250" y="280" text-anchor="middle" font-size="12" font-weight="bold" fill="#2D3436">Inciting Incident</text>
+
+                <!-- Climax -->
+                <circle cx="400" cy="120" r="8" fill="#FF6B6B"/>
+                <text x="400" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#FF6B6B">CLIMAX</text>
+
+                <!-- Crisis -->
+                <circle cx="500" cy="160" r="6" fill="#FFE66D"/>
+                <text x="500" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="#2D3436">Crisis</text>
+
+                <!-- Act Labels -->
+                <text x="160" y="380" text-anchor="middle" font-size="14" font-weight="bold" fill="#2D3436">ACT I</text>
+                <text x="400" y="380" text-anchor="middle" font-size="14" font-weight="bold" fill="#2D3436">ACT II</text>
+                <text x="640" y="380" text-anchor="middle" font-size="14" font-weight="bold" fill="#2D3436">ACT III</text>
+
+                <!-- Status indicators -->
+                <text x="70" y="360" font-size="11" fill="#999">Setup</text>
+                <text x="330" y="360" font-size="11" fill="#999">Complications</text>
+                <text x="600" y="360" font-size="11" fill="#999">Resolution</text>
+            </svg>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-title">McKee's Golden Rule</div>
+            <div class="funny-text">Plot is what happens when the toilet breaks in Act II. Story is what happens when your character realizes the toilet was broken all along, and they're the one who didn't fix it. Audiences don't cry over what happens; they cry over what it means.</div>
+        </div>
+    </section>
+
+    <!-- Story Structure Section -->
+    <section id="structure" class="wrapper">
+        <h2>Understanding Story Structure</h2>
+
+        <p>Story structure is not a formula—it's the anatomy of human experience. McKee's framework reveals the underlying skeleton that supports all compelling narratives, regardless of genre or medium.</p>
+
+        <h3>The Three-Act Structure</h3>
+        <p>Every story worth telling can be divided into three acts, though the proportions vary:</p>
+
+        <div class="three-act-diagram">
+            <div class="act act-1">
+                <div class="act-percent">~25%</div>
+                <div class="act-title">Act I: Setup</div>
+                <div class="act-content">
+                    Establish the world, characters, and the fundamental conflict. The <strong>inciting incident</strong> throws the protagonist's life out of balance and propels them into action. Everything before this moment is exposition.
+                </div>
+            </div>
+            <div class="act act-2">
+                <div class="act-percent">~50%</div>
+                <div class="act-title">Act II: Complications</div>
+                <div class="act-content">
+                    The meat of the story. <strong>Progressive complications</strong> mean the situation grows worse, not better. Each attempt to resolve the conflict creates new obstacles. The character is tested under increasing pressure, revealing true character.
+                </div>
+            </div>
+            <div class="act act-3">
+                <div class="act-percent">~25%</div>
+                <div class="act-title">Act III: Resolution</div>
+                <div class="act-content">
+                    The <strong>crisis</strong> forces a dilemma: two choices, both terrible. The character must choose, leading to the <strong>climax</strong>—the point of irreversible change. The resolution shows the new world that emerges.
+                </div>
+            </div>
+        </div>
+
+        <div class="pull-quote">
+            <p>"The climax is the irreversible change that occurs at the moment of maximum pressure, when the forces of antagonism are at their strongest and the protagonist's desire is at its most vital."</p>
+            <div class="pull-quote-author">— Robert McKee, Story</div>
+        </div>
+
+        <h3>The Three Story Types: The Archplot Triangle</h3>
+
+        <div class="lessons-grid">
+            <div class="card card-highlight">
+                <h4 style="color: var(--warm-red);">Archplot</h4>
+                <p>The classical, <strong>protagonist-centered</strong> story. One character drives the action with a clear goal. Examples: <em>Jaws</em>, <em>The Godfather</em>, <em>Thelma & Louise</em>.</p>
+                <p><strong>Characteristics:</strong> Linear progression, clear cause-and-effect, protagonist actively pursues a goal, closed ending with definitive resolution.</p>
+            </div>
+            <div class="card card-highlight">
+                <h4 style="color: var(--dark-purple);">Miniplot</h4>
+                <p>A story with <strong>multiple protagonists or ensemble casts</strong> where no single character dominates. The focus shifts between characters.</p>
+                <p><strong>Characteristics:</strong> Multiple storylines converge, shared protagonist role, complex endings, often explores relationships and interconnections.</p>
+            </div>
+            <div class="card card-highlight">
+                <h4 style="color: var(--forest);">Antiplot</h4>
+                <p>A story that <strong>subverts expectations</strong> and narrative conventions. Often experimental, fragmentary, circular rather than linear.</p>
+                <p><strong>Characteristics:</strong> No clear goal, protagonist may lack agency, ambiguous or anti-climactic endings, challenges audience expectations deliberately.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12 Core Lessons -->
+    <section id="lessons" class="wrapper">
+        <h2>The 12 Core Lessons</h2>
+        <p>McKee distills the art of storytelling into twelve fundamental principles. Master these, and you can write stories that grip audiences:</p>
+
+        <div class="lessons-grid">
+            <!-- Lesson 1 -->
+            <div class="lesson-card">
+                <div class="lesson-number">1</div>
+                <div class="lesson-title">The Story Triangle</div>
+                <div class="lesson-description">
+                    All stories exist on a spectrum between three types: archplot (protagonist-driven), miniplot (ensemble), and antiplot (subversive). Most successful stories are archplot because humans are wired to follow a single character's journey.
+                </div>
+            </div>
+
+            <!-- Lesson 2 -->
+            <div class="lesson-card">
+                <div class="lesson-number">2</div>
+                <div class="lesson-title">The Inciting Incident</div>
+                <div class="lesson-description">
+                    The event that throws the protagonist's life out of balance. It's not the first scene—it comes after setup. It's the moment that makes the story inevitable. Without it, you have a vignette, not a story.
+                </div>
+            </div>
+
+            <!-- Lesson 3 -->
+            <div class="lesson-card">
+                <div class="lesson-number">3</div>
+                <div class="lesson-title">The Gap Between Expectation and Result</div>
+                <div class="lesson-description">
+                    The engine of all drama. When what the character expects to happen differs from what actually happens, we create surprise and irony. This is where emotion lives. The larger the gap, the stronger the story.
+                </div>
+            </div>
+
+            <!-- Lesson 4 -->
+            <div class="lesson-card">
+                <div class="lesson-number">4</div>
+                <div class="lesson-title">Progressive Complications</div>
+                <div class="lesson-description">
+                    Things must get worse, not better. Each scene should raise the stakes and create new problems. If your second act resolves tension, you have no third act. Escalation is everything.
+                </div>
+            </div>
+
+            <!-- Lesson 5 -->
+            <div class="lesson-card">
+                <div class="lesson-number">5</div>
+                <div class="lesson-title">The Crisis</div>
+                <div class="lesson-description">
+                    A dilemma where both options are terrible. The protagonist must choose between bad and worse. This internal pressure forces the character to reveal their true self, stripped of all pretense.
+                </div>
+            </div>
+
+            <!-- Lesson 6 -->
+            <div class="lesson-card">
+                <div class="lesson-number">6</div>
+                <div class="lesson-title">The Climax</div>
+                <div class="lesson-description">
+                    The point of irreversible change. After the climax, the world is fundamentally different. It's not about physical action—it's about irreversible transformation of the protagonist's inner world and outer circumstances.
+                </div>
+            </div>
+
+            <!-- Lesson 7 -->
+            <div class="lesson-card">
+                <div class="lesson-number">7</div>
+                <div class="lesson-title">Beats, Scenes, Sequences, Acts</div>
+                <div class="lesson-description">
+                    The hierarchy of story. A beat is a unit of behavior. Scenes are collections of beats where one character influences another and something changes. Sequences are linked scenes. Acts contain sequences. Each level builds on the last.
+                </div>
+            </div>
+
+            <!-- Lesson 8 -->
+            <div class="lesson-card">
+                <div class="lesson-number">8</div>
+                <div class="lesson-title">Character Revealed Under Pressure</div>
+                <div class="lesson-description">
+                    True character is what someone does under pressure when they think no one is watching. Not what they say or think they are, but what they do. Characterization is surface; character is depth. Build pressure to reveal truth.
+                </div>
+            </div>
+
+            <!-- Lesson 9 -->
+            <div class="lesson-card">
+                <div class="lesson-number">9</div>
+                <div class="lesson-title">The Controlling Idea</div>
+                <div class="lesson-description">
+                    The moral argument of your story. What does your story believe about human nature? What's the theme? Every scene should test and support this central idea. Without it, your story is all sound and fury, signifying nothing.
+                </div>
+            </div>
+
+            <!-- Lesson 10 -->
+            <div class="lesson-card">
+                <div class="lesson-number">10</div>
+                <div class="lesson-title">Exposition: Show, Don't Tell</div>
+                <div class="lesson-description">
+                    Audiences hate being lectured. Dramatize exposition. Reveal character history and world rules through conflict and action, not monologue. The best exposition feels like discovery, not instruction.
+                </div>
+            </div>
+
+            <!-- Lesson 11 -->
+            <div class="lesson-card">
+                <div class="lesson-number">11</div>
+                <div class="lesson-title">The Principle of Antagonism</div>
+                <div class="lesson-description">
+                    Your antagonist is the key to your story's power. A stronger antagonist creates a stronger protagonist. The antagonist must be fully realized and have compelling motivations. They're the protagonist of their own story.
+                </div>
+            </div>
+
+            <!-- Lesson 12 -->
+            <div class="lesson-card">
+                <div class="lesson-number">12</div>
+                <div class="lesson-title">Writing from the Inside Out</div>
+                <div class="lesson-description">
+                    Start with character and emotion, not plot mechanics. Build from inner truth outward. The best stories come from personal obsession and authentic human insight. Technical proficiency serves the human truth beneath the story.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Dives on Key Concepts -->
+    <section class="wrapper">
+        <h2>Deep Dives: The Foundations</h2>
+
+        <h3>1. The Inciting Incident: When the World Changes</h3>
+        <p>The inciting incident is <strong>not</strong> the opening. It's the moment when the status quo becomes untenable and action becomes necessary. It's the point of no return.</p>
+
+        <div class="info-box">
+            <strong>Key principle:</strong> The inciting incident must be unavoidable and emotionally significant. The protagonist cannot ignore it. It's external and clear, not ambiguous.
+        </div>
+
+        <div class="film-example">
+            <div class="film-title">Chinatown (1974)</div>
+            <div class="film-year">Directed by Roman Polanski</div>
+            <div class="film-text">Private detective J.J. Gittes is hired by a woman (seemingly Mrs. Mulwray) to follow her husband. This simple job—the inciting incident—spirals into a labyrinth of corruption, deceit, and tragedy. The inciting incident isn't just what happens; it's what we <em>think</em> is happening that's so compelling. The audience, like Gittes, is manipulated by false assumptions.</div>
+        </div>
+
+        <h3>2. The Gap Between Expectation and Result: Where Emotion Lives</h3>
+        <p>Every scene is structured by this gap. Character expects X, wants X, acts toward X—but gets Y instead. The bigger the gap, the stronger the emotion.</p>
+
+        <div class="info-box">
+            <strong>Key principle:</strong> Irony is the engine of emotion. Set up expectations clearly, then subvert them. This is why comedies are built on the gap—physical comedy is expectation meeting reality (person steps on banana peel, we expected them to walk straight).
+        </div>
+
+        <div class="film-example">
+            <div class="film-title">Casablanca (1942)</div>
+            <div class="film-year">Directed by Michael Curtiz</div>
+            <div class="film-text">Rick expects that past love is dead and buried; Ilsa appears, proving it isn't. Ilsa expects Rick to help her escape; he refuses, forcing a devastating choice. The film is a masterclass in the gap—every scene plays expectation against heartbreaking reality. The ending is powerful precisely because it gives us the opposite of what we anticipated, but it feels inevitable.</div>
+        </div>
+
+        <h3>3. Progressive Complications: Raising the Stakes</h3>
+        <p>In Act II, things must get worse. Not better. Each scene should raise the stakes, create new obstacles, and push the protagonist deeper into the conflict. The second act is where most writers stumble because they don't understand this principle.</p>
+
+        <div class="info-box">
+            <strong>Key principle:</strong> If your protagonist is winning in Act II, you have no story. Complications aren't random—they flow from character and conflict. The antagonist gets smarter, more desperate. The protagonist's own flaws create new problems.
+        </div>
+
+        <h3>4. Character Under Pressure: The Truth Revealed</h3>
+        <p>McKee's most profound insight: <strong>character is action under pressure.</strong> Not dialogue, not backstory, not what the character claims to be. What does the character <em>do</em> when facing impossible odds?</p>
+
+        <div class="info-box">
+            <strong>Key principle:</strong> Build pressure that strips away pretense. The character's true values, fears, and desires are revealed only under duress. This is why climaxes matter—they're the ultimate pressure test.
+        </div>
+
+        <div class="film-example">
+            <div class="film-title">The Godfather (1972)</div>
+            <div class="film-year">Directed by Francis Ford Coppola</div>
+            <div class="film-text">Michael Corleone begins as a war hero, removed from family business, seemingly decent. Under pressure—threats to his father, his brother, his family's honor—he transforms into a cold, ruthless don. The film doesn't tell us who Michael is; it shows us through escalating pressure. Each complication forces him deeper into darkness, until the final scene reveals the complete transformation. His character is revealed by what he does under maximum pressure.</div>
+        </div>
+
+        <h3>5. The Controlling Idea: The Story's Moral Argument</h3>
+        <p>Every great story argues something about human nature. This is the controlling idea—the thematic spine that gives meaning to events.</p>
+
+        <div class="info-box">
+            <strong>Key principle:</strong> The controlling idea can be stated as: "In this world, when [situation], [character] learns that [moral truth]." It's proven through action, not stated outright.
+        </div>
+
+        <div class="film-example">
+            <div class="film-title">Thelma & Louise (1991)</div>
+            <div class="film-year">Directed by Ridley Scott, Written by Callie Khouri</div>
+            <div class="film-text">McKee's favorite example. The controlling idea: when women are trapped by a patriarchal system that denies them agency, they discover freedom only in death—a tragic but powerful argument about systemic oppression. Every scene supports this idea. The ending isn't pessimistic; it's the only logical conclusion to the film's central argument. Thelma and Louise must choose death over subjugation because the world offers no third option. The story is saying something profound about power, freedom, and choice.</div>
+        </div>
+    </section>
+
+    <!-- AI Connection Section -->
+    <section id="ai" class="wrapper">
+        <h2>The AI Connection: Story Structure as Sequence Generation</h2>
+
+        <div class="ai-connection">
+            <h3>Why McKee's Story Principles Apply to Language Models</h3>
+            <p>Story structure and language model architecture are surprisingly similar. Both involve:</p>
+            <ul style="margin-left: 2rem; line-height: 2;">
+                <li><strong>Sequence generation:</strong> A model predicts the next token just as a story predicts the next scene based on what came before.</li>
+                <li><strong>Tension and entropy:</strong> Language models succeed by balancing surprise and inevitability—the gap between expectation and result.</li>
+                <li><strong>Progressive complications:</strong> Good outputs maintain rising complexity and stakes, never retreating to prior states.</li>
+                <li><strong>Character under pressure:</strong> Both test systems by introducing adversarial inputs, revealing true capabilities only under stress.</li>
+                <li><strong>The controlling idea:</strong> Effective prompts contain a latent theme or goal that guides all generated text.</li>
+            </ul>
+        </div>
+
+        <h3>Specific Parallels: From McKee to AI</h3>
+
+        <div class="card card-ai">
+            <h4>The Inciting Incident as the Prompt</h4>
+            <p>A prompt is like an inciting incident—it throws the model's blank slate into disequilibrium and demands a response. The best prompts are clear, specific, and create irresistible necessity. Just as an inciting incident can't be ignored, a well-crafted prompt can't be accidentally skipped in generation.</p>
+        </div>
+
+        <div class="card card-ai">
+            <h4>Progressive Complications as Rising Entropy</h4>
+            <p>In a story, complications escalate: each problem spawns new obstacles. In language generation, entropy increases with each token. The challenge is maintaining coherence while increasing complexity—analogous to the protagonist facing mounting pressure. A model generating text must increase semantic difficulty while maintaining logical consistency, just as a story escalates pressure while maintaining narrative coherence.</p>
+        </div>
+
+        <div class="card card-ai">
+            <h4>The Gap as Surprising but Inevitable Outputs</h4>
+            <p>McKee's gap—expectation versus result—is exactly what makes good language model outputs feel intelligent. When a model generates something unexpected yet perfectly sensible, it creates the same emotional resonance as a well-executed plot twist. The best outputs surprise us but, in retrospect, feel inevitable. This is the gap: "I didn't see that coming, but of course that's what it should say."</p>
+        </div>
+
+        <div class="card card-ai">
+            <h4>Character Under Pressure as Adversarial Testing</h4>
+            <p>Red-teaming and adversarial prompts are like story pressure tests. They reveal what a model actually does (versus what it's supposed to do). Character under pressure in stories shows true nature; adversarial inputs show actual model capabilities and limitations. Both strip away pretense and reveal fundamental truth.</p>
+        </div>
+
+        <div class="card card-ai">
+            <h4>The Controlling Idea as Latent Theme</h4>
+            <p>Every story argues something; every effective prompt contains a latent theme or value that guides generation. Models trained with RLHF learn to implement a controlling idea—a core principle about what good outputs look like. This internalized theme guides generation just as a controlling idea guides a screenplay.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-title">The AI Writer's Dilemma</div>
+            <div class="funny-text">A language model and a screenwriter face identical problems: you're generating sequences of tokens/scenes that must cohere into meaning. Both succeed by understanding character, raising stakes, and delivering the gap between expectation and result. The main difference? A screenwriter gets drunk and complains about studio notes; a model just crashes and gets retrained. Also, the model will never acknowledge that all good stories are basically <em>The Hero's Journey</em> remixed.</div>
+        </div>
+    </section>
+
+    <!-- Cross-References Section -->
+    <section id="cross-books" class="wrapper">
+        <h2>Cross-References: Story in Other Books</h2>
+        <p>McKee's principles appear across the great books on writing and narrative. Here's how they connect:</p>
+
+        <div class="cross-book">
+            <h3>Related Frameworks</h3>
+
+            <div class="book-ref">
+                <div class="book-title">Save the Cat! by Blake Snyder</div>
+                <div class="book-author">Blake Snyder (2005)</div>
+                <div class="book-connection">
+                    Snyder's 15-beat structure is a practical implementation of McKee's principles. Where McKee is philosophical, Snyder is prescriptive. Save the Cat breaks the story into specific beats: opening image, call to adventure, crossing the threshold, etc. It's McKee with a step-by-step manual. McKee teaches you to see structure; Snyder teaches you to build it.
+                </div>
+            </div>
+
+            <div class="book-ref">
+                <div class="book-title">The Story of Human Culture by The Moth</div>
+                <div class="book-author">The Moth (various)</div>
+                <div class="book-connection">
+                    The Moth is a platform for true stories, and Moth stories embody McKee's principles perfectly: a real person, under real pressure, discovering something true. Every Moth story contains the gap, progressive complications, and character under pressure. McKee provides the theory; The Moth provides the proof that these principles work in real human storytelling.
+                </div>
+            </div>
+
+            <div class="book-ref">
+                <div class="book-title">On Writing by Stephen King</div>
+                <div class="book-author">Stephen King (2000)</div>
+                <div class="book-connection">
+                    King writes: "Plot is what happens when your character tries to avoid the consequences of being who they are." This is pure McKee—character under pressure. King focuses on character as the foundation; McKee provides the structural framework to build on that foundation. Together, they form a complete picture: be true to character, then put that character in increasingly impossible situations.
+                </div>
+            </div>
+
+            <div class="book-ref">
+                <div class="book-title">Bird by Bird by Anne Lamott</div>
+                <div class="book-author">Anne Lamott (1994)</div>
+                <div class="book-connection">
+                    Lamott emphasizes writing from personal truth and authenticity. McKee argues that the controlling idea comes from authentic human insight. Lamott teaches the emotional, intuitive path to storytelling; McKee provides the structural scaffolding to support that truth. Both insist that great writing comes from what you actually care about, not formula.
+                </div>
+            </div>
+
+            <div class="book-ref">
+                <div class="book-title">The Anatomy of Story by John Truby</div>
+                <div class="book-author">John Truby (2007)</div>
+                <div class="book-connection">
+                    Truby focuses on the 22-character-driven building blocks of story and how character flaws create plot. While McKee emphasizes structure and the gap, Truby emphasizes character psychology and moral weakness as the engine of story. They're complementary: McKee shows you the skeleton; Truby shows you the nerves and organs that make the skeleton move.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Film Examples Deep Dive -->
+    <section id="films" class="wrapper">
+        <h2>The Master Examples: McKee's Favorite Films</h2>
+        <p>McKee repeatedly references the same films because they exemplify perfect story structure. Here's why they matter:</p>
+
+        <div class="card card-film">
+            <h4>Chinatown (1974) - The Perfect Screenplay</h4>
+            <p><strong>Why McKee loves it:</strong> Chinatown demonstrates flawless story structure while simultaneously subverting expectations. J.J. Gittes is a skilled detective, but he's manipulated by forces larger than himself. The inciting incident—a simple surveillance job—leads to corruption, murder, and tragedy.</p>
+            <p><strong>The gap:</strong> Gittes expects a straightforward case; he gets a conspiracy. He expects morality to matter; he discovers it doesn't. The famous ending—"Forget it, Jake, it's Chinatown"—is devastating because it proves the fundamental premise: in this world, the little guy can't win.</p>
+            <p><strong>Structure mastery:</strong> Every scene is essential. There's zero wasted dialogue. Each revelation advances both plot and character while deepening theme.</p>
+        </div>
+
+        <div class="card card-film">
+            <h4>Casablanca (1942) - Emotional Logic</h4>
+            <p><strong>Why McKee loves it:</strong> Casablanca appears loosely constructed, almost accidental in its narrative. In reality, it's a masterpiece of emotional logic. Every scene is powered by conflict and the gap between expectation and result.</p>
+            <p><strong>The controlling idea:</strong> In a world at war, love and duty are irreconcilable. Someone must sacrifice; the question is who. Rick's journey from cynical detachment to selfless sacrifice is earned through increasing pressure and impossible choices.</p>
+            <p><strong>Character revelation:</strong> Rick's true character—noble and self-sacrificing—is hidden beneath layers of cynicism. Only under the pressure of Ilsa's return and the moral weight of the Resistance does his true nature emerge.</p>
+        </div>
+
+        <div class="card card-film">
+            <h4>The Godfather (1972) - Character as Tragedy</h4>
+            <p><strong>Why McKee loves it:</strong> The Godfather is a Shakespearean tragedy told through the transformation of Michael Corleone. The film doesn't tell us Michael's story; it shows us his corruption through escalating pressure.</p>
+            <p><strong>Progressive complications:</strong> Each act raises the stakes for Michael. Act I introduces him as an outsider to the family business. Act II forces him deeper into the world through violence and betrayal. Act III completes his transformation into a cold don. There's no escape; each choice closes off alternatives.</p>
+            <p><strong>The climax:</strong> The final scene—Michael ordering the death of his own brother—is irreversible moral change. He's not the Michael who began; he can never return to innocence.</p>
+        </div>
+
+        <div class="card card-film">
+            <h4>Thelma & Louise (1991) - The Ultimate Gap</h4>
+            <p><strong>Why McKee loves it:</strong> McKee calls Thelma & Louise a perfect example of how to execute an unconventional ending through structural logic. The film's ending is tragic, yet inevitable.</p>
+            <p><strong>The premise:</strong> Two women, trapped by circumstance and male violence, discover freedom. But freedom in a patriarchal system has only one logical conclusion: death or subjugation. The film argues that the system offers no third option.</p>
+            <p><strong>The controlling idea proven:</strong> The final scene—Thelma and Louise driving off the cliff—is the logical climax of everything the film has argued. It's emotionally devastating but structurally perfect. The gap between what we want (their escape and happiness) and what we get (their freedom through death) is the entire power of the film.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-title">Why These Films, Not Others?</div>
+            <div class="funny-text">McKee doesn't cite Citizen Kane or 2001: A Space Odyssey because they're "important"—he cites Chinatown, Casablanca, The Godfather, and Thelma & Louise because they work. They grip audiences. They move people to tears. They're built on rock-solid structure, but the structure is invisible because it's in service of truth and emotion. That's the difference between a film that's technically perfect and a film that's alive.</div>
+        </div>
+    </section>
+
+    <!-- Summary and Key Takeaways -->
+    <section class="wrapper">
+        <h2>The Essence: What to Remember</h2>
+
+        <div class="card">
+            <h3>McKee's Central Argument</h3>
+            <p>Story is not plot. Story is character under pressure, making choices that reveal who they truly are. Structure is the architecture that supports and amplifies character. The best stories combine:</p>
+            <ul style="margin-left: 2rem; line-height: 2;">
+                <li><strong>Compelling character:</strong> Someone worth following for two hours</li>
+                <li><strong>Clear inciting incident:</strong> An event that makes action inevitable</li>
+                <li><strong>Progressive complications:</strong> Rising stakes and pressure</li>
+                <li><strong>The gap:</strong> Expectation meeting reality with emotional impact</li>
+                <li><strong>Crisis and climax:</strong> Pressure that forces irreversible change</li>
+                <li><strong>Controlling idea:</strong> A truth about human nature that the story argues and proves</li>
+            </ul>
+        </div>
+
+        <div class="pull-quote">
+            <p>"The difference between a writer and a hack is that the writer has something to say. He's been moved by an insight into human nature so profound and truthful that he's compelled to share it. Everything else is technique."</p>
+            <div class="pull-quote-author">— Robert McKee, paraphrased</div>
+        </div>
+
+        <h3>For Screenwriters</h3>
+        <p>Study the films McKee references obsessively. Analyze scene by scene why they work. Notice how each scene raises stakes. Watch how character is revealed through action, not exposition. Understand that your antagonist is as important as your protagonist—a weak antagonist creates a weak story.</p>
+
+        <h3>For Any Writer</h3>
+        <p>These principles apply to novels, short stories, essays, and even speeches. Anywhere humans tell stories, McKee's framework works. The hierarchy of story (beats, scenes, sequences, acts) is universal. The principle of progressive complications applies whether you're writing a 120-page screenplay or a 400-page novel.</p>
+
+        <h3>For AI and Prompt Engineers</h3>
+        <p>Understand that good prompts function like good inciting incidents: they create necessity. Good outputs maintain the gap between expectation and result. Red-teaming is pressure-testing character. A model's true capabilities reveal themselves under adversarial conditions, just as character reveals itself under pressure.</p>
+
+        <div class="funny-box">
+            <div class="funny-title">The One Thing McKee Would Tell You</div>
+            <div class="funny-text">If Robert McKee could tell you one thing, it would be: "Stop trying to write stories that are new. Write stories that are true. Find what you authentically believe about human nature, and then find a character whose journey proves that truth. The structure will follow. Everything else—the fancy camera work, the clever dialogue, the exotic locations—is just window dressing. The story is the house."</div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section class="wrapper">
+        <h2>McKee's Methodology: How to Apply This</h2>
+
+        <h3>Step 1: Find Your Controlling Idea</h3>
+        <p>Before you write a single scene, ask: "What do I believe about human nature? What does my story want to argue?" Your controlling idea should be provable through action. Not: "Life is hard." But: "When life is hard and we have no other option, we discover courage we didn't know we had."</p>
+
+        <h3>Step 2: Design Your Inciting Incident</h3>
+        <p>Your inciting incident should be so compelling that your protagonist can't ignore it. It should be external, clear, and emotionally significant. It's the moment the story truly begins. Everything before it is setup; everything after is consequence.</p>
+
+        <h3>Step 3: Build Progressive Complications</h3>
+        <p>In your second act, make things worse, not better. Each complication should flow from character and previous complications. Never let your protagonist catch their breath. Escalate pressure continuously.</p>
+
+        <h3>Step 4: Test Character Under Pressure</h3>
+        <p>Use crisis as a pressure test. Force your character to choose between two bad options. What they choose reveals who they are. This choice should feel inevitable in retrospect but surprising in the moment.</p>
+
+        <h3>Step 5: Craft a Climax That's Irreversible</h3>
+        <p>Your climax should change the protagonist's inner and/or outer world permanently. After the climax, return is impossible. The character is transformed. The world is transformed. Only then resolve through the denouement.</p>
+
+        <h3>Step 6: Prove Your Controlling Idea</h3>
+        <p>By the end, your story should have proven its central argument. Not stated it explicitly, but proven it through action. The audience should feel that the controlling idea is true.</p>
+
+        <div class="info-box">
+            <strong>McKee's Test:</strong> If you removed your controlling idea from your story, would the story still work? If yes, you haven't embedded it deep enough. The theme should be invisible but irrefutable.
+        </div>
+    </section>
+
+    <!-- Visual Climax Peak -->
+    <section class="wrapper">
+        <h2>The Climax Peak: Visual Guide</h2>
+        <p>Here's a visual representation of how tension builds through the story:</p>
+
+        <svg class="tension-curve" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="tensionGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#E17055;stop-opacity:0.2" />
+                    <stop offset="100%" style="stop-color:#FFA502;stop-opacity:0.05" />
+                </linearGradient>
+            </defs>
+
+            <!-- Background -->
+            <rect width="800" height="400" fill="url(#tensionGrad)"/>
+
+            <!-- Grid lines -->
+            <line x1="50" y1="350" x2="750" y2="350" stroke="#ddd" stroke-width="2"/>
+            <line x1="50" y1="50" x2="50" y2="350" stroke="#ddd" stroke-width="2"/>
+
+            <!-- Act divisions -->
+            <line x1="250" y1="50" x2="250" y2="350" stroke="#999" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+            <line x1="550" y1="50" x2="550" y2="350" stroke="#999" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+
+            <!-- Tension curve -->
+            <path d="M 50 320 Q 150 280 250 200 Q 350 150 400 80 Q 450 150 550 240 Q 650 300 750 350"
+                  stroke="#E17055" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- Key moments -->
+            <!-- Inciting Incident -->
+            <circle cx="250" cy="200" r="8" fill="#4ECDC4"/>
+            <text x="250" y="220" text-anchor="middle" font-size="12" font-weight="bold" fill="#2D3436">Inciting</text>
+
+            <!-- First Complication -->
+            <circle cx="350" cy="150" r="6" fill="#FFE66D"/>
+            <text x="350" y="140" text-anchor="middle" font-size="11" fill="#2D3436">Complication 1</text>
+
+            <!-- Crisis -->
+            <circle cx="500" cy="130" r="6" fill="#FF6B6B"/>
+            <text x="500" y="115" text-anchor="middle" font-size="12" font-weight="bold" fill="#E17055">CRISIS</text>
+
+            <!-- Climax (Peak) -->
+            <circle cx="400" cy="80" r="10" fill="#E17055"/>
+            <text x="400" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#E17055">CLIMAX</text>
+            <line x1="400" y1="80" x2="400" y2="350" stroke="#E17055" stroke-width="2" stroke-dasharray="3,3" opacity="0.5"/>
+
+            <!-- Resolution -->
+            <circle cx="650" cy="300" r="6" fill="#A06CD5"/>
+            <text x="650" y="320" text-anchor="middle" font-size="11" fill="#2D3436">Resolution</text>
+
+            <!-- Labels -->
+            <text x="150" y="380" text-anchor="middle" font-size="13" font-weight="bold" fill="#2D3436">ACT I</text>
+            <text x="400" y="380" text-anchor="middle" font-size="13" font-weight="bold" fill="#2D3436">ACT II</text>
+            <text x="650" y="380" text-anchor="middle" font-size="13" font-weight="bold" fill="#2D3436">ACT III</text>
+
+            <!-- Y-axis label -->
+            <text x="20" y="30" font-size="11" fill="#999">Tension</text>
+            <text x="700" y="370" font-size="11" fill="#999">Time</text>
+        </svg>
+
+        <p style="text-align: center; color: #999; font-size: 0.9rem; margin-top: 1rem;">The climax is the peak of tension. Everything before rises toward it. Everything after falls from it. This is not coincidence—it's the geometry of emotion.</p>
+    </section>
+
+    <!-- Conclusion -->
+    <section class="wrapper">
+        <h2>Final Words: Why Story Matters</h2>
+
+        <p>Robert McKee's <em>Story</em> is more than a screenwriting manual. It's a meditation on human nature, emotion, and what moves us to care about other people's struggles. McKee argues that story is the most powerful tool humans have for communicating truth. Not because it's entertaining (though it is), but because it works on us at a level deeper than logic.</p>
+
+        <p>When you sit in a dark theater and a story moves you to tears, something profound is happening. Your defenses are down. You're living through someone else's struggle. You're confronted with a truth about human nature that you can't argue with because you've <em>felt</em> it.</p>
+
+        <p>That's the power McKee is trying to teach you to harness. Not for fame or money (though those might follow), but because you have something to say about what it means to be human, and you want others to feel that truth as deeply as you do.</p>
+
+        <div class="pull-quote">
+            <p>"The greatest gift a writer can give the world is not a beautiful sentence or a clever idea. It's a true insight into human nature, expressed through character under pressure, structured so powerfully that the audience feels it as inevitably true. That is story. That is why we tell them. That is why we listen."</p>
+            <div class="pull-quote-author">— Robert McKee, The Heart of Story</div>
+        </div>
+
+        <h3>Your Next Steps</h3>
+        <ul style="margin-left: 2rem; line-height: 2; font-size: 1.05rem;">
+            <li>Read <em>Story</em> by Robert McKee (the full book is essential—this guide is just a map)</li>
+            <li>Watch the four films McKee cites repeatedly: Chinatown, Casablanca, The Godfather, Thelma & Louise</li>
+            <li>Analyze one film scene-by-scene, identifying each beat and how it serves the controlling idea</li>
+            <li>Write your own story applying these principles: find your controlling idea first, design your inciting incident, build escalating complications, test character under pressure</li>
+            <li>Join a community of writers and share your work for feedback (McKee's Story seminars exist for this reason)</li>
+        </ul>
+
+        <div class="info-box">
+            <strong>The ultimate test:</strong> Does your story move people? If not, structure isn't your problem—truth is. McKee can teach you structure, but only you can find the authentic human insight worth sharing.
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Story: Substance, Structure, Style, and the Principles of Screenwriting</strong></p>
+        <p>by Robert McKee (1997)</p>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.7);">This comprehensive guide was created as a study aid and introduction to McKee's principles. For complete mastery, read the full book and attend McKee's Story seminars.</p>
+        <p style="margin-top: 2rem; font-size: 0.85rem; color: rgba(255,255,255,0.6);">Created with research into screenwriting craft, narrative structure, and the intersection of story principles with AI language modeling.</p>
+    </footer>
+</body>
+</html>

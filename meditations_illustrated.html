@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditations by Marcus Aurelius - Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #2d3436 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(74, 144, 226, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(160, 108, 213, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 40px;
+        }
+
+        .illustration-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 20px 40px rgba(255, 107, 107, 0.3));
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--cream);
+            margin: 20px 0;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
+            letter-spacing: -1px;
+        }
+
+        .cover h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--coral);
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .cover p {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--forest);
+            font-weight: 600;
+            margin-top: 30px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--sunny);
+            font-size: 0.9rem;
+            z-index: 3;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        .intro-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid var(--deep-blue);
+            padding: 40px;
+            margin-bottom: 60px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .intro-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--cream);
+            margin-bottom: 20px;
+        }
+
+        .intro-section p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #d0d0d0;
+        }
+
+        .context-box {
+            background: linear-gradient(135deg, rgba(9, 132, 227, 0.1) 0%, rgba(160, 108, 213, 0.1) 100%);
+            border: 1px solid rgba(160, 108, 213, 0.3);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--deep-blue);
+        }
+
+        .context-box strong {
+            color: var(--sunny);
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .lesson {
+            background: linear-gradient(135deg, rgba(45, 52, 54, 0.8) 0%, rgba(26, 26, 46, 0.8) 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lesson:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2);
+        }
+
+        .lesson-inner {
+            padding: 40px;
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--coral), var(--warm-red));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .lesson h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--cream);
+            margin: 15px 0;
+            line-height: 1.3;
+        }
+
+        .lesson-subtitle {
+            color: var(--coral);
+            font-weight: 600;
+            margin: 10px 0 20px;
+            font-size: 0.95rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 3px solid var(--teal);
+        }
+
+        .card-label {
+            font-weight: 700;
+            color: var(--sunny);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 230, 109, 0.1) 100%);
+            border-left: 4px solid var(--coral);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #e8e8e8;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            left: 10px;
+            top: -10px;
+            font-size: 3rem;
+            color: var(--coral);
+            opacity: 0.3;
+        }
+
+        .quote-attribution {
+            margin-top: 12px;
+            color: var(--sunny);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        .funny-box {
+            background: linear-gradient(135deg, rgba(85, 239, 196, 0.1) 0%, rgba(253, 203, 110, 0.1) 100%);
+            border: 1px solid rgba(85, 239, 196, 0.3);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 3px solid var(--mint);
+        }
+
+        .funny-box .card-label {
+            color: var(--mint);
+        }
+
+        .funny-box p {
+            color: #e0e0e0;
+        }
+
+        .ai-box {
+            background: linear-gradient(135deg, rgba(160, 108, 213, 0.1) 0%, rgba(74, 144, 226, 0.1) 100%);
+            border: 1px solid rgba(160, 108, 213, 0.3);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 3px solid var(--dark-purple);
+        }
+
+        .ai-box .card-label {
+            color: var(--dark-purple);
+        }
+
+        .ai-box p {
+            color: #d8d8d8;
+        }
+
+        .connect-box {
+            background: linear-gradient(135deg, rgba(253, 121, 168, 0.1) 0%, rgba(0, 184, 148, 0.1) 100%);
+            border: 1px solid rgba(253, 121, 168, 0.3);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 3px solid var(--pink);
+        }
+
+        .connect-box .card-label {
+            color: var(--pink);
+        }
+
+        .connect-box p {
+            color: #d8d8d8;
+        }
+
+        .story {
+            background: linear-gradient(135deg, rgba(45, 52, 54, 0.6) 0%, rgba(26, 26, 46, 0.6) 100%);
+            border-radius: 8px;
+            padding: 30px;
+            margin: 25px 0;
+            border-left: 4px solid var(--orange);
+        }
+
+        .story-inner h4 {
+            color: var(--cream);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .story-inner p {
+            color: #d0d0d0;
+            margin-bottom: 12px;
+        }
+
+        .cheatsheet {
+            background: linear-gradient(135deg, rgba(0, 184, 148, 0.1) 0%, rgba(0, 132, 227, 0.1) 100%);
+            border-radius: 12px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 2px solid rgba(0, 184, 148, 0.3);
+        }
+
+        .cheatsheet h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--cream);
+            margin-bottom: 30px;
+        }
+
+        .cheatsheet-inner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .cheatsheet-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 3px solid var(--forest);
+        }
+
+        .cheatsheet-item strong {
+            color: var(--mint);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .cheatsheet-item p {
+            color: #d0d0d0;
+            font-size: 0.95rem;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            .cover h2 {
+                font-size: 1.3rem;
+            }
+
+            .lesson h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            50% { transform: translateY(-20px) translateX(10px) rotate(180deg); }
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--coral), transparent);
+            margin: 60px 0;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--cream);
+            margin: 80px 0 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--coral), var(--sunny));
+            margin: 0 auto 20px;
+        }
+
+        .conclusion {
+            background: linear-gradient(135deg, rgba(107, 92, 231, 0.15) 0%, rgba(9, 132, 227, 0.15) 100%);
+            border: 2px solid rgba(160, 108, 213, 0.3);
+            padding: 50px;
+            border-radius: 12px;
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .conclusion h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--cream);
+            margin-bottom: 20px;
+        }
+
+        .conclusion p {
+            font-size: 1.1rem;
+            color: #d0d0d0;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 80px;
+        }
+
+        .book-reference {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--sunny);
+            margin: 5px;
+        }
+
+        @media print {
+            body { background: white; color: black; }
+            .cover, .lesson, .card, .quote-box, .funny-box, .ai-box, .connect-box, .story, .cheatsheet {
+                background: white !important;
+                border: 1px solid #ccc !important;
+                box-shadow: none !important;
+            }
+            .scroll-hint { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- COVER -->
+    <section class="cover">
+        <div class="cover-content">
+            <div class="illustration-container">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Columns -->
+                    <rect x="30" y="80" width="15" height="80" fill="#FFEAA7" stroke="#FF6B6B" stroke-width="2"/>
+                    <rect x="155" y="80" width="15" height="80" fill="#FFEAA7" stroke="#FF6B6B" stroke-width="2"/>
+                    <!-- Column capitals -->
+                    <rect x="25" y="75" width="25" height="8" fill="#FF6B6B"/>
+                    <rect x="150" y="75" width="25" height="8" fill="#FF6B6B"/>
+                    <!-- Flame in center -->
+                    <path d="M 100 60 Q 95 50 95 40 Q 95 30 100 20 Q 105 30 105 40 Q 105 50 100 60 Z" fill="#FFE66D" stroke="#FF6B6B" stroke-width="2"/>
+                    <path d="M 100 60 Q 92 55 90 45 Q 88 35 95 25" fill="#FDCB6E" opacity="0.7"/>
+                    <path d="M 100 60 Q 108 55 110 45 Q 112 35 105 25" fill="#FDCB6E" opacity="0.7"/>
+                    <!-- Glow -->
+                    <circle cx="100" cy="45" r="20" fill="none" stroke="#FFE66D" stroke-width="1" opacity="0.5"/>
+                    <!-- Stoic rays -->
+                    <line x1="100" y1="10" x2="100" y2="0" stroke="#FFE66D" stroke-width="2" opacity="0.6"/>
+                    <line x1="120" y1="20" x2="128" y2="12" stroke="#FFE66D" stroke-width="2" opacity="0.6"/>
+                    <line x1="80" y1="20" x2="72" y2="12" stroke="#FFE66D" stroke-width="2" opacity="0.6"/>
+                    <!-- Desk/scroll below -->
+                    <rect x="50" y="140" width="100" height="40" fill="#A06CD5" stroke="#FFE66D" stroke-width="2" rx="4"/>
+                    <path d="M 60 145 L 140 145" stroke="#FFEAA7" stroke-width="1" opacity="0.5"/>
+                    <path d="M 60 155 L 140 155" stroke="#FFEAA7" stroke-width="1" opacity="0.5"/>
+                    <!-- Stars around -->
+                    <circle cx="20" cy="30" r="2" fill="#FFE66D"/>
+                    <circle cx="180" cy="40" r="2" fill="#FFE66D"/>
+                    <circle cx="180" cy="130" r="2" fill="#FFE66D"/>
+                    <circle cx="20" cy="140" r="2" fill="#FFE66D"/>
+                </svg>
+            </div>
+            <h1>MEDITATIONS</h1>
+            <h2>by Marcus Aurelius</h2>
+            <p>A Guide to Stoic Philosophy in the Modern Age</p>
+            <p class="tagline">2000 Years of Wisdom for Your Inner Citadel</p>
+            <div class="scroll-hint">↓ Scroll to explore ↓</div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <!-- INTRODUCTION -->
+        <section class="intro-section">
+            <h2>The Emperor Philosopher</h2>
+            <p>Marcus Aurelius (121-180 CE) was the most powerful man in the world. Yet he sat in his tent, often during military campaigns, writing private reflections in his personal journal. These writings, never meant for publication, became <em>Meditations</em>—humanity's greatest gift from a mind wrestling with duty, death, and what truly matters.</p>
+            <p>He wrote while commanding legions against Germanic tribes. He wrote while the Antonine Plague ravaged Rome, killing millions. He wrote while grooming his son Commodus, who would become one of history's worst rulers. These weren't philosophical abstractions. This was a man living his philosophy.</p>
+
+            <div class="context-box">
+                <strong>Historical Context:</strong> Marcus Aurelius ruled during unprecedented crises—the plague that killed 5-10 million people, constant frontier wars, internal political instability. He had no advantage of distance or comfort. His philosophy was forged in real adversity. When he wrote "You could leave life right now—let that determine what you do," he meant it literally, at any moment, he could be dead from plague or battle.
+            </div>
+
+            <p><strong>Why This Matters Today:</strong> We face algorithmic uncertainty (social media), information overload (infinite content), and existential questions about technology and AI. Marcus offers something radical: a framework for what's actually in your control. Not your stock portfolio fluctuations—your judgments. Not whether people like your post—your character. Not whether AI replaces your job—how you respond.</p>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- THE 12 LESSONS -->
+        <h2 class="section-title">The 12 Core Lessons</h2>
+
+        <div class="lessons-grid">
+            <!-- LESSON 1: DICHOTOMY OF CONTROL -->
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <div class="lesson-number">1</div>
+                    <h3>The Dichotomy of Control</h3>
+                    <div class="lesson-subtitle">What's Up to You vs. What Isn't</div>
+
+                    <div class="card">
+                        <div class="card-label">Core Idea</div>
+                        <p>Some things are within your control (your judgments, desires, intentions, actions); most things are not (your body, health, reputation, wealth, outcomes). The secret to peace: focus entirely on the former, accept the latter with grace.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "You have power over your mind—not outside events. Realize this, and you will find strength."
+                        <div class="quote-attribution">— Marcus Aurelius, Book 8</div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>The Historical Reality</h4>
+                            <p>Marcus couldn't control whether the plague would kill his family. He couldn't control whether Germanic tribes would breach Rome's frontier. He couldn't control his son Commodus's character (Commodus became infamous for his cruelty, narcissism, and debauchery). But he could control how he responded, what values he upheld, and whether he'd surrender his character to despair.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <div class="card-label">Modern Translation</div>
+                        <p>You can't control your phone's algorithm, your boss's mood, whether a job interview goes well, or if your startup succeeds. But you CAN control: your preparation, your focus, whether you panic at uncertainty, and your integrity. Stop tweeting angry replies at things you can't change. Start building your actual values.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <div class="card-label">AI Connection</div>
+                        <p>In reinforcement learning, the agent's "action space" is what it can directly influence—its outputs, internal weights (through learning), its attention focus. Everything else—the reward signal, the environment state, the world's response—is outside that boundary. Marcus defined the action space of human flourishing 2000 years before we formalizedRL. Your compute budget (finite time) is about mastering your controllable action space, not obsessing over the environment's response.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <div class="card-label">Cross-Book Connection</div>
+                        <p><strong>Atomic Habits</strong> uses this: focus on the process (controllable), not the outcome (not controllable). <strong>Man's Search for Meaning</strong> shows Viktor Frankl surviving Nazi camps by keeping his internal choice intact even when everything external was stolen. <strong>Thinking Fast and Slow</strong> reveals how our mind tricks us into worrying about things beyond our control (availability heuristic).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 2: MEMENTO MORI -->
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <div class="lesson-number">2</div>
+                    <h3>Memento Mori</h3>
+                    <div class="lesson-subtitle">You Could Leave Life Right Now</div>
+
+                    <div class="card">
+                        <div class="card-label">Core Idea</div>
+                        <p>Death is certain, timing is not. You could die today. This isn't morbid—it's clarifying. It cuts through trivial nonsense instantly. It asks: given this, what should I actually be doing right now? What matters?</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "You could leave life right now. Let that determine what you do and say and think."
+                        <div class="quote-attribution">— Marcus Aurelius, Book 2</div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>The Historical Reality</h4>
+                            <p>During the Antonine Plague (165-180 CE), 5 million died across the empire. Marcus saw people dropping dead daily. His guards, his generals, his family members—gone. He wrote Meditations during this horror. This wasn't theoretical death meditation. It was lived urgency. When plague kills 1 in 8 people you know, your time preference shifts immediately.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <div class="card-label">Modern Translation</div>
+                        <p>You're doom-scrolling Twitter for 45 minutes. Memento mori asks: If you found out today was your last, would you spend it reading hot takes about celebrities? Probably not. So stop. Life isn't infinite, your attention isn't infinite. Every hour spent on what doesn't matter is an hour you won't get back. This is why billionaires wake up at 5am—not because they're special, but because they internalized: my time is finite, I should use it on what I actually value.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <div class="card-label">AI Connection</div>
+                        <p>In machine learning, you have a finite compute budget—training time, memory, processing power. You can't train forever. Memento mori is accepting your finite compute budget as a human. It's the hard constraint that forces prioritization. An AI without a compute limit would train on everything forever and never decide. A human with mortality is forced to choose. Death is your most powerful optimizer.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <div class="card-label">Cross-Book Connection</div>
+                        <p><strong>The Alchemist</strong> teaches that the treasure you seek is always within reach, but only if you pursue it with urgency. <strong>Letters from a Stoic</strong> has Seneca constantly reminding us: "It is not that we have a short time to live, but that we waste a lot of it." Mortality isn't the enemy—indifference to mortality is.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 3: THE OBSTACLE IS THE WAY -->
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <div class="lesson-number">3</div>
+                    <h3>The Obstacle Is the Way</h3>
+                    <div class="lesson-subtitle">How to Turn Problems into Power</div>
+
+                    <div class="card">
+                        <div class="card-label">Core Idea</div>
+                        <p>Obstacles aren't impediments to the path; they ARE the path. Your challenge reveals your character. A wall blocks your road? It's now your material for growth. Resistance in life = friction for sharpening your skills.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "The impediment to action advances action. What stands in the way becomes the way."
+                        <div class="quote-attribution">— Marcus Aurelius, Book 5</div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>The Historical Reality</h4>
+                            <p>Marcus didn't inherit a peaceful, prosperous empire. He inherited plague, frontier collapse, betrayals, and financial ruin. He couldn't retreat to philosophy. He HAD to engage. His obstacle WAS his opportunity to demonstrate everything he believed. He fought Germanic tribes, managed plague response, stabilized currency inflation. His philosophy wasn't tested in comfort—it was tested under maximum pressure.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <div class="card-label">Modern Translation</div>
+                        <p>You didn't get the promotion. That's bad. Or—that's your obstacle teaching you something your current role won't. You got rejected by an investor. Or—that's forcing you to find a better business model. Your code keeps crashing in production. Or—that's the obstacle that makes you a better engineer. The problem isn't that you have obstacles. The problem is thinking obstacles shouldn't be there.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <div class="card-label">AI Connection</div>
+                        <p>In deep learning, training loss that won't decrease is an obstacle. But that obstacle teaches you to investigate: Is your learning rate wrong? Your architecture? Your data? The obstacle is THE training signal. Without obstacles, without errors, the system never learns. Humans are the same. A life without obstacles is a life without growth. The obstacle isn't preventing learning—it IS learning.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <div class="card-label">Cross-Book Connection</div>
+                        <p><strong>Atomic Habits</strong> frames identity through obstacles: you become the kind of person who solves hard problems by solving hard problems. <strong>The Alchemist</strong> shows obstacles as tests that reveal whether you're serious about your quest. <strong>Man's Search for Meaning</strong> proves that meaning isn't found in ease—it's found in how you respond to what breaks you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 4: AMOR FATI -->
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <div class="lesson-number">4</div>
+                    <h3>Amor Fati</h3>
+                    <div class="lesson-subtitle">Love Your Fate</div>
+
+                    <div class="card">
+                        <div class="card-label">Core Idea</div>
+                        <p>Don't just accept what happens. Don't tolerate it. Love it. Train yourself to see what occurs as exactly what you needed, whether you understand why yet or not. This transforms victimhood into agency.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "A blazing fire makes flame and brightness out of everything that is thrown into it."
+                        <div class="quote-attribution">— Marcus Aurelius, Book 4</div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>The Historical Reality</h4>
+                            <p>Marcus was forced into philosophy. He wanted to study rhetoric as a boy. His teachers redirected him. His uncle, the emperor before him, chose him as successor not because he was an obvious choice, but because Rome had run through bad emperors. Marcus was the best available option in a moment of desperation. Everything he became—the philosopher emperor—happened because he accepted and embraced a path he didn't choose.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <div class="card-label">Modern Translation</div>
+                        <p>You got laid off during the startup collapse. Your reaction options: (1) See yourself as a victim—unfair, devastating. (2) Accept it—okay, moving on. (3) Love it—this is forcing me to discover what I actually want to build; I wouldn't have taken this risk otherwise. Amor fati is option 3. It's not positive thinking (lying to yourself). It's seeing that your best opportunities often hide in what initially felt like punishment.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <div class="card-label">AI Connection</div>
+                        <p>In adversarial training, the "enemy" network (the adversary) is actually your teacher. The obstacle improves the model. This is amor fati for AI: love the adversary because it makes you stronger. Gradient descent doesn't hate errors—it uses them to descend toward better parameters. Every failure is fuel.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <div class="card-label">Cross-Book Connection</div>
+                        <p><strong>The Alchemist</strong> teaches that every challenge on your journey is preparing you for what you're becoming. <strong>Thinking Fast and Slow</strong> explains why we're terrible at predicting what will make us happy, and why events we thought would devastate us often become turning points. We can't know in advance—but we can choose to trust the process.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 5: THE VIEW FROM ABOVE -->
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <div class="lesson-number">5</div>
+                    <h3>The View from Above</h3>
+                    <div class="lesson-subtitle">Cosmic Perspective & Abstraction</div>
+
+                    <div class="card">
+                        <div class="card-label">Core Idea</div>
+                        <p>Zoom out. See your life from 10,000 feet. See Rome from space. See your worries as atoms in the larger cosmos. This isn't nihilism—it's perspective. It makes what matters clear and what doesn't disappear.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "Constantly think of the universe as one living organism, with one substance and one soul; and always think of yourself as an atom that belongs to the whole, a part of the whole."
+                        <div class="quote-attribution">— Marcus Aurelius, Book 4</div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>The Historical Reality</h4>
+                            <p>Marcus, ruling the mightiest empire on Earth, understood that Rome's dominance was temporary. He read history. Every great power before Rome had fallen. He knew his name would eventually mean nothing. He knew future generations would study him only if he upheld virtue. This cosmic perspective made him ruthlessly uninterested in fame and entirely focused on his actual duty.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <div class="card-label">Modern Translation</div>
+                        <p>You're stressing about whether people are judging your Instagram photo. Zoom out: In 200 years, literally no one will care about this photo. In 1000 years, your entire civilization might be forgotten. Your anxious social performance is invisible on any timescale that matters. This should be liberating. It means you can actually be yourself.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <div class="card-label">AI Connection</div>
+                        <p>In deep neural networks, you have layers at different levels of abstraction. Low layers see pixels; high layers see objects; highest layers see scenes. Marcus is teaching abstraction layers for consciousness. Zoom to the highest layer: you're a local instance of the universal logos (Greek word meaning universal reason). This is what Buddhist philosophy calls "enlightenment"—seeing beyond the layer of individual ego.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <div class="card-label">Cross-Book Connection</div>
+                        <p><strong>Thinking Fast and Slow</strong> shows how our minds zoom in too much on immediate feelings, biasing toward near-term events. The view from above is literally forcing System 2 (slow thinking) to dominate System 1 (fast, emotional reactions). <strong>Man's Search for Meaning</strong> uses cosmic perspective to ask: what will your life have meant?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 6: IMPERMANENCE OF ALL THINGS -->
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <div class="lesson-number">6</div>
+                    <h3>Impermanence of All Things</h3>
+                    <div class="lesson-subtitle">Everything Flows, Nothing Stays</div>
+
+                    <div class="card">
+                        <div class="card-label">Core Idea</div>
+                        <p>Every possession will be lost. Every relationship will end (through separation or death). Every status will be surpassed. Every body decays. This isn't tragic—it's liberating. Attachment to permanence is the root of suffering. Accept change and you accept reality.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "Time is a river of passing events, and strong is its current; no sooner is a thing brought to sight than it is swept by and another comes in its place, and this too will be swept away."
+                        <div class="quote-attribution">— Marcus Aurelius, Book 4</div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>The Historical Reality</h4>
+                            <p>Marcus saw empires built on permanence vanish. He held objects, knowing one day they'd be dust. He had a loving wife, Faustina, and knew their time together was finite. He had power as emperor, and knew it would pass to whoever came next (actually, to his terrible son, which he foresaw). Living with impermanence wasn't depressing—it made each moment with what he loved more precious.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <div class="card-label">Modern Translation</div>
+                        <p>You bought the latest iPhone thinking it'll be great forever. Two years later, it's obsolete. You're worried about losing your job—a position that, honestly, won't exist in 20 years anyway due to AI. You're accumulating status on social media thinking it's permanent. Everything you own will be destroyed, stolen, outdated, or abandoned. Everything you've achieved will be forgotten or surpassed. This is fine. It's not a failure of the universe—it's the universe's natural rhythm.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <div class="card-label">AI Connection</div>
+                        <p>Every neural network is impermanent. Training it is temporary. New architectures replace old ones. Your fine-tuned weights will be obsolete next year. Models die. Weights decay. This isn't pessimism—it's what makes innovation necessary. A static, unchanging AI landscape would be the real tragedy. Impermanence IS progress.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <div class="card-label">Cross-Book Connection</div>
+                        <p><strong>The Alchemist</strong> teaches that the journey matters more than arrival because arrival is impermanent. <strong>Thinking Fast and Slow</strong> shows the "hedonic treadmill"—you buy the thing you think will make you happy forever, and within weeks you adjust back to baseline. Marcus understood this 2000 years before psychology named it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 7: THE INNER CITADEL -->
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <div class="lesson-number">7</div>
+                    <h3>The Inner Citadel</h3>
+                    <div class="lesson-subtitle">Your Mind as Your Fortress</div>
+
+                    <div class="card">
+                        <div class="card-label">Core Idea</div>
+                        <p>Your mind is a fortress that can never be breached without your permission. Your thoughts, judgments, values—these are the absolute last thing anyone can take from you. Even under torture, imprisonment, or execution, your inner citadel remains inviolable if you defend it.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "Confine yourself to the present. No mind can lose the past or future; they are not here. It is only the present moment you can lose; for that is all you have."
+                        <div class="quote-attribution">— Marcus Aurelius, Book 8</div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>The Historical Reality</h4>
+                            <p>Marcus ruled during times when emperors were assassinated, plotted against, betrayed by generals. He had enemies and rivals constantly seeking to destroy him or undermine his authority. But his inner citadel—his commitment to justice, reason, and duty—remained unshakeable. Enemies could take his throne, but they couldn't take his mind.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <div class="card-label">Modern Translation</div>
+                        <p>Your boss is a nightmare. Can they control your inner citadel? No. They can control your paycheck, your schedule, your email inbox. But they cannot control what you think about their criticism, whether you believe their judgment, or what you value. Social media can attack you. Can it control your citadel? Only if you let it. Trolls can rage. Your inner citadel is untouchable if you actually believe you're in control of it.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <div class="card-label">AI Connection</div>
+                        <p>This is the concept of a "sandbox" or "trusted execution environment"—a protected memory space that runs isolated from external interference. Your consciousness is your sandbox. Adversarial inputs (insults, noise, disinformation) can hit your inputs, but your actual processing—your judgment, your values, your reasoning—remains secure if you maintain proper isolation. This is cybersecurity for the mind.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <div class="card-label">Cross-Book Connection</div>
+                        <p><strong>Man's Search for Meaning</strong> is essentially an exploration of the inner citadel—Frankl in a Nazi concentration camp, where every external freedom was stripped, but he defended his inner citadel so fiercely that he found meaning even there. <strong>Thinking Fast and Slow</strong> shows how external stimuli hijack your automatic thinking; the inner citadel is choosing to engage System 2.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 8: DUTY AND SERVICE -->
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <div class="lesson-number">8</div>
+                    <h3>Duty & Service</h3>
+                    <div class="lesson-subtitle">The Emperor AND the Philosopher</div>
+
+                    <div class="card">
+                        <div class="card-label">Core Idea</div>
+                        <p>You have a role. Not metaphorically—actually. You're a parent, a professional, a community member, maybe a leader. That role comes with duties. Philosophy isn't an escape from duty. Philosophy is how you perform your duty excellently while keeping yourself sane.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "When you wake up, think about the words which you need to guide you through the day."
+                        <div class="quote-attribution">— Marcus Aurelius, Book 2</div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>The Historical Reality</h4>
+                            <p>Marcus WAS the emperor. He couldn't resign. He couldn't retreat to a monastery to meditate. He had to show up in the Senate, command armies, make life-and-death decisions about millions of people. And he HAD to do this excellently. His Stoicism wasn't escapism—it was the framework that let him serve competently under unbearable stress. That's the opposite of philosophy as retreat.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <div class="card-label">Modern Translation</div>
+                        <p>You have a job. You might hate it. But you accepted the role, and people depend on you. Stoicism isn't about quitting and meditating in the desert. It's about showing up, doing the work excellently, not being destroyed by the frustrations. You have a family. You have responsibilities. Philosophy is the operating system that lets you execute those responsibilities with integrity and without losing your mind.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <div class="card-label">AI Connection</div>
+                        <p>An AI system isn't "free" just because it can theoretically optimize any function. It's constrained by its design. An AI deployed in a hospital has a duty to help patients. An AI in finance has a duty to serve its users honestly. The constraint of duty isn't a limitation—it's the specification. Marcus understood that his "constraint" as emperor was actually the entire point of his existence.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <div class="card-label">Cross-Book Connection</div>
+                        <p><strong>Man's Search for Meaning</strong> argues that meaning comes from responsiblity and duty, not freedom. <strong>Atomic Habits</strong> shows that identity is built through repeated small duties—you become a good professional by doing the job well, consistently. Duty isn't a burden if you reframe it as your identity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 9: ANGER IS A CHOICE -->
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <div class="lesson-number">9</div>
+                    <h3>Anger Is a Choice</h3>
+                    <div class="lesson-subtitle">Emotion as Judgment, Not Reflex</div>
+
+                    <div class="card">
+                        <div class="card-label">Core Idea</div>
+                        <p>Your anger isn't a reflex—it's a judgment. You felt insulted, so you judged the insult as something that should make you angry. But you could judge differently. The anger isn't inevitable. Your judgment is the lever.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "You have power over your mind—not outside events. Realize this, and you will find strength. Anger is just a temporary madness."
+                        <div class="quote-attribution">— Marcus Aurelius, Book 6</div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>The Historical Reality</h4>
+                            <p>Marcus had soldiers, generals, senators, enemies, and advisors constantly provoking him. He had the power to execute anyone who disrespected him. He consciously chose not to let anger control him. Anger would have made him a tyrant like his son Commodus. His refusal to be controlled by anger made him one of history's most respected leaders.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <div class="card-label">Modern Translation</div>
+                        <p>Someone online said something stupid about you. You feel immediate rage. This is the reflex. But before you respond, there's a choice point: Is this person's judgment worth my emotional energy? Did they insult me or did they expose an insecurity I actually need to examine? If I respond in anger, will that serve my goals? Usually the answer is no. Anger is the cheap response. Choosing not to be angered is the strength.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <div class="card-label">AI Connection</div>
+                        <p>In reinforcement learning, an "emotion" is a reward signal. Anger is negative reward. But an intelligent agent doesn't react immediately to every negative reward—it evaluates whether the action caused by the emotion is optimal. A sophisticated system can acknowledge the reward signal without being controlled by it. This is what humans do when they master anger.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <div class="card-label">Cross-Book Connection</div>
+                        <p><strong>Thinking Fast and Slow</strong> describes how emotions (System 1) hijack reasoning (System 2). Anger is the perfect example. <strong>Atomic Habits</strong> talks about habit stacking—pausing before reacting is a habit you can build. <strong>Letters from a Stoic</strong> has Seneca discussing anger more than any other emotion, recognizing it as the most dangerous threat to a free mind.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 10: MORNING PREPARATION -->
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <div class="lesson-number">10</div>
+                    <h3>Morning Preparation for Difficulty</h3>
+                    <div class="lesson-subtitle">Prememorization of Challenges</div>
+
+                    <div class="card">
+                        <div class="card-label">Core Idea</div>
+                        <p>Start your day by imagining the difficulties you'll face: angry people, obstacles, failures. Not to be depressed—to be prepared. When the difficulty comes, you've already rehearsed your response. You're not surprised.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "Begin the morning by saying to yourself, I shall meet with busybodies, ingrates, egomaniacs, liars, the foul and cranky. They are all stricken with ignorance of good and evil... But I have long understood the nature of good and the nature of evil."
+                        <div class="quote-attribution">— Marcus Aurelius, Book 2</div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>The Historical Reality</h4>
+                            <p>Marcus woke up knowing his day would include senators trying to manipulate him, military problems without good solutions, plague victims, and his family's challenges. He wasn't surprised by difficulty—he expected it. And he'd rehearsed his response. This isn't pessimism. It's realism. He knew what was coming and had prepared his mind.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <div class="card-label">Modern Translation</div>
+                        <p>Before a difficult meeting, imagine what could go wrong: the other person could be hostile, your argument could be misunderstood, you could freeze. By imagining this, you're not depressing yourself—you're rehearsing. When it happens, you're less shocked. You've already decided how to respond. This is why pilots train for emergencies. Marcus was training for the emergencies of life.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <div class="card-label">AI Connection</div>
+                        <p>This is adversarial training. You're pre-training on worst-case scenarios. You're asking: what would break my resolve? And then you're building robustness against it. A model that only trains on best-case data will catastrophically fail on edge cases. Marcus is building a mind robust to edge cases through deliberate pre-exposure to difficulty.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <div class="card-label">Cross-Book Connection</div>
+                        <p><strong>Atomic Habits</strong> calls this "implementation intentions"—pre-deciding how you'll respond to obstacles. <strong>Thinking Fast and Slow</strong> shows we're terrible at predicting emotional reactions (affective forecasting), but we can improve by actually imagining the scenario vividly. Marcus was optimizing for emotional preparation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 11: GRATITUDE TO THOSE WHO SHAPED YOU -->
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <div class="lesson-number">11</div>
+                    <h3>Gratitude to Those Who Shaped You</h3>
+                    <div class="lesson-subtitle">The Debt to Your Teachers</div>
+
+                    <div class="card">
+                        <div class="card-label">Core Idea</div>
+                        <p>Your teachers, mentors, parents, rivals—they shaped who you are. Your job is to recognize this, feel grateful, and pass it forward. This isn't sentimentality. It's clearing the record. You owe a debt.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "From my grandfather Verus, I learned good morals and the government of my temper... from my father, bashfulness and a manly character... from my mother, piety and a love of truth and justice."
+                        <div class="quote-attribution">— Marcus Aurelius, Book 1</div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>The Historical Reality</h4>
+                            <p>Marcus begins Meditations—his private journal—by explicitly thanking everyone who taught him. Not for public show (this was never meant to be published). He's clearing his debt to history. He lists his grandfather, his father, his mother, his teachers, even people who taught him by bad example. He understood: without them, he's nothing.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <div class="card-label">Modern Translation</div>
+                        <p>You're successful. You think it's because you're smart. But you stand on the shoulders of everyone who ever taught you, believed in you, or taught you what not to do. Write down five people who shaped you. Actually write it down. You don't need to send it to them (though you could). But you need to actually acknowledge: I owe these people. This gratitude is the antidote to arrogance.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <div class="card-label">AI Connection</div>
+                        <p>Every AI model is trained on data created by humans. Every architecture builds on research by thousands of previous researchers. The model that pretends it created itself is like a person who pretends they were self-made. Gratitude to previous work isn't weakness—it's acknowledging the reality of causation. You are the product of your training data and your architecture.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <div class="card-label">Cross-Book Connection</div>
+                        <p><strong>Atomic Habits</strong> discusses how your identity is shaped by your environment and habits. <strong>Man's Search for Meaning</strong> implies gratitude: acknowledging that meaning comes through the relationships that formed you, not from anything you did alone. Gratitude is the opposite of victimhood.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 12: NATURE AND THE LOGOS -->
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <div class="lesson-number">12</div>
+                    <h3>Nature & the Logos</h3>
+                    <div class="lesson-subtitle">Universal Reason and Your Purpose</div>
+
+                    <div class="card">
+                        <div class="card-label">Core Idea</div>
+                        <p>There's a universal reason (logos) underlying everything. You're not separate from it—you're an expression of it. Your purpose isn't to escape nature or transcend it. It's to align with it. Your reason is part of the universal reason.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "The universe is transformation; our life is what our thoughts make it."
+                        <div class="quote-attribution">— Marcus Aurelius, Book 4</div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>The Historical Reality</h4>
+                            <p>Marcus was educated in Greek Stoic philosophy, which taught that the universe operates by reason, not chaos. As emperor, he saw this: patterns repeat, causation is real, there are laws. His job was to align himself with these laws, not to imagine he could transcend them. This made him humble but also clear-eyed.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <div class="card-label">Modern Translation</div>
+                        <p>You're part of nature, not separate from it. Your desire to eat, to reproduce, to survive—these aren't shameful. They're part of the logos. Your reason is part of the universal reason. When you use reason excellently, you're aligning with the deepest structure of reality. When you act in chaos, you're creating your own suffering.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <div class="card-label">AI Connection</div>
+                        <p>In physics, there are laws (electromagnetism, gravity, thermodynamics). An AI that aligns with these laws (uses them to make predictions) thrives. An AI that ignores them fails. The logos is the physics of reality. Intelligence isn't about defying the laws—it's about understanding them so deeply you can navigate them. Marcus understood this about human nature 2000 years before we formalized physics.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <div class="card-label">Cross-Book Connection</div>
+                        <p><strong>The Alchemist</strong> has the concept of "the soul of the world"—the universe's consciousness guiding you toward your purpose. <strong>Thinking Fast and Slow</strong> is about how your mind works (the logos of thought). <strong>Atomic Habits</strong> teaches that your habits should align with your identity, which itself should align with how humans actually work, not how you wish you worked.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRACTICAL CHEATSHEET -->
+        <div class="divider"></div>
+        <h2 class="section-title">Practical Cheatsheet</h2>
+
+        <div class="cheatsheet">
+            <h3>The 5-Minute Daily Practice</h3>
+            <div class="cheatsheet-inner">
+                <div class="cheatsheet-item">
+                    <strong>Morning (2 min)</strong>
+                    <p>List today's challenges. Pre-decide your response. Remind yourself: some things are up to me (my effort, attitude, choices), most things aren't (outcomes, others' reactions).</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <strong>Throughout Day</strong>
+                    <p>When stressed: Is this in my control? If yes, act decisively. If no, accept it and move on. That's it. Most suffering is resisting what's not controllable.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <strong>When Triggered</strong>
+                    <p>Before reacting to anger/insult: pause. Your emotion is a judgment. Can you judge differently? Asking this one question breaks automatic reactivity.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <strong>When Failing</strong>
+                    <p>See the obstacle as the material for growth, not as proof of inadequacy. Every failure teaches something. Every obstacle is the way.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <strong>When Successful</strong>
+                    <p>Feel gratitude to those who shaped you. Remember: your success is built on others' work. This gratitude prevents arrogance and clarifies what actually matters.</p>
+                </div>
+                <div class="cheatsheet-item">
+                    <strong>Before Sleep (2 min)</strong>
+                    <p>Review: Did I act according to my values today? Where did I fall short? Tomorrow, try again. This is progress—not perfection.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- THE BIGGER PICTURE -->
+        <div class="divider"></div>
+        <h2 class="section-title">Stoicism vs. Other Frameworks</h2>
+
+        <div class="two-col">
+            <div class="card">
+                <div class="card-label">vs. Buddhism</div>
+                <p><strong>Similar:</strong> Both emphasize accepting what's beyond control, recognizing impermanence, training the mind away from reactive emotion.</p>
+                <p><strong>Different:</strong> Stoics embrace duty in the world; Buddhists seek enlightenment through letting go. Stoics say "do your duty excellently"; Buddhism says "release attachment to outcomes."</p>
+            </div>
+            <div class="card">
+                <div class="card-label">vs. Christianity</div>
+                <p><strong>Similar:</strong> Both emphasize virtue, duty, forgiveness, accepting what you can't control as God's will.</p>
+                <p><strong>Different:</strong> Christianity emphasizes grace and salvation; Stoicism emphasizes self-discipline and reason as the path to virtue. Christian: "God helps you." Stoic: "Your reason is godlike; use it."</p>
+            </div>
+            <div class="card">
+                <div class="card-label">vs. Cynicism</div>
+                <p><strong>Similar:</strong> Both question social convention and reject materialism.</p>
+                <p><strong>Different:</strong> Cynics reject society entirely; Stoics engage with society but refuse to be controlled by its judgments. Marcus didn't retreat—he ruled.</p>
+            </div>
+            <div class="card">
+                <div class="card-label">vs. Modern Self-Help</div>
+                <p><strong>Similar:</strong> Both offer practical tools for managing stress and building resilience.</p>
+                <p><strong>Different:</strong> Self-help often says "manifest your dreams"; Stoicism says "master your response to whatever comes, and stop caring about dreams you can't control." It's more honest.</p>
+            </div>
+        </div>
+
+        <!-- THE HISTORICAL CONTEXT DEEP DIVE -->
+        <div class="divider"></div>
+        <h2 class="section-title">Marcus in Context: The Antonine Age in Crisis</h2>
+
+        <div class="context-box">
+            <h3 style="color: var(--cream); margin-top: 0;">Why His Philosophy Mattered (And Still Does)</h3>
+            <p><strong>The Antonine Plague (165-180 CE):</strong> A pandemic killed 5-10 million people (roughly 1/4 to 1/3 of Rome's population). Marcus was emperor during this. Imagine COVID but killing 30% of people. He couldn't hide. He was writing Meditations while organizing plague response, burying the dead, and watching society collapse.</p>
+
+            <p><strong>The Germanic Wars:</strong> Rome's northern frontier was collapsing. Marcus spent his final years on military campaigns in the field, fighting Germanic tribes. He was writing his philosophy while living in a battlefield tent, not in a palace. That's not theory—that's applied philosophy under maximum stress.</p>
+
+            <p><strong>His Son, Commodus:</strong> Marcus had one biological son, Commodus. By all accounts, Commodus was a disaster. Narcissistic, cruel, incompetent. Marcus knew this. He had groomed him as successor anyway because that was his duty. He couldn't control his son's character. But he could control how he raised him and what values he modeled. Memento mori: Marcus died knowing his son would probably undo everything he built. And he accepted it.</p>
+
+            <p><strong>Financial Crisis:</strong> The plague decimated Rome's labor force and tax base. Currency inflation was rampant. Marcus had to manage economic collapse while fighting plague and wars. He couldn't print money (they used metal coins). He had real constraints. His philosophy wasn't abstract—it was the framework that kept him functional during apocalyptic conditions.</p>
+        </div>
+
+        <div class="story">
+            <div class="story-inner">
+                <h4>What Would Marcus Say About AI?</h4>
+                <p><strong>On control:</strong> "You can't control whether AI replaces your job. You can control how hard you prepare, what skills you build, and how you respond if it happens. Stop worrying about the outcome. Focus on what's actually in your control."</p>
+
+                <p><strong>On mortality:</strong> "AI systems will be outdated. Your current skills will be obsolete. You could lose your career to automation next year. Let that reality clarify what actually matters—not accumulating status in a system that's changing, but building character that's valuable in any system."</p>
+
+                <p><strong>On the inner citadel:</strong> "No AI can take your judgment, your values, your integrity. Even if AI does every external task, you still control what you care about. Don't surrender your mind to fear of the machine."</p>
+
+                <p><strong>On duty:</strong> "If you work with AI, your duty is to deploy it excellently. If you compete against it, your duty is to excel at what humans do that machines can't—judgment, wisdom, leadership. Don't despair about forces beyond your control. Focus on your actual responsibility."</p>
+            </div>
+        </div>
+
+        <!-- CROSS-BOOK SYNTHESIS -->
+        <div class="divider"></div>
+        <h2 class="section-title">The Stoic Library: How Meditations Connects to Other Wisdom</h2>
+
+        <div class="lessons-grid">
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <h4 style="color: var(--cream); margin-bottom: 15px;">Man's Search for Meaning (Viktor Frankl)</h4>
+                    <p><strong>The connection:</strong> Frankl survived Nazi concentration camps by maintaining what Marcus called the "inner citadel." When the Nazis took his freedom, his family, his identity—they couldn't take his ability to choose his response. Frankl proves Marcus's theory empirically.</p>
+                    <p><strong>The lesson:</strong> Meaning comes from how you respond to suffering, not from avoiding suffering. Marcus and Frankl agree: difficulty is the raw material for building a meaningful life.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <h4 style="color: var(--cream); margin-bottom: 15px;">The Alchemist (Paulo Coelho)</h4>
+                    <p><strong>The connection:</strong> The Alchemist teaches that every obstacle is preparing you for your quest. This is Marcus's "the obstacle is the way" in narrative form.</p>
+                    <p><strong>The lesson:</strong> The universe isn't hostile to your dreams. Every challenge is the path. Amor fati—love your fate—because your fate is exactly what you need to become who you're meant to be.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <h4 style="color: var(--cream); margin-bottom: 15px;">Letters from a Stoic (Seneca)</h4>
+                    <p><strong>The connection:</strong> Seneca was another Roman Stoic (actually, from the generation before Marcus). His letters are Stoicism applied to real life: ambition, anger, fear, wealth, friendship.</p>
+                    <p><strong>The lesson:</strong> Seneca proves that Stoicism works. He was wealthy, powerful, and happy because he practiced the same principles Marcus did. He wasn't rigidly ascetic—he enjoyed life. But he didn't depend on externals for happiness.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <h4 style="color: var(--cream); margin-bottom: 15px;">Thinking, Fast and Slow (Daniel Kahneman)</h4>
+                    <p><strong>The connection:</strong> Kahneman maps how your mind actually works. System 1 (fast, emotional) makes bad decisions. System 2 (slow, rational) makes better ones. Marcus is teaching you to strengthen System 2.</p>
+                    <p><strong>The lesson:</strong> Your emotions aren't truth. Your first reaction isn't final. By pausing (engaging System 2), you gain access to your actual reasoning. This is what Marcus meant by "your mind is your fortress."</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <h4 style="color: var(--cream); margin-bottom: 15px;">Atomic Habits (James Clear)</h4>
+                    <p><strong>The connection:</strong> Clear argues that small repeated actions build identity. Marcus argues that virtue is built through repeated choices aligned with your values.</p>
+                    <p><strong>The lesson:</strong> You don't become stoic through one big revelation. You become stoic by choosing the stoic response to small challenges, repeatedly, until it's automatic. This is habit formation applied to philosophy.</p>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-inner">
+                    <h4 style="color: var(--cream); margin-bottom: 15px;">Why These Books Matter Together</h4>
+                    <p><strong>The synthesis:</strong> Marcus provides the philosophy. Frankl proves it works under maximum pressure. Coelho gives it narrative. Kahneman explains the psychology. Clear shows how to implement it. Seneca models it applied to a real life.</p>
+                    <p><strong>The truth:</strong> These aren't competing frameworks. They're the same wisdom, approached from different angles. Read them together, and you get a complete picture of how to live.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONCLUSION -->
+        <div class="conclusion">
+            <h2>Why Marcus Aurelius Still Matters</h2>
+            <p>Marcus Aurelius has been dead for 1,846 years. He has no power, no money, no status. Yet his private journal—written for no audience, with no expectation of publication—has become one of humanity's most influential texts.</p>
+            <p>This is because he discovered something timeless: The only thing that survives is how you respond to difficulty. Everything else—money, power, status, your body, your reputation—is temporary. The only thing that lasts is your character.</p>
+            <p><strong>In an age of AI, infinite choice, and constant disruption, this is more relevant than ever.</strong> You can't control whether your job exists in 10 years. You can't control the algorithm. You can't control what others think. But you can control your preparation, your values, your effort, and your response. That's your action space. That's what makes you human.</p>
+            <p style="margin-top: 30px; font-size: 1.2rem; font-style: italic;">Start with the dichotomy of control. Everything else follows.</p>
+        </div>
+
+        <!-- FURTHER READING -->
+        <div class="divider"></div>
+        <h2 class="section-title">How to Read This Guide</h2>
+
+        <div class="context-box">
+            <h3 style="color: var(--cream); margin-top: 0;">Suggested Approaches</h3>
+
+            <p><strong>For the Busy (30 min):</strong> Read the Dichotomy of Control and Memento Mori lessons. Those two contain the core of Marcus. If you grasp those, you grasp Stoicism.</p>
+
+            <p><strong>For the Curious (2 hours):</strong> Read all 12 lessons. Spend time with the ones that resonate. Skip the ones that don't—yet. They might matter later.</p>
+
+            <p><strong>For the Deep Dive (ongoing):</strong> Read this guide, then read Meditations itself. It's short (about 200 pages). Read it slowly. Reread the passages that hit you. Then read it again in a year. Marcus wrote for rereading.</p>
+
+            <p><strong>For the Practitioner:</strong> Do the 5-minute daily practice. That's not philosophy—that's applied philosophy. The practice IS the understanding.</p>
+
+            <p><strong>For the Skeptic:</strong> Test it. For one week, practice the dichotomy of control. Notice what changes in your stress level, your decision-making, your relationships. Philosophy is only real if it changes how you live.</p>
+        </div>
+
+        <!-- THE FINAL THOUGHT -->
+        <div class="story" style="border-left-color: var(--coral); margin-top: 60px;">
+            <div class="story-inner">
+                <h4 style="color: var(--coral);">On Difficulty (from Book 5)</h4>
+                <p>"The impediment to action advances action. What stands in the way becomes the way."</p>
+                <p style="margin-top: 20px; color: #c0c0c0;">This might be Marcus's most important sentence. Everything you're struggling with right now—that's the material. That's your curriculum. Don't waste energy wishing the struggle wasn't there. It is. The only question is: will you use it to become stronger, or will you be broken by it?</p>
+                <p style="margin-top: 15px; color: #c0c0c0;">Marcus was broken by his circumstances in some ways (his son was a disaster, the plague killed millions, his health declined). But his character wasn't broken. And that's all he ever controlled anyway.</p>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>This illustrated guide synthesizes Marcus Aurelius's <em>Meditations</em> with modern psychology, AI theory, and practical wisdom from complementary texts.</p>
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">
+                <span class="book-reference">Meditations - Marcus Aurelius (170-180 CE)</span>
+                <span class="book-reference">Man's Search for Meaning - Viktor Frankl (1946)</span>
+                <span class="book-reference">The Alchemist - Paulo Coelho (1988)</span>
+                <span class="book-reference">Letters from a Stoic - Seneca (50 CE)</span>
+                <span class="book-reference">Thinking, Fast and Slow - Daniel Kahneman (2011)</span>
+                <span class="book-reference">Atomic Habits - James Clear (2018)</span>
+            </p>
+            <p style="margin-top: 30px; color: #555;">Created for anyone seeking practical wisdom in an uncertain world.</p>
+        </div>
+    </div>
+
+    <script>
+        // Add subtle particle effects
+        function createParticles() {
+            const container = document.body;
+            for (let i = 0; i < 10; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 50 + 20 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.borderRadius = '50%';
+                particle.style.background = `rgba(${Math.random() > 0.5 ? '255, 107, 107' : '78, 205, 196'}, 0.1)`;
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Initialize particles on load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', createParticles);
+        } else {
+            createParticles();
+        }
+
+        // Add smooth scroll hints
+        document.addEventListener('scroll', () => {
+            const scrollHint = document.querySelector('.scroll-hint');
+            if (window.scrollY > 100 && scrollHint) {
+                scrollHint.style.opacity = '0';
+                scrollHint.style.pointerEvents = 'none';
+            } else if (scrollHint) {
+                scrollHint.style.opacity = '1';
+                scrollHint.style.pointerEvents = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>

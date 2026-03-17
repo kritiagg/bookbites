@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Alchemist - Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: #ECF0F1;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* COVER SECTION */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .cover h1 {
+            font-size: clamp(3rem, 10vw, 5rem);
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            letter-spacing: 2px;
+        }
+
+        .cover p {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: #FFD700;
+            font-style: italic;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cover-illustration {
+            max-width: 90vw;
+            height: auto;
+            margin-top: 40px;
+            filter: drop-shadow(0 10px 40px rgba(0, 0, 0, 0.8));
+        }
+
+        /* SECTION STYLES */
+        section {
+            min-height: 100vh;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lesson-section {
+            background: linear-gradient(135deg, #2D3436 0%, #1e272e 100%);
+        }
+
+        .lesson-section:nth-child(even) {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2D3436 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .lesson-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        .lesson-content {
+            padding: 40px;
+        }
+
+        .lesson-number {
+            color: var(--sunny);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .lesson-content h2 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            color: #FFD700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .key-lesson {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid var(--sunny);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #FFD700;
+        }
+
+        .examples {
+            margin: 30px 0;
+        }
+
+        .example {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .example:last-child {
+            border-bottom: none;
+        }
+
+        .example strong {
+            color: var(--sunny);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .example p {
+            color: #ECF0F1;
+            margin-left: 15px;
+            font-size: 0.95rem;
+        }
+
+        .funny-take {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid var(--coral);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .funny-take strong {
+            color: var(--coral);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .funny-take p {
+            color: #ECF0F1;
+            font-size: 0.95rem;
+        }
+
+        .ai-connection {
+            background: rgba(30, 144, 255, 0.1);
+            border-left: 4px solid var(--deep-blue);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .ai-connection strong {
+            color: var(--deep-blue);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .ai-connection p {
+            color: #ECF0F1;
+            font-size: 0.95rem;
+        }
+
+        .cross-book {
+            background: rgba(160, 108, 213, 0.1);
+            border-left: 4px solid var(--purple);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .cross-book strong {
+            color: var(--purple);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .cross-book p {
+            color: #ECF0F1;
+            font-size: 0.95rem;
+        }
+
+        .quote {
+            background: rgba(255, 215, 0, 0.08);
+            border: 2px solid var(--sunny);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 16px;
+            text-align: center;
+            font-style: italic;
+            color: #FFD700;
+            font-size: 1.1rem;
+        }
+
+        .quote::before {
+            content: '"';
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .illustration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .illustration svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+        }
+
+        /* SPOTLIGHT SECTIONS */
+        .spotlight-section {
+            min-height: 100vh;
+            padding: 80px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .spotlight-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .spotlight-title {
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: #FFD700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .spotlight-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #ECF0F1;
+            margin-bottom: 40px;
+        }
+
+        .spotlight-text p {
+            margin-bottom: 20px;
+        }
+
+        /* CHEATSHEET */
+        .cheatsheet-section {
+            min-height: 100vh;
+            padding: 80px 40px;
+            background: linear-gradient(135deg, #2D3436 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cheatsheet-title {
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: #FFD700;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .lesson-card {
+            background: rgba(255, 215, 0, 0.05);
+            border: 2px solid var(--sunny);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .lesson-card:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .lesson-card h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .lesson-card p {
+            color: #ECF0F1;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .cross-connection {
+            color: var(--purple);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            section {
+                padding: 40px 25px;
+            }
+
+            .lesson-grid {
+                gap: 30px;
+            }
+
+            .lesson-content {
+                padding: 25px;
+            }
+
+            .cover h1 {
+                margin-bottom: 15px;
+            }
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--sunny);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFD700;
+        }
+
+        /* ANIMATIONS */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER SECTION -->
+<section class="cover">
+    <div class="cover-content">
+        <svg class="cover-illustration" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+            <!-- Night Sky -->
+            <defs>
+                <radialGradient id="nightSky" cx="50%" cy="30%">
+                    <stop offset="0%" style="stop-color:#2a2e5f;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#0f1a3f;stop-opacity:1" />
+                </radialGradient>
+                <filter id="starGlow">
+                    <feGaussianBlur stdDeviation="1.5"/>
+                </filter>
+            </defs>
+
+            <rect width="1000" height="600" fill="url(#nightSky)"/>
+
+            <!-- Stars with twinkle -->
+            <circle cx="150" cy="80" r="2" fill="#FFD700" filter="url(#starGlow)" class="glow" opacity="0.9"/>
+            <circle cx="300" cy="120" r="1.5" fill="#FFD700" filter="url(#starGlow)" opacity="0.7"/>
+            <circle cx="450" cy="90" r="2" fill="#FFD700" filter="url(#starGlow)" class="glow" opacity="0.9"/>
+            <circle cx="650" cy="110" r="1.5" fill="#FFD700" filter="url(#starGlow)" opacity="0.7"/>
+            <circle cx="800" cy="75" r="2" fill="#FFD700" filter="url(#starGlow)" class="glow" opacity="0.9"/>
+            <circle cx="200" cy="160" r="1" fill="#FFD700" opacity="0.5"/>
+            <circle cx="550" cy="150" r="1.5" fill="#FFD700" opacity="0.6"/>
+            <circle cx="900" cy="180" r="1" fill="#FFD700" opacity="0.5"/>
+            <circle cx="100" cy="200" r="2" fill="#FFD700" class="glow" opacity="0.8"/>
+            <circle cx="750" cy="220" r="1.5" fill="#FFD700" opacity="0.6"/>
+
+            <!-- Moon -->
+            <circle cx="850" cy="100" r="60" fill="#FFE66D" opacity="0.95"/>
+            <circle cx="870" cy="90" r="60" fill="#2a2e5f" opacity="0.3"/>
+
+            <!-- Pyramids (dark silhouettes) -->
+            <polygon points="300,400 200,550 400,550" fill="#1a1f3a"/>
+            <polygon points="500,420 370,550 630,550" fill="#0f1a3f"/>
+            <polygon points="750,390 580,550 920,550" fill="#1a1f3a"/>
+
+            <!-- Desert sand gradient -->
+            <rect y="450" width="1000" height="150" fill="#DAA520" opacity="0.3"/>
+            <path d="M 0 450 Q 250 400 500 450 T 1000 450 L 1000 600 L 0 600 Z" fill="#CD853F" opacity="0.4"/>
+
+            <!-- Camel silhouette -->
+            <g transform="translate(400, 480)">
+                <ellipse cx="0" cy="0" rx="35" ry="25" fill="#3d2817"/>
+                <circle cx="45" cy="-15" r="20" fill="#3d2817"/>
+                <circle cx="50" cy="-18" r="8" fill="#1a1a1a"/>
+                <rect x="-25" y="20" width="8" height="40" fill="#3d2817"/>
+                <rect x="5" y="20" width="8" height="40" fill="#3d2817"/>
+            </g>
+
+            <!-- Oasis (blue water and palm) -->
+            <g transform="translate(700, 480)">
+                <ellipse cx="0" cy="0" rx="40" ry="15" fill="#4ECDC4" opacity="0.7"/>
+                <line x1="0" y1="-5" x2="0" y2="-60" stroke="#228B22" stroke-width="6"/>
+                <circle cx="-8" cy="-70" r="15" fill="#228B22"/>
+                <circle cx="8" cy="-68" r="15" fill="#228B22"/>
+                <circle cx="0" cy="-75" r="15" fill="#228B22"/>
+            </g>
+
+            <!-- Guiding Star (bright central star) -->
+            <g transform="translate(500, 150)">
+                <circle cx="0" cy="0" r="6" fill="#FFD700" filter="url(#starGlow)" class="glow"/>
+                <path d="M 0,-12 L 4,-4 L 12,-4 L 6,2 L 8,10 L 0,6 L -8,10 L -6,2 L -12,-4 L -4,-4 Z" fill="#FFD700" opacity="0.8"/>
+            </g>
+        </svg>
+        <h1>The Alchemist</h1>
+        <p>A Journey to Your Personal Legend</p>
+    </div>
+</section>
+
+<!-- LESSON 1: FOLLOW YOUR PERSONAL LEGEND -->
+<section class="lesson-section">
+    <div class="container">
+        <div class="lesson-grid">
+            <div class="lesson-content">
+                <div class="lesson-number">Lesson 1 of 12</div>
+                <h2>Follow Your Personal Legend</h2>
+                <div class="key-lesson">
+                    Everyone has a Personal Legend — a unique destiny that calls to them. The courage to pursue it defines a life of meaning.
+                </div>
+                <div class="examples">
+                    <div class="example">
+                        <strong>Santiago's Journey:</strong>
+                        <p>Santiago abandons his comfortable life as a shepherd to pursue dreams of treasure. He doesn't know the exact destination, but he hears the call.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Paulo Coelho's Path:</strong>
+                        <p>Coelho quit his career as a lawyer to write and explore spiritual philosophy — against conventional wisdom, but aligned with his true legend.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Steve Jobs' Vision:</strong>
+                        <p>Jobs' Stanford speech emphasized following your heart: "Your work is going to fill a large part of your life... the only way to be truly satisfied is to do what you believe is great work."</p>
+                    </div>
+                </div>
+                <div class="funny-take">
+                    <strong>🎭 The Funny Take:</strong>
+                    <p>Your Personal Legend isn't your LinkedIn headline. It's the thing you'd do even if no one paid you or noticed. Spoiler: Santiago's legend didn't come with job security or a 401k.</p>
+                </div>
+                <div class="ai-connection">
+                    <strong>💡 AI Connection:</strong>
+                    <p>Foundation models have a "Personal Legend" written into their pre-training. GPT-4's legend is to understand and generate human language. That pre-training destiny shapes everything it can become.</p>
+                </div>
+                <div class="cross-book">
+                    <strong>🔗 Cross-Book Connection (Mindset):</strong>
+                    <p>Carol Dweck's "fixed mindset" is the opposite of pursuing your legend. A growth mindset says "my legend is waiting" — a fixed mindset says "this is all I'll ever be."</p>
+                </div>
+                <div class="quote">
+                    "When you want something, all the universe conspires in your favor." — Paulo Coelho
+                </div>
+            </div>
+            <div class="illustration">
+                <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="starPath" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.2" />
+                            <stop offset="50%" style="stop-color:#FFD700;stop-opacity:0.6" />
+                            <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0.2" />
+                        </linearGradient>
+                        <filter id="pathGlow">
+                            <feGaussianBlur stdDeviation="2"/>
+                        </filter>
+                    </defs>
+
+                    <!-- Desert dunes -->
+                    <path d="M 0 500 Q 150 400 300 480 T 600 500 L 600 700 L 0 700 Z" fill="#CD853F"/>
+                    <path d="M 0 550 Q 200 480 400 540 T 600 550 L 600 700 L 0 700 Z" fill="#DAA520"/>
+
+                    <!-- Stars pointing down -->
+                    <g filter="url(#pathGlow)">
+                        <circle cx="100" cy="80" r="4" fill="#FFD700"/>
+                        <circle cx="200" cy="120" r="4" fill="#FFD700"/>
+                        <circle cx="320" cy="140" r="4" fill="#FFD700"/>
+                        <circle cx="430" cy="160" r="4" fill="#FFD700"/>
+                        <circle cx="520" cy="180" r="4" fill="#FFD700"/>
+                    </g>
+
+                    <!-- Curved path of light -->
+                    <path d="M 100 100 Q 200 200 300 300 T 500 500" stroke="#FFD700" stroke-width="3" fill="none" opacity="0.6" stroke-dasharray="10,5"/>
+
+                    <!-- Shepherd figure at bottom -->
+                    <g transform="translate(300, 580)">
+                        <!-- Body -->
+                        <rect x="-8" y="-30" width="16" height="35" fill="#E8A555" rx="3"/>
+                        <!-- Head -->
+                        <circle cx="0" cy="-40" r="12" fill="#D4A574"/>
+                        <!-- Staff -->
+                        <line x1="15" y1="-35" x2="20" y2="-70" stroke="#8B7355" stroke-width="3" stroke-linecap="round"/>
+                        <!-- Crook at top -->
+                        <path d="M 20 -70 Q 35 -65 40 -50" stroke="#8B7355" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <!-- Legs -->
+                        <rect x="-6" y="5" width="5" height="25" fill="#7A6B5D"/>
+                        <rect x="1" y="5" width="5" height="25" fill="#6B5D4F"/>
+                        <!-- Arms reaching up -->
+                        <line x1="-8" y1="-15" x2="-25" y2="-30" stroke="#D4A574" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="8" y1="-15" x2="25" y2="-25" stroke="#D4A574" stroke-width="4" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- Bright guiding star -->
+                    <g transform="translate(100, 100)">
+                        <circle cx="0" cy="0" r="8" fill="#FFD700" filter="url(#pathGlow)"/>
+                        <path d="M 0,-16 L 5,-6 L 16,-6 L 8,0 L 11,10 L 0,5 L -11,10 L -8,0 L -16,-6 L -5,-6 Z" fill="#FFD700"/>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 2: THE UNIVERSE CONSPIRES -->
+<section class="lesson-section">
+    <div class="container">
+        <div class="lesson-grid">
+            <div class="illustration">
+                <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="sparkle">
+                            <feGaussianBlur stdDeviation="1"/>
+                        </filter>
+                        <radialGradient id="cosmic">
+                            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.4" />
+                            <stop offset="100%" style="stop-color:#4ECDC4;stop-opacity:0.1" />
+                        </radialGradient>
+                    </defs>
+
+                    <!-- Cosmic background -->
+                    <rect width="600" height="700" fill="#1a1a3a"/>
+
+                    <!-- Stars -->
+                    <circle cx="80" cy="100" r="3" fill="#FFD700" filter="url(#sparkle)" opacity="0.9"/>
+                    <circle cx="200" cy="80" r="2" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="420" cy="120" r="3" fill="#FFD700" filter="url(#sparkle)" opacity="0.8"/>
+                    <circle cx="550" cy="100" r="2" fill="#FFD700" opacity="0.7"/>
+                    <circle cx="150" cy="200" r="2.5" fill="#FFD700" opacity="0.8"/>
+                    <circle cx="500" cy="180" r="2" fill="#FFD700" opacity="0.6"/>
+
+                    <!-- Central figure -->
+                    <g transform="translate(300, 450)">
+                        <!-- Body -->
+                        <rect x="-10" y="-35" width="20" height="40" fill="#E8A555" rx="3"/>
+                        <!-- Head -->
+                        <circle cx="0" cy="-45" r="13" fill="#D4A574"/>
+                        <!-- Arms spread -->
+                        <line x1="-10" y1="-20" x2="-50" y2="-40" stroke="#D4A574" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="10" y1="-20" x2="50" y2="-40" stroke="#D4A574" stroke-width="4" stroke-linecap="round"/>
+                        <!-- Legs -->
+                        <rect x="-7" y="5" width="5" height="30" fill="#7A6B5D"/>
+                        <rect x="2" y="5" width="5" height="30" fill="#6B5D4F"/>
+                    </g>
+
+                    <!-- Arrows of connection pointing to figure -->
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FFD700"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Upper left arrow -->
+                    <path d="M 150 200 Q 200 300 270 400" stroke="#FFD700" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.7" stroke-dasharray="5,5"/>
+
+                    <!-- Upper right arrow -->
+                    <path d="M 450 180 Q 400 300 330 400" stroke="#FFD700" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.7" stroke-dasharray="5,5"/>
+
+                    <!-- Left side arrow -->
+                    <path d="M 80 250 Q 150 350 260 420" stroke="#4ECDC4" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.7" stroke-dasharray="5,5"/>
+
+                    <!-- Right side arrow -->
+                    <path d="M 520 250 Q 450 350 340 420" stroke="#4ECDC4" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.7" stroke-dasharray="5,5"/>
+
+                    <!-- Wind swirls -->
+                    <path d="M 50 300 Q 100 280 120 320" stroke="#4ECDC4" stroke-width="1.5" fill="none" opacity="0.5"/>
+                    <path d="M 550 320 Q 500 300 480 340" stroke="#4ECDC4" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+                    <!-- Cosmic ripples around figure -->
+                    <circle cx="300" cy="450" r="80" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.4"/>
+                    <circle cx="300" cy="450" r="120" fill="none" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/>
+
+                    <!-- Sun in background -->
+                    <circle cx="550" cy="150" r="40" fill="#FFE66D" opacity="0.3"/>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <div class="lesson-number">Lesson 2 of 12</div>
+                <h2>The Universe Conspires</h2>
+                <div class="key-lesson">
+                    When you pursue your Personal Legend with genuine desire, the universe conspires to help. Mentors appear, opportunities align, and "coincidences" multiply.
+                </div>
+                <div class="examples">
+                    <div class="example">
+                        <strong>Santiago's Mentors:</strong>
+                        <p>A gypsy, a king in disguise, and an Englishman each appear exactly when Santiago needs guidance. Not luck — resonance with intention.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Beginner's Luck:</strong>
+                        <p>When you start anything with full commitment, doors open. Jobs, serendipitous meetings, resources materialize because you're finally aligned with your goal.</p>
+                    </div>
+                    <div class="example">
+                        <strong>The Butterfly Effect:</strong>
+                        <p>Santiago's small choice to follow his dream creates ripples: he meets the merchant, the king, Fatima. Each person's life is altered because Santiago said yes.</p>
+                    </div>
+                </div>
+                <div class="funny-take">
+                    <strong>🎭 The Funny Take:</strong>
+                    <p>The universe doesn't conspire for your Netflix subscription renewal. But for your actual dream? Suddenly the algorithm feeds you perfect people, books, and opportunities. It's like the universe is the world's best recommender system.</p>
+                </div>
+                <div class="ai-connection">
+                    <strong>💡 AI Connection:</strong>
+                    <p>Transformer attention literally conspires — each token in the sequence attends to (focuses on) every other token, working together to understand meaning. The "conspiracy" of attention weights creates intelligence from seeming chaos.</p>
+                </div>
+                <div class="cross-book">
+                    <strong>🔗 Cross-Book Connection (Flow):</strong>
+                    <p>In "Flow," Csikszentmihalyi describes flow states as the universe conspiring: when you're perfectly matched to a challenge, the world dissolves and action flows. Conspiracy feels like oneness.</p>
+                </div>
+                <div class="quote">
+                    "It's the possibility of having a dream come true that makes life interesting." — Paulo Coelho
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 3: FEAR IS THE REAL OBSTACLE -->
+<section class="lesson-section">
+    <div class="container">
+        <div class="lesson-grid">
+            <div class="lesson-content">
+                <div class="lesson-number">Lesson 3 of 12</div>
+                <h2>Fear Is the Real Obstacle</h2>
+                <div class="key-lesson">
+                    Fear of failure, fear of the unknown, fear of loss — these are thicker walls than any physical barrier. But they are illusions.
+                </div>
+                <div class="examples">
+                    <div class="example">
+                        <strong>Santiago's Moment of Doubt:</strong>
+                        <p>Multiple times, Santiago considers turning back. The robbers, the desert, the doubts whisper: "Give up, go home, this is foolish." But he realizes the pain of regret would be worse.</p>
+                    </div>
+                    <div class="example">
+                        <strong>The Imposter Syndrome Wall:</strong>
+                        <p>Most people never start because they fear they're not good enough, not talented enough, not worthy. The wall is perception, not reality.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Fear vs. Actual Risk:</strong>
+                        <p>Santiago's imagination of failure is worse than any actual failure he faces. Our minds are excellent at catastrophizing but terrible at assessing real probability.</p>
+                    </div>
+                </div>
+                <div class="funny-take">
+                    <strong>🎭 The Funny Take:</strong>
+                    <p>Your brain's threat detection system evolved to save you from saber-tooth tigers, not failed startups. It's like using a tank to go to the grocery store — total overkill for modern problems.</p>
+                </div>
+                <div class="ai-connection">
+                    <strong>💡 AI Connection:</strong>
+                    <p>AI safety paradoxically holds back AI: fear of misalignment prevents deployment of helpful applications. Sometimes the fear of a problem we haven't solved yet stops us from solving problems we can solve right now.</p>
+                </div>
+                <div class="cross-book">
+                    <strong>🔗 Cross-Book Connection (Mindset):</strong>
+                    <p>Dweck's "fixed mindset" is built on fear: fear of proving you're not smart, not talented, not capable. Growth mindset says "fear is data, not destiny."</p>
+                </div>
+                <div class="quote">
+                    "Tell your heart that the fear of suffering is worse than the suffering itself." — Paulo Coelho
+                </div>
+            </div>
+            <div class="illustration">
+                <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Left side: Thick wall illusion -->
+                    <g transform="translate(100, 200)">
+                        <text x="0" y="-30" font-size="16" fill="#FFD700" font-family="Inter" text-anchor="middle">FROM THIS SIDE</text>
+                        <!-- Thick perspective wall -->
+                        <rect x="0" y="0" width="80" height="200" fill="#8B4513" stroke="#FFD700" stroke-width="2"/>
+                        <rect x="5" y="10" width="70" height="180" fill="#654321"/>
+                        <line x1="0" y1="0" x2="20" y2="20" stroke="#FFD700" stroke-width="1" opacity="0.5"/>
+                        <line x1="0" y1="50" x2="20" y2="70" stroke="#FFD700" stroke-width="1" opacity="0.5"/>
+                        <line x1="0" y1="100" x2="20" y2="120" stroke="#FFD700" stroke-width="1" opacity="0.5"/>
+                        <line x1="0" y1="150" x2="20" y2="170" stroke="#FFD700" stroke-width="1" opacity="0.5"/>
+
+                        <!-- Person facing wall -->
+                        <circle cx="-40" cy="80" r="12" fill="#D4A574"/>
+                        <rect x="-48" y="95" width="16" height="40" fill="#E8A555"/>
+                        <rect x="-32" y="95" width="16" height="40" fill="#E8A555"/>
+                        <rect x="-46" y="135" width="10" height="25" fill="#7A6B5D"/>
+                        <rect x="-28" y="135" width="10" height="25" fill="#6B5D4F"/>
+                    </g>
+
+                    <!-- Arrow pointing right -->
+                    <defs>
+                        <marker id="thick-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FFD700"/>
+                        </marker>
+                    </defs>
+                    <path d="M 220 300 L 340 300" stroke="#FFD700" stroke-width="3" marker-end="url(#thick-arrow)"/>
+                    <text x="280" y="325" font-size="14" fill="#FFD700" font-family="Inter" text-anchor="middle" font-weight="600">WALK THROUGH</text>
+
+                    <!-- Right side: Paper-thin wall -->
+                    <g transform="translate(420, 200)">
+                        <text x="0" y="-30" font-size="16" fill="#4ECDC4" font-family="Inter" text-anchor="middle">FROM THE OTHER SIDE</text>
+                        <!-- Very thin wall (paper) -->
+                        <rect x="0" y="0" width="3" height="200" fill="#F5DEB3" stroke="#FFD700" stroke-width="1"/>
+                        <line x1="2" y1="20" x2="2" y2="180" stroke="#DAA520" stroke-width="0.5" opacity="0.7"/>
+
+                        <!-- Person having walked through -->
+                        <circle cx="50" cy="80" r="12" fill="#D4A574"/>
+                        <rect x="42" y="95" width="16" height="40" fill="#E8A555"/>
+                        <rect x="58" y="95" width="16" height="40" fill="#E8A555"/>
+                        <rect x="44" y="135" width="10" height="25" fill="#7A6B5D"/>
+                        <rect x="62" y="135" width="10" height="25" fill="#6B5D4F"/>
+                        <!-- Arms raised in relief -->
+                        <line x1="42" y1="100" x2="20" y2="70" stroke="#D4A574" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="58" y1="100" x2="80" y2="70" stroke="#D4A574" stroke-width="4" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- Desert background -->
+                    <path d="M 0 500 Q 150 400 300 480 T 600 500 L 600 700 L 0 700 Z" fill="#CD853F"/>
+                    <path d="M 0 550 Q 200 480 400 540 T 600 550 L 600 700 L 0 700 Z" fill="#DAA520"/>
+
+                    <!-- Text caption -->
+                    <text x="300" y="600" font-size="18" fill="#FFD700" font-family="Playfair Display" text-anchor="middle" font-weight="700">The Wall Was Never the Problem</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 4: THE TREASURE WAS AT HOME -->
+<section class="lesson-section">
+    <div class="container">
+        <div class="lesson-grid">
+            <div class="illustration">
+                <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Church background -->
+                    <g transform="translate(300, 250)">
+                        <!-- Church building -->
+                        <rect x="-80" y="-60" width="160" height="120" fill="#8B6F47" stroke="#D4AF37" stroke-width="2"/>
+                        <!-- Roof -->
+                        <polygon points="-90,-60 0,-120 90,-60" fill="#654321" stroke="#D4AF37" stroke-width="2"/>
+                        <!-- Cross -->
+                        <line x1="0" y1="-140" x2="0" y2="-100" stroke="#FFD700" stroke-width="4"/>
+                        <line x1="-15" y1="-125" x2="15" y2="-125" stroke="#FFD700" stroke-width="4"/>
+                        <!-- Door -->
+                        <rect x="-20" y="30" width="40" height="60" fill="#3d2817" stroke="#D4AF37" stroke-width="2"/>
+                        <circle cx="-5" cy="60" r="3" fill="#FFD700"/>
+                        <!-- Windows -->
+                        <rect x="-60" y="-30" width="30" height="30" fill="#4ECDC4" stroke="#D4AF37" stroke-width="1"/>
+                        <rect x="30" y="-30" width="30" height="30" fill="#4ECDC4" stroke="#D4AF37" stroke-width="1"/>
+                    </g>
+
+                    <!-- Winding path -->
+                    <path d="M 300 500 Q 200 450 150 350 Q 120 280 180 180 Q 250 80 400 60 Q 500 50 550 150 Q 570 250 480 400 Q 400 520 300 560" stroke="#FFE66D" stroke-width="3" fill="none" stroke-dasharray="10,5" opacity="0.7"/>
+
+                    <!-- Start point -->
+                    <circle cx="300" cy="500" r="25" fill="#FFD700" opacity="0.3" stroke="#FFD700" stroke-width="2"/>
+                    <text x="300" y="515" font-size="14" fill="#FFD700" font-family="Inter" text-anchor="middle" font-weight="600">START</text>
+
+                    <!-- X marks the spot (beneath church) -->
+                    <g transform="translate(300, 420)">
+                        <line x1="-25" y1="-25" x2="25" y2="25" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="25" y1="-25" x2="-25" y2="25" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+                        <circle cx="0" cy="0" r="35" fill="none" stroke="#FFD700" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+                    </g>
+
+                    <!-- Treasure chest (underground) -->
+                    <g transform="translate(300, 470)">
+                        <!-- Chest -->
+                        <ellipse cx="0" cy="0" rx="35" ry="25" fill="#CD853F" stroke="#8B6F47" stroke-width="2"/>
+                        <!-- Lid -->
+                        <path d="M -35 0 Q 0 -15 35 0" fill="#DAA520" stroke="#8B6F47" stroke-width="2"/>
+                        <!-- Gold coins spilling -->
+                        <circle cx="-45" cy="5" r="6" fill="#FFD700" opacity="0.8"/>
+                        <circle cx="45" cy="8" r="6" fill="#FFD700" opacity="0.8"/>
+                        <circle cx="0" cy="25" r="5" fill="#FFD700" opacity="0.7"/>
+                    </g>
+
+                    <!-- Distant travelers on the path -->
+                    <circle cx="200" cy="280" r="5" fill="#E8A555" opacity="0.4"/>
+                    <circle cx="450" cy="200" r="5" fill="#E8A555" opacity="0.4"/>
+
+                    <!-- Desert ground -->
+                    <path d="M 0 600 Q 150 550 300 580 T 600 600 L 600 700 L 0 700 Z" fill="#CD853F"/>
+
+                    <!-- Quote beneath -->
+                    <text x="300" y="680" font-size="16" fill="#FFD700" font-family="Playfair Display" text-anchor="middle" font-weight="700" font-style="italic">The journey was the treasure</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <div class="lesson-number">Lesson 4 of 12</div>
+                <h2>The Treasure Was at Home</h2>
+                <div class="key-lesson">
+                    The treasure Santiago sought across continents was buried beneath the church where he dreamed. The external quest revealed internal transformation.
+                </div>
+                <div class="examples">
+                    <div class="example">
+                        <strong>The Plot Twist:</strong>
+                        <p>Santiago discovers he must return home. The gold is there, yes, but what matters is that he left as a shepherd and returns as a man who knew himself.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Dorothy in Oz:</strong>
+                        <p>"There's no place like home" — but first Dorothy had to journey through Oz to know what home meant. Home wasn't the destination; it was the reunion with herself.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Domain Knowledge Paradox:</strong>
+                        <p>We often chase exotic solutions from far away when the best answers are in our own expertise, relationships, and local context. The treasure is usually where you started.</p>
+                    </div>
+                </div>
+                <div class="funny-take">
+                    <strong>🎭 The Funny Take:</strong>
+                    <p>We're all living in an episode of a divine sitcom where the prize is always in the last place you look. Spoiler alert: it's always your backyard. (Of course — who'd keep looking after finding it?)</p>
+                </div>
+                <div class="ai-connection">
+                    <strong>💡 AI Connection:</strong>
+                    <p>ML practitioners obsess over exotic datasets from far sources when the best training data is often their own domain data, fine-tuned and relevant. The treasure isn't in BigData — it's in the data that matters to you.</p>
+                </div>
+                <div class="cross-book">
+                    <strong>🔗 Cross-Book Connection (Stumbling on Happiness):</strong>
+                    <p>Daniel Gilbert shows we systematically misjudge what will make us happy. We think we need that thing far away, but the actual joy is in relationships, community, and meaning — often closest to home.</p>
+                </div>
+                <div class="quote">
+                    "You must understand that love never keeps a man from pursuing his Personal Legend." — Paulo Coelho
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 5: THE CRYSTAL MERCHANT -->
+<section class="lesson-section">
+    <div class="container">
+        <div class="lesson-grid">
+            <div class="lesson-content">
+                <div class="lesson-number">Lesson 5 of 12</div>
+                <h2>The Crystal Merchant's Regret</h2>
+                <div class="key-lesson">
+                    The merchant dreamed of Mecca for 30 years but never went. He lived in the dream world, avoiding the risk and discomfort of action.
+                </div>
+                <div class="examples">
+                    <div class="example">
+                        <strong>The Dream vs. Reality:</strong>
+                        <p>The merchant was comfortable in the dream. Real action would mean real failure, real cost, real sacrifice. So he romanticized instead of acted.</p>
+                    </div>
+                    <div class="example">
+                        <strong>The Comfort Trap:</strong>
+                        <p>Santiago energizes his shop, helps him sell, brings purpose. The merchant realizes he might have kept the dream alive just to avoid the messiness of living it.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Deathbed Regret:</strong>
+                        <p>The crystal merchant is intelligent, kind, and capable — but at what cost? His life became a museum of one deferred dream.</p>
+                    </div>
+                </div>
+                <div class="funny-take">
+                    <strong>🎭 The Funny Take:</strong>
+                    <p>We're all the crystal merchant in some area. We have that thing we "always wanted to do" that lives rent-free in our heads while we optimize for comfort. The dream is a beautiful prison.</p>
+                </div>
+                <div class="ai-connection">
+                    <strong>💡 AI Connection:</strong>
+                    <p>Models can get stuck in local optima — comfortable solutions that are good enough to never push for better. The crystal merchant is a neural network that converged to local (not global) maximum.</p>
+                </div>
+                <div class="cross-book">
+                    <strong>🔗 Cross-Book Connection (Atomic Habits):</strong>
+                    <p>James Clear argues systems beat goals. The crystal merchant had a goal (Mecca) but no system to achieve it. His daily system reinforced comfort, not pilgrimage.</p>
+                </div>
+                <div class="quote">
+                    "There is only one thing that makes a dream impossible to achieve: the fear of failure." — Paulo Coelho
+                </div>
+            </div>
+            <div class="illustration">
+                <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Shop counter -->
+                    <rect x="100" y="300" width="400" height="150" fill="#8B6F47" stroke="#D4AF37" stroke-width="3"/>
+                    <rect x="110" y="310" width="380" height="130" fill="#A0826D"/>
+
+                    <!-- Crystal glasses on shelves -->
+                    <g transform="translate(150, 250)">
+                        <!-- Glass 1 -->
+                        <path d="M 0 0 L -15 40 L 15 40 Z" fill="none" stroke="#4ECDC4" stroke-width="2" opacity="0.8"/>
+                        <circle cx="0" cy="0" r="8" fill="#4ECDC4" opacity="0.3"/>
+                        <!-- Glass 2 -->
+                        <path d="M 40 0 L 25 40 L 55 40 Z" fill="none" stroke="#4ECDC4" stroke-width="2" opacity="0.8"/>
+                        <circle cx="40" cy="0" r="8" fill="#4ECDC4" opacity="0.3"/>
+                        <!-- Glass 3 -->
+                        <path d="M 80 0 L 65 40 L 95 40 Z" fill="none" stroke="#4ECDC4" stroke-width="2" opacity="0.8"/>
+                        <circle cx="80" cy="0" r="8" fill="#4ECDC4" opacity="0.3"/>
+                    </g>
+
+                    <!-- Merchant figure behind counter (wistful pose) -->
+                    <g transform="translate(300, 350)">
+                        <!-- Head looking up/dreaming -->
+                        <circle cx="0" cy="0" r="15" fill="#D4A574"/>
+                        <!-- Eyes looking distant -->
+                        <circle cx="-6" cy="-3" r="2" fill="#000"/>
+                        <circle cx="6" cy="-3" r="2" fill="#000"/>
+                        <!-- Sad mouth -->
+                        <path d="M -8 3 Q 0 5 8 3" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        <!-- Body at counter -->
+                        <rect x="-12" y="15" width="24" height="50" fill="#E8A555" rx="3"/>
+                        <!-- Arms on counter -->
+                        <line x1="-12" y1="25" x2="-40" y2="40" stroke="#D4A574" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="12" y1="25" x2="40" y2="40" stroke="#D4A574" stroke-width="4" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- Dream bubble showing Mecca (mosque) -->
+                    <g transform="translate(450, 180)">
+                        <!-- Thought cloud -->
+                        <ellipse cx="0" cy="0" rx="70" ry="60" fill="#FFE66D" opacity="0.3" stroke="#FFE66D" stroke-width="2" stroke-dasharray="5,5"/>
+                        <!-- Mosque inside -->
+                        <polygon points="0,-40 -30,-10 -20,30 20,30 30,-10" fill="#D4AF37" opacity="0.6"/>
+                        <!-- Dome -->
+                        <circle cx="0" cy="-35" r="20" fill="#FFD700" opacity="0.5"/>
+                        <!-- Crescent moon -->
+                        <path d="M -10 -50 Q 0 -55 10 -50" stroke="#FFD700" stroke-width="2" fill="none" opacity="0.7"/>
+                    </g>
+
+                    <!-- Calendar pages showing years passing -->
+                    <g transform="translate(100, 150)">
+                        <rect x="0" y="0" width="60" height="50" fill="#FFEAA7" stroke="#DAA520" stroke-width="1"/>
+                        <text x="30" y="35" font-size="20" fill="#000" font-family="Inter" text-anchor="middle" font-weight="700">30 YRS</text>
+                    </g>
+
+                    <!-- Sand/base -->
+                    <path d="M 0 600 Q 150 550 300 580 T 600 600 L 600 700 L 0 700 Z" fill="#CD853F"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 6: THE LANGUAGE OF THE WORLD -->
+<section class="lesson-section">
+    <div class="container">
+        <div class="lesson-grid">
+            <div class="illustration">
+                <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="glow2">
+                            <feGaussianBlur stdDeviation="2"/>
+                        </filter>
+                    </defs>
+
+                    <!-- Central point (Santiago) -->
+                    <circle cx="300" cy="350" r="15" fill="#E8A555" opacity="0.9"/>
+
+                    <!-- Connections to elements -->
+                    <!-- Wind connection -->
+                    <path d="M 300 350 L 150 200" stroke="#4ECDC4" stroke-width="2" opacity="0.6" stroke-dasharray="5,5"/>
+                    <g transform="translate(150, 200)">
+                        <path d="M 0 0 Q 20 -10 40 0" stroke="#4ECDC4" stroke-width="2" fill="none" opacity="0.8"/>
+                        <path d="M 5 -5 Q 25 -15 45 -5" stroke="#4ECDC4" stroke-width="1.5" fill="none" opacity="0.6"/>
+                        <text x="30" y="30" font-size="12" fill="#4ECDC4" font-family="Inter" font-weight="600">Wind</text>
+                    </g>
+
+                    <!-- Sun connection -->
+                    <path d="M 300 350 L 480 150" stroke="#FFE66D" stroke-width="2" opacity="0.6" stroke-dasharray="5,5"/>
+                    <g transform="translate(480, 150)">
+                        <circle cx="0" cy="0" r="25" fill="#FFE66D" opacity="0.5"/>
+                        <circle cx="0" cy="0" r="20" fill="none" stroke="#FFE66D" stroke-width="2" opacity="0.8"/>
+                        <line x1="0" y1="-35" x2="0" y2="-50" stroke="#FFE66D" stroke-width="2"/>
+                        <line x1="35" y1="0" x2="50" y2="0" stroke="#FFE66D" stroke-width="2"/>
+                        <line x1="0" y1="35" x2="0" y2="50" stroke="#FFE66D" stroke-width="2"/>
+                        <line x1="-35" y1="0" x2="-50" y2="0" stroke="#FFE66D" stroke-width="2"/>
+                        <text x="0" y="50" font-size="12" fill="#FFE66D" font-family="Inter" font-weight="600" text-anchor="middle">Sun</text>
+                    </g>
+
+                    <!-- Birds connection -->
+                    <path d="M 300 350 L 120 450" stroke="#A06CD5" stroke-width="2" opacity="0.6" stroke-dasharray="5,5"/>
+                    <g transform="translate(120, 450)">
+                        <path d="M -15 0 L 0 -10 L 15 0" stroke="#A06CD5" stroke-width="2" fill="none"/>
+                        <path d="M -10 10 L 5 0 L 20 10" stroke="#A06CD5" stroke-width="2" fill="none" opacity="0.7"/>
+                        <text x="0" y="35" font-size="12" fill="#A06CD5" font-family="Inter" font-weight="600" text-anchor="middle">Birds</text>
+                    </g>
+
+                    <!-- Desert connection -->
+                    <path d="M 300 350 L 480 480" stroke="#DAA520" stroke-width="2" opacity="0.6" stroke-dasharray="5,5"/>
+                    <g transform="translate(480, 480)">
+                        <path d="M 0 0 Q -20 -30 -40 0" fill="none" stroke="#DAA520" stroke-width="2"/>
+                        <path d="M -10 0 Q -30 -25 -50 0" fill="none" stroke="#DAA520" stroke-width="2" opacity="0.7"/>
+                        <text x="0" y="35" font-size="12" fill="#DAA520" font-family="Inter" font-weight="600" text-anchor="middle">Desert</text>
+                    </g>
+
+                    <!-- Omens symbol -->
+                    <circle cx="300" cy="350" r="50" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.4" stroke-dasharray="10,5"/>
+                    <circle cx="300" cy="350" r="70" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.2" stroke-dasharray="10,5"/>
+
+                    <!-- Central text -->
+                    <text x="300" y="360" font-size="11" fill="#FFD700" font-family="Inter" text-anchor="middle" font-weight="600">CONNECTED</text>
+
+                    <!-- Desert ground -->
+                    <path d="M 0 600 Q 150 550 300 580 T 600 600 L 600 700 L 0 700 Z" fill="#CD853F"/>
+
+                    <!-- Bottom text -->
+                    <text x="300" y="680" font-size="16" fill="#FFD700" font-family="Playfair Display" text-anchor="middle" font-weight="700">Everything Speaks the Same Language</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <div class="lesson-number">Lesson 6 of 12</div>
+                <h2>The Language of the World</h2>
+                <div class="key-lesson">
+                    Everything in the universe speaks the same language: wind, sun, birds, stones, omens. Once you learn it, you can read the world.
+                </div>
+                <div class="examples">
+                    <div class="example">
+                        <strong>Omens as Communication:</strong>
+                        <p>Santiago learns to read signs: a hawk attack means danger, bird migration signals travel opportunity. The world is always speaking; we just don't listen.</p>
+                    </div>
+                    <div class="example">
+                        <strong>The Old Man's Teaching:</strong>
+                        <p>The king explains that the Soul of the World communicates with souls who are paying attention. It's not mystical — it's pattern recognition at scale.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Synchronicity:</strong>
+                        <p>When you're aligned with your legend, patterns emerge. The universe wasn't broadcasting them before — you are now fluent in its language.</p>
+                    </div>
+                </div>
+                <div class="funny-take">
+                    <strong>🎭 The Funny Take:</strong>
+                    <p>We think we need an app to understand life, when we should just be reading nature's newsletter. The wind, birds, and stones are literally texting us advice — we're just checking TikTok instead.</p>
+                </div>
+                <div class="ai-connection">
+                    <strong>💡 AI Connection:</strong>
+                    <p>Embeddings connect concepts in shared vector space. "Wind" and "change" live close together; "sun" and "clarity" align. The Language of the World is isomorphism — same meaning, different medium.</p>
+                </div>
+                <div class="cross-book">
+                    <strong>🔗 Cross-Book Connection (GEB by Hofstadter):</strong>
+                    <p>Gödel, Escher, Bach explores isomorphism: the same patterns repeat across music, art, mathematics, biology. The universe speaks in recursive patterns — you just have to zoom in and out.</p>
+                </div>
+                <div class="quote">
+                    "In order to find the treasure, you will have to follow the omens." — Paulo Coelho
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 7: LOVE SHOULD NOT HOLD YOU BACK -->
+<section class="lesson-section">
+    <div class="container">
+        <div class="lesson-grid">
+            <div class="lesson-content">
+                <div class="lesson-number">Lesson 7 of 12</div>
+                <h2>Love Should Not Hold You Back</h2>
+                <div class="key-lesson">
+                    Fatima loves Santiago but tells him to go. True love elevates you toward your legend, it doesn't chain you to comfort.
+                </div>
+                <div class="examples">
+                    <div class="example">
+                        <strong>Fatima's Wisdom:</strong>
+                        <p>She knows Santiago must complete his quest. If he stays for her out of guilt or codependency, he'll resent her and never fully love her. Love requires wholeness.</p>
+                    </div>
+                    <div class="example">
+                        <strong>The Paradox of Love:</strong>
+                        <p>Healthy love doesn't suffocate dreams — it insists you pursue them. The jealous lover who needs you to stay small isn't loving; they're controlling.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Reunion as Transcendence:</strong>
+                        <p>When Santiago returns transformed, his love for Fatima is deeper because he returns as his fullest self, not his negotiated self.</p>
+                    </div>
+                </div>
+                <div class="funny-take">
+                    <strong>🎭 The Funny Take:</strong>
+                    <p>The healthiest relationships come with an exit clause you never use. "Go find your treasure. I'm not going anywhere" is the ultimate love language. It's terrifying and beautiful.</p>
+                </div>
+                <div class="ai-connection">
+                    <strong>💡 AI Connection:</strong>
+                    <p>Don't overfit your model to one dataset. Generalize across domains, learn from diverse sources, and your original domain knowledge becomes richer. Constraint-free learning beats locked-in optimization.</p>
+                </div>
+                <div class="cross-book">
+                    <strong>🔗 Cross-Book Connection (Man's Search for Meaning):</strong>
+                    <p>Frankl shows that love can be transcendent — pointing us toward meaning beyond ourselves. The highest love says "go become who you're meant to be."</p>
+                </div>
+                <div class="quote">
+                    "Love never keeps a man from pursuing his Personal Legend." — Paulo Coelho
+                </div>
+            </div>
+            <div class="illustration">
+                <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="heartGlow">
+                            <feGaussianBlur stdDeviation="2"/>
+                        </filter>
+                    </defs>
+
+                    <!-- Two figures facing away (parting) -->
+                    <!-- Santiago (left) -->
+                    <g transform="translate(180, 380)">
+                        <!-- Head -->
+                        <circle cx="0" cy="0" r="12" fill="#D4A574"/>
+                        <!-- Body -->
+                        <rect x="-10" y="15" width="20" height="45" fill="#E8A555" rx="2"/>
+                        <!-- Arms at sides -->
+                        <line x1="-10" y1="20" x2="-30" y2="45" stroke="#D4A574" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="10" y1="20" x2="30" y2="45" stroke="#D4A574" stroke-width="3" stroke-linecap="round"/>
+                        <!-- Legs -->
+                        <rect x="-7" y="60" width="5" height="30" fill="#7A6B5D"/>
+                        <rect x="2" y="60" width="5" height="30" fill="#6B5D4F"/>
+                        <!-- Head tilted in resolve -->
+                        <circle cx="0" cy="-2" r="12" fill="#D4A574"/>
+                    </g>
+
+                    <!-- Fatima (right) -->
+                    <g transform="translate(420, 380)">
+                        <!-- Head -->
+                        <circle cx="0" cy="0" r="12" fill="#D4A574"/>
+                        <!-- Body (robe) -->
+                        <path d="M -12 15 L -12 60 L 12 60 L 12 15 Q 0 20 -12 15" fill="#A06CD5" opacity="0.8"/>
+                        <!-- Arms reaching toward Santiago -->
+                        <line x1="-10" y1="25" x2="-35" y2="35" stroke="#D4A574" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+                        <line x1="10" y1="25" x2="35" y2="35" stroke="#D4A574" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+                    </g>
+
+                    <!-- Hearts with wings between them -->
+                    <g transform="translate(300, 300)">
+                        <!-- Central heart -->
+                        <path d="M 0 -10 C -12 -20 -20 -15 -20 -5 C -20 5 0 15 0 15 C 0 15 20 5 20 -5 C 20 -15 12 -20 0 -10" fill="#FD79A8" filter="url(#heartGlow)"/>
+                        <!-- Wings left -->
+                        <path d="M -15 -5 L -35 -15 L -30 0" fill="#FFD700" opacity="0.7"/>
+                        <!-- Wings right -->
+                        <path d="M 15 -5 L 35 -15 L 30 0" fill="#FFD700" opacity="0.7"/>
+                    </g>
+
+                    <!-- Arrow showing Santiago departing -->
+                    <defs>
+                        <marker id="love-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FFE66D"/>
+                        </marker>
+                    </defs>
+                    <path d="M 250 480 L 350 500" stroke="#FFE66D" stroke-width="2" marker-end="url(#love-arrow)" opacity="0.6"/>
+                    <text x="300" y="525" font-size="13" fill="#FFE66D" font-family="Inter" text-anchor="middle" font-weight="600">GO • GROW • RETURN</text>
+
+                    <!-- Desert -->
+                    <path d="M 0 600 Q 150 550 300 580 T 600 600 L 600 700 L 0 700 Z" fill="#CD853F"/>
+
+                    <!-- Stars above -->
+                    <circle cx="150" cy="100" r="2" fill="#FFD700" opacity="0.8"/>
+                    <circle cx="300" cy="80" r="2" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="450" cy="110" r="2" fill="#FFD700" opacity="0.7"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 8: LISTEN TO YOUR HEART -->
+<section class="lesson-section">
+    <div class="container">
+        <div class="lesson-grid">
+            <div class="illustration">
+                <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="heartbeat">
+                            <feGaussianBlur stdDeviation="1.5"/>
+                        </filter>
+                    </defs>
+
+                    <!-- Person meditating with hand on heart -->
+                    <g transform="translate(300, 300)">
+                        <!-- Head -->
+                        <circle cx="0" cy="-40" r="15" fill="#D4A574"/>
+                        <!-- Peaceful eyes closed -->
+                        <circle cx="-6" cy="-43" r="2" fill="#000"/>
+                        <circle cx="6" cy="-43" r="2" fill="#000"/>
+                        <!-- Body -->
+                        <path d="M -15 -20 L -15 30 L 15 30 L 15 -20 Q 0 -10 -15 -20" fill="#E8A555"/>
+                        <!-- Hand on heart -->
+                        <circle cx="0" cy="10" r="8" fill="#D4A574" opacity="0.7"/>
+                    </g>
+
+                    <!-- Heart inside -->
+                    <g transform="translate(300, 310)">
+                        <path d="M 0 -15 C -18 -28 -30 -18 -30 -5 C -30 10 0 30 0 30 C 0 30 30 10 30 -5 C 30 -18 18 -28 0 -15" fill="#FD79A8" opacity="0.9" filter="url(#heartbeat)"/>
+                    </g>
+
+                    <!-- Signal waves emanating from heart -->
+                    <circle cx="300" cy="310" r="50" fill="none" stroke="#FD79A8" stroke-width="1" opacity="0.4"/>
+                    <circle cx="300" cy="310" r="80" fill="none" stroke="#FD79A8" stroke-width="1" opacity="0.3"/>
+                    <circle cx="300" cy="310" r="110" fill="none" stroke="#FD79A8" stroke-width="1" opacity="0.2"/>
+
+                    <!-- Words radiating from heart -->
+                    <text x="400" y="200" font-size="13" fill="#FFD700" font-family="Inter" font-weight="600" opacity="0.8">INTUITION</text>
+                    <text x="450" y="310" font-size="13" fill="#FFD700" font-family="Inter" font-weight="600" opacity="0.8">WISDOM</text>
+                    <text x="380" y="430" font-size="13" fill="#FFD700" font-family="Inter" font-weight="600" opacity="0.8">KNOWING</text>
+                    <text x="200" y="430" font-size="13" fill="#FFD700" font-family="Inter" font-weight="600" opacity="0.8">TRUTH</text>
+                    <text x="120" y="310" font-size="13" fill="#FFD700" font-family="Inter" font-weight="600" opacity="0.8">CLARITY</text>
+                    <text x="180" y="200" font-size="13" fill="#FFD700" font-family="Inter" font-weight="600" opacity="0.8">COURAGE</text>
+
+                    <!-- Brain above (overthinking) -->
+                    <g transform="translate(300, 100)" opacity="0.5">
+                        <ellipse cx="0" cy="0" rx="25" ry="30" fill="none" stroke="#666" stroke-width="2"/>
+                        <path d="M -15 -15 Q -20 -25 -10 -30 Q 0 -32 10 -30 Q 20 -25 15 -15" fill="none" stroke="#666" stroke-width="1"/>
+                        <text x="0" y="5" font-size="11" fill="#999" font-family="Inter" text-anchor="middle">OVERTHINKING</text>
+                    </g>
+
+                    <!-- Arrow pointing down -->
+                    <path d="M 300 150 L 300 240" stroke="#FFD700" stroke-width="2" opacity="0.5"/>
+
+                    <!-- Desert -->
+                    <path d="M 0 600 Q 150 550 300 580 T 600 600 L 600 700 L 0 700 Z" fill="#CD853F"/>
+
+                    <!-- Bottom quote -->
+                    <text x="300" y="680" font-size="15" fill="#FFD700" font-family="Playfair Display" text-anchor="middle" font-weight="700" font-style="italic">Listen Before You Think</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <div class="lesson-number">Lesson 8 of 12</div>
+                <h2>Listen to Your Heart</h2>
+                <div class="key-lesson">
+                    Your heart knows things your mind hasn't logic-ed through yet. Intuition is pattern recognition compressed into feeling.
+                </div>
+                <div class="examples">
+                    <div class="example">
+                        <strong>Santiago's Gut Decisions:</strong>
+                        <p>He can't always explain why he trusts someone or chooses a direction. But his heart reads the world's language before his mind catches up.</p>
+                    </div>
+                    <div class="example">
+                        <strong>The Paradox of Analysis:</strong>
+                        <p>"People are afraid to pursue their dreams because they feel they don't deserve them." Your heart knows your worth before your imposter syndrome broadcasts doubt.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Simpler Solutions:</strong>
+                        <p>Often a gut-level simple model outperforms a complex overthought solution. Occam's razor in biology: the simplest explanation usually wins.</p>
+                    </div>
+                </div>
+                <div class="funny-take">
+                    <strong>🎭 The Funny Take:</strong>
+                    <p>Your mind will give you 47 reasons not to follow your dream. Your heart will give you 1: "This is who you are." And somehow the heart usually wins, embarrassing the mind's logic.</p>
+                </div>
+                <div class="ai-connection">
+                    <strong>💡 AI Connection:</strong>
+                    <p>In ML, sometimes simpler models (fewer parameters, less complexity) outperform neural networks. Sometimes raw intuition beats overfit complexity. Trust the Signal-to-Noise ratio.</p>
+                </div>
+                <div class="cross-book">
+                    <strong>🔗 Cross-Book Connection (Thinking, Fast and Slow):</strong>
+                    <p>Kahneman shows System 1 (intuition) is faster and often right, while System 2 (analysis) is slow and prone to rationalization. Your heart is System 1 — wise and quick.</p>
+                </div>
+                <div class="quote">
+                    "Your heart is alive only because it dreams." — Paulo Coelho
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 9: MAKTUB (IT IS WRITTEN) -->
+<section class="lesson-section">
+    <div class="container">
+        <div class="lesson-grid">
+            <div class="lesson-content">
+                <div class="lesson-number">Lesson 9 of 12</div>
+                <h2>Maktub (It Is Written)</h2>
+                <div class="key-lesson">
+                    Some things are destined. Your pre-training, circumstances, and capacities shape what you can become. Work within that destiny, not against it.
+                </div>
+                <div class="examples">
+                    <div class="example">
+                        <strong>Acceptance and Agency:</strong>
+                        <p>The alchemist teaches Santiago about Maktub — accepting fate while still pursuing your legend. It's not fatalism; it's aligned action.</p>
+                    </div>
+                    <div class="example">
+                        <strong>The Paradox of Destiny:</strong>
+                        <p>You can't change your birth, your early wounds, or your innate talents. But how you respond to them? That's your agency inside destiny.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Pre-Training Shapes Destiny:</strong>
+                        <p>You were born in a specific time, place, family, body. These are written. Your legend is executing within those givens, not fighting them.</p>
+                    </div>
+                </div>
+                <div class="funny-take">
+                    <strong>🎭 The Funny Take:</strong>
+                    <p>Maktub is the ultimate excuse and the ultimate responsibility combined. "It was written" AND "I wrote it by my choices." The existential equivalent of quantum mechanics.</p>
+                </div>
+                <div class="ai-connection">
+                    <strong>💡 AI Connection:</strong>
+                    <p>A model's "destiny" is written in its pre-training: weights, parameters, learned representations. It can't become something utterly outside its architecture. But within that destiny, it generates infinite possibilities.</p>
+                </div>
+                <div class="cross-book">
+                    <strong>🔗 Cross-Book Connection (Black Swan):</strong>
+                    <p>Taleb shows that some futures are predictable, others aren't. Maktub acknowledges both: some paths are written, others emerge as "unknown unknowns." Work with both.</p>
+                </div>
+                <div class="quote">
+                    "It's written." — Paulo Coelho's reminder that surrender and pursuit coexist.
+                </div>
+            </div>
+            <div class="illustration">
+                <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="pageGradient">
+                            <stop offset="0%" style="stop-color:#FFEAA7;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0.8" />
+                        </linearGradient>
+                        <filter id="pageGlow2">
+                            <feGaussianBlur stdDeviation="2"/>
+                        </filter>
+                    </defs>
+
+                    <!-- Open book -->
+                    <g transform="translate(300, 350)">
+                        <!-- Left page -->
+                        <rect x="-100" y="-120" width="95" height="240" fill="url(#pageGradient)" stroke="#8B6F47" stroke-width="2"/>
+                        <!-- Right page -->
+                        <rect x="5" y="-120" width="95" height="240" fill="url(#pageGradient)" stroke="#8B6F47" stroke-width="2"/>
+                        <!-- Spine -->
+                        <rect x="-5" y="-120" width="10" height="240" fill="#654321"/>
+
+                        <!-- Text on pages (simple lines) -->
+                        <line x1="-90" y1="-100" x2="-20" y2="-100" stroke="#654321" stroke-width="1" opacity="0.6"/>
+                        <line x1="-90" y1="-85" x2="-10" y2="-85" stroke="#654321" stroke-width="1" opacity="0.5"/>
+                        <line x1="-90" y1="-70" x2="-30" y2="-70" stroke="#654321" stroke-width="1" opacity="0.6"/>
+                        <line x1="-90" y1="-55" x2="-15" y2="-55" stroke="#654321" stroke-width="1" opacity="0.5"/>
+                        <line x1="-90" y1="-40" x2="-25" y2="-40" stroke="#654321" stroke-width="1" opacity="0.6"/>
+
+                        <line x1="15" y1="-100" x2="85" y2="-100" stroke="#654321" stroke-width="1" opacity="0.6"/>
+                        <line x1="15" y1="-85" x2="90" y2="-85" stroke="#654321" stroke-width="1" opacity="0.5"/>
+                        <line x1="15" y1="-70" x2="80" y2="-70" stroke="#654321" stroke-width="1" opacity="0.6"/>
+                        <line x1="15" y1="-55" x2="85" y2="-55" stroke="#654321" stroke-width="1" opacity="0.5"/>
+                        <line x1="15" y1="-40" x2="75" y2="-40" stroke="#654321" stroke-width="1" opacity="0.6"/>
+
+                        <!-- MAKTUB written -->
+                        <text x="0" y="30" font-size="28" fill="#A06CD5" font-family="Playfair Display" text-anchor="middle" font-weight="700" font-style="italic">MAKTUB</text>
+                    </g>
+
+                    <!-- Stars rising from the book -->
+                    <g filter="url(#pageGlow2)">
+                        <circle cx="200" cy="180" r="4" fill="#FFD700" opacity="0.9"/>
+                        <circle cx="280" cy="120" r="4" fill="#FFD700" opacity="0.9"/>
+                        <circle cx="320" cy="80" r="4" fill="#FFD700" opacity="0.9"/>
+                        <circle cx="400" cy="100" r="4" fill="#FFD700" opacity="0.9"/>
+                        <circle cx="420" cy="180" r="4" fill="#FFD700" opacity="0.9"/>
+                    </g>
+
+                    <!-- Connecting lines from book to stars -->
+                    <line x1="250" y1="250" x2="200" y2="180" stroke="#FFD700" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+                    <line x1="300" y1="240" x2="280" y2="120" stroke="#FFD700" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+                    <line x1="320" y1="240" x2="320" y2="80" stroke="#FFD700" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+                    <line x1="350" y1="250" x2="400" y2="100" stroke="#FFD700" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+                    <line x1="370" y1="250" x2="420" y2="180" stroke="#FFD700" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+
+                    <!-- Desert -->
+                    <path d="M 0 600 Q 150 550 300 580 T 600 600 L 600 700 L 0 700 Z" fill="#CD853F"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 10: THE SPOON OF OIL PARABLE -->
+<section class="lesson-section">
+    <div class="container">
+        <div class="lesson-grid">
+            <div class="illustration">
+                <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Boy walking through palace -->
+                    <!-- Floor (palace) -->
+                    <rect x="0" y="500" width="600" height="100" fill="#FFD700" opacity="0.2"/>
+                    <rect x="0" y="500" width="600" height="10" fill="#DAA520" opacity="0.4"/>
+
+                    <!-- Palace columns -->
+                    <rect x="50" y="300" width="30" height="250" fill="#8B6F47" opacity="0.3"/>
+                    <rect x="520" y="300" width="30" height="250" fill="#8B6F47" opacity="0.3"/>
+
+                    <!-- Decorative arches -->
+                    <path d="M 50 300 Q 150 200 250 300" stroke="#D4AF37" stroke-width="2" fill="none" opacity="0.4"/>
+                    <path d="M 350 300 Q 450 200 550 300" stroke="#D4AF37" stroke-width="2" fill="none" opacity="0.4"/>
+
+                    <!-- Palace details (windows, light) -->
+                    <circle cx="100" cy="350" r="20" fill="#4ECDC4" opacity="0.3"/>
+                    <circle cx="500" cy="350" r="20" fill="#4ECDC4" opacity="0.3"/>
+                    <circle cx="300" cy="250" r="25" fill="#FFE66D" opacity="0.2"/>
+
+                    <!-- Boy carrying spoon -->
+                    <g transform="translate(300, 420)">
+                        <!-- Head -->
+                        <circle cx="0" cy="0" r="12" fill="#D4A574"/>
+                        <!-- Body -->
+                        <rect x="-8" y="15" width="16" height="35" fill="#E8A555"/>
+                        <!-- Legs -->
+                        <rect x="-6" y="50" width="4" height="25" fill="#7A6B5D"/>
+                        <rect x="2" y="50" width="4" height="25" fill="#6B5D4F"/>
+                        <!-- Arm extended holding spoon -->
+                        <line x1="8" y1="20" x2="40" y2="10" stroke="#D4A574" stroke-width="3" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- Spoon with oil -->
+                    <g transform="translate(340, 400)">
+                        <!-- Spoon -->
+                        <ellipse cx="0" cy="0" rx="12" ry="8" fill="#C0C0C0" stroke="#999" stroke-width="1"/>
+                        <!-- Handle -->
+                        <rect x="10" y="-2" width="25" height="4" fill="#C0C0C0" stroke="#999" stroke-width="1" rx="2"/>
+                        <!-- Oil drop -->
+                        <ellipse cx="-2" cy="-2" rx="4" ry="3" fill="#FFD700" opacity="0.9"/>
+                    </g>
+
+                    <!-- Floating text along the path showing awareness -->
+                    <text x="150" y="380" font-size="12" fill="#FFD700" font-family="Inter" opacity="0.7">See the palace...</text>
+                    <text x="400" y="360" font-size="12" fill="#FFD700" font-family="Inter" opacity="0.7">Hear the music...</text>
+                    <text x="250" y="300" font-size="12" fill="#FFD700" font-family="Inter" opacity="0.7">Feel the beauty...</text>
+                    <text x="380" y="280" font-size="12" fill="#FFD700" font-family="Inter" opacity="0.7">But don't spill the oil.</text>
+
+                    <!-- Oil drops that were not spilled (path) -->
+                    <circle cx="280" cy="440" r="2" fill="#FFD700" opacity="0.5"/>
+                    <circle cx="300" cy="435" r="2" fill="#FFD700" opacity="0.5"/>
+                    <circle cx="320" cy="440" r="2" fill="#FFD700" opacity="0.5"/>
+
+                    <!-- Bottom lesson -->
+                    <text x="300" y="680" font-size="15" fill="#FFD700" font-family="Playfair Display" text-anchor="middle" font-weight="700">Balance Wonder and Focus</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <div class="lesson-number">Lesson 10 of 12</div>
+                <h2>The Spoon of Oil Parable</h2>
+                <div class="key-lesson">
+                    A wise man gives a boy a spoon of oil and tells him to walk through a magnificent palace. The test: enjoy the palace (see, hear, feel) without spilling the oil (losing focus).
+                </div>
+                <div class="examples">
+                    <div class="example">
+                        <strong>The Paradox of Life:</strong>
+                        <p>You must be present in beauty, joy, and wonder while staying committed to your quest. Not rigidity, not recklessness — balance.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Distraction is Real:</strong>
+                        <p>The palace is real. Its beauty is real. So are your dreams. The trick is holding both without sacrificing either.</p>
+                    </div>
+                    <div class="example">
+                        <strong>The Boy's Wisdom:</strong>
+                        <p>At the end, the boy admits he enjoyed the palace AND didn't spill the oil. Not by tension, but by acceptance that both matter.</p>
+                    </div>
+                </div>
+                <div class="funny-take">
+                    <strong>🎭 The Funny Take:</strong>
+                    <p>We're all the boy, and the spoon is a metaphor for life. Instagram, Netflix, work, relationships — all valid palaces. But spill the oil (lose your center) and you're just wandering distracted through beauty you can't really see.</p>
+                </div>
+                <div class="ai-connection">
+                    <strong>💡 AI Connection:</strong>
+                    <p>The exploration vs. exploitation tradeoff. Pure exploitation (never explore) and pure exploration (always distracted) both fail. The optimal strategy balances both — sample the palace but stay oriented.</p>
+                </div>
+                <div class="cross-book">
+                    <strong>🔗 Cross-Book Connection (Flow):</strong>
+                    <p>Flow states require the perfect balance: challenge and skill, focus and awareness, structure and freedom. Like the spoon of oil — tight enough to stay centered, loose enough to dance.</p>
+                </div>
+                <div class="quote">
+                    "The task the old man had assigned him made him keep his attention on the spoon of oil. Others, seeing the works of art, also saw the spoon, and some dropped theirs as well." — Paulo Coelho
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 11: TURN YOURSELF INTO THE WIND -->
+<section class="lesson-section">
+    <div class="container">
+        <div class="lesson-grid">
+            <div class="lesson-content">
+                <div class="lesson-number">Lesson 11 of 12</div>
+                <h2>Turn Yourself Into the Wind</h2>
+                <div class="key-lesson">
+                    Santiago's ultimate test: to become one with nature itself, to merge with the Soul of the World, to transcend the boundary between self and universe.
+                </div>
+                <div class="examples">
+                    <div class="example">
+                        <strong>The Ultimate Transformation:</strong>
+                        <p>It's not about understanding the wind; it's about being the wind. Ego dissolution — not death, but expansion.</p>
+                    </div>
+                    <div class="example">
+                        <strong>From Separation to Unity:</strong>
+                        <p>Santiago begins as "me traveling through the world." He ends as "the world traveling through me." Perspective shift as spiritual evolution.</p>
+                    </div>
+                    <div class="example">
+                        <strong>The Desert Teaches Surrender:</strong>
+                        <p>In trying to control the wind, Santiago fails. In surrendering to it, becoming it, he succeeds. Paradoxical power through non-resistance.</p>
+                    </div>
+                </div>
+                <div class="funny-take">
+                    <strong>🎭 The Funny Take:</strong>
+                    <p>Ego death is what happens when you finally realize you're not special — you're not separate. You're just wind, sand, and starlight like everything else. And somehow that's the most special thing ever.</p>
+                </div>
+                <div class="ai-connection">
+                    <strong>💡 AI Connection:</strong>
+                    <p>Neural style transfer literally makes models "become" what they learn from — combining features across domains. The model dissolves into the data, becoming an expression of patterns rather than a separate entity.</p>
+                </div>
+                <div class="cross-book">
+                    <strong>🔗 Cross-Book Connection (Flow):</strong>
+                    <p>The deepest flow states feel like dissolution of self — you're no longer observing yourself perform, you ARE the performance. Ego merges with action. That's "becoming the wind."</p>
+                </div>
+                <div class="quote">
+                    "I am the desert, the wind, the sun. I am everything." — Paulo Coelho
+                </div>
+            </div>
+            <div class="illustration">
+                <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="dissolve">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="4" result="noise" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+                        </filter>
+                        <filter id="windFlow">
+                            <feGaussianBlur stdDeviation="3"/>
+                        </filter>
+                    </defs>
+
+                    <!-- Figure dissolving/merging with wind -->
+                    <!-- Starting as solid (left) -->
+                    <g transform="translate(150, 350)" opacity="0.7">
+                        <circle cx="0" cy="0" r="12" fill="#D4A574"/>
+                        <rect x="-8" y="15" width="16" height="35" fill="#E8A555"/>
+                    </g>
+
+                    <!-- Transitioning (middle) -->
+                    <g transform="translate(300, 350)" opacity="0.5" filter="url(#dissolve)">
+                        <circle cx="0" cy="0" r="12" fill="#D4A574"/>
+                        <rect x="-8" y="15" width="16" height="35" fill="#E8A555"/>
+                    </g>
+
+                    <!-- Wind currents (right) - figure dissolved into wind -->
+                    <g transform="translate(450, 350)">
+                        <!-- Flowing wind lines -->
+                        <path d="M -40 -30 Q 0 -20 40 -30" stroke="#4ECDC4" stroke-width="2" fill="none" filter="url(#windFlow)" opacity="0.8"/>
+                        <path d="M -45 0 Q 0 15 45 0" stroke="#4ECDC4" stroke-width="2" fill="none" filter="url(#windFlow)" opacity="0.7"/>
+                        <path d="M -40 30 Q 0 45 40 30" stroke="#4ECDC4" stroke-width="2" fill="none" filter="url(#windFlow)" opacity="0.8"/>
+                        <!-- Particles from body -->
+                        <circle cx="-30" cy="-15" r="2" fill="#D4A574" opacity="0.4"/>
+                        <circle cx="25" cy="5" r="2" fill="#E8A555" opacity="0.4"/>
+                        <circle cx="-20" cy="25" r="2" fill="#D4A574" opacity="0.3"/>
+                    </g>
+
+                    <!-- Arrows showing transformation -->
+                    <defs>
+                        <marker id="transform-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FFD700"/>
+                        </marker>
+                    </defs>
+                    <path d="M 200 300 L 250 300" stroke="#FFD700" stroke-width="2" marker-end="url(#transform-arrow)" opacity="0.6"/>
+                    <path d="M 350 300 L 400 300" stroke="#FFD700" stroke-width="2" marker-end="url(#transform-arrow)" opacity="0.6"/>
+
+                    <!-- Text labels -->
+                    <text x="150" y="420" font-size="12" fill="#FFD700" font-family="Inter" text-anchor="middle" font-weight="600">SELF</text>
+                    <text x="300" y="420" font-size="12" fill="#FFD700" font-family="Inter" text-anchor="middle" font-weight="600">DISSOLVING</text>
+                    <text x="450" y="420" font-size="12" fill="#FFD700" font-family="Inter" text-anchor="middle" font-weight="600">WIND</text>
+
+                    <!-- Desert and sky -->
+                    <rect x="0" y="0" width="600" height="300" fill="#1a3a52" opacity="0.3"/>
+                    <path d="M 0 600 Q 150 550 300 580 T 600 600 L 600 700 L 0 700 Z" fill="#CD853F"/>
+
+                    <!-- Stars overhead -->
+                    <circle cx="100" cy="80" r="2" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="300" cy="60" r="2" fill="#FFD700" opacity="0.7"/>
+                    <circle cx="500" cy="100" r="2" fill="#FFD700" opacity="0.6"/>
+
+                    <!-- Central truth -->
+                    <text x="300" y="680" font-size="16" fill="#FFD700" font-family="Playfair Display" text-anchor="middle" font-weight="700">I Am Everything</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 12: BEGINNER'S LUCK -->
+<section class="lesson-section">
+    <div class="container">
+        <div class="lesson-grid">
+            <div class="illustration">
+                <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Dice showing sixes -->
+                    <g transform="translate(150, 250)">
+                        <rect x="0" y="0" width="80" height="80" fill="#E8A555" stroke="#8B6F47" stroke-width="2" rx="4"/>
+                        <!-- Six dots -->
+                        <circle cx="15" cy="15" r="5" fill="#FFD700"/>
+                        <circle cx="15" cy="40" r="5" fill="#FFD700"/>
+                        <circle cx="15" cy="65" r="5" fill="#FFD700"/>
+                        <circle cx="65" cy="15" r="5" fill="#FFD700"/>
+                        <circle cx="65" cy="40" r="5" fill="#FFD700"/>
+                        <circle cx="65" cy="65" r="5" fill="#FFD700"/>
+                        <!-- Floating up -->
+                        <text x="40" y="130" font-size="14" fill="#FFD700" font-family="Inter" text-anchor="middle" font-weight="600">LUCK</text>
+                    </g>
+
+                    <!-- Four-leaf clover -->
+                    <g transform="translate(450, 250)">
+                        <!-- Stem -->
+                        <line x1="0" y1="60" x2="0" y2="0" stroke="#228B22" stroke-width="3"/>
+                        <!-- Four leaves -->
+                        <ellipse cx="-20" cy="0" rx="15" ry="25" fill="#228B22" opacity="0.8"/>
+                        <ellipse cx="20" cy="0" rx="15" ry="25" fill="#228B22" opacity="0.8"/>
+                        <ellipse cx="0" cy="-20" rx="15" ry="25" fill="#228B22" opacity="0.8"/>
+                        <ellipse cx="0" cy="20" rx="15" ry="25" fill="#228B22" opacity="0.8"/>
+                        <!-- Center -->
+                        <circle cx="0" cy="0" r="4" fill="#FFD700"/>
+                        <!-- Floating up -->
+                        <text x="0" y="130" font-size="14" fill="#FFD700" font-family="Inter" text-anchor="middle" font-weight="600">FORTUNE</text>
+                    </g>
+
+                    <!-- Arrows pointing to light/success above -->
+                    <defs>
+                        <marker id="luck-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FFD700"/>
+                        </marker>
+                    </defs>
+                    <path d="M 150 200 L 150 100" stroke="#FFD700" stroke-width="2" marker-end="url(#luck-arrow)" opacity="0.5"/>
+                    <path d="M 450 200 L 450 100" stroke="#FFD700" stroke-width="2" marker-end="url(#luck-arrow)" opacity="0.5"/>
+
+                    <!-- Bright light/opportunity above -->
+                    <circle cx="300" cy="80" r="40" fill="#FFE66D" opacity="0.4"/>
+                    <circle cx="300" cy="80" r="30" fill="#FFD700" opacity="0.3"/>
+
+                    <!-- Beginner's mind (centered below) -->
+                    <g transform="translate(300, 450)">
+                        <circle cx="0" cy="0" r="20" fill="none" stroke="#4ECDC4" stroke-width="2" opacity="0.7"/>
+                        <circle cx="0" cy="0" r="25" fill="none" stroke="#4ECDC4" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+                        <text x="0" y="5" font-size="12" fill="#4ECDC4" font-family="Inter" text-anchor="middle" font-weight="600">START</text>
+                    </g>
+
+                    <!-- Ripples outward showing expansion -->
+                    <circle cx="300" cy="450" r="60" fill="none" stroke="#FFE66D" stroke-width="1" opacity="0.3" stroke-dasharray="5,5"/>
+                    <circle cx="300" cy="450" r="90" fill="none" stroke="#FFE66D" stroke-width="1" opacity="0.2" stroke-dasharray="5,5"/>
+
+                    <!-- Quote at bottom -->
+                    <text x="300" y="680" font-size="14" fill="#FFD700" font-family="Playfair Display" text-anchor="middle" font-weight="700">The Universe Rewards Those Who Begin</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <div class="lesson-number">Lesson 12 of 12</div>
+                <h2>Beginner's Luck</h2>
+                <div class="key-lesson">
+                    The universe appears to reward those who simply start. Beginner's luck isn't about randomness — it's about momentum meeting readiness.
+                </div>
+                <div class="examples">
+                    <div class="example">
+                        <strong>The Advantage of Starting:</strong>
+                        <p>Santiago gets lucky with the merchant's daughter, meets the king, finds treasure. But he only encountered those opportunities because he started walking.</p>
+                    </div>
+                    <div class="example">
+                        <strong>Random Initialization Works:</strong>
+                        <p>In neural networks, random weight initialization often produces surprisingly good results. Just starting often creates momentum that compounds.</p>
+                    </div>
+                    <div class="example">
+                        <strong>The Default Matters:</strong>
+                        <p>If your default is "start," you're in the game. If your default is "wait for perfect conditions," you're out before you begin.</p>
+                    </div>
+                </div>
+                <div class="funny-take">
+                    <strong>🎭 The Funny Take:</strong>
+                    <p>"Beginner's luck" is just what we call being in the game while others are still watching from the stands. Spoiler: there's no magic, just exposure and attempt.</p>
+                </div>
+                <div class="ai-connection">
+                    <strong>💡 AI Connection:</strong>
+                    <p>Random initialization in deep learning often yields good results. Not because randomness is wise, but because starting + iteration beats perfect planning + inaction. Begin badly, improve fast.</p>
+                </div>
+                <div class="cross-book">
+                    <strong>🔗 Cross-Book Connection (Nudge):</strong>
+                    <p>Thaler and Sunstein show defaults matter enormously. Your first decision shapes the trajectory. Begin with a bias toward action — it's the best default.</p>
+                </div>
+                <div class="quote">
+                    "When you want something, all the universe conspires in your favor. But you have to start." — Paulo Coelho (implied)
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SPOTLIGHT: The Crystal Merchant's Regret -->
+<section class="spotlight-section">
+    <div class="spotlight-content">
+        <h2 class="spotlight-title">Spotlight: The Crystal Merchant's Regret</h2>
+        <div class="spotlight-text">
+            <p>
+                The crystal merchant is perhaps the saddest character in The Alchemist—not because he suffers hardship, but because he never tries. For thirty years, he has dreamed of making a pilgrimage to Mecca, one of Islam's holiest cities. He prepares for the journey mentally, rehearses the pilgrimage in his mind, reads about it, and speaks of it constantly to anyone who will listen.
+            </p>
+            <p>
+                Yet he never goes. Every day brings a reason not to leave: the shop might fail without him, travelers might come and find it closed, his routine is comfortable, the risk is real. So he stays, tending his crystal glasses, living in the dream world of "one day I will go," while the actual days pass.
+            </p>
+            <p>
+                When Santiago enters his life, the merchant finds renewed purpose: helping Santiago become successful feels like a proxy for his own unlived dream. Santiago becomes the merchant's second life, his way of participating in adventure without the risk. But by the book's end, the merchant is still in his shop, still dreaming of Mecca, still waiting.
+            </p>
+            <p>
+                The merchant represents the tragedy of potential unrealized. He is intelligent, kind, hard-working—all the qualities that would make him successful anywhere. But he chose comfort over courage, and now the dream is hollow. The universe was always ready to conspire in his favor, but he never said yes.
+            </p>
+            <p>
+                This is the unspoken cost of deferred dreams: they become museums. You visit them daily, dust them off, and tell yourself "maybe next year." But the oil of life drips away, and at some point, you're no longer sad about the dream—you're angry at yourself for never even trying.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- SPOTLIGHT: The Oasis and the Spoon of Oil -->
+<section class="spotlight-section">
+    <div class="spotlight-content">
+        <h2 class="spotlight-title">Spotlight: The Oasis and the Spoon of Oil</h2>
+        <div class="spotlight-text">
+            <p>
+                In a legendary passage, a wise man summons a young boy and hands him a spoon containing a single drop of oil. "Walk through the palace," the wise man instructs, "and observe all of its beauty—but do not spill the oil."
+            </p>
+            <p>
+                The boy makes his way through chambers of extraordinary splendor: marble columns, paintings, fountains, gardens tended with love and precision. The palace is overwhelming in its beauty—each room designed to capture wonder. But the boy's eyes remain fixed on the spoon. He walks through carefully, mind focused, heart guarded.
+            </p>
+            <p>
+                When he returns to the wise man, the boy admits he has not spilled the oil. But the wise man smiles and asks, "Did you see the paintings? The fountains? Did you smell the gardens?" The boy hangs his head—he had been so focused on the oil that he barely noticed the palace.
+            </p>
+            <p>
+                The wise man then hands him the spoon again and says, "Go again. This time, see everything." The boy returns confused. When he comes back, he admits he was distracted by the palace and spilled the oil.
+            </p>
+            <p>
+                Finally, the wise man sends him once more, and this time the boy understands: he can enjoy the palace fully—see the paintings, smell the gardens, listen to the fountains—while also keeping his focus. He returns with both the oil intact and the memory of a beautiful palace.
+            </p>
+            <p>
+                This parable teaches the essence of the Personal Legend: you cannot achieve greatness by avoiding life's beauty, nor can you achieve it by being swallowed by distraction. The secret is simultaneity—to live fully and deeply in the world while maintaining your center, your focus, your why. It is the balance between structure and freedom, between commitment and presence, between the goal and the journey.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- CHEATSHEET SECTION -->
+<section class="cheatsheet-section">
+    <div class="container">
+        <h2 class="cheatsheet-title">The Alchemist: Lesson Cheatsheet</h2>
+        <div class="lessons-grid">
+            <div class="lesson-card">
+                <h3>1. Follow Your Personal Legend</h3>
+                <p>You have a unique destiny. The courage to pursue it is what gives life meaning.</p>
+                <p class="cross-connection">🔗 Mindset: Growth mindset means pursuing your legend.</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>2. The Universe Conspires</h3>
+                <p>When you pursue with genuine desire, mentors appear, opportunities align, and "luck" multiplies.</p>
+                <p class="cross-connection">🔗 Flow: On the right path, flow states emerge naturally.</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>3. Fear Is the Real Obstacle</h3>
+                <p>The wall of fear is often paper-thin. Our imagination catastrophizes worse than reality.</p>
+                <p class="cross-connection">🔗 Mindset: Fixed mindset is built on fear of proving you're not good enough.</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>4. The Treasure Was at Home</h3>
+                <p>The external quest reveals internal transformation. The prize was the journey, not the destination.</p>
+                <p class="cross-connection">🔗 Stumbling on Happiness: We misjudge what will make us happy.</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>5. The Crystal Merchant's Regret</h3>
+                <p>Living in dreams without action traps you in nostalgia. Action beats dreaming, always.</p>
+                <p class="cross-connection">🔗 Atomic Habits: Systems beat goals. Have a system to pursue your legend.</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>6. The Language of the World</h3>
+                <p>Everything communicates the same language: omens, signs, patterns. Learn to read the world.</p>
+                <p class="cross-connection">🔗 GEB: Isomorphism repeats across music, math, art, and life.</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>7. Love Should Not Hold You Back</h3>
+                <p>True love elevates you toward your legend. It supports growth, never demands smallness.</p>
+                <p class="cross-connection">🔗 Man's Search for Meaning: Love as transcendence beyond self.</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>8. Listen to Your Heart</h3>
+                <p>Intuition is pattern recognition compressed into feeling. Your heart knows before your mind logic-es through.</p>
+                <p class="cross-connection">🔗 Thinking, Fast and Slow: System 1 (intuition) is often right.</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>9. Maktub (It Is Written)</h3>
+                <p>Some things are destined. Accept your constraints while maximizing your agency within them.</p>
+                <p class="cross-connection">🔗 Black Swan: Some futures are predictable, others emerge as unknown unknowns.</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>10. The Spoon of Oil</h3>
+                <p>Balance enjoying life while keeping focus. Structure and freedom, commitment and presence, must coexist.</p>
+                <p class="cross-connection">🔗 Flow: Optimal challenge matched with skill creates effortless action.</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>11. Turn Yourself Into the Wind</h3>
+                <p>The ultimate transformation: dissolve ego boundaries, merge with the Soul of the World. Become the journey.</p>
+                <p class="cross-connection">🔗 Flow: Deepest flow states dissolve the observer into performance.</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>12. Beginner's Luck</h3>
+                <p>The universe rewards those who simply start. Momentum meets readiness. Begin badly, improve fast.</p>
+                <p class="cross-connection">🔗 Nudge: Your default toward action is your best leverage.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

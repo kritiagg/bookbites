@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Elements of Style — Illustrated Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+  :root {
+    --coral: #FF6B6B;
+    --teal: #4ECDC4;
+    --sunny: #FFE66D;
+    --purple: #A06CD5;
+    --sky: #74B9FF;
+    --mint: #55EFC4;
+    --pink: #FD79A8;
+    --orange: #FDCB6E;
+    --dark: #2D3436;
+    --cream: #FFEAA7;
+    --deep-blue: #0984E3;
+    --warm-red: #E17055;
+    --forest: #00B894;
+    --dark-purple: #6C5CE7;
+    --sage: #7FB069;
+    --clay: #C4705B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); overflow-x: hidden; }
+
+  /* ===== COVER ===== */
+  .cover {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 40px 20px;
+  }
+
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+  }
+
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    color: white;
+    letter-spacing: -2px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    line-height: 1.1;
+  }
+
+  .cover .author {
+    font-size: 1.3rem;
+    color: var(--sunny);
+    margin-top: 8px;
+    font-weight: 600;
+    z-index: 2;
+  }
+
+  .cover .subtitle {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 16px;
+    z-index: 2;
+    text-align: center;
+    max-width: 600px;
+  }
+
+  .cover-svg {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 40px;
+    z-index: 2;
+  }
+
+  /* ===== LESSONS ===== */
+  .lesson {
+    min-height: 100vh;
+    padding: 60px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .lesson-inner {
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .lesson-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 12px;
+  }
+
+  .lesson-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .lesson-subtitle {
+    font-size: 1rem;
+    opacity: 0.7;
+    margin-bottom: 30px;
+  }
+
+  .illustration-container {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .illustration-container svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  .card-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #444;
+  }
+
+  .card .example {
+    background: #f8f9fa;
+    border-left: 4px solid var(--sage);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #333;
+  }
+
+  .card .example-label {
+    font-weight: 700;
+    color: var(--sage);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+
+  /* ===== QUOTE BOX ===== */
+  .quote-box {
+    background: var(--dark);
+    color: white;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+
+  .quote-box .quote-text {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .quote-box .quote-attr {
+    color: var(--sunny);
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-top: 8px;
+  }
+
+  /* ===== CONNECT BOX ===== */
+  .connect-box {
+    background: #e8f4fd;
+    border-left: 4px solid var(--deep-blue);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+
+  .connect-box .connect-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--deep-blue);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .connect-box p {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* ===== AI BOX ===== */
+  .ai-box {
+    background: linear-gradient(135deg, #0984E3, #6C5CE7);
+    color: white;
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+
+  .ai-box .ai-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--sunny);
+    margin-bottom: 6px;
+  }
+
+  .ai-box p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* ===== FUNNY BOX ===== */
+  .funny-box {
+    background: #fff5f5;
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    border: 2px dashed var(--coral);
+  }
+
+  .funny-box .funny-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--coral);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .funny-box p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #666;
+    font-style: italic;
+  }
+
+  /* ===== STORY SPOTLIGHT ===== */
+  .story {
+    min-height: 100vh;
+    padding: 60px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .story-inner {
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .story h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  .story p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  /* ===== CHEATSHEET ===== */
+  .cheatsheet {
+    min-height: 100vh;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .cheatsheet-inner {
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .cheatsheet h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .cheatsheet-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .cheat-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+  }
+
+  .cheat-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--sunny);
+    margin-bottom: 12px;
+  }
+
+  .cheat-card p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  @media (max-width: 700px) {
+    .cheatsheet-grid { grid-template-columns: 1fr; }
+    .cover h1 { font-size: 3rem; }
+    .lesson-title { font-size: 1.8rem; }
+  }
+
+  /* ===== SPECIFIC LESSON BACKGROUNDS ===== */
+  .lesson-1 { background: linear-gradient(180deg, #f0f4f8 0%, #e8f0f5 100%); color: var(--dark); }
+  .lesson-2 { background: linear-gradient(180deg, #fff9e6 0%, #fff4cc 100%); color: var(--dark); }
+  .lesson-3 { background: linear-gradient(180deg, #f0f9ff 0%, #dff4ff 100%); color: var(--dark); }
+  .lesson-4 { background: linear-gradient(180deg, #fef5f1 0%, #fde9e0 100%); color: var(--dark); }
+  .lesson-5 { background: linear-gradient(180deg, #f5f9f3 0%, #eaf3e5 100%); color: var(--dark); }
+  .lesson-6 { background: linear-gradient(180deg, #fdf3ff 0%, #fae6ff 100%); color: var(--dark); }
+  .lesson-7 { background: linear-gradient(180deg, #f0f8ff 0%, #d9edff 100%); color: var(--dark); }
+  .lesson-8 { background: linear-gradient(180deg, #fff0f5 0%, #ffe0eb 100%); color: var(--dark); }
+  .lesson-9 { background: linear-gradient(180deg, #f0fff4 0%, #d4fce5 100%); color: var(--dark); }
+  .lesson-10 { background: linear-gradient(180deg, #fff7e6 0%, #ffeccc 100%); color: var(--dark); }
+  .lesson-11 { background: linear-gradient(180deg, #f5f0ff 0%, #ede0ff 100%); color: var(--dark); }
+  .lesson-12 { background: linear-gradient(180deg, #f0f5f9 0%, #dce8f0 100%); color: var(--dark); }
+
+  .story-1 { background: linear-gradient(135deg, #1a3a4a 0%, #0f2a3a 100%); color: white; }
+  .story-2 { background: linear-gradient(135deg, #3a2a1a 0%, #2a1a0a 100%); color: white; }
+  .story-3 { background: linear-gradient(135deg, #1a2a3a 0%, #0a1a2a 100%); color: white; }
+
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<section class="cover">
+  <div class="particle" style="width: 100px; height: 100px; background: var(--sunny); top: 10%; left: 10%;"></div>
+  <div class="particle" style="width: 150px; height: 150px; background: var(--teal); top: 60%; right: 15%;"></div>
+  <div class="particle" style="width: 80px; height: 80px; background: var(--purple); bottom: 20%; left: 20%;"></div>
+
+  <h1>The Elements of Style</h1>
+  <div class="author">Strunk & White</div>
+  <div class="subtitle">The Complete Visual Guide to Clear, Concise, & Elegant Writing</div>
+
+  <svg class="cover-svg" viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg">
+    <!-- Open book with words flowing -->
+    <defs>
+      <linearGradient id="bookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#FFE66D;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#FF6B6B;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+
+    <!-- Book spine -->
+    <path d="M 320 80 L 330 80 L 330 280 L 320 280" fill="#0f3460" stroke="none"/>
+
+    <!-- Left page -->
+    <rect x="80" y="80" width="240" height="200" fill="white" stroke="#2D3436" stroke-width="2" rx="4"/>
+
+    <!-- Right page -->
+    <rect x="380" y="80" width="240" height="200" fill="white" stroke="#2D3436" stroke-width="2" rx="4"/>
+
+    <!-- Words on left page -->
+    <text x="95" y="110" font-size="11" fill="#FF6B6B" font-weight="700">Clarity</text>
+    <text x="95" y="130" font-size="11" fill="#4ECDC4" font-weight="700">Precision</text>
+    <text x="95" y="150" font-size="11" fill="#FFE66D" font-weight="700">Brevity</text>
+    <text x="95" y="170" font-size="11" fill="#A06CD5" font-weight="700">Elegance</text>
+
+    <!-- Lines representing text on left -->
+    <line x1="95" y1="190" x2="280" y2="190" stroke="#ddd" stroke-width="1.5"/>
+    <line x1="95" y1="205" x2="310" y2="205" stroke="#ddd" stroke-width="1.5"/>
+    <line x1="95" y1="220" x2="290" y2="220" stroke="#ddd" stroke-width="1.5"/>
+    <line x1="95" y1="235" x2="275" y2="235" stroke="#ddd" stroke-width="1.5"/>
+
+    <!-- Words on right page -->
+    <text x="395" y="110" font-size="11" fill="#E17055" font-weight="700">Vigor</text>
+    <text x="395" y="130" font-size="11" fill="#00B894" font-weight="700">Voice</text>
+    <text x="395" y="150" font-size="11" fill="#0984E3" font-weight="700">Authority</text>
+    <text x="395" y="170" font-size="11" fill="#6C5CE7" font-weight="700">Style</text>
+
+    <!-- Lines representing text on right -->
+    <line x1="395" y1="190" x2="580" y2="190" stroke="#ddd" stroke-width="1.5"/>
+    <line x1="395" y1="205" x2="610" y2="205" stroke="#ddd" stroke-width="1.5"/>
+    <line x1="395" y1="220" x2="590" y2="220" stroke="#ddd" stroke-width="1.5"/>
+    <line x1="395" y1="235" x2="575" y2="235" stroke="#ddd" stroke-width="1.5"/>
+
+    <!-- Pen marking the page -->
+    <g transform="translate(600, 120) rotate(-30)">
+      <rect x="0" y="0" width="8" height="60" fill="var(--coral)" rx="4"/>
+      <circle cx="4" cy="65" r="6" fill="var(--sunny)"/>
+    </g>
+
+    <!-- Flourish lines -->
+    <path d="M 150 310 Q 200 320 250 310" stroke="var(--sunny)" stroke-width="2" fill="none"/>
+    <path d="M 450 310 Q 500 320 550 310" stroke="var(--teal)" stroke-width="2" fill="none"/>
+  </svg>
+</section>
+
+<!-- ===== LESSON 1: Use the Active Voice ===== -->
+<section class="lesson lesson-1">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #E17055;">1</div>
+    <h2 class="lesson-title">Use the Active Voice</h2>
+    <p class="lesson-subtitle">Let your subjects do the work instead of hiding behind verbs</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Passive figure (sluggish) -->
+        <circle cx="150" cy="120" r="30" fill="#ccc" opacity="0.5"/>
+        <text x="150" y="130" text-anchor="middle" font-size="16" fill="#666" font-weight="700">Passive</text>
+        <line x1="150" y1="150" x2="150" y2="200" stroke="#ccc" stroke-width="3" opacity="0.5"/>
+
+        <!-- Arrow showing action -->
+        <path d="M 210 120 L 490 120" stroke="#E17055" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
+        <text x="350" y="110" text-anchor="middle" font-size="12" fill="#E17055" font-weight="700">TRANSFORMATION</text>
+
+        <!-- Active figure (dynamic) -->
+        <circle cx="550" cy="120" r="30" fill="#E17055"/>
+        <text x="550" y="130" text-anchor="middle" font-size="16" fill="white" font-weight="700">Active</text>
+        <path d="M 520 150 L 550 200 L 580 150" stroke="#E17055" stroke-width="3" fill="none"/>
+        <path d="M 550 200 L 570 220" stroke="#E17055" stroke-width="3"/>
+
+        <!-- Annotations -->
+        <text x="150" y="230" text-anchor="middle" font-size="11" fill="#999">Something is done TO it</text>
+        <text x="550" y="230" text-anchor="middle" font-size="11" fill="#666">It DOES something</text>
+
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#E17055"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p>The active voice puts power into your subject and energy into your verbs. When readers meet a subject doing something, the sentence moves. Passive construction—where the subject is acted upon—buries the action and forces readers to decode meaning. Strong writing reveals who's doing what, not vague descriptions of things being done.</p>
+
+      <div class="example">
+        <div class="example-label">Passive (Weak)</div>
+        <strong>"The report was written by the marketing team in three weeks."</strong> — Who? The subject disappears into vagueness.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Active (Strong)</div>
+        <strong>"The marketing team wrote the report in three weeks."</strong> — Clear, direct, energetic.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Another Example</div>
+        <strong>Passive:</strong> "The email was not responded to by the customer." <br>
+        <strong>Active:</strong> "The customer ignored the email." — Clearer and saves words.
+      </div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Passive voice is like writing with your eyes closed. You stumble forward, hoping something coherent emerges. Active voice is like opening your eyes and walking with confidence. Sure, you might bump into a wall occasionally, but at least you *meant* to bump into it.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Large language models like GPT have a statistical preference for active voice in high-quality training data. When analyzing what makes "good writing" in literature and journalism, transformers learn that sentences with clear agents (subjects) and direct actions have higher engagement metrics. Neural networks actually optimize toward active constructions because they're more predictable and efficient to process. Text generation improves when beam search rewards clarity over passive complexity.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Atomic Habits</strong> by James Clear emphasizes systems and clear agents of change. Just as habits require identifying the person taking action, strong writing requires clear subjects. Both books agree: vagueness about who acts kills momentum.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The active voice is nearly always to be preferred to the passive voice... it is more direct, puts less strain on the reader, and expresses the thought, or is likely to express it, more clearly and with greater force."</div>
+      <div class="quote-attr">— William Strunk Jr., The Elements of Style</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 2: Place Words in Order of Importance ===== -->
+<section class="lesson lesson-2">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #FDCB6E;">2</div>
+    <h2 class="lesson-title">Place Words in Order of Importance</h2>
+    <p class="lesson-subtitle">The positions of power are the beginning and the end</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Three sentences showing emphasis -->
+        <!-- Weak (weak-strong-weak) -->
+        <g>
+          <text x="50" y="50" font-size="11" fill="#999" font-weight="700">WEAK ORDERING:</text>
+          <circle cx="70" cy="80" r="15" fill="#ddd"/>
+          <text x="70" y="88" text-anchor="middle" font-size="10" fill="#666">We</text>
+
+          <rect x="110" y="70" width="250" height="30" fill="#f0f0f0" rx="4"/>
+          <text x="125" y="92" font-size="10" fill="#666">explored the vast library, finding old books and discovering</text>
+
+          <circle cx="400" cy="80" r="15" fill="#ddd"/>
+          <text x="400" y="88" text-anchor="middle" font-size="10" fill="#666">manuscripts.</text>
+        </g>
+
+        <!-- Good (medium-medium-strong) -->
+        <g>
+          <text x="50" y="160" font-size="11" fill="#999" font-weight="700">STRONGER:</text>
+          <circle cx="70" cy="190" r="15" fill="#FFE66D"/>
+          <text x="70" y="198" text-anchor="middle" font-size="9" fill="#333" font-weight="700">We</text>
+
+          <rect x="110" y="180" width="250" height="30" fill="#fffacc" rx="4"/>
+          <text x="125" y="202" font-size="10" fill="#666">explored the vast library, discovering</text>
+
+          <circle cx="400" cy="190" r="15" fill="#FF6B6B"/>
+          <text x="400" y="198" text-anchor="middle" font-size="9" fill="white" font-weight="700">ancient manuscripts.</text>
+        </g>
+
+        <!-- Legend -->
+        <circle cx="50" cy="250" r="8" fill="#ddd"/>
+        <text x="75" y="255" font-size="9" fill="#666">Weak</text>
+
+        <circle cx="200" cy="250" r="8" fill="#FFE66D"/>
+        <text x="225" y="255" font-size="9" fill="#666">Medium</text>
+
+        <circle cx="350" cy="250" r="8" fill="#FF6B6B"/>
+        <text x="375" y="255" font-size="9" fill="#666">Strong</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p>The opening word arrests attention; the closing word, memory. Every sentence structure matters. A fact buried in the middle goes unnoticed. The strongest writing saves its payload for the end—the period provides finality and emphasis. Begin with the subject or context, arrange modifying details, and conclude with the climax.</p>
+
+      <div class="example">
+        <div class="example-label">Weak Ending</div>
+        "The company spent millions developing the app, but it failed, regrettably." — Regrettably is buried, the failure is undersold.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Strong Ending</div>
+        "The company spent millions developing the app. It failed." — Short, direct, devastating.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Another Pattern</div>
+        <strong>Weak:</strong> "The author, despite numerous obstacles and distractions, completed the manuscript." <br>
+        <strong>Strong:</strong> "Despite numerous obstacles, the author completed the manuscript." — The completion is now the climax.
+      </div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Sentence structure is like joke timing—everything depends on where you put the punchline. Put it in the middle and nobody laughs. Put it at the end and people remember it. Bad writers are comedians who announce the joke, tell the joke, then explain why it was funny. Good writers deliver it.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Transformer models use attention mechanisms that weight sentence positions differently. The beginning (initial tokens) and ending (final tokens before a period) carry disproportionate weight in the model's learned representations. When fine-tuning LLMs for quality assessment, data scientists find that information placement dramatically affects how well the model predicts human preference ratings. Token position encoding in transformers literally encodes the importance of positional information.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Made to Stick</strong> by Chip and Dan Heath discusses how to structure ideas so they're remembered. Both books agree: the end is where memory lives. Strunk & White about sentences; Heath about arguments. Same principle.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The position of the words in a sentence is the principal means of showing their relationship."</div>
+      <div class="quote-attr">— William Strunk Jr., The Elements of Style</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 3: Omit Needless Words ===== -->
+<section class="lesson lesson-3">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #74B9FF;">3</div>
+    <h2 class="lesson-title">Omit Needless Words</h2>
+    <p class="lesson-subtitle">Economy of language creates power and clarity</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bloated sentence -->
+        <g>
+          <text x="50" y="30" font-size="12" fill="#74B9FF" font-weight="700">VERBOSE (32 words):</text>
+          <rect x="50" y="50" width="600" height="80" fill="#dceef8" rx="8" stroke="#74B9FF" stroke-width="2"/>
+          <text x="70" y="75" font-size="10" fill="#333" font-family="monospace">In the final analysis, it is quite clear that</text>
+          <text x="70" y="92" font-size="10" fill="#333" font-family="monospace">the fact of the matter is that the budget was</text>
+          <text x="70" y="109" font-size="10" fill="#333" font-family="monospace">exceeded in a manner that was somewhat</text>
+          <text x="70" y="126" font-size="10" fill="#333" font-family="monospace">problematic and concerning.</text>
+        </g>
+
+        <!-- Arrow down -->
+        <path d="M 350 140 L 350 170" stroke="#74B9FF" stroke-width="3" marker-end="url(#arrowblue)"/>
+        <text x="360" y="160" font-size="11" fill="#74B9FF" font-weight="700">TRIM</text>
+
+        <!-- Trimmed sentence -->
+        <g>
+          <text x="50" y="190" font-size="12" fill="#00B894" font-weight="700">DIRECT (5 words):</text>
+          <rect x="50" y="210" width="600" height="50" fill="#ddf8e8" rx="8" stroke="#00B894" stroke-width="2"/>
+          <text x="70" y="245" font-size="10" fill="#333" font-family="monospace">The budget was exceeded.</text>
+        </g>
+
+        <text x="350" y="290" text-anchor="middle" font-size="10" fill="#666">Removed 27 words. Power increased 500%.</text>
+
+        <defs>
+          <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#74B9FF"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p>Every superfluous word dilutes meaning. The sin is not brevity; it's waste. Remove redundancies, circumlocutions, hedging language, and filler. "The reason why is because" says nothing that "because" doesn't already say. "It is clear that" announces obviousness instead of demonstrating it. Ruthless editors ask: Does this word carry meaning? If not, execute it.</p>
+
+      <div class="example">
+        <div class="example-label">Redundant</div>
+        "At this point in time, we are currently experiencing issues." — Removes 8 words by cutting waste.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Trimmed</div>
+        "We have issues." — Or better: identify what issues specifically.
+      </div>
+
+      <div class="example">
+        <div class="example-label">More Examples</div>
+        <strong>Verbose:</strong> "The new innovations that were introduced were very interesting." <br>
+        <strong>Direct:</strong> "The innovations intrigued us." <br><br>
+        <strong>Verbose:</strong> "There are many people who believe that..." <br>
+        <strong>Direct:</strong> "Many believe..."
+      </div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Unnecessary words are verbal clutter. They're like having 47 apps on your phone that you never use. Each one slows you down. Every extra adjective is someone clearing their throat before speaking. Every conjunction that could be a period is you rambling at a party. Cut them, and suddenly people listen.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Compression is fundamental to neural networks. Token prediction efficiency improves when input sequences are concise—fewer tokens mean faster inference and better attention patterns. When training language models on compressed text (like news headlines versus verbose Wikipedia), models learn to assign higher probability to direct language. Text generation tasks reward brevity because of computational constraints. The transformer's positional encoding actually encodes word economy as a feature.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Deep Work</strong> by Cal Newport emphasizes focus and elimination of distraction. Strunk & White apply the same principle to language itself: every distraction (unnecessary word) fractures attention. Both argue for extreme discipline in removing what doesn't serve the core purpose.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Vigorous writing is concise. A sentence should contain no unnecessary words, a paragraph no unnecessary sentences, for the same reason that a drawing should have no unnecessary lines and a machine no unnecessary parts."</div>
+      <div class="quote-attr">— William Strunk Jr., The Elements of Style</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 4: Use Concrete Language ===== -->
+<section class="lesson lesson-4">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #FF6B6B;">4</div>
+    <h2 class="lesson-title">Use Concrete Language</h2>
+    <p class="lesson-subtitle">Show, don't summarize; name, don't generalize</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left: Abstract cloud -->
+        <g>
+          <text x="100" y="25" font-size="12" fill="#FF6B6B" font-weight="700">ABSTRACT:</text>
+          <ellipse cx="100" cy="120" rx="80" ry="60" fill="#ffcccc" stroke="#FF6B6B" stroke-width="2" opacity="0.7"/>
+          <text x="100" y="125" text-anchor="middle" font-size="11" fill="#333" font-weight="700">Various</text>
+          <text x="100" y="145" text-anchor="middle" font-size="11" fill="#333">things</text>
+          <text x="100" y="165" text-anchor="middle" font-size="11" fill="#333">happened</text>
+        </g>
+
+        <!-- Right: Concrete objects -->
+        <g>
+          <text x="550" y="25" font-size="12" fill="#00B894" font-weight="700">CONCRETE:</text>
+
+          <!-- Apple -->
+          <circle cx="480" cy="100" r="15" fill="#FF6B6B"/>
+          <line x1="480" y1="85" x2="480" y2="75" stroke="#00B894" stroke-width="2"/>
+          <text x="480" y="130" text-anchor="middle" font-size="9" fill="#333" font-weight="700">Apple</text>
+
+          <!-- Desk -->
+          <rect x="520" y="95" width="50" height="30" fill="#C4705B"/>
+          <line x1="520" y1="125" x2="520" y2="155" stroke="#C4705B" stroke-width="3"/>
+          <line x1="570" y1="125" x2="570" y2="155" stroke="#C4705B" stroke-width="3"/>
+          <text x="545" y="180" text-anchor="middle" font-size="9" fill="#333" font-weight="700">Desk</text>
+
+          <!-- Pen -->
+          <rect x="600" y="85" width="3" height="50" fill="#000" transform="rotate(-30 601 110)"/>
+          <circle cx="610" cy="80" r="5" fill="#FFE66D"/>
+          <text x="610" y="140" text-anchor="middle" font-size="9" fill="#333" font-weight="700">Pen</text>
+        </g>
+
+        <!-- Quote comparison -->
+        <rect x="50" y="220" width="600" height="50" fill="#f5f5f5" rx="8"/>
+        <text x="70" y="242" font-size="9" fill="#666" font-weight="600">Abstract: "The workspace exhibited characteristics of organization and utility."</text>
+        <text x="70" y="260" font-size="9" fill="#666" font-weight="600">Concrete: "The desk held an apple and a pen."</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p>Abstract language creates fog. Readers build understanding from specifics. An "animal" is vague; a "fox" is vivid. "Food was consumed" hides appetite; "She devoured the sandwich" shows hunger. Concrete nouns and precise verbs do the heavy lifting. Adjectives like "interesting" or "important" demand proof—show why by naming specific things. Readers remember images, not generalizations.</p>
+
+      <div class="example">
+        <div class="example-label">Vague</div>
+        "The presentation was good because it had relevant content and good delivery." — What specifically made it work?
+      </div>
+
+      <div class="example">
+        <div class="example-label">Concrete</div>
+        "The presenter showed three studies from the past year, each with clear graphs, and spoke without notes for 40 minutes." — Now we know exactly what made it effective.
+      </div>
+
+      <div class="example">
+        <div class="example-label">More Examples</div>
+        <strong>Abstract:</strong> "The weather was bad." <br>
+        <strong>Concrete:</strong> "Rain drummed on the windows; the temperature dropped to 34 degrees." <br><br>
+        <strong>Abstract:</strong> "She was upset." <br>
+        <strong>Concrete:</strong> "She gripped her coffee cup so hard her knuckles went white."
+      </div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Abstract language is what happens when someone's been hit in the head too many times. Concrete language is what normal people speak. Tell someone "the canine quadruped" instead of "dog" and they'll think you've lost your mind. Yet that's how we write professionally all the time. Imagine saying "I am experiencing negative precipitation events" instead of "It's raining." Your friends would stage an intervention.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Vision transformers and multimodal models like GPT-4V embed concrete language more reliably than abstract descriptors in their internal representations. When a model sees "fox" paired with an actual fox image across training data, it builds robust features. But "animal" maps to thousands of conflicting contexts. During language generation, LLMs trained on concrete examples produce more coherent and specific outputs because the token probability distributions are sharper. Specificity reduces entropy and improves prediction quality.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Show, Don't Tell</strong> is the cardinal rule of storytelling everywhere. In <strong>The Story Grid</strong> by Shawn Coyne and writing craft books, the principle is identical: readers connect through sensory detail and specifics, not generalizations. Strunk & White simply apply this storytelling wisdom to all writing.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Prefer the specific to the general, the definite to the vague, the concrete to the abstract."</div>
+      <div class="quote-attr">— William Strunk Jr., The Elements of Style</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 5: Use Parallel Construction ===== -->
+<section class="lesson lesson-5">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #00B894;">5</div>
+    <h2 class="lesson-title">Use Parallel Construction</h2>
+    <p class="lesson-subtitle">Balance your structures to balance your meaning</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Non-parallel (broken scales) -->
+        <g>
+          <text x="80" y="30" font-size="11" fill="#FF6B6B" font-weight="700">NOT PARALLEL:</text>
+
+          <!-- Unbalanced beam -->
+          <line x1="50" y1="120" x2="150" y2="120" stroke="#ccc" stroke-width="8"/>
+          <line x1="60" y1="120" x2="60" y2="160" stroke="#ccc" stroke-width="4"/>
+          <line x1="140" y1="120" x2="140" y2="160" stroke="#ccc" stroke-width="4"/>
+
+          <!-- Weights -->
+          <rect x="40" y="160" width="40" height="40" fill="#FF6B6B" rx="4"/>
+          <text x="60" y="185" text-anchor="middle" font-size="10" fill="white" font-weight="700">reading</text>
+
+          <rect x="120" y="160" width="40" height="60" fill="#FF6B6B" rx="4"/>
+          <text x="140" y="195" text-anchor="middle" font-size="9" fill="white" font-weight="700">to write</text>
+          <text x="140" y="207" text-anchor="middle" font-size="9" fill="white" font-weight="700">well</text>
+
+          <text x="100" y="240" text-anchor="middle" font-size="9" fill="#666">"I like reading and to write well" — Unbalanced</text>
+        </g>
+
+        <!-- Parallel (balanced scales) -->
+        <g>
+          <text x="520" y="30" font-size="11" fill="#00B894" font-weight="700">PARALLEL:</text>
+
+          <!-- Balanced beam -->
+          <line x1="480" y1="120" x2="580" y2="120" stroke="#00B894" stroke-width="8"/>
+          <line x1="490" y1="120" x2="490" y2="160" stroke="#00B894" stroke-width="4"/>
+          <line x1="570" y1="120" x2="570" y2="160" stroke="#00B894" stroke-width="4"/>
+
+          <!-- Weights -->
+          <rect x="470" y="160" width="40" height="50" fill="#00B894" rx="4"/>
+          <text x="490" y="190" text-anchor="middle" font-size="9" fill="white" font-weight="700">reading</text>
+
+          <rect x="550" y="160" width="40" height="50" fill="#00B894" rx="4"/>
+          <text x="570" y="190" text-anchor="middle" font-size="9" fill="white" font-weight="700">writing</text>
+
+          <text x="530" y="240" text-anchor="middle" font-size="9" fill="#666">"I like reading and writing" — Balanced</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p>Parallel construction means expressing similar ideas in similar form. Lists should parallel: nouns with nouns, verbs with verbs, clauses with clauses. When structure mirrors meaning, readers move through your prose like dancers in rhythm. Parallel items create momentum. Mixed structures—mixing "ing" forms with infinitives, or nouns with verbs—create cognitive friction. The reader's mind expects balance and stumbles when it's absent.</p>
+
+      <div class="example">
+        <div class="example-label">Not Parallel (Mixed Forms)</div>
+        "The job requires attention to detail, meeting deadlines, and to communicate clearly." — Mixes "attention to" and "meeting" and "to communicate."
+      </div>
+
+      <div class="example">
+        <div class="example-label">Parallel (Consistent Form)</div>
+        "The job requires attention to detail, adherence to deadlines, and clear communication." — All nouns; balanced rhythm.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Another Example</div>
+        <strong>Not Parallel:</strong> "She loves hiking, to paint, and reading books." <br>
+        <strong>Parallel:</strong> "She loves hiking, painting, and reading." — All gerunds; clean and rhythmic.
+      </div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Parallel construction is how your brain expects lists to work. When you break it, your brain does a little hiccup. It's like saying "The grocery list: milk, bread, and please buy cheese." Your reader's mind does a double-take. Why did that last one sound different? Stick to the pattern, and readers glide along. Break it, and you've irritated their internal grammar police.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Transformer models encode sequence patterns and repetition as high-confidence features. When input tokens follow a predictable parallel structure (noun-verb-noun repeated), the attention mechanism develops stronger, more stable patterns. During language generation, parallel structures reduce prediction uncertainty—the model becomes more confident about what should come next because it recognizes the pattern. Parsing algorithms also perform better on parallel construction because syntactic trees are more regular and unambiguous. It's easier for NLP systems to understand balanced structures.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Thinking in Bets</strong> by Annie Duke uses parallel structure when listing decision factors, creating clarity through symmetry. <strong>Storytelling with Data</strong> by Cole Nussbaumer Knaflic designs parallel visual structures for the same reason: pattern recognition, confidence, and flow.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Express coordinate ideas in similar form."</div>
+      <div class="quote-attr">— William Strunk Jr., The Elements of Style</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 6: Choose the Right Word ===== -->
+<section class="lesson lesson-6">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #A06CD5;">6</div>
+    <h2 class="lesson-title">Choose the Right Word</h2>
+    <p class="lesson-subtitle">Precision in diction drives precision in thought</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Three words, three contexts -->
+        <g>
+          <!-- Walk -->
+          <circle cx="120" cy="100" r="40" fill="#f0f0f0" stroke="#A06CD5" stroke-width="2"/>
+          <text x="120" y="105" text-anchor="middle" font-size="14" fill="#A06CD5" font-weight="700">walk</text>
+
+          <text x="120" y="160" text-anchor="middle" font-size="9" fill="#666">Neutral, everyday</text>
+
+          <!-- Stroll -->
+          <circle cx="350" cy="100" r="40" fill="#f0f0f0" stroke="#A06CD5" stroke-width="2"/>
+          <text x="350" y="105" text-anchor="middle" font-size="14" fill="#A06CD5" font-weight="700">stroll</text>
+
+          <text x="350" y="160" text-anchor="middle" font-size="9" fill="#666">Leisurely, pleasant</text>
+
+          <!-- Trudge -->
+          <circle cx="580" cy="100" r="40" fill="#f0f0f0" stroke="#A06CD5" stroke-width="2"/>
+          <text x="580" y="105" text-anchor="middle" font-size="14" fill="#A06CD5" font-weight="700">trudge</text>
+
+          <text x="580" y="160" text-anchor="middle" font-size="9" fill="#666">Exhausted, labored</text>
+        </g>
+
+        <!-- Example sentences -->
+        <g>
+          <rect x="50" y="200" width="600" height="80" fill="#f9f5ff" rx="8" stroke="#A06CD5" stroke-width="1"/>
+
+          <text x="70" y="222" font-size="9" fill="#333" font-weight="700">1. "The couple walked through the park on Sunday."</text>
+          <text x="70" y="237" font-size="9" fill="#666">Straightforward, no emotion implied.</text>
+
+          <text x="70" y="258" font-size="9" fill="#333" font-weight="700">2. "The couple strolled through the park on Sunday."</text>
+          <text x="70" y="273" font-size="9" fill="#666">Same scene, but now romantic and relaxed.</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p>The difference between "walk" and "trudge" is not just vocabulary—it's emotional content, pacing, and meaning. Synonym ≠ duplicate. Every word carries connotation: emotional weight, associations, and nuance. "Frugal" is admirable; "stingy" is contemptible. "Curious" is endearing; "nosy" is intrusive. The right word doesn't just fit the sentence; it carries your intended meaning. Wrong words create unintended meanings.</p>
+
+      <div class="example">
+        <div class="example-label">Vague Word Choice</div>
+        "The actor gave a nice performance." — Nice is so generic it says nothing.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Precise Word Choice</div>
+        "The actor's nuanced portrayal of grief made the final scene unbearable." — Now we know exactly what made the performance work.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Connotation Matters</div>
+        <strong>A. "The manager was economical with feedback."</strong> (sounds controlled, strategic) <br>
+        <strong>B. "The manager was stingy with feedback."</strong> (sounds withholding, mean) <br>
+        Same behavior, opposite feelings.
+      </div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Using a thesaurus without understanding connotation is like choosing a wine based solely on color. You might pick "a red wine" when you meant "a delicate pinot noir" and end up with a bottle of liquid gasoline. Words that mean technically the same thing can make sentences taste completely different. "Elderly gentleman" versus "old dude." Same person, wildly different vibes.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Word embeddings in models like Word2Vec and GloVe capture connotation as vector distances. Two synonymous words occupy nearby positions in semantic space, but their vectors are distinct—each word has learned associations from its training contexts. When GPT generates text, it samples from probability distributions that encode connotational differences. "Stroll" has different co-occurrence patterns than "trudge" in training data, resulting in different activation profiles. LLMs actually distinguish connotation through learned statistical associations, not explicit rules.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Thinking with Data</strong> emphasizes that numbers without context lie. Strunk & White apply the same principle to words: words without precision don't clarify. Both demand specificity to prevent misinterpretation. "Data" without units is useless; "good" without definition is worthless.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The word must be exact, not merely plausible. The adjective hasn't been built that can pull a weak noun out of a tight place."</div>
+      <div class="quote-attr">— E.B. White, The Elements of Style</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 7: Avoid Jargon Unless Necessary ===== -->
+<section class="lesson lesson-7">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #0984E3;">7</div>
+    <h2 class="lesson-title">Avoid Jargon Unless Necessary</h2>
+    <p class="lesson-subtitle">Obscure language obscures meaning</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left: Jargon wall -->
+        <g>
+          <text x="80" y="25" font-size="11" fill="#FF6B6B" font-weight="700">JARGON WALL:</text>
+
+          <!-- Brick wall of words -->
+          <rect x="40" y="50" width="200" height="200" fill="none" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="5,5"/>
+
+          <text x="50" y="70" font-size="8" fill="#FF6B6B" font-weight="700">optimize</text>
+          <text x="120" y="70" font-size="8" fill="#FF6B6B" font-weight="700">synergy</text>
+          <text x="50" y="90" font-size="8" fill="#FF6B6B" font-weight="700">paradigm</text>
+          <text x="120" y="90" font-size="8" fill="#FF6B6B" font-weight="700">leverage</text>
+
+          <text x="50" y="130" font-size="8" fill="#FF6B6B" font-weight="700">actionable</text>
+          <text x="120" y="130" font-size="8" fill="#FF6B6B" font-weight="700">bandwidth</text>
+
+          <text x="50" y="170" font-size="8" fill="#FF6B6B" font-weight="700">pivot</text>
+          <text x="120" y="170" font-size="8" fill="#FF6B6B" font-weight="700">utilize</text>
+
+          <text x="50" y="210" font-size="8" fill="#FF6B6B" font-weight="700">ecosystem</text>
+          <text x="120" y="210" font-size="8" fill="#FF6B6B" font-weight="700">silo</text>
+
+          <text x="100" y="270" text-anchor="middle" font-size="9" fill="#666">Blocks meaning</text>
+        </g>
+
+        <!-- Arrow -->
+        <path d="M 260 150 L 320 150" stroke="#0984E3" stroke-width="3" marker-end="url(#arrowblue)"/>
+
+        <!-- Right: Clear language -->
+        <g>
+          <text x="520" y="25" font-size="11" fill="#00B894" font-weight="700">CLEAR LANGUAGE:</text>
+
+          <!-- Open space -->
+          <rect x="380" y="50" width="300" height="200" fill="none" stroke="#00B894" stroke-width="1.5"/>
+
+          <text x="400" y="100" font-size="10" fill="#333" font-weight="700">Make it work.</text>
+          <text x="400" y="130" font-size="10" fill="#333" font-weight="700">Work together.</text>
+          <text x="400" y="160" font-size="10" fill="#333" font-weight="700">Change direction.</text>
+          <text x="400" y="190" font-size="10" fill="#333" font-weight="700">Use what you have.</text>
+
+          <text x="530" y="270" text-anchor="middle" font-size="9" fill="#666">Invites understanding</text>
+        </g>
+
+        <defs>
+          <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#0984E3"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p>Jargon creates two problems: it excludes outsiders and it lets insiders avoid thinking clearly. When writing for a general audience, resist specialized terminology unless absolutely required. Technical writers sometimes hide uncertainty behind buzzwords ("leverage synergies," "optimize ecosystem") instead of saying what they mean. Readers sense this evasion and mistrust it. Plain language forces clarity. If you can't explain it in simple terms, you don't understand it.</p>
+
+      <div class="example">
+        <div class="example-label">Jargon-Heavy</div>
+        "We need to leverage our core competencies to optimize stakeholder value in the digital transformation paradigm." — What does this actually mean?
+      </div>
+
+      <div class="example">
+        <div class="example-label">Clear</div>
+        "We should use our strengths to improve how we serve customers online." — Immediately understandable.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Tech Example</div>
+        <strong>Jargon:</strong> "Utilize the API endpoint for asynchronous data retrieval." <br>
+        <strong>Clear (for mixed audience):</strong> "Use the API to pull data in the background." <br>
+        <strong>Note:</strong> "API" is acceptable if your audience knows it; if not, say "connection."
+      </div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Corporate jargon is what happens when people want to sound important without saying anything. "Circle back on that" means "talk about it again later." "Take this offline" means "leave me alone." "Bandwidth" used to mean internet speed; now it means "I don't want to do your job." It's like people are playing a game where nobody's allowed to speak plainly. The bigger the corporation, the more nonsense they speak. It's inversely proportional to actual meaning.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Language models trained on clear, accessible text perform better on downstream tasks than models trained on jargon-heavy text. Jargon creates sparse probability distributions—the model learns fewer consistent patterns because specialized terms appear in fewer contexts. When fine-tuning on technical domains, models that also see plain-language explanations develop stronger, more generalizable representations. In transfer learning, models trained on general, non-specialized text often outperform domain-specific models on novel tasks. Simplicity breeds flexibility.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Thinking, Fast and Slow</strong> by Daniel Kahneman shows how people avoid processing complex information. Jargon exploits this by creating the illusion of meaning without requiring readers to think. Strunk & White demand transparency; Kahneman explains why people accept obscurity. Both point toward clarity as the antidote.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Do not use words without knowing their meaning."</div>
+      <div class="quote-attr">— E.B. White, The Elements of Style</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 8: Prefer the Simple to the Complex ===== -->
+<section class="lesson lesson-8">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #FD79A8;">8</div>
+    <h2 class="lesson-title">Prefer the Simple to the Complex</h2>
+    <p class="lesson-subtitle">Simplicity serves readers better than cleverness</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Complex path (winding) -->
+        <g>
+          <text x="100" y="25" font-size="11" fill="#FF6B6B" font-weight="700">COMPLEX:</text>
+          <path d="M 50 80 Q 80 60, 120 80 T 200 80" stroke="#FF6B6B" stroke-width="3" fill="none"/>
+          <path d="M 50 80 L 50 150 Q 80 120, 120 150 T 200 150" stroke="#FF6B6B" stroke-width="3" fill="none"/>
+          <circle cx="50" cy="80" r="8" fill="#FF6B6B"/>
+          <circle cx="200" cy="150" r="8" fill="#FF6B6B"/>
+          <text x="130" y="200" text-anchor="middle" font-size="9" fill="#666">Twists and turns</text>
+          <text x="130" y="215" text-anchor="middle" font-size="9" fill="#666">Hard to follow</text>
+        </g>
+
+        <!-- Simple path (straight) -->
+        <g>
+          <text x="550" y="25" font-size="11" fill="#00B894" font-weight="700">SIMPLE:</text>
+          <line x1="500" y1="110" x2="600" y2="110" stroke="#00B894" stroke-width="4"/>
+          <circle cx="500" cy="110" r="8" fill="#00B894"/>
+          <circle cx="600" cy="110" r="8" fill="#00B894"/>
+          <text x="550" y="200" text-anchor="middle" font-size="9" fill="#666">Direct route</text>
+          <text x="550" y="215" text-anchor="middle" font-size="9" fill="#666">Easy to follow</text>
+        </g>
+
+        <!-- Example at bottom -->
+        <rect x="50" y="240" width="600" height="30" fill="#f5f5f5" rx="6"/>
+        <text x="70" y="260" font-size="8" fill="#333" font-weight="700">Simple sentences are faster to read and understand. Complex sentences make readers work. Work = friction. Friction = abandonment.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p>Complexity doesn't equal intelligence. A sentence that forces readers to stop and parse it has failed. Simple sentences move fast. They're clear. They're confident. A good writer can express complex ideas in simple sentences, the way a physicist can explain quantum mechanics to a curious child. If you find yourself writing complex sentences to sound smart, you've already lost the reader. Complexity should serve the content, never the writer's ego.</p>
+
+      <div class="example">
+        <div class="example-label">Complex (Forced Difficulty)</div>
+        "The multifaceted phenomenon regarding the intersection of technological advancement and societal evolution necessitates comprehensive analysis." — Pretentious, unclear.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Simple (Clear Meaning)</div>
+        "Technology changes society. We need to understand how." — Three sentences, crystal clear.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Unnecessary Complexity</div>
+        <strong>Complex:</strong> "It is often the case that situations of considerable magnitude necessitate multifaceted approaches." <br>
+        <strong>Simple:</strong> "Big problems need many solutions."
+      </div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Some writers write complex sentences thinking it makes them sound like a genius. It makes them sound like someone who's scared. Actual smart people explain things simply—they're confident enough not to hide behind complication. Ever notice how Einstein's best ideas are stated simply? "E=mc²" not "the energy manifestation of mass is equivalent to its multiplicative interaction with light velocity squared." Simplicity is the sign of mastery, not the opposite.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>When training language models on writing quality data, models learn that sentence length and processing depth correlate with lower human engagement metrics. Simpler sentences have higher probability of being copied, quoted, and shared. In beam search decoding, shorter sequences receive higher probability scores when entropy is controlled. Perplexity—the model's confusion—increases with sentence complexity. Simple writing is statistically easier for transformers to generate and humans to process. It's not a limitation of AI; it's a fundamental property of how minds work, human and artificial.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>A Brief History of Time</strong> by Stephen Hawking proves that even the most complex physics can be explained in accessible prose. Complex ideas don't require complex sentences—they require patient explanation. Strunk & White and Hawking agree: simplicity is not simplistic; it's the pinnacle of clarity.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Vigorous prose is vigorous. Long sentences often become tangled."</div>
+      <div class="quote-attr">— E.B. White, The Elements of Style</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 9: Be Precise with Modifiers ===== -->
+<section class="lesson lesson-9">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #55EFC4;">9</div>
+    <h2 class="lesson-title">Be Precise with Modifiers</h2>
+    <p class="lesson-subtitle">Misplaced words create accidental meaning</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Dangling modifier illustration -->
+        <!-- Correct sentence -->
+        <g>
+          <text x="70" y="30" font-size="11" fill="#00B894" font-weight="700">CORRECT:</text>
+
+          <!-- The parts connected -->
+          <rect x="50" y="60" width="100" height="30" fill="#e8f8f5" border="1px solid #00B894" rx="4"/>
+          <text x="100" y="82" text-anchor="middle" font-size="9" fill="#333" font-weight="700">modifier</text>
+
+          <path d="M 160 75 L 200 75" stroke="#00B894" stroke-width="2" marker-end="url(#arrowright)"/>
+
+          <rect x="220" y="60" width="120" height="30" fill="#e8f8f5" rx="4"/>
+          <text x="280" y="82" text-anchor="middle" font-size="9" fill="#333" font-weight="700">correct target</text>
+
+          <text x="180" y="120" text-anchor="middle" font-size="8" fill="#666" font-weight="700">"While eating lunch, I read the email."</text>
+          <text x="180" y="135" text-anchor="middle" font-size="8" fill="#666">The modifier clearly describes the subject: I</text>
+        </g>
+
+        <!-- Incorrect sentence -->
+        <g>
+          <text x="70" y="180" font-size="11" fill="#FF6B6B" font-weight="700">DANGLING MODIFIER:</text>
+
+          <!-- The parts disconnected -->
+          <rect x="50" y="210" width="100" height="30" fill="#ffe8e8" rx="4"/>
+          <text x="100" y="232" text-anchor="middle" font-size="9" fill="#333" font-weight="700">modifier</text>
+
+          <path d="M 160 225 L 200 225" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+
+          <rect x="220" y="210" width="120" height="30" fill="#ffe8e8" rx="4"/>
+          <text x="280" y="232" text-anchor="middle" font-size="9" fill="#333" font-weight="700">wrong target</text>
+
+          <text x="180" y="270" text-anchor="middle" font-size="8" fill="#666" font-weight="700">"While eating lunch, the email arrived."</text>
+          <text x="180" y="285" text-anchor="middle" font-size="8" fill="#666">The email wasn't eating lunch (absurd!)</text>
+        </g>
+
+        <defs>
+          <marker id="arrowright" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#00B894"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p>A modifier should clearly relate to the word it modifies. When separated from that word, the modifier "dangles"—it attaches to the wrong target, creating absurdity or confusion. A dangling participle is one of the most common clarity sins. The reader stumbles, tries to parse what you meant, and usually succeeds but with effort—effort they didn't want to expend. Position modifiers so the connection is unmistakable.</p>
+
+      <div class="example">
+        <div class="example-label">Dangling Modifier</div>
+        "Turning the corner, the building suddenly appeared." — Was the building turning the corner? (Absurd.) The subject who turned the corner was omitted.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Clear Placement</div>
+        "Turning the corner, we suddenly saw the building." — Now we (the subject) are clearly doing the turning.
+      </div>
+
+      <div class="example">
+        <div class="example-label">More Examples</div>
+        <strong>Dangling:</strong> "Running late for the meeting, the traffic made me furious." (Traffic wasn't running late.) <br>
+        <strong>Fixed:</strong> "Running late for the meeting, I cursed the traffic." <br><br>
+        <strong>Dangling:</strong> "Confused about the instructions, the manual was consulted." (The manual wasn't confused.) <br>
+        <strong>Fixed:</strong> "Confused about the instructions, we consulted the manual."
+      </div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Dangling modifiers are how sentences go crazy. They're like someone starting a story about themselves and then suddenly talking about someone else without warning. "Exhausted from running, my laptop crashed." Wait, was your laptop exhausted from running? Did it finish a 5K? It's the grammatical equivalent of plot holes. Readers go, "Hold on, what?" Your sentence just confused them for no reason.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Dependency parsing models struggle with dangling modifiers because the ambiguity creates multiple valid parse trees in low-confidence regions. When generating text, language models actually learn to avoid dangling modifiers through training on well-edited text where clarity is rewarded. However, models trained on internet text (which includes many poorly-written examples) sometimes generate danglers. This happens in the attention mechanism—the model loses track of which noun the modifier should attach to. Coreference resolution tasks explicitly penalize this type of error.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Logic and Critical Thinking</strong textbooks teach the importance of clear referents—what a pronoun refers to must be unambiguous. Strunk & White apply the same logic principle to modifiers. Both demand precision in reference to avoid misinterpretation.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Misrelated modifiers and mis-modifiers are the cause of many mistakes."</div>
+      <div class="quote-attr">— William Strunk Jr., The Elements of Style</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 10: Read Your Work Aloud ===== -->
+<section class="lesson lesson-10">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #FFE66D;">10</div>
+    <h2 class="lesson-title">Read Your Work Aloud</h2>
+    <p class="lesson-subtitle">Your ear catches what your eyes miss</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Eye reading silently -->
+        <g>
+          <text x="120" y="30" font-size="11" fill="#999" font-weight="700">SILENT READING:</text>
+
+          <!-- Eye -->
+          <circle cx="120" cy="100" r="25" fill="#f0f0f0" stroke="#999" stroke-width="2"/>
+          <circle cx="120" cy="100" r="12" fill="#999"/>
+          <circle cx="120" cy="100" r="6" fill="white"/>
+
+          <!-- Thought bubble -->
+          <path d="M 170 70 Q 200 50, 230 70 L 240 100 Q 220 120, 190 110 Z" fill="#f0f0f0" stroke="#999" stroke-width="1.5"/>
+          <text x="210" y="92" text-anchor="middle" font-size="8" fill="#666">Seems fine...</text>
+
+          <text x="120" y="170" text-anchor="middle" font-size="9" fill="#666">Skips over awkward</text>
+          <text x="120" y="185" text-anchor="middle" font-size="9" fill="#666">phrasing automatically</text>
+        </g>
+
+        <!-- Ear reading aloud -->
+        <g>
+          <text x="550" y="30" font-size="11" fill="#FFE66D" font-weight="700">READING ALOUD:</text>
+
+          <!-- Ear -->
+          <ellipse cx="550" cy="100" rx="20" ry="25" fill="#f0f0f0" stroke="#FFE66D" stroke-width="2"/>
+          <path d="M 535 100 Q 550 110, 545 125" fill="none" stroke="#FFE66D" stroke-width="2"/>
+
+          <!-- Sound waves -->
+          <path d="M 580 85 Q 600 75, 620 85" fill="none" stroke="#FFE66D" stroke-width="2"/>
+          <path d="M 580 100 Q 600 90, 620 100" fill="none" stroke="#FFE66D" stroke-width="2"/>
+          <path d="M 580 115 Q 600 105, 620 115" fill="none" stroke="#FFE66D" stroke-width="2"/>
+
+          <!-- Reaction -->
+          <path d="M 570 140 Q 550 160, 540 170" stroke="#FFE66D" stroke-width="2" fill="none"/>
+          <text x="550" y="185" text-anchor="middle" font-size="9" fill="#666" font-weight="700">Wait, that</text>
+          <text x="550" y="200" text-anchor="middle" font-size="9" fill="#666" font-weight="700">doesn't flow...</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p>Reading silently, your brain autocorrects. It fills in gaps and smooths over rough patches. Your mouth cannot lie. When you read aloud, every awkward phrasing, every repetition of sound, every unintended rhythm becomes obvious. You hear the music of your sentences—their pace, their weight, their momentum. Sentences that read smoothly move readers forward effortlessly. Sentences with verbal stumbles force readers to brake. Reading aloud is not optional; it's mandatory editing.</p>
+
+      <div class="example">
+        <div class="example-label">Silent Problem</div>
+        "The decision decision was made by the committee." — Your eye skips the repeated word while reading silently.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Aloud Exposure</div>
+        "The decision decision was made by the committee." — Your mouth forces you to say "decision" twice. The error becomes unmistakable.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Rhythm Check</div>
+        "The quick brown fox runs fast over the fence." — Aloud, you notice "fast" and "runs" are awkwardly close rhythmically. Delete one or reorder.
+      </div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>If you only read silently, your terrible sentences escape into the world like badly-behaved children. You think they're fine because your brain is a generous liar. But the moment they're spoken aloud, everyone hears the chaos. Your readers are essentially listening to your sentences in their heads even when they read silently. So do them (and yourself) a favor: read it aloud before you inflict it on others. Your neighbors might think you're insane, talking to your computer. But you're not insane; you're professional.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Text-to-speech models and phonetic analysis reveal patterns that silent readers miss. When feeding text through an English text-to-speech system, prosodic anomalies, alliteration clusters, and rhythm breaks become audible. Modern language models actually benefit from prosodic features during training—models that have access to speech data alongside text learn better representations of what makes language "sound right." Reading aloud engages a different neural processing pathway than silent reading; it activates motor cortex and auditory processing that silent reading doesn't. This is why reading aloud catches errors: you're literally engaging more of your brain.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Atomic Habits</strong> emphasizes that feedback loops strengthen learning. Reading aloud creates an audio feedback loop that silent reading cannot provide. Strunk & White demand this feedback; Clear teaches why feedback works. Same principle applied to revision.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Writing is done with your ears. You should be able to listen to the sentence and hear whether it is harmonious or not."</div>
+      <div class="quote-attr">— E.B. White, The Elements of Style</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 11: Know Your Grammar, Then Break the Rules ===== -->
+<section class="lesson lesson-11">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #6C5CE7;">11</div>
+    <h2 class="lesson-title">Know Your Grammar, Then Break the Rules</h2>
+    <p class="lesson-subtitle">Master rules before you earn the right to violate them</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Three figures representing stages -->
+        <!-- Beginner: Bound by rules -->
+        <g>
+          <text x="120" y="25" font-size="10" fill="#999" font-weight="700">BEGINNER:</text>
+          <circle cx="120" cy="80" r="25" fill="#ccc"/>
+          <path d="M 120 60 L 120 100 M 100 85 L 140 85" stroke="#999" stroke-width="2"/>
+          <!-- Chains -->
+          <path d="M 95 100 Q 80 110, 70 130" stroke="#FF6B6B" stroke-width="3"/>
+          <path d="M 145 100 Q 160 110, 170 130" stroke="#FF6B6B" stroke-width="3"/>
+          <text x="120" y="160" text-anchor="middle" font-size="9" fill="#666">Trapped by rules</text>
+          <text x="120" y="175" text-anchor="middle" font-size="9" fill="#666">Doesn't understand</text>
+          <text x="120" y="190" text-anchor="middle" font-size="9" fill="#666">why they exist</text>
+        </g>
+
+        <!-- Intermediate: Learning rules -->
+        <g>
+          <text x="350" y="25" font-size="10" fill="#FFE66D" font-weight="700">INTERMEDIATE:</text>
+          <circle cx="350" cy="80" r="25" fill="#FFE66D"/>
+          <path d="M 350 60 L 350 100 M 330 85 L 370 85" stroke="#333" stroke-width="2"/>
+          <!-- Books around -->
+          <rect x="310" y="120" width="15" height="20" fill="#f0f0f0" stroke="#333" stroke-width="1"/>
+          <rect x="375" y="120" width="15" height="20" fill="#f0f0f0" stroke="#333" stroke-width="1"/>
+          <text x="350" y="160" text-anchor="middle" font-size="9" fill="#666">Understands the</text>
+          <text x="350" y="175" text-anchor="middle" font-size="9" fill="#666">rules and why they</text>
+          <text x="350" y="190" text-anchor="middle" font-size="9" fill="#666">serve clarity</text>
+        </g>
+
+        <!-- Advanced: Free to choose -->
+        <g>
+          <text x="580" y="25" font-size="10" fill="#00B894" font-weight="700">MASTERY:</text>
+          <circle cx="580" cy="80" r="25" fill="#00B894"/>
+          <path d="M 580 60 L 580 100 M 560 85 L 600 85" stroke="white" stroke-width="2"/>
+          <!-- Freedom lines -->
+          <path d="M 605 80 L 650 50" stroke="#00B894" stroke-width="2"/>
+          <path d="M 605 90 L 650 110" stroke="#00B894" stroke-width="2"/>
+          <text x="580" y="160" text-anchor="middle" font-size="9" fill="#666">Breaks rules with</text>
+          <text x="580" y="175" text-anchor="middle" font-size="9" fill="#666">intention and effect</text>
+          <text x="580" y="190" text-anchor="middle" font-size="9" fill="#666">when it serves</text>
+          <text x="580" y="205" text-anchor="middle" font-size="9" fill="#666">meaning</text>
+        </g>
+
+        <!-- Arrow showing progression -->
+        <path d="M 155 85 L 310 85" stroke="#999" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrow1)"/>
+        <path d="M 385 85 L 540 85" stroke="#999" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrow2)"/>
+
+        <defs>
+          <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#999"/>
+          </marker>
+          <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#999"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p>Grammar rules aren't arbitrary prison walls—they're the foundation that makes effective communication possible. Before you break a rule, understand why it exists: rules about subject-verb agreement, about parallel structure, about modifier placement serve clarity. Once you master these principles, you can violate them intentionally for effect. A sentence fragment can land harder than a complete sentence. Starting with "and" can create rhythm. But the violation only works because readers expect completion and connection. Break rules you understand; never break rules you've merely neglected to learn.</p>
+
+      <div class="example">
+        <div class="example-label">Broken Rule (Ignorant)</div>
+        "The team are go to the meeting tomorrow." — This violates subject-verb agreement, but not intentionally or effectively. It's just wrong.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Broken Rule (Intentional)</div>
+        "And then the door opened. Slowly. Like something dreadful waited on the other side." — Fragments used deliberately for dramatic effect. Works because the reader expects complete sentences and the violation surprises them.
+      </div>
+
+      <div class="example">
+        <div class="example-label">The Difference</div>
+        <strong>Broken rule (bad):</strong> "Between you and I, the decision were wrong." <br>
+        <strong>Broken rule (good):</strong> "She came. Saw. Conquered." — The second violates normal syntax for power and rhythm.
+      </div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>There's a difference between breaking the rules because you're a rebel and breaking them because you're a master. Most people who claim to break rules are just writing badly and pretending it's intentional. It's like saying you're "deconstructing" a painting when you're really just bad at drawing. Learn the rules first. Then, if you want to break them for effect, you've earned it. Otherwise, you're just committing grammatical crimes and calling them style.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Language models trained on rule-following text learn strong grammatical representations. When these models encounter intentional rule-breaking (like sentence fragments in literary text), their probability distributions shift but remain coherent—they recognize the deviation as purposeful within a specific context. Models can learn the difference between errors and stylistic choices through large enough training corpora. When fine-tuned on creative writing, models learn to generate intentional rule-breaking. But models trained only on error-prone data produce incoherent output. The hierarchy is: learn the rules, then learn to break them strategically. Same for AI.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Antifragile</strong> by Nassim Nicholas Taleb argues that you need a foundation to weather volatility. Strunk & White apply the same logic: master the foundation (grammar and clarity) before you venture into experimentation. Both books reject the false choice between rules and freedom; they demand mastery as the path to freedom.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Young writers often suppose that style is a garnish for the meat of prose, some sauce by which a dull dish is made palatable... Style takes its final shape more from attitudes of mind than from principles of composition. Thus, we lean on the rule of brevity, on the use of the active voice, on the choice of words."</div>
+      <div class="quote-attr">— E.B. White, The Elements of Style</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 12: Develop a Consistent Voice ===== -->
+<section class="lesson lesson-12">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #0984E3;">12</div>
+    <h2 class="lesson-title">Develop a Consistent Voice</h2>
+    <p class="lesson-subtitle">Style is the writer's personality made visible on the page</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Multiple voices showing variety -->
+        <g>
+          <text x="350" y="20" text-anchor="middle" font-size="12" fill="#333" font-weight="700">VOICE: Consistent Thread Through Everything</text>
+
+          <!-- Wave representing voice continuity -->
+          <path d="M 50 140 Q 100 100, 150 140 T 300 140 T 450 140 T 600 140 T 750 140"
+                stroke="#0984E3" stroke-width="3" fill="none"/>
+
+          <!-- Sample texts along the wave -->
+          <text x="75" y="185" font-size="8" fill="#666" text-anchor="middle" font-weight="600">Email:</text>
+          <text x="75" y="200" font-size="8" fill="#444">"Let's sync up."</text>
+
+          <text x="175" y="185" font-size="8" fill="#666" text-anchor="middle" font-weight="600">Report:</text>
+          <text x="175" y="200" font-size="8" fill="#444">"We will discuss."</text>
+
+          <text x="285" y="185" font-size="8" fill="#666" text-anchor="middle" font-weight="600">Blog:</text>
+          <text x="285" y="200" font-size="8" fill="#444">"Here's the thing..."</text>
+
+          <text x="395" y="185" font-size="8" fill="#666" text-anchor="middle" font-weight="600">Tweet:</text>
+          <text x="395" y="200" font-size="8" fill="#444">"Thoughts on this?"</text>
+
+          <text x="550" y="185" font-size="8" fill="#666" text-anchor="middle" font-weight="600">Speech:</text>
+          <text x="550" y="200" font-size="8" fill="#444">"Consider this..."</text>
+
+          <!-- Note -->
+          <text x="350" y="245" text-anchor="middle" font-size="9" fill="#666">Different formats, same recognizable voice</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p>Voice is not a formula; it's your way of seeing and expressing truth. It emerges from consistent choices: the length of your sentences, the words you favor, your attitude toward formality, your rhythm, your sense of humor. A reader should recognize your voice after two paragraphs. The voice shouldn't change dramatically depending on format. Whether you're writing an email, a report, or a book, something should feel distinctly yours. Developing voice takes time and permission to be yourself on the page. It requires rejecting the idea that there's only one "correct" way to write. But consistency within your choices is essential—randomly switching voices confuses readers and undermines authority.</p>
+
+      <div class="example">
+        <div class="example-label">Inconsistent Voice</div>
+        "The synergy of technological innovation will maximize our quarterly performance metrics. Honestly, I think we're overthinking this." — Shifts from corporate jargon to casual in one sentence. Readers don't know who's talking.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Consistent Voice (Formal)</div>
+        "Our technological advantages, if properly leveraged, offer genuine competitive benefit. That's the core insight. Everything else follows." — Formal but personal. Rhythm and word choice are consistent throughout.
+      </div>
+
+      <div class="example">
+        <div class="example-label">Consistent Voice (Casual)</div>
+        "Technology helps. But only if we actually know what we're doing. Most of the time, we don't. So that's the real problem we need to solve." — Casual, direct, conversational. Consistent throughout.
+      </div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Reading someone with a strong voice is like meeting a person with a personality. Reading someone without voice is like meeting an AI that's trying too hard to seem human. It sounds "correct" but something's off. You feel it in your bones. The best writers sound like themselves—nobody else could write quite that way. That's voice. And the weird part? You develop it by being yourself, not by trying to sound professional or smart. Be consistently yourself, and your voice will emerge.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Fine-tuning language models on a single author's body of work creates a "voice signature" that the model learns—specific vocabulary patterns, sentence length distributions, punctuation preferences, and thematic choices that uniquely identify the author. When generating new text, the model produces outputs that mimic that voice because it's learned the statistical signature. Stylometry, the field that analyzes authorship through style, uses these exact features to identify unknown authors. A consistent voice means consistent activation patterns in the model's learned parameters. LLMs actually demonstrate that voice is learnable, predictable, and distinctive enough to fingerprint.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Mindset</strong> by Carol Dweck discusses developing authentic identity through consistent practice and self-reflection. Strunk & White apply the same principle to writing voice: it develops through practice and commitment to authentic expression. Both books reward consistency and authenticity over performance.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Who is this 'I' anyway? It is the writer, of course. There is no law that says the writer must appear in person in what he writes. Make full use of the pronoun 'I.' By doing so, the writer achieves a kind of exact reality that is often lacking in essays where the author hides behind the impartial all-knowing narrator."</div>
+      <div class="quote-attr">— E.B. White, The Elements of Style</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 1: The Gettysburg Address ===== -->
+<section class="story story-1">
+  <div class="story-inner">
+    <h2>Story Spotlight: The Gettysburg Address</h2>
+    <p>Abraham Lincoln's Gettysburg Address (November 19, 1863) is the perfect case study in Strunk & White's principles applied to the highest stakes. Lincoln had 272 words to reshape the meaning of the Civil War—to reframe it not as a political conflict but as a test of whether a nation founded on liberty could endure.</p>
+
+    <p>Every single principle in this guide appears in Lincoln's masterpiece. He uses active voice: "We hold these truths." His sentences alternate long and short, with the climax at the end: "...dedicated here to the unfinished work...that this nation, under God, shall have a new birth of freedom." No wasted words. No jargon. Concrete language: "graves," "earth," "nation," "people." Parallel construction: "that government of the people, by the people, for the people, shall not perish."</p>
+
+    <p>And voice—unmistakable voice. Lincoln sounds like Lincoln. The formality feels authentic, not performed. Listen to the rhythm: "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal." There's music in that sentence. The alliteration, the careful pacing, the building momentum—it's designed to be heard aloud. And indeed, Lincoln's words were spoken, not just written. They followed every rule about oral delivery: clarity, brevity, vigor.</p>
+
+    <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Lincoln's silhouette -->
+      <ellipse cx="350" cy="80" rx="40" ry="50" fill="#8B8B7A"/>
+      <circle cx="350" cy="50" r="25" fill="#9C9C8B"/>
+
+      <!-- Beard and distinctive features -->
+      <path d="M 330 65 Q 340 75, 350 75 Q 360 75, 370 65" fill="none" stroke="#8B8B7A" stroke-width="2"/>
+
+      <!-- Words floating around him -->
+      <text x="420" y="50" font-size="11" fill="#FFE66D" font-weight="700">Clarity</text>
+      <text x="450" y="80" font-size="11" fill="#FFE66D" font-weight="700">Power</text>
+      <text x="430" y="120" font-size="11" fill="#FFE66D" font-weight="700">Voice</text>
+      <text x="280" y="50" font-size="11" fill="#FFE66D" font-weight="700">Brevity</text>
+      <text x="250" y="80" font-size="11" fill="#FFE66D" font-weight="700">Truth</text>
+      <text x="270" y="120" font-size="11" fill="#FFE66D" font-weight="700">Rhythm</text>
+
+      <!-- Podium -->
+      <rect x="320" y="140" width="60" height="40" fill="#6B5B4F" rx="2"/>
+      <rect x="310" y="175" width="80" height="8" fill="#6B5B4F"/>
+    </svg>
+
+    <p style="margin-top: 30px;">The lesson: When everything matters, every word matters. Lincoln didn't ramble. He didn't hedge. He didn't use jargon or apologize for his point. He said what needed saying with the precision and force of someone who understood that his words might shape history. And they did.</p>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 2: E.B. White on Writing Itself ===== -->
+<section class="story story-2">
+  <div class="story-inner">
+    <h2>Story Spotlight: E.B. White's Philosophy of Clarity</h2>
+    <p>E.B. White, who revised and expanded "The Elements of Style" after William Strunk Jr.'s death, believed that style wasn't a separate thing from meaning—it was how meaning came alive. White's own essays demonstrate what he preaches: simplicity married to precision, active voice delivering authority, short and long sentences creating rhythm.</p>
+
+    <p>In "Death of a Pig," White's famous essay about the death of his beloved pig, there's not a wasted sentence. Every detail serves emotion: the temperature of the water, the specific medications tried, the final moments. White doesn't tell you to feel sad; he shows you exactly what sadness looked like in his barn. And because he writes with such clarity and precision, readers feel it too. No melodrama, no manipulation. Just truth, clearly stated.</p>
+
+    <p>White proved that the rules aren't limiting; they're liberating. Once you master clarity, you can write anything—journalism, essays, children's books (Charlotte's Web), satire. The constraints free you to focus on meaning instead of struggling with language. White shows that mastering Strunk's principles isn't about writing in a corporate memo format. It's about achieving such clarity that your unique voice comes through unmistakable and unfiltered.</p>
+
+    <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Typewriter -->
+      <rect x="200" y="60" width="300" height="80" fill="#3d3d3d" rx="8"/>
+
+      <!-- Keys (simplified) -->
+      <rect x="220" y="80" width="15" height="12" fill="#5d5d5d" rx="2"/>
+      <rect x="240" y="80" width="15" height="12" fill="#5d5d5d" rx="2"/>
+      <rect x="260" y="80" width="15" height="12" fill="#5d5d5d" rx="2"/>
+      <rect x="280" y="80" width="15" height="12" fill="#5d5d5d" rx="2"/>
+      <rect x="300" y="80" width="15" height="12" fill="#5d5d5d" rx="2"/>
+      <rect x="320" y="80" width="15" height="12" fill="#5d5d5d" rx="2"/>
+      <rect x="340" y="80" width="15" height="12" fill="#5d5d5d" rx="2"/>
+      <rect x="360" y="80" width="15" height="12" fill="#5d5d5d" rx="2"/>
+
+      <!-- Platen (roller) -->
+      <rect x="200" y="45" width="300" height="12" fill="#2d2d2d" rx="3"/>
+
+      <!-- Carriage -->
+      <line x1="220" y1="45" x2="220" y2="55" stroke="#999" stroke-width="2"/>
+      <line x1="460" y1="45" x2="460" y2="55" stroke="#999" stroke-width="2"/>
+
+      <!-- Words coming out -->
+      <text x="350" y="155" text-anchor="middle" font-size="11" fill="#FFE66D" font-weight="700">Words that matter</text>
+    </svg>
+
+    <p style="margin-top: 30px;">White's legacy is this: Good writing is an act of respect for the reader. You owe them clarity. You owe them your best thinking, precisely expressed. And when you deliver that, something remarkable happens—your voice becomes unmistakable, your ideas stick, and your words survive. That's why we're still reading E.B. White's essays nearly a century later.</p>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 3: Twitter's 280-Character Constraint ===== -->
+<section class="story story-3">
+  <div class="story-inner">
+    <h2>Story Spotlight: Constraints Force Clarity</h2>
+    <p>Twitter's original 140-character limit (later expanded to 280) is a modern-day vindication of Strunk & White. The constraint forced writers to choose words with brutal precision. You couldn't afford filler, jargon, or passive voice. "The decision was made" takes 20 characters; "We decided" takes 10. On Twitter, that difference matters.</p>
+
+    <p>Some of the most memorable sentences of the last decade came from Twitter precisely because of this constraint. Politicians, writers, comedians—they all learned that brevity and directness created impact. "We should talk about bees" is a tweet. "A discussion should be initiated regarding the ecological significance of Apis mellifera" is corporate speak that would never trend.</p>
+
+    <p>The lesson Strunk & White taught a century ago—that every word must earn its place—became viscerally obvious in real time. Writers who mastered the platform weren't the ones who posted frequently; they were the ones who understood that constraints force you to find the exact word, the necessary word, the word that carries maximum meaning in minimum space. Twitter didn't invent the principle. It just made it inescapable.</p>
+
+    <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Phone screen -->
+      <rect x="200" y="20" width="300" height="160" fill="#1a1a1a" stroke="#666" stroke-width="2" rx="12"/>
+
+      <!-- Status bar -->
+      <rect x="200" y="20" width="300" height="25" fill="#0a0a0a"/>
+      <text x="350" y="38" text-anchor="middle" font-size="10" fill="#fff">9:41</text>
+
+      <!-- Tweet -->
+      <rect x="220" y="60" width="260" height="100" fill="#0f1419" rx="8"/>
+
+      <!-- Tweet text -->
+      <text x="235" y="80" font-size="11" fill="#fff" font-weight="600">Every word must work.</text>
+      <text x="235" y="100" font-size="11" fill="#fff">Omit needless ones.</text>
+      <text x="235" y="120" font-size="11" fill="#999" font-size="10">Clarity wins.</text>
+
+      <!-- Character counter -->
+      <text x="500" y="155" font-size="9" fill="#FFE66D" font-weight="700">47/280</text>
+    </svg>
+
+    <p style="margin-top: 30px;">Strunk & White didn't know about Twitter, but they would have recognized it instantly: a system that rewards the precise, the vigorous, the active, and the clear. A system where jargon drowns and simplicity soars. A medium where style and substance became inseparable because space itself became a principle of design.</p>
+  </div>
+</section>
+
+<!-- ===== CHEATSHEET ===== -->
+<section class="cheatsheet">
+  <div class="cheatsheet-inner">
+    <h2>The Quick Reference Cheatsheet</h2>
+
+    <div class="cheatsheet-grid">
+      <div class="cheat-card">
+        <h3>1. Active Voice</h3>
+        <p><strong>Subject does verb.</strong> "The team completed the project." Not "The project was completed by the team." Active = power, clarity, momentum.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>2. Order of Importance</h3>
+        <p><strong>Strong beginning, stronger ending.</strong> Save your most important idea for the period. Position shapes emphasis. The end is where memory lives.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>3. Omit Needless Words</h3>
+        <p><strong>Every word must carry weight.</strong> Delete redundancies, hedging, filler. "In my opinion, I think..." = waste. "I think..." is better. Better still: "This matters because..."</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>4. Concrete Language</h3>
+        <p><strong>Name things, don't generalize.</strong> Not "the weather was bad" but "Rain drummed on the windows." Show don't tell. Readers remember images, not abstractions.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>5. Parallel Construction</h3>
+        <p><strong>Balance structures balance meaning.</strong> "I like hiking, painting, and reading" (all gerunds). Not "I like hiking, to paint, and reading" (mixed forms). Pattern = clarity.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>6. Choose Right Words</h3>
+        <p><strong>Synonyms aren't identical.</strong> "Stroll" vs. "trudge" changes everything. Connotation matters. Use a dictionary, not just a thesaurus. Know what your word carries.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>7. Avoid Jargon</h3>
+        <p><strong>Say what you mean plainly.</strong> Jargon excludes and obscures. Unless writing for specialists who need the term, find simpler language. "Utilize" = "use." Pick "use."</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>8. Prefer Simple to Complex</h3>
+        <p><strong>Complexity ≠ intelligence.</strong> Short sentences move fast. Complex ideas can be explained simply. Long sentences tire readers. Break them up. Readers thank you.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>9. Modifiers Must Be Clear</h3>
+        <p><strong>Dangles confuse readers.</strong> "Running late, the traffic annoyed me" = traffic running late (absurd). Fix: "Running late, I cursed the traffic." Connect modifiers to their targets.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>10. Read Aloud</h3>
+        <p><strong>Your ear catches what eyes miss.</strong> Silent reading auto-corrects. Reading aloud exposes rhythm breaks, repetitions, awkward phrasing. Do this before you publish.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>11. Know Rules Before Breaking</h3>
+        <p><strong>Mastery before rebellion.</strong> Understand why rules exist before you violate them. "Fragment. Like this." works because readers expect completeness. Error and effect differ.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>12. Develop Consistent Voice</h3>
+        <p><strong>You, unmistakably you.</strong> Voice emerges from consistent choices: sentence length, word preference, rhythm, tone. Readers should recognize you after two paragraphs. Be yourself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

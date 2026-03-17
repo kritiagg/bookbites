@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Humor Code: A Global Search for What Makes Things Funny</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        /* ===== COVER ===== */
+        .cover {
+            background: linear-gradient(135deg, var(--coral) 0%, var(--purple) 100%);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .cover .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .cover .authors {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .venn-diagram-container {
+            margin: 50px auto;
+            max-width: 400px;
+        }
+
+        /* ===== VENN DIAGRAM ===== */
+        svg {
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background: white;
+            color: var(--coral);
+            transform: translateY(-2px);
+        }
+
+        /* ===== LESSONS ===== */
+        .lesson {
+            padding: 50px 40px;
+            border-bottom: 3px solid #f0f0f0;
+            scroll-margin-top: 80px;
+        }
+
+        .lesson:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: var(--sunny);
+            color: var(--dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-weight: 700;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .lesson h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .lesson-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .lesson-inner.alt {
+            direction: rtl;
+        }
+
+        .lesson-inner.alt > * {
+            direction: ltr;
+        }
+
+        .lesson-text h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: var(--deep-blue);
+        }
+
+        .lesson-text p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .illustration-container {
+            background: linear-gradient(135deg, var(--sunny)20%, var(--sky)20%);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .illustration-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: linear-gradient(135deg, var(--coral)10%, var(--teal)10%);
+            border-left: 4px solid var(--coral);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.2);
+        }
+
+        .card-label {
+            display: inline-block;
+            background: var(--coral);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .card h4 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .card p {
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        /* ===== QUOTE BOX ===== */
+        .quote-box {
+            background: linear-gradient(135deg, var(--purple)15%, var(--pink)15%);
+            border-left: 5px solid var(--purple);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 1.1em;
+            color: var(--dark);
+        }
+
+        .quote-author {
+            margin-top: 15px;
+            font-style: normal;
+            font-weight: 600;
+            color: var(--deep-blue);
+        }
+
+        /* ===== FUNNY BOX ===== */
+        .funny-box {
+            background: linear-gradient(135deg, var(--sunny)25%, var(--orange)25%);
+            border: 2px dashed var(--orange);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .funny-box h4 {
+            color: var(--warm-red);
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .funny-box p {
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        /* ===== AI CONNECTION BOX ===== */
+        .ai-box {
+            background: linear-gradient(135deg, var(--sky)15%, var(--deep-blue)15%);
+            border-left: 5px solid var(--deep-blue);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .ai-box h4 {
+            color: var(--deep-blue);
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ai-box p {
+            font-size: 0.95em;
+            line-height: 1.8;
+            color: var(--dark);
+        }
+
+        /* ===== CROSS-BOOK CONNECTION ===== */
+        .connect-box {
+            background: linear-gradient(135deg, var(--mint)20%, var(--forest)10%);
+            border-left: 5px solid var(--forest);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .connect-box h4 {
+            color: var(--forest);
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .connect-box p {
+            font-size: 0.95em;
+            line-height: 1.8;
+            color: var(--dark);
+        }
+
+        /* ===== STORIES ===== */
+        .story {
+            background: linear-gradient(135deg, var(--pink)10%, var(--purple)10%);
+            padding: 40px;
+            margin: 40px 0;
+            border-radius: 12px;
+            border: 2px solid var(--pink);
+        }
+
+        .story h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: var(--purple);
+        }
+
+        .story-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .story-inner.stacked {
+            grid-template-columns: 1fr;
+        }
+
+        .story p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        /* ===== CHEATSHEET ===== */
+        .cheatsheet {
+            background: linear-gradient(135deg, var(--coral)10%, var(--sunny)10%);
+            padding: 50px 40px;
+            border-top: 5px solid var(--coral);
+        }
+
+        .cheatsheet h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+
+        .cheatsheet-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .cheatsheet-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--teal);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .cheatsheet-item h4 {
+            color: var(--deep-blue);
+            font-size: 1.1em;
+            margin-bottom: 12px;
+        }
+
+        .cheatsheet-item p {
+            font-size: 0.9em;
+            line-height: 1.7;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer .book-details {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 20px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .lesson-inner, .story-inner, .cheatsheet-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .lesson-inner.alt {
+                direction: ltr;
+            }
+
+            .cover h1 {
+                font-size: 2.5em;
+            }
+
+            .lesson h2 {
+                font-size: 1.8em;
+            }
+
+            .cover {
+                padding: 50px 25px;
+            }
+
+            .lesson {
+                padding: 30px 20px;
+            }
+        }
+
+        /* ===== PARTICLES ===== */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        /* ===== TABLE OF CONTENTS ===== */
+        .toc {
+            background: linear-gradient(135deg, var(--cream)30%, var(--sky)10%);
+            padding: 40px;
+            margin: 40px;
+            border-radius: 12px;
+        }
+
+        .toc h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+
+        .toc ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .toc li {
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid var(--teal);
+        }
+
+        .toc a {
+            color: var(--deep-blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: var(--coral);
+        }
+
+        /* ===== TWO COLUMN ===== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ===== COVER ===== -->
+        <div class="cover" id="cover">
+            <div class="cover-content">
+                <h1>The Humor Code</h1>
+                <p class="subtitle">A Global Search for What Makes Things Funny</p>
+                <p class="authors">By Peter McGraw & Joel Warner</p>
+
+                <div class="venn-diagram-container">
+                    <svg viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Benign circle -->
+                        <circle cx="150" cy="175" r="110" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+                        <!-- Violation circle -->
+                        <circle cx="250" cy="175" r="110" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+
+                        <!-- Labels -->
+                        <text x="110" y="180" font-size="18" fill="white" font-weight="bold" text-anchor="middle">BENIGN</text>
+                        <text x="290" y="180" font-size="18" fill="white" font-weight="bold" text-anchor="middle">VIOLATION</text>
+
+                        <!-- Center overlap label -->
+                        <text x="200" y="170" font-size="20" fill="white" font-weight="bold" text-anchor="middle" font-style="italic">HUMOR</text>
+                        <text x="200" y="195" font-size="14" fill="white" text-anchor="middle">= Both</text>
+                    </svg>
+                </div>
+
+                <div class="nav-buttons">
+                    <a href="#toc" class="nav-btn">Jump to Contents</a>
+                    <a href="#lesson-1" class="nav-btn">Start Reading</a>
+                    <a href="#cheatsheet" class="nav-btn">Quick Reference</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TABLE OF CONTENTS ===== -->
+        <div class="toc" id="toc">
+            <h2>What's Inside</h2>
+            <ul>
+                <li><a href="#lesson-1">Lesson 1: The Benign Violation Theory</a></li>
+                <li><a href="#lesson-2">Lesson 2: Why Tickling Only Works From Others</a></li>
+                <li><a href="#lesson-3">Lesson 3: Geographic Humor Differences</a></li>
+                <li><a href="#lesson-4">Lesson 4: The Comedy Club Experiment</a></li>
+                <li><a href="#lesson-5">Lesson 5: Humor & Tragedy (Too Soon vs Too Late)</a></li>
+                <li><a href="#lesson-6">Lesson 6: Laughing At vs With</a></li>
+                <li><a href="#lesson-7">Lesson 7: The Evolutionary Purpose of Humor</a></li>
+                <li><a href="#lesson-8">Lesson 8: Humor in Advertising & Marketing</a></li>
+                <li><a href="#lesson-9">Lesson 9: Dark Humor & Coping Mechanisms</a></li>
+                <li><a href="#lesson-10">Lesson 10: The Humor Cliff</a></li>
+                <li><a href="#lesson-11">Lesson 11: Professional vs Everyday Humor</a></li>
+                <li><a href="#lesson-12">Lesson 12: Humor Across Cultures</a></li>
+                <li><a href="#spotlight-1">Spotlight 1: The Japanese Laughter Revolution</a></li>
+                <li><a href="#spotlight-2">Spotlight 2: The Middle East Comedy Scene</a></li>
+                <li><a href="#spotlight-3">Spotlight 3: New York vs LA Comedy Divide</a></li>
+                <li><a href="#cheatsheet">Quick Reference Cheatsheet</a></li>
+            </ul>
+        </div>
+
+        <!-- ===== LESSON 1: THE BENIGN VIOLATION THEORY ===== -->
+        <div class="lesson" id="lesson-1">
+            <div class="lesson-number">1</div>
+            <h2>The Benign Violation Theory</h2>
+
+            <div class="lesson-inner">
+                <div class="lesson-text">
+                    <h3>The Foundation: Something Both Wrong AND Okay</h3>
+                    <p>At the heart of McGraw and Warner's research lies a deceptively simple but profoundly powerful insight: humor emerges at the intersection of two opposing forces. Something must be <strong>wrong</strong>—a violation of norms, expectations, or social conventions. But simultaneously, it must be perceived as <strong>okay</strong>—benign, harmless, or inconsequential. This duality is the secret ingredient that separates laughter from offense, comedy from cruelty.</p>
+
+                    <p>The theory explains why the same joke lands perfectly in one context and falls flat (or causes genuine harm) in another. A joke about a funeral is darkly comedic if told by the grieving family member; it's cruel if told by a stranger. A mild insult between close friends is playful banter; the identical words from a rival are hurtful. The violation itself is constant—what changes is the benignity.</p>
+
+                    <p>This framework has profound implications. It suggests that humor isn't about surprise alone, or incongruity alone, or taboo-breaking alone. Rather, it's about the calibration—the precise balance point where something is just wrong enough to be interesting, but safe enough to find funny.</p>
+                </div>
+
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Benign circle -->
+                        <circle cx="120" cy="150" r="80" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+                        <text x="120" y="145" font-size="16" font-weight="bold" text-anchor="middle" fill="#FF6B6B">BENIGN</text>
+                        <text x="120" y="165" font-size="12" text-anchor="middle" fill="#FF6B6B">(it's okay)</text>
+
+                        <!-- Violation circle -->
+                        <circle cx="180" cy="150" r="80" fill="none" stroke="#4ECDC4" stroke-width="3"/>
+                        <text x="180" y="145" font-size="16" font-weight="bold" text-anchor="middle" fill="#4ECDC4">VIOLATION</text>
+                        <text x="180" y="165" font-size="12" text-anchor="middle" fill="#4ECDC4">(it's wrong)</text>
+
+                        <!-- Overlap - HUMOR -->
+                        <ellipse cx="150" cy="150" rx="30" ry="80" fill="#FFE66D" opacity="0.7"/>
+                        <text x="150" y="150" font-size="24" font-weight="bold" text-anchor="middle" fill="#2D3436">HUMOR!</text>
+
+                        <!-- Arrows showing the concept -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#A06CD5"/>
+                            </marker>
+                        </defs>
+                        <path d="M 60 240 Q 150 280 240 240" stroke="#A06CD5" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <text x="150" y="270" font-size="12" text-anchor="middle" fill="#A06CD5">Perfect calibration = Laughter</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Key Insight</span>
+                <h4>The Calibration Matters</h4>
+                <p>Too benign (no violation) = boring. Too much violation (not benign) = offensive. The sweet spot in between? Pure comedy gold. This explains why a perfectly timed joke about a taboo subject can unite a room in laughter, while an untimely one can create profound discomfort.</p>
+            </div>
+
+            <div class="quote-box">
+                "Humor is a benign violation—something that is both wrong and okay at the same time. The art of comedy is getting that balance just right."
+                <div class="quote-author">— Central thesis, The Humor Code</div>
+            </div>
+
+            <div class="funny-box">
+                <h4>🧪 Test This Theory</h4>
+                <p><strong>Try this:</strong> Tell a friend a mildly awkward joke about themselves. Was it funny? Now explain the joke before telling it. Less funny, right? The violation becomes too obvious, the benignity needs to be felt, not explained.</p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & The Benign Violation Theory</h4>
+                <p>This theory provides a formal computational framework for AI humor systems. Rather than trying to detect "funniness" directly (which is subjective), AI could be trained to identify violations (departures from linguistic or social norms) and assess benignity (through context, relationship signals, and severity metrics). The challenge: benignity is deeply contextual. ChatGPT jokes often fail because the system can detect incongruity but cannot reliably calibrate context-dependent benignity. It doesn't know if a violation is truly "okay" in the specific social situation. This is why humor remains one of the hardest problems in natural language understanding—it requires not just pattern recognition, but genuine contextual reasoning.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connection to Other Books</h4>
+                <p><strong>Thinking, Fast and Slow (Kahneman):</strong> The benign violation theory illustrates how System 1 (fast, intuitive thinking) processes humor. We instantly recognize the violation, quickly assess benignity, and react with laughter—all before System 2 (deliberate reasoning) can overthink it. This is why explaining a joke ruins it; explanation engages System 2.</p>
+                <p><strong>Predictably Irrational (Ariely):</strong> Just as we have predictable irrationalities in decision-making, we have predictable patterns in what we find funny. The benign violation framework reveals these patterns—we're not randomly amused, but consistently amused by specific types of violations in specific contexts.</p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 2: WHY TICKLING ONLY WORKS FROM OTHERS ===== -->
+        <div class="lesson" id="lesson-2">
+            <div class="lesson-number">2</div>
+            <h2>Why Tickling Only Works From Others</h2>
+
+            <div class="lesson-inner alt">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Self-tickling scenario -->
+                        <g id="self-tickle">
+                            <circle cx="150" cy="150" r="40" fill="#FF6B6B" opacity="0.3"/>
+                            <text x="150" y="155" font-size="40" text-anchor="middle">🤷</text>
+                        </g>
+
+                        <!-- Arrows -->
+                        <path d="M 50 150 L 100 150" stroke="#4ECDC4" stroke-width="2" fill="none"/>
+                        <text x="75" y="140" font-size="12" fill="#4ECDC4" font-weight="bold">No laughter</text>
+
+                        <path d="M 200 150 L 250 150" stroke="#FFE66D" stroke-width="2" fill="none"/>
+                        <text x="225" y="140" font-size="12" fill="#FFE66D" font-weight="bold">Hilarious!</text>
+
+                        <!-- Other-tickling scenario -->
+                        <g id="other-tickle">
+                            <circle cx="260" cy="150" r="30" fill="#FFE66D" opacity="0.5"/>
+                            <text x="260" y="155" font-size="30" text-anchor="middle">😂</text>
+                        </g>
+
+                        <!-- Bottom explanation -->
+                        <text x="150" y="280" font-size="13" text-anchor="middle" fill="#2D3436" font-weight="bold">Prediction + Violation = Humor!</text>
+                    </svg>
+                </div>
+
+                <div class="lesson-text">
+                    <h3>Predictability Kills the Punchline</h3>
+                    <p>One of McGraw and Warner's most elegant experiments reveals something profound about how our brains process humor: you cannot tickle yourself and laugh. You already know exactly when and where the tickle is coming, so your brain doesn't register a violation. There's a violation (the physical sensation is unusual), but it's fully predicted and controlled—therefore benign to the point of boring.</p>
+
+                    <p>When someone else tickles you, there's genuine unpredictability. Your brain detects a violation—an unexpected, slightly threatening physical sensation—but in a safe social context (someone you trust, playful tone), it's benign. The combination creates laughter.</p>
+
+                    <p>This principle extends far beyond tickling. It explains why:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Self-deprecating humor works:</strong> You're violating normal self-presentation norms (we usually present ourselves favorably), but in a controlled, safe way you've chosen.</li>
+                        <li><strong>Surprises are funny:</strong> The audience doesn't see the punchline coming, creating genuine unpredictability.</li>
+                        <li><strong>Sarcasm requires skill:</strong> The joke works because listeners anticipate one meaning but receive another—a violation of linguistic expectations within a benign frame.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Brain Science</span>
+                <h4>Prediction & Violation</h4>
+                <p>Our brains are prediction machines. When predictions are perfectly met, we experience no surprise (and no humor). When predictions are violated in unexpected ways, we notice. But we only laugh when that violation occurs in a benign context—which is why timing, trust, and social signals are everything in comedy.</p>
+            </div>
+
+            <div class="funny-box">
+                <h4>🧪 Test This Theory</h4>
+                <p><strong>Try this:</strong> Tell someone a joke you've told them many times before. Probably not funny the second time. Now tell them a new joke with a structure they don't expect. The violation of their expectations about where the joke is heading creates laughter.</p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & Predictability in Humor</h4>
+                <p>This insight has profound implications for AI humor systems. Current language models (like GPT) are optimized for predictability—they're trained to generate the most likely next token given the context. But humor requires <em>controlled unpredictability</em>. The AI must recognize patterns well enough to set up expectations, then violate those expectations in just the right way. This is why temperature settings matter in GPT: too low (highly predictable), jokes are obvious and unfunny; too high (highly random), jokes are nonsensical. The sweet spot—genuine violation within benignity—requires the model to understand not just language patterns, but social and contextual norms.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connection to Other Books</h4>
+                <p><strong>Stumbling on Happiness (Gilbert):</strong> Our brains predict how we'll feel in the future, and those predictions are often wrong. Similarly, comedians predict how audiences will react to jokes, and the unexpected audience response creates its own form of humor. The violation of emotional expectations.</p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 3: GEOGRAPHIC HUMOR DIFFERENCES ===== -->
+        <div class="lesson" id="lesson-3">
+            <div class="lesson-number">3</div>
+            <h2>Geographic Humor Differences</h2>
+
+            <div class="lesson-inner">
+                <div class="lesson-text">
+                    <h3>What's Funny in New York Isn't Funny in Tokyo</h3>
+                    <p>McGraw and Warner's global research revealed a startling truth: humor norms are deeply geographic. What makes people laugh in Manhattan—aggressive sarcasm, self-aggrandizing humor, direct insults delivered as jokes—falls flat in Tokyo, where indirectness, group harmony, and observational humor dominate.</p>
+
+                    <p>The New York comedy scene thrives on <strong>confrontation</strong>. Comedians challenge audiences, insult hecklers, make fun of their own neuroses and failures. The violation (aggressive, boundary-pushing content) is benign because of the performance frame—everyone knows they're in a comedy club, the comedian's tone is playful, and the audience has consented to be provoked.</p>
+
+                    <p>The Los Angeles comedy scene, by contrast, is more <strong>polished and aspirational</strong>. Comedians tell carefully crafted stories, often self-deprecating but ultimately about triumph and growth. The violations are smaller, more relatable—everyday awkwardness rather than aggressive confrontation.</p>
+
+                    <p>Japanese comedy (owarai) operates on completely different principles. Precision timing, physical comedy, and wordplay dominate. Comedians often perform in pairs, with one playing the "straight man" and the other the fool. The humor is more <strong>observational and absurdist</strong>, less about personal revelation or social confrontation.</p>
+
+                    <p>This isn't because Japanese people don't appreciate aggressive humor—they do. But in public, formal comedy settings, the violations preferred are different. The social norms around humor are different.</p>
+                </div>
+
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- World map background -->
+                        <circle cx="150" cy="150" r="120" fill="#E8F4F8"/>
+
+                        <!-- New York marker -->
+                        <g id="new-york">
+                            <circle cx="100" cy="100" r="35" fill="#FF6B6B" opacity="0.4" stroke="#FF6B6B" stroke-width="2"/>
+                            <text x="100" y="105" font-size="11" text-anchor="middle" font-weight="bold" fill="#2D3436">NYC</text>
+                            <text x="100" y="120" font-size="9" text-anchor="middle" fill="#2D3436">AGGRESSIVE</text>
+                        </g>
+
+                        <!-- LA marker -->
+                        <g id="la">
+                            <circle cx="80" cy="160" r="35" fill="#FDCB6E" opacity="0.5" stroke="#FDCB6E" stroke-width="2"/>
+                            <text x="80" y="165" font-size="11" text-anchor="middle" font-weight="bold" fill="#2D3436">LA</text>
+                            <text x="80" y="180" font-size="9" text-anchor="middle" fill="#2D3436">POLISHED</text>
+                        </g>
+
+                        <!-- Tokyo marker -->
+                        <g id="tokyo">
+                            <circle cx="220" cy="80" r="35" fill="#4ECDC4" opacity="0.5" stroke="#4ECDC4" stroke-width="2"/>
+                            <text x="220" y="85" font-size="11" text-anchor="middle" font-weight="bold" fill="#2D3436">Tokyo</text>
+                            <text x="220" y="100" font-size="9" text-anchor="middle" fill="#2D3436">PRECISE</text>
+                        </g>
+
+                        <!-- Middle East marker -->
+                        <g id="middle-east">
+                            <circle cx="160" cy="140" r="35" fill="#A06CD5" opacity="0.4" stroke="#A06CD5" stroke-width="2"/>
+                            <text x="160" y="145" font-size="11" text-anchor="middle" font-weight="bold" fill="white">ME</text>
+                            <text x="160" y="160" font-size="9" text-anchor="middle" fill="white">POLITICAL</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Cultural Norms</span>
+                <h4>Violations Are Culture-Specific</h4>
+                <p>What constitutes a violation of norms depends entirely on cultural context. A joke that violates norms in one culture might violate different norms in another, or might not be a violation at all. The benignity assessment is equally cultural—what's acceptable to joke about differs dramatically across societies.</p>
+            </div>
+
+            <div class="story" id="spotlight-1">
+                <h3>Spotlight 1: The Japanese Laughter Revolution</h3>
+                <div class="story-inner stacked">
+                    <div>
+                        <p>When McGraw and Warner traveled to Japan, they discovered a humor system they initially didn't recognize as humor at all. Japanese comedians would perform elaborate, precise physical comedy routines that seemed more like carefully choreographed dance than what American audiences would call "comedy." The audience would erupt in laughter—but not from jokes, but from perfectly timed physical movements, unexpected facial expressions, and absurdist scenarios.</p>
+
+                        <p>Japanese humor values <strong>precision</strong> above all. A comedian's timing must be exact; a gesture must be perfectly calculated. There's little room for improvisation or audience interaction—the violation is built into the structure of the performance, not the relationship between comedian and audience.</p>
+
+                        <p>This reflects deeper cultural values: group harmony, attention to detail, respect for structure. The jokes are almost subordinate to the <em>performance of the jokes</em>. An American comedian might say "I'm terrible at relationships" (self-deprecating personal revelation), while a Japanese comedian might enact an absurdist scenario where a man cannot decide which vending machine to use (observational, abstract, precisely choreographed).</p>
+
+                        <p>Yet both are funny. Both contain benign violations. But the violations are entirely different in nature, reflecting different cultural norms about what's appropriate to discuss publicly and how to discuss it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story" id="spotlight-2">
+                <h3>Spotlight 2: The Middle East Comedy Scene</h3>
+                <div class="story-inner stacked">
+                    <div>
+                        <p>The Middle East has a rich tradition of comedic storytelling, but McGraw and Warner found that humor often serves different purposes than in Western comedy clubs. Much Middle Eastern humor is <strong>political and subversive</strong>—it's a way to critique power structures, navigate censorship, and build community through shared understanding of difficult situations.</p>
+
+                        <p>A comedian in the Middle East might tell stories that are funny to insiders (those who understand the political and cultural context) but baffling to outsiders. The humor often relies on <strong>allusion and implication</strong> rather than explicit punchlines. This reflects a necessity—in contexts where direct political speech can be dangerous, humor becomes a coded language for expressing dissent.</p>
+
+                        <p>The violations in Middle Eastern humor are often <strong>social and political</strong> rather than personal. A joke might be about government incompetence, gender roles, or family hierarchies—things everyone thinks about but cannot discuss directly. The humor allows people to laugh together about shared frustrations while maintaining plausible deniability.</p>
+
+                        <p>This shows how benign violation theory must account for power dynamics. The benignity of a joke depends not just on social context, but on political context. A joke that's benign in a private gathering might be dangerous in public; a joke that's funny to one political faction might be offensive to another.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story" id="spotlight-3">
+                <h3>Spotlight 3: New York vs LA Comedy Divide</h3>
+                <div class="story-inner stacked">
+                    <div>
+                        <p>Within the United States, McGraw and Warner observed significant differences between New York and Los Angeles comedy scenes—two cities that are only 2,500 miles apart but might as well be different countries comedically.</p>
+
+                        <p><strong>New York Comedy:</strong> Audiences expect to be challenged, insulted (in the name of humor), and made uncomfortable. A New York comedian might say "You look like you make terrible life choices" to an audience member, and the room explodes with laughter. The violation is the direct, insulting language; the benignity is the obvious playfulness of the context and tone. New York audiences want to feel like they're in a gladiatorial arena where wit is the weapon. Comedy here is about dominance, cleverness, and the ability to handle confrontation.</p>
+
+                        <p><strong>LA Comedy:</strong> Audiences want well-crafted stories. An LA comedian might tell a 10-minute story about dating disasters, building to a perfectly timed punchline. The violations are gentler, more relatable. Self-deprecation is key, but it's always in service of a larger narrative. LA audiences aren't interested in being insulted; they want to feel good about themselves while laughing at shared human foibles. Comedy here is about aspiration and growth.</p>
+
+                        <p>These differences reflect the cities themselves. New York is crowded, confrontational, where strangers interact regularly and humor is a way to establish dominance in the social hierarchy. LA is about image, aspiration, and carefully curated personas—comedy reflects that by being more polished and less aggressive.</p>
+
+                        <p>Yet both are legitimately funny. The benign violation theory explains why: both systems work within their cultural context. What matters is calibration to that specific context. A perfect New York joke dies in LA because the violation doesn't feel benign to an LA audience (it feels mean-spirited rather than playful). An LA joke bores a New York audience (it feels like the comedian is trying too hard to be likable rather than funny).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & Cultural Context</h4>
+                <p>This is perhaps the most challenging problem in computational humor: cultural context. Training an AI on comedy from one culture can actually make it worse at understanding humor in another culture. The violations don't translate; the benignity assessments differ. A system trained on New York comedy will try to be aggressive and insulting in contexts where it should be gentle and self-deprecating. The Turing test of comedy isn't just "make a joke that's funny"—it's "make a joke that's funny <em>in the specific cultural context</em>."</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connection to Other Books</h4>
+                <p><strong>Influence (Cialdini):</strong> Cialdini's principle of liking shows that we're more influenced by people who are similar to us and who we like. Similarly, we find humor funnier when it comes from people whose values and norms we share. Geographic differences in humor reflect deeper differences in values and what people consider normal.</p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 4: THE COMEDY CLUB EXPERIMENT ===== -->
+        <div class="lesson" id="lesson-4">
+            <div class="lesson-number">4</div>
+            <h2>The Comedy Club Experiment</h2>
+
+            <div class="lesson-inner alt">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Stage -->
+                        <rect x="50" y="50" width="200" height="80" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                        <text x="150" y="100" font-size="14" text-anchor="middle" font-weight="bold" fill="#2D3436">COMEDIAN</text>
+
+                        <!-- Audience section -->
+                        <g id="audience">
+                            <!-- Row 1 -->
+                            <circle cx="80" cy="160" r="8" fill="#FF6B6B" opacity="0.7"/>
+                            <circle cx="120" cy="160" r="8" fill="#FF6B6B" opacity="0.7"/>
+                            <circle cx="160" cy="160" r="8" fill="#FF6B6B" opacity="0.7"/>
+                            <circle cx="200" cy="160" r="8" fill="#FF6B6B" opacity="0.7"/>
+
+                            <!-- Row 2 -->
+                            <circle cx="100" cy="190" r="8" fill="#4ECDC4" opacity="0.7"/>
+                            <circle cx="150" cy="190" r="8" fill="#4ECDC4" opacity="0.7"/>
+                            <circle cx="200" cy="190" r="8" fill="#4ECDC4" opacity="0.7"/>
+
+                            <!-- Row 3 -->
+                            <circle cx="80" cy="220" r="8" fill="#74B9FF" opacity="0.7"/>
+                            <circle cx="130" cy="220" r="8" fill="#74B9FF" opacity="0.7"/>
+                            <circle cx="180" cy="220" r="8" fill="#74B9FF" opacity="0.7"/>
+                        </g>
+
+                        <!-- Laughter waves -->
+                        <path d="M 50 130 Q 70 120 90 130" stroke="#A06CD5" stroke-width="2" fill="none"/>
+                        <path d="M 50 125 Q 100 105 150 125" stroke="#A06CD5" stroke-width="2" fill="none"/>
+                        <path d="M 120 120 Q 170 100 220 120" stroke="#A06CD5" stroke-width="2" fill="none"/>
+
+                        <text x="150" y="270" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Social Laughter Contagion</text>
+                    </svg>
+                </div>
+
+                <div class="lesson-text">
+                    <h3>When Group Dynamics Change Everything</h3>
+                    <p>McGraw and Warner conducted fascinating experiments in comedy clubs, systematically testing how the same joke performed to the same person in different contexts produces wildly different responses. Their findings: <strong>laughter is contagious</strong>, but more importantly, <strong>group size and audience composition dramatically change what seems funny</strong>.</p>
+
+                    <p>A single person watching a comedian on a screen and laughing at a joke versus that same person in a packed comedy club watching the same comedian tell the same joke—the responses were noticeably different. Why? The presence of other people laughing creates <strong>social proof</strong>. When you hear others laugh, your brain's threat-detection system relaxes. "This is safe to laugh at," your subconscious registers. "Other people are doing it, so it must be benign."</p>
+
+                    <p>This explains several phenomena:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>The laugh track:</strong> TV shows use canned laughter to simulate group dynamics and make jokes seem funnier than they actually are.</li>
+                        <li><strong>The setup for larger crowds:</strong> Comedians often tell the same joke to different-sized audiences and adjust based on energy.</li>
+                        <li><strong>The echo chamber effect:</strong> In groups with similar values, people laugh more readily at jokes that reinforce those values because the benignity is stronger.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Social Dynamics</span>
+                <h4>Laughter Contagion</h4>
+                <p>Humans are profoundly influenced by the laughter of others. A joke that might seem aggressive or offensive when told to you individually becomes benign when you're surrounded by people laughing. This isn't weakness; it's an adaptive mechanism that evolved because groups that could laugh together were more cohesive and successful.</p>
+            </div>
+
+            <div class="funny-box">
+                <h4>🧪 Test This Theory</h4>
+                <p><strong>Try this:</strong> Watch a comedy special alone versus with friends. Chances are you'll laugh harder with friends, even at jokes you predicted. Now watch the same special knowing it was recorded without an audience (if one exists). Less funny? That's social proof at work.</p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & Social Context in Humor</h4>
+                <p>Current AI systems operate in isolation—they generate jokes without awareness of social context, group dynamics, or audience composition. They can't calibrate humor to group size, relationship dynamics, or the presence of "co-laughers." They also can't leverage social proof. A joke is funny or not funny in an AI's assessment, independent of whether others are laughing. Real human comedy depends on reading the room, adjusting based on audience response, and leveraging group dynamics. This is why a perfectly written joke can bomb with the wrong audience or at the wrong moment in an evening. AI humor systems need to become socially aware—they need to understand not just the joke and the audience, but the <em>group dynamics</em> influencing how funny that joke will seem.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connection to Other Books</h4>
+                <p><strong>Influence (Cialdini):</strong> Social proof is one of Cialdini's most powerful persuasion principles. We're more likely to believe, buy, or do something if we see others doing it. Laughter functions as a form of social proof—if others are laughing, this must be safe and appropriate to laugh at.</p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 5: HUMOR & TRAGEDY ===== -->
+        <div class="lesson" id="lesson-5">
+            <div class="lesson-number">5</div>
+            <h2>Humor & Tragedy: Too Soon vs Too Late</h2>
+
+            <div class="lesson-inner">
+                <div class="lesson-text">
+                    <h3>The Temporal Dance of Benign Violation</h3>
+                    <p>One of the most poignant insights from McGraw and Warner's research: jokes about tragedy operate under a clock. Tell a joke about a recent tragedy, and audiences are horrified—the violation isn't benign because the pain is still fresh. Wait too long, and the joke becomes pointless because the context fades. But hit the sweet spot, and a joke about tragedy can be profoundly cathartic and meaningful.</p>
+
+                    <p>This temporal dimension of benign violation theory is crucial. The benignity of a joke isn't just about social context or speaker-audience relationship; it's also about <strong>temporal context</strong>. How much time has passed since the tragedy? Has the acute pain transformed into something that can be examined from a distance?</p>
+
+                    <p>Consider jokes about 9/11. In 2001, jokes about the attacks seemed unconscionable. By 2005, comedians were working with 9/11 material, and audiences who had processed their shock could laugh as a form of cultural healing. By 2015, jokes about 9/11 were commonplace because enough time had passed that the acute violation could be benign. Yet if you told a 9/11 joke to someone who lost a family member that week, it would still violate benignity.</p>
+
+                    <p>The same principle applies to personal tragedies. A comedian can joke about their own divorce much sooner than their audience can joke about it, because the comedian has had emotional distance from the moment of pain. The audience, hearing the joke, might still see the person through the lens of that tragedy and not yet be ready for humor.</p>
+
+                    <p>This reveals something profound: <strong>humor is a mechanism for processing tragedy</strong>. By finding something benignly violated in a tragic situation, we can laugh—and in laughing, we acknowledge that the pain, while real, is not all-consuming. Humor becomes a sign of healing.</p>
+                </div>
+
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Timeline -->
+                        <line x1="40" y1="150" x2="260" y2="150" stroke="#2D3436" stroke-width="2"/>
+
+                        <!-- Points on timeline -->
+                        <circle cx="60" cy="150" r="8" fill="#FF6B6B"/>
+                        <text x="60" y="125" font-size="12" text-anchor="middle" fill="#FF6B6B" font-weight="bold">TRAGEDY</text>
+                        <text x="60" y="180" font-size="10" text-anchor="middle" fill="#FF6B6B">Too soon</text>
+
+                        <circle cx="150" cy="150" r="8" fill="#FFE66D"/>
+                        <text x="150" y="125" font-size="12" text-anchor="middle" fill="#FFE66D" font-weight="bold">SWEET SPOT</text>
+                        <text x="150" y="180" font-size="10" text-anchor="middle" fill="#FFE66D">Perfect timing</text>
+
+                        <circle cx="240" cy="150" r="8" fill="#74B9FF"/>
+                        <text x="240" y="125" font-size="12" text-anchor="middle" fill="#74B9FF" font-weight="bold">FORGOTTEN</text>
+                        <text x="240" y="180" font-size="10" text-anchor="middle" fill="#74B9FF">Too late</text>
+
+                        <!-- Curve showing benignity -->
+                        <path d="M 60 200 Q 150 100 240 200" stroke="#A06CD5" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                        <text x="150" y="90" font-size="12" text-anchor="middle" fill="#A06CD5" font-weight="bold">Benignity Arc</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Temporal Context</span>
+                <h4>The Healing Power of Humor</h4>
+                <p>Humor about tragedy is a sign that healing has begun. The fact that something once purely painful can now be approached with humor means that the acute trauma has been processed enough to find benignity in it. This is why comedians often make jokes about the darkest experiences of their lives—not to minimize the pain, but to acknowledge that they've moved beyond the moment of acute suffering.</p>
+            </div>
+
+            <div class="quote-box">
+                "Humor is a way of saying that despite everything, we can still laugh. It's a sign that we've found distance from the pain."
+                <div class="quote-author">— Concept from The Humor Code</div>
+            </div>
+
+            <div class="funny-box">
+                <h4>🧪 Test This Theory</h4>
+                <p><strong>Try this:</strong> Think of an embarrassing moment from your life. If it happened recently (days/weeks), you probably can't joke about it yet—it still feels like a violation. If it happened years ago, you can tell the story as a funny anecdote. The violation hasn't changed, but the benignity has grown with time.</p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & Temporal Context in Humor</h4>
+                <p>This is a dimension of humor that's particularly challenging for AI: understanding temporal context. A joke about COVID was offensive in March 2020 and unremarkable in March 2022. The identical text had dramatically different humor value depending on how much time had passed. AI systems would need to understand not just the semantic content of a joke, but its temporal position relative to the events it references. They'd need to know when tragedies occurred, how much cultural processing has happened, and how much emotional distance people have achieved. Current systems don't account for this dimension at all.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connection to Other Books</h4>
+                <p><strong>Thinking, Fast and Slow (Kahneman):</strong> Kahneman discusses how our emotional reactions fade over time—a phenomenon called hedonic adaptation. Similarly, our reactions to tragedy fade, allowing humor to become benign. The same mechanism that lets us adapt to loss also allows us to laugh about loss.</p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 6: LAUGHING AT VS WITH ===== -->
+        <div class="lesson" id="lesson-6">
+            <div class="lesson-number">6</div>
+            <h2>Laughing At vs With: The Cruelty Threshold</h2>
+
+            <div class="lesson-inner alt">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Laughing WITH -->
+                        <g id="laughing-with">
+                            <circle cx="100" cy="100" r="40" fill="#55EFC4" opacity="0.6" stroke="#55EFC4" stroke-width="2"/>
+                            <text x="100" y="105" font-size="30" text-anchor="middle">🤝</text>
+                        </g>
+
+                        <!-- Arrow -->
+                        <path d="M 140 100 L 160 100" stroke="#A06CD5" stroke-width="2" fill="none"/>
+
+                        <!-- Laughing AT -->
+                        <g id="laughing-at">
+                            <circle cx="200" cy="100" r="40" fill="#FF6B6B" opacity="0.6" stroke="#FF6B6B" stroke-width="2"/>
+                            <text x="200" y="105" font-size="30" text-anchor="middle">👆</text>
+                        </g>
+
+                        <!-- Labels -->
+                        <text x="100" y="160" font-size="13" text-anchor="middle" font-weight="bold" fill="#55EFC4">INCLUSIVE</text>
+                        <text x="100" y="175" font-size="11" text-anchor="middle" fill="#55EFC4">Benign violation</text>
+
+                        <text x="200" y="160" font-size="13" text-anchor="middle" font-weight="bold" fill="#FF6B6B">EXCLUSIVE</text>
+                        <text x="200" y="175" font-size="11" text-anchor="middle" fill="#FF6B6B">Can become cruel</text>
+
+                        <!-- Bottom explanation -->
+                        <text x="150" y="250" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">The difference: Who controls the laughter?</text>
+                    </svg>
+                </div>
+
+                <div class="lesson-text">
+                    <h3>The Inclusion/Exclusion Boundary</h3>
+                    <p>McGraw and Warner identified a critical distinction that separates humor from bullying: <strong>laughing with someone versus laughing at them</strong>. This distinction isn't always obvious, but it determines whether a violation remains benign or becomes cruel.</p>
+
+                    <p>When you laugh <strong>with</strong> someone, you're including them in the humor. A self-deprecating comedian is inviting you to laugh with them about their own flaws. Even if the comedian is making fun of themselves harshly, the audience feels like they're sharing in something together. The violation is self-chosen, which makes it benign.</p>
+
+                    <p>When you laugh <strong>at</strong> someone, you're excluding them from the humor. You're laughing because they're inferior, foolish, or different in ways that place them outside the group's norms. This can be benign (teasing among close friends) or cruel (mockery of a vulnerable person), depending on context, power dynamics, and whether the target can defend themselves or join in.</p>
+
+                    <p>The key difference: <strong>control</strong>. Does the person being laughed about have control over the laughter? Can they defend themselves? Are they positioned as equal to or inferior to the laughers? A woman joking about her body to an audience has set up the joke and can own it. Random strangers mocking a woman's body is bullying, even if the content is identical.</p>
+
+                    <p>This distinction is crucial because it reveals that benign violation isn't purely about the violation itself—it's also about power dynamics and consent. A violation that the target has agreed to (or initiated) is more likely to remain benign than one imposed by others.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Power Dynamics</span>
+                <h4>Consent & Control Matter</h4>
+                <p>The benignity of a violation depends partly on who initiated it. Self-deprecating humor is benign because you're choosing your own violation. Mockery is cruel when it's imposed on a non-consenting target. This explains why the same type of joke can be hilarious from a friend and hurtful from a stranger—power dynamics and consent have shifted.</p>
+            </div>
+
+            <div class="funny-box">
+                <h4>🧪 Test This Theory</h4>
+                <p><strong>Try this:</strong> A friend makes fun of your fashion choices. You laugh. Later, a stranger says the exact same thing. Different reaction, right? The violation is identical, but the benignity is completely different because the power dynamic is different. With your friend, you're equals engaged in playful banter. With a stranger, you're being judged by someone outside your circle.</p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & The Ethics of Humor</h4>
+                <p>This distinction has profound implications for AI humor systems. An AI could theoretically generate jokes that violate norms, but assessing benignity requires understanding power dynamics, consent, and the target's ability to respond. Current systems can't determine whether a joke is self-directed (by a willing comedian) or imposed mockery. They can't assess whether the humor is punching up (at someone more powerful), punching sideways (at someone equal), or punching down (at someone vulnerable). Without this understanding, an AI generating humor risks constantly punching down—making jokes at the expense of groups with less power. This is one reason why many AI-generated jokes feel mean-spirited: they violate norms (good) but in ways that lack the benignity of consent and equal power dynamics.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connection to Other Books</h4>
+                <p><strong>Influence (Cialdini):</strong> Cialdini discusses how we're influenced by people we like and who are similar to us. Laughing "with" someone increases liking and builds rapport, while laughing "at" someone decreases liking and builds distance. The distinction between these types of laughter has profound effects on social bonding.</p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 7: EVOLUTIONARY PURPOSE OF HUMOR ===== -->
+        <div class="lesson" id="lesson-7">
+            <div class="lesson-number">7</div>
+            <h2>The Evolutionary Purpose of Humor</h2>
+
+            <div class="lesson-inner">
+                <div class="lesson-text">
+                    <h3>Why Did Laughter Evolve?</h3>
+                    <p>McGraw and Warner explore a question that evolutionary biologists have long pondered: why do humans laugh? What adaptive advantage does humor provide? The answer, they suggest, relates to how humor helps us navigate social complexity and deal with threats.</p>
+
+                    <p>In evolutionary terms, humans faced constant challenges: physical threats (predators, enemies) and social threats (group rejection, status loss). Laughter appears to have evolved as a mechanism for <strong>signaling and managing these threats</strong>. When we laugh at something that violates norms but is benign, we're essentially saying: "This is a threat to our social order, but it's not a <em>real</em> threat. We can acknowledge the violation without panicking."</p>
+
+                    <p>Consider the classic case of tickling. Your body's threat-response system detects an unexpected physical sensation (potential danger), but laughter signals "this is safe" to others and to yourself. Group laughter serves a similar function: by laughing together at a norm violation, we're collectively agreeing that this violation is benign, that our social order can handle it. This is why shared laughter creates group bonding—it's a form of collective reassurance.</p>
+
+                    <p>Humor may also have evolved as a form of <strong>creative problem-solving</strong>. Noticing incongruities and violations (the core of humor) requires the same cognitive skills as identifying problems and finding novel solutions. Groups with better senses of humor might have been better at solving problems, innovating, and adapting to change.</p>
+
+                    <p>Additionally, humor creates <strong>social cohesion</strong>. Groups that laugh together have stronger bonds. Laughter creates a shared experience that signals "we're in this together." In evolutionary terms, tight-knit groups were more successful—they cooperated better, defended each other, and survived longer. Humor was glue.</p>
+                </div>
+
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Brain -->
+                        <ellipse cx="150" cy="120" rx="50" ry="60" fill="#74B9FF" opacity="0.5" stroke="#0984E3" stroke-width="2"/>
+
+                        <!-- Threat detection -->
+                        <circle cx="100" cy="100" r="10" fill="#FF6B6B"/>
+                        <text x="100" y="105" font-size="12" text-anchor="middle" fill="white" font-weight="bold">!</text>
+                        <text x="100" y="125" font-size="10" text-anchor="middle" fill="#FF6B6B">Threat</text>
+
+                        <!-- Processing -->
+                        <circle cx="150" cy="80" r="10" fill="#FFE66D"/>
+                        <text x="150" y="85" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">?</text>
+                        <text x="150" y="100" font-size="10" text-anchor="middle" fill="#FFE66D">Assess</text>
+
+                        <!-- Resolution -->
+                        <circle cx="200" cy="100" r="10" fill="#55EFC4"/>
+                        <text x="200" y="105" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">✓</text>
+                        <text x="200" y="125" font-size="10" text-anchor="middle" fill="#55EFC4">Safe</text>
+
+                        <!-- Arrows -->
+                        <path d="M 110 100 L 140 90" stroke="#2D3436" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+                        <path d="M 160 90 L 190 100" stroke="#2D3436" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+                        <!-- Group bonding below -->
+                        <g id="group">
+                            <circle cx="80" cy="220" r="15" fill="#FF6B6B" opacity="0.6"/>
+                            <circle cx="150" cy="220" r="15" fill="#FF6B6B" opacity="0.6"/>
+                            <circle cx="220" cy="220" r="15" fill="#FF6B6B" opacity="0.6"/>
+
+                            <!-- Connection lines -->
+                            <line x1="95" y1="220" x2="135" y2="220" stroke="#A06CD5" stroke-width="2"/>
+                            <line x1="165" y1="220" x2="205" y2="220" stroke="#A06CD5" stroke-width="2"/>
+                        </g>
+
+                        <text x="150" y="270" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Shared Laughter = Group Bonding</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Evolution</span>
+                <h4>Humor as Threat Management</h4>
+                <p>Laughter evolved as a way to process threats—to signal "this is scary/weird/wrong, but it's okay." In social contexts, shared laughter means "we're processing this together." This mechanism made groups more cohesive and better able to handle uncertainty and change.</p>
+            </div>
+
+            <div class="quote-box">
+                "Humor is an evolutionary response to threats. By laughing together, we signal that we can handle norm violations, we're safe together, and our social order is stable enough to process challenge."
+                <div class="quote-author">— Concept from The Humor Code</div>
+            </div>
+
+            <div class="funny-box">
+                <h4>🧪 Test This Theory</h4>
+                <p><strong>Try this:</strong> In tense situations (waiting for bad news, in an awkward social situation), notice how much more people laugh. Dark humor emerges in hospitals, funeral homes, and war zones. This isn't disrespect; it's threat management. The more threatened a group feels, the more they may resort to humor as a way to regain psychological control.</p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & Evolutionary Models of Humor</h4>
+                <p>Understanding humor as an evolved threat-management mechanism could help AI systems generate more appropriate humor. Rather than treating humor as "incongruity + surprise," AI could model it as "threat detection + assessment + reassurance." This would help systems understand why certain jokes work in certain contexts (high tension → need for humor to manage threat) and why the same joke fails in other contexts (low tension → no need for threat management). It would also help AI understand that humor serves a social function—it's not just about making people laugh, but about managing collective anxiety and building group cohesion.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connection to Other Books</h4>
+                <p><strong>Stumbling on Happiness (Gilbert):</strong> Gilbert discusses how our brains are prediction machines and how we experience negative emotions when threats are detected. Humor appears to be a mechanism for reducing the stress of those threat-detection signals—a way of saying "this isn't as bad as it feels."</p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 8: HUMOR IN ADVERTISING ===== -->
+        <div class="lesson" id="lesson-8">
+            <div class="lesson-number">8</div>
+            <h2>Humor in Advertising & Marketing</h2>
+
+            <div class="lesson-inner alt">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Product (box) -->
+                        <rect x="100" y="80" width="100" height="100" fill="#FDCB6E" stroke="#2D3436" stroke-width="2"/>
+                        <text x="150" y="135" font-size="14" text-anchor="middle" font-weight="bold" fill="#2D3436">PRODUCT</text>
+
+                        <!-- Humor element -->
+                        <circle cx="220" cy="120" r="30" fill="#FF6B6B" opacity="0.7"/>
+                        <text x="220" y="125" font-size="24" text-anchor="middle">😂</text>
+
+                        <!-- Connection -->
+                        <line x1="200" y1="130" x2="220" y2="130" stroke="#A06CD5" stroke-width="2"/>
+                        <path d="M 220 150 L 220 200" stroke="#4ECDC4" stroke-width="3"/>
+
+                        <!-- Result -->
+                        <circle cx="220" cy="235" r="25" fill="#55EFC4" stroke="#00B894" stroke-width="2"/>
+                        <text x="220" y="240" font-size="16" text-anchor="middle" font-weight="bold">SALE</text>
+                    </svg>
+                </div>
+
+                <div class="lesson-text">
+                    <h3>Why Funny Ads Work (And When They Don't)</h3>
+                    <p>McGraw and Warner examine how companies use humor in advertising, and they find predictable patterns. Humor in ads works when it creates a benign violation that makes the product or brand seem more desirable. But it fails spectacularly when the violation isn't actually benign.</p>
+
+                    <p><strong>Successful ad humor</strong> typically violates expectations about the product category itself. A luxury car ad that's overly serious reinforces that luxury cars are serious purchases. But a luxury car ad that makes fun of itself (or of typical car-buying anxiety) creates humor through benign violation—it acknowledges something wrong or awkward about the category, but in a way that's obviously playful.</p>
+
+                    <p><strong>Failed ad humor</strong> often violates the wrong thing. An insurance company making edgy jokes about death might get laughs, but it violates benignity—it seems cruel or inappropriate. The violation isn't felt as benign because it doesn't match the brand's positioning or the customer's values.</p>
+
+                    <p>The most effective advertising humor also creates <strong>positive associations with the brand</strong>. If you laugh at a brand's commercial, you associate that laughter with the brand. You feel closer to it, like you share values or perspective. This is why brands invest in funny ads—they're not just trying to make you remember the product; they're trying to make you <em>like</em> the brand by positioning it as funny, self-aware, and aligned with your sense of humor.</p>
+
+                    <p>Additionally, humor <strong>lowers defenses</strong>. We're less likely to critically evaluate marketing messages when we're laughing. A funny ad can slip persuasive messages past our critical filters because our brains are focused on processing the humor, not scrutinizing the claim.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Marketing</span>
+                <h4>Laughter Builds Brand Loyalty</h4>
+                <p>Funny advertising works because it creates positive associations and lowers consumer defenses against persuasion. People remember funny ads better and feel more connected to brands that make them laugh. The key is matching the violation to the brand's positioning—a financial services firm making dark jokes creates a different effect than a fast-food chain making absurdist humor.</p>
+            </div>
+
+            <div class="funny-box">
+                <h4>🧪 Test This Theory</h4>
+                <p><strong>Try this:</strong> Recall your favorite advertisement. Chances are it made you laugh or smile. Now think about an ad you disliked. Likely, it made an awkward joke that didn't match the brand or violated benignity (seemed mean-spirited, off-brand, or trying too hard). The difference is often just calibration.</p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & Persuasive Humor</h4>
+                <p>AI systems trained to generate marketing copy could benefit enormously from benign violation theory. Rather than generating jokes, they could be trained to identify what norms the product/brand violates (or could humorously violate) and how to frame those violations as benign. For example: "People usually take financial planning seriously. What if we made it silly?" That understanding of the product's relationship to norms is where humor in marketing starts. Current AI often generates jokes that are technically funny but don't relate to the product, so they fail as advertising. A better system would understand the product category's norms and generate humor that specifically addresses the gap between those norms and reality.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connection to Other Books</h4>
+                <p><strong>Influence (Cialdini):</strong> Cialdini discusses how liking is a powerful persuasion tool. Funny ads work partly because they make people like the brand. Laughter creates positive emotional associations, which Cialdini's research shows is a powerful driver of persuasion and purchase intent.</p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 9: DARK HUMOR & COPING ===== -->
+        <div class="lesson" id="lesson-9">
+            <div class="lesson-number">9</div>
+            <h2>Dark Humor & Coping Mechanisms</h2>
+
+            <div class="lesson-inner">
+                <div class="lesson-text">
+                    <h3>Laughing Through the Darkness</h3>
+                    <p>McGraw and Warner found that dark humor—jokes about death, suffering, taboo topics—serves a profound psychological function: it's a coping mechanism. When facing difficult realities, people use dark humor to process fear and maintain psychological equilibrium. A surgeon joking about death before entering the operating room, a firefighter making morbid jokes at a fire station, a cancer patient joking about chemotherapy—these aren't signs of callousness. They're signs of psychological resilience.</p>
+
+                    <p>Dark humor works through benign violation theory in a specific way: it <strong>acknowledges a serious violation (something genuinely frightening or painful) but reframes it as benign through the act of joking</strong>. By laughing about death, we're saying: "Yes, this is real. Yes, this is terrible. But we can maintain our sanity and dignity by finding humor in it. We're not defeated by it."</p>
+
+                    <p>The research suggests that <strong>people who use dark humor cope better with trauma</strong>. They're not in denial; they're processing the reality of the situation while maintaining psychological function. This is why dark humor emerges in the darkest situations—hospitals, war zones, funeral homes. It's not disrespect; it's psychological survival.</p>
+
+                    <p>However, dark humor also has social risks. The same joke that's psychologically helpful when told within a group of people facing the same challenge can be deeply offensive when told to outsiders. A soldier's dark jokes about war are coping mechanisms; the same jokes told to civilians who didn't face that trauma can feel cruel. Context determines whether dark humor is healing or harmful.</p>
+
+                    <p>This distinction is crucial: dark humor is healing when it's <strong>shared among people who share the trauma</strong> and when <strong>the joker has emotional authority</strong> over the subject. A cancer patient joking about cancer shows resilience. A healthy person joking about cancer comes across as cruel or inappropriate because they lack the experiential authority to make that joke benign.</p>
+                </div>
+
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Trauma/pain -->
+                        <circle cx="150" cy="80" r="40" fill="#FF6B6B" opacity="0.5" stroke="#FF6B6B" stroke-width="2"/>
+                        <text x="150" y="85" font-size="24" text-anchor="middle">💔</text>
+
+                        <!-- Arrow down -->
+                        <path d="M 150 120 L 150 150" stroke="#A06CD5" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+                        <!-- Dark humor processing -->
+                        <circle cx="150" cy="190" r="40" fill="#A06CD5" opacity="0.5" stroke="#A06CD5" stroke-width="2"/>
+                        <text x="150" y="200" font-size="32" text-anchor="middle">😈😂</text>
+
+                        <!-- Outcome -->
+                        <path d="M 190 190 L 230 190" stroke="#55EFC4" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
+                        <circle cx="260" cy="190" r="30" fill="#55EFC4" opacity="0.5" stroke="#55EFC4" stroke-width="2"/>
+                        <text x="260" y="200" font-size="24" text-anchor="middle">💪</text>
+
+                        <text x="150" y="270" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Coping Through Reframing</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Psychology</span>
+                <h4>Humor as Resilience</h4>
+                <p>Dark humor isn't a sign of emotional damage; it's a sign of psychological strength. People who can joke about terrible situations are maintaining cognitive flexibility and emotional control in the face of trauma. Research supports this: people with better senses of humor cope better with adversity.</p>
+            </div>
+
+            <div class="quote-box">
+                "Humor is how we process the unprocessable. By joking about pain, we're not minimizing it—we're managing it."
+                <div class="quote-author">— Psychological principle from The Humor Code</div>
+            </div>
+
+            <div class="funny-box">
+                <h4>🧪 Test This Theory</h4>
+                <p><strong>Try this:</strong> Notice when dark humor emerges in conversations. Usually it's when people are discussing something genuinely difficult—health problems, relationship breakdowns, work stress. The humor isn't cruel; it's coping. The darker the situation, the darker the humor that helps people process it.</p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & Dark Humor Generation</h4>
+                <p>This is one of the most challenging aspects of computational humor for AI to navigate. An AI could theoretically generate dark humor based on patterns in training data, but without understanding the psychological function (coping, processing, shared trauma), the jokes will feel off. They'll seem cruel or gratuitous rather than healing. Understanding dark humor requires understanding context—who is telling the joke, what trauma they've experienced, who is hearing it, and whether they share that trauma. An AI system making dark jokes about a subject it has no experiential connection to will consistently violate benignity (seem cruel rather than coping) because it lacks the authority to make those jokes. This is a fundamental limitation: humor requires emotional intelligence, and current AI systems don't have genuine emotional experiences to draw from.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connection to Other Books</h4>
+                <p><strong>Stumbling on Happiness (Gilbert):</strong> Gilbert discusses how humans have remarkable abilities to adapt to difficult circumstances and maintain happiness. Dark humor appears to be part of this adaptive toolkit—a way that humans maintain psychological resilience even in terrible situations.</p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 10: THE HUMOR CLIFF ===== -->
+        <div class="lesson" id="lesson-10">
+            <div class="lesson-number">10</div>
+            <h2>The Humor Cliff: When Violations Become Too Severe</h2>
+
+            <div class="lesson-inner alt">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Benignity axis (left to right) -->
+                        <line x1="40" y1="220" x2="260" y2="220" stroke="#2D3436" stroke-width="2"/>
+                        <text x="25" y="225" font-size="11" fill="#2D3436" font-weight="bold">BENIGN</text>
+                        <text x="265" y="225" font-size="11" fill="#2D3436" font-weight="bold">VIOLATION</text>
+
+                        <!-- Humor curve -->
+                        <path d="M 50 200 Q 150 80 200 80 L 200 220" stroke="#FFE66D" stroke-width="3" fill="none"/>
+
+                        <!-- Cliff edge -->
+                        <path d="M 200 80 L 260 80" stroke="#FF6B6B" stroke-width="4" fill="none"/>
+
+                        <!-- Points -->
+                        <circle cx="100" cy="160" r="6" fill="#FFE66D"/>
+                        <text x="100" y="250" font-size="10" text-anchor="middle" fill="#FFE66D" font-weight="bold">FUNNY</text>
+
+                        <circle cx="200" cy="80" r="6" fill="#FF6B6B"/>
+                        <text x="200" y="250" font-size="10" text-anchor="middle" fill="#FF6B6B" font-weight="bold">CLIFF</text>
+
+                        <circle cx="240" cy="80" r="6" fill="#FF6B6B"/>
+                        <text x="240" y="250" font-size="10" text-anchor="middle" fill="#FF6B6B" font-weight="bold">OFFENSIVE</text>
+                    </svg>
+                </div>
+
+                <div class="lesson-text">
+                    <h3>The Edge Where Humor Becomes Harm</h3>
+                    <p>McGraw and Warner discovered a critical threshold in benign violation theory: the "humor cliff." As a violation becomes more severe, it remains funny up to a point—but past that point, there's a cliff. The violation becomes too great to remain benign, and laughter stops abruptly. What was funny becomes offensive, disturbing, or harmful.</p>
+
+                    <p>The humor cliff is different for every person and situation. For one person, a joke about a certain topic is funny; for another (perhaps someone who's experienced trauma related to that topic), the same joke crosses the cliff immediately and becomes harmful.</p>
+
+                    <p>The research suggests that <strong>the humor cliff is determined by the severity of the violation and how much benignity remains</strong>. A mild violation can be hilarious. A moderate violation is still funny but starts to make people uncomfortable (dark humor). A severe violation is offensive because there's no longer enough benignity to maintain the humor. The violation is too great.</p>
+
+                    <p>Interestingly, McGraw and Warner found that <strong>comedians with the best senses of violation-spotting are those who can navigate right up to the cliff without going over</strong>. They find material that's maximally violated but still benign. The best dark humor comedians push the boundary constantly, which is why they have devoted fans and equally devoted critics.</p>
+
+                    <p>The humor cliff explains why <strong>the same joke bombs with different audiences</strong>. One audience still finds the violation benign; another has already crossed the cliff and sees the violation as too severe. This is why comedy is so variable—the cliff is constantly moving based on audience composition, cultural moment, and individual sensitivities.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Boundaries</span>
+                <h4>Benignity Has Limits</h4>
+                <p>There's a point where a violation becomes too severe to remain benign. This point differs for every person and situation. Skilled comedians navigate right up to this cliff, finding humor in material that's maximally violated but still safe. But they're always taking the risk that their audience's cliff is somewhere different from where they calculated it to be.</p>
+            </div>
+
+            <div class="quote-box">
+                "The humor cliff is where violations are too severe to remain benign. Crossing it is where humor becomes harm. The art of comedy is finding the edge without falling off—but every audience has a different cliff."
+                <div class="quote-author">— Concept from The Humor Code</div>
+            </div>
+
+            <div class="funny-box">
+                <h4>🧪 Test This Theory</h4>
+                <p><strong>Try this:</strong> Think of a comedian you enjoy. Now imagine them pushing their material further—making jokes even darker or more offensive. At some point, would you stop finding them funny? That's your personal humor cliff for that topic. Different people have different cliffs, which is why comedy is so divisive.</p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & The Humor Cliff Problem</h4>
+                <p>The humor cliff is particularly challenging for AI systems. Not only must an AI detect violations and assess benignity, it must also understand where the cliff is for its specific audience. And that cliff is different for different people and constantly shifting based on cultural moment, individual sensitivity, and context. An AI trained to generate edgy humor might consistently cross cliffs it doesn't perceive. It might think it's being funny when it's being offensive because it doesn't understand the severity of violation from the audience's perspective. This is why AI-generated humor often feels either too safe (avoiding any real violation) or too harsh (crossing cliffs it didn't see). Getting the benignity calibration right is hard enough; adding the cliff detection makes it exponentially harder.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connection to Other Books</h4>
+                <p><strong>Thinking, Fast and Slow (Kahneman):</strong> Kahneman discusses how our minds work in different modes—System 1 (intuitive, fast) and System 2 (deliberate, slow). The humor cliff might relate to how quickly people assess whether something is benign. If System 1 judges it safe, it's funny. If System 1 judges it threatening, the cliff has been crossed.</p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 11: PROFESSIONAL VS EVERYDAY HUMOR ===== -->
+        <div class="lesson" id="lesson-11">
+            <div class="lesson-number">11</div>
+            <h2>Professional Humor vs Everyday Humor</h2>
+
+            <div class="lesson-inner">
+                <div class="lesson-text">
+                    <h3>The Stage vs the Break Room</h3>
+                    <p>McGraw and Warner's research reveals an interesting distinction: <strong>humor operates differently in professional settings versus personal contexts</strong>. A joke that kills in a comedy club might crash in a boardroom. A hilarious remark among friends might be inappropriate with colleagues. The rules of benign violation are context-dependent.</p>
+
+                    <p><strong>Professional humor</strong> tends to be safer, more inclusive, and less personal. The violation must be less severe because the benignity frame is weaker. You're at work; people aren't fully relaxed; the social distance between colleagues is greater. Humor at work tends toward observational (commenting on universal human experiences) rather than personal (revealing vulnerabilities or making self-deprecating jokes that only work with intimacy).</p>
+
+                    <p><strong>Everyday humor</strong> among friends or family can be much darker and more personal because the benignity frame is stronger. You have established trust, shared history, and understanding of each other's boundaries. You can make violations that would be catastrophic in professional settings because the benignity is obvious.</p>
+
+                    <p>This explains why <strong>offices that loosen up and allow more personal humor report better morale and cohesion</strong>—humor requires some level of genuine connection and trust. The more professional a setting, the less real humor can flourish. But this creates a catch-22: to improve culture through humor, you need to take the risk of people misinterpreting your jokes as crossing cliffs you didn't intend to cross.</p>
+
+                    <p>Some workplaces have figured out how to build safer humor spaces by establishing clear norms about what kinds of violations are benign in that context. A startup culture might allow more aggressive humor; a corporate office might stick to safer observational humor. But the key is <strong>consistency and clear boundaries</strong>. When everyone knows the norms, people can calibrate their humor better.</p>
+                </div>
+
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Work setting -->
+                        <rect x="40" y="40" width="100" height="120" fill="#74B9FF" opacity="0.3" stroke="#0984E3" stroke-width="2"/>
+                        <text x="90" y="65" font-size="13" text-anchor="middle" font-weight="bold" fill="#0984E3">WORK</text>
+                        <circle cx="70" cy="110" r="8" fill="#0984E3"/>
+                        <circle cx="110" cy="110" r="8" fill="#0984E3"/>
+                        <text x="90" y="140" font-size="10" text-anchor="middle" fill="#0984E3">Safe Humor</text>
+
+                        <!-- Personal setting -->
+                        <rect x="160" y="40" width="100" height="120" fill="#FF6B6B" opacity="0.3" stroke="#FF6B6B" stroke-width="2"/>
+                        <text x="210" y="65" font-size="13" text-anchor="middle" font-weight="bold" fill="#FF6B6B">FRIENDS</text>
+                        <circle cx="190" cy="110" r="8" fill="#FF6B6B"/>
+                        <circle cx="230" cy="110" r="8" fill="#FF6B6B"/>
+                        <text x="210" y="140" font-size="10" text-anchor="middle" fill="#FF6B6B">Edgy Humor</text>
+
+                        <!-- Difference indicator -->
+                        <text x="150" y="200" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Context Changes Benignity</text>
+
+                        <!-- Spectrum -->
+                        <line x1="50" y1="240" x2="250" y2="240" stroke="#2D3436" stroke-width="2"/>
+                        <text x="50" y="260" font-size="10" fill="#2D3436" font-weight="bold">Formal</text>
+                        <text x="240" y="260" font-size="10" text-anchor="end" fill="#2D3436" font-weight="bold">Personal</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Context Matters</span>
+                <h4>Benignity is Situational</h4>
+                <p>The same joke has different humor value in different contexts because the benignity frame is different. Professional settings require safer violations because the benignity frame is weaker (lower trust, more formal relationships). Personal settings allow edgier violations because the benignity frame is stronger (established trust, shared history).</p>
+            </div>
+
+            <div class="funny-box">
+                <h4>🧪 Test This Theory</h4>
+                <p><strong>Try this:</strong> Tell a mildly edgy joke to a coworker versus to a close friend. Notice the difference in how it lands. With your friend, you can build on it, go darker, establish shared humor. With the coworker, there's more caution, less build-up, and a faster retreat to safe ground if the joke doesn't land perfectly.</p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & Contextual Humor</h4>
+                <p>An AI deployed in professional settings (like workplace communication tools) needs to understand and respect the different benignity frames of professional versus personal contexts. The same system that can handle edgy humor in personal conversations needs to be significantly more conservative in professional ones. Currently, most AI systems either err entirely on the side of caution (generating safe, boring humor) or ignore context entirely. A better system would calibrate humor intensity to context: detecting whether it's a professional setting, understanding the relationships involved, and adjusting violation severity accordingly. This requires not just language understanding, but contextual awareness of the social situation.</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connection to Other Books</h4>
+                <p><strong>Thinking, Fast and Slow (Kahneman):</strong> Kahneman discusses how context shapes decision-making and how the same information is processed differently depending on framing. Similarly, the same joke is processed differently depending on the professional versus personal framing of the context.</p>
+            </div>
+        </div>
+
+        <!-- ===== LESSON 12: HUMOR ACROSS CULTURES ===== -->
+        <div class="lesson" id="lesson-12">
+            <div class="lesson-number">12</div>
+            <h2>Humor Across Cultures: The World Tour</h2>
+
+            <div class="lesson-inner">
+                <div class="lesson-text">
+                    <h3>What Makes Things Funny in Every Corner of the World</h3>
+                    <p>McGraw and Warner spent years researching humor across cultures, conducting their research in multiple countries and analyzing comedy traditions from around the world. Their central finding: <strong>benign violation theory appears to be universal</strong>, but what counts as a violation and what counts as benign varies dramatically by culture.</p>
+
+                    <p>In the United States, humor often focuses on <strong>personal revelation and self-deprecation</strong>. Comedians talk about their failures, embarrassments, and neuroses. The violation is the sharing of something normally kept private; the benignity comes from the fact that the comedian is choosing to reveal it and has successfully survived the experience they're describing.</p>
+
+                    <p>In many European countries, <strong>wordplay and linguistic humor</strong> are highly valued. Violating language norms—using words in unexpected ways, creating puns, playing with multiple meanings—creates humor. In cultures with multiple languages, multilingual puns can be especially funny because they violate linguistic expectations.</p>
+
+                    <p>In East Asia, as we've seen with Japan, <strong>observational and absurdist humor</strong> are more common. Less personal revelation, more attention to the details of everyday life and surreal scenarios. The humor often comes from recognizing how ridiculous normal life is when examined closely.</p>
+
+                    <p>In cultures with strong oral storytelling traditions (common in Africa, the Middle East, and Latin America), <strong>narrative and character-based humor</strong> dominate. Long, carefully structured stories with callbacks and developing characters. The humor comes from watching how the narrator will resolve an increasingly complex narrative.</p>
+
+                    <p>McGraw and Warner's key insight: <strong>every culture uses benign violation as the source of humor, but the cultural norms that define "violations" and "benignity" are entirely different</strong>. What's taboo to discuss in one culture is a standard comedy topic in another. What seems edgy and irreverent in one culture is not a violation at all in another.</p>
+
+                    <p>This has profound implications for global communication: <strong>humor is one of the hardest things to translate across cultures</strong> because it depends on understanding very specific cultural norms about what's normal and what's acceptable to discuss. A joke that works in New York will often fall flat in Tokyo, not because Japanese people don't appreciate humor, but because the violation structure is different and the benignity assessment is based on different cultural values.</p>
+                </div>
+
+                <div class="illustration-container">
+                    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Center point -->
+                        <circle cx="150" cy="150" r="5" fill="#2D3436"/>
+
+                        <!-- Radiating humor styles -->
+                        <!-- US -->
+                        <line x1="150" y1="150" x2="150" y2="60" stroke="#FF6B6B" stroke-width="2"/>
+                        <circle cx="150" cy="50" r="20" fill="#FF6B6B" opacity="0.5"/>
+                        <text x="150" y="55" font-size="10" text-anchor="middle" fill="#2D3436" font-weight="bold">PERSONAL</text>
+
+                        <!-- Europe -->
+                        <line x1="150" y1="150" x2="230" y2="90" stroke="#4ECDC4" stroke-width="2"/>
+                        <circle cx="240" cy="75" r="20" fill="#4ECDC4" opacity="0.5"/>
+                        <text x="240" y="80" font-size="10" text-anchor="middle" fill="#2D3436" font-weight="bold">WORDPLAY</text>
+
+                        <!-- Asia -->
+                        <line x1="150" y1="150" x2="230" y2="210" stroke="#74B9FF" stroke-width="2"/>
+                        <circle cx="240" cy="225" r="20" fill="#74B9FF" opacity="0.5"/>
+                        <text x="240" y="230" font-size="10" text-anchor="middle" fill="#2D3436" font-weight="bold">ABSURD</text>
+
+                        <!-- Africa/ME/LA -->
+                        <line x1="150" y1="150" x2="70" y2="210" stroke="#A06CD5" stroke-width="2"/>
+                        <circle cx="60" cy="225" r="20" fill="#A06CD5" opacity="0.5"/>
+                        <text x="60" y="230" font-size="10" text-anchor="middle" fill="white" font-weight="bold">STORY</text>
+
+                        <text x="150" y="280" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Benign Violation = Universal Core</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Universality</span>
+                <h4>Same Theory, Different Norms</h4>
+                <p>Benign violation theory appears to be universal—every culture uses it to create humor. But what counts as a violation and what counts as benign is entirely culturally determined. This explains both why humor is universal and why it's so hard to translate across cultures.</p>
+            </div>
+
+            <div class="quote-box">
+                "Humor is universal. But what's funny is deeply particular to each culture's norms, values, and what people consider acceptable to laugh about."
+                <div class="quote-author">— Global finding from The Humor Code</div>
+            </div>
+
+            <div class="funny-box">
+                <h4>🧪 Test This Theory</h4>
+                <p><strong>Try this:</strong> Find a comedy special from a different culture (especially one where you don't speak the language natively). Chances are, some humor won't translate. Why? Not because people in that culture aren't funny, but because the violations are culture-specific. What violates their cultural norms might not violate yours, and vice versa.</p>
+            </div>
+
+            <div class="ai-box">
+                <h4>🤖 AI & The Ultimate Humor Challenge</h4>
+                <p>If cross-cultural humor is hard for humans, it's exponentially harder for AI. An AI trained primarily on English-language comedy will struggle with humor in other languages not just because of translation, but because the violation structures are different. The AI would need to be trained on comedy from the target culture, understand that culture's norms, and calibrate violations appropriately. This is why the most impressive AI humor achievements so far have been in specific, bounded contexts (Mad Libs-style humor, pun generation) rather than general-purpose comedy. The Turing test of humor isn't just "make a joke that's funny"—it's "make a joke that's funny in the specific cultural context, understanding that culture's unique norms about what's normal and what's acceptable."</p>
+            </div>
+
+            <div class="connect-box">
+                <h4>📚 Connection to Other Books</h4>
+                <p><strong>Thinking, Fast and Slow (Kahneman):</strong> Kahneman's research on cultural differences in thinking and decision-making suggests that cognitive processes vary by culture. Similarly, what triggers laughter and what gets processed as benign varies by culture. The underlying mechanism (benign violation) might be universal, but the inputs and outputs are culturally specific.</p>
+            </div>
+        </div>
+
+        <!-- ===== CHEATSHEET ===== -->
+        <div class="cheatsheet" id="cheatsheet">
+            <h2>Quick Reference Cheatsheet</h2>
+            <div class="cheatsheet-inner">
+                <div class="cheatsheet-item">
+                    <h4>🎯 Benign Violation Theory</h4>
+                    <p><strong>Formula:</strong> Violation + Benignity = Humor. Something must be wrong (violation of norms), but simultaneously safe or okay (benign). Perfect calibration matters.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🤖 Why Tickling Yourself Doesn't Work</h4>
+                    <p>Predictability kills humor. You can't violate your own expectations if you control the violation. Surprise and unpredictability are key components of benignity assessment.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🌍 Geographic Humor Differences</h4>
+                    <p>What violates norms varies by culture. NYC comedy = aggressive confrontation. LA = polished storytelling. Tokyo = precise physical comedy. Same benign violation theory; different violation types.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🎪 Comedy Club Dynamics</h4>
+                    <p>Laughter is contagious. Jokes land better in groups because social proof makes violations seem more benign. Audience composition and size dramatically affect humor response.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>⏰ Tragedy Timeline</h4>
+                    <p>Too soon = pure violation, not benign. Too late = forgotten. Sweet spot: enough time for acute pain to transform into something that can be examined humorously.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>👥 Laughing With vs At</h4>
+                    <p>Inclusion vs exclusion. Laughing "with" someone includes them in the humor (more benign). Laughing "at" excludes them (can be cruel). Control and consent matter.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🧬 Evolutionary Purpose</h4>
+                    <p>Humor evolved to process threats and bond groups. Laughter signals "this violation is benign; we're safe." Shared laughter creates cohesion and collective reassurance.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>💼 Humor in Advertising</h4>
+                    <p>Funny ads work by violating category norms while keeping benignity intact. Laughter builds brand affinity and lowers persuasion defenses. Successful ad humor matches brand positioning.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🌙 Dark Humor & Coping</h4>
+                    <p>Dark humor is psychological resilience, not callousness. People in trauma use it to process fear. Healing humor requires shared experience; external dark humor can feel cruel.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>⛰️ The Humor Cliff</h4>
+                    <p>As violations increase in severity, humor decreases until a threshold: the cliff. Past it, violations are too severe to be benign. Where the cliff is varies by person and culture.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🏢 Professional vs Personal Humor</h4>
+                    <p>Same joke, different contexts. Professional settings require safer violations (weaker benignity frame). Personal settings allow edgier humor (stronger trust/benignity). Context determines calibration.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🌐 Universal Yet Particular</h4>
+                    <p>Benign violation theory is universal, but what counts as violation and benignity is culturally specific. This explains why humor is universal but rarely translates well across cultures.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🤖 Why AI Humor Fails</h4>
+                    <p>Current AI can generate incongruity but can't calibrate benignity to context, culture, power dynamics, or individual sensitivity. It can't detect humor cliffs. It lacks emotional experience to make dark humor feel healing rather than cruel.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>✨ Key to Great Comedy</h4>
+                    <p>Master the specific violation types your audience finds relevant. Calibrate benignity perfectly. Understand power dynamics and consent. Read the room and know where the cliff is for that specific audience, at that specific moment.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>📚 Connections to Other Books</h4>
+                    <p><strong>Thinking Fast & Slow:</strong> Humor exploits System 1 intuition. <strong>Predictably Irrational:</strong> We have predictable humor preferences. <strong>Influence:</strong> Humor builds liking. <strong>Stumbling on Happiness:</strong> Humor helps us adapt to difficult realities.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🎓 The Bottom Line</h4>
+                    <p>Humor is one of the most sophisticated human behaviors, requiring simultaneous understanding of norms, context, psychology, culture, and power dynamics. It's also one of the hardest things for AI to master because it demands genuine contextual intelligence, not just pattern matching.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="footer">
+            <p><strong>The Humor Code: A Global Search for What Makes Things Funny</strong></p>
+            <p>By Peter McGraw & Joel Warner</p>
+            <div class="book-details">
+                <p>Published by Simon & Schuster</p>
+                <p>This illustrated guide provides a comprehensive exploration of benign violation theory and its applications across comedy, culture, psychology, AI, and human behavior.</p>
+                <p style="margin-top: 20px; opacity: 0.7;">Created as an educational resource summarizing key concepts and research from the book.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

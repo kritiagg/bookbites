@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>On Writing Well — Illustrated Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+:root {
+  --coral: #FF6B6B;
+  --teal: #4ECDC4;
+  --sunny: #FFE66D;
+  --purple: #A06CD5;
+  --sky: #74B9FF;
+  --mint: #55EFC4;
+  --pink: #FD79A8;
+  --orange: #FDCB6E;
+  --dark: #2D3436;
+  --cream: #FFEAA7;
+  --deep-blue: #0984E3;
+  --warm-red: #E17055;
+  --forest: #00B894;
+  --dark-purple: #6C5CE7;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+
+.cover {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; padding: 40px 20px;
+}
+.cover h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem; color: white; letter-spacing: -2px;
+  text-align: center; position: relative; z-index: 2;
+}
+.cover .author { font-size: 1.3rem; color: var(--sunny); margin-top: 8px; font-weight: 600; z-index: 2; }
+.cover .subtitle { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 16px; z-index: 2; text-align: center; max-width: 600px; }
+.cover .svg-container { width: 90%; max-width: 700px; margin-top: 40px; z-index: 2; }
+
+.particle {
+  position: absolute; border-radius: 50%; opacity: 0.15;
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.lesson {
+  min-height: 100vh; padding: 60px 20px;
+  display: flex; align-items: center; justify-content: center;
+}
+.lesson-inner { max-width: 900px; width: 100%; }
+.lesson-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem;
+  color: white; margin-bottom: 12px;
+}
+.lesson-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2;
+}
+.lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+.illustration-container { margin-bottom: 30px; width: 100%; }
+
+.card {
+  background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.card-label {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.card p { font-size: 0.95rem; line-height: 1.7; color: #444; margin-bottom: 10px; }
+
+.quote-box {
+  background: var(--dark); color: white; border-radius: 16px;
+  padding: 24px 28px; margin-bottom: 20px;
+}
+.quote-box .quote-text { font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+.quote-box .quote-attr { color: var(--sunny); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+
+.connect-box {
+  background: #e8f4fd; border-left: 4px solid var(--deep-blue);
+  border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px;
+}
+.connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--deep-blue); letter-spacing: 1px; margin-bottom: 6px; }
+.connect-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+
+.ai-box {
+  background: linear-gradient(135deg, #0984E3, #6C5CE7);
+  color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px;
+}
+.ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--sunny); margin-bottom: 6px; }
+.ai-box p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
+
+.funny-box {
+  background: #fff5f5; border-radius: 16px; padding: 20px 24px;
+  margin-bottom: 20px; border: 2px dashed var(--coral);
+}
+.funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: var(--coral); letter-spacing: 1px; margin-bottom: 6px; }
+.funny-box p { font-size: 0.9rem; line-height: 1.6; color: #666; font-style: italic; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+@media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+.story {
+  min-height: 100vh; padding: 60px 20px;
+  display: flex; align-items: center; justify-content: center;
+}
+.story-inner { max-width: 900px; width: 100%; }
+.story h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px; }
+.story p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 16px; }
+
+.cheatsheet {
+  min-height: 100vh; padding: 60px 20px;
+  background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+  display: flex; align-items: center; justify-content: center;
+}
+.cheatsheet-inner { max-width: 900px; width: 100%; }
+.cheatsheet h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; text-align: center; margin-bottom: 40px; }
+
+.cheat-card {
+  background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+.cheat-card h3 { color: var(--warm-red); font-size: 1.1rem; margin-bottom: 8px; }
+.cheat-card p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+
+@media (max-width: 800px) {
+  .cover h1 { font-size: 3rem; }
+  .lesson-title { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div class="particle" style="width: 120px; height: 120px; background: var(--teal); top: 10%; left: 5%; animation-delay: 0s;"></div>
+  <div class="particle" style="width: 80px; height: 80px; background: var(--coral); top: 20%; right: 10%; animation-delay: 1s;"></div>
+  <div class="particle" style="width: 100px; height: 100px; background: var(--sunny); bottom: 15%; left: 15%; animation-delay: 2s;"></div>
+  <div class="particle" style="width: 90px; height: 90px; background: var(--purple); bottom: 10%; right: 5%; animation-delay: 1.5s;"></div>
+
+  <h1>On Writing Well</h1>
+  <div class="author">William Zinsser</div>
+  <div class="subtitle">The Art of Nonfiction Writing — Clarity, Brevity, and Humanity in Every Word</div>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Writer at desk with light -->
+      <rect x="50" y="120" width="180" height="140" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+      <circle cx="200" cy="80" r="30" fill="var(--sunny)" opacity="0.3"/>
+      <line x1="200" y1="80" x2="200" y2="150" stroke="var(--sunny)" stroke-width="2" opacity="0.5"/>
+      <circle cx="140" cy="160" r="25" fill="#FFD700" opacity="0.4"/>
+      <rect x="120" y="190" width="50" height="60" rx="3" fill="var(--coral)" opacity="0.3"/>
+      <text x="145" y="235" text-anchor="middle" font-family="Inter" font-size="12" fill="rgba(255,255,255,0.7)" font-weight="600">CLARITY</text>
+
+      <!-- Tangled words (bad writing) -->
+      <g opacity="0.3">
+        <text x="320" y="100" font-family="Playfair Display" font-size="24" fill="var(--warm-red)" opacity="0.5">confusing verbiage</text>
+        <path d="M 330 110 Q 350 120 340 135" stroke="var(--warm-red)" stroke-width="2" fill="none" opacity="0.4"/>
+        <path d="M 345 115 Q 360 125 350 140" stroke="var(--warm-red)" stroke-width="2" fill="none" opacity="0.4"/>
+      </g>
+
+      <!-- Crossed out words -->
+      <line x1="320" y1="140" x2="420" y2="140" stroke="var(--coral)" stroke-width="3" opacity="0.6"/>
+      <text x="370" y="155" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--coral)" opacity="0.8">Delete unnecessary words</text>
+
+      <!-- Clear arrow pointing right -->
+      <path d="M 440 150 L 520 150" stroke="var(--teal)" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
+
+      <!-- Clean sentence (good writing) -->
+      <rect x="540" y="120" width="140" height="70" rx="8" fill="rgba(76,205,196,0.1)" stroke="var(--teal)" stroke-width="2"/>
+      <text x="610" y="150" text-anchor="middle" font-family="Inter" font-size="13" fill="white" font-weight="600">Simple.</text>
+      <text x="610" y="170" text-anchor="middle" font-family="Inter" font-size="13" fill="white" font-weight="600">Direct.</text>
+      <text x="610" y="190" text-anchor="middle" font-family="Inter" font-size="11" fill="rgba(255,255,255,0.7)">Human.</text>
+
+      <!-- Arrow marker definition -->
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+          <polygon points="0 0, 10 3, 0 6" fill="var(--teal)"/>
+        </marker>
+      </defs>
+
+      <!-- Bottom insight -->
+      <text x="350" y="270" text-anchor="middle" font-family="Playfair Display" font-size="16" fill="var(--sunny)" font-weight="600" opacity="0.9">Clutter is the disease. Clarity is the cure.</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ LESSON 1: SIMPLICITY ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #fef5f5 0%, #fde7e7 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--coral);">1</div>
+    <h2 class="lesson-title">Simplicity Is the First Principle</h2>
+    <p class="lesson-subtitle">Remove clutter. Keep what matters.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left side: Cluttered text -->
+        <text x="80" y="40" font-family="Inter" font-size="12" fill="#999" font-weight="700" letter-spacing="1px">CLUTTERED</text>
+        <g transform="translate(0, 60)">
+          <circle cx="80" cy="40" r="4" fill="var(--coral)" opacity="0.3"/>
+          <text x="95" y="45" font-family="Inter" font-size="11" fill="#777">utilizing a methodological approach</text>
+          <circle cx="80" cy="70" r="4" fill="var(--coral)" opacity="0.3"/>
+          <text x="95" y="75" font-family="Inter" font-size="11" fill="#777">predicated on the fundamental principles</text>
+          <circle cx="80" cy="100" r="4" fill="var(--coral)" opacity="0.3"/>
+          <text x="95" y="105" font-family="Inter" font-size="11" fill="#777">notwithstanding the apparent contradiction</text>
+          <circle cx="80" cy="130" r="4" fill="var(--coral)" opacity="0.3"/>
+          <text x="95" y="135" font-family="Inter" font-size="11" fill="#777">in the aforementioned documentation</text>
+        </g>
+
+        <!-- Scissors cutting -->
+        <g transform="translate(350, 80)" opacity="0.6">
+          <line x1="0" y1="0" x2="20" y2="20" stroke="var(--warm-red)" stroke-width="3"/>
+          <line x1="20" y1="0" x2="0" y2="20" stroke="var(--warm-red)" stroke-width="3"/>
+        </g>
+
+        <!-- Right side: Simple text -->
+        <text x="480" y="40" font-family="Inter" font-size="12" fill="#999" font-weight="700" letter-spacing="1px">SIMPLE</text>
+        <g transform="translate(420, 60)">
+          <circle cx="80" cy="40" r="4" fill="var(--forest)"/>
+          <text x="95" y="45" font-family="Inter" font-size="11" fill="#333" font-weight="600">Use a method</text>
+          <circle cx="80" cy="70" r="4" fill="var(--forest)"/>
+          <text x="95" y="75" font-family="Inter" font-size="11" fill="#333" font-weight="600">Based on core principles</text>
+          <circle cx="80" cy="100" r="4" fill="var(--forest)"/>
+          <text x="95" y="105" font-family="Inter" font-size="11" fill="#333" font-weight="600">Even when it contradicts</text>
+          <circle cx="80" cy="130" r="4" fill="var(--forest)"/>
+          <text x="95" y="135" font-family="Inter" font-size="11" fill="#333" font-weight="600">What the docs say</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--coral);">💡 KEY LESSON</div>
+      <p><strong>Clutter is the disease. Clarity is the cure.</strong> Most writers use too many words. Zinsser's first rule: strip every sentence to its cleanest components. Ask yourself of every word: Does it serve? If not, delete it.</p>
+      <p style="margin-top:12px;"><strong>Example 1:</strong> "We are endeavoring to construct a system" → "We are building a system." Kill "endeavoring." Kill "to construct." Four words become three.</p>
+      <p style="margin-top:12px;"><strong>Example 2:</strong> "The question as to whether" → "Whether." The reader already knows it's a question.</p>
+      <p style="margin-top:12px;"><strong>Example 3:</strong> "At the present time" → "Now." One word instead of four. Doctors write "despite the fact that" when they mean "although." Lawyers use "in the event that" instead of "if." Simplicity feels rude at first. It's not.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Clutter is the disease of American writing. We are a society strangling in unnecessary words, circular constructions, pompous framing, and a loss of the simple declarative sentence."</div>
+      <div class="quote-attr">— William Zinsser</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>"Your college professor loved your 50-page thesis with footnotes citing footnotes. Your reader has 8 seconds and a smartphone. Guess who's right now?"</p>
+    </div>
+
+    <div class="two-col">
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Language models are trained on massive text corpora. They learn that <strong>simple patterns are more frequent than complex ones</strong>. When LLMs generate text, they're statistically predicting the next token based on probability. Simplicity aligns with training data distribution. Verbose prose creates low-probability token sequences — the model's confidence drops. Clear writing has high probability across your training examples.</p>
+      </div>
+      <div class="connect-box">
+        <div class="connect-label">📚 CONNECTS TO</div>
+        <p><strong>Deep Work:</strong> Cal Newport argues that distraction kills focus. Clutter in writing is distraction on the page. <strong>Atomic Habits:</strong> Small changes compound. Delete one unnecessary word per sentence × 1000 sentences = you're a different writer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 2: TIGHTEN YOUR PROSE ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f8ff 0%, #e6f2ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--deep-blue);">2</div>
+    <h2 class="lesson-title">Tighten Your Prose — Every Word Earns Its Keep</h2>
+    <p class="lesson-subtitle">Reduce word count. Increase impact.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Before: Bloated paragraph -->
+        <rect x="20" y="20" width="300" height="120" rx="8" fill="#fff3e0" stroke="var(--orange)" stroke-width="2"/>
+        <text x="170" y="45" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--orange)" font-weight="700">BEFORE (87 words)</text>
+        <text x="30" y="70" font-family="Inter" font-size="9" fill="#666" font-weight="500">It is widely acknowledged that the implementation of a comprehensive system of new technologies has the potential to significantly enhance the overall effectiveness of business operations in ways that are yet to be fully understood by most practitioners.</text>
+
+        <!-- Arrow -->
+        <path d="M 350 80 L 410 80" stroke="#999" stroke-width="3" fill="none" marker-end="url(#arrow2)"/>
+        <text x="380" y="100" text-anchor="middle" font-family="Inter" font-size="10" fill="#999" font-weight="600">Compress</text>
+
+        <!-- After: Tight version -->
+        <rect x="420" y="20" width="260" height="120" rx="8" fill="#e8f5e9" stroke="var(--forest)" stroke-width="2"/>
+        <text x="550" y="45" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--forest)" font-weight="700">AFTER (12 words)</text>
+        <text x="430" y="70" font-family="Inter" font-size="9.5" fill="#333" font-weight="500">New technology dramatically improves business effectiveness.</text>
+
+        <!-- Word count reduction -->
+        <g transform="translate(20, 170)">
+          <rect x="0" y="0" width="600" height="70" rx="8" fill="rgba(76,205,196,0.1)" stroke="var(--teal)" stroke-width="2"/>
+          <text x="10" y="30" font-family="Inter" font-size="12" fill="var(--teal)" font-weight="700">Techniques for tightening:</text>
+          <text x="10" y="52" font-family="Inter" font-size="10" fill="#555">Delete every adverb ending in "-ly" • Remove "very," "really," "quite," "somewhat" • Replace phrases with single words • Cut: "due to the fact that" → "because" • Kill weakeners</text>
+        </g>
+
+        <defs>
+          <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#999"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--deep-blue);">💡 KEY LESSON</div>
+      <p><strong>Every word must earn its place.</strong> Zinsser teaches writers to rewrite ruthlessly. The first draft is rarely tight. The best writers cut 20-40% of their first draft on revision.</p>
+      <p style="margin-top:12px;"><strong>Example 1:</strong> "In my opinion, I think..." → "I think..." (or just make the statement). You don't need "in my opinion"—the reader knows it's your opinion.</p>
+      <p style="margin-top:12px;"><strong>Example 2:</strong> "She was absolutely perfect" → "She was perfect." "Absolutely" adds nothing. Adverbs are weak. Replace with stronger verbs: "spoke loudly" → "shouted."</p>
+      <p style="margin-top:12px;"><strong>Example 3:</strong> "For all intents and purposes" → "Essentially" or just cut it. This phrase appears in legal documents and academic writing but kills clarity in journalism or memoir.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The writer who cares about clarity will fight relentlessly against the noun-stacking, the vagueness, the jargon, the mystification—all the things that make so much prose needlessly difficult."</div>
+      <div class="quote-attr">— William Zinsser</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>"Your first draft reads like you're being paid by the word. Your editor cuts 40%. You're shocked. Then you realize: it reads better. The cruel truth: you're probably 30% better at writing than you think, hiding under 40% verbosity."</p>
+    </div>
+
+    <div class="two-col">
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Compression is how neural networks work. A language model's hidden layers compress input sequences into meaningful patterns. Superfluous words are noise in that compression. When you write tight prose, you're doing what transformers do: maximize signal-to-noise ratio. Attention mechanisms literally learn to ignore irrelevant tokens. Good writers are doing attention mechanisms manually.</p>
+      </div>
+      <div class="connect-box">
+        <div class="connect-label">📚 CONNECTS TO</div>
+        <p><strong>The Power of Habit:</strong> Tight writing is a system. Zinsser's rule: read your prose aloud. If you stumble, so does the reader. <strong>Thinking, Fast and Slow:</strong> Cognitive load theory—every unnecessary word taxes working memory.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 3: KNOW YOUR SUBJECT ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #f3f5ff 0%, #ede7f6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--purple);">3</div>
+    <h2 class="lesson-title">Know Your Subject — Research Is Not Optional</h2>
+    <p class="lesson-subtitle">Master the material before you write about it.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Brain with knowledge flowing in -->
+        <circle cx="150" cy="120" r="50" fill="var(--purple)" opacity="0.2" stroke="var(--purple)" stroke-width="2"/>
+        <text x="150" y="125" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--purple)" font-weight="700">SUBJECT</text>
+
+        <!-- Research sources feeding knowledge -->
+        <g opacity="0.7">
+          <rect x="280" y="40" width="50" height="40" rx="3" fill="var(--teal)"/>
+          <text x="305" y="65" text-anchor="middle" font-family="Inter" font-size="9" fill="white" font-weight="600">Books</text>
+          <path d="M 280 60 L 200 100" stroke="var(--teal)" stroke-width="2" fill="none"/>
+        </g>
+
+        <g opacity="0.7">
+          <rect x="280" y="100" width="50" height="40" rx="3" fill="var(--teal)"/>
+          <text x="305" y="125" text-anchor="middle" font-family="Inter" font-size="9" fill="white" font-weight="600">Experts</text>
+          <path d="M 280 120 L 200 120" stroke="var(--teal)" stroke-width="2" fill="none"/>
+        </g>
+
+        <g opacity="0.7">
+          <rect x="280" y="160" width="50" height="40" rx="3" fill="var(--teal)"/>
+          <text x="305" y="185" text-anchor="middle" font-family="Inter" font-size="9" fill="white" font-weight="600">Documents</text>
+          <path d="M 280 180 L 200 140" stroke="var(--teal)" stroke-width="2" fill="none"/>
+        </g>
+
+        <!-- Confident writer emerging -->
+        <g transform="translate(480, 80)">
+          <circle cx="40" cy="40" r="30" fill="var(--sunny)" opacity="0.3"/>
+          <text x="40" y="50" text-anchor="middle" font-family="Inter" font-size="11" fill="#333" font-weight="700">Writer</text>
+          <text x="40" y="100" text-anchor="middle" font-family="Inter" font-size="10" fill="var(--purple)" font-weight="600">Confident</text>
+          <text x="40" y="115" text-anchor="middle" font-family="Inter" font-size="10" fill="var(--purple)" font-weight="600">Authentic</text>
+          <text x="40" y="130" text-anchor="middle" font-family="Inter" font-size="10" fill="var(--purple)" font-weight="600">Credible</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--purple);">💡 KEY LESSON</div>
+      <p><strong>Confidence comes from mastery.</strong> Zinsser emphasizes: you cannot fake knowledge. Readers detect BS. Expert writers know their subject so deeply they can explain it simply.</p>
+      <p style="margin-top:12px;"><strong>Example 1:</strong> Zinsser wrote about architecture, science, and music because he *learned* these subjects first. He interviewed architects. He sat in concert halls. He read until he understood.</p>
+      <p style="margin-top:12px;"><strong>Example 2:</strong> A journalist writing about cancer research must interview oncologists, read studies, understand treatment protocols. Only then can they write clearly for a general audience. Shallow knowledge produces jargon and hedging.</p>
+      <p style="margin-top:12px;"><strong>Example 3:</strong> Memoir writers who don't interrogate their own memories write sentimentally. Deep writers excavate the truth—contradictions and all. They research themselves.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"You must do much more research than you will ever use. It's this deep knowledge that makes the difference between good writing and shallow writing."</div>
+      <div class="quote-attr">— William Zinsser</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>"You have 500 words to explain quantum mechanics. You spend 20 hours learning. Sounds insane. But those 20 hours let you explain in 500 clear words. Skip the research, you write 500 confused words and delete them in shame."</p>
+    </div>
+
+    <div class="two-col">
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Language models trained on narrow domains (medical text, legal documents, technical papers) outperform general models on those tasks. They've absorbed the "knowledge" of the domain. They know which words belong together. A writer mastering a subject is building a domain-specific model in their brain—learning probability distributions of concepts, terminology, and causation unique to that field.</p>
+      </div>
+      <div class="connect-box">
+        <div class="connect-label">📚 CONNECTS TO</div>
+        <p><strong>Deep Work by Cal Newport:</strong> Mastery requires deliberate practice. Writing about something requires deep focus and repetition. <strong>Range by David Epstein:</strong> Knowing your subject includes understanding adjacent fields and how ideas connect across domains.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 4: FIND YOUR VOICE ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #ffe8f5 0%, #ffd4e8 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--pink);">4</div>
+    <h2 class="lesson-title">Find Your Voice — Write Like You Talk</h2>
+    <p class="lesson-subtitle">Authenticity beats perfection. Every time.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Three writers with different voices -->
+        <g transform="translate(40, 60)">
+          <circle cx="40" cy="0" r="30" fill="var(--pink)" opacity="0.3"/>
+          <text x="40" y="60" text-anchor="middle" font-family="Inter" font-size="9" fill="#666" font-weight="600">Stilted</text>
+          <text x="40" y="80" text-anchor="middle" font-family="Inter" font-size="8" fill="#999">"It is my humble opinion"</text>
+          <text x="40" y="93" text-anchor="middle" font-family="Inter" font-size="8" fill="#999">that said matter warrants</text>
+          <text x="40" y="106" text-anchor="middle" font-family="Inter" font-size="8" fill="#999">further consideration.</text>
+          <circle cx="40" cy="130" r="4" fill="var(--coral)"/>
+        </g>
+
+        <g transform="translate(280, 60)">
+          <circle cx="40" cy="0" r="30" fill="var(--mint)" opacity="0.3"/>
+          <text x="40" y="60" text-anchor="middle" font-family="Inter" font-size="9" fill="#333" font-weight="600">Natural</text>
+          <text x="40" y="80" text-anchor="middle" font-family="Inter" font-size="8.5" fill="#444">"Look, I think we should</text>
+          <text x="40" y="92" text-anchor="middle" font-family="Inter" font-size="8.5" fill="#444">consider this more carefully."</text>
+          <circle cx="40" cy="130" r="4" fill="var(--forest)"/>
+        </g>
+
+        <g transform="translate(520, 60)">
+          <circle cx="40" cy="0" r="30" fill="var(--orange)" opacity="0.3"/>
+          <text x="40" y="60" text-anchor="middle" font-family="Inter" font-size="9" fill="#333" font-weight="600">Your Style</text>
+          <text x="40" y="80" text-anchor="middle" font-family="Inter" font-size="8" fill="#555">Honest tone</text>
+          <text x="40" y="92" text-anchor="middle" font-family="Inter" font-size="8" fill="#555">Unique phrases</text>
+          <text x="40" y="104" text-anchor="middle" font-family="Inter" font-size="8" fill="#555">Real personality</text>
+          <circle cx="40" cy="130" r="4" fill="var(--sunny)"/>
+        </g>
+
+        <!-- Bottom insight -->
+        <rect x="20" y="180" width="660" height="80" rx="8" fill="rgba(253,121,168,0.08)" stroke="var(--pink)" stroke-width="2"/>
+        <text x="40" y="205" font-family="Inter" font-size="10" fill="#333" font-weight="600">Your readers want <em>you</em>. Not a generic "writer voice."</text>
+        <text x="40" y="223" font-family="Inter" font-size="9.5" fill="#555">Write like you speak. Trust your natural rhythm. If you wouldn't say it in conversation, question why it's in your draft. Readers detect phoniness instantly.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--pink);">💡 KEY LESSON</div>
+      <p><strong>Your voice is your competitive advantage.</strong> Zinsser argues that good writing sounds like conversation—natural, direct, honest. Students often adopt a fake "academic voice" because they think that's what writing demands. It's not.</p>
+      <p style="margin-top:12px;"><strong>Example 1:</strong> Zinsser himself writes like he talks. His sentences are conversational. He uses contractions. He asks rhetorical questions. ("Who says?") That's his voice. It's memorable because it's genuine.</p>
+      <p style="margin-top:12px;"><strong>Example 2:</strong> A scientist explaining her research doesn't need to say "the investigator hypothesized." Say "I wondered if..." Your personality makes it human.</p>
+      <p style="margin-top:12px;"><strong>Example 3:</strong> Memoir writers are told to "be vulnerable." That's voice. Not performance. Not drama. Just honesty about what actually happened and how it felt.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Be yourself. The selling of a product is not as important as the selling of you. Writing is an act of ego, and you might as well admit it."</div>
+      <div class="quote-attr">— William Zinsser</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>"Academic voice: 'The aforementioned phenomenon represents a paradigmatic shift.' You voice: 'This changes everything.' Guess which sentence your friend will remember? (Hint: it's not the one with 'aforementioned.')"</p>
+    </div>
+
+    <div class="two-col">
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Language models trained on diverse writers learn voice as a statistical pattern. GPT can mimic Hemingway (short, punchy sentences) vs. Proust (long, layered clauses). These are learned distributions over sentence structures and word choices. Your natural voice is a learned pattern too—from your speech, your influences, your personality. Writing authentically means letting those patterns emerge rather than forcing a generic "writing voice" onto your work.</p>
+      </div>
+      <div class="connect-box">
+        <div class="connect-label">📚 CONNECTS TO</div>
+        <p><strong>Atomic Habits:</strong> Your voice is a habit built over years of reading and writing. Small improvements compound. <strong>Man's Search for Meaning:</strong> Authenticity (Frankl's path to meaning) applies to writing—find what's true for you and express it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 5: AUDIENCE AWARENESS ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #e8f4f8 0%, #d4ebf3 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--sky);">5</div>
+    <h2 class="lesson-title">Know Your Audience — Write for One Reader</h2>
+    <p class="lesson-subtitle">Specificity beats abstraction. Always.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Generic "audience" (blurry) -->
+        <g opacity="0.3" transform="translate(40, 80)">
+          <text x="0" y="20" font-family="Inter" font-size="10" fill="#999" font-weight="700">VAGUE AUDIENCE</text>
+          <circle cx="15" cy="50" r="12" fill="var(--warm-red)"/>
+          <circle cx="40" cy="45" r="12" fill="var(--warm-red)"/>
+          <circle cx="65" cy="50" r="12" fill="var(--warm-red)"/>
+          <circle cx="25" cy="75" r="12" fill="var(--warm-red)"/>
+          <circle cx="55" cy="78" r="12" fill="var(--warm-red)"/>
+          <text x="40" y="120" text-anchor="middle" font-family="Inter" font-size="9" fill="#999">Writing for "everyone"</text>
+          <text x="40" y="135" text-anchor="middle" font-family="Inter" font-size="9" fill="#999">=writing for no one</text>
+        </g>
+
+        <!-- Specific reader (focused) -->
+        <g transform="translate(380, 80)">
+          <text x="0" y="20" font-family="Inter" font-size="10" fill="var(--sky)" font-weight="700">SPECIFIC READER</text>
+          <circle cx="40" cy="50" r="20" fill="var(--sky)" opacity="0.4"/>
+          <circle cx="40" cy="50" r="15" fill="var(--sky)" opacity="0.6"/>
+          <circle cx="40" cy="50" r="10" fill="var(--sky)"/>
+          <text x="40" y="55" text-anchor="middle" font-family="Inter" font-size="9" fill="white" font-weight="600">ONE READER</text>
+          <text x="40" y="120" text-anchor="middle" font-family="Inter" font-size="9" fill="#333">"My best friend."</text>
+          <text x="40" y="135" text-anchor="middle" font-family="Inter" font-size="9" fill="#555">"A curious 12-year-old."</text>
+          <text x="40" y="150" text-anchor="middle" font-family="Inter" font-size="9" fill="#555">"My mother."</text>
+        </g>
+
+        <!-- Effect -->
+        <rect x="30" y="200" width="640" height="80" rx="8" fill="rgba(116,185,255,0.08)" stroke="var(--sky)" stroke-width="2"/>
+        <text x="50" y="225" font-family="Inter" font-size="11" fill="#333" font-weight="600">Write to <em>one specific person.</em></text>
+        <text x="50" y="247" font-family="Inter" font-size="9.5" fill="#555">Imagine them reading. What do they need to understand? What's their background? What will confuse them? Writing for one person feels personal. It connects.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--sky);">💡 KEY LESSON</div>
+      <p><strong>Write to one reader, not a thousand.</strong> This counterintuitive advice is Zinsser's most powerful. When writers think about "the audience" (a faceless mass), their writing becomes vague and defensive. Instead: imagine your best friend. A teacher. Your mom. Write to them.</p>
+      <p style="margin-top:12px;"><strong>Example 1:</strong> A science journalist writing about vaccine development doesn't write for "the general public." They write for their friend who dropped out of bio class sophomore year but is curious. That specificity determines word choice, pacing, and examples.</p>
+      <p style="margin-top:12px;"><strong>Example 2:</strong> A business writer explaining crypto doesn't write for "investors." They imagine a smart person who knows nothing about blockchain. They avoid jargon. They use analogies that person would understand.</p>
+      <p style="margin-top:12px;"><strong>Example 3:</strong> Memoir writers who think "my audience is everyone" write defensively. Writers who write "this is for my sister and my closest friends" write truthfully. Paradoxically: that honesty reaches more people.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Think of this as a conversation between you and the reader. Directly. Not you and the reader and a vast readership."</div>
+      <div class="quote-attr">— William Zinsser</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>"You think you're writing for millions. You're writing for one person at 2am who picked up your article. They're tired. They have 3 minutes. Will your prose honor their time or waste it?"</p>
+    </div>
+
+    <div class="two-col">
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Transformer models learn context through attention mechanisms. They "focus" on relevant tokens the way a reader focuses on relevant information. When you write to one specific reader, you're creating contextual coherence—each sentence attends to what came before, anticipating what the reader needs next. This is the same dynamic: attention as selectivity. Generic writing has low attention weights everywhere. Specific writing has high weights where they matter.</p>
+      </div>
+      <div class="connect-box">
+        <div class="connect-label">📚 CONNECTS TO</div>
+        <p><strong>Made to Stick (Heath brothers):</strong> Concrete, specific examples stick. Abstract "audiences" don't. <strong>Crucial Conversations:</strong> Communication works when you understand the specific person you're talking to.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 6: LEARN THE CRAFT ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #fef3e8 0%, #fde7d8 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--orange);">6</div>
+    <h2 class="lesson-title">Learn the Craft — Grammar Is Not Your Enemy</h2>
+    <p class="lesson-subtitle">Understand the rules to break them with purpose.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Grammar as foundation -->
+        <g transform="translate(50, 100)">
+          <rect x="0" y="80" width="200" height="40" rx="4" fill="var(--orange)" opacity="0.3" stroke="var(--orange)" stroke-width="2"/>
+          <text x="100" y="107" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--orange)" font-weight="700">Grammar Foundation</text>
+          <text x="100" y="15" text-anchor="middle" font-family="Inter" font-size="10" fill="#333">Master</text>
+          <text x="100" y="30" text-anchor="middle" font-family="Inter" font-size="10" fill="#333">the</text>
+          <text x="100" y="45" text-anchor="middle" font-family="Inter" font-size="10" fill="#333">Rules</text>
+        </g>
+
+        <!-- Creative building on foundation -->
+        <g transform="translate(350, 60)">
+          <rect x="0" y="120" width="200" height="40" rx="4" fill="var(--orange)" opacity="0.3" stroke="var(--orange)" stroke-width="2"/>
+          <text x="100" y="147" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--orange)" font-weight="700">Grammar Foundation</text>
+          <!-- Creative flourishes -->
+          <circle cx="50" cy="60" r="15" fill="var(--teal)" opacity="0.5"/>
+          <circle cx="100" cy="40" r="15" fill="var(--purple)" opacity="0.5"/>
+          <circle cx="150" cy="55" r="15" fill="var(--coral)" opacity="0.5"/>
+          <text x="100" y="25" text-anchor="middle" font-family="Inter" font-size="10" fill="#333">Break them</text>
+          <text x="100" y="42" text-anchor="middle" font-family="Inter" font-size="10" fill="#333">with purpose</text>
+        </g>
+
+        <!-- Examples -->
+        <rect x="20" y="200" width="660" height="70" rx="8" fill="rgba(253,203,110,0.1)" stroke="var(--orange)" stroke-width="2"/>
+        <text x="40" y="225" font-family="Inter" font-size="10" fill="#333" font-weight="600">Fragment sentences. For emphasis.</text>
+        <text x="40" y="243" font-family="Inter" font-size="9.5" fill="#555">Start with "and" or "but" when it strengthens rhythm. Use semicolons boldly. Comma splices are wrong <em>unless</em> the clauses are closely related. Know when you're wrong and why you're doing it anyway.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--orange);">💡 KEY LESSON</div>
+      <p><strong>Learn grammar so you can deploy it strategically.</strong> Zinsser's controversial take: grammar rules aren't chains. They're tools. Master them, then use them creatively.</p>
+      <p style="margin-top:12px;"><strong>Example 1:</strong> Hemingway's short sentences are grammatically simple. Deliberately. He mastered complex grammar, then stripped it for power. His simplicity required expertise.</p>
+      <p style="margin-top:12px;"><strong>Example 2:</strong> Fragment sentences (like this) work when used sparingly. Why? Because readers expect complete sentences. Breaking that expectation creates emphasis. But only if you know the rule exists.</p>
+      <p style="margin-top:12px;"><strong>Example 3:</strong> Comma splices are technically wrong. "The rain fell, the earth welcomed it." But that comma feels right—the clauses are closely connected. Zinsser would accept it if intentional. He'd reject it if you didn't know the rule.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"If you wish to improve your writing, you must devote yourself, before all else, to the sensuous pleasure of words."</div>
+      <div class="quote-attr">— William Zinsser</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>"Your English teacher said: 'Never use fragments.' You listened. Your writing is now dead. The cure: learn the rule so well you can break it alive."</p>
+    </div>
+
+    <div class="two-col">
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Language models learn grammar implicitly through token prediction. They develop internal representations of syntactic structures. When a model generates creative text (breaking grammar strategically), it's learned <em>when</em> those breaks are statistically valid in training data. Humans do the same: you learned grammar by immersion, then you recognized when breaking it creates stylistic effect. Both systems require mastery before deviation.</p>
+      </div>
+      <div class="connect-box">
+        <div class="connect-label">📚 CONNECTS TO</div>
+        <p><strong>Atomic Habits:</strong> Mastery happens through deliberate practice. Grammar mastery requires writing thousands of sentences. <strong>Peak by Anders Ericsson:</strong> Deliberate practice on fundamentals (grammar, structure) builds the foundation for creative expertise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 7: EMOTION IN NONFICTION ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #f5f0ff 0%, #ede7f6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--dark-purple);">7</div>
+    <h2 class="lesson-title">Emotion in Nonfiction — Show, Don't Tell</h2>
+    <p class="lesson-subtitle">Create feeling through specific detail, not adjectives.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- "Sad" description -->
+        <g transform="translate(40, 60)">
+          <rect x="0" y="0" width="220" height="100" rx="8" fill="#fff0f5" stroke="#ff69b4" stroke-width="1.5"/>
+          <text x="110" y="25" text-anchor="middle" font-family="Inter" font-size="11" fill="#d946a6" font-weight="700">TELLING</text>
+          <text x="10" y="50" font-family="Inter" font-size="9.5" fill="#333">She was very sad and heartbroken about the loss.</text>
+          <text x="10" y="75" font-family="Inter" font-size="9" fill="#999">Adjectives pile up.</text>
+          <text x="10" y="88" font-family="Inter" font-size="9" fill="#999">Reader feels nothing.</text>
+        </g>
+
+        <!-- Arrow -->
+        <path d="M 290 110 L 350 110" stroke="#999" stroke-width="3" fill="none" marker-end="url(#arrow3)"/>
+
+        <!-- Specific detail -->
+        <g transform="translate(380, 60)">
+          <rect x="0" y="0" width="280" height="100" rx="8" fill="#f0f8ff" stroke="#4169e1" stroke-width="1.5"/>
+          <text x="140" y="25" text-anchor="middle" font-family="Inter" font-size="11" fill="#0984e3" font-weight="700">SHOWING</text>
+          <text x="10" y="50" font-family="Inter" font-size="9.5" fill="#333">She sat in his chair. She picked up his coffee mug</text>
+          <text x="10" y="64" font-family="Inter" font-size="9.5" fill="#333">from the desk—still warm—and set it down.</text>
+          <text x="10" y="80" font-family="Inter" font-size="9" fill="#0984e3" font-weight="600">Reader feels the loss.</text>
+        </g>
+
+        <!-- Third example: grief through action -->
+        <rect x="20" y="180" width="660" height="100" rx="8" fill="rgba(110,76,231,0.08)" stroke="var(--dark-purple)" stroke-width="2"/>
+        <text x="40" y="205" font-family="Inter" font-size="11" fill="#333" font-weight="600">Emotion emerges from action and detail, not labels.</text>
+        <text x="40" y="227" font-family="Inter" font-size="9.5" fill="#555">"He stared at the phone for an hour and never called." That detail carries grief. "He was devastated" does nothing. Let the reader deduce the emotion from what they see. Trust them.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--dark-purple);">💡 KEY LESSON</div>
+      <p><strong>Nonfiction can be deeply emotional without being sentimental.</strong> Zinsser teaches: show emotion through detail. Never tell the reader how to feel. Let them feel it.</p>
+      <p style="margin-top:12px;"><strong>Example 1:</strong> Instead of "It was a tragic accident," write what the accident was. A car wrapped around a tree. Glass on the pavement. These details carry tragedy.</p>
+      <p style="margin-top:12px;"><strong>Example 2:</strong> In memoir: instead of "I was angry with my father," show what anger looked like. "I left his voicemail unplayed for three days." That action reveals emotion more powerfully than the word "angry."</p>
+      <p style="margin-top:12px;"><strong>Example 3:</strong> In profile writing: instead of "She was confident," show her confidence through dialogue and action. "She ordered coffee without asking how it was made. She leaned back in her chair. She held the interviewer's gaze." Confidence appears.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Don't be afraid to write about human emotion. But don't state the emotion. Let the reader feel it."</div>
+      <div class="quote-attr">— William Zinsser</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>"You write: 'I was devastated.' Reader thinks: 'Show me.' You write: 'I couldn't eat. I sat in the dark.' Reader feels it. The fewer adjectives, the stronger the emotion. Counterintuitive? Yes. True? Absolutely."</p>
+    </div>
+
+    <div class="two-col">
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Language models represent meaning through distributed embeddings. Abstract emotional labels ("sad," "happy") occupy narrow regions in embedding space. Concrete descriptions (specific actions, sensory details) activate richer, more widely distributed patterns. When you show rather than tell, you're generating tokens that activate more diverse neural patterns in the reader's mind, creating stronger representational resonance. LLMs trained on fiction know this: emotionally impactful text has more surprising token sequences.</p>
+      </div>
+      <div class="connect-box">
+        <div class="connect-label">📚 CONNECTS TO</div>
+        <p><strong>Made to Stick:</strong> Concrete details stick. Abstract emotions evaporate. <strong>Thinking, Fast and Slow:</strong> Our brains simulate stories. Specific details trigger simulation. Adjectives don't.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 8: INTERVIEWING ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #e8f5e9 0%, #c8e6c9 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--forest);">8</div>
+    <h2 class="lesson-title">Interviewing — Listen More Than You Talk</h2>
+    <p class="lesson-subtitle">The best quote comes from listening, not asking.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bad interview: leading questions -->
+        <g transform="translate(50, 60)">
+          <circle cx="40" cy="20" r="30" fill="var(--warm-red)" opacity="0.2" stroke="var(--warm-red)" stroke-width="2"/>
+          <text x="40" y="30" text-anchor="middle" font-family="Inter" font-size="9" fill="var(--warm-red)" font-weight="600">Interviewer</text>
+          <g transform="translate(0, 70)">
+            <path d="M 30 10 Q 50 5 70 15" stroke="var(--warm-red)" stroke-width="2" fill="none"/>
+            <text x="40" y="45" font-family="Inter" font-size="8" fill="#666">"So you were amazing, right?"</text>
+          </g>
+          <circle cx="40" cy="150" r="30" fill="var(--coral)" opacity="0.2" stroke="var(--coral)" stroke-width="2"/>
+          <text x="40" y="160" text-anchor="middle" font-family="Inter" font-size="9" fill="var(--coral)" font-weight="600">Subject</text>
+          <g transform="translate(0, 100)">
+            <path d="M 50 50 Q 30 45 10 55" stroke="var(--coral)" stroke-width="2" fill="none"/>
+            <text x="40" y="80" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">"Um, sure?"</text>
+          </g>
+          <text x="40" y="220" text-anchor="middle" font-family="Inter" font-size="9" fill="#999">Result: forced answers</text>
+        </g>
+
+        <!-- Good interview: open questions -->
+        <g transform="translate(400, 60)">
+          <circle cx="40" cy="20" r="30" fill="var(--forest)" opacity="0.2" stroke="var(--forest)" stroke-width="2"/>
+          <text x="40" y="30" text-anchor="middle" font-family="Inter" font-size="9" fill="var(--forest)" font-weight="600">Interviewer</text>
+          <g transform="translate(0, 70)">
+            <path d="M 30 10 Q 50 5 70 15" stroke="var(--forest)" stroke-width="2" fill="none"/>
+            <text x="40" y="45" font-family="Inter" font-size="8.5" fill="#333">"What was that like?"</text>
+          </g>
+          <circle cx="40" cy="150" r="30" fill="var(--teal)" opacity="0.2" stroke="var(--teal)" stroke-width="2"/>
+          <text x="40" y="160" text-anchor="middle" font-family="Inter" font-size="9" fill="var(--teal)" font-weight="600">Subject</text>
+          <g transform="translate(0, 100)">
+            <path d="M 50 50 Q 30 45 10 55" stroke="var(--teal)" stroke-width="2" fill="none"/>
+            <text x="40" y="70" text-anchor="middle" font-family="Inter" font-size="8.5" fill="#333">"Well, it was terrifying and</text>
+            <text x="40" y="85" text-anchor="middle" font-family="Inter" font-size="8.5" fill="#333">also thrilling and I'd never...</text>
+          </g>
+          <text x="40" y="220" text-anchor="middle" font-family="Inter" font-size="9" fill="var(--forest)">Result: gold quotes</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--forest);">💡 KEY LESSON</div>
+      <p><strong>Interviewing is 80% listening, 20% talking.</strong> Zinsser emphasizes: ask open-ended questions. Then shut up. Let silence do work. The best quotes emerge when people talk themselves into truth.</p>
+      <p style="margin-top:12px;"><strong>Example 1:</strong> Bad: "You've overcome so many obstacles, haven't you?" Good: "Tell me about a time things fell apart." The second invites honesty. The first puppeteers the answer.</p>
+      <p style="margin-top:12px;"><strong>Example 2:</strong> When an interview stalls, stay silent. Don't fill pauses. People hate silence. They'll keep talking. And that's when the real story comes out.</p>
+      <p style="margin-top:12px;"><strong>Example 3:</strong> Follow-up questions matter. "What do you mean by that?" or "Can you give me an example?" These dig into specificity. Vague answers become vivid stories.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The best interviews come from listening, not interrogating. Your job is to help people tell their own story, not to impose your story on them."</div>
+      <div class="quote-attr">— William Zinsser (adapted)</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>"You prepare 50 questions. You ask 5. The subject talks for an hour. You get the best story of your career. Your prep was 90% wasted. That's interviewing."</p>
+    </div>
+
+    <div class="two-col">
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Dialogue is a sequence of context and response. Like token prediction: the model "listens" (encodes the conversation history) before "speaking" (generating the next token). Good interviews let context deepen. Each question refines the context. Silence is like increasing context window—more information for the next response. Bad interviews truncate context with leading questions. Good interviewing is like training a model with rich feedback signals.</p>
+      </div>
+      <div class="connect-box">
+        <div class="connect-label">📚 CONNECTS TO</div>
+        <p><strong>Crucial Conversations:</strong> Active listening precedes influence. <strong>Never Split the Difference:</strong> Chris Voss emphasizes open questions and tactical empathy—hearing what's unsaid.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 9: STRUCTURE AND ORGANIZATION ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #fce4ec 0%, #f8bbd0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--pink);">9</div>
+    <h2 class="lesson-title">Structure — Build Your Piece Like Architecture</h2>
+    <p class="lesson-subtitle">A strong framework holds attention and meaning.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bad structure: wobbly -->
+        <g transform="translate(50, 100)">
+          <line x1="40" y1="100" x2="40" y2="20" stroke="#ccc" stroke-width="2"/>
+          <rect x="15" y="15" width="50" height="20" rx="3" fill="var(--coral)" opacity="0.4" transform="rotate(-8 40 25)"/>
+          <rect x="15" y="45" width="50" height="20" rx="3" fill="var(--coral)" opacity="0.3" transform="rotate(12 40 55)"/>
+          <rect x="15" y="75" width="50" height="20" rx="3" fill="var(--coral)" opacity="0.2" transform="rotate(-15 40 85)"/>
+          <text x="40" y="125" text-anchor="middle" font-family="Inter" font-size="9" fill="var(--coral)">Unstable</text>
+        </g>
+
+        <!-- Good structure: solid -->
+        <g transform="translate(400, 100)">
+          <line x1="40" y1="100" x2="40" y2="20" stroke="#999" stroke-width="3"/>
+          <rect x="15" y="15" width="50" height="20" rx="3" fill="var(--forest)" opacity="0.8"/>
+          <rect x="15" y="45" width="50" height="20" rx="3" fill="var(--forest)" opacity="0.8"/>
+          <rect x="15" y="75" width="50" height="20" rx="3" fill="var(--forest)" opacity="0.8"/>
+          <text x="40" y="125" text-anchor="middle" font-family="Inter" font-size="9" fill="var(--forest)">Solid</text>
+        </g>
+
+        <!-- Structure elements -->
+        <rect x="20" y="170" width="660" height="110" rx="8" fill="rgba(253,121,168,0.08)" stroke="var(--pink)" stroke-width="2"/>
+        <text x="40" y="195" font-family="Inter" font-size="11" fill="#333" font-weight="600">Structure elements:</text>
+        <text x="40" y="217" font-family="Inter" font-size="9.5" fill="#555"><strong>Lead:</strong> Grab attention (story, question, surprise). <strong>nut graph:</strong> Explain the wider significance. <strong>Body:</strong> Develop the idea with examples. <strong>Ending:</strong> Circle back to the lead or land a final insight.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--pink);">💡 KEY LESSON</div>
+      <p><strong>Structure isn't rigid—it's a skeleton that holds the meat.</strong> Zinsser distinguishes between structure and formula. A formula is imprisoning. Structure is liberating because it forces clarity.</p>
+      <p style="margin-top:12px;"><strong>Example 1:</strong> A memoir doesn't need chronological structure. It needs emotional architecture. Show how the past shaped the present. Maybe that's non-linear. Maybe it loops. Structure asks: what sequence makes sense for this reader's understanding?</p>
+      <p style="margin-top:12px;"><strong>Example 2:</strong> A feature article needs a strong lead (the hook), a nut graph (why this matters), then the body explores themes. Without that skeleton, you meander. Readers get lost.</p>
+      <p style="margin-top:12px;"><strong>Example 3:</strong> The ending must earn its place. Zinsser hates lazy endings that "tack on" a conclusion. The ending should illuminate what came before, complete a circle, or land a final insight that reframes everything.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Your structure is like a tent pole. It holds everything up. Without it, the whole thing collapses into a heap."</div>
+      <div class="quote-attr">— William Zinsser</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>"You have a great essay that meanders for 3000 words, concludes nowhere, and ends with 'anyway...'. Structure would have killed it. In the best way."</p>
+    </div>
+
+    <div class="two-col">
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Transformer models learn positional encoding—the position of tokens matters. Structure creates positional relationships. A strong lead activates attention patterns that propagate through the text. A weak structure creates low attention weights everywhere. When you build structure (lead, development, conclusion), you're creating a probability landscape that guides attention through your piece the way you intend.</p>
+      </div>
+      <div class="connect-box">
+        <div class="connect-label">📚 CONNECTS TO</div>
+        <p><strong>Made to Stick:</strong> Stories have structure (SUCCESs model). <strong>Deep Work:</strong> Depth requires structure—knowing where you are in the larger argument.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 10: EDITING & REWRITING ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f4ff 0%, #e6ecff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--deep-blue);">10</div>
+    <h2 class="lesson-title">Rewriting — Your First Draft Is a Skeleton</h2>
+    <p class="lesson-subtitle">Good writing is rewriting. Most writing is first drafting.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Draft 1 -->
+        <g transform="translate(40, 60)">
+          <rect x="0" y="0" width="150" height="180" rx="6" fill="var(--sky)" opacity="0.15" stroke="var(--sky)" stroke-width="2"/>
+          <text x="75" y="25" text-anchor="middle" font-family="Inter" font-size="10" fill="var(--sky)" font-weight="700">DRAFT 1</text>
+          <text x="10" y="50" font-family="Inter" font-size="8" fill="#666">Lorem ipsum dolor sit</text>
+          <text x="10" y="63" font-family="Inter" font-size="8" fill="#666">amet consectetur adipiscing</text>
+          <text x="10" y="76" font-family="Inter" font-size="8" fill="#666">elit sed do eiusmod tempor.</text>
+          <text x="10" y="89" font-family="Inter" font-size="8" fill="#666">Incididunt ut labore et dolore</text>
+          <text x="10" y="102" font-family="Inter" font-size="8" fill="#666">magna aliqua. Ut enim ad</text>
+          <text x="10" y="115" font-family="Inter" font-size="8" fill="#666">minim veniam quis nostrud.</text>
+          <line x1="5" y1="130" x2="145" y2="130" stroke="#ccc" stroke-width="1"/>
+          <text x="75" y="155" text-anchor="middle" font-family="Inter" font-size="8" fill="var(--sky)" font-weight="600">→ 500 words</text>
+          <text x="75" y="170" text-anchor="middle" font-family="Inter" font-size="8" fill="var(--sky)" font-weight="600">Rough, verbose</text>
+        </g>
+
+        <!-- Arrow -->
+        <path d="M 220 150 L 280 150" stroke="#999" stroke-width="3" fill="none" marker-end="url(#arrow4)"/>
+        <text x="250" y="130" text-anchor="middle" font-family="Inter" font-size="9" fill="#999" font-weight="600">Edit</text>
+
+        <!-- Draft 2-3 -->
+        <g transform="translate(320, 60)">
+          <rect x="0" y="0" width="150" height="180" rx="6" fill="var(--forest)" opacity="0.15" stroke="var(--forest)" stroke-width="2"/>
+          <text x="75" y="25" text-anchor="middle" font-family="Inter" font-size="10" fill="var(--forest)" font-weight="700">DRAFT 2-3</text>
+          <text x="10" y="50" font-family="Inter" font-size="8.5" fill="#333">She walked down the street</text>
+          <text x="10" y="63" font-family="Inter" font-size="8.5" fill="#333">in the morning. The sun was</text>
+          <text x="10" y="76" font-family="Inter" font-size="8.5" fill="#333">bright. Birds sang. She felt</text>
+          <text x="10" y="89" font-family="Inter" font-size="8.5" fill="#333">hopeful about the day ahead</text>
+          <text x="10" y="102" font-family="Inter" font-size="8.5" fill="#333">because of reasons.</text>
+          <line x1="5" y1="120" x2="145" y2="120" stroke="#ccc" stroke-width="1"/>
+          <text x="75" y="145" text-anchor="middle" font-family="Inter" font-size="8" fill="var(--forest)" font-weight="600">→ 300 words</text>
+          <text x="75" y="160" text-anchor="middle" font-family="Inter" font-size="8" fill="var(--forest)" font-weight="600">Tightened, real</text>
+        </g>
+
+        <!-- Arrow -->
+        <path d="M 500 150 L 560 150" stroke="#999" stroke-width="3" fill="none" marker-end="url(#arrow4)"/>
+
+        <!-- Final -->
+        <g transform="translate(600, 60)">
+          <rect x="0" y="0" width="70" height="180" rx="6" fill="var(--sunny)" opacity="0.25" stroke="var(--sunny)" stroke-width="2"/>
+          <text x="35" y="25" text-anchor="middle" font-family="Inter" font-size="10" fill="var(--sunny)" font-weight="700">FINAL</text>
+          <text x="5" y="55" font-family="Inter" font-size="8" fill="#333">Morning sunlight.</text>
+          <text x="5" y="68" font-family="Inter" font-size="8" fill="#333">She walked.</text>
+          <text x="5" y="81" font-family="Inter" font-size="8" fill="#333">Hope felt</text>
+          <text x="5" y="94" font-family="Inter" font-size="8" fill="#333">possible.</text>
+          <line x1="5" y1="110" x2="65" y2="110" stroke="#ccc" stroke-width="1"/>
+          <text x="35" y="135" text-anchor="middle" font-family="Inter" font-size="7.5" fill="var(--sunny)" font-weight="600">→ 100 words</text>
+          <text x="35" y="148" text-anchor="middle" font-family="Inter" font-size="7" fill="var(--sunny)" font-weight="600">Sharp, alive</text>
+        </g>
+
+        <defs>
+          <marker id="arrow4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#999"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--deep-blue);">💡 KEY LESSON</div>
+      <p><strong>Rewriting separates writers from people who write.</strong> Zinsser says: expect to cut 20-40% of your first draft. Good writers often rewrite 5+ times.</p>
+      <p style="margin-top:12px;"><strong>Example 1:</strong> First draft: "I felt a sense of deep sadness about the situation." Fifth draft: "I wept." The work isn't in the first version. It's in removal.</p>
+      <p style="margin-top:12px;"><strong>Example 2:</strong> Read your work aloud. If you stumble, the reader will. Mark those passages. Rewrite them. Rhythm matters. Only rewriting reveals bad rhythm.</p>
+      <p style="margin-top:12px;"><strong>Example 3:</strong> First drafts are permission to be messy. Write freely. Don't edit as you go. Then, in drafts 2-5, apply Zinsser's rules: simplify, tighten, show don't tell. The separation of generation and editing is crucial.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"I not only have to rewrite what I have written, but I have to reread it, in the way an editor would."</div>
+      <div class="quote-attr">— William Zinsser</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>"You think your first draft is done. You're 20% done. Most writers think editing is torture. Great writers know it's where the real writing happens."</p>
+    </div>
+
+    <div class="two-col">
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Neural networks train through iterative refinement: forward pass, compute loss, backprop, update weights. Writing is the same. Draft = forward pass. Reading = loss computation. Revision = backprop. You're adjusting your "weights" (word choices, structure, clarity) based on feedback from your reader-self. Multiple passes refine the model. First drafts are untrained models. Final drafts are fine-tuned.</p>
+      </div>
+      <div class="connect-box">
+        <div class="connect-label">📚 CONNECTS TO</div>
+        <p><strong>Atomic Habits:</strong> Iteration compounds. Each draft improves 5%. Five drafts = ~25% better. <strong>Peak by Ericsson:</strong> Deliberate practice requires feedback loops. Rewriting is the feedback loop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 11: WRITING DIFFERENT FORMS ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #fff3e0 0%, #ffe0b2 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--orange);">11</div>
+    <h2 class="lesson-title">Forms of Writing — Master the Genre</h2>
+    <p class="lesson-subtitle">News, essays, reviews, memoirs each have their own rules.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Four writing forms -->
+        <g transform="translate(30, 60)">
+          <rect x="0" y="0" width="140" height="140" rx="8" fill="var(--coral)" opacity="0.15" stroke="var(--coral)" stroke-width="2"/>
+          <text x="70" y="30" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--coral)" font-weight="700">NEWS</text>
+          <text x="70" y="55" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Facts first.</text>
+          <text x="70" y="68" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Pyramid structure.</text>
+          <text x="70" y="81" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Objectivity.</text>
+          <text x="70" y="94" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Third person.</text>
+          <text x="70" y="107" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Speed of clarity.</text>
+        </g>
+
+        <g transform="translate(200, 60)">
+          <rect x="0" y="0" width="140" height="140" rx="8" fill="var(--teal)" opacity="0.15" stroke="var(--teal)" stroke-width="2"/>
+          <text x="70" y="30" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--teal)" font-weight="700">ESSAY</text>
+          <text x="70" y="55" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Argument first.</text>
+          <text x="70" y="68" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Logic + emotion.</text>
+          <text x="70" y="81" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Personal voice.</text>
+          <text x="70" y="94" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Can meander.</text>
+          <text x="70" y="107" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Persuasion.</text>
+        </g>
+
+        <g transform="translate(370, 60)">
+          <rect x="0" y="0" width="140" height="140" rx="8" fill="var(--purple)" opacity="0.15" stroke="var(--purple)" stroke-width="2"/>
+          <text x="70" y="30" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--purple)" font-weight="700">PROFILE</text>
+          <text x="70" y="55" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Character first.</text>
+          <text x="70" y="68" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Show the person.</text>
+          <text x="70" y="81" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Story + detail.</text>
+          <text x="70" y="94" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Dialogue heavy.</text>
+          <text x="70" y="107" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Intimacy.</text>
+        </g>
+
+        <g transform="translate(540, 60)">
+          <rect x="0" y="0" width="140" height="140" rx="8" fill="var(--pink)" opacity="0.15" stroke="var(--pink)" stroke-width="2"/>
+          <text x="70" y="30" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--pink)" font-weight="700">MEMOIR</text>
+          <text x="70" y="55" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Truth first.</text>
+          <text x="70" y="68" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Personal memory.</text>
+          <text x="70" y="81" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Reflection.</text>
+          <text x="70" y="94" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">First person.</text>
+          <text x="70" y="107" text-anchor="middle" font-family="Inter" font-size="8" fill="#333">Meaning-making.</text>
+        </g>
+
+        <!-- Bottom insight -->
+        <rect x="20" y="220" width="660" height="70" rx="8" fill="rgba(255,152,0,0.08)" stroke="var(--orange)" stroke-width="2"/>
+        <text x="40" y="245" font-family="Inter" font-size="10" fill="#333" font-weight="600">Know the contract with your reader.</text>
+        <text x="40" y="264" font-family="Inter" font-size="9.5" fill="#555">News readers expect facts. Essay readers expect argument. Profile readers want character. Memoir readers seek truth. Master the form, then innovate.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--orange);">💡 KEY LESSON</div>
+      <p><strong>Each form has an implicit contract with the reader.</strong> Zinsser devotes substantial sections to different genres because the rules shift. A news article and a personal essay have different purposes.</p>
+      <p style="margin-top:12px;"><strong>Example 1:</strong> In news, the pyramid structure (most important facts first) serves readers who skim. In an essay, you might bury your thesis to earn it through argument. Same clarity, different architecture.</p>
+      <p style="margin-top:12px;"><strong>Example 2:</strong> Profile writing requires intimate knowledge. You're not being objective—you're characterizing a person. The contract says: show me this person's humanity. News says: show me what happened. Different demands.</p>
+      <p style="margin-top:12px;"><strong>Example 3:</strong> Memoir is about truth, not accuracy. You might compress three conversations into one scene. That's allowed if it reveals something true. The contract isn't "every fact," it's "emotional and spiritual truth." Know this before you write.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Good writing is a tool. Different forms sharpen it differently. Master the form."</div>
+      <div class="quote-attr">— William Zinsser</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>"You write a news article like a memoir. You write an essay like a news report. You write a profile like a sales pitch. Your readers are confused. Know the form first, innovate second."</p>
+    </div>
+
+    <div class="two-col">
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Language models learn genre conventions implicitly. News-trained models generate pyramidal structures. Essay-trained models develop arguments. Profile-trained models balance description with dialogue. Genre is a learned probability distribution. When you write, you're choosing which distribution to sample from. Master the distribution, then you can innovate within it.</p>
+      </div>
+      <div class="connect-box">
+        <div class="connect-label">📚 CONNECTS TO</div>
+        <p><strong>Thinking in Bets by Annie Duke:</strong> Different contexts (poker, work, life) have different decision rules. Same with writing—context determines form. <strong>Nudge:</strong> Default structure shapes behavior.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 12: PURPOSE & HUMANITY ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--dark);">12</div>
+    <h2 class="lesson-title">Purpose & Humanity — Why You Write Matters</h2>
+    <p class="lesson-subtitle">Great writing serves readers. It's not about you.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Writer ego -->
+        <g transform="translate(50, 80)" opacity="0.3">
+          <circle cx="50" cy="30" r="30" fill="var(--warm-red)"/>
+          <text x="50" y="40" text-anchor="middle" font-family="Inter" font-size="11" fill="white" font-weight="700">ME</text>
+          <path d="M 80 30 L 140 30" stroke="var(--warm-red)" stroke-width="2"/>
+          <text x="160" y="35" font-family="Inter" font-size="9" fill="var(--warm-red)">Self-centered writing</text>
+        </g>
+
+        <!-- Reader focus -->
+        <g transform="translate(50, 140)">
+          <circle cx="50" cy="30" r="30" fill="var(--teal)"/>
+          <text x="50" y="40" text-anchor="middle" font-family="Inter" font-size="10" fill="white" font-weight="700">READER</text>
+          <path d="M 80 30 L 140 30" stroke="var(--teal)" stroke-width="3"/>
+          <text x="160" y="35" font-family="Inter" font-size="9" fill="var(--teal)" font-weight="600">Purposeful writing</text>
+        </g>
+
+        <!-- Core message -->
+        <rect x="300" y="60" width="380" height="180" rx="12" fill="rgba(45,52,54,0.05)" stroke="var(--dark)" stroke-width="2"/>
+        <text x="490" y="90" text-anchor="middle" font-family="Inter" font-size="12" fill="#333" font-weight="700">The Central Insight</text>
+        <text x="320" y="120" font-family="Inter" font-size="10.5" fill="#333">Your job as a writer:</text>
+        <text x="320" y="138" font-family="Inter" font-size="9.5" fill="#555">• Clarify a subject for your reader</text>
+        <text x="320" y="154" font-family="Inter" font-size="9.5" fill="#555">• Help them understand something they didn't</text>
+        <text x="320" y="170" font-family="Inter" font-size="9.5" fill="#555">• Do it with respect and clarity</text>
+        <text x="320" y="186" font-family="Inter" font-size="9.5" fill="#555">• Make it matter for <em>them</em>, not for you</text>
+        <text x="320" y="210" font-family="Inter" font-size="9" fill="var(--dark)" font-weight="600">Everything else follows from this.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--dark);">💡 KEY LESSON</div>
+      <p><strong>Good writing is a service, not a performance.</strong> Zinsser's final essential wisdom: your purpose is to illuminate something for the reader. Every rule in the book (simplicity, clarity, specificity) serves that purpose. It's not about impressing people with your vocabulary. It's about making something clear.</p>
+      <p style="margin-top:12px;"><strong>Example 1:</strong> A scientist who uses jargon to sound smart is serving ego. A scientist who explains clearly is serving readers. Which writer contributes to human understanding? The clear one.</p>
+      <p style="margin-top:12px;"><strong>Example 2:</strong> A memoirist who indulges in 50 pages of navel-gazing is serving self. A memoirist who excavates their truth to reveal something universal is serving readers. The difference is purpose.</p>
+      <p style="margin-top:12px;"><strong>Example 3:</strong> Zinsser's own work—from travel writing to cultural criticism—is rooted in one question: "What does my reader need to understand to see this clearly?" Everything flows from that service orientation. That's why his writing endures.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The most important sentence is your first one. The second most important is your last. Everything in between is explaining why those two sentences matter."</div>
+      <div class="quote-attr">— William Zinsser</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>"You spend 2 hours crafting the perfect paragraph that no one will remember. You write one clear sentence that changes how someone thinks. Guess which one mattered?"</p>
+    </div>
+
+    <div class="two-col">
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Language models are trained with one objective: predict the next token well. They learn to serve the training objective. Poor LLMs maximize token count (because longer outputs seem more impressive). Good LLMs maximize clarity and relevance per token. The difference isn't capability—it's training objective. Writers are the same. If your objective is "impress people" you'll write obscurely. If it's "clarify this for my reader" you'll write with purpose.</p>
+      </div>
+      <div class="connect-box">
+        <div class="connect-label">📚 CONNECTS TO</div>
+        <p><strong>Man's Search for Meaning:</strong> Purpose gives meaning. Your writing purpose determines its impact. <strong>Deep Work:</strong> Meaning emerges from serving something larger than ego. Your reader is larger than ego.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY SPOTLIGHT 1: ZINSSER AND THE NEW YORK TIMES ============ -->
+<section class="story" style="background: linear-gradient(135deg, #1a1a3e 0%, #0f0f23 100%); color: white;">
+  <div class="story-inner">
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px;">Story Spotlight: From Journalism to Philosophy</h2>
+
+    <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 30px;">
+      <!-- Typewriter -->
+      <g opacity="0.4">
+        <rect x="150" y="80" width="400" height="80" rx="8" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+        <line x1="250" y1="100" x2="550" y2="100" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+        <circle cx="180" cy="140" r="8" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+        <circle cx="620" cy="140" r="8" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      </g>
+      <!-- Light from writing -->
+      <circle cx="350" cy="100" r="60" fill="var(--sunny)" opacity="0.15"/>
+      <text x="350" y="110" text-anchor="middle" font-family="Playfair Display" font-size="32" fill="var(--sunny)" opacity="0.3">✍</text>
+    </svg>
+
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">William Zinsser spent decades as a journalist for the <strong>New York Herald Tribune</strong>. He learned the craft in deadline pressure—where clarity was survival. A cluttered sentence was cut. A weak word was questioned. That discipline shaped everything he later wrote.</p>
+
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">But journalism wasn't his final form. Zinsser evolved into an essayist, critic, and memoirist. He wrote about architecture, music, jazz, travel. Each form demanded something different. Yet the core principle—<strong>clarity in service of the reader</strong>—remained constant.</p>
+
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">The insight: <strong>Zinsser mastered constraint (journalism's rules) before he mastered freedom (essay's flexibility).</strong> He knew grammar so well he could break it. He knew structure so deeply he could innovate. His teaching flows from that journey. He's not saying "break all rules." He's saying: "Learn the rules, understand your purpose, then write with intention."</p>
+
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;"><em>"On Writing Well"</em> is the distilled wisdom of someone who spent decades in the trenches, learning what works, discarding what doesn't. It's not theory. It's practice elevated to principle.</p>
+  </div>
+</section>
+
+<!-- ============ STORY SPOTLIGHT 2: THE POWER OF REVISION ============ -->
+<section class="story" style="background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%); color: white;">
+  <div class="story-inner">
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px;">Story Spotlight: How Good Writers Rewrite</h2>
+
+    <svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 30px;">
+      <!-- Layers of revision -->
+      <rect x="50" y="30" width="600" height="120" rx="4" fill="var(--coral)" opacity="0.15" stroke="var(--coral)" stroke-width="1"/>
+      <text x="350" y="55" text-anchor="middle" font-family="Inter" font-size="10" fill="rgba(255,255,255,0.6)">First Draft: Rough idea, scattered</text>
+
+      <rect x="60" y="50" width="580" height="100" rx="4" fill="var(--orange)" opacity="0.2" stroke="var(--orange)" stroke-width="1"/>
+      <text x="350" y="75" text-anchor="middle" font-family="Inter" font-size="10" fill="rgba(255,255,255,0.7)">Second Draft: Add detail, find voice</text>
+
+      <rect x="70" y="70" width="560" height="80" rx="4" fill="var(--sunny)" opacity="0.25" stroke="var(--sunny)" stroke-width="1"/>
+      <text x="350" y="95" text-anchor="middle" font-family="Inter" font-size="10" fill="rgba(255,255,255,0.8)">Third Draft: Tighten prose, cut clutter</text>
+
+      <rect x="80" y="90" width="540" height="60" rx="4" fill="var(--teal)" opacity="0.3" stroke="var(--teal)" stroke-width="1"/>
+      <text x="350" y="115" text-anchor="middle" font-family="Inter" font-size="10" fill="white" font-weight="600">Final: Polish, proof, ship</text>
+    </svg>
+
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">Zinsser often illustrates revision with his own examples. A sentence he writes as "He was absolutely devastated by the unexpected loss" might become "He sat in the dark" after five revisions. The power isn't in the explanation. It's in what the reader sees.</p>
+
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">The transformation requires discipline. Many writers draft once and call it done. Good writers know: <strong>the first draft is permission to be wrong. Revision is where you get right.</strong> Zinsser himself says he rewrites everything multiple times. He reads aloud. He asks: Does this earn its place? Does this word serve the meaning?</p>
+
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">The lesson hits harder when you apply it: Take something you wrote. Read it aloud. Count the unnecessary words. Cut 20%. What remains is sharper. This is Zinsser's method. Not mystical. Mechanical. Repeatable. Learnable.</p>
+  </div>
+</section>
+
+<!-- ============ STORY SPOTLIGHT 3: FINDING YOUR VOICE ============ -->
+<section class="story" style="background: linear-gradient(135deg, #1a1a3e 0%, #0f0f23 100%); color: white;">
+  <div class="story-inner">
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px;">Story Spotlight: Learning to Sound Like Yourself</h2>
+
+    <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 30px;">
+      <!-- Three writers -->
+      <g transform="translate(80, 60)">
+        <circle cx="20" cy="20" r="18" fill="var(--coral)" opacity="0.4"/>
+        <text x="20" y="27" text-anchor="middle" font-family="Inter" font-size="8" fill="white" font-weight="600">Student</text>
+        <text x="20" y="60" text-anchor="middle" font-family="Inter" font-size="9" fill="white">Writes like</text>
+        <text x="20" y="75" text-anchor="middle" font-family="Inter" font-size="9" fill="white">a textbook</text>
+      </g>
+
+      <g transform="translate(350, 60)">
+        <circle cx="20" cy="20" r="18" fill="var(--purple)" opacity="0.4"/>
+        <text x="20" y="27" text-anchor="middle" font-family="Inter" font-size="8" fill="white" font-weight="600">Learner</text>
+        <text x="20" y="60" text-anchor="middle" font-family="Inter" font-size="9" fill="white">Writes like</text>
+        <text x="20" y="75" text-anchor="middle" font-family="Inter" font-size="9" fill="white">they talk</text>
+      </g>
+
+      <g transform="translate(600, 60)">
+        <circle cx="20" cy="20" r="18" fill="var(--teal)" opacity="0.4"/>
+        <text x="20" y="27" text-anchor="middle" font-family="Inter" font-size="8" fill="white" font-weight="600">Master</text>
+        <text x="20" y="60" text-anchor="middle" font-family="Inter" font-size="9" fill="white">Writes like</text>
+        <text x="20" y="75" text-anchor="middle" font-family="Inter" font-size="9" fill="white">themselves</text>
+      </g>
+
+      <!-- Arrow showing progression -->
+      <path d="M 120 140 L 280 140 L 450 140" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" marker-end="url(#arrowWhite)"/>
+
+      <defs>
+        <marker id="arrowWhite" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+          <polygon points="0 0, 10 3, 0 6" fill="rgba(255,255,255,0.5)"/>
+        </marker>
+      </defs>
+    </svg>
+
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">Zinsser emphasizes: <strong>Your voice doesn't appear magically. It emerges through practice and permission.</strong> Students write in fake "academic voice" because teachers rewarded it. Professionals write in fake "professional voice" because they think clients expect it. Both are wrong.</p>
+
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">Zinsser's solution: Give yourself permission to sound like you. Not performatively casual. Just honest. The writer who says "Look, here's what happened" sounds more human than someone saying "In light of recent developments." Same facts, different voice. One connects.</p>
+
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">The irony: readers trust authentic voice more than polished voice. A CEO who writes email like a memo—short, clear, direct—builds more trust than one who writes like a PR department. Zinsser's teaching gives permission to be yourself on the page. That permission is rarer and more valuable than grammar lessons.</p>
+  </div>
+</section>
+
+<!-- ============ CHEATSHEET ============ -->
+<section class="cheatsheet">
+  <div class="cheatsheet-inner">
+    <h2>Quick Reference: Zinsser's Writing Principles</h2>
+
+    <div class="cheat-card">
+      <h3>1. Simplicity</h3>
+      <p><strong>Rule:</strong> Delete every word that doesn't serve. Strip sentences to their cleanest components. Clutter is the disease. Clarity is the cure.</p>
+      <p style="margin-top:8px;"><strong>Action:</strong> For every sentence, ask: Can this be cut? Can any word be removed without losing meaning? If yes, remove it.</p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>2. Tighten Your Prose</h3>
+      <p><strong>Rule:</strong> Replace phrases with single words. "Due to the fact that" → "Because." "Utilize" → "Use." Cut adverbs ending in "-ly." Delete "very," "really," "quite."</p>
+      <p style="margin-top:8px;"><strong>Action:</strong> First pass: cut 20%. Second pass: cut 10% more. This discipline strengthens the remaining words.</p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>3. Know Your Subject</h3>
+      <p><strong>Rule:</strong> Research deeply before writing. Read books. Interview experts. Live with the subject until you understand it at depth.</p>
+      <p style="margin-top:8px;"><strong>Action:</strong> Spend 80% of your time researching. The writing will be 80% easier, 80% better.</p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>4. Find Your Voice</h3>
+      <p><strong>Rule:</strong> Write like you speak. Trust your natural rhythm. Use contractions. Ask rhetorical questions. Be yourself.</p>
+      <p style="margin-top:8px;"><strong>Action:</strong> Read a paragraph aloud. Does it sound like you? If not, why not? Rewrite toward your natural voice.</p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>5. Know Your Audience</h3>
+      <p><strong>Rule:</strong> Write to one specific reader, not a thousand. Imagine a friend, mentor, or loved one. Write for them.</p>
+      <p style="margin-top:8px;"><strong>Action:</strong> Before drafting, write: "This is for ___." Then write everything with that person in mind.</p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>6. Master Grammar</h3>
+      <p><strong>Rule:</strong> Learn the rules so you can break them intentionally. Fragment sentences for emphasis. Start with "and" when rhythm demands it. Know when you're wrong and why.</p>
+      <p style="margin-top:8px;"><strong>Action:</strong> Study grammar fundamentals. Then consciously deviate when it serves meaning.</p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>7. Show, Don't Tell Emotion</h3>
+      <p><strong>Rule:</strong> Use action and detail to convey feeling. "She sat in his chair" carries grief. "She was devastated" doesn't.</p>
+      <p style="margin-top:8px;"><strong>Action:</strong> Replace emotional labels with specific actions. What did the emotion look like? What did it do?</p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>8. Interview Well</h3>
+      <p><strong>Rule:</strong> Ask open-ended questions. Listen more than you talk. Silence is your tool—it makes people keep talking, and that's where truth emerges.</p>
+      <p style="margin-top:8px;"><strong>Action:</strong> Prepare 10 questions. Ask 3. Listen to what follows. That's where the story lives.</p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>9. Build Structure</h3>
+      <p><strong>Rule:</strong> Every piece needs a skeleton. Lead (hook the reader). Body (develop the idea). Ending (circle back or land an insight).</p>
+      <p style="margin-top:8px;"><strong>Action:</strong> Before writing, outline: 1) What will grab them? 2) What's the substance? 3) How will this end?</p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>10. Rewrite Ruthlessly</h3>
+      <p><strong>Rule:</strong> First draft is permission to be wrong. Revision is where real writing happens. Expect to rewrite 3-5 times.</p>
+      <p style="margin-top:8px;"><strong>Action:</strong> Read aloud. Mark places where you stumble. Cut at least 20% of your first draft on revision two.</p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>11. Master Your Form</h3>
+      <p><strong>Rule:</strong> News, essays, profiles, memoirs each have different contracts with readers. Know what form you're in. Know its rules.</p>
+      <p style="margin-top:8px;"><strong>Action:</strong> Read 10 examples of the form you're writing in. Note the structure. Understand the reader's expectations.</p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>12. Purpose Above All</h3>
+      <p><strong>Rule:</strong> Your job is to clarify something for the reader. Everything serves that purpose. Ego is the enemy.</p>
+      <p style="margin-top:8px;"><strong>Action:</strong> Before writing, answer: What does my reader need to understand? Everything else is secondary.</p>
+    </div>
+
+    <div class="cheat-card" style="background: linear-gradient(135deg, rgba(255,181,54,0.15), rgba(255,107,107,0.15)); border-left: 4px solid var(--sunny);">
+      <h3 style="color: var(--warm-red);">The Meta-Rule</h3>
+      <p><strong>Good writing is a service, not a performance. Your reader's clarity matters more than your cleverness. Serve them with honesty, simplicity, and respect. Everything else follows.</strong></p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

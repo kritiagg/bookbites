@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Comedy Bible — Illustrated Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+  :root {
+    --coral: #FF6B6B;
+    --teal: #4ECDC4;
+    --sunny: #FFE66D;
+    --purple: #A06CD5;
+    --sky: #74B9FF;
+    --mint: #55EFC4;
+    --pink: #FD79A8;
+    --orange: #FDCB6E;
+    --dark: #2D3436;
+    --cream: #FFEAA7;
+    --deep-blue: #0984E3;
+    --warm-red: #E17055;
+    --forest: #00B894;
+    --dark-purple: #6C5CE7;
+    --laugh-yellow: #FFD93D;
+    --stage-purple: #9B59B6;
+    --comedy-gold: #F39C12;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+
+  /* ===== COVER ===== */
+  .cover {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a0033 0%, #330066 50%, #1a0033 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; padding: 40px 20px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem; color: white; letter-spacing: -2px;
+    text-align: center; position: relative; z-index: 2;
+    text-shadow: 0 4px 20px rgba(255, 215, 61, 0.3);
+  }
+  .cover .author { font-size: 1.3rem; color: var(--laugh-yellow); margin-top: 8px; font-weight: 600; z-index: 2; }
+  .cover .subtitle { font-size: 1rem; color: rgba(255,255,255,0.7); margin-top: 16px; z-index: 2; text-align: center; max-width: 500px; }
+  .cover-svg { width: 90%; max-width: 700px; margin-top: 40px; z-index: 2; }
+
+  .particle {
+    position: absolute; border-radius: 50%; opacity: 0.12;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+  }
+
+  /* ===== LESSONS ===== */
+  .lesson {
+    min-height: 100vh; padding: 60px 20px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lesson-inner { max-width: 900px; width: 100%; }
+  .lesson-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem;
+    color: white; margin-bottom: 12px;
+  }
+  .lesson-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2;
+  }
+  .lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+
+  .illustration-container { margin: 30px 0; }
+  .illustration-container svg { max-width: 100%; height: auto; display: block; }
+
+  .card {
+    background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  .card-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .card p { font-size: 0.95rem; line-height: 1.7; color: #444; }
+
+  .quote-box {
+    background: var(--dark); color: white; border-radius: 16px;
+    padding: 24px 28px; margin-bottom: 20px;
+  }
+  .quote-box .quote-text { font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+  .quote-box .quote-attr { color: var(--laugh-yellow); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+
+  .connect-box {
+    background: #f0e6ff; border-left: 4px solid var(--stage-purple);
+    border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px;
+  }
+  .connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--stage-purple); letter-spacing: 1px; margin-bottom: 6px; }
+  .connect-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+
+  .ai-box {
+    background: linear-gradient(135deg, #1abc9c, #3498db);
+    color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px;
+  }
+  .ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--laugh-yellow); margin-bottom: 6px; }
+  .ai-box p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.95); }
+
+  .funny-box {
+    background: #fff5f5; border-radius: 16px; padding: 20px 24px;
+    margin-bottom: 20px; border: 2px dashed var(--coral);
+  }
+  .funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: var(--coral); letter-spacing: 1px; margin-bottom: 6px; }
+  .funny-box p { font-size: 0.9rem; line-height: 1.6; color: #666; font-style: italic; }
+
+  /* ===== STORIES ===== */
+  .story {
+    min-height: 100vh; padding: 60px 20px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .story-inner { max-width: 900px; width: 100%; }
+  .story h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px; }
+  .story p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 16px; }
+
+  /* ===== CHEATSHEET ===== */
+  .cheatsheet {
+    min-height: 100vh; padding: 60px 20px;
+    background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cheatsheet-inner { max-width: 900px; width: 100%; }
+  .cheatsheet h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; text-align: center; margin-bottom: 40px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .cheatsheet-card {
+    background: rgba(255,255,255,0.95); border-radius: 12px; padding: 20px;
+    border-left: 4px solid var(--laugh-yellow);
+  }
+  .cheatsheet-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--stage-purple); margin-bottom: 8px; }
+  .cheatsheet-card p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ===== LESSON-SPECIFIC STYLES ===== */
+  .lesson-1 { background: linear-gradient(180deg, #fef5e7 0%, #fdeaa8 100%); }
+  .lesson-1 .lesson-num { background: var(--comedy-gold); }
+
+  .lesson-2 { background: linear-gradient(180deg, #f4ecf7 0%, #e8d5f2 100%); }
+  .lesson-2 .lesson-num { background: var(--stage-purple); }
+
+  .lesson-3 { background: linear-gradient(180deg, #e8f8f5 0%, #d1f2eb 100%); }
+  .lesson-3 .lesson-num { background: var(--teal); }
+
+  .lesson-4 { background: linear-gradient(180deg, #fef9e7 0%, #fef5e7 100%); }
+  .lesson-4 .lesson-num { background: var(--laugh-yellow); color: #2d3436; }
+
+  .lesson-5 { background: linear-gradient(180deg, #fdeef4 0%, #fadbd8 100%); }
+  .lesson-5 .lesson-num { background: var(--coral); }
+
+  .lesson-6 { background: linear-gradient(180deg, #ebf5fb 0%, #d6eaf8 100%); }
+  .lesson-6 .lesson-num { background: var(--deep-blue); }
+
+  .lesson-7 { background: linear-gradient(180deg, #fef5e7 0%, #fceaa8 100%); }
+  .lesson-7 .lesson-num { background: var(--orange); }
+
+  .lesson-8 { background: linear-gradient(180deg, #f5eef8 0%, #ebdef0 100%); }
+  .lesson-8 .lesson-num { background: var(--purple); }
+
+  .lesson-9 { background: linear-gradient(180deg, #eaf2f8 0%, #d5e8f7 100%); }
+  .lesson-9 .lesson-num { background: var(--sky); color: #2d3436; }
+
+  .lesson-10 { background: linear-gradient(180deg, #f2f9e4 0%, #e8f5e9 100%); }
+  .lesson-10 .lesson-num { background: var(--forest); }
+
+  .lesson-11 { background: linear-gradient(180deg, #fadbd8 0%, #f5b7b1 100%); }
+  .lesson-11 .lesson-num { background: var(--warm-red); }
+
+  .lesson-12 { background: linear-gradient(180deg, #fef9e7 0%, #fef5e7 100%); }
+  .lesson-12 .lesson-num { background: var(--comedy-gold); }
+
+  .story-1 { background: linear-gradient(180deg, #1a1a3e 0%, #16213e 100%); color: white; }
+  .story-2 { background: linear-gradient(180deg, #16213e 0%, #1a1a3e 100%); color: white; }
+  .story-3 { background: linear-gradient(180deg, #1a1a3e 0%, #16213e 100%); color: white; }
+</style>
+</head>
+<body>
+
+<!-- ========== COVER ========== -->
+<section class="cover">
+  <svg class="particle" style="width: 80px; height: 80px; top: 10%; left: 5%;"><circle cx="40" cy="40" r="40" fill="#FFD93D"/></svg>
+  <svg class="particle" style="width: 120px; height: 120px; top: 20%; right: 8%;"><circle cx="60" cy="60" r="60" fill="#9B59B6" opacity="0.08"/></svg>
+  <svg class="particle" style="width: 60px; height: 60px; bottom: 15%; left: 12%;"><circle cx="30" cy="30" r="30" fill="#FF6B6B" opacity="0.08"/></svg>
+  <svg class="particle" style="width: 100px; height: 100px; bottom: 20%; right: 5%;"><circle cx="50" cy="50" r="50" fill="#4ECDC4" opacity="0.08"/></svg>
+
+  <h1>The Comedy Bible</h1>
+  <div class="author">by Judy Carter</div>
+  <div class="subtitle">From Stand-up to Sitcom — The Art & Craft of Comedy Illustrated</div>
+
+  <div class="cover-svg">
+    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Stage -->
+      <rect x="50" y="180" width="600" height="100" fill="#2d3436" rx="10"/>
+      <rect x="50" y="175" width="600" height="10" fill="#FFD93D"/>
+
+      <!-- Spotlight -->
+      <circle cx="200" cy="100" r="80" fill="#FFD93D" opacity="0.3"/>
+      <circle cx="500" cy="80" r="60" fill="#9B59B6" opacity="0.2"/>
+
+      <!-- Comedian figure -->
+      <circle cx="200" cy="120" r="25" fill="#fdbcb4"/>
+      <rect x="180" y="145" width="40" height="35" fill="#1a1a1a" rx="3"/>
+      <rect x="175" y="180" width="15" height="30" fill="#8B4513"/>
+      <rect x="210" y="180" width="15" height="30" fill="#8B4513"/>
+      <line x1="200" y1="145" x2="160" y2="130" stroke="#fdbcb4" stroke-width="8" stroke-linecap="round"/>
+      <line x1="200" y1="145" x2="240" y2="130" stroke="#fdbcb4" stroke-width="8" stroke-linecap="round"/>
+
+      <!-- Microphone -->
+      <circle cx="180" cy="110" r="8" fill="#333"/>
+      <line x1="180" y1="118" x2="180" y2="150" stroke="#333" stroke-width="4"/>
+      <rect x="165" y="150" width="30" height="8" fill="#666" rx="2"/>
+
+      <!-- Audience silhouettes -->
+      <circle cx="350" cy="230" r="12" fill="#555"/>
+      <circle cx="380" cy="240" r="12" fill="#555"/>
+      <circle cx="410" cy="235" r="12" fill="#555"/>
+      <circle cx="440" cy="245" r="12" fill="#555"/>
+      <circle cx="470" cy="240" r="12" fill="#555"/>
+      <circle cx="500" cy="235" r="12" fill="#555"/>
+      <circle cx="530" cy="242" r="12" fill="#555"/>
+
+      <!-- Laughter text (animated) -->
+      <text x="600" y="80" font-size="24" font-weight="bold" fill="#FFD93D" opacity="0.7">HA!</text>
+      <text x="650" y="120" font-size="20" fill="#9B59B6" opacity="0.6">HEH</text>
+      <text x="620" y="160" font-size="18" fill="#FF6B6B" opacity="0.5">HAHA</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ========== LESSON 1: FIND YOUR FUNNY ========== -->
+<section class="lesson lesson-1">
+  <div class="lesson-inner">
+    <div class="lesson-num">1</div>
+    <h2 class="lesson-title">Find Your Funny</h2>
+    <p class="lesson-subtitle">Discovering Your Unique Comedy Voice</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Head silhouette -->
+        <circle cx="200" cy="100" r="50" fill="#FFD93D" opacity="0.3" stroke="#FFD93D" stroke-width="2"/>
+        <circle cx="200" cy="100" r="45" fill="none" stroke="#FFD93D" stroke-width="3"/>
+
+        <!-- Brain lobes (humor areas) -->
+        <ellipse cx="180" cy="90" rx="15" ry="25" fill="#9B59B6" opacity="0.4"/>
+        <ellipse cx="220" cy="90" rx="15" ry="25" fill="#F39C12" opacity="0.4"/>
+        <path d="M 200 110 Q 200 120 210 125" stroke="#FF6B6B" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+
+        <!-- Three personality paths -->
+        <text x="50" y="180" font-size="14" font-weight="bold" fill="#2d3436">Observational</text>
+        <circle cx="80" cy="200" r="8" fill="#4ECDC4"/>
+        <line x1="88" y1="200" x2="120" y2="200" stroke="#4ECDC4" stroke-width="2"/>
+
+        <text x="280" y="180" font-size="14" font-weight="bold" fill="#2d3436">Self-Deprecating</text>
+        <circle cx="320" cy="200" r="8" fill="#FF6B6B"/>
+        <line x1="328" y1="200" x2="360" y2="200" stroke="#FF6B6B" stroke-width="2"/>
+
+        <text x="480" y="180" font-size="14" font-weight="bold" fill="#2d3436">Absurdist</text>
+        <circle cx="520" cy="200" r="8" fill="#9B59B6"/>
+        <line x1="528" y1="200" x2="560" y2="200" stroke="#9B59B6" stroke-width="2"/>
+
+        <!-- Personal experience cloud -->
+        <ellipse cx="500" cy="100" rx="80" ry="60" fill="none" stroke="#F39C12" stroke-width="2" stroke-dasharray="8,4"/>
+        <text x="420" y="105" font-size="12" fill="#F39C12">Your Experiences</text>
+        <text x="430" y="125" font-size="12" fill="#F39C12">&amp; Perspective</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎭 KEY LESSON</div>
+      <p>Your comedy voice is the intersection of your personality, life experience, and natural sense of humor. Carter teaches that the funniest material comes from authentic, personal truth. Consider comedians like Jerry Seinfeld (observational), Rodney Dangerfield (self-deprecation), or Maria Bamford (vulnerable absurdism)—each found success by understanding what made them uniquely funny. Your comedy DNA isn't something to discover; it's something to excavate from your own story. Don't try to be someone else's funny; find the humor in YOUR perspective, YOUR failures, and YOUR unique way of seeing the world.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Finding your funny is like online dating for your personality—you're trying to figure out which version of yourself is the most attractive. Spoiler: it's the version that isn't trying.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Large language models generate text by predicting the next token based on patterns learned from training data. Similarly, your comedy voice emerges from pattern recognition in your own life experiences. Where LLMs have embedding spaces for language, comedians have emotional embedding spaces for their material. The more you train on your authentic experiences (rather than copying other comedians), the more unique your "comedy weights" become—and the more distinctive your output.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+      <p>Carol Dweck's <em>Mindset</em> complements this lesson—discovering your funny requires a growth mindset. Your comedy voice isn't fixed; it develops through deliberate practice and experimentation. Rather than a fixed "talent," comedy voice is built incrementally through understanding yourself better.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The key to comedy is to be yourself. The audience wants to laugh at you, not an imitation of someone else."</div>
+      <div class="quote-attr">— Judy Carter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LESSON 2: COMEDY GOLDMINE — MINING YOUR MATERIAL ========== -->
+<section class="lesson lesson-2">
+  <div class="lesson-inner">
+    <div class="lesson-num">2</div>
+    <h2 class="lesson-title">Comedy Goldmine</h2>
+    <p class="lesson-subtitle">Excavating Material From Your Life</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Mountain/mine -->
+        <polygon points="100,280 200,80 300,280" fill="#8B4513" opacity="0.5"/>
+        <polygon points="300,280 400,100 500,280" fill="#A0522D" opacity="0.5"/>
+        <polygon points="500,280 600,90 700,280" fill="#8B4513" opacity="0.5"/>
+
+        <!-- Mine entrance -->
+        <rect x="150" y="200" width="100" height="80" fill="#333" rx="20"/>
+        <polygon points="150,200 200,160 250,200" fill="#555"/>
+
+        <!-- Pickaxe -->
+        <rect x="70" y="150" width="6" height="60" fill="#654321" transform="rotate(-30 73 180)"/>
+        <polygon points="50,130 90,130 70,110" fill="#FFD700"/>
+
+        <!-- Gems/material inside -->
+        <circle cx="120" cy="190" r="8" fill="#9B59B6"/>
+        <circle cx="200" cy="210" r="10" fill="#FF6B6B"/>
+        <circle cx="160" cy="240" r="9" fill="#FFD93D"/>
+        <circle cx="240" cy="200" r="8" fill="#4ECDC4"/>
+
+        <!-- Labels for material types -->
+        <text x="320" y="100" font-size="13" font-weight="bold" fill="#2d3436">EMBARRASSMENT</text>
+        <text x="320" y="140" font-size="13" font-weight="bold" fill="#2d3436">Family Drama</text>
+        <text x="320" y="180" font-size="13" font-weight="bold" fill="#2d3436">Failed Relationships</text>
+        <text x="320" y="220" font-size="13" font-weight="bold" fill="#2d3436">Awkward Moments</text>
+        <text x="320" y="260" font-size="13" font-weight="bold" fill="#2d3436">Daily Observations</text>
+
+        <!-- Arrows pointing to nuggets -->
+        <line x1="310" y1="100" x2="240" y2="200" stroke="#FFD93D" stroke-width="2" marker-end="url(#arrowhead)"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">💎 KEY LESSON</div>
+      <p>The richest comedy material comes from your own life, not imagination. Carter emphasizes mining your experiences for humor: embarrassing moments, family dynamics, romantic failures, workplace absurdities. Think of Hannah Gadsby mining gender identity, or Dave Chappelle's childhood observations. The principle is specificity—"I had a terrible date" isn't comedy; "He spent the entire dinner explaining cryptocurrency to my salad" is. Real comedians keep notebooks, record voice memos, and obsessively catalog their lives for punchlines. Your worst moments become your best material because they're authentic and emotionally grounded.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>You know you're a professional comedian when your friends stop sharing stories with you because they know they'll become a tight five-minute bit within 72 hours.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Language models use a process called "attention" to identify the most relevant patterns in their training data. Comedians use a similar selective attention—focusing on small, weird details others overlook. Your ability to notice absurdity (the 5-year-old's logic, the weird phrasing in a sign, the bodily function at an awkward moment) is your competitive advantage. This specificity and pattern recognition mirrors how transformers identify salient features in high-dimensional data.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+      <p>In <em>Atomic Habits</em>, James Clear discusses "identity-based habits." Mining your material for comedy is similar—you're training yourself to notice the comic potential in everyday life, making humor-spotting a habitual skill rather than occasional inspiration.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Your life is not just material; it's your material. Write down everything. The comedy is in the details."</div>
+      <div class="quote-attr">— Judy Carter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LESSON 3: THE STRUCTURE OF FUNNY ========== -->
+<section class="lesson lesson-3">
+  <div class="lesson-inner">
+    <div class="lesson-num">3</div>
+    <h2 class="lesson-title">The Structure of Funny</h2>
+    <p class="lesson-subtitle">Anatomy of the Joke</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Three-beat structure -->
+        <circle cx="150" cy="100" r="40" fill="#4ECDC4" opacity="0.5"/>
+        <text x="125" y="110" font-size="14" font-weight="bold" fill="#fff">Setup</text>
+
+        <line x1="190" y1="100" x2="260" y2="100" stroke="#4ECDC4" stroke-width="3" marker-end="url(#arrowhead)"/>
+        <text x="215" y="80" font-size="11" fill="#2d3436" text-anchor="middle">Build</text>
+
+        <circle cx="310" cy="100" r="40" fill="#FF6B6B" opacity="0.5"/>
+        <text x="290" y="110" font-size="14" font-weight="bold" fill="#fff">Punchline</text>
+
+        <!-- Misdirection element -->
+        <rect x="100" y="180" width="200" height="60" fill="#FFE66D" opacity="0.3" rx="8"/>
+        <text x="200" y="200" font-size="12" font-weight="bold" text-anchor="middle" fill="#2d3436">Expectation</text>
+        <text x="200" y="220" font-size="12" text-anchor="middle" fill="#2d3436">(Audience believes X)</text>
+
+        <line x1="300" y1="210" x2="380" y2="210" stroke="#2d3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <text x="340" y="200" font-size="11" fill="#2d3436" text-anchor="middle">TWIST</text>
+
+        <rect x="380" y="180" width="200" height="60" fill="#9B59B6" opacity="0.3" rx="8"/>
+        <text x="480" y="200" font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">Reality Shift</text>
+        <text x="480" y="220" font-size="12" text-anchor="middle" fill="#fff">(They got Y instead!)</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎬 KEY LESSON</div>
+      <p>Comedy follows the rule of three: Setup, Build, Punchline. The setup establishes expectations (audience believes X will happen). The build deepens their investment. The punchline delivers a reality shift—they get Y instead. Classic example from Mitch Hedberg: "I used to do drugs. I still do, but I used to too." The setup implies he quit; the build confirms it; the punchline subverts it. Or consider Tim Minchin's wordplay: "I'm not a fan of the word 'homophobic.' It's not a phobia, some people aren't afraid of gays, they just think they're gross." Setup (word critique), Build (definition), Punchline (brutal honesty). Mastering this structure transforms observations into comedic gold.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Most people tell jokes like they're defusing a bomb—they rush to the punchline before it explodes. Good comedians know the setup and build are where the audience falls in love; the punchline is just the payoff of trust you've already earned.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Neural networks and transformers use a concept called "attention mechanism" that weights different inputs based on relevance. In comedy, your setup and build are training the audience's attention—directing them toward certain ideas while obscuring others. The punchline works because you've manipulated their attention distribution. Similarly, a joke's effectiveness depends on information density and temporal dynamics, much like how LLMs predict next tokens based on context windows. The audience's prediction error (what they expected vs. what happened) generates the laugh.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+      <p><em>Made to Stick</em> by Chip and Dan Heath discusses how memorable ideas follow the SUCCESs framework (Simplicity, Unexpectedness, Concrete, Credible, Emotional, Story). Jokes operate similarly—setup creates simplicity and credibility, the twist introduces unexpectedness, and the punchline delivers emotional payoff through the structure.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"A joke is the shortest distance between two truths."</div>
+      <div class="quote-attr">— Judy Carter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LESSON 4: TIMING IS EVERYTHING ========== -->
+<section class="lesson lesson-4">
+  <div class="lesson-inner">
+    <div class="lesson-num">4</div>
+    <h2 class="lesson-title">Timing Is Everything</h2>
+    <p class="lesson-subtitle">The Rhythm of Laughter</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Metronome -->
+        <rect x="320" y="200" width="60" height="40" fill="#2d3436" rx="5"/>
+        <line x1="350" y1="60" x2="350" y2="200" stroke="#2d3436" stroke-width="3"/>
+        <circle cx="350" cy="55" r="8" fill="#FF6B6B"/>
+
+        <!-- Swinging beats -->
+        <line x1="350" y1="70" x2="300" y2="140" stroke="#FFD93D" stroke-width="2" opacity="0.5"/>
+        <text x="280" y="160" font-size="11" fill="#2d3436">BEAT 1</text>
+
+        <line x1="350" y1="70" x2="400" y2="140" stroke="#9B59B6" stroke-width="2" opacity="0.5"/>
+        <text x="410" y="160" font-size="11" fill="#2d3436">BEAT 2</text>
+
+        <!-- Pause visualization -->
+        <rect x="50" y="80" width="200" height="40" fill="#4ECDC4" opacity="0.3" rx="5"/>
+        <text x="150" y="105" font-size="12" font-weight="bold" text-anchor="middle" fill="#2d3436">SETUP (Fast)</text>
+
+        <rect x="50" y="140" width="200" height="60" fill="#FFD93D" opacity="0.3" rx="5"/>
+        <text x="150" y="165" font-size="12" font-weight="bold" text-anchor="middle" fill="#2d3436">PAUSE</text>
+        <text x="150" y="185" font-size="11" text-anchor="middle" fill="#2d3436">(Let it breathe)</text>
+
+        <rect x="50" y="220" width="200" height="20" fill="#FF6B6B" opacity="0.3" rx="3"/>
+        <text x="150" y="235" font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">PUNCHLINE (Sharp)</text>
+
+        <!-- Audience response -->
+        <text x="500" y="100" font-size="18" fill="#FFD93D" font-weight="bold">HA!</text>
+        <text x="540" y="150" font-size="16" fill="#9B59B6">Ha-ha</text>
+        <text x="500" y="200" font-size="14" fill="#4ECDC4">hehe</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">⏱️ KEY LESSON</div>
+      <p>Timing is the difference between a laugh and silence. Carter teaches that comedians must master pause—the silence before a punchline is where the audience's anticipation builds. Watch George Carlin use long pauses to let observations sink in. Notice how Jerry Seinfeld sometimes repeats a phrase with different inflection, changing the rhythm to reset audience expectations. Louis C.K. uses silence as a tool—not rushing punchlines, but letting the audience catch up to his logic. Timing also includes knowing when to speed up (during build) and when to slow down (before payoff). The rhythm of your delivery shapes whether material lands or bombs. Practice performing to dead silence; learn to own the pause.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Professional comedians and professional poker players have one thing in common: they understand the power of letting people sit in their own discomfort for exactly the right amount of time.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>In music generation and text synthesis, timing is modeled through tempo and duration tokens. Language models generate text sequentially; humor generation requires understanding temporal dynamics. A joke's punchline landing depends on information-theoretic surprise relative to the audience's prediction at that moment. If you deliver the punchline too early, the audience hasn't built enough context. Too late, they've already guessed it. It's about entropy management—managing the audience's uncertainty distribution over time.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+      <p>In <em>Flow</em> by Mihaly Csikszentmihalyi, optimal experience comes from the balance between challenge and skill. Comedy timing creates flow for the audience—delivering information at just the right pace to keep them engaged but slightly challenged. The pause maintains psychological tension before resolution.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Silence is a tool. Use it like a master."</div>
+      <div class="quote-attr">— Judy Carter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LESSON 5: CALLBACKS & CALLBACKS WITHIN CALLBACKS ========== -->
+<section class="lesson lesson-5">
+  <div class="lesson-inner">
+    <div class="lesson-num">5</div>
+    <h2 class="lesson-title">The Callback Loop</h2>
+    <p class="lesson-subtitle">Building Comedy Architecture</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Circular callback structure -->
+        <circle cx="350" cy="140" r="100" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+        <circle cx="350" cy="140" r="80" fill="none" stroke="#9B59B6" stroke-width="2" opacity="0.5"/>
+        <circle cx="350" cy="140" r="60" fill="none" stroke="#FFD93D" stroke-width="2" opacity="0.5"/>
+
+        <!-- Callback points -->
+        <circle cx="350" cy="50" r="8" fill="#FF6B6B"/>
+        <text x="350" y="35" font-size="11" text-anchor="middle" fill="#2d3436" font-weight="bold">JOKE #1</text>
+
+        <circle cx="420" cy="100" r="8" fill="#9B59B6"/>
+        <text x="440" y="100" font-size="11" fill="#2d3436" font-weight="bold">CALLBACK A</text>
+
+        <circle cx="420" cy="180" r="8" fill="#FF6B6B"/>
+        <text x="440" y="180" font-size="11" fill="#2d3436" font-weight="bold">CALLBACK B</text>
+
+        <circle cx="350" cy="230" r="8" fill="#4ECDC4"/>
+        <text x="350" y="250" font-size="11" text-anchor="middle" fill="#2d3436" font-weight="bold">META-CALLBACK</text>
+
+        <circle cx="280" cy="180" r="8" fill="#FFD93D"/>
+        <text x="250" y="180" font-size="11" fill="#2d3436" font-weight="bold">CALLBACK C</text>
+
+        <circle cx="280" cy="100" r="8" fill="#FF6B6B"/>
+        <text x="240" y="100" font-size="11" fill="#2d3436" font-weight="bold">CALLBACK D</text>
+
+        <!-- Arrows showing flow -->
+        <path d="M 350 58 Q 380 80 420 92" stroke="#2d3436" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
+        <path d="M 420 108 Q 420 140 420 172" stroke="#2d3436" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🔄 KEY LESSON</div>
+      <p>A callback is a return to a joke told earlier, finding new context or angle. Callbacks create coherence in a comedy set—they reward audience members who paid attention and deepen the relationship between you and your audience. Think of Anthony Jeselnik's callbacks that circle back with darker twists, or how Daniel Sloss weaves personal stories throughout a whole set so early jokes resurface with new meaning. The most sophisticated comics use meta-callbacks—jokes about callbacks themselves. This creates what Carter calls "architecture"—a set that feels like a unified piece rather than random jokes stitched together. Callbacks also function as inside jokes between you and the audience, building intimacy and shared understanding.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>A bad callback is like a bad TikTok trend revival—nobody asked for it, it doesn't hit the same, and it just makes everyone feel old. A good callback is like bumping into an old friend at the grocery store and discovering you both have the exact same weird opinion about mayonnaise.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Callbacks demonstrate what linguists call "discourse coherence"—the way earlier parts of a text inform later parts. In transformer models, attention mechanisms allow later tokens to attend to earlier tokens, creating coherence through learned relationships. A callback leverages the audience's memory (their implicit attention to previous jokes) to create new meaning. The punchline lands because they can retrieve and recombine earlier information in unexpected ways—similar to how neural networks retrieve and combine learned patterns.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+      <p><em>Thinking in Bets</em> by Annie Duke emphasizes how good decision-making involves updating beliefs based on new information. Callbacks work similarly—the audience revises their understanding of an earlier joke based on new context, and the revision itself generates laughter through surprise and recognition.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"A great set is a conversation, not a list of jokes. Callbacks are how you have that conversation."</div>
+      <div class="quote-attr">— Judy Carter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LESSON 6: CHARACTER & PERSONA ========== -->
+<section class="lesson lesson-6">
+  <div class="lesson-inner">
+    <div class="lesson-num">6</div>
+    <h2 class="lesson-title">Character & Persona</h2>
+    <p class="lesson-subtitle">Building Your On-Stage Identity</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Real self vs persona -->
+        <circle cx="150" cy="100" r="50" fill="#4ECDC4" opacity="0.4"/>
+        <text x="150" y="105" font-size="13" font-weight="bold" text-anchor="middle" fill="#2d3436">REAL</text>
+        <text x="150" y="125" font-size="11" text-anchor="middle" fill="#2d3436">You</text>
+
+        <line x1="200" y1="100" x2="300" y2="100" stroke="#FFD93D" stroke-width="3"/>
+        <text x="250" y="85" font-size="12" fill="#2d3436" text-anchor="middle" font-weight="bold">AMPLIFIED</text>
+
+        <circle cx="400" cy="100" r="50" fill="#FF6B6B" opacity="0.4"/>
+        <text x="400" y="105" font-size="13" font-weight="bold" text-anchor="middle" fill="#fff">STAGE</text>
+        <text x="400" y="125" font-size="11" text-anchor="middle" fill="#fff">Persona</text>
+
+        <!-- Character traits -->
+        <rect x="80" y="180" width="140" height="70" fill="#9B59B6" opacity="0.2" rx="8"/>
+        <text x="150" y="200" font-size="12" font-weight="bold" text-anchor="middle" fill="#2d3436">Example:</text>
+        <text x="150" y="220" font-size="11" text-anchor="middle" fill="#2d3436">Slightly meaner</text>
+        <text x="150" y="235" font-size="11" text-anchor="middle" fill="#2d3436">version of yourself</text>
+
+        <rect x="480" y="180" width="140" height="70" fill="#FFD93D" opacity="0.2" rx="8"/>
+        <text x="550" y="200" font-size="12" font-weight="bold" text-anchor="middle" fill="#2d3436">Example:</text>
+        <text x="550" y="220" font-size="11" text-anchor="middle" fill="#2d3436">Confident,</text>
+        <text x="550" y="235" font-size="11" text-anchor="middle" fill="#2d3436">unbothered observer</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎭 KEY LESSON</div>
+      <p>Your stage persona is an amplified, exaggerated version of who you actually are. Carter emphasizes that your character creates distance—it allows you to say dangerous things because "that's what the character would say," not necessarily what you believe. Consider how Dave Attell plays a sleazy, degraded version of himself (it's funnier because we know it's slightly exaggerated), or how Bo Burnham creates characters within his material. Your persona gives you permission to be meaner, sadder, more ridiculous, or more vulnerable than everyday life allows. The key is consistency—once your audience knows your character, they can anticipate how you'd react to situations, which amplifies the comedy when you subvert those expectations. Your character is your comedy DNA made visible.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Comedians are basically actors who refused to memorize lines and instead decided to just annoy people for money. Your stage persona is just giving yourself permission to be the jerk you're already thinking about being.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>In machine learning, we talk about "latent representations"—the hidden, compressed features a model learns from data. Your comedy persona is your latent representation made manifest. Just as a neural network learns that "cat," "dog," and "bird" cluster together in some abstract space (animals), your character consistency trains the audience to cluster your behavior patterns, allowing them to predict and enjoy when you violate those patterns. This is similar to how chatbots maintain "personas" through prompt engineering—a consistent character framework shapes outputs.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+      <p><em>Mindset</em> by Carol Dweck discusses how we perform identity in different contexts. Your comedy persona is a deliberate performance of identity—you're teaching the audience who you are (on stage) and asking them to laugh with that character. It's psychological branding in real-time.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Your persona is your permission slip. It lets you be who you want to be on stage."</div>
+      <div class="quote-attr">— Judy Carter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LESSON 7: OBSERVATIONAL COMEDY ========== -->
+<section class="lesson lesson-7">
+  <div class="lesson-inner">
+    <div class="lesson-num">7</div>
+    <h2 class="lesson-title">The Art of Observation</h2>
+    <p class="lesson-subtitle">Finding Comedy in the Everyday</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Eye/observation -->
+        <circle cx="150" cy="100" r="40" fill="#FFD93D" opacity="0.4"/>
+        <circle cx="150" cy="100" r="30" fill="white"/>
+        <circle cx="150" cy="100" r="15" fill="#2d3436"/>
+        <circle cx="160" cy="90" r="6" fill="white"/>
+
+        <!-- Pointing to mundane objects -->
+        <line x1="190" y1="100" x2="280" y2="80" stroke="#FFD93D" stroke-width="2"/>
+
+        <!-- Coffee cup -->
+        <rect x="300" y="50" width="50" height="60" fill="#E8B4B8" stroke="#2d3436" stroke-width="2"/>
+        <path d="M 350 70 Q 370 65 370 100" fill="none" stroke="#2d3436" stroke-width="2"/>
+        <text x="325" y="110" font-size="12" text-anchor="middle" fill="#2d3436" font-weight="bold">Coffee</text>
+        <text x="325" y="130" font-size="11" text-anchor="middle" fill="#2d3436">Why does it taste</text>
+        <text x="325" y="145" font-size="11" text-anchor="middle" fill="#2d3436">different cold?</text>
+
+        <!-- Phone -->
+        <rect x="420" y="50" width="40" height="70" fill="#333" stroke="#2d3436" stroke-width="2" rx="5"/>
+        <rect x="425" y="55" width="30" height="60" fill="#666"/>
+        <text x="440" y="135" font-size="11" text-anchor="middle" fill="#2d3436" font-weight="bold">Phone</text>
+        <text x="440" y="150" font-size="10" text-anchor="middle" fill="#2d3436">We pretend</text>
+        <text x="440" y="163" font-size="10" text-anchor="middle" fill="#2d3436">we're busy</text>
+
+        <!-- Mundane situation -->
+        <rect x="560" y="50" width="70" height="70" fill="#9B59B6" opacity="0.3" rx="5"/>
+        <text x="595" y="85" font-size="11" text-anchor="middle" fill="#2d3436" font-weight="bold">Elevator</text>
+        <text x="595" y="100" font-size="10" text-anchor="middle" fill="#2d3436">Why do we</text>
+        <text x="595" y="113" font-size="10" text-anchor="middle" fill="#2d3436">avoid eye</text>
+
+        <!-- Insight arrow -->
+        <line x1="200" y1="180" x2="280" y2="180" stroke="#FF6B6B" stroke-width="3" marker-end="url(#arrowhead)"/>
+        <text x="240" y="170" font-size="12" fill="#2d3436" text-anchor="middle" font-weight="bold">ZOOM IN</text>
+
+        <!-- Punchline box -->
+        <rect x="300" y="160" width="380" height="90" fill="#FF6B6B" opacity="0.2" rx="8"/>
+        <text x="490" y="185" font-size="12" text-anchor="middle" fill="#2d3436" font-weight="bold">The specific detail reveals</text>
+        <text x="490" y="205" font-size="12" text-anchor="middle" fill="#2d3436" font-weight="bold">universal human truth</text>
+        <text x="490" y="230" font-size="11" text-anchor="middle" fill="#555" style="font-style: italic;">Jerry Seinfeld watches a cereal aisle</text>
+        <text x="490" y="245" font-size="11" text-anchor="middle" fill="#555" style="font-style: italic;">for 10 minutes to find one joke</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🔍 KEY LESSON</div>
+      <p>Observational comedy finds the absurdity already present in reality. Carter teaches that the best observational comedians don't comment broadly—they zoom in on tiny, specific details that reveal universal truths. Jerry Seinfeld's genius is noticing that people clap when a plane lands, as if the pilot will hear it. John Mulaney observes the absurdity of the phrase "Fuck, I did it again"—who planned this? Sebastian Maniscalco notices how Americans throw away things Europeans would keep. The process is: notice something weird, zoom in on the specific detail, find the emotional truth, then amplify it. Observational comedy requires constant attention and note-taking. You're not inventing reality; you're pointing out what everyone misses.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Observational comedians are essentially the people who have way too much free time and decided to weaponize it. "Why is this so weird?" is their entire career, and frankly, it's a power move.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Computer vision and anomaly detection work by learning what "normal" looks like, then identifying deviations. Observational comedians do the same thing—they build an internal model of how people typically behave, then spot the deviations and call attention to them. This is pattern recognition in the behavioral domain. When you zoom in on a specific detail (people clap for planes), you're reducing dimensionality—extracting one feature from the high-dimensional space of human behavior and amplifying its absurdity.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+      <p><em>Atomic Habits</em> by James Clear emphasizes how small changes compound into large results. Similarly, observational comedy teaches that the smallest details (a weird phrasing, an awkward pause, an unexpected juxtaposition) can become entire bits. The ability to zoom in on minutiae is the skill that separates great observers from those who just notice things.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The comedy is already there. You're just pointing at it."</div>
+      <div class="quote-attr">— Judy Carter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LESSON 8: VULNERABILITY AS STRENGTH ========== -->
+<section class="lesson lesson-8">
+  <div class="lesson-inner">
+    <div class="lesson-num">8</div>
+    <h2 class="lesson-title">Vulnerability As Strength</h2>
+    <p class="lesson-subtitle">Making Weakness Funny</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Broken/vulnerable figure -->
+        <circle cx="200" cy="80" r="30" fill="#FF6B6B" opacity="0.5"/>
+        <rect x="180" y="110" width="40" height="50" fill="#4ECDC4" opacity="0.4"/>
+        <line x1="180" y1="160" x2="150" y2="200" stroke="#2d3436" stroke-width="3"/>
+        <line x1="220" y1="160" x2="250" y2="200" stroke="#2d3436" stroke-width="3"/>
+
+        <!-- Cracks/vulnerability showing -->
+        <line x1="190" y1="85" x2="200" y2="100" stroke="#FFF" stroke-width="2" stroke-dasharray="3,3" opacity="0.7"/>
+        <line x1="210" y1="88" x2="200" y2="105" stroke="#FFF" stroke-width="2" stroke-dasharray="3,3" opacity="0.7"/>
+
+        <!-- Emotional layers -->
+        <text x="350" y="60" font-size="13" font-weight="bold" fill="#2d3436">VISIBLE:</text>
+        <text x="350" y="85" font-size="12" fill="#2d3436">Failure, Insecurity</text>
+        <text x="350" y="105" font-size="12" fill="#2d3436">Awkwardness, Pain</text>
+
+        <text x="350" y="145" font-size="13" font-weight="bold" fill="#2d3436">RESONATES:</text>
+        <text x="350" y="170" font-size="12" fill="#2d3436">Everyone has this</text>
+        <text x="350" y="190" font-size="12" fill="#2d3436">You're brave to say it</text>
+
+        <!-- Heart symbol -->
+        <path d="M 200 220 Q 180 200 180 180 Q 180 160 200 160 Q 220 160 220 180 Q 220 200 200 220 Z" fill="#FF6B6B" opacity="0.6"/>
+        <text x="200" y="230" font-size="11" text-anchor="middle" fill="#2d3436" font-weight="bold">Connection</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">💔 KEY LESSON</div>
+      <p>The funniest, most resonant comedy comes from honest vulnerability. Carter emphasizes that audiences don't just laugh at jokes—they laugh with people who are brave enough to expose themselves. Think of Dave Chappelle's material about relationships, or Hannah Gadsby's comedy about identity and trauma, or Bo Burnham's material about depression. When you joke about something that genuinely hurts, the audience recognizes your honesty. They think, "I thought I was the only one." The key is honest exposure followed by comedic reframing—you're not laughing at your pain; you're laughing at your perspective on it. The vulnerability creates permission for the audience to be vulnerable too. This is why crowd-pleasing jokes about airlines feel empty, but jokes about your worst relationship feel alive.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Vulnerability in comedy is like showing someone your browser history—it's terrifying, but once they laugh instead of running away, you're friends for life. Turns out people bond over shared dysfunction way faster than shared interests.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>In neuroscience and machine learning, we discuss "activation functions" that determine whether a neuron "fires." Vulnerability in comedy acts as an activation function for audience empathy—it opens emotional circuits that generic observations can't reach. The vulnerability triggers what researchers call "theory of mind"—the audience models your internal state and finds resonance. This is computationally expensive (it requires mental simulation), but it's precisely what makes the moment more powerful than a generic joke.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+      <p><em>Man's Search for Meaning</em> by Viktor Frankl discusses how meaning emerges from suffering acknowledged and understood. Comedy vulnerability works similarly—the audience recognizes meaning in your struggle and responds with laughter that doubles as recognition and release.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Your weakness is your strength. The more honest you are about your mess, the more people recognize themselves in you."</div>
+      <div class="quote-attr">— Judy Carter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LESSON 9: AUDIENCE DYNAMICS ========== -->
+<section class="lesson lesson-9">
+  <div class="lesson-inner">
+    <div class="lesson-num">9</div>
+    <h2 class="lesson-title">Reading the Room</h2>
+    <p class="lesson-subtitle">Audience Psychology & Dynamics</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Audience as network -->
+        <circle cx="150" cy="100" r="15" fill="#9B59B6"/>
+        <circle cx="220" cy="70" r="15" fill="#9B59B6"/>
+        <circle cx="280" cy="100" r="15" fill="#9B59B6"/>
+        <circle cx="320" cy="150" r="15" fill="#9B59B6"/>
+        <circle cx="250" cy="180" r="15" fill="#9B59B6"/>
+
+        <!-- Connections/energy flow -->
+        <line x1="150" y1="100" x2="220" y2="70" stroke="#FFD93D" stroke-width="2" opacity="0.6"/>
+        <line x1="220" y1="70" x2="280" y2="100" stroke="#FFD93D" stroke-width="2" opacity="0.6"/>
+        <line x1="280" y1="100" x2="320" y2="150" stroke="#FFD93D" stroke-width="2" opacity="0.6"/>
+        <line x1="320" y1="150" x2="250" y2="180" stroke="#FFD93D" stroke-width="2" opacity="0.6"/>
+        <line x1="250" y1="180" x2="150" y2="100" stroke="#FFD93D" stroke-width="2" opacity="0.6"/>
+
+        <!-- Stage energy -->
+        <circle cx="600" cy="120" r="40" fill="#FF6B6B" opacity="0.5"/>
+        <text x="600" y="125" font-size="13" font-weight="bold" text-anchor="middle" fill="#fff">YOU</text>
+
+        <line x1="400" y1="150" x2="560" y2="120" stroke="#FF6B6B" stroke-width="3"/>
+        <text x="475" y="135" font-size="11" fill="#2d3436" font-weight="bold">ENERGY</text>
+
+        <!-- Energy levels chart -->
+        <text x="100" y="240" font-size="12" font-weight="bold" fill="#2d3436">Energy States:</text>
+        <text x="100" y="260" font-size="11" fill="#2d3436">Cold? Warm? Drunk? Tired? Hostile?</text>
+        <text x="100" y="275" font-size="11" fill="#FF6B6B" font-weight="bold">Each requires different material</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">👥 KEY LESSON</div>
+      <p>An audience is not a collection of individuals—it's a living organism with energy, mood, and momentum. Carter teaches that successful comedians read the room constantly, adjusting material based on what's working. A drunk crowd responds to different humor than a corporate audience. A morning show crowd has different energy than a midnight set. Learn to recognize the mood: Are they warm and receptive? Cold and skeptical? Rowdy and confrontational? Your job is to meet them where they are, not where you want them to be. Some comedians have fifty minutes of material but only use twenty on any given night, depending on what's working. The skill isn't just telling jokes—it's real-time decision-making based on audience feedback. Notice which jokes get laughs, which get silence, where the energy shifts.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Reading a room as a comedian is like being a therapist in reverse—instead of helping people heal, you're exploiting their vulnerabilities for entertainment. Except instead of confidentiality agreements, you just have your credibility.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>In machine learning, we use "feedback loops" to adjust model outputs based on real-world performance. Comedians do the same—they observe which material generates positive feedback (laughter) and adjust future outputs accordingly. This is similar to reinforcement learning, where the model learns which actions maximize rewards. The audience is the reward signal; laughter is the positive reinforcement. You're training yourself in real-time based on audience response, much like how language models are fine-tuned on human feedback.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+      <p><em>Crucial Conversations</em> by Kerry Patterson discusses how to read emotional dynamics and adjust communication in real-time. Comedy requires the same perceptiveness—you're monitoring tone, energy, and psychological safety, then modulating your approach accordingly.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The audience teaches you how to perform for them. Listen."</div>
+      <div class="quote-attr">— Judy Carter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LESSON 10: WRITING FOR DIFFERENT MEDIUMS ========== -->
+<section class="lesson lesson-10">
+  <div class="lesson-inner">
+    <div class="lesson-num">10</div>
+    <h2 class="lesson-title">Beyond Stand-up</h2>
+    <p class="lesson-subtitle">Comedy Across Mediums</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Different mediums -->
+        <rect x="50" y="60" width="120" height="100" fill="#4ECDC4" opacity="0.3" rx="8"/>
+        <text x="110" y="85" font-size="13" font-weight="bold" text-anchor="middle" fill="#2d3436">Stand-up</text>
+        <text x="110" y="105" font-size="10" text-anchor="middle" fill="#2d3436">Live, Timed</text>
+        <text x="110" y="120" font-size="10" text-anchor="middle" fill="#2d3436">Audience</text>
+        <text x="110" y="135" font-size="10" text-anchor="middle" fill="#2d3436">Present</text>
+
+        <rect x="210" y="60" width="120" height="100" fill="#FF6B6B" opacity="0.3" rx="8"/>
+        <text x="270" y="85" font-size="13" font-weight="bold" text-anchor="middle" fill="#fff">TV Sitcom</text>
+        <text x="270" y="105" font-size="10" text-anchor="middle" fill="#fff">Story Arc</text>
+        <text x="270" y="120" font-size="10" text-anchor="middle" fill="#fff">Ensemble</text>
+        <text x="270" y="135" font-size="10" text-anchor="middle" fill="#fff">Episode</text>
+
+        <rect x="370" y="60" width="120" height="100" fill="#9B59B6" opacity="0.3" rx="8"/>
+        <text x="430" y="85" font-size="13" font-weight="bold" text-anchor="middle" fill="#fff">Sketch</text>
+        <text x="430" y="105" font-size="10" text-anchor="middle" fill="#fff">Character</text>
+        <text x="430" y="120" font-size="10" text-anchor="middle" fill="#fff">Short Form</text>
+        <text x="430" y="135" font-size="10" text-anchor="middle" fill="#fff">Premise</text>
+
+        <rect x="530" y="60" width="120" height="100" fill="#FFD93D" opacity="0.3" rx="8"/>
+        <text x="590" y="85" font-size="13" font-weight="bold" text-anchor="middle" fill="#2d3436">Script/Film</text>
+        <text x="590" y="105" font-size="10" text-anchor="middle" fill="#2d3436">Visual Comedy</text>
+        <text x="590" y="120" font-size="10" text-anchor="middle" fill="#2d3436">Subtext</text>
+        <text x="590" y="135" font-size="10" text-anchor="middle" fill="#2d3436">Edit</text>
+
+        <!-- Key differences -->
+        <text x="50" y="220" font-size="12" font-weight="bold" fill="#2d3436">Stand-up = Intimate, Reactive, Real-time</text>
+        <text x="50" y="240" font-size="12" font-weight="bold" fill="#2d3436">Sitcom = Story-driven, Ensemble, Structured</text>
+        <text x="50" y="260" font-size="12" font-weight="bold" fill="#2d3436">Sketch = Concept-based, High energy, Repeatable</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">📺 KEY LESSON</div>
+      <p>Stand-up comedy translates differently to each medium. Carter covers the shifts required: Stand-up is intimate, reactive, real-time relationship with an audience. TV sitcom requires story arcs, ensemble dynamics, and structured beats (setup, escalation, payoff, tag). Sketch comedy is concept-driven—find a funny premise, mine it exhaustively, end before it dies. Film/script comedy relies heavily on visual gags, subtext, and editing. Your best stand-up joke might not work on TV if it's too personal; your best sitcom premise might bomb as stand-up because it needs other characters to land. Each medium has different rules and economics. Understanding these distinctions lets you adapt your material or create new material specifically designed for each form. The Comedy Bible teaches that mastering one form (stand-up) is the foundation for learning the others.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Stand-up comedians transitioning to sitcoms is like a sprinter trying to run a marathon—both are running, but the strategies are completely different. One is about explosive energy in short bursts; the other is about pacing and narrative endurance.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Transfer learning in machine learning involves taking a model trained on one task and adapting it to a different task. Your comedy "model" (trained on stand-up) can be fine-tuned for sitcom writing, but the adaptation isn't trivial. Stand-up trains you to recognize micro-expressions and real-time feedback; sitcom requires you to write narrative coherence and character arcs. It's domain adaptation—the underlying principles carry over, but the loss function (what makes something "good") changes significantly between mediums.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+      <p><em>Range</em> by David Epstein discusses how diverse skills and experiences create innovation. Comedy across mediums is a perfect example—the ability to translate your humor across stand-up, sitcom, sketch, and film requires broad skill and adaptability, which itself becomes a competitive advantage.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Master one form first, then learn to translate your voice across them."</div>
+      <div class="quote-attr">— Judy Carter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LESSON 11: TACKLING TABOO & CONTROVERSY ========== -->
+<section class="lesson lesson-11">
+  <div class="lesson-inner">
+    <div class="lesson-num">11</div>
+    <h2 class="lesson-title">Punching Smart</h2>
+    <p class="lesson-subtitle">Comedy on Controversial Topics</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Power dynamics -->
+        <circle cx="150" cy="100" r="30" fill="#FF6B6B" opacity="0.5"/>
+        <text x="150" y="108" font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">UP</text>
+        <text x="150" y="125" font-size="11" text-anchor="middle" fill="#2d3436">Punch up at</text>
+        <text x="150" y="140" font-size="11" text-anchor="middle" fill="#2d3436">power</text>
+
+        <circle cx="450" cy="100" r="30" fill="#FDB4B4" opacity="0.7"/>
+        <text x="450" y="108" font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">DOWN</text>
+        <text x="450" y="125" font-size="11" text-anchor="middle" fill="#2d3436">Avoid punching</text>
+        <text x="450" y="140" font-size="11" text-anchor="middle" fill="#2d3436">down</text>
+
+        <!-- Comedian position -->
+        <circle cx="300" cy="180" r="25" fill="#FFD93D" opacity="0.6"/>
+        <text x="300" y="188" font-size="11" font-weight="bold" text-anchor="middle" fill="#2d3436">YOU</text>
+
+        <line x1="300" y1="205" x2="180" y2="70" stroke="#FFD93D" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <line x1="300" y1="205" x2="420" y2="70" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowhead)" opacity="0.5"/>
+
+        <!-- Principles -->
+        <rect x="50" y="220" width="600" height="50" fill="#9B59B6" opacity="0.15" rx="8"/>
+        <text x="60" y="240" font-size="11" fill="#2d3436">Power target matters: Is it up or down? Punching up (at authority, wealth, power) works. Punching down (at</text>
+        <text x="60" y="258" font-size="11" fill="#2d3436">marginalized people) rarely works unless the joke is about the puncher's own experience of marginalization.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">⚡ KEY LESSON</div>
+      <p>The rule of comic punching is simple: punch up or punch yourself; never punch down. Carter teaches that the best controversial comedy targets power, hypocrisy, and systems, not vulnerable groups. Consider George Carlin punching at organized religion and government, or Hannah Gadsby punching at gender norms and her own trauma. These land because they're punching at systems or at themselves. Contrast with comedy that mocks marginalized people—it rarely lands because the audience recognizes the imbalance. The exceptions are when the comedian shares the marginalized identity and is making fun of their own community (Black comedians joking about Black culture, queer comedians joking about queer people). Context, identity, and power dynamics all matter. The most dangerous controversial comedy is actually funny—the audience laughs first, then thinks about why the subject is controversial.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>The difference between edgy comedy and bigotry is the same as the difference between a surgeon and a psychopath—both use knives, but intent and skill matter. One builds you up; the other just tears you down.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>In AI safety and alignment research, we discuss "reward modeling"—trying to teach systems what humans actually want (not just what they say they want). Comedy that works morally activates "reward signals" in the audience (laughter + recognition + justice). Comedy that punches down activates different signals (anxiety, shame, recognition of cruelty). The comedian's job is to shape the audience's reward function through material—directing them toward laughter that builds rather than tears down.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+      <p><em>Thinking in Bets</em> by Annie Duke discusses how we justify beliefs and how outside view challenges inside justifications. Controversial comedy works by holding up a mirror—forcing audiences to examine power dynamics and hypocrisies they've accepted without questioning.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"You can say anything, but you have to earn it with skill and intelligence."</div>
+      <div class="quote-attr">— Judy Carter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LESSON 12: THE CRAFT NEVER STOPS ========== -->
+<section class="lesson lesson-12">
+  <div class="lesson-inner">
+    <div class="lesson-num">12</div>
+    <h2 class="lesson-title">Mastery Through Practice</h2>
+    <p class="lesson-subtitle">The Unending Craft of Comedy</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Spiral of improvement -->
+        <path d="M 350 250 Q 300 200 320 150 Q 340 100 390 110 Q 440 120 430 170 Q 420 220 370 240"
+              fill="none" stroke="#FFD93D" stroke-width="4" opacity="0.6"/>
+
+        <!-- Markers on spiral -->
+        <circle cx="350" cy="250" r="6" fill="#FF6B6B"/>
+        <text x="350" y="270" font-size="11" text-anchor="middle" fill="#2d3436" font-weight="bold">Open mic</text>
+
+        <circle cx="320" cy="150" r="6" fill="#FF6B6B"/>
+        <text x="310" y="135" font-size="11" text-anchor="middle" fill="#2d3436">Bad shows</text>
+
+        <circle cx="390" cy="110" r="6" fill="#4ECDC4"/>
+        <text x="400" y="95" font-size="11" text-anchor="middle" fill="#2d3436">Growth</text>
+
+        <circle cx="430" cy="170" r="6" fill="#4ECDC4"/>
+        <text x="450" y="175" font-size="11" text-anchor="middle" fill="#2d3436">Refinement</text>
+
+        <circle cx="370" cy="240" r="6" fill="#FFD93D"/>
+        <text x="370" y="265" font-size="11" text-anchor="middle" fill="#2d3436">Mastery?</text>
+
+        <!-- Hours note -->
+        <text x="550" y="100" font-size="13" font-weight="bold" fill="#2d3436">The 10,000 Hour</text>
+        <text x="550" y="120" font-size="13" font-weight="bold" fill="#2d3436">Principle</text>
+        <text x="550" y="145" font-size="11" fill="#555">Peak performance</text>
+        <text x="550" y="160" font-size="11" fill="#555">comes from deliberate</text>
+        <text x="550" y="175" font-size="11" fill="#555">practice over years.</text>
+        <text x="550" y="195" font-size="11" fill="#FF6B6B" font-weight="bold">Comedy is no exception.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🏆 KEY LESSON</div>
+      <p>Comedy is a craft that demands thousands of hours of deliberate practice. Carter emphasizes that even the "naturals" worked for years before success. Dave Chappelle performed stand-up nightly for years before his HBO special. Bo Burnham has been performing since childhood. The mythology of overnight success hides the invisible work. You get better by bombing, analyzing why, revising, and trying again. This is empirical learning—each show teaches you something about timing, material, audience dynamics. The goal isn't to become "naturally funny" (that's a myth); it's to become a professional craftsperson of comedy. You study what works, why it works, and how to replicate and improve it. This is true for all performance: musicians practice scales daily, actors run scenes hundreds of times, athletes drill fundamentals endlessly. Comedy is no different. Your worst shows teach more than your best ones.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Comedians and athletes have the same training philosophy: fail spectacularly, document the failure, analyze it obsessively, then fail differently tomorrow. The difference is athletes do it in private; comedians do it in front of drunk strangers.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Deep learning requires enormous amounts of data and computational resources to train effectively. Comedy requires the equivalent—thousands of hours of data collection (performing), empirical feedback (audience laughter), and gradient descent-like optimization (iterating material). The "loss function" for comedy is audience response; you're minimizing silence and maximizing laughter. This is literally optimization through experience. An amateur approaches comedy haphazardly; a professional applies systematic feedback loops to improve measurable metrics over time. The 10,000-hour rule reflects the reality that building complex skills requires sufficient training data and iterative refinement.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+      <p><em>Atomic Habits</em> by James Clear is almost entirely about this principle—mastery comes from systems and deliberate practice, not motivation. Comedy success requires the same: a system for writing, testing, refining, and performing material consistently. The person who shows up to open mics 200 times will surpass the person with natural talent who only performs 20 times.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"There is no shortcut to becoming a great comedian. There is only the work."</div>
+      <div class="quote-attr">— Judy Carter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STORY SPOTLIGHT 1: FINDING THE FUNNY ========== -->
+<section class="story story-1">
+  <div class="story-inner">
+    <h3>Story Spotlight: The Open Mic Crucible</h3>
+    <p>Every comedian's journey begins in chaos. The open mic night: a church basement, a dive bar, or a comedy club with sticky floors. The audience is half-paying attention, half-texting, a quarter finishing their previous conversation (yes, that's impossible; open mic math doesn't work). This is where Judy Carter's teachings crystallize. A nervous twenty-three-year-old approaches the mic with five minutes of "borrowed" material—jokes they heard from comedy specials, tweaked slightly. The first joke lands. Someone laughs. The performer's body floods with adrenaline. Then the next joke dies. Complete silence. The room doesn't hate them; worse—they've become background noise.</p>
+    <p>This is the gift. The silence teaches what a thousand books cannot. The performer learns that their Steve Jobs joke, clever as it is, doesn't land because it relies on too much setup. They learn that the joke about grocery store interactions, painful as it is to perform, gets genuine laughs because people recognize themselves in the absurdity. They learn timing by watching the audience's faces. They learn that their persona as a "serious observer" doesn't work if they never crack a smile.</p>
+    <p>By week ten, the notebook is filled with actual observations, actual bits. The five-minute set is now three minutes of material that actually works, plus two minutes of "finding the material." By week fifty, the performer has seventy minutes of rough material, twelve minutes of tested, polished bits, and a voice emerging—not imitating anyone else, but genuinely theirs. This is the crucible. This is where comedy happens: not on stage, but in the gap between bombing and understanding why, then having the courage to try again.</p>
+
+    <div class="illustration-container" style="margin-top: 40px;">
+      <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+        <text x="350" y="50" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFD93D" opacity="0.8">Open Mic Stages of Grief</text>
+
+        <rect x="50" y="80" width="100" height="80" fill="#FF6B6B" opacity="0.4" rx="5"/>
+        <text x="100" y="105" font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">Week 1-5</text>
+        <text x="100" y="125" font-size="11" text-anchor="middle" fill="#fff">Denial</text>
+        <text x="100" y="140" font-size="10" text-anchor="middle" fill="#fff">"I'm funny"</text>
+
+        <rect x="170" y="80" width="100" height="80" fill="#FFA500" opacity="0.4" rx="5"/>
+        <text x="220" y="105" font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">Week 5-15</text>
+        <text x="220" y="125" font-size="11" text-anchor="middle" fill="#fff">Anger</text>
+        <text x="220" y="140" font-size="10" text-anchor="middle" fill="#fff">"This crowd sucks"</text>
+
+        <rect x="290" y="80" width="100" height="80" fill="#FFD93D" opacity="0.4" rx="5"/>
+        <text x="340" y="105" font-size="12" font-weight="bold" text-anchor="middle" fill="#2d3436">Week 15-40</text>
+        <text x="340" y="125" font-size="11" text-anchor="middle" fill="#2d3436">Bargaining</text>
+        <text x="340" y="140" font-size="10" text-anchor="middle" fill="#2d3436">"Maybe if I..."</text>
+
+        <rect x="410" y="80" width="100" height="80" fill="#4ECDC4" opacity="0.4" rx="5"/>
+        <text x="460" y="105" font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">Week 40+</text>
+        <text x="460" y="125" font-size="11" text-anchor="middle" fill="#fff">Acceptance</text>
+        <text x="460" y="140" font-size="10" text-anchor="middle" fill="#fff">Growth</text>
+
+        <rect x="530" y="80" width="100" height="80" fill="#9B59B6" opacity="0.4" rx="5"/>
+        <text x="580" y="105" font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">Year 2+</text>
+        <text x="580" y="125" font-size="11" text-anchor="middle" fill="#fff">Mastery</text>
+        <text x="580" y="140" font-size="10" text-anchor="middle" fill="#fff">Craft</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STORY SPOTLIGHT 2: FROM BOMBS TO BITS ========== -->
+<section class="story story-2">
+  <div class="story-inner">
+    <h3>Story Spotlight: Mining a Bad Relationship for Gold</h3>
+    <p>A comedian goes through a terrible breakup. The relationship was publicly humiliating—the ex cheated, left a note, and told mutual friends before telling the comedian. In the weeks of depression and anger, the comedian starts writing. Not therapy writing, but comedy writing. They document the absurdity: the note was left on the pillow (like a hotel), the ex blocked them on Instagram but not Facebook (specifically Facebook, which nobody uses), the mutual friends' reactions ranged from supportive to aggressively taking sides.</p>
+    <p>At open mics, the material is raw, painful, and not quite funny yet. The comedian performs the bit and notices the audience's discomfort. They're laughing, but it feels like nervous laughter. The comedian goes home and rewrites. Instead of venting about the pain, they focus on the absurd details. They find the angle: the ex's specific wording in the note was unintentionally funny (bad grammar, dramatic phrasing). The blocking behavior reveals something universally relatable—the anxiety of not knowing if someone still cares about your existence. The friends' reactions become a commentary on how breakups force people to choose sides.</p>
+    <p>Five weeks later, the breakup bit is polished, five minutes long, and absolutely crushing. It's genuinely funny, but it also has depth. The audience laughs, but they also recognize themselves—their own bad relationships, their own humiliation, their own absurd coping mechanisms. The comedian turned vulnerability and pain into comedy gold, following Carter's cardinal rule: your worst moments become your best material. The breakup hurt in real-time; the processed breakup, transmuted into comedy, becomes the gift you give your audience—permission to laugh at their own chaos.</p>
+
+    <div class="illustration-container" style="margin-top: 40px;">
+      <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+        <text x="350" y="40" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFD93D" opacity="0.8">Pain → Processing → Comedy</text>
+
+        <!-- Pain phase -->
+        <circle cx="100" cy="120" r="35" fill="#FF6B6B" opacity="0.5"/>
+        <text x="100" y="120" font-size="11" text-anchor="middle" fill="#fff" font-weight="bold">Pain</text>
+        <text x="100" y="135" font-size="10" text-anchor="middle" fill="#fff">(Raw emotion)</text>
+
+        <line x1="135" y1="120" x2="210" y2="120" stroke="#FFD93D" stroke-width="2"/>
+
+        <!-- Processing phase -->
+        <circle cx="280" cy="120" r="35" fill="#FFA500" opacity="0.5"/>
+        <text x="280" y="120" font-size="11" text-anchor="middle" fill="#fff" font-weight="bold">Notes</text>
+        <text x="280" y="135" font-size="10" text-anchor="middle" fill="#fff">(Observation)</text>
+
+        <line x1="315" y1="120" x2="390" y2="120" stroke="#FFD93D" stroke-width="2"/>
+
+        <!-- Comedy phase -->
+        <circle cx="460" cy="120" r="35" fill="#4ECDC4" opacity="0.5"/>
+        <text x="460" y="120" font-size="11" text-anchor="middle" fill="#fff" font-weight="bold">Bit</text>
+        <text x="460" y="135" font-size="10" text-anchor="middle" fill="#fff">(Laughter)</text>
+
+        <line x1="495" y1="120" x2="570" y2="120" stroke="#FFD93D" stroke-width="2"/>
+
+        <!-- Healing phase -->
+        <circle cx="630" cy="120" r="35" fill="#9B59B6" opacity="0.5"/>
+        <text x="630" y="120" font-size="11" text-anchor="middle" fill="#fff" font-weight="bold">Healed</text>
+        <text x="630" y="135" font-size="10" text-anchor="middle" fill="#fff">(Connection)</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STORY SPOTLIGHT 3: BUILDING A TIGHT SET ========== -->
+<section class="story story-3">
+  <div class="story-inner">
+    <h3>Story Spotlight: The Year-Long Tight Five</h3>
+    <p>A comedian makes a commitment: build a five-minute set that absolutely kills. Not good—kills. Every joke lands, the transitions are smooth, the callbacks compound, the closer leaves the audience laughing and thinking. For the first four months, the comedian performs at open mics twice a week. Every single performance, they test the same material. They take notes after each show: which jokes got the biggest laugh, where did the energy dip, which transitions felt natural vs. forced?</p>
+    <p>The set evolves. A joke that bombed initially gets rewritten. A callback that seemed clever gets cut because it disrupts the flow. The comedian discovers that one throwaway line generates more laughter than the joke it was supposed to support, so they rebuild the bit around it. They learn timing through dozens of repetitions—where to breathe, where to pause, where to accelerate. They learn their audience's psychology: the joke lands better if they're slightly self-deprecating going into it. They learn their persona: the audience has learned to expect a certain sensibility, and jokes that violate that expectation don't land as well.</p>
+    <p>By month twelve, the five-minute set is airtight. It's the same five minutes (mostly) but also completely different—polished, refined, lived-in. The comedian can perform it at an open mic or a corporate event or a festival and it lands because it's not dependent on a specific crowd's energy. It's solid. This is what Carter calls "craft"—not inspiration, not luck, but thousands of tiny decisions and refinements that transform a draft into mastery. The comedian doesn't feel like they're performing the bit anymore; they feel like they're living it. That's when you know it's ready.</p>
+
+    <div class="illustration-container" style="margin-top: 40px;">
+      <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+        <text x="350" y="35" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFD93D" opacity="0.8">The 12-Month Tightening Process</text>
+
+        <rect x="50" y="70" width="100" height="80" fill="#FF6B6B" opacity="0.3" rx="5"/>
+        <text x="100" y="90" font-size="11" font-weight="bold" text-anchor="middle" fill="#2d3436">Month 1-3</text>
+        <text x="100" y="110" font-size="11" text-anchor="middle" fill="#2d3436">5 minutes</text>
+        <text x="100" y="125" font-size="10" text-anchor="middle" fill="#2d3436">95 laughs/125 attempts</text>
+
+        <rect x="170" y="70" width="100" height="80" fill="#FFA500" opacity="0.3" rx="5"/>
+        <text x="220" y="90" font-size="11" font-weight="bold" text-anchor="middle" fill="#2d3436">Month 4-6</text>
+        <text x="220" y="110" font-size="11" text-anchor="middle" fill="#2d3436">5 minutes</text>
+        <text x="220" y="125" font-size="10" text-anchor="middle" fill="#2d3436">110 laughs/125 attempts</text>
+
+        <rect x="290" y="70" width="100" height="80" fill="#FFD93D" opacity="0.3" rx="5"/>
+        <text x="340" y="90" font-size="11" font-weight="bold" text-anchor="middle" fill="#2d3436">Month 7-9</text>
+        <text x="340" y="110" font-size="11" text-anchor="middle" fill="#2d3436">5 minutes</text>
+        <text x="340" y="125" font-size="10" text-anchor="middle" fill="#2d3436">119 laughs/125 attempts</text>
+
+        <rect x="410" y="70" width="100" height="80" fill="#4ECDC4" opacity="0.3" rx="5"/>
+        <text x="460" y="90" font-size="11" font-weight="bold" text-anchor="middle" fill="#2d3436">Month 10-12</text>
+        <text x="460" y="110" font-size="11" text-anchor="middle" fill="#2d3436">5 minutes</text>
+        <text x="460" y="125" font-size="10" text-anchor="middle" fill="#2d3436">124 laughs/125 attempts</text>
+
+        <rect x="530" y="70" width="120" height="80" fill="#9B59B6" opacity="0.3" rx="5"/>
+        <text x="590" y="90" font-size="11" font-weight="bold" text-anchor="middle" fill="#fff">Month 13+</text>
+        <text x="590" y="110" font-size="11" text-anchor="middle" fill="#fff">Tight Five</text>
+        <text x="590" y="125" font-size="10" text-anchor="middle" fill="#fff">Repeatable, Reliable</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CHEATSHEET ========== -->
+<section class="cheatsheet">
+  <div class="cheatsheet-inner">
+    <h2>Comedy Bible Cheatsheet</h2>
+
+    <div class="two-col">
+      <div class="cheatsheet-card">
+        <h4>1. Find Your Funny</h4>
+        <p>Your comedy voice is authentic + personal + specific. Mine your actual life, not imagination. Jerry Seinfeld, Hannah Gadsby, Maria Bamford each found their unique angle. Don't imitate; excavate.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h4>2. Comedy Goldmine</h4>
+        <p>The funniest material comes from your embarrassments, failures, family chaos, and observations. Specificity is essential: "He explained cryptocurrency to my salad" not "My date was boring." Write everything down.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h4>3. The Three-Beat Structure</h4>
+        <p>Setup (establish expectations) → Build (deepen investment) → Punchline (twist reality). Misdirection is key. Audience expects X, gets Y. The gap between expectation and reality creates laughter.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h4>4. Timing & Pause</h4>
+        <p>Silence is a tool. The pause before a punchline lets anticipation build. Silence after a punchline lets the audience catch up. Master pace control: fast setup, deliberate pause, sharp punchline.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h4>5. Callbacks</h4>
+        <p>Return to earlier jokes with new context or angle. Callbacks create architecture and reward attention. Build callbacks within callbacks for meta-comedy. Shows coherence over randomness.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h4>6. Character & Persona</h4>
+        <p>Create an amplified, exaggerated version of yourself. Your persona gives you permission to be meaner, sadder, more ridiculous. Consistency trains audience expectations, which you then violate for laughs.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h4>7. Observational Comedy</h4>
+        <p>Point at the absurdity already present in reality. Notice tiny details others miss (people clap when planes land). Zoom in, find emotional truth, amplify. Specificity reveals universal recognition.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h4>8. Vulnerability as Strength</h4>
+        <p>Honest exposure + comedic reframing = power. Laugh at your perspective on pain, not just pain. The audience recognizes your honesty and feels less alone. Creates permission for their vulnerability.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h4>9. Reading the Room</h4>
+        <p>An audience is a living organism with mood and momentum. Read energy constantly. Adjust material based on what works. Every crowd is different—cold crowds, warm crowds, drunk crowds need different material.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h4>10. Beyond Stand-up</h4>
+        <p>Stand-up ≠ Sitcom ≠ Sketch ≠ Script. Each medium has different rules. Stand-up: intimate, reactive. Sitcom: story-driven, ensemble. Sketch: concept-based. Script: visual, edited.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h4>11. Punching Smart</h4>
+        <p>Punch up (at power/authority/systems) or at yourself. Never punch down (at marginalized people) unless you share the identity. Power dynamics matter. Controversial comedy works if the joke is technically brilliant.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h4>12. Mastery Through Practice</h4>
+        <p>10,000 hours. Deliberate practice. Bomb, analyze why, revise, repeat. Your worst shows teach more than your best. Systems and iteration beat talent. Show up to open mics religiously. The work is constant.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 50px; background: rgba(255,255,255,0.08); padding: 30px; border-radius: 12px;">
+      <h3 style="color: white; margin-bottom: 20px; font-family: 'Playfair Display', serif; font-size: 1.8rem;">The Comedy Hierarchy</h3>
+      <p style="color: rgba(255,255,255,0.85); margin-bottom: 16px; line-height: 1.8;">
+        <strong style="color: var(--laugh-yellow);">1. Voice First:</strong> Discover what makes YOU funny. Your unique perspective, your authentic experiences, your weird worldview.
+      </p>
+      <p style="color: rgba(255,255,255,0.85); margin-bottom: 16px; line-height: 1.8;">
+        <strong style="color: var(--laugh-yellow);">2. Material Second:</strong> Mine your life for real stories and observations. Specificity and honesty beat cleverness.
+      </p>
+      <p style="color: rgba(255,255,255,0.85); margin-bottom: 16px; line-height: 1.8;">
+        <strong style="color: var(--laugh-yellow);">3. Craft Third:</strong> Master structure, timing, callbacks, persona. These are learnable skills that transform material into art.
+      </p>
+      <p style="color: rgba(255,255,255,0.85); line-height: 1.8;">
+        <strong style="color: var(--laugh-yellow);">4. Performance Last:</strong> Deliver with presence and authority. Your confidence in the material transfers to the audience. Trust the work.
+      </p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

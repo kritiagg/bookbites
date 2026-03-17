@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freakonomics: A Rogue Economist Explores the Hidden Side of Everything</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-purple) 100%);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--coral), var(--teal), var(--sunny));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Cover Section */
+        .cover {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--coral) 50%, var(--teal) 100%);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .cover-icon {
+            margin-bottom: 40px;
+        }
+
+        .magnifying-glass {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            line-height: 1.2;
+        }
+
+        .cover-subtitle {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 20px;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .cover-authors {
+            font-size: 18px;
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Book Info Card */
+        .book-info {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 900px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--deep-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Lessons Grid */
+        .lessons-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--coral), var(--teal), var(--sunny));
+            border-radius: 2px;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        /* Lesson Cards */
+        .lesson-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 6px solid var(--teal);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .lesson-card.color-1 {
+            border-left-color: var(--coral);
+        }
+
+        .lesson-card.color-2 {
+            border-left-color: var(--sunny);
+        }
+
+        .lesson-card.color-3 {
+            border-left-color: var(--teal);
+        }
+
+        .lesson-card.color-4 {
+            border-left-color: var(--pink);
+        }
+
+        .lesson-card.color-5 {
+            border-left-color: var(--purple);
+        }
+
+        .lesson-card.color-6 {
+            border-left-color: var(--sky);
+        }
+
+        .lesson-card.color-7 {
+            border-left-color: var(--mint);
+        }
+
+        .lesson-card.color-8 {
+            border-left-color: var(--orange);
+        }
+
+        .lesson-card.color-9 {
+            border-left-color: var(--forest);
+        }
+
+        .lesson-card.color-10 {
+            border-left-color: var(--warm-red);
+        }
+
+        .lesson-card.color-11 {
+            border-left-color: var(--deep-blue);
+        }
+
+        .lesson-card.color-12 {
+            border-left-color: var(--dark-purple);
+        }
+
+        .lesson-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--coral), var(--sunny));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        }
+
+        .lesson-card.color-1 .lesson-number {
+            background: linear-gradient(135deg, var(--coral), var(--warm-red));
+        }
+
+        .lesson-card.color-2 .lesson-number {
+            background: linear-gradient(135deg, var(--sunny), var(--orange));
+        }
+
+        .lesson-card.color-3 .lesson-number {
+            background: linear-gradient(135deg, var(--teal), var(--mint));
+        }
+
+        .lesson-card.color-4 .lesson-number {
+            background: linear-gradient(135deg, var(--pink), var(--warm-red));
+        }
+
+        .lesson-card.color-5 .lesson-number {
+            background: linear-gradient(135deg, var(--purple), var(--dark-purple));
+        }
+
+        .lesson-card.color-6 .lesson-number {
+            background: linear-gradient(135deg, var(--sky), var(--deep-blue));
+        }
+
+        .lesson-card.color-7 .lesson-number {
+            background: linear-gradient(135deg, var(--mint), var(--forest));
+        }
+
+        .lesson-card.color-8 .lesson-number {
+            background: linear-gradient(135deg, var(--orange), var(--warm-red));
+        }
+
+        .lesson-card.color-9 .lesson-number {
+            background: linear-gradient(135deg, var(--forest), var(--teal));
+        }
+
+        .lesson-card.color-10 .lesson-number {
+            background: linear-gradient(135deg, var(--warm-red), var(--coral));
+        }
+
+        .lesson-card.color-11 .lesson-number {
+            background: linear-gradient(135deg, var(--deep-blue), var(--sky));
+        }
+
+        .lesson-card.color-12 .lesson-number {
+            background: linear-gradient(135deg, var(--dark-purple), var(--purple));
+        }
+
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .lesson-subtitle {
+            font-size: 14px;
+            color: var(--warm-red);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .lesson-description {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .key-insight {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+            border-left: 4px solid var(--coral);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .data-point {
+            background: rgba(255, 230, 109, 0.15);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #333;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+
+        .funny-take {
+            background: rgba(253, 121, 168, 0.1);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #333;
+            border-left: 4px solid var(--pink);
+        }
+
+        .funny-label {
+            font-weight: 700;
+            color: var(--pink);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .ai-connection {
+            background: rgba(9, 132, 227, 0.1);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #333;
+            border-left: 4px solid var(--deep-blue);
+        }
+
+        .ai-label {
+            font-weight: 700;
+            color: var(--deep-blue);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        /* Key Lessons Showcase */
+        .key-lessons {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-purple) 100%);
+            color: white;
+            padding: 80px 20px;
+        }
+
+        .key-lessons .section-title {
+            color: white;
+        }
+
+        .key-lessons .section-title::after {
+            background: linear-gradient(90deg, var(--coral), var(--sunny));
+        }
+
+        .deep-dive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .deep-dive-card {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--dark);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .deep-dive-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .deep-dive-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .dive-content {
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .data-highlight {
+            background: linear-gradient(90deg, var(--sunny), var(--orange));
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Connections Section */
+        .connections-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .connections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .connection-card {
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .connection-card:hover {
+            border-color: var(--teal);
+            box-shadow: 0 8px 24px rgba(78, 205, 196, 0.15);
+        }
+
+        .connection-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .connection-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .connection-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* SVG Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .pulsing {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--coral), var(--sunny));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 42px;
+            }
+
+            .cover-subtitle {
+                font-size: 18px;
+            }
+
+            nav {
+                gap: 15px;
+                font-size: 12px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .lesson-title {
+                font-size: 20px;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cover-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            .magnifying-glass {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        /* Equals Sign Animation */
+        .equals-sign {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--coral);
+            margin: 10px 0;
+            display: inline-block;
+        }
+
+        .comparison-pair {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .item {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 15px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        /* Tab System for Lessons */
+        .lesson-expanded {
+            margin-top: 60px;
+        }
+
+        .featured-lesson {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--coral) 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .featured-lesson h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .featured-lesson p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-left: 4px solid white;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">📊 Freakonomics</div>
+                <nav>
+                    <a href="#home">Home</a>
+                    <a href="#lessons">Lessons</a>
+                    <a href="#key-dives">Deep Dives</a>
+                    <a href="#connections">Connections</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cover Section -->
+    <section class="cover" id="home">
+        <div class="cover-content">
+            <div class="cover-icon">
+                <svg class="magnifying-glass floating" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hidden connections background -->
+                    <defs>
+                        <filter id="shadow">
+                            <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                        </filter>
+                    </defs>
+
+                    <!-- Magnifying glass circle -->
+                    <circle cx="70" cy="70" r="55" fill="none" stroke="white" stroke-width="8" filter="url(#shadow)"/>
+
+                    <!-- Handle -->
+                    <line x1="105" y1="105" x2="160" y2="160" stroke="white" stroke-width="8" stroke-linecap="round" filter="url(#shadow)"/>
+
+                    <!-- Hidden connections inside glass -->
+                    <g opacity="0.6">
+                        <circle cx="50" cy="50" r="4" fill="white"/>
+                        <circle cx="90" cy="70" r="4" fill="white"/>
+                        <circle cx="70" cy="90" r="4" fill="white"/>
+                        <circle cx="60" cy="60" r="3" fill="white"/>
+                        <line x1="50" y1="50" x2="90" y2="70" stroke="white" stroke-width="1.5"/>
+                        <line x1="90" y1="70" x2="70" y2="90" stroke="white" stroke-width="1.5"/>
+                        <line x1="70" y1="90" x2="50" y2="50" stroke="white" stroke-width="1.5"/>
+                    </g>
+
+                    <!-- Magnifying glass center text -->
+                    <text x="70" y="75" text-anchor="middle" font-family="Playfair Display" font-size="24" font-weight="900" fill="white" opacity="0.8">?</text>
+                </svg>
+            </div>
+            <h1>Freakonomics</h1>
+            <p class="cover-subtitle">A Rogue Economist Explores the Hidden Side of Everything</p>
+            <p class="cover-authors">By Steven Levitt & Stephen Dubner</p>
+        </div>
+    </section>
+
+    <!-- Book Info -->
+    <div class="container">
+        <div class="book-info">
+            <h2 style="text-align: center; font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 30px;">About This Book</h2>
+            <p style="text-align: center; font-size: 16px; line-height: 1.8; color: #555; margin-bottom: 30px;">
+                Freakonomics revolutionized how we think about the hidden incentives driving human behavior. Through detective-like economic analysis, Levitt and Dubner uncover the secret reasons behind everything from Chicago teachers cheating to why drug dealers live with their moms. This guide explores 12 core lessons that reshape how you see the world.
+            </p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Published</div>
+                    <div class="info-value">2005</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Pages</div>
+                    <div class="info-value">320</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Genre</div>
+                    <div class="info-value">Economics / Social Science</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Core Idea</div>
+                    <div class="info-value">Incentives Shape Everything</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 12 Lessons Section -->
+    <section class="lessons-section" id="lessons">
+        <div class="container">
+            <h2 class="section-title">12 Essential Lessons</h2>
+
+            <div class="lessons-grid">
+                <!-- Lesson 1 -->
+                <div class="lesson-card color-1">
+                    <div class="lesson-number">1</div>
+                    <div class="lesson-subtitle">The Three Types of Incentives</div>
+                    <h3 class="lesson-title">Incentives Are Everything</h3>
+                    <p class="lesson-description">Economics is about incentives—how to get people to do what you want them to do. There are three categories: economic (money), social (reputation), and moral (right vs. wrong).</p>
+                    <div class="key-insight">
+                        "Incentives matter so much that they can completely overturn the natural human inclination to cooperate."
+                    </div>
+                    <div class="data-point">
+                        🎯 When incentives align, behavior follows predictably. When they don't, expect unexpected outcomes.
+                    </div>
+                </div>
+
+                <!-- Lesson 2 -->
+                <div class="lesson-card color-2">
+                    <div class="lesson-number">2</div>
+                    <div class="lesson-subtitle">Levitt's Algorithm | Chicago Teachers</div>
+                    <h3 class="lesson-title">When Good People Cheat</h3>
+                    <p class="lesson-description">Levitt developed a statistical algorithm to detect cheating teachers in Chicago. He found that when incentives changed (high-stakes testing), good teachers under pressure cheated in measurable, detectable ways.</p>
+                    <div class="key-insight">
+                        Teachers would erase wrong answers and fill in correct ones, creating statistical impossibilities Levitt's algorithm could identify.
+                    </div>
+                    <div class="data-point">
+                        📊 Levitt caught ~250 teachers cheating by analyzing answer sheet patterns—revealing how incentive structures trump morality.
+                    </div>
+                    <div class="funny-take">
+                        <div class="funny-label">🎭 The Absurdist Angle</div>
+                        Teachers and sumo wrestlers: both respectable professions, both caught cheating for different incentives. Who would you trust less?
+                    </div>
+                </div>
+
+                <!-- Lesson 3 -->
+                <div class="lesson-card color-3">
+                    <div class="lesson-number">3</div>
+                    <div class="lesson-subtitle">The Information Asymmetry Problem</div>
+                    <h3 class="lesson-title">The KKK & Real Estate Agents</h3>
+                    <p class="lesson-description">Both the KKK (in the early 1900s) and real estate agents exploit the same advantage: hidden information. The KKK hid their members' identities to create power. Real estate agents hide true property values to maximize commissions.</p>
+                    <div class="key-insight">
+                        Power comes not from strength, but from what you know that others don't.
+                    </div>
+                    <div class="data-point">
+                        💰 Real estate agents sell their own homes 10% higher and hold them 3.5 weeks longer—because they know the true market value.
+                    </div>
+                    <div class="ai-connection">
+                        <div class="ai-label">🤖 AI Connection</div>
+                        Information asymmetry = the ML model knowing patterns humans don't. This is exactly how ML systems gain advantage: processing hidden patterns.
+                    </div>
+                </div>
+
+                <!-- Lesson 4 -->
+                <div class="lesson-card color-4">
+                    <div class="lesson-number">4</div>
+                    <div class="lesson-subtitle">The Most Controversial Claim</div>
+                    <h3 class="lesson-title">Abortion & the Crime Drop</h3>
+                    <p class="lesson-description">Levitt's most shocking finding: the 1973 Roe v. Wade decision legalizing abortion correlated with a 20-year crime drop starting in the 1990s. His thesis: unwanted children (who would have been at higher crime risk) were not born.</p>
+                    <div class="key-insight">
+                        "Legalized abortion led to less crime" became one of the most debated claims in economics—challenging moral, political, and social beliefs.
+                    </div>
+                    <div class="data-point">
+                        🔍 States that legalized abortion earlier saw crime drops earlier. The correlation is undeniable; the interpretation remains controversial.
+                    </div>
+                    <div class="data-point">
+                        ⚠️ This chapter exemplifies Freakonomics' mission: follow data to uncomfortable truths, regardless of ideology.
+                    </div>
+                </div>
+
+                <!-- Lesson 5 -->
+                <div class="lesson-card color-5">
+                    <div class="lesson-number">5</div>
+                    <div class="lesson-subtitle">Nature vs. Nurture Economics</div>
+                    <h3 class="lesson-title">What Makes a Perfect Parent?</h3>
+                    <p class="lesson-description">Conventional wisdom says parenting style matters enormously. Levitt's data analysis reveals something uncomfortable: what parents do matters far less than who they are (genetics, education, socioeconomic status).</p>
+                    <div class="key-insight">
+                        "The traits that make good parents—traits like patience, intelligence, and the ability to delay gratification—are largely heritable."
+                    </div>
+                    <div class="data-point">
+                        📈 Parents who read to kids → kids read better. But smart parents read more, and smart genes predict smart kids. Causality is murky.
+                    </div>
+                    <div class="funny-take">
+                        <div class="funny-label">😅 The Uncomfortable Truth</div>
+                        Parenting advice industry: $2 billion. Actual impact of parenting style on outcomes: statistically minimal. Awkward.
+                    </div>
+                </div>
+
+                <!-- Lesson 6 -->
+                <div class="lesson-card color-6">
+                    <div class="lesson-number">6</div>
+                    <div class="lesson-subtitle">Names as Destiny Markers</div>
+                    <h3 class="lesson-title">Baby Names & Socioeconomic Destiny</h3>
+                    <p class="lesson-description">Your baby's name doesn't change your life—but it's a proxy for something that does: your parents' education and expectations. Unusual, distinctive names cluster in lower-income families; classic names in higher-income families.</p>
+                    <div class="key-insight">
+                        "A child's name is an early indicator of parental taste and education, which predicts future success better than the name itself."
+                    </div>
+                    <div class="data-point">
+                        🏷️ Study: Resume with "Jamal" vs. "Jake" with identical qualifications → Jake gets 50% more callbacks. But the name didn't cause the difference.
+                    </div>
+                    <div class="ai-connection">
+                        <div class="ai-label">🤖 AI Connection</div>
+                        This is proxying: using observable features to predict hidden ones. Names → parent education → family resources. Classic feature engineering.
+                    </div>
+                </div>
+
+                <!-- Lesson 7 -->
+                <div class="lesson-card color-7">
+                    <div class="lesson-number">7</div>
+                    <div class="lesson-subtitle">Sumo Wrestling Corruption</div>
+                    <h3 class="lesson-title">Sumo Wrestlers as Cheaters</h3>
+                    <p class="lesson-description">Levitt analyzed 20 years of sumo wrestling data and found clear evidence of match-fixing. Wrestlers with .500 records in their final match would get suspicious win streaks. The incentive? Eight consecutive wins triggers ranking bonuses and tournament prizes.</p>
+                    <div class="key-insight">
+                        "In sumo, a .500 record wrestler facing someone chasing their eighth win nearly always loses. The odds? Too suspicious to be chance."
+                    </div>
+                    <div class="data-point">
+                        🏮 Wrestlers with exactly 7 wins needed exactly 1 more → they win against .500 record wrestlers at 80% rate. Normal would be ~50%.
+                    </div>
+                    <div class="comparison-pair">
+                        <div class="item">Sumo Wrestling</div>
+                        <span class="equals-sign">=</span>
+                        <div class="item">Chicago Teachers</div>
+                    </div>
+                    <div class="funny-take">
+                        <div class="funny-label">🎪 Absurd Mirror</div>
+                        Japan's most honored sport: rigged. Chicago's most trusted educators: cheating. Power + incentives = predictable deception.
+                    </div>
+                </div>
+
+                <!-- Lesson 8 -->
+                <div class="lesson-card color-8">
+                    <div class="lesson-number">8</div>
+                    <div class="lesson-subtitle">The Venkatesh Ethnography</div>
+                    <h3 class="lesson-title">Drug Dealers Living with Their Moms</h3>
+                    <p class="lesson-description">Sociologist Sudhir Venkatesh embedded with Chicago gang dealers and discovered shocking economics: street-level dealers make minimum wage (or less), work long hours, and have massive risk of death. Yet they persist because of one incentive: hope of future promotion.</p>
+                    <div class="key-insight">
+                        "It's like any other job: lottery-like payoff structure keeps workers at low-wage positions. The dream of becoming a kingpin sustains the system."
+                    </div>
+                    <div class="data-point">
+                        💵 Street dealers: ~$150/week, 10-hour shifts, 1-in-4 chance of arrest/death. But boss makes $200K/year—and every dealer thinks they'll be boss.
+                    </div>
+                    <div class="data-point">
+                        🏠 Living with moms = free housing, reducing costs while pursuing the dream. Rational economic choice, not stereotype.
+                    </div>
+                    <div class="ai-connection">
+                        <div class="ai-label">🤖 AI Connection</div>
+                        Reward structures shape behavior in economic models and in neural networks. A system with bad local incentives will fail globally—just like gang economics.
+                    </div>
+                </div>
+
+                <!-- Lesson 9 -->
+                <div class="lesson-card color-9">
+                    <div class="lesson-number">9</div>
+                    <div class="lesson-subtitle">Epistemology of Economics</div>
+                    <h3 class="lesson-title">The Power of Asking the Right Question</h3>
+                    <p class="lesson-description">Levitt's greatest skill isn't economic theory—it's asking questions nobody else thinks to ask. "Why do sumo wrestlers cheat?" isn't obvious. "How do real estate agents manipulate sales?" requires lateral thinking. The right question unlocks everything.</p>
+                    <div class="key-insight">
+                        "The best economic thinking is about curiosity, not equations. Finding the right question is harder than finding the answer."
+                    </div>
+                    <div class="data-point">
+                        🤔 From drug dealer economics to baby names to teacher cheating: all require asking "why?" in places others assume the answer.
+                    </div>
+                    <div class="ai-connection">
+                        <div class="ai-label">🤖 AI Connection</div>
+                        Problem formulation is 90% of ML. Having data and models means nothing if you're solving the wrong problem. This is Freakonomics' core insight applied to AI.
+                    </div>
+                </div>
+
+                <!-- Lesson 10 -->
+                <div class="lesson-card color-10">
+                    <div class="lesson-number">10</div>
+                    <div class="lesson-subtitle">Conventional Wisdom vs. Reality</div>
+                    <h3 class="lesson-title">Conventional Wisdom Is Usually Wrong</h3>
+                    <p class="lesson-description">"Swim soon after eating causes cramps." "Wearing a seatbelt is dangerous." These were once conventional wisdom. Freakonomics shows that much of what we "know" is folk myth. Data reveals surprising truths.</p>
+                    <div class="key-insight">
+                        "Conventional wisdom is a bedrock for a reason: it's a shield against having to think hard about much of anything."
+                    </div>
+                    <div class="data-point">
+                        ❌ Sumo is honorable (nope, rigged). Teachers are virtuous (nope, cheat). Parents' techniques matter (nope, genes matter more).
+                    </div>
+                    <div class="ai-connection">
+                        <div class="ai-label">🤖 AI Connection</div>
+                        Prior bias: humans embed conventional wisdom into their models. Good ML practitioners challenge priors and let data speak. This is the Freakonomics philosophy.
+                    </div>
+                </div>
+
+                <!-- Lesson 11 -->
+                <div class="lesson-card color-11">
+                    <div class="lesson-number">11</div>
+                    <div class="lesson-subtitle">Exploratory Data Analysis</div>
+                    <h3 class="lesson-title">The Hidden Side of Everything</h3>
+                    <p class="lesson-description">Every topic has a hidden layer: what's visible vs. what motivates behavior. Sumo wrestlers look noble; the numbers show corruption. Teachers seem virtuous; incentives reveal cheating. The Freakonomics method is to excavate this hidden layer.</p>
+                    <div class="key-insight">
+                        "Once you start looking at the world through an economic lens—seeing how incentives drive behavior—you can't unsee it."
+                    </div>
+                    <div class="data-point">
+                        🔍 Every human activity has an economic skeleton beneath the cultural skin. Find the skeleton, understand the behavior.
+                    </div>
+                    <div class="ai-connection">
+                        <div class="ai-label">🤖 AI Connection</div>
+                        Exploratory data analysis: the art of finding patterns nobody expected. This is exactly what Freakonomics does with human behavior data.
+                    </div>
+                </div>
+
+                <!-- Lesson 12 -->
+                <div class="lesson-card color-12">
+                    <div class="lesson-number">12</div>
+                    <div class="lesson-subtitle">Information Leverage</div>
+                    <h3 class="lesson-title">Experts Exploit Information Asymmetry</h3>
+                    <p class="lesson-description">Doctors, lawyers, car mechanics, real estate agents: all profit from knowing more than you. This isn't malicious—it's just economics. When you have information others don't, you extract value from that gap.</p>
+                    <div class="key-insight">
+                        "An expert is someone who knows more than you about something. That information gap is where their profit lies."
+                    </div>
+                    <div class="data-point">
+                        💎 Real estate agents sell their own homes at 10% premiums. They know the true market; you don't. Information = power = profit.
+                    </div>
+                    <div class="funny-take">
+                        <div class="funny-label">🎭 The Expert's Paradox</div>
+                        The person best qualified to help you is the person most incentivized to exploit you. Welcome to capitalism.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Deep Dives Section -->
+    <section class="key-lessons" id="key-dives">
+        <div class="container">
+            <h2 class="section-title">Key Lessons: Data-Driven Deep Dives</h2>
+
+            <div class="deep-dive-grid">
+                <!-- Deep Dive 1: Chicago Teachers -->
+                <div class="deep-dive-card">
+                    <h3 class="deep-dive-title">Chicago Teachers: The Algorithm</h3>
+                    <div class="dive-content">
+                        <p><strong>The Problem:</strong> High-stakes testing created perverse incentives. Teachers under pressure began filling in wrong answers with correct ones—not randomly, but systematically.</p>
+
+                        <p><strong>Levitt's Algorithm:</strong> He analyzed the statistical signature of cheating:</p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Sudden gains in specific answer blocks</li>
+                            <li>Unlikely answer patterns (all A's suddenly)</li>
+                            <li>Students who scored well but missed basics</li>
+                        </ul>
+
+                        <div class="data-highlight">
+                            ~250 Teachers Caught | Pattern Recognition Revealed Systematic Fraud
+                        </div>
+
+                        <p><strong>The Insight:</strong> When incentives reward short-term gains over long-term learning, good people do bad things. The system, not individual morality, determined outcomes.</p>
+                    </div>
+                </div>
+
+                <!-- Deep Dive 2: Sumo Wrestling -->
+                <div class="deep-dive-card">
+                    <h3 class="deep-dive-title">Sumo Wrestling: A Data-Driven Heist</h3>
+                    <div class="dive-content">
+                        <p><strong>The Setup:</strong> 20 years of sumo match data, ~1,500 wrestlers, a seemingly honorable sport.</p>
+
+                        <p><strong>The Smoking Gun:</strong> A wrestler with exactly 7 wins in their final match faces an opponent at exactly 7 wins. The wrestler needing one more win nearly always wins.</p>
+
+                        <div class="data-highlight">
+                            79% Win Rate vs. Expected 50% | The Statistical Improbability Is Staggering
+                        </div>
+
+                        <p><strong>The System:</strong> Japanese wrestling associations were fixing matches through a network of favors. Eight wins = rank promotion + bonuses. The incentive structure created automatic corruption.</p>
+
+                        <p style="font-style: italic; color: #666;">The stunning part: it took Levitt's data analysis to expose what Japanese authorities likely knew but ignored.</p>
+                    </div>
+                </div>
+
+                <!-- Deep Dive 3: Gang Economics -->
+                <div class="deep-dive-card">
+                    <h3 class="deep-dive-title">Gang Economics: Why Dealers Persist</h3>
+                    <div class="dive-content">
+                        <p><strong>The Venkatesh Study:</strong> Sociologist embedded with Chicago gang leaders, analyzed dealer economics like a corporation.</p>
+
+                        <ul style="margin: 15px 0; padding-left: 20px; list-style: none;">
+                            <li>👑 <strong>Leadership (bosses):</strong> ~$200,000/year (top percentile income)</li>
+                            <li>🎯 <strong>Officers (managers):</strong> ~$20,000-$30,000/year</li>
+                            <li>💵 <strong>Street dealers (grunts):</strong> $150/week, ~$7,800/year</li>
+                        </ul>
+
+                        <div class="data-highlight">
+                            Worse Than Minimum Wage + Death Risk | Why Do They Stay?
+                        </div>
+
+                        <p><strong>The Answer:</strong> Lottery-like payoff structure. Every street dealer thinks they'll be the next boss. The dream of $200K/year sustains 10-hour shifts at $7.50/hour. It's a rational economic gamble with terrible odds.</p>
+
+                        <p><strong>Living with moms:</strong> Not a failure of family structure—it's a rational cost-cutting measure while pursuing promotion.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connections to Other Books -->
+    <section class="connections-section" id="connections">
+        <div class="container">
+            <h2 class="section-title">Cross-Book Connections</h2>
+            <p style="text-align: center; font-size: 16px; color: #666; margin-bottom: 50px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Freakonomics sits at the intersection of behavioral economics, psychology, and data science. These books expand the same ideas in different directions.
+            </p>
+
+            <div class="connections-grid">
+                <div class="connection-card">
+                    <div class="connection-icon">🧠</div>
+                    <h3 class="connection-title">Thinking, Fast and Slow</h3>
+                    <p class="connection-desc"><strong>Daniel Kahneman</strong> explains the psychological mechanisms behind Freakonomics' findings. While Levitt shows <em>what</em> people do, Kahneman explains <em>why</em> cognitive biases drive decisions.</p>
+                </div>
+
+                <div class="connection-card">
+                    <div class="connection-icon">🎲</div>
+                    <h3 class="connection-title">Predictably Irrational</h3>
+                    <p class="connection-desc"><strong>Dan Ariely</strong> dives deeper into how irrationality is systematic and predictable. Freakonomics shows hidden incentives; Ariely shows hidden psychology behind those incentives.</p>
+                </div>
+
+                <div class="connection-card">
+                    <div class="connection-icon">🦢</div>
+                    <h3 class="connection-title">The Black Swan</h3>
+                    <p class="connection-desc"><strong>Nassim Taleb</strong> explores how rare events dominate outcomes and how we're blind to them. Freakonomics' abortion-crime finding is a Black Swan: nobody expected the connection until data revealed it.</p>
+                </div>
+
+                <div class="connection-card">
+                    <div class="connection-icon">💡</div>
+                    <h3 class="connection-title">Nudge</h3>
+                    <p class="connection-desc"><strong>Thaler & Sunstein</strong> apply Freakonomics' incentive logic to policy design. If incentives shape behavior, small design changes ("nudges") can redirect behavior toward better outcomes.</p>
+                </div>
+
+                <div class="connection-card">
+                    <div class="connection-icon">🎯</div>
+                    <h3 class="connection-title">Influence</h3>
+                    <p class="connection-desc"><strong>Robert Cialdini</strong> maps the weapons of persuasion. Freakonomics shows incentives; Cialdini shows how to deploy them through psychological principles (reciprocity, authority, scarcity, etc.).</p>
+                </div>
+
+                <div class="connection-card">
+                    <div class="connection-icon">📊</div>
+                    <h3 class="connection-title">Moneyball</h3>
+                    <p class="connection-desc"><strong>Michael Lewis</strong> applies Freakonomics' data-driven thinking to baseball. Same principle: conventional wisdom loses to rigorous analysis of what actually predicts success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI and Freakonomics Connection -->
+    <section style="padding: 80px 20px; background: linear-gradient(135deg, rgba(9, 132, 227, 0.05) 0%, rgba(78, 205, 196, 0.05) 100%);">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--dark);">Freakonomics Meets Machine Learning</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto;">
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 15px; color: var(--deep-blue);">🤖 Incentives → Reward Functions</h3>
+                    <p style="color: #555; line-height: 1.7;">
+                        Freakonomics: People respond to incentives. ML: Models optimize toward reward functions. Both reveal that <strong>what you optimize for is what you get</strong>. Misaligned rewards = misaligned behavior (human or algorithmic).
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 15px; color: var(--deep-blue);">🔍 Cheating Detection → Anomaly Detection</h3>
+                    <p style="color: #555; line-height: 1.7;">
+                        Levitt caught teachers via statistical anomalies. ML models detect fraud the same way: patterns that deviate from expected distributions. Both rely on "this seems too perfect to be random."
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 15px; color: var(--deep-blue);">📊 Information Asymmetry → Feature Advantage</h3>
+                    <p style="color: #555; line-height: 1.7;">
+                        Real estate agents profit from knowing true market values. ML models profit from features humans can't see. Both compress information others lack into predictive advantage.
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 15px; color: var(--deep-blue);">❓ Right Question → Problem Formulation</h3>
+                    <p style="color: #555; line-height: 1.7;">
+                        Levitt's genius: asking "why?" in unexpected places. ML practitioners: the hardest part isn't the algorithm, it's formulating the right problem to solve.
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 15px; color: var(--deep-blue);">🧠 Prior Bias → Conventional Wisdom</h3>
+                    <p style="color: #555; line-height: 1.7;">
+                        Humans embed prior beliefs into models. Freakonomics: challenge priors with data. Good ML: be skeptical of what you "know" until the data confirms it.
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 15px; color: var(--deep-blue);">🔬 Exploratory Data Analysis → Discovery</h3>
+                    <p style="color: #555; line-height: 1.7;">
+                        Freakonomics: look at data without assumptions; let patterns emerge. EDA: visualization, statistical summaries, finding the hidden. Both require curiosity over expertise.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Takeaways -->
+    <section style="padding: 80px 20px; background: white;">
+        <div class="container">
+            <div class="featured-lesson">
+                <h3>The Freakonomics Framework: Think Like a Rogue Economist</h3>
+                <p>At its core, Freakonomics teaches a method, not just findings. Here's how to apply it:</p>
+
+                <div class="highlight-box">
+                    <strong style="display: block; margin-bottom: 10px;">1. Follow the Incentives</strong>
+                    <p style="margin: 0; font-size: 14px;">What is someone rewarded for? Economic incentive (money), social (reputation), or moral (ethics)? When behavior seems irrational, look for hidden incentives.</p>
+                </div>
+
+                <div class="highlight-box">
+                    <strong style="display: block; margin-bottom: 10px;">2. Challenge Conventional Wisdom</strong>
+                    <p style="margin: 0; font-size: 14px;">What does everyone "know" to be true? Sumo wrestlers are honorable. Teachers are virtuous. Parents' techniques matter. Data often proves conventional wisdom wrong.</p>
+                </div>
+
+                <div class="highlight-box">
+                    <strong style="display: block; margin-bottom: 10px;">3. Look for Information Asymmetry</strong>
+                    <p style="margin: 0; font-size: 14px;">Who knows something others don't? That's where power and profit live. Real estate agents, doctors, experts all profit from information gaps.</p>
+                </div>
+
+                <div class="highlight-box">
+                    <strong style="display: block; margin-bottom: 10px;">4. Ask the Right Question</strong>
+                    <p style="margin: 0; font-size: 14px;">The answer is hidden until you ask the right question. "Why do gang members make minimum wage?" leads to brilliant insights about hope and lottery-like incentives.</p>
+                </div>
+
+                <div class="highlight-box">
+                    <strong style="display: block; margin-bottom: 10px;">5. Let Data Decide</strong>
+                    <p style="margin: 0; font-size: 14px;">Intuition, tradition, and ideology are weaker than evidence. Levitt's sumo analysis, teacher algorithm, and gang study all overturned intuitive beliefs with data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Section: Why This Matters -->
+    <section style="padding: 80px 20px; background: linear-gradient(135deg, var(--dark) 0%, var(--dark-purple) 100%); color: white;">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 48px; margin-bottom: 30px;">Why Freakonomics Still Matters</h2>
+
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px;">
+                    Published in 2005, Freakonomics changed how we think about human behavior. Nearly two decades later, its core insight—that incentives shape everything—has become the foundation of behavioral economics, data science, and even AI research.
+                </p>
+
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px;">
+                    In a world drowning in data, Freakonomics teaches the most valuable skill: asking the right questions. It shows that rigorous thinking, creative problem-framing, and willingness to follow data into uncomfortable places can reveal truths hidden in plain sight.
+                </p>
+
+                <p style="font-size: 18px; line-height: 1.8; font-weight: 500; color: var(--sunny);">
+                    The hidden side of everything is waiting. You just have to ask the right question.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-title">Freakonomics Study Guide</div>
+            <p class="footer-text">
+                A comprehensive illustrated guide to Steven Levitt & Stephen Dubner's groundbreaking exploration of hidden incentives, surprising truths, and the hidden side of everything.
+            </p>
+            <p class="footer-text" style="font-size: 12px; opacity: 0.6;">
+                Created with 💜 for economics enthusiasts, data scientists, and rogue thinkers everywhere.
+                <br><br>
+                Book published 2005 | Guide updated 2026
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top" id="scrollToTop">↑</div>
+
+    <script>
+        // Scroll to top button functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideUp 0.6s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.lesson-card, .deep-dive-card, .connection-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add slide-up animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

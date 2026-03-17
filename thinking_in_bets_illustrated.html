@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thinking in Bets: An Illustrated Guide | Annie Duke</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* ============ COVER ============ */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--teal) 50%, var(--sunny) 100%);
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="white" opacity="0.05"/><circle cx="80" cy="30" r="25" fill="white" opacity="0.03"/><circle cx="70" cy="70" r="20" fill="white" opacity="0.04"/><circle cx="30" cy="80" r="18" fill="white" opacity="0.03"/></svg>');
+            animation: drift 20s infinite linear;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, -50px); }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 40px;
+        }
+
+        .cover-illustration {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .poker-chip {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .chip-1 {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--coral), var(--warm-red));
+            top: 20px;
+            left: 20px;
+            animation-delay: 0s;
+        }
+
+        .chip-2 {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--teal), #2d9c9f);
+            top: 60px;
+            right: 40px;
+            animation-delay: 1s;
+        }
+
+        .chip-3 {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, var(--sunny), var(--orange));
+            bottom: 30px;
+            left: 50px;
+            animation-delay: 2s;
+        }
+
+        .card {
+            position: absolute;
+            width: 70px;
+            height: 100px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .card-1 {
+            top: 80px;
+            right: 60px;
+            animation-delay: 0.5s;
+        }
+
+        .card-2 {
+            bottom: 60px;
+            right: 20px;
+            animation-delay: 1.5s;
+        }
+
+        .probability-cloud {
+            position: absolute;
+            width: 200px;
+            height: 150px;
+            top: 100px;
+            right: 50px;
+            opacity: 0.3;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .cover h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cover p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .author {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 30px;
+        }
+
+        /* ============ MAIN CONTAINER ============ */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-purple);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--coral);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '⚡';
+            font-size: 2rem;
+        }
+
+        /* ============ LESSON CARDS ============ */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .lesson {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .lesson:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .lesson-header {
+            padding: 40px 30px;
+            background: linear-gradient(135deg, var(--teal), var(--mint));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .lesson-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lesson-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lesson-inner {
+            padding: 30px;
+        }
+
+        .lesson-key-idea {
+            background: linear-gradient(135deg, #f0f9ff, #e0f7f4);
+            border-left: 4px solid var(--teal);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 6px;
+        }
+
+        .lesson-key-idea strong {
+            color: var(--dark-purple);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lesson-content {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        /* ============ SPECIAL BOXES ============ */
+        .poker-example {
+            background: linear-gradient(135deg, #fff9e6, #fff5e6);
+            border: 2px solid var(--orange);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .poker-example::before {
+            content: '♠️';
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 1.5rem;
+        }
+
+        .business-app {
+            background: linear-gradient(135deg, #f0f7ff, #e3f2fd);
+            border: 2px solid var(--deep-blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .business-app::before {
+            content: '💼';
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 1.5rem;
+        }
+
+        .funny-box {
+            background: linear-gradient(135deg, #fff0f6, #ffe6f0);
+            border: 2px solid var(--pink);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 50px;
+            font-style: italic;
+        }
+
+        .funny-box::before {
+            content: '😄';
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 1.5rem;
+        }
+
+        .ai-box {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border: 2px solid var(--dark-purple);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .ai-box::before {
+            content: '🤖';
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* ============ QUOTE BOX ============ */
+        .quote-box {
+            background: linear-gradient(135deg, var(--coral), var(--warm-red));
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.6;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 3rem;
+            opacity: 0.3;
+            position: absolute;
+            top: 0;
+            left: 15px;
+        }
+
+        .quote-attribution {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* ============ STORY SECTION ============ */
+        .story {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 40px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .story-header {
+            background: linear-gradient(135deg, var(--coral), var(--warm-red));
+            color: white;
+            padding: 30px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .story-inner {
+            padding: 30px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .story-inner p {
+            margin-bottom: 15px;
+        }
+
+        /* ============ CHEATSHEET ============ */
+        .cheatsheet {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 40px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .cheatsheet-header {
+            background: linear-gradient(135deg, var(--forest), #00a86b);
+            color: white;
+            padding: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .cheatsheet-inner {
+            padding: 30px;
+        }
+
+        .decision-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .matrix-cell {
+            background: linear-gradient(135deg, #f5f5f5, #ececec);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--teal);
+        }
+
+        .matrix-label {
+            font-weight: 600;
+            color: var(--dark-purple);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        /* ============ TWO COLUMN LAYOUT ============ */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* ============ CONNECT BOX ============ */
+        .connect-box {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 2px solid var(--orange);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .connect-title {
+            font-weight: 700;
+            color: var(--warm-red);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .connect-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .connect-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+
+        .connect-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--warm-red);
+            font-weight: bold;
+        }
+
+        /* ============ ILLUSTRATION CONTAINER ============ */
+        .illustration-container {
+            background: linear-gradient(135deg, #f0f9ff, #e0f7f4);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin: 25px 0;
+            border: 2px solid var(--teal);
+        }
+
+        .illustration-label {
+            font-weight: 600;
+            color: var(--teal);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* ============ PARTICLES ============ */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: linear-gradient(135deg, var(--dark), #424242);
+            color: white;
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        .footer p {
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .key-takeaways {
+            background: linear-gradient(135deg, #fff9e6, #fff5e6);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 5px solid var(--sunny);
+        }
+
+        .key-takeaways strong {
+            color: var(--warm-red);
+            display: block;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .takeaway-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .takeaway-list li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .takeaway-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--sunny);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+    <div class="cover-content">
+        <div class="cover-illustration">
+            <div class="poker-chip chip-1">♠</div>
+            <div class="poker-chip chip-2">♣</div>
+            <div class="poker-chip chip-3">♦</div>
+            <div class="card card-1">♥️</div>
+            <div class="card card-2">🎲</div>
+        </div>
+        <h1>Thinking in Bets</h1>
+        <h2>Making Smarter Decisions When You Don't Have All the Facts</h2>
+        <p>A Comprehensive Illustrated Guide to Decision-Making, Uncertainty, and Better Outcomes</p>
+        <p class="author">by Annie Duke</p>
+    </div>
+</section>
+
+<!-- ============ MAIN CONTENT ============ -->
+<div class="container">
+
+    <!-- INTRO SECTION -->
+    <section style="background: white; padding: 40px; border-radius: 12px; margin-bottom: 60px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--dark-purple); margin-bottom: 20px;">Welcome to the Decision Revolution</h2>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #555; margin-bottom: 15px;">
+            Annie Duke's "Thinking in Bets" revolutionizes how we approach decisions in an uncertain world. Drawing from her professional poker career, Duke reveals how to separate luck from skill, recognize our cognitive biases, and build decision-making frameworks that improve outcomes in business, relationships, and life.
+        </p>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #555;">
+            This guide explores 12 core lessons that transform decision-making from reactive gut-feeling to strategic thinking. By treating every decision as a bet—something with stakes and uncertainty—we develop calibrated thinking and better judgment under pressure.
+        </p>
+    </section>
+
+    <!-- ============ 12 LESSONS GRID ============ -->
+    <h2 class="section-title">The 12 Core Lessons</h2>
+
+    <div class="lessons-grid">
+
+        <!-- LESSON 1: RESULTING -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">01</div>
+                <div class="lesson-title">Resulting</div>
+                <div class="lesson-subtitle">Judging Decisions by Outcomes, Not Process</div>
+            </div>
+            <div class="lesson-inner">
+                <div class="lesson-key-idea">
+                    <strong>Key Concept</strong>
+                    The tendency to evaluate the quality of a decision based on its outcome rather than the quality of the decision-making process at the time it was made.
+                </div>
+
+                <div class="lesson-content">
+                    We commit "resulting" when we confuse good outcomes with good decisions. A lucky gamble that pays off isn't a smart decision; a well-reasoned choice that fails due to chance isn't a bad one. This cognitive error distorts our learning and prevents improvement.
+                </div>
+
+                <div class="poker-example">
+                    <strong>Poker Example:</strong> A player goes all-in with 7-2 (the worst hand in poker). They win. Was it a good decision? No—the odds were terrible. Only the outcome was good, thanks to luck. A skilled player knows the difference.
+                </div>
+
+                <div class="business-app">
+                    <strong>Business Application:</strong> A startup founder made a bold marketing pivot without data. It worked, so everyone praises the decision. But if the same decision had failed 80% of the time, was it wise? Separate process from outcome to build repeatable success.
+                </div>
+
+                <div class="funny-box">
+                    We're all armchair quarterbacks after the game ends. The difference? Expert decision-makers evaluate the play when it's called, not when the final score is in.
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection:</strong> Resulting is a form of outcome bias and evaluation bias in ML. Models trained to minimize loss on past outcomes often don't reflect the quality of the decision-making framework. Good forecasting systems reward calibration, not just accuracy on individual predictions.
+                </div>
+
+                <div class="key-takeaways">
+                    <strong>Key Takeaway</strong>
+                    <ul class="takeaway-list">
+                        <li>Judge decisions by their process and information available at the time, not by what happened</li>
+                        <li>A bad process with good outcome teaches the wrong lesson</li>
+                        <li>Build decision journals to track reasoning before you know the result</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 2: WANNA BET? -->
+        <div class="lesson">
+            <div class="lesson-header" style="background: linear-gradient(135deg, var(--coral), var(--warm-red));">
+                <div class="lesson-number">02</div>
+                <div class="lesson-title">Wanna Bet?</div>
+                <div class="lesson-subtitle">Treating Decisions as Bets Forces Better Thinking</div>
+            </div>
+            <div class="lesson-inner">
+                <div class="lesson-key-idea">
+                    <strong>Key Concept</strong>
+                    When we frame decisions as bets, we're forced to clarify odds, assign probabilities, and acknowledge uncertainty. This simple shift improves decision quality dramatically.
+                </div>
+
+                <div class="lesson-content">
+                    Instead of saying "We should hire this person," say "I'm willing to bet 10:1 that this hire will outperform expectations." That little question—"Are you willing to bet on that?"—reveals confidence gaps and forces explicit thinking about risk.
+                </div>
+
+                <div class="poker-example">
+                    <strong>Poker Example:</strong> Every poker decision is a bet. You bet your chips on the strength of your hand, the position, the community cards. You must quantify your confidence (fold, call, raise) with actual money. This clarity is why poker players often think more clearly than the general population.
+                </div>
+
+                <div class="business-app">
+                    <strong>Business Application:</strong> Replace vague confidence with explicit stakes. "I bet my credibility and $50k budget that this product redesign will increase conversions by 15%." Now you're thinking clearly about ROI, timelines, and assumptions.
+                </div>
+
+                <div class="quote-box">
+                    "In poker, you get immediate, objective feedback about whether your predictions were correct. In life, it's much murkier. But we can learn from poker's clarity."
+                    <div class="quote-attribution">— Annie Duke</div>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection:</strong> This is calibrated uncertainty. Neural networks produce confident outputs regardless of actual epistemic uncertainty. Humans with probabilistic mindsets (bets) are better at saying "I don't know" with measured confidence intervals, just like LLMs should be.
+                </div>
+
+                <div class="key-takeaways">
+                    <strong>Key Takeaway</strong>
+                    <ul class="takeaway-list">
+                        <li>Frame decisions as bets to expose hidden assumptions</li>
+                        <li>Ask "How confident are you?" and "Are you willing to stake something on it?"</li>
+                        <li>Real stakes create clarity; vague decisions hide bad thinking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 3: LUCK VS SKILL -->
+        <div class="lesson">
+            <div class="lesson-header" style="background: linear-gradient(135deg, var(--sky), var(--deep-blue));">
+                <div class="lesson-number">03</div>
+                <div class="lesson-title">Luck vs Skill</div>
+                <div class="lesson-subtitle">The Difficulty of Separating Them</div>
+            </div>
+            <div class="lesson-inner">
+                <div class="lesson-key-idea">
+                    <strong>Key Concept</strong>
+                    In high-variance domains (business, sports, investing), outcomes depend on both skill and luck. Confusing them leads to overconfidence or unjustified pessimism.
+                </div>
+
+                <div class="lesson-content">
+                    A poker player can win with bad play (luck) or lose with perfect play (bad luck). Similarly, a CEO makes a bold acquisition that creates shareholder value—was it strategy or was the market timing just right? The truth usually contains both.
+                </div>
+
+                <div class="poker-example">
+                    <strong>Poker Example:</strong> Phil Hellmuth, a talented but emotionally volatile player, wins WSOP bracelets (skill) but also suffers epic downswings (luck dominates variance). Over 10,000 hands, skill shows. Over 10 hands, luck dominates. The line between them is blurry.
+                </div>
+
+                <div class="business-app">
+                    <strong>Business Application:</strong> Your competitor launched a product similar to yours but got market conditions, viral adoption, and luck to create a unicorn. If you copy their strategy, will you get the same result? Only if you account for the luck component they benefited from.
+                </div>
+
+                <div class="illustration-container">
+                    <div class="illustration-label">The Luck-Skill Spectrum</div>
+                    <svg width="100%" height="100" viewBox="0 0 500 100" style="max-width: 500px; margin: 20px auto;">
+                        <line x1="50" y1="60" x2="450" y2="60" stroke="var(--dark)" stroke-width="2"/>
+                        <text x="50" y="85" font-size="12" text-anchor="middle" fill="var(--dark)">Pure Luck (Coin Flip)</text>
+                        <text x="450" y="85" font-size="12" text-anchor="middle" fill="var(--dark)">Pure Skill (Chess)</text>
+                        <circle cx="50" cy="60" r="6" fill="var(--pink)"/>
+                        <circle cx="150" cy="60" r="6" fill="var(--orange)"/>
+                        <circle cx="250" cy="60" r="6" fill="var(--sunny)"/>
+                        <circle cx="350" cy="60" r="6" fill="var(--teal)"/>
+                        <circle cx="450" cy="60" r="6" fill="var(--forest)"/>
+                        <text x="150" y="25" font-size="11" text-anchor="middle" fill="#666">Poker, Investing, Sports</text>
+                    </svg>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection:</strong> This is aleatoric vs epistemic uncertainty. Aleatoric uncertainty is irreducible randomness (dice rolls). Epistemic uncertainty is reducible through better data and models. Good decision-makers distinguish them and invest in reducing epistemic uncertainty while accepting aleatoric limits.
+                </div>
+
+                <div class="key-takeaways">
+                    <strong>Key Takeaway</strong>
+                    <ul class="takeaway-list">
+                        <li>Outcomes reflect both skill and luck; disentangle them over time</li>
+                        <li>Short-term results hide luck; long-term patterns reveal skill</li>
+                        <li>Ask: "How much of this outcome would repeat if we did it again?"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 4: MOTIVATED REASONING -->
+        <div class="lesson">
+            <div class="lesson-header" style="background: linear-gradient(135deg, var(--purple), var(--dark-purple));">
+                <div class="lesson-number">04</div>
+                <div class="lesson-title">Motivated Reasoning</div>
+                <div class="lesson-subtitle">We Process Info to Confirm Existing Beliefs</div>
+            </div>
+            <div class="lesson-inner">
+                <div class="lesson-key-idea">
+                    <strong>Key Concept</strong>
+                    Our brains are confirmation machines. We seek information that confirms what we already believe and dismiss contradictory evidence as biased, flawed, or irrelevant.
+                </div>
+
+                <div class="lesson-content">
+                    If you believe a stock is undervalued, you see positive news as validation and negative news as temporary noise. If you distrust a colleague, you interpret their mistakes as incompetence and their wins as luck. Motivated reasoning protects our worldviews but destroys accuracy.
+                </div>
+
+                <div class="business-app">
+                    <strong>Business Application:</strong> A product manager is convinced their feature will be a hit. They ask stakeholders for feedback, but they interpret "interesting concept" as "we love it" and "we're concerned about adoption" as "you didn't explain it well enough." Result: launch failure, surprise, blame on others.
+                </div>
+
+                <div class="funny-box">
+                    We're all scientists when it comes to confirming what we already believe. Every piece of data is cherry-picked evidence in the trial of "I'm Right."
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection:</strong> This is confirmation bias in training. Models trained on biased datasets learn to amplify those biases. Fine-tuning on cherry-picked examples teaches motivated reasoning. Best practices: adversarial evaluation, red-team feedback, and data diversity.
+                </div>
+
+                <div class="key-takeaways">
+                    <strong>Key Takeaway</strong>
+                    <ul class="takeaway-list">
+                        <li>Actively seek information that contradicts your beliefs</li>
+                        <li>Ask "What would change my mind?" before making decisions</li>
+                        <li>Hire people who disagree with you; they'll catch blind spots</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 5: THE BUDDY SYSTEM -->
+        <div class="lesson">
+            <div class="lesson-header" style="background: linear-gradient(135deg, var(--mint), var(--forest));">
+                <div class="lesson-number">05</div>
+                <div class="lesson-title">The Buddy System</div>
+                <div class="lesson-subtitle">Truth-Seeking Groups vs Confirmation-Seeking Groups</div>
+            </div>
+            <div class="lesson-inner">
+                <div class="lesson-key-idea">
+                    <strong>Key Concept</strong>
+                    The quality of your decisions depends on the quality of your group. Truth-seeking groups expose bad thinking; confirmation-seeking groups amplify it.
+                </div>
+
+                <div class="lesson-content">
+                    In a truth-seeking group, members challenge assumptions, play devil's advocate, and reward the person who says "That's a bad idea" as much as the one who says "Great idea." In a confirmation-seeking group, people police each other to maintain harmony and consensus.
+                </div>
+
+                <div class="poker-example">
+                    <strong>Poker Example:</strong> High-level poker players form study groups where they brutally analyze hands. "You folded too often there" or "That call was weak." The goal is truth, not friendship. This pressure cooker forges better players.
+                </div>
+
+                <div class="story">
+                    <div class="story-header">Case Study: The Seattle Seahawks and Super Bowl XLIX</div>
+                    <div class="story-inner">
+                        <p>With 26 seconds left and the score tied, the Seahawks had a chance to score. Coach Pete Carroll called a pass play instead of running the ball (the logical choice with Marshawn Lynch, their star running back). The play was intercepted, and the Patriots won.</p>
+                        <p>Journalists erupted: "Worst call in sports history!" Fans demanded Carroll's firing. But here's the truth: The call was mathematically sound. The Seahawks' passing play had a higher expected value than a run, given defensive alignments. The outcome was bad, but the decision-making process was good.</p>
+                        <p>Carroll was part of a team that made good decisions under uncertainty. That's what separates winning franchises from lucky franchises.</p>
+                    </div>
+                </story>
+
+                <div class="ai-box">
+                    <strong>AI Connection:</strong> This is ensemble disagreement and debate. Single models often overfit or hallucinate. Ensembles of diverse models that challenge each other's predictions produce better calibration and robustness. This is why companies like OpenAI use constitutional AI—multiple perspectives enforcing truth-seeking principles.
+                </div>
+
+                <div class="key-takeaways">
+                    <strong>Key Takeaway</strong>
+                    <ul class="takeaway-list">
+                        <li>Build groups that reward truthfulness over agreeableness</li>
+                        <li>Assign someone the role of "devil's advocate" in important decisions</li>
+                        <li>A good group improves decision quality; a bad group amplifies bias</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 6: TEMPORAL DISCOUNTING -->
+        <div class="lesson">
+            <div class="lesson-header" style="background: linear-gradient(135deg, var(--cream), var(--orange));">
+                <div class="lesson-number">06</div>
+                <div class="lesson-title">Temporal Discounting</div>
+                <div class="lesson-subtitle">The 10-10-10 Framework</div>
+            </div>
+            <div class="lesson-inner">
+                <div class="lesson-key-idea">
+                    <strong>Key Concept</strong>
+                    We overweight immediate emotions and underweight long-term consequences. The 10-10-10 technique expands our time horizon.
+                </div>
+
+                <div class="lesson-content">
+                    Before a big decision, ask yourself:
+                    <ul style="margin: 15px 0 15px 25px; list-style: none;">
+                        <li style="margin: 8px 0;">• <strong>In 10 minutes:</strong> How will I feel about this decision?</li>
+                        <li style="margin: 8px 0;">• <strong>In 10 months:</strong> Will this decision still matter?</li>
+                        <li style="margin: 8px 0;">• <strong>In 10 years:</strong> Will I regret this?</li>
+                    </ul>
+                    This reframes short-term emotional reactions into long-term consequences.
+                </div>
+
+                <div class="business-app">
+                    <strong>Business Application:</strong> You're tempted to take credit for a colleague's work to impress your boss (feels great in 10 minutes). In 10 months, you'll be exposed or your reputation will be damaged (bad). In 10 years, you'll have lost trust and opportunity (very bad). The long view kills the bad idea.
+                </div>
+
+                <div class="illustration-container">
+                    <div class="illustration-label">The 10-10-10 Timeline</div>
+                    <svg width="100%" height="80" viewBox="0 0 500 80" style="max-width: 500px; margin: 15px auto;">
+                        <line x1="50" y1="40" x2="450" y2="40" stroke="var(--dark)" stroke-width="2"/>
+                        <circle cx="50" cy="40" r="8" fill="var(--pink)"/>
+                        <circle cx="250" cy="40" r="8" fill="var(--sunny)"/>
+                        <circle cx="450" cy="40" r="8" fill="var(--forest)"/>
+                        <text x="50" y="65" font-size="12" text-anchor="middle" font-weight="600" fill="var(--dark)">10 Minutes</text>
+                        <text x="250" y="65" font-size="12" text-anchor="middle" font-weight="600" fill="var(--dark)">10 Months</text>
+                        <text x="450" y="65" font-size="12" text-anchor="middle" font-weight="600" fill="var(--dark)">10 Years</text>
+                        <text x="50" y="20" font-size="10" text-anchor="middle" fill="#666">Emotion</text>
+                        <text x="250" y="20" font-size="10" text-anchor="middle" fill="#666">Consequence</text>
+                        <text x="450" y="20" font-size="10" text-anchor="middle" fill="#666">Life Impact</text>
+                    </svg>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection:</strong> This is reward modeling over multiple time horizons. Simple AI systems optimize for immediate reward (maximize engagement), but good systems learn to balance immediate and delayed rewards. Calibration across timescales is essential.
+                </div>
+
+                <div class="key-takeaways">
+                    <strong>Key Takeaway</strong>
+                    <ul class="takeaway-list">
+                        <li>Use 10-10-10 to expand your decision horizon</li>
+                        <li>Don't let immediate emotions override long-term wisdom</li>
+                        <li>A decision that feels good now but bad in 10 years is a bad decision</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 7: ULYSSES CONTRACTS -->
+        <div class="lesson">
+            <div class="lesson-header" style="background: linear-gradient(135deg, var(--pink), #ff6b9d));">
+                <div class="lesson-number">07</div>
+                <div class="lesson-title">Ulysses Contracts</div>
+                <div class="lesson-subtitle">Pre-commitment Strategies</div>
+            </div>
+            <div class="lesson-inner">
+                <div class="lesson-key-idea">
+                    <strong>Key Concept</strong>
+                    Knowing you make bad decisions when emotionally triggered, pre-commit to good decisions before emotions take over. This is "tying yourself to the mast," like Ulysses to avoid the sirens.
+                </div>
+
+                <div class="lesson-content">
+                    We know we'll be tempted to quit the gym, overspend, or make impulsive trades. Rather than rely on willpower, we create contracts with ourselves: "If I miss three workouts, I owe my friend $200." Suddenly, the decision is already made, before emotion strikes.
+                </div>
+
+                <div class="poker-example">
+                    <strong>Poker Example:</strong> Professional poker players set stop-loss limits before they sit down. "I'm leaving if I lose $5,000." Why? Because once you're stuck $3,000, your judgment is compromised. You chase losses. The pre-commitment (contract) overrides emotional impulse.
+                </div>
+
+                <div class="business-app">
+                    <strong>Business Application:</strong> You know you won't fire underperformers if you wait until the emotional moment. So you pre-commit: "If productivity drops 20% two quarters in a row, we have a conversation." The contract removes emotion from the decision.
+                </div>
+
+                <div class="key-takeaways">
+                    <strong>Key Takeaway</strong>
+                    <ul class="takeaway-list">
+                        <li>Make the hard decision when calm, execute it when triggered</li>
+                        <li>Use accountability (friends, contracts, public commitments) as your safety net</li>
+                        <li>Pre-commitment removes the temptation to make bad decisions in the moment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 8: BACKCASTING & PREMORTEM -->
+        <div class="lesson">
+            <div class="lesson-header" style="background: linear-gradient(135deg, var(--sky), #5dade2));">
+                <div class="lesson-number">08</div>
+                <div class="lesson-title">Backcasting & Premortem</div>
+                <div class="lesson-subtitle">Imagining Future Success and Failure</div>
+            </div>
+            <div class="lesson-inner">
+                <div class="lesson-key-idea">
+                    <strong>Key Concept</strong>
+                    Instead of imagining the future vaguely, use structured imagination: backcasting (imagine success, work backward to today) and premortem (imagine failure, work backward to cause).
+                </div>
+
+                <div class="lesson-content">
+                    <strong>Backcasting:</strong> "It's 2030. Our product is a massive success. How did we get here?" Working backward forces realistic thinking about necessary steps, timing, and resources.
+                    <br><br>
+                    <strong>Premortem:</strong> "It's 2027. Our project failed spectacularly. What went wrong?" Team members imagine failure reasons (technical, market, team), and you design safeguards against them.
+                </div>
+
+                <div class="business-app">
+                    <strong>Business Application:</strong> A startup pitches an aggressive growth plan. Instead of optimistic forecasts, the team does a premortem: "We're out of business in 18 months. Why?" Answers: cash burn rate too high, churn too severe, product-market fit failed. Now they design with these risks in mind.
+                </div>
+
+                <div class="illustration-container">
+                    <div class="illustration-label">Backcasting vs Premortem</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                        <div style="border: 2px solid var(--forest); padding: 15px; border-radius: 6px; background: #f0fff4;">
+                            <div style="font-weight: 600; color: var(--forest); margin-bottom: 10px;">Backcasting</div>
+                            <p style="font-size: 0.9rem; color: #555;">Start: Success ✓<br>Work: Backward to today<br>Reveal: Necessary steps</p>
+                        </div>
+                        <div style="border: 2px solid var(--warm-red); padding: 15px; border-radius: 6px; background: #fff5f5;">
+                            <div style="font-weight: 600; color: var(--warm-red); margin-bottom: 10px;">Premortem</div>
+                            <p style="font-size: 0.9rem; color: #555;">Start: Failure ✗<br>Work: Backward to cause<br>Reveal: Risk mitigation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-takeaways">
+                    <strong>Key Takeaway</strong>
+                    <ul class="takeaway-list">
+                        <li>Backcasting reveals the path to success; premortem reveals the path to failure</li>
+                        <li>Use both to sense-check decisions against reality</li>
+                        <li>A premortem catches risks vague planning misses</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 9: DECISION MATRIX -->
+        <div class="lesson">
+            <div class="lesson-header" style="background: linear-gradient(135deg, var(--teal), #3ab9b3));">
+                <div class="lesson-number">09</div>
+                <div class="lesson-title">Decision Matrix</div>
+                <div class="lesson-subtitle">Expected Value Thinking</div>
+            </div>
+            <div class="lesson-inner">
+                <div class="lesson-key-idea">
+                    <strong>Key Concept</strong>
+                    Expected Value = (Probability × Payoff) + (Probability × Payoff) for all outcomes. Use this to make choices between uncertain options.
+                </div>
+
+                <div class="lesson-content">
+                    Instead of "This is a good opportunity," quantify: "There's a 60% chance we gain $100k and a 40% chance we lose $50k. EV = (0.6 × 100k) + (0.4 × -50k) = $40k." Expected value forces clarity and comparison.
+                </div>
+
+                <div class="poker-example">
+                    <strong>Poker Example:</strong> You have a pair of aces. A player bets $100. The pot is $200. You calculate: "If I call, there's a 75% chance I win $300 and a 25% chance I lose $100. EV = (0.75 × 300) + (0.25 × -100) = $200. Call." This is pure expected value thinking.
+                </div>
+
+                <div class="cheatsheet">
+                    <div class="cheatsheet-header">📊 Decision Matrix Template</div>
+                    <div class="cheatsheet-inner">
+                        <div style="margin-bottom: 20px;">
+                            <strong style="color: var(--dark-purple);">Option:</strong> [Your decision]
+                        </div>
+                        <div class="decision-matrix">
+                            <div class="matrix-cell">
+                                <div class="matrix-label">Best Case</div>
+                                <p style="font-size: 0.9rem; color: #555;">Probability: ____%<br>Payoff: $______</p>
+                            </div>
+                            <div class="matrix-cell">
+                                <div class="matrix-label">Base Case</div>
+                                <p style="font-size: 0.9rem; color: #555;">Probability: ____%<br>Payoff: $______</p>
+                            </div>
+                            <div class="matrix-cell">
+                                <div class="matrix-label">Worst Case</div>
+                                <p style="font-size: 0.9rem; color: #555;">Probability: ____%<br>Payoff: -$______</p>
+                            </div>
+                            <div class="matrix-cell">
+                                <div class="matrix-label">Expected Value</div>
+                                <p style="font-size: 0.9rem; color: #555; font-weight: 600;">EV = ________</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-takeaways">
+                    <strong>Key Takeaway</strong>
+                    <ul class="takeaway-list">
+                        <li>Assign probabilities and payoffs to outcomes</li>
+                        <li>Compare options by expected value, not by hope or fear</li>
+                        <li>A small-probability, high-payoff bet can have huge EV</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 10: OUTCOME FIELDING -->
+        <div class="lesson">
+            <div class="lesson-header" style="background: linear-gradient(135deg, var(--orange), #f39c12));">
+                <div class="lesson-number">10</div>
+                <div class="lesson-title">Outcome Fielding</div>
+                <div class="lesson-subtitle">Sorting Outcomes into Luck vs Skill Quadrants</div>
+            </div>
+            <div class="lesson-inner">
+                <div class="lesson-key-idea">
+                    <strong>Key Concept</strong>
+                    After outcomes happen, categorize them: Good outcome + good process (skill), bad outcome + good process (bad luck), good outcome + bad process (good luck), bad outcome + bad process (bad skill). This teaches you what to repeat and what to avoid.
+                </div>
+
+                <div class="lesson-content">
+                    A decision with a great process that fails teaches a different lesson than a lucky win. By fielding outcomes—sorting them into quadrants—you extract the right lessons and avoid the "resulting" trap.
+                </div>
+
+                <div class="illustration-container">
+                    <div class="illustration-label">Outcome Fielding Matrix</div>
+                    <svg width="100%" height="250" viewBox="0 0 400 250" style="max-width: 400px; margin: 15px auto;">
+                        <line x1="200" y1="30" x2="200" y2="210" stroke="var(--dark)" stroke-width="2"/>
+                        <line x1="50" y1="120" x2="350" y2="120" stroke="var(--dark)" stroke-width="2"/>
+
+                        <text x="100" y="55" font-size="12" font-weight="600" fill="var(--dark)" text-anchor="middle">Good Outcome</text>
+                        <text x="300" y="55" font-size="12" font-weight="600" fill="var(--dark)" text-anchor="middle">Bad Outcome</text>
+                        <text x="30" y="80" font-size="11" font-weight="600" fill="var(--dark)">Good</text>
+                        <text x="30" y="95" font-size="11" font-weight="600" fill="var(--dark)">Process</text>
+                        <text x="30" y="165" font-size="11" font-weight="600" fill="var(--dark)">Bad</text>
+                        <text x="30" y="180" font-size="11" font-weight="600" fill="var(--dark)">Process</text>
+
+                        <rect x="60" y="70" width="130" height="50" fill="#e8f5e9" stroke="var(--forest)" stroke-width="2"/>
+                        <text x="125" y="102" font-size="11" font-weight="600" fill="var(--forest)" text-anchor="middle">SKILL ✓</text>
+
+                        <rect x="210" y="70" width="130" height="50" fill="#fff3e0" stroke="var(--orange)" stroke-width="2"/>
+                        <text x="275" y="102" font-size="11" font-weight="600" fill="var(--orange)" text-anchor="middle">BAD LUCK</text>
+
+                        <rect x="60" y="130" width="130" height="50" fill="#fce4ec" stroke="var(--pink)" stroke-width="2"/>
+                        <text x="125" y="162" font-size="11" font-weight="600" fill="var(--pink)" text-anchor="middle">GOOD LUCK</text>
+
+                        <rect x="210" y="130" width="130" height="50" fill="#ffebee" stroke="var(--warm-red)" stroke-width="2"/>
+                        <text x="275" y="162" font-size="11" font-weight="600" fill="var(--warm-red)" text-anchor="middle">BAD SKILL ✗</text>
+                    </svg>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection:</strong> This is confusion matrix analysis in ML. True positives, false positives, true negatives, false negatives tell you about model behavior. Similarly, outcome fielding tells you about decision-making behavior and where to improve.
+                </div>
+
+                <div class="key-takeaways">
+                    <strong>Key Takeaway</strong>
+                    <ul class="takeaway-list">
+                        <li>Good outcome + good process = Skill to leverage</li>
+                        <li>Bad outcome + good process = Bad luck to accept</li>
+                        <li>Good outcome + bad process = Good luck not to repeat</li>
+                        <li>Bad outcome + bad process = Skill gap to fix</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 11: CALIBRATION -->
+        <div class="lesson">
+            <div class="lesson-header" style="background: linear-gradient(135deg, var(--mint), #00cec9));">
+                <div class="lesson-number">11</div>
+                <div class="lesson-title">Calibration</div>
+                <div class="lesson-subtitle">Being Honest About What You Know and Don't Know</div>
+            </div>
+            <div class="lesson-inner">
+                <div class="lesson-key-idea">
+                    <strong>Key Concept</strong>
+                    Calibration means your confidence matches reality. When you say "I'm 80% confident," that thing should happen 80% of the time. Most people are poorly calibrated: overconfident on easy things, underconfident on hard things.
+                </div>
+
+                <div class="lesson-content">
+                    Practice by making probabilistic predictions and tracking results. "I'm 60% sure the market will rise tomorrow." Log it. After 100 predictions, were the 60% ones right 60% of the time? If not, you're miscalibrated. Adjust.
+                </div>
+
+                <div class="poker-example">
+                    <strong>Poker Example:</strong> A skilled player says, "I'm putting you on a range of hands where I win 65% of the time." This is calibration in action. After thousands of hands, if they really are 65%, they win. If they're overestimating, they lose money despite being right about their range.
+                </div>
+
+                <div class="business-app">
+                    <strong>Business Application:</strong> Your sales team says, "We're 80% confident we'll close this deal." Track it. If 80% of deals close, great. If only 40% close, you've discovered overconfidence. Now you can correct.
+                </div>
+
+                <div class="cheatsheet">
+                    <div class="cheatsheet-header">📈 Calibration Log</div>
+                    <div class="cheatsheet-inner">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                            <tr style="background: #f5f5f5; font-weight: 600;">
+                                <td style="border: 1px solid #ddd; padding: 10px;">Prediction</td>
+                                <td style="border: 1px solid #ddd; padding: 10px;">Confidence</td>
+                                <td style="border: 1px solid #ddd; padding: 10px;">Actual Outcome</td>
+                                <td style="border: 1px solid #ddd; padding: 10px;">Correct?</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 10px;">Market rises today</td>
+                                <td style="border: 1px solid #ddd; padding: 10px;">60%</td>
+                                <td style="border: 1px solid #ddd; padding: 10px;">Yes</td>
+                                <td style="border: 1px solid #ddd; padding: 10px;">✓</td>
+                            </tr>
+                            <tr style="background: #f9f9f9;">
+                                <td style="border: 1px solid #ddd; padding: 10px;">Hire will succeed</td>
+                                <td style="border: 1px solid #ddd; padding: 10px;">75%</td>
+                                <td style="border: 1px solid #ddd; padding: 10px;">Yes</td>
+                                <td style="border: 1px solid #ddd; padding: 10px;">✓</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection:</strong> This is model calibration in ML. A neural network might output 95% confidence for a prediction but be wrong 20% of the time. Temperature scaling or other calibration techniques align predicted probability with actual accuracy. Good AI systems are well-calibrated.
+                </div>
+
+                <div class="key-takeaways">
+                    <strong>Key Takeaway</strong>
+                    <ul class="takeaway-list">
+                        <li>Track your predictions and actual outcomes systematically</li>
+                        <li>If you're overconfident, deflate your estimates</li>
+                        <li>Calibration improves over time with honest feedback</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 12: BETTING AS EPISTEMICS -->
+        <div class="lesson">
+            <div class="lesson-header" style="background: linear-gradient(135deg, var(--coral), #ff7675));">
+                <div class="lesson-number">12</div>
+                <div class="lesson-title">Betting as Epistemics</div>
+                <div class="lesson-subtitle">How to Know What You Know</div>
+            </div>
+            <div class="lesson-inner">
+                <div class="lesson-key-idea">
+                    <strong>Key Concept</strong>
+                    Betting (putting money or credibility on outcomes) is the ultimate epistemology test. You can't truly claim knowledge if you wouldn't bet on it. Betting forces intellectual honesty.
+                </div>
+
+                <div class="lesson-content">
+                    In business, science, and life, people claim certainty they don't possess. The betting framework reveals the gap between claimed confidence and actual conviction. "I'm sure this will work"—will you stake your year's salary on it? If not, your confidence is performative.
+                </div>
+
+                <div class="poker-example">
+                    <strong>Poker Example:</strong> A recreational player is "sure" they have the best hand and keeps raising. A professional looks at the math and folds. The professional's knowledge is grounded in willingness to lose money if wrong. The amateur's confidence is fantasy.
+                </div>
+
+                <div class="business-app">
+                    <strong>Business Application:</strong> An executive insists, "This new strategy will transform the company." CEO response: "Great. I'm reducing your bonus if the KPIs miss targets by 20%." Suddenly, confidence deflates. This is betting forcing truth.
+                </div>
+
+                <div class="quote-box">
+                    "Belief is not something you have, it's something you do. You reveal your true beliefs through actions, especially when stakes are real."
+                    <div class="quote-attribution">— Adapted from Annie Duke</div>
+                </div>
+
+                <div class="ai-box">
+                    <strong>AI Connection:</strong> This is Bayesian uncertainty and epistemic humility. Good AI systems output calibrated confidence and admit uncertainty. "I don't know" at 40% confidence is more honest than "I know" at 95% confidence with poor calibration. Betting frameworks teach AI (and humans) to be truthful.
+                </div>
+
+                <div class="key-takeaways">
+                    <strong>Key Takeaway</strong>
+                    <ul class="takeaway-list">
+                        <li>Use betting (stakes) to separate real knowledge from illusion</li>
+                        <li>If you won't bet on something, you don't really believe it</li>
+                        <li>Betting creates intellectual honesty and accountability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============ ADVANCED SECTION ============ -->
+    <h2 class="section-title">Deeper Dives & Frameworks</h2>
+
+    <!-- Bayesian Updating -->
+    <div class="story">
+        <div class="story-header">🧠 Bayesian Updating: The Core of Good Betting</div>
+        <div class="story-inner">
+            <p>At the heart of "Thinking in Bets" is Bayesian thinking: updating your beliefs as new evidence arrives. Before new information, you have a prior belief ("80% chance it rains tomorrow"). New evidence arrives (weather service says 30% rain). You update to a posterior belief ("Maybe 50%"). Repeat forever.</p>
+            <p>Most people operate with static beliefs. Once they've decided something, new evidence barely moves them. This is the opposite of Bayesian thinking. Duke's framework forces continuous updating—the hallmark of learning.</p>
+            <p><strong>Poker Application:</strong> Your opponent bets big on the flop. Prior: you thought they had a medium hand (30% strong, 70% medium). This bet updates your belief sharply (70% strong, 30% medium now). By the river, dozens of small updates have shaped your decision. This is Bayesian betting.</p>
+        </div>
+    </div>
+
+    <!-- Cross-Book Connections -->
+    <section style="background: white; padding: 40px; border-radius: 12px; margin: 40px 0; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--dark-purple); margin-bottom: 25px;">Cross-Book Connections</h3>
+
+        <div class="connect-box">
+            <div class="connect-title">Thinking, Fast and Slow (Daniel Kahneman)</div>
+            <p style="margin-bottom: 12px;">Kahneman's System 1 (fast, emotional) vs System 2 (slow, analytical) thinking explains why we make intuitive decisions poorly. Duke's bet framework forces System 2 thinking.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-title">The Black Swan (Nassim Taleb)</div>
+            <p style="margin-bottom: 12px;">Taleb emphasizes extreme outcomes and their disproportionate impact. Duke's framework explicitly accounts for tail risks and lowprobability, high-payoff scenarios that Black Swans describe.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-title">Predictably Irrational (Dan Ariely)</div>
+            <p style="margin-bottom: 12px;">Ariely catalogs our systematic irrationalities (anchoring, loss aversion, etc.). Duke's framework doesn't eliminate these biases but makes them visible and manageable through explicit betting and calibration.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-title">Superforecasting (Philip Tetlock & Dan Gardner)</div>
+            <p style="margin-bottom: 12px;">Tetlock's research on expert forecasters reveals that the best predictors think probabilistically, update constantly, and own their mistakes—all core principles in "Thinking in Bets."</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-title">Nudge (Thaler & Sunstein)</div>
+            <p style="margin-bottom: 12px;">Nudges use behavioral insights to improve decisions. A "nudge" is really a pre-commitment device (Ulysses contract) that guides you toward better choices by design.</p>
+        </div>
+    </section>
+
+    <!-- AI & Calibration Section -->
+    <section style="background: white; padding: 40px; border-radius: 12px; margin: 40px 0; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--dark-purple); margin-bottom: 25px;">AI & Machine Learning Connections</h3>
+
+        <div class="two-col">
+            <div>
+                <h4 style="color: var(--teal); font-weight: 600; margin-bottom: 12px;">Resulting → Outcome Bias</h4>
+                <p style="font-size: 0.95rem; line-height: 1.7; color: #555;">ML models trained on noisy labels learn to confuse good outcomes with good predictions. Robust training separates signal (process) from noise (outcome randomness).</p>
+            </div>
+            <div>
+                <h4 style="color: var(--teal); font-weight: 600; margin-bottom: 12px;">Wanna Bet? → Confidence Intervals</h4>
+                <p style="font-size: 0.95rem; line-height: 1.7; color: #555;">Good AI systems output calibrated probabilities with uncertainty ranges, not binary guesses. This forces the same clarity that "wanna bet?" demands of humans.</p>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <div>
+                <h4 style="color: var(--teal); font-weight: 600; margin-bottom: 12px;">Motivated Reasoning → Confirmation Bias</h4>
+                <p style="font-size: 0.95rem; line-height: 1.7; color: #555;">Models fine-tuned on cherry-picked examples learn to amplify existing patterns. Diverse training data and adversarial examples combat this, just as Devil's Advocate combats bias in groups.</p>
+            </div>
+            <div>
+                <h4 style="color: var(--teal); font-weight: 600; margin-bottom: 12px;">Truth-Seeking Groups → Ensemble Methods</h4>
+                <p style="font-size: 0.95rem; line-height: 1.7; color: #555;">Ensemble models (random forests, boosting, mixture of experts) outperform single models because diverse predictions catch errors. This is the team version of epistemology.</p>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <div>
+                <h4 style="color: var(--teal); font-weight: 600; margin-bottom: 12px;">Calibration → Temperature Scaling</h4>
+                <p style="font-size: 0.95rem; line-height: 1.7; color: #555;">Neural networks often output overconfident predictions. Temperature scaling adjusts output distributions to match true probabilities, making models honest about uncertainty.</p>
+            </div>
+            <div>
+                <h4 style="color: var(--teal); font-weight: 600; margin-bottom: 12px;">Bayesian Updating → Variational Inference</h4>
+                <p style="font-size: 0.95rem; line-height: 1.7; color: #555;">Modern probabilistic AI uses Bayesian inference to update beliefs as data arrives. This is Duke's betting framework in algorithmic form—continuous learning from evidence.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practical Exercises -->
+    <section style="background: white; padding: 40px; border-radius: 12px; margin: 40px 0; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--dark-purple); margin-bottom: 25px;">💪 Practical Exercises</h3>
+
+        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 20px;">
+            <h4 style="color: var(--dark-purple); font-weight: 600; margin-bottom: 12px;">Exercise 1: Decision Journal</h4>
+            <p style="margin-bottom: 10px;"><strong>Goal:</strong> Separate process from outcome.</p>
+            <p style="font-size: 0.95rem; line-height: 1.7; color: #555; margin-bottom: 10px;"><strong>Steps:</strong></p>
+            <ul style="margin-left: 20px; color: #555; font-size: 0.95rem;">
+                <li>Before a major decision, write down your reasoning, probabilities, and expected value.</li>
+                <li>Record the decision and timestamp.</li>
+                <li>After outcome is known, compare your reasoning to what actually happened.</li>
+                <li>Identify whether outcome was luck or process quality.</li>
+            </ul>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 20px;">
+            <h4 style="color: var(--dark-purple); font-weight: 600; margin-bottom: 12px;">Exercise 2: The 10-10-10 Pause</h4>
+            <p style="margin-bottom: 10px;"><strong>Goal:</strong> Expand your time horizon before reactive decisions.</p>
+            <p style="font-size: 0.95rem; line-height: 1.7; color: #555; margin-bottom: 10px;"><strong>Steps:</strong></p>
+            <ul style="margin-left: 20px; color: #555; font-size: 0.95rem;">
+                <li>When triggered by emotion, pause and ask: "How will I feel in 10 minutes?"</li>
+                <li>Then ask: "In 10 months, will this matter?"</li>
+                <li>Finally: "In 10 years, will I regret this?"</li>
+                <li>Let the 10-year view override the 10-minute view.</li>
+            </ul>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 20px;">
+            <h4 style="color: var(--dark-purple); font-weight: 600; margin-bottom: 12px;">Exercise 3: Premortem Team Meeting</h4>
+            <p style="margin-bottom: 10px;"><strong>Goal:</strong> Identify risks before they sabotage success.</p>
+            <p style="font-size: 0.95rem; line-height: 1.7; color: #555; margin-bottom: 10px;"><strong>Steps:</strong></p>
+            <ul style="margin-left: 20px; color: #555; font-size: 0.95rem;">
+                <li>Gather your team. Imagine it's 18 months from now and the project failed.</li>
+                <li>Each person independently writes down what went wrong.</li>
+                <li>Share and discuss. Look for patterns.</li>
+                <li>Design safeguards against the top 3-5 failure modes.</li>
+            </ul>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px;">
+            <h4 style="color: var(--dark-purple); font-weight: 600; margin-bottom: 12px;">Exercise 4: Calibration Tracker</h4>
+            <p style="margin-bottom: 10px;"><strong>Goal:</strong> Build honest self-knowledge of confidence levels.</p>
+            <p style="font-size: 0.95rem; line-height: 1.7; color: #555; margin-bottom: 10px;"><strong>Steps:</strong></p>
+            <ul style="margin-left: 20px; color: #555; font-size: 0.95rem;">
+                <li>Each week, make 5-10 predictions with confidence levels (50%, 70%, 90%).</li>
+                <li>Log the outcome (correct or incorrect).</li>
+                <li>After 100 predictions, calculate: did 70% predictions come true 70% of the time?</li>
+                <li>Adjust your confidence estimates upward or downward accordingly.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Final Takeaways -->
+    <section style="background: linear-gradient(135deg, var(--dark-purple), var(--purple)); color: white; padding: 40px; border-radius: 12px; margin: 40px 0;">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 25px;">🎯 The Meta Lesson: Thinking in Systems, Not Moments</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px;">
+            "Thinking in Bets" is ultimately about thinking in <em>systems</em> rather than <em>moments</em>. A single decision matters less than a life of decisions. A single outcome teaches less than a pattern of outcomes. A single interaction teaches less than a repeating group dynamic.
+        </p>
+        <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px;">
+            By adopting the frameworks in this guide—betting, Bayesian updating, pre-commitment, outcome fielding, calibration—you shift from reactive to strategic thinking. You stop playing each hand in isolation and start building a poker career. In business, relationships, and life, this shift compounds into superior outcomes.
+        </p>
+        <p style="font-size: 1.05rem; line-height: 1.8;">
+            The best decisions aren't made under perfect information. They're made with courage, humility, and a willingness to quantify uncertainty. That's thinking in bets.
+        </p>
+    </section>
+
+    <!-- Quick Reference Card -->
+    <section style="background: white; padding: 40px; border-radius: 12px; margin: 40px 0; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--dark-purple); margin-bottom: 25px;">📋 One-Page Quick Reference</h3>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="background: linear-gradient(135deg, #f0f9ff, #e0f7f4); padding: 20px; border-radius: 8px; border-left: 4px solid var(--teal);">
+                <div style="font-weight: 600; color: var(--teal); margin-bottom: 10px;">1. Resulting</div>
+                <p style="font-size: 0.9rem; color: #555;">Judge process, not outcome. Good decisions sometimes fail.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #fff9e6, #fff5e6); padding: 20px; border-radius: 8px; border-left: 4px solid var(--orange);">
+                <div style="font-weight: 600; color: var(--orange); margin-bottom: 10px;">2. Wanna Bet?</div>
+                <p style="font-size: 0.9rem; color: #555;">Frame as bets. Real stakes force real thinking.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f0f7ff, #e3f2fd); padding: 20px; border-radius: 8px; border-left: 4px solid var(--deep-blue);">
+                <div style="font-weight: 600; color: var(--deep-blue); margin-bottom: 10px;">3. Luck vs Skill</div>
+                <p style="font-size: 0.9rem; color: #555;">Separate them. Short term hides skill; long term reveals it.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f3e5f5, #e1bee7); padding: 20px; border-radius: 8px; border-left: 4px solid var(--dark-purple);">
+                <div style="font-weight: 600; color: var(--dark-purple); margin-bottom: 10px;">4. Motivated Reasoning</div>
+                <p style="font-size: 0.9rem; color: #555;">Seek disconfirming evidence. Hire disagreement.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f0fff4, #e8f5e9); padding: 20px; border-radius: 8px; border-left: 4px solid var(--forest);">
+                <div style="font-weight: 600; color: var(--forest); margin-bottom: 10px;">5. Buddy System</div>
+                <p style="font-size: 0.9rem; color: #555;">Build truth-seeking groups. Debate beats consensus.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #fff0f6, #ffe6f0); padding: 20px; border-radius: 8px; border-left: 4px solid var(--pink);">
+                <div style="font-weight: 600; color: var(--pink); margin-bottom: 10px;">6. 10-10-10</div>
+                <p style="font-size: 0.9rem; color: #555;">Expand time horizon. Long term beats short term.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f9f3ff, #f3e5f5); padding: 20px; border-radius: 8px; border-left: 4px solid var(--purple);">
+                <div style="font-weight: 600; color: var(--purple); margin-bottom: 10px;">7. Ulysses Contracts</div>
+                <p style="font-size: 0.9rem; color: #555;">Pre-commit. Remove emotion from decision moment.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f5f9ff, #eef5ff); padding: 20px; border-radius: 8px; border-left: 4px solid var(--sky);">
+                <div style="font-weight: 600; color: var(--sky); margin-bottom: 10px;">8. Backcasting & Premortem</div>
+                <p style="font-size: 0.9rem; color: #555;">Imagine success and failure. Plan accordingly.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f0faff, #e6f7ff); padding: 20px; border-radius: 8px; border-left: 4px solid var(--deep-blue);">
+                <div style="font-weight: 600; color: var(--deep-blue); margin-bottom: 10px;">9. Decision Matrix</div>
+                <p style="font-size: 0.9rem; color: #555;">Calculate expected value. Numbers beat intuition.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #fef3e0, #fff9e6); padding: 20px; border-radius: 8px; border-left: 4px solid var(--orange);">
+                <div style="font-weight: 600; color: var(--orange); margin-bottom: 10px;">10. Outcome Fielding</div>
+                <p style="font-size: 0.9rem; color: #555;">Sort outcomes. Learn the right lesson.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #e0f7f4, #c8f1eb); padding: 20px; border-radius: 8px; border-left: 4px solid var(--teal);">
+                <div style="font-weight: 600; color: var(--teal); margin-bottom: 10px;">11. Calibration</div>
+                <p style="font-size: 0.9rem; color: #555;">Track predictions. Build honest self-knowledge.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #fff0f5, #ffe6f2); padding: 20px; border-radius: 8px; border-left: 4px solid var(--warm-red);">
+                <div style="font-weight: 600; color: var(--warm-red); margin-bottom: 10px;">12. Betting as Epistemics</div>
+                <p style="font-size: 0.9rem; color: #555;">Stake something. Separate belief from illusion.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <p>📚 <strong>Thinking in Bets: An Illustrated Guide</strong></p>
+    <p>Based on the work of <strong>Annie Duke</strong> | Original published 2018</p>
+    <p style="margin-top: 25px; font-size: 0.9rem; opacity: 0.8;">
+        This guide synthesizes core concepts, frameworks, and applications from "Thinking in Bets." For the complete argument, examples, and exercises, read the original book. This is a visual companion for learning and reference.
+    </p>
+    <p style="margin-top: 20px; font-size: 0.85rem; opacity: 0.7;">
+        Guide created with care for decision-makers, analysts, leaders, and anyone who wants to think more clearly under uncertainty.
+    </p>
+</footer>
+
+</body>
+</html>

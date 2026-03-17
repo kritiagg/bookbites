@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindset - Illustrated</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .cover {
+            background: linear-gradient(135deg, #1a2a1f 0%, #2D3436 50%, #0d1a0f 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .cover p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .cover-svg {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-top: 2rem;
+        }
+
+        .content-section {
+            background: white;
+        }
+
+        .content-section:nth-child(even) {
+            background: linear-gradient(135deg, #f0fdf7 0%, #e8f5f0 100%);
+        }
+
+        .content-wrapper {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--teal);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .lesson-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--teal);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .lesson-card p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .examples {
+            background: rgba(78, 205, 196, 0.05);
+            border-left: 3px solid var(--teal);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .examples h4 {
+            color: var(--teal);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .examples ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .examples li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .examples li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+            font-weight: bold;
+        }
+
+        .funny-take, .ai-connection, .cross-connection {
+            background: rgba(160, 108, 213, 0.08);
+            border-left: 3px solid var(--purple);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .funny-take h4, .ai-connection h4, .cross-connection h4 {
+            color: var(--purple);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal), var(--purple));
+            border-radius: 2px;
+        }
+
+        .story-card {
+            background: linear-gradient(135deg, var(--teal) 0%, #00a89e 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .story-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .svg-illustration {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            margin: 0 auto 2rem;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 1.5rem;
+            }
+
+            .lesson-card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- COVER SECTION -->
+    <section class="cover">
+        <div class="cover-content">
+            <h1>Mindset</h1>
+            <p>The New Psychology of Success</p>
+            <svg class="cover-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Fixed mindset brain (left) -->
+                <circle cx="100" cy="120" r="45" fill="none" stroke="var(--teal)" stroke-width="2" opacity="0.4"/>
+                <circle cx="100" cy="120" r="30" fill="none" stroke="var(--teal)" stroke-width="1.5" opacity="0.3"/>
+                <path d="M 70 90 Q 65 95 70 100 Q 75 105 70 110" stroke="var(--teal)" stroke-width="1" opacity="0.3"/>
+                <path d="M 130 90 Q 135 95 130 100 Q 125 105 130 110" stroke="var(--teal)" stroke-width="1" opacity="0.3"/>
+                <text x="100" y="200" font-size="14" text-anchor="middle" fill="var(--teal)" opacity="0.7">Fixed</text>
+
+                <!-- Growth mindset brain (right) -->
+                <circle cx="300" cy="120" r="45" fill="none" stroke="var(--purple)" stroke-width="2.5"/>
+                <!-- Expanding neural connections -->
+                <path d="M 260 80 Q 280 70 300 60 Q 320 70 340 80" stroke="var(--purple)" stroke-width="2" fill="none"/>
+                <path d="M 260 120 Q 230 120 250 140 Q 280 150 320 140 Q 340 120 360 120" stroke="var(--purple)" stroke-width="2" fill="none"/>
+                <path d="M 260 160 Q 280 170 300 180 Q 320 170 340 160" stroke="var(--purple)" stroke-width="2" fill="none"/>
+                <!-- Nodes -->
+                <circle cx="300" cy="60" r="4" fill="var(--purple)"/>
+                <circle cx="250" cy="140" r="4" fill="var(--purple)"/>
+                <circle cx="320" cy="140" r="4" fill="var(--purple)"/>
+                <circle cx="300" cy="180" r="4" fill="var(--purple)"/>
+                <text x="300" y="200" font-size="14" text-anchor="middle" fill="var(--purple)">Growth</text>
+            </svg>
+        </div>
+    </section>
+
+    <!-- LESSON 1: Fixed vs Growth Mindset -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>1. Fixed vs Growth Mindset</h3>
+                <p>Fixed mindset: "I am what I am. Either I'm smart or I'm not." Growth mindset: "I can develop my abilities through effort and practice."</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Michael Jordan: Cut from high school team, used it as fuel to practice relentlessly</li>
+                        <li>Einstein: Spoke late as a child, parents doubted him, yet became a titan</li>
+                        <li>Fixed mindset person: Avoids challenge to protect self-image</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Fixed mindset is your ego's favorite excuse: "I failed because I'm not a math person" vs "I failed because I didn't practice."</p>
+                </div>
+                <div class="ai-connection">
+                    <h4>AI Connection</h4>
+                    <p>Pre-training = fixed knowledge. Models are frozen. Growth mindset = fine-tuning adapting to new domains through learning.</p>
+                </div>
+                <div class="cross-connection">
+                    <h4>Cross-Book Connection</h4>
+                    <p><strong>Atomic Habits:</strong> Growth mindset is the foundation of building systems for incremental improvement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 2: The Power of Yet -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>2. The Power of "Yet"</h3>
+                <p>"I can't do it... YET." This single word transforms defeat into a learning opportunity. It acknowledges present struggle while committing to future growth.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Student: "I'm failing math" → "I'm failing math YET" (implies path forward)</li>
+                        <li>Athlete: "I can't run a sub-4 minute mile" → "I can't YET" (opens possibility)</li>
+                        <li>Learner: Transforms "I don't understand" into a planning problem, not an identity</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>"Yet" is the grown-up version of "I'll get better." It's confidence without delusion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 3: Effort Is the Path -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>3. Effort Is the Path</h3>
+                <p>The road to mastery is effort. Mozart practiced 3,500+ hours before writing masterpieces. The Beatles played Hamburg clubs for years before Beatlemania.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Mozart: Not a prodigy infant, but a disciplined practitioner</li>
+                        <li>The Beatles: 10,000 hours in Hamburg before they were "overnight successes"</li>
+                        <li>Deliberate practice: focused, effortful, with feedback—not just repetition</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>We want genius without grind. Nature and nurture both matter, but nurture is the part you control.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 4: Praise Process Not Person -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>4. Praise Process, Not Person</h3>
+                <p>Say "You worked hard" not "You're smart." Praising intelligence teaches kids to fear challenges (to protect their image). Praising effort teaches resilience.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Dweck's puzzle study: Kids praised for intelligence avoid hard puzzles; kids praised for effort seek them out</li>
+                        <li>Fixed mindset praise: Locks kids into proving their intelligence, avoiding risk</li>
+                        <li>Growth mindset praise: Motivates kids to embrace challenges as learning</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>"You're so smart" is psychological poison. "You worked really hard" is a superpower injection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 5: Embrace Challenges -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>5. Embrace Challenges</h3>
+                <p>Growth happens at the edge of your ability. Challenges are not threats; they're the gym where your brain gets stronger.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Fosbury Flop: Dick Fosbury invented a new high jump technique, challenged by traditionalists, changed the sport</li>
+                        <li>Fixed mindset: Sees challenge as proof of incompetence</li>
+                        <li>Growth mindset: Sees challenge as an opportunity to expand ability</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Fixed mindset people are comfort specialists. Growth mindset people are discomfort enthusiasts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 6: Learn from Criticism -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>6. Learn from Criticism</h3>
+                <p>Criticism is data, not attack. At Pixar, the "Braintrust" tears apart films in progress. That harsh feedback makes them better.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Pixar Braintrust: Brutal feedback sessions strengthen films, not weaken them</li>
+                        <li>Fixed mindset: Defensive, dismisses criticism as attack on identity</li>
+                        <li>Growth mindset: Extracts signal from criticism, ignores ego</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Criticism hurts fixed mindset people because they think it means "you're bad." Growth mindset people think it means "here's how to improve."</p>
+                </div>
+                <div class="ai-connection">
+                    <h4>AI Connection</h4>
+                    <p>RLHF (Reinforcement Learning from Human Feedback) = learning from criticism. Models improve through feedback loops.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 7: Inspired by Others' Success -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>7. Inspired, Not Intimidated, by Others' Success</h3>
+                <p>Fixed mindset: "If someone else is winning, my ceiling is lower." Growth mindset: "Someone did it. So can I. What did they do?"</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Roger Bannister's 4-minute mile: Once someone proved it was possible, dozens followed within a year</li>
+                        <li>Belief is contagious: Seeing others' growth makes your growth possible</li>
+                        <li>Fixed mindset: Threat. Growth mindset: Inspiration and role model</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Someone's success isn't a loss for you. It's proof of concept that the human brain can go there.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 8: Danger of Labels -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>8. The Danger of Labels</h3>
+                <p>"Gifted" programs create fragile perfectionists. Labeling kids as "smart" or "talented" teaches them to avoid risk and protect their label.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Gifted kids: Often become anxious, perfectionist, afraid of failure</li>
+                        <li>Fixed label: "You're talented" → "I must always succeed to prove it"</li>
+                        <li>Growth framing: "You have potential" → "I can develop through practice"</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Telling a kid they're gifted is like giving them a cage with golden bars.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 9: Mindset in Relationships -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>9. Mindset in Relationships</h3>
+                <p>Fixed mindset myth: "There's one perfect soulmate for you." Growth mindset: "Great relationships require work, understanding, and growth."</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Soulmate myth: If you have to work at it, it's wrong. Reality: all great couples work.</li>
+                        <li>Fixed view: Your partner should complete you. Growth view: You both grow together.</li>
+                        <li>Conflict: Viewed as incompatibility vs. opportunity to understand better</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Soulmates don't exist. Soulmates are built through deliberate practice and communication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 10: Mindset in Leadership -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>10. Mindset in Leadership</h3>
+                <p>Jack Welch (fixed): Hired "talented" people and fired those who didn't shine immediately. Satya Nadella (growth): Taught Microsoft to embrace challenge and learning.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Welch's talent cult: Ranked-and-yanked, created cutthroat culture</li>
+                        <li>Nadella's growth culture: Microsoft went from stagnant to innovative</li>
+                        <li>Fixed leader: Hires the best, fires the rest. Growth leader: Develops people.</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>A fixed mindset CEO believes in "A-players." A growth mindset CEO believes in A-players and people on their way to being A-players.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 11: Brain Plasticity -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>11. The Brain Is Plastic</h3>
+                <p>London taxi drivers grow their hippocampus (spatial memory) from years of navigating the city. The brain physically changes with practice.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>London cab drivers: Demonstrable physical brain growth from memorizing 25,000 streets</li>
+                        <li>Neuroplasticity: Your brain isn't fixed; it rewires based on use</li>
+                        <li>Implications: You're not "bad at math"—your math brain just isn't trained</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Your brain isn't hardware; it's software that updates with use.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 12: Changing Your Mindset -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>12. Changing Your Mindset</h3>
+                <p>Awareness is the first step. Notice fixed mindset thoughts: "I can't do this," "I'm not a [math/art/sports] person." Replace with growth language and deliberate action.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Fixed: "I'm terrible at public speaking." Growth: "I'm not good at it yet; I need practice."</li>
+                        <li>Fixed: "I'm not creative." Growth: "I haven't developed my creative muscles."</li>
+                        <li>Process: Acknowledge, reframe, commit to effort and learning</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>You can't think your way to a growth mindset. You have to do the work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY: The Puzzle Study -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="story-card">
+                <h3>Story: The Puzzle Study</h3>
+                <p>Dweck conducted a landmark study with 10-year-olds. She gave them puzzles, then split them for a second round:</p>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li><strong>Group 1 (praised for intelligence):</strong> "Wow, you got them all right! You must be really smart."</li>
+                    <li><strong>Group 2 (praised for effort):</strong> "Wow, you got them all right! You must have worked really hard."</li>
+                </ul>
+                <p style="margin-top: 1.5rem;">Then she offered them a choice: harder puzzles (they'd learn) or easier puzzles (they'd feel successful). Results:</p>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li>Group 1 (intelligence): 90% chose easy puzzles. They wanted to prove they were smart.</li>
+                    <li>Group 2 (effort): 90% chose hard puzzles. They wanted to learn and improve.</li>
+                </ul>
+                <p style="margin-top: 1.5rem;">One sentence of praise shaped their entire approach to learning. Praise intelligence → fear of challenge. Praise effort → embrace of growth.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY: Enron Disaster -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="story-card">
+                <h3>Story: Enron's Fixed Mindset Disaster</h3>
+                <p>Enron hired "the smartest people in the room"—Stanford MBAs, McKinsey consultants. They created a fixed-mindset culture: prove you're brilliant or get fired.</p>
+                <p>This backfired catastrophically:</p>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li><strong>No admission of error:</strong> If you're the smartest, you can't be wrong. So problems got hidden.</li>
+                    <li><strong>No learning:</strong> You can't learn from mistakes if admitting mistakes means you're not brilliant.</li>
+                    <li><strong>Fraud escalation:</strong> To protect the "brilliant" image, lies got bigger and bigger.</li>
+                </ul>
+                <p style="margin-top: 1.5rem;">The $70 billion collapse was enabled by a fixed mindset culture that valued talent over character and avoided admitting error. A growth-minded culture would have caught and corrected problems early.</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

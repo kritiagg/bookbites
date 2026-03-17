@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Romance: An Illustrated Guide | Aziz Ansari & Eric Klinenberg</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* Cover Section */
+        .cover {
+            background: linear-gradient(135deg, var(--pink) 0%, var(--sky) 50%, var(--coral) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .cover-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            font-size: 60px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .cover p {
+            font-size: 1.3em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .cover .authors {
+            font-size: 1.1em;
+            margin-top: 30px;
+            font-weight: 500;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 15px 40px;
+            background: rgba(255,255,255,0.95);
+            color: var(--pink);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            background: white;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 30px 20px;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .header-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meta-icon {
+            font-size: 1.3em;
+        }
+
+        /* Lesson Cards */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .lesson {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            scroll-margin-top: 20px;
+        }
+
+        .lesson:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .lesson-header {
+            padding: 25px;
+            position: relative;
+        }
+
+        .lesson-1 { --accent: var(--coral); }
+        .lesson-2 { --accent: var(--sky); }
+        .lesson-3 { --accent: var(--pink); }
+        .lesson-4 { --accent: var(--purple); }
+        .lesson-5 { --accent: var(--teal); }
+        .lesson-6 { --accent: var(--orange); }
+        .lesson-7 { --accent: var(--warm-red); }
+        .lesson-8 { --accent: var(--deep-blue); }
+        .lesson-9 { --accent: var(--forest); }
+        .lesson-10 { --accent: var(--dark-purple); }
+        .lesson-11 { --accent: var(--sky); }
+        .lesson-12 { --accent: var(--pink); }
+
+        .lesson-header {
+            background: linear-gradient(135deg, var(--accent) 0%, rgba(var(--accent), 0.7) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .lesson h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lesson-subtitle {
+            font-size: 0.95em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+        }
+
+        .lesson-inner {
+            padding: 25px;
+        }
+
+        .lesson-inner p {
+            margin-bottom: 18px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* Key Study Box */
+        .key-study {
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f3ff 100%);
+            border-left: 4px solid var(--accent);
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .key-study h4 {
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .key-study p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Funny Box */
+        .funny-box {
+            background: linear-gradient(135deg, #fff5e6 0%, #fff0d9 100%);
+            border-left: 4px solid var(--orange);
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-top: 2px solid var(--orange);
+        }
+
+        .funny-box h4 {
+            color: var(--orange);
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .funny-box p {
+            margin: 0;
+            font-size: 0.95em;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* AI Connection Box */
+        .ai-box {
+            background: linear-gradient(135deg, #f0e6ff 0%, #e6d5ff 100%);
+            border-left: 4px solid var(--dark-purple);
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .ai-box h4 {
+            color: var(--dark-purple);
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ai-box p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Connect Box */
+        .connect-box {
+            background: linear-gradient(135deg, #e6f7ff 0%, #cce7ff 100%);
+            border-left: 4px solid var(--deep-blue);
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .connect-box h4 {
+            color: var(--deep-blue);
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .connect-box p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .connect-box ul {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+            list-style: none;
+        }
+
+        .connect-box li {
+            margin: 4px 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .connect-box li::before {
+            content: '→ ';
+            color: var(--deep-blue);
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: linear-gradient(135deg, #ffe6f0 0%, #ffd4e5 100%);
+            border-left: 4px solid var(--pink);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .quote-author {
+            font-weight: 600;
+            color: var(--pink);
+            margin-top: 8px;
+            font-style: normal;
+        }
+
+        /* Illustration Container */
+        .illustration-container {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.02);
+            border-radius: 10px;
+        }
+
+        .illustration-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cheatsheet */
+        .cheatsheet {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+        }
+
+        .cheatsheet-header {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--purple) 100%);
+            color: white;
+            padding: 25px;
+        }
+
+        .cheatsheet-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .cheatsheet-inner {
+            padding: 30px;
+        }
+
+        .cheatsheet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .cheatsheet-item {
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f3ff 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--deep-blue);
+        }
+
+        .cheatsheet-item h4 {
+            color: var(--deep-blue);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .cheatsheet-item p {
+            font-size: 0.9em;
+            color: #666;
+            margin: 0;
+        }
+
+        /* Story Box */
+        .story {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+        }
+
+        .story-header {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--mint) 100%);
+            color: white;
+            padding: 25px;
+        }
+
+        .story-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .story-inner {
+            padding: 30px;
+        }
+
+        .story-inner p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.1;
+            font-size: 3em;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--dark);
+            color: white;
+            margin-top: 60px;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .footer h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        /* Table of Contents */
+        .table-of-contents {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .table-of-contents h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: var(--dark);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .toc-item {
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f3ff 100%);
+            border-radius: 10px;
+            border-left: 4px solid var(--deep-blue);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toc-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .toc-number {
+            color: var(--deep-blue);
+            font-weight: 600;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 2.2em;
+            }
+
+            .cover-icons {
+                font-size: 40px;
+                gap: 15px;
+            }
+
+            .header h2 {
+                font-size: 1.8em;
+            }
+
+            .header-meta {
+                gap: 15px;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Particles -->
+    <div class="particle" style="top: 10%; left: 5%;">💬</div>
+    <div class="particle" style="top: 20%; right: 10%;">❤️</div>
+    <div class="particle" style="top: 60%; left: 15%;">📱</div>
+    <div class="particle" style="bottom: 20%; right: 5%;">💕</div>
+    <div class="particle" style="top: 40%; right: 20%;">🌍</div>
+
+    <!-- Cover Section -->
+    <section class="cover" id="cover">
+        <div class="cover-content">
+            <div class="cover-icons">
+                <span>📱</span>
+                <span>❤️</span>
+                <span>👆</span>
+            </div>
+            <h1>Modern Romance</h1>
+            <p>An Illustrated Guide to Love in the Digital Age</p>
+            <div class="authors">
+                By Aziz Ansari & Eric Klinenberg
+            </div>
+            <a href="#lessons" class="cta-button">Explore the Guide</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h2>Understanding Modern Romance</h2>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <span class="meta-icon">📚</span>
+                    <span>12 Core Lessons</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">🧪</span>
+                    <span>Research-Based</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">😄</span>
+                    <span>Observational Comedy</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">🤖</span>
+                    <span>AI Insights</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="table-of-contents">
+            <h2>Table of Contents</h2>
+            <div class="toc-grid">
+                <a href="#lesson-1" class="toc-item">
+                    <div class="toc-number">Lesson 1</div>
+                    <div class="toc-title">The Paradox of Choice</div>
+                </a>
+                <a href="#lesson-2" class="toc-item">
+                    <div class="toc-number">Lesson 2</div>
+                    <div class="toc-title">Love Then vs. Now</div>
+                </a>
+                <a href="#lesson-3" class="toc-item">
+                    <div class="toc-number">Lesson 3</div>
+                    <div class="toc-title">Texting Anxiety</div>
+                </a>
+                <a href="#lesson-4" class="toc-item">
+                    <div class="toc-number">Lesson 4</div>
+                    <div class="toc-title">Dating Apps & Choice</div>
+                </a>
+                <a href="#lesson-5" class="toc-item">
+                    <div class="toc-number">Lesson 5</div>
+                    <div class="toc-title">Dating Across Cultures</div>
+                </a>
+                <a href="#lesson-6" class="toc-item">
+                    <div class="toc-number">Lesson 6</div>
+                    <div class="toc-title">Good Enough vs. Soulmate</div>
+                </a>
+                <a href="#lesson-7" class="toc-item">
+                    <div class="toc-number">Lesson 7</div>
+                    <div class="toc-title">Ghosting & Benching</div>
+                </a>
+                <a href="#lesson-8" class="toc-item">
+                    <div class="toc-number">Lesson 8</div>
+                    <div class="toc-title">The Science of Attraction</div>
+                </a>
+                <a href="#lesson-9" class="toc-item">
+                    <div class="toc-number">Lesson 9</div>
+                    <div class="toc-title">Living Alone & Singledom</div>
+                </a>
+                <a href="#lesson-10" class="toc-item">
+                    <div class="toc-number">Lesson 10</div>
+                    <div class="toc-title">Passionate vs. Companionate</div>
+                </a>
+                <a href="#lesson-11" class="toc-item">
+                    <div class="toc-number">Lesson 11</div>
+                    <div class="toc-title">How Phones Changed Courtship</div>
+                </a>
+                <a href="#lesson-12" class="toc-item">
+                    <div class="toc-number">Lesson 12</div>
+                    <div class="toc-title">Commitment in the Age of Options</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Lessons Grid -->
+        <div class="lessons-grid" id="lessons">
+            <!-- Lesson 1: The Paradox of Choice -->
+            <div class="lesson lesson-1" id="lesson-1">
+                <div class="lesson-header">
+                    <div class="lesson-number">📊 Lesson 1</div>
+                    <h3>The Paradox of Choice</h3>
+                    <div class="lesson-subtitle">Why Having More Options Makes Dating Harder</div>
+                </div>
+                <div class="lesson-inner">
+                    <p>Psychologist Barry Schwartz's concept of "choice overload" fundamentally explains modern dating struggles. When faced with unlimited options—whether in jam selection or partner selection—we become paralyzed, less satisfied, and perpetually wondering if we made the wrong choice.</p>
+
+                    <div class="key-study">
+                        <h4>🧪 Sheena Iyengar's Jam Study</h4>
+                        <p>When a supermarket offered 24 jam varieties, only 3% of shoppers made a purchase. When offering just 6 jams, 30% bought—a tenfold increase. Dating apps operate on the inverse: infinite options lead to decision paralysis and lower commitment rates.</p>
+                    </div>
+
+                    <p>Pre-internet dating forced proximity-based choices: you dated the cute person in your class or at your job. There was built-in finality. Today's singles scroll through thousands of potential partners, each interaction creating a new comparison point. "Is this person better than the next 500 I could match with?"</p>
+
+                    <div class="funny-box">
+                        <h4>😄 The Aziz Take</h4>
+                        <p>"Your grandpa didn't swipe left on your grandma because her nose was 2mm too wide. He proposed because she was literally the only option at the dance that night."</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 AI Connection: Cold-Start Problem</h4>
+                        <p>Recommender systems face the cold-start problem: new users have minimal data, so algorithms show everything, overwhelming users. Dating apps face the reverse: they have too much data (millions of users) and insufficient filtering logic, causing decision fatigue—the same phenomenon as infinite jam.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>🔗 Cross-Book Connections</h4>
+                        <ul>
+                            <li><strong>Paradox of Choice:</strong> Barry Schwartz's definitive work on choice overload</li>
+                            <li><strong>Thinking Fast and Slow:</strong> Kahneman's bounded rationality explains why we can't evaluate 100 profiles</li>
+                            <li><strong>Stumbling on Happiness:</strong> Why we're terrible at predicting what makes us happy in partners</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 2: Love Then vs. Now -->
+            <div class="lesson lesson-2" id="lesson-2">
+                <div class="lesson-header">
+                    <div class="lesson-number">🕰️ Lesson 2</div>
+                    <h3>Love Then vs. Now</h3>
+                    <div class="lesson-subtitle">How Your Grandparents Found Love (And Why It Was Easier)</div>
+                </div>
+                <div class="lesson-inner">
+                    <p>Your grandparents' romantic journey was fundamentally different. Proximity, economic necessity, and social pressure created a clear path: meet someone local, get to know them incrementally, commit because options were limited and social structures demanded it.</p>
+
+                    <div class="key-study">
+                        <h4>📈 Historical Data</h4>
+                        <p>In 1960, only 8% of American marriages began online. By 2020, it's 35%. The median time from first date to engagement dropped from 2-3 years to months. We're meeting more people but committing faster and with less certainty.</p>
+                    </div>
+
+                    <p><strong>Then:</strong> You met someone at church, work, or through family. You'd see them repeatedly. Attraction built over time. Commitment felt natural because leaving meant social ostracism.</p>
+
+                    <p><strong>Now:</strong> You swipe for 2 hours, match with someone you've never seen, text for 3 days, meet once, and make a commitment decision. The timeline is compressed; the relationship complexity is exponential.</p>
+
+                    <div class="two-col">
+                        <div class="funny-box">
+                            <h4>😄 The Comparison</h4>
+                            <p>"Your grandma's first date was probably at a soda fountain. She wore a nice dress. Your first date is at a taco place while you're both still texting other people you matched with yesterday."</p>
+                        </div>
+                        <div class="key-study">
+                            <h4>💭 The Pressure Shift</h4>
+                            <p>Before: Family and society pressured you to marry. Now: You must pressure yourself. You must convince yourself this person is "the one" despite having theoretically infinite alternatives.</p>
+                        </div>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 AI Connection: Recommendation Feedback Loops</h4>
+                        <p>Dating apps create algorithmic feedback loops similar to Netflix recommendations. The more you swipe/reject, the more refined the algorithm's profile of you becomes—but you're being shown versions of yourself shaped by past choices, not exploring genuinely new compatibility profiles.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>🔗 Cross-Book Connections</h4>
+                        <ul>
+                            <li><strong>Bowling Alone:</strong> Robert Putnam's analysis of declining social structures that once facilitated meeting</li>
+                            <li><strong>Attached:</strong> How attachment styles have remained constant while dating infrastructure has radically changed</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 3: Texting Anxiety -->
+            <div class="lesson lesson-3" id="lesson-3">
+                <div class="lesson-header">
+                    <div class="lesson-number">💬 Lesson 3</div>
+                    <h3>The Texting Anxiety Spiral</h3>
+                    <div class="lesson-subtitle">Why a Simple "Hey" Has Never Been More Complicated</div>
+                </div>
+                <div class="lesson-inner">
+                    <p>Text messaging introduced asynchronous communication into dating. Before, you'd call (synchronous—immediate response required) or meet in person. Now, a message can sit for hours, and the recipient's silence becomes data. Did they not see it? Do they hate you? Are they busy or uninterested?</p>
+
+                    <div class="key-study">
+                        <h4>⏰ The Response Time Problem</h4>
+                        <p>Research shows people assume a 1-minute response means interest, 15 minutes is normal, 1 hour is suspicious, 4+ hours means disinterest. But these norms are completely invented. The person might be in a meeting, napping, or showering. Texting has created a false information channel.</p>
+                    </div>
+
+                    <p>Text messages lack tone, facial expression, and vocal inflection. "Haha ok" could mean laughing agreement or passive-aggressive dismissal. This ambiguity creates rumination. You text something, they don't respond for 2 hours, and now you've spiraled through 47 interpretations.</p>
+
+                    <div class="funny-box">
+                        <h4>😄 The Modern Anxiety</h4>
+                        <p>"We've invented a technology that lets you agonize about someone's non-response in real-time, with a little notification dot telling you exactly when they were last online. Thanks, progress."</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>😰 Texting Culture Rules (Unwritten But Enforced)</h4>
+                        <p><strong>The Wait Rule:</strong> If they took 3 hours to text, wait 3+ hours. <strong>The Emoji Rule:</strong> More emojis = more interested. <strong>The Selfie Rule:</strong> If they send selfies, they like you. <strong>The Double Text Rule:</strong> Never send two texts in a row without a response. All of these are completely arbitrary.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 AI Connection: Information Asymmetry</h4>
+                        <p>Texting creates information asymmetry similar to adverse selection in economics. The person with the faster response time appears more interested, so both parties optimize to appear interested by responding quickly—creating artificial urgency and anxiety. Dating apps amplify this: they show "read receipts," "typing indicators," and "last seen" timestamps, weaponizing information for emotional effect.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>🔗 Cross-Book Connections</h4>
+                        <ul>
+                            <li><strong>Thinking Fast and Slow:</strong> How we make quick judgments based on incomplete information (text tone)</li>
+                            <li><strong>Predictably Irrational:</strong> Why we create arbitrary rules to manage uncertainty</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 4: Dating Apps & Choice Overload -->
+            <div class="lesson lesson-4" id="lesson-4">
+                <div class="lesson-header">
+                    <div class="lesson-number">📲 Lesson 4</div>
+                    <h3>Dating Apps & Choice Overload</h3>
+                    <div class="lesson-subtitle">Why Swiping Through Thousands Leads to Paralysis</div>
+                </div>
+                <div class="lesson-inner">
+                    <p>Dating apps gamified romance. Tinder, Bumble, Hinge, and others turned partner selection into a frictionless, infinite scroll—like TikTok but for humans. This removed all barrier to entry: no conversation required to match, no risk of rejection in initial contact (rejection exists, but it's hidden), infinite profiles available.</p>
+
+                    <div class="key-study">
+                        <h4>💔 The Paradox</h4>
+                        <p>More dating app users exist than ever before (46% of 18-30 year-olds in the US use apps). Yet reported happiness with dating has declined. Users spend hours swiping but report lower-quality connections and more dating fatigue.</p>
+                    </div>
+
+                    <p><strong>The Economics of Swiping:</strong> Each swipe is a micro-decision with zero cost. No emotional investment required upfront. This creates the illusion of unlimited potential, which psychologically prevents commitment to any single match. "Why settle for this good match when I could swipe 50 more profiles?"</p>
+
+                    <div class="funny-box">
+                        <h4>😄 The Honest App Description</h4>
+                        <p>"Swipe through 500 people in your city, match with 50, message with 5, meet 1, realize you preferred someone you rejected 300 swipes ago, but they've already forgotten you existed."</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>📊 The Matching Problem</h4>
+                        <p>Men typically right-swipe 60% of profiles (low selectivity); women right-swipe 5% (high selectivity). This creates a matching imbalance: men feel worthless because few matches; women feel overwhelmed by low-quality matches. Both are experiencing choice overload differently.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 AI Connection: Collaborative Filtering & Cold-Start</h4>
+                        <p>Dating apps use collaborative filtering: "Users like you also liked these people." But this creates filter bubbles. You get shown people similar to those you've swiped before, reinforcing your existing preferences and preventing serendipity. Additionally, the cold-start problem (new users with no swipe history) causes algorithms to show everyone to everyone, maximizing engagement but minimizing compatibility matching.</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>💰 Business Model Problem</h4>
+                        <p>Dating apps profit from engagement, not successful matches. If everyone found their perfect match and left, the app dies. So algorithms are optimized to keep you swiping, not to create genuine matches. This is a fundamental misalignment of incentives.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>🔗 Cross-Book Connections</h4>
+                        <ul>
+                            <li><strong>Paradox of Choice:</strong> How unlimited options decrease satisfaction</li>
+                            <li><strong>Thinking Fast and Slow:</strong> Why swiping is System 1 thinking (fast, intuitive) not System 2 (deliberate, careful)</li>
+                            <li><strong>Attached:</strong> Apps don't account for attachment styles—they're purely appearance-based</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 5: International Dating Cultures -->
+            <div class="lesson lesson-5" id="lesson-5">
+                <div class="lesson-header">
+                    <div class="lesson-number">🌍 Lesson 5</div>
+                    <h3>Dating Across Cultures</h3>
+                    <div class="lesson-subtitle">Tokyo, Paris, Buenos Aires & Doha: Four Approaches to Modern Romance</div>
+                </div>
+                <div class="lesson-inner">
+                    <p>One of Ansari and Klinenberg's key insights: dating norms are deeply cultural. Technology is global, but romance is still profoundly local. How people in Tokyo, Paris, Buenos Aires, and Doha approach modern dating reveals that there's no single "modern romance"—there are many.</p>
+
+                    <div class="two-col">
+                        <div class="key-study">
+                            <h4>🇯🇵 Tokyo: Cautious & Structured</h4>
+                            <p>Japanese dating is slower, more formal, and less sexualized than Western norms. Meeting through apps is growing, but traditional approaches (introductions through friends/family) remain dominant. First dates are carefully planned. Physical intimacy comes much later. Marriage is approached pragmatically.</p>
+                        </div>
+                        <div class="key-study">
+                            <h4>🇫🇷 Paris: Romantic & Dismissive of Labels</h4>
+                            <p>French dating emphasizes the art of seduction and intellectual connection. Interestingly, Parisians often disdain the formal "relationship" label—you're seeing someone, it's romantic, but "are we exclusive?" is too American. Dating apps are used but with irony.</p>
+                        </div>
+                    </div>
+
+                    <div class="two-col">
+                        <div class="key-study">
+                            <h4>🇦🇷 Buenos Aires: Passionate & Family-Oriented</h4>
+                            <p>Argentine culture emphasizes passionate romance and tight family bonds. Dating is more about finding a life partner than exploring options. People meet through friends or apps but often with serious intent. Commitment comes faster than in Anglo-American contexts.</p>
+                        </div>
+                        <div class="key-study">
+                            <h4>🇶🇦 Doha: Traditional & Transitioning</h4>
+                            <p>In conservative Muslim contexts, traditional dating is restricted; many relationships are family-arranged. Yet younger generations in Doha are using apps quietly, creating a tension between traditional expectations and personal autonomy. Dating apps here are more transactional and secretive.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>😄 The Cultural Absurdity</h4>
+                        <p>"We've globalized technology but not dating norms. A Tinder profile in Paris and a Tinder profile in Tokyo are using the same app but operating in completely different romantic universes."</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 AI Connection: Algorithmic Bias in Global Context</h4>
+                        <p>Dating app algorithms are often trained on Western (American/European) user data, then deployed globally. This creates cultural bias: the algorithm might prioritize traits valued in Western dating (physical attractiveness, career achievement) over those valued elsewhere (family stability, introversion, educational prestige in specific fields). A single algorithm can't serve diverse cultural contexts.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>🔗 Cross-Book Connections</h4>
+                        <ul>
+                            <li><strong>Thinking Fast and Slow:</strong> Cultural differences in fast/slow thinking about romance</li>
+                            <li><strong>Attached:</strong> Attachment styles vary by culture, but apps are culturally agnostic</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 6: Good Enough vs. Soulmate -->
+            <div class="lesson lesson-6" id="lesson-6">
+                <div class="lesson-header">
+                    <div class="lesson-number">✨ Lesson 6</div>
+                    <h3>Good Enough vs. Soulmate Model</h3>
+                    <div class="lesson-subtitle">Are You Expecting Impossible Standards From Romance?</div>
+                </div>
+                <div class="lesson-inner">
+                    <p>Ansari and Klinenberg distinguish between two marriage models that dominate modern thinking: the "soulmate" model and the "good enough" model. This distinction is crucial for understanding modern dating dissatisfaction.</p>
+
+                    <div class="two-col">
+                        <div class="key-study">
+                            <h4>💫 Soulmate Model</h4>
+                            <p>There is one perfect person for you. This person will be attracted to you, compatible with you, satisfy all your needs, understand you deeply, and make you feel complete. Finding this person justifies all your searching. It's romantic destiny.</p>
+                        </div>
+                        <div class="key-study">
+                            <h4>👌 Good Enough Model</h4>
+                            <p>No person is perfect, but some are compatible enough across key dimensions (values, humor, kindness, sexual chemistry). Love develops through time and commitment, not through finding "the one."</p>
+                        </div>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>🧠 The Problem</h4>
+                        <p>Dating apps and romantic culture (movies, songs) heavily promote the soulmate model. This creates unrealistic expectations. You swipe for 2 hours, match with someone, meet them once, and think "Are they my soulmate?" The answer is almost always no—because soulmates don't exist. But the app created expectation of finding one.</p>
+                    </div>
+
+                    <p>Historically, marriages were arranged or proximity-based. People didn't ask "Is this my soulmate?" They asked "Is this person stable, kind, and do we have shared values?" Over decades of marriage, companionate love (comfort, stability, deep knowledge of each other) was more important than passionate love (lust, butterflies, excitement).</p>
+
+                    <div class="funny-box">
+                        <h4>😄 The Romance Industrial Complex</h4>
+                        <p>"Disney lied to you. Shrek has a more realistic view of love: 'Ogres have layers.' Your soulmate also has layers. They're boring sometimes. They annoy you. You stay anyway because you chose them and you keep choosing them."</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>❤️ Gottman's Research</h4>
+                        <p>John Gottman studied 3,000+ couples over decades. His key finding: The strongest predictor of divorce isn't lack of love—it's contempt. Couples who stay together don't necessarily feel passionate butterflies. They feel respect, kindness, and commitment. They've shifted from passionate love (high arousal, novelty-seeking) to companionate love (stability, deep knowing).</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 AI Connection: Optimization vs. Satisfaction</h4>
+                        <p>Recommender systems optimize for a single metric (engagement, clicks, purchases). Dating apps optimize for... engagement, not compatibility. This mirrors the soulmate model's problem: you're optimizing for "perfect match" when real relationships optimize for "good enough + commitment + time."</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>🔗 Cross-Book Connections</h4>
+                        <ul>
+                            <li><strong>Stumbling on Happiness:</strong> We're bad at predicting what makes us happy in long-term relationships</li>
+                            <li><strong>Attached:</strong> Secure attachment + good communication > soulmate mythology</li>
+                            <li><strong>Paradox of Choice:</strong> Believing in soulmates makes you perpetually dissatisfied</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 7: Ghosting, Benching & Breadcrumbing -->
+            <div class="lesson lesson-7" id="lesson-7">
+                <div class="lesson-header">
+                    <div class="lesson-number">👻 Lesson 7</div>
+                    <h3>Ghosting, Benching & Breadcrumbing</h3>
+                    <div class="lesson-subtitle">Modern Phenomena of Casual Cruelty in Low-Risk Environments</div>
+                </div>
+                <div class="lesson-inner">
+                    <p>These behaviors—disappearing without explanation (ghosting), keeping someone as a backup (benching), sending occasional messages to maintain interest without commitment (breadcrumbing)—are new phenomena enabled by digital communication and the low-barrier-to-entry nature of online dating.</p>
+
+                    <div class="two-col">
+                        <div class="key-study">
+                            <h4>👻 Ghosting</h4>
+                            <p>Complete disappearance without explanation. In pre-digital dating, this was socially difficult: you'd run into the person, they'd see you with someone else, word would spread. Now? You can simply delete the app. There's no consequence.</p>
+                        </div>
+                        <div class="key-study">
+                            <h4>🏀 Benching</h4>
+                            <p>Keeping someone interested as a backup option while exploring others. You reply to their messages occasionally but avoid commitment. If your "starter" relationship fails, you have a bench player ready.</p>
+                        </div>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>🍞 Breadcrumbing</h4>
+                        <p>Sending intermittent messages (a like, a response to a story, a "how are you?") to keep someone interested without investing in the relationship. It maintains the person's emotional energy toward you with minimal effort on your part.</p>
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>😄 The Modern Toolkit</h4>
+                        <p>"We've invented incredibly efficient ways to be emotionally unavailable. It's like ghosting, but with plausible deniability. 'I've been busy!' Sure, but you've been on Instagram three times today."</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>🎮 Why This Happens</h4>
+                        <p>Because the app environment has no social friction. You're not in a small community where rejection matters. You're one profile among millions. Ghosting someone has zero social cost. Benching provides insurance (never having to be alone). Breadcrumbing maintains optionality with minimal commitment. All of these are rational when the environment incentivizes them.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 AI Connection: Information Abundance & Devaluation</h4>
+                        <p>When something is abundant, it's devalued. Recommender systems create abundance: millions of potential partners available instantly. This abundance creates a psychological devaluation of any individual—they're replaceable. Ghosting is the behavioral manifestation of this: they're just another swipeable profile, not a person deserving explanation.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>🔗 Cross-Book Connections</h4>
+                        <ul>
+                            <li><strong>Predictably Irrational:</strong> How low friction and anonymity lead to behavior we'd never exhibit in person</li>
+                            <li><strong>Thinking Fast and Slow:</strong> System 1 (fast, emotional) dominates in ghosting; System 2 reflection is absent</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 8: The Science of Attraction -->
+            <div class="lesson lesson-8" id="lesson-8">
+                <div class="lesson-header">
+                    <div class="lesson-number">🔬 Lesson 8</div>
+                    <h3>The Science of Attraction</h3>
+                    <div class="lesson-subtitle">What Actually Makes You Attracted to Someone (Spoiler: It's Complicated)</div>
+                </div>
+                <div class="lesson-inner">
+                    <p>Attraction is not purely visual. Yet dating apps have optimized for visual attraction—a photo, maybe a few photos, and a brief bio. This is an evolutionary mismatch. Humans evolved to assess attraction in person: through smell, voice, movement, humor, intelligence.</p>
+
+                    <div class="key-study">
+                        <h4>👃 The Role of Smell</h4>
+                        <p>Research on human pheromones and the major histocompatibility complex (MHC) shows we unconsciously assess genetic compatibility through smell. A person's natural scent communicates immune system diversity. You can't smell someone through an app.</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>😊 Proximity & Repeated Exposure</h4>
+                        <p>The "mere exposure effect" (Zajonc, 1968): We prefer things we've been exposed to repeatedly. Attraction often grows through regular exposure—seeing someone in class, at work, in your friend group. Apps compress this into one interaction. You see their photo once; if you don't swipe right immediately, you never see them again.</p>
+                    </div>
+
+                    <p>Attraction is also highly context-dependent. You might find someone more attractive when they're laughing, when they're concentrating, when they're wearing a particular color, when they're in their element (a musician at a concert). A photo can't capture this. A profile can't capture context.</p>
+
+                    <div class="funny-box">
+                        <h4>😄 The Photo Paradox</h4>
+                        <p>"We've optimized dating for the moment of least attraction: a carefully curated still image taken in good lighting, edited with filters. Almost nobody looks exactly like their main profile photo. And yet we're making attraction decisions based on this."</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>💬 The Role of Personality</h4>
+                        <p>Studies show personality, humor, and intelligence significantly increase attractiveness over time. Someone's sense of humor—not visible in a photo—might be the most attractive thing about them. Yet dating apps prioritize photos first, bio second.</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>⌛ The Halo Effect</h4>
+                        <p>If someone is attractive, we assume they're also intelligent, kind, and successful. This bias distorts real assessment. We might be overlooking perfectly compatible partners because they're not conventionally attractive, while pursuing conventionally attractive people who are toxic.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 AI Connection: Feature Reduction in Recommender Systems</h4>
+                        <p>Dating apps reduce humans to vectors: age, height, location, photos, interests. But attraction involves interactions between features and context. A recommender system can't easily model "funny + sarcastic + works in tech + loves dogs" as a combination where the interactions matter more than individual features. It optimizes for individual signals (photo attractiveness), not human complexity.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>🔗 Cross-Book Connections</h4>
+                        <ul>
+                            <li><strong>Thinking Fast and Slow:</strong> Photos trigger System 1 thinking; real attraction requires System 2</li>
+                            <li><strong>Predictably Irrational:</strong> The halo effect and anchoring bias in visual assessment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 9: Living Alone & Rise of Singledom -->
+            <div class="lesson lesson-9" id="lesson-9">
+                <div class="lesson-header">
+                    <div class="lesson-number">🏠 Lesson 9</div>
+                    <h3>Living Alone & the Rise of Singledom</h3>
+                    <div class="lesson-subtitle">The Demographic Shift Reshaping Modern Romance</div>
+                </div>
+                <div class="lesson-inner">
+                    <p>One of the most significant demographic shifts in modern history: more people are living alone than ever before. This fundamentally changes the urgency and nature of romantic pursuit. Historically, living alone was economically untenable and socially shameful. Now it's increasingly normal.</p>
+
+                    <div class="key-study">
+                        <h4>📊 The Numbers</h4>
+                        <p>In 1960, 13% of American adults lived alone. By 2020, it's 28%. In some major cities (New York, San Francisco), over 35% of adults live alone. This is not temporary—it's a structural shift in how we live.</p>
+                    </div>
+
+                    <p><strong>The Economic Shift:</strong> Women entering the workforce meant they could afford to live independently. They no longer needed to marry for economic survival. This delayed and reduced marriage rates. Men, historically, couldn't afford to live alone; now they can. Both genders have the option of singledom.</p>
+
+                    <div class="key-study">
+                        <h4>💔 The Romantic Implication</h4>
+                        <p>If living alone is acceptable, marriage is no longer mandatory. This is liberating and destabilizing. Liberating because you can pursue a relationship because you want to, not because you have to. Destabilizing because if marriage isn't necessary, why should you commit to this imperfect person?</p>
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>😄 The Modern Option Value</h4>
+                        <p>"Your single apartment is actually keeping you single. You're comfortable. No one's nagging you to do dishes. Netflix is always available. Your relationship would have to be REALLY good to be better than your couch. Your grandma would have been married with 3 kids by now just to have someone to talk to."</p>
+                    </div>
+
+                    <p><strong>The Loneliness Paradox:</strong> More people are single and living alone, yet loneliness is epidemic. You have freedom but also isolation. Dating apps promised to solve this (infinite connection!), but they've often made it worse (endless options, shallow connections).</p>
+
+                    <div class="key-study">
+                        <h4>👥 Community Erosion</h4>
+                        <p>Living alone correlates with reduced participation in community organizations (churches, clubs, neighborhood groups). These were historically how people met. Now you're alone in your apartment, swiping through strangers. The solution to loneliness isn't easier dating app access—it's community rebuilding.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 AI Connection: Algorithmic Substitution for Proximity</h4>
+                        <p>Apps are trying to algorithmically solve what proximity used to solve. Instead of naturally meeting people through work/friends/community, you're matched by algorithm. But algorithms can't replicate the friction and serendipity of real community. They optimize for engagement, not for authentic connection.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>🔗 Cross-Book Connections</h4>
+                        <ul>
+                            <li><strong>Bowling Alone:</strong> Putnam's analysis of declining social organizations and community</li>
+                            <li><strong>Stumbling on Happiness:</strong> The paradox that we're worse at predicting what makes us happy (community matters more than we think)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 10: Passionate vs. Companionate Love -->
+            <div class="lesson lesson-10" id="lesson-10">
+                <div class="lesson-header">
+                    <div class="lesson-number">💓 Lesson 10</div>
+                    <h3>Passionate vs. Companionate Love</h3>
+                    <div class="lesson-subtitle">Why the Butterflies Fade (And Why That's Actually Good)</div>
+                </div>
+                <div class="lesson-inner">
+                    <p>Psychologists distinguish between two types of love. Passionate love is characterized by excitement, butterflies, intense desire, and novelty. Companionate love is characterized by comfort, security, deep knowledge of each other, and commitment. Both are real love. They're just different.</p>
+
+                    <div class="two-col">
+                        <div class="key-study">
+                            <h4>🔥 Passionate Love</h4>
+                            <p>High arousal, lust, excitement, obsessive thinking about the person, physiological responses (racing heart, butterflies). This is the "falling in love" phase. It's intense and intoxicating. It also fades. Inevitably. Neuroscience shows that passionate love activates reward pathways (dopamine, similar to drugs). This can't be sustained indefinitely.</p>
+                        </div>
+                        <div class="key-study">
+                            <h4>🏡 Companionate Love</h4>
+                            <p>Deep knowledge of the person, comfort in their presence, commitment to their wellbeing, humor and inside jokes, sexual intimacy rooted in affection rather than excitement. This is the "being in love" phase. It's stable, sustainable, and often deeper than passionate love.</p>
+                        </div>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>⌛ The Timeline</h4>
+                        <p>Research suggests passionate love peaks around 2-3 years, then declines. This is sometimes called "falling out of love," but it's really a transition. If the relationship survives this transition (and it's not easy), companionate love grows and becomes the foundation of long-term relationships.</p>
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>😄 The Cultural Mismatch</h4>
+                        <p>"Movies and songs are all about passionate love—yearning, pining, obsession. Nobody writes songs about companionate love: 'I made you coffee and laughed at your dumb joke / And I still wanted to kiss you.' It doesn't sell tickets, but it's more real."</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>💊 The Problem</h4>
+                        <p>Dating apps and the soulmate model fetishize passionate love. You're looking for butterflies, for "the spark," for that addictive feeling. When you meet someone and the intense passion fades (after 2-3 years, inevitably), you think "This isn't the one" and move on. But passion always fades. That's not failure—that's normal development.</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>👨‍👩‍👧 Gottman's Findings</h4>
+                        <p>John Gottman found that couples who report the highest long-term happiness aren't those who report the most passion—they're those who maintain respect, kindness, and commitment through the passion-to-companionship transition. Couples who experience and accept this transition stay together. Couples who expect passion to persist often separate.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 AI Connection: Exploit vs. Explore Trade-off</h4>
+                        <p>In machine learning, the explore-exploit dilemma is central: do you continue exploiting a known-good option, or explore new options hoping for better? Passionate love is exploring (novelty, excitement). Companionate love is exploiting (deepening what you have). Dating apps are structured for infinite exploration. They make it hard to commit to exploitation—deepening one relationship—because the alternative (exploring new matches) is always one swipe away.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>🔗 Cross-Book Connections</h4>
+                        <ul>
+                            <li><strong>Stumbling on Happiness:</strong> We overestimate how much passion matters to long-term happiness</li>
+                            <li><strong>Attached:</strong> Secure attachment styles transition from passion to companionship more smoothly</li>
+                            <li><strong>Predictably Irrational:</strong> We make irrational relationship decisions based on passionate feelings</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 11: How Phones Changed Courtship -->
+            <div class="lesson lesson-11" id="lesson-11">
+                <div class="lesson-header">
+                    <div class="lesson-number">📞 Lesson 11</div>
+                    <h3>How Phones Changed Courtship Forever</h3>
+                    <div class="lesson-subtitle">From Landlines to Swiping: A 50-Year Arc</div>
+                </div>
+                <div class="lesson-inner">
+                    <p>The technology of courtship has completely transformed in a generation. This shift has fundamentally altered how relationships form, progress, and sometimes dissolve.</p>
+
+                    <div class="key-study">
+                        <h4>☎️ The Landline Era (1960s-1990s)</h4>
+                        <p>If you wanted to talk to someone, you called their house. Someone else might answer. You'd ask "Is [person] home?" Deeply vulnerable. No texting to remove yourself from immediate conversation. No profiles. No curated presentation. You called, you talked, you were present.</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>📱 The Mobile Revolution (2000s)</h4>
+                        <p>Cell phones gave you privacy. You could text (asynchronously! game-changing). You could arrange dates without parent interference. But texting lacked tone and created anxiety (analyzed in Lesson 3).</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>📲 The Smartphone Era (2010s)</h4>
+                        <p>Smartphone apps made dating frictionless. Swiping is easier than calling. Matching with a stranger requires zero courage (they've also swiped). The courtship process collapsed from months (meeting → repeated contact → asking out → dating) to hours (match → text → meet).</p>
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>😄 The Compression</h4>
+                        <p>"In your grandpa's day, he had to be 100% sure he liked someone before asking them out (because asking took courage and she might say no publicly). Now you swipe on 50 people an hour and ask 5 to meet without conviction. We've made dating lower stakes and somehow higher stakes simultaneously."</p>
+                    </div>
+
+                    <p><strong>Curated Presentation:</strong> Pre-smartphone dating forced authenticity. You showed up as yourself. Now you have a profile with a carefully curated photo, bio, and music taste. You're optimizing your presentation for algorithm and audience.</p>
+
+                    <div class="key-study">
+                        <h4>📊 The Attention Economy</h4>
+                        <p>Phones have made attention itself scarce. Everyone's distracted. A conversation is competing with notifications, messages, and infinite media. Courtship used to require your full attention (expensive signal of interest). Now you can text someone while scrolling Instagram and watching TV.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 AI Connection: Information Overload & Filtering</h4>
+                        <p>Phones carry infinite information. Courtship used to be information-scarce (you know this person through limited exposure). Now you have too much information: their Instagram history, their location history via maps, their music taste, their friend network visible through social graphs. But this information is curated and edited—it's not more truthful, just more abundant and more subject to algorithmic filtering.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>🔗 Cross-Book Connections</h4>
+                        <ul>
+                            <li><strong>Thinking Fast and Slow:</strong> Phones enable System 1 thinking (snap judgments); courtship requires System 2</li>
+                            <li><strong>Predictably Irrational:</strong> We're irrational about technology's impact on relationships</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 12: Commitment in the Age of Infinite Options -->
+            <div class="lesson lesson-12" id="lesson-12">
+                <div class="lesson-header">
+                    <div class="lesson-number">🎯 Lesson 12</div>
+                    <h3>Commitment in the Age of Infinite Options</h3>
+                    <div class="lesson-subtitle">Choosing One When a Thousand Others Are Available</div>
+                </div>
+                <div class="lesson-inner">
+                    <p>This is perhaps the central challenge of modern romance. How do you commit to one person when the app in your pocket tells you that thousands of "better" alternatives exist? This is not a romantic problem—it's a philosophical and psychological one.</p>
+
+                    <div class="key-study">
+                        <h4>⚡ The Paradox</h4>
+                        <p>Historical commitment was easy because alternatives were invisible. You married the person you met through proximity and social pressure. You didn't know the 500 people you might have been more compatible with. Now you know (or think you know) about them. This makes commitment feel like settling.</p>
+                    </div>
+
+                    <p><strong>The Sunk Cost Fallacy Inversion:</strong> Normally, sunk cost fallacy causes you to stay in bad relationships ("I've invested 5 years already"). Now it works in reverse: investment creates commitment. But apps are designed to minimize investment. Swipe right, text, meet once. If there's no spark, delete and move on. No investment, no commitment.</p>
+
+                    <div class="key-study">
+                        <h4>🎪 The MaximIzer Problem</h4>
+                        <p>Barry Schwartz distinguishes between "maximizers" (always seeking the best option) and "satisficers" (seeking good enough and stopping). Dating apps turn everyone into maximizers. You're optimizing your search through thousands of profiles. Maximizers report lower satisfaction even when they find objectively good partners (because they wonder about the alternatives).</p>
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>😄 The Eternal Doubt</h4>
+                        <p>"You're in a relationship, but there's always this background feeling: 'What if I'd swiped right on that person who seemed cool?' Your partner is good, but they're good because you can compare them to a mental database of the thousands of people you rejected. That's not romantic."</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>💍 Historical Commitment Mechanisms</h4>
+                        <p>Marriage used to be enforced by: (1) Economic necessity (especially for women), (2) Social shame (divorce was scandalous), (3) Legal barriers (divorce was hard to obtain), (4) Religious prohibition. All of these are gone. Commitment now depends purely on whether the relationship is satisfying. That's higher stakes.</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>📱 Commitment as Friction</h4>
+                        <p>Apps are designed to minimize friction. But commitment requires friction—costs that make leaving harder than staying. Taking the time to deeply know someone creates friction (investment). Shared memories create friction. Shared assets create friction. Modern dating minimizes all of this.</p>
+                    </div>
+
+                    <div class="key-study">
+                        <h4>🧠 The Solution (Ansari's Implicit Argument)</h4>
+                        <p>Commit to someone "good enough" and then invest in deepening that relationship. The commitment creates the conditions for deeper love. You can't find the perfect person and expect perfect love—you create perfect love through commitment, time, and work. This requires viewing relationships as projects (something to build) not transactions (something to optimize).</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 AI Connection: The Explore-Exploit Trade-off (Redux)</h4>
+                        <p>In reinforcement learning, agents must balance exploring new options with exploiting known-good options. If you only explore, you never benefit from what you've found. If you only exploit, you miss potentially better options. Dating apps are infinite exploration. Successful relationships require switching to exploitation: deepening one relationship at the cost of exploring others. The app doesn't reward this switch (it doesn't profit from your commitment), but happiness does.</p>
+                    </div>
+
+                    <p><strong>The Final Insight:</strong> Modern romance is hard because the infrastructure (apps, technology, culture) makes commitment feel optional. But happiness in relationships requires commitment—the willingness to invest in one person and forgo the theoretical better alternatives. The people who find happiness aren't those who optimize their search. They're those who optimize their chosen relationship.</p>
+
+                    <div class="connect-box">
+                        <h4>🔗 Cross-Book Connections</h4>
+                        <ul>
+                            <li><strong>Paradox of Choice:</strong> Commitment requires accepting choice limits</li>
+                            <li><strong>Thinking Fast and Slow:</strong> Commitment requires System 2 deliberation, not System 1 swiping</li>
+                            <li><strong>Stumbling on Happiness:</strong> We're wrong about what makes us happy (commitment + investment > search + optimization)</li>
+                            <li><strong>Attached:</strong> Secure attachment correlates with willingness to commit</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cheatsheet Section -->
+        <div class="cheatsheet">
+            <div class="cheatsheet-header">
+                <h2>Quick Reference: Modern Romance Cheatsheet</h2>
+                <p>Key takeaways and actionable insights</p>
+            </div>
+            <div class="cheatsheet-inner">
+                <div class="cheatsheet-grid">
+                    <div class="cheatsheet-item">
+                        <h4>🎯 The Core Problem</h4>
+                        <p>Infinite choice (via apps and culture) combined with high expectations (soulmate mythology) creates dating paralysis and low commitment.</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <h4>📊 The Data Point</h4>
+                        <p>Sheena Iyengar's jam study shows that 24 options = 3% purchase rate. 6 options = 30% purchase rate. Infinite dating options = decision paralysis.</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <h4>❤️ Gottman's Finding</h4>
+                        <p>Long-term relationship happiness correlates with respect and kindness, not passion. The couples who last aren't those who feel butterflies forever—they're those who maintain respect through the transition to companionate love.</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <h4>🍞 The Toxic Trio</h4>
+                        <p>Ghosting, benching, and breadcrumbing are enabled by low-friction environments. Real names and real accountability would reduce these behaviors drastically.</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <h4>🌍 Cultural Insight</h4>
+                        <p>Dating norms are deeply cultural. There's no single "modern romance"—Tokyo, Paris, Buenos Aires, and Doha have radically different approaches. Technology is global; romance is local.</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <h4>👻 The Soulmate Lie</h4>
+                        <p>There is no one perfect person. Successful relationships are built through commitment and time with a "good enough" partner, not through finding mythical soulmates.</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <h4>📱 The Attention Problem</h4>
+                        <p>Texting introduced asynchronous communication and created false information about interest. A delayed text doesn't mean disinterest; it often means distraction or busyness.</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <h4>🏠 The Singledom Shift</h4>
+                        <p>28% of American adults live alone (up from 13% in 1960). This makes marriage optional, which is liberating and destabilizing.</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <h4>💔 Passion Fades</h4>
+                        <p>Passionate love peaks around 2-3 years, then transitions to companionate love. This isn't failure—it's normal development. If you're expecting passion forever, you'll keep leaving relationships.</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <h4>🤖 The Algorithm Problem</h4>
+                        <p>Apps optimize for engagement, not compatibility. They profit from you swiping, not from you finding a partner. This misaligns their incentive with yours.</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <h4>💪 The Real Solution</h4>
+                        <p>Commit to someone "good enough" and invest in deepening that relationship. Happiness comes from commitment + time + work, not from search optimization + choice expansion.</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <h4>🎬 The Philosophical Shift</h4>
+                        <p>Move from viewing relationships as transactions ("Is this person perfect?") to viewing them as projects ("Can I build something with this person?").</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story Section: The Research Behind the Book -->
+        <div class="story">
+            <div class="story-header">
+                <h2>The Research Behind the Book</h2>
+                <p>How Ansari and Klinenberg Built Modern Romance</p>
+            </div>
+            <div class="story-inner">
+                <p><strong>Aziz Ansari</strong> is a comedian known for observational humor about contemporary life. His special "Aziz Ansari: Live at Gotham" won a Peabody Award. <strong>Eric Klinenberg</strong> is a sociologist and New York University professor who studies social connection, urban life, and climate change.</p>
+
+                <p>Their collaboration created a unique blend: sociological rigor combined with comedic accessibility. Rather than presenting academic papers, they traveled internationally (to Tokyo, Paris, Buenos Aires, and Doha) conducting interviews with real people about how they approached dating and relationships. They combined these interviews with research from psychology, neuroscience, and economics to understand modern romance's underlying structures.</p>
+
+                <p>The book emerges from a simple question: Why is dating so hard now when we've supposedly made it easier? Apps have removed friction (no rejection fear because it's algorithmic). We have more information about potential partners (photos, bios, social media). Yet reported happiness with dating has declined. The book's answer: the infrastructure that makes dating easier (apps, choice, low commitment) has simultaneously made it harder to commit to anyone.</p>
+
+                <p>Ansari and Klinenberg argue that we're operating under outdated myths (the soulmate) while using new tools (apps) that optimize for the opposite of what we need (commitment). The solution isn't better apps—it's understanding that relationships are built through time, investment, and deliberate choice, not through search optimization and endless alternatives.</p>
+
+                <p>The book's genius is making this argument funny. Aziz's observational comedy extracts humor from the absurdity of modern dating (sending "what's up" texts, analyzing read receipts, judging people by their Spotify taste) while maintaining the underlying seriousness: we're genuinely confused about how to find love in 2023 because our cultural narratives and technological infrastructure are misaligned.</p>
+            </div>
+        </div>
+
+        <!-- AI & Recommender Systems Deep Dive -->
+        <div class="story">
+            <div class="story-header">
+                <h2>🤖 AI Deep Dive: Recommender Systems & Dating Apps</h2>
+                <p>The machine learning mechanics that shape your romantic options</p>
+            </div>
+            <div class="story-inner">
+                <p><strong>Dating apps are recommender systems.</strong> They're engineered to predict which profiles you'll swipe right on, and which profiles you'll match with. This is technically similar to how Netflix recommends movies, Spotify recommends songs, or Amazon recommends products. But with crucial differences.</p>
+
+                <p><strong>How Recommender Systems Work:</strong> Most use collaborative filtering. The algorithm observes your behavior (which profiles you swiped right on, which you rejected), finds other users with similar behavior patterns, and recommends profiles those users liked. If you and another user both swiped right on Person A, the algorithm assumes you have similar taste and recommends people they swiped right on.</p>
+
+                <p><strong>The Cold-Start Problem:</strong> New users have no swipe history, so the algorithm can't use collaborative filtering. Instead, it shows new users everyone. This creates massive choice overload for new users. The algorithm prioritizes engagement (showing lots of profiles) over compatibility (showing matched profiles). New users see hundreds of options in their first session—the exact opposite of helpful.</p>
+
+                <p><strong>The Explore-Exploit Dilemma:</strong> In reinforcement learning, agents must decide whether to exploit known-good options or explore new ones. If you only exploit (keep swiping on people similar to your past likes), you miss discovering new preferences. If you only explore (random swiping), you waste time. Dating apps are structured for infinite exploration. They monetize engagement, which increases with choice. Every swipe is data; every match is a potential paying user. There's no incentive to help you commit to one person and stop swiping.</p>
+
+                <p><strong>Collaborative Filtering's Bias:</strong> If the algorithm observes that users who swipe right on Person A also swipe right on Person B, it creates a feedback loop. Person A and Person B become increasingly linked in the system, reinforcing each other's visibility. This creates homogeneity: similar-looking people are recommended together, deepening the algorithm's existing biases about what's attractive.</p>
+
+                <p><strong>Information Asymmetry:</strong> The app knows: your swipe history, your location, your age, your message patterns, your response times, your profile abandonment patterns, how long you view each profile. It uses this information to optimize for engagement, not for your happiness. You know nothing about its decision-making. This asymmetry is structural.</p>
+
+                <p><strong>The Match Prediction Problem:</strong> Apps predict you'll match with someone based on past behavior. But compatibility is multidimensional and evolves over time. Someone who swiped right on tall, attractive profiles might actually be happier with someone who's average-looking but hilarious. The algorithm can't predict this because it can only see past behavior (photos), not unmeasurable factors (humor, kindness, emotional intelligence).</p>
+
+                <p><strong>The Business Model Misalignment:</strong> Apps profit from you swiping, not from successful relationships. A study by Pew Research found that 60% of dating app users who met someone serious deleted the app. From the app's perspective, a successful relationship is a lost user. This creates perverse incentives to keep you searching rather than satisfied.</p>
+
+                <p><strong>The Real-World Implication:</strong> Dating apps are optimized for engagement metrics (swipes, matches, messages), not for happiness metrics (relationship satisfaction, long-term compatibility). This misalignment means the app's incentives work against yours. You think the app is helping you find a partner. The app is actually optimizing for you to stay engaged, swiping, and uncertain.</p>
+
+                <p><strong>A Better System Would:</strong> Minimize choice (recommend 5-10 high-compatibility matches, not 500), prioritize interaction over appearance (ask about values, humor, goals before showing photos), make reputation visible (prevent ghosting through accountability), and align incentives (profit from successful relationships, not endless searching).</p>
+
+                <p><strong>But This Would Reduce Engagement.</strong> So it likely won't happen voluntarily. Apps will continue optimizing for engagement while marketing themselves as optimized for compatibility. Users will continue experiencing choice overload while thinking they're getting better options. The misalignment will persist because it's profitable for the company, even though it makes dating worse for users.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <h3>Modern Romance: Fully Illustrated</h3>
+            <p>A comprehensive guide to understanding love in the digital age</p>
+            <p style="margin-top: 20px; font-size: 0.9em;">Based on "Modern Romance: An Investigation" by Aziz Ansari & Eric Klinenberg</p>
+            <p style="margin-top: 20px; opacity: 0.7; font-size: 0.85em;">Created with deep analysis of psychological research (Gottman, Iyengar, Schwartz), cross-cultural insights, and the intersection of AI/recommender systems with human connection.</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll behavior already set in CSS
+        // Add some interactivity if needed
+
+        // Animate elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // Observe lesson cards
+        document.querySelectorAll('.lesson').forEach(lesson => {
+            lesson.style.opacity = '0';
+            lesson.style.transform = 'translateY(20px)';
+            lesson.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(lesson);
+        });
+    </script>
+</body>
+</html>

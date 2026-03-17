@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influence Illustrated - Robert Cialdini</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 30px;
+        }
+
+        /* Alternating backgrounds */
+        .section:nth-child(odd) {
+            background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+        }
+
+        .section:nth-child(even) {
+            background: linear-gradient(135deg, #2D3436 0%, #1A1A1A 100%);
+            color: white;
+        }
+
+        .cover {
+            background: linear-gradient(135deg, #1A0E2E 0%, #16213E 50%, #0F3460 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .cover p {
+            font-size: 1.3rem;
+            color: var(--coral);
+            font-weight: 500;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 900px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .section:nth-child(even) .lesson-card {
+            background: #1E1E1E;
+            color: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--coral);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section:nth-child(even) .lesson-title {
+            color: var(--coral);
+        }
+
+        .lesson-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--purple), var(--coral));
+            color: white;
+            border-radius: 50%;
+            font-weight: 900;
+            font-size: 1.3rem;
+        }
+
+        .lesson-content {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .examples {
+            background: rgba(255,107,107,0.05);
+            padding: 20px;
+            border-left: 4px solid var(--coral);
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .section:nth-child(even) .examples {
+            background: rgba(255,107,107,0.1);
+        }
+
+        .examples strong {
+            color: var(--coral);
+        }
+
+        .examples ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .examples li {
+            margin: 8px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .examples li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--coral);
+        }
+
+        .funny-take {
+            background: linear-gradient(135deg, rgba(255,230,109,0.1), rgba(255,107,107,0.05));
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-style: italic;
+            border-left: 4px solid var(--sunny);
+        }
+
+        .ai-connection {
+            background: rgba(74,205,196,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--teal);
+        }
+
+        .ai-connection strong {
+            color: var(--teal);
+        }
+
+        .cross-book {
+            background: rgba(160,108,213,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+            border-left: 4px solid var(--purple);
+        }
+
+        .cross-book strong {
+            color: var(--purple);
+        }
+
+        .quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--coral);
+            margin: 20px 0;
+            padding: 20px;
+            border-left: 4px solid var(--coral);
+            text-align: center;
+        }
+
+        .section:nth-child(even) .quote {
+            color: var(--sunny);
+            border-color: var(--sunny);
+        }
+
+        svg {
+            width: 100%;
+            max-width: 500px;
+            margin: 30px 0;
+        }
+
+        .svg-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .spacer {
+            height: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 40px 20px;
+            }
+
+            .lesson-card {
+                padding: 25px;
+            }
+
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            .lesson-title {
+                font-size: 1.5rem;
+            }
+
+            .quote {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- COVER -->
+    <section class="section cover">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 600px; position: absolute; opacity: 0.3;">
+            <!-- Puppet strings -->
+            <line x1="80" y1="20" x2="80" y2="150" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+            <line x1="150" y1="20" x2="150" y2="150" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+            <line x1="220" y1="20" x2="220" y2="150" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+            <line x1="290" y1="20" x2="290" y2="150" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+            <!-- Puppet head -->
+            <circle cx="80" cy="180" r="30" stroke="#FF6B6B" stroke-width="2" fill="none"/>
+            <circle cx="150" cy="180" r="30" stroke="#FF6B6B" stroke-width="2" fill="none"/>
+            <circle cx="220" cy="180" r="30" stroke="#FF6B6B" stroke-width="2" fill="none"/>
+            <circle cx="290" cy="180" r="30" stroke="#FF6B6B" stroke-width="2" fill="none"/>
+            <!-- Magnetic field lines -->
+            <path d="M 200 250 Q 200 300 200 350" stroke="#A06CD5" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+            <path d="M 180 260 Q 200 310 220 360" stroke="#A06CD5" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+            <path d="M 220 260 Q 200 310 180 360" stroke="#A06CD5" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+            <!-- Magnet symbols -->
+            <text x="150" y="380" font-size="24" fill="#A06CD5">+ +</text>
+            <text x="230" y="380" font-size="24" fill="#A06CD5">- -</text>
+        </svg>
+        <div class="cover-content">
+            <h1>Influence</h1>
+            <p>The Psychology of Persuasion</p>
+            <p style="margin-top: 15px; font-size: 1rem; color: #AAAAAA;">Robert Cialdini</p>
+        </div>
+    </section>
+
+    <!-- LESSON 1: RECIPROCITY -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">1</div>
+                <span>Reciprocity: Give First</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Two figures exchanging -->
+                    <circle cx="100" cy="150" r="20" fill="#FF6B6B"/>
+                    <circle cx="300" cy="150" r="20" fill="#4ECDC4"/>
+                    <!-- Bodies -->
+                    <line x1="100" y1="170" x2="100" y2="220" stroke="#2D3436" stroke-width="3"/>
+                    <line x1="300" y1="170" x2="300" y2="220" stroke="#2D3436" stroke-width="3"/>
+                    <!-- Arms extended -->
+                    <line x1="100" y1="180" x2="150" y2="180" stroke="#2D3436" stroke-width="3"/>
+                    <line x1="300" y1="180" x2="250" y2="180" stroke="#2D3436" stroke-width="3"/>
+                    <!-- Gift arrows -->
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FF6B6B"/>
+                        </marker>
+                        <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#4ECDC4"/>
+                        </marker>
+                    </defs>
+                    <path d="M 160 170 Q 200 140 240 170" stroke="#FF6B6B" stroke-width="3" fill="none" marker-end="url(#arrowhead2)"/>
+                    <path d="M 240 190 Q 200 220 160 190" stroke="#4ECDC4" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    <!-- Gift boxes -->
+                    <rect x="145" y="155" width="25" height="25" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="230" y="155" width="25" height="25" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                    <!-- Title -->
+                    <text x="200" y="280" font-size="16" fill="#2D3436" text-anchor="middle" font-weight="bold">Obligation Creates Obligation</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>When someone does something for us, we automatically feel obligated to reciprocate. This primal human instinct is so powerful that it can override our personal preferences and rational judgment. Give value first, and people will scramble to give back.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Free samples at the grocery store increase sales by 2000%+</li>
+                    <li>Tupperware parties: host gets a gift, guests feel obligated to buy</li>
+                    <li>Charities sending free address labels: donations increase even when labels aren't used</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "If you give someone a free pen, they'll remember you. If you give them free samples all day, they'll feel like they owe you their firstborn child."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> RLHF (Reinforcement Learning from Human Feedback) works like reciprocity—models that receive helpful corrections learn to return better outputs. Initial helpful prompts bias the model toward helpful responses.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Atomic Habits explores how small gifts of positive behavior create obligation to continue.
+            </div>
+            <div class="quote">"The obligation to receive is perhaps the most basic and most fundamental human response to the gift."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 2: COMMITMENT & CONSISTENCY -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">2</div>
+                <span>Commitment & Consistency: Foot-in-Door</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Door -->
+                    <rect x="120" y="80" width="160" height="180" fill="none" stroke="#2D3436" stroke-width="3"/>
+                    <!-- Door swing -->
+                    <path d="M 280 100 Q 320 140 280 180" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+                    <!-- Foot -->
+                    <ellipse cx="275" cy="150" rx="15" ry="20" fill="#FF6B6B"/>
+                    <!-- Person -->
+                    <circle cx="80" cy="100" r="15" fill="#4ECDC4"/>
+                    <line x1="80" y1="115" x2="80" y2="160" stroke="#2D3436" stroke-width="3"/>
+                    <line x1="65" y1="130" x2="95" y2="130" stroke="#2D3436" stroke-width="3"/>
+                    <!-- Progression arrows -->
+                    <text x="200" y="50" font-size="14" fill="#2D3436" text-anchor="middle" font-weight="bold">Small → Big</text>
+                    <path d="M 180 60 L 220 60" stroke="#2D3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <!-- Steps -->
+                    <circle cx="150" cy="230" r="8" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                    <circle cx="200" cy="230" r="8" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                    <circle cx="250" cy="230" r="8" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                    <text x="150" y="265" font-size="11" text-anchor="middle" fill="#2D3436">Step 1</text>
+                    <text x="200" y="265" font-size="11" text-anchor="middle" fill="#2D3436">Step 2</text>
+                    <text x="250" y="265" font-size="11" text-anchor="middle" fill="#2D3436">Step 3</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>Once people commit to something small, they're more likely to follow through with something bigger. We're driven by consistency—the desire to appear consistent with our prior commitments, values, and deeds. Start small, scale big.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Chinese prisoners of war: small written statements led to larger ideological shifts</li>
+                    <li>Car salesmen: low initial price, then add-ons customers feel committed to</li>
+                    <li>Free trial → subscription: users who sign up feel committed to using the service</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Get someone to sign their name, and suddenly they think they're a different person. Literally the same person, but now with commitment."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Prompt manipulation works via commitment—if you get an AI model to state a position early, it becomes self-consistent with that position for subsequent outputs.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Atomic Habits emphasizes identity-based habits—get people to identify as a "runner" and they're committed.
+            </div>
+            <div class="quote">"Once we have made a choice or taken a stand, we encounter personal and interpersonal pressures to behave consistently."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 3: SOCIAL PROOF -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">3</div>
+                <span>Social Proof: Following Crowds</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Leading figure -->
+                    <circle cx="80" cy="80" r="18" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                    <line x1="80" y1="100" x2="80" y2="140" stroke="#2D3436" stroke-width="3"/>
+                    <line x1="65" y1="115" x2="95" y2="115" stroke="#2D3436" stroke-width="3"/>
+                    <!-- Following crowd -->
+                    <circle cx="150" cy="100" r="15" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                    <line x1="150" y1="115" x2="150" y2="150" stroke="#2D3436" stroke-width="2"/>
+                    <circle cx="200" cy="110" r="15" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                    <line x1="200" y1="125" x2="200" y2="160" stroke="#2D3436" stroke-width="2"/>
+                    <circle cx="250" cy="105" r="15" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                    <line x1="250" y1="120" x2="250" y2="155" stroke="#2D3436" stroke-width="2"/>
+                    <circle cx="300" cy="100" r="15" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                    <line x1="300" y1="115" x2="300" y2="150" stroke="#2D3436" stroke-width="2"/>
+                    <!-- Arrows showing direction -->
+                    <path d="M 100 80 L 130 90" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 170 100 L 190 105" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 220 108 L 240 104" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <!-- Check marks (approval) -->
+                    <text x="150" y="200" font-size="28" text-anchor="middle" fill="#00B894">✓</text>
+                    <text x="200" y="200" font-size="28" text-anchor="middle" fill="#00B894">✓</text>
+                    <text x="250" y="200" font-size="28" text-anchor="middle" fill="#00B894">✓</text>
+                    <text x="300" y="200" font-size="28" text-anchor="middle" fill="#00B894">✓</text>
+                    <text x="80" y="200" font-size="28" text-anchor="middle" fill="#FF6B6B">→</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>Humans are herd animals. When we're uncertain about what to do, we look to others and copy their behavior. If many people are doing something, it must be right. This is one of the most powerful influence tools because it operates almost invisibly.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Canned laughter on TV: makes jokes seem funnier because others find them funny</li>
+                    <li>Amazon reviews: products with more 5-star reviews get more sales (even if reviews are fake)</li>
+                    <li>Laugh tracks: people laugh longer and harder when they hear others laughing first</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Everyone's jumping off a bridge? Well, I guess I should too. If everyone's doing it, it must be fun. Right? ...Right?"
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> AI learns via social proof—training on internet text means models absorb the consensus view of billions of humans. The most common answer in the training set becomes the "right" answer.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Predictably Irrational explores how social proof overrides our own judgment.
+            </div>
+            <div class="quote">"We view a behavior as more appropriate in a given situation to the degree that we see others performing it."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 4: AUTHORITY -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">4</div>
+                <span>Authority: Milgram's Obedience</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Authority figure (experimenter) -->
+                    <rect x="280" y="60" width="80" height="120" fill="#A06CD5" rx="10"/>
+                    <circle cx="320" cy="50" r="18" fill="#A06CD5" stroke="#2D3436" stroke-width="2"/>
+                    <!-- Clipboard -->
+                    <rect x="300" y="100" width="40" height="50" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                    <!-- Label (authority) -->
+                    <text x="320" y="75" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Authority</text>
+                    <!-- Obedient person -->
+                    <circle cx="80" cy="80" r="18" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                    <line x1="80" y1="100" x2="80" y2="140" stroke="#2D3436" stroke-width="3"/>
+                    <line x1="65" y1="115" x2="95" y2="115" stroke="#2D3436" stroke-width="3"/>
+                    <!-- Hesitation lines -->
+                    <path d="M 70 35 Q 65 25 70 15" stroke="#FF6B6B" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <path d="M 85 35 Q 90 25 85 15" stroke="#FF6B6B" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <!-- Command arrow -->
+                    <path d="M 260 130 L 180 130" stroke="#A06CD5" stroke-width="3" marker-end="url(#arrowhead)"/>
+                    <text x="220" y="115" font-size="11" fill="#A06CD5" font-weight="bold">Command</text>
+                    <!-- Shock machine on right -->
+                    <rect x="120" y="160" width="50" height="80" fill="#FF6B6B" stroke="#2D3436" stroke-width="2" rx="5"/>
+                    <text x="145" y="200" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Shock</text>
+                    <text x="145" y="220" font-size="11" text-anchor="middle" fill="white">→ 450V</text>
+                    <!-- Voltage scale -->
+                    <rect x="25" y="200" width="60" height="8" fill="none" stroke="#2D3436" stroke-width="1"/>
+                    <line x1="25" y1="204" x2="85" y2="204" stroke="#FF6B6B" stroke-width="2"/>
+                    <text x="25" y="220" font-size="9" fill="#2D3436">0V</text>
+                    <text x="75" y="220" font-size="9" fill="#2D3436">450V</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>We're deeply susceptible to authority figures. Milgram's famous experiment showed that ordinary people would deliver what they believed to be fatal electric shocks to another person simply because a scientist in a white coat told them to. The illusion of authority is almost as powerful as actual expertise.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Milgram's experiments: 65% of people delivered maximum "shock" when ordered</li>
+                    <li>Doctor endorsements: people trust medical advice more from people wearing white coats</li>
+                    <li>Celebrity endorsements: we buy products because famous people use them</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Put someone in a white coat and suddenly they're an expert. Lab coat? You could be just a guy who raids Halloween costumes, but people still listen."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Anthropomorphization makes AI seem authoritative—people trust outputs more if the AI sounds confident or has a high "status" persona in conversation.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Thinking Fast & Slow explains heuristics that make us trust authority figures without question.
+            </div>
+            <div class="quote">"A study of obedience in a new setting without skin shock showed that the basic effect was maintained, but with one important variation."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 5: LIKING -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">5</div>
+                <span>Liking: We Say Yes to Friends</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Two smiling faces -->
+                    <circle cx="100" cy="100" r="35" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                    <circle cx="100" cy="80" r="6" fill="#2D3436"/>
+                    <circle cx="110" cy="80" r="6" fill="#2D3436"/>
+                    <path d="M 95 105 Q 105 115 115 105" stroke="#2D3436" stroke-width="2" fill="none"/>
+                    <!-- Second face -->
+                    <circle cx="300" cy="100" r="35" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                    <circle cx="300" cy="80" r="6" fill="#2D3436"/>
+                    <circle cx="310" cy="80" r="6" fill="#2D3436"/>
+                    <path d="M 295 105 Q 305 115 315 105" stroke="#2D3436" stroke-width="2" fill="none"/>
+                    <!-- Heart connection -->
+                    <path d="M 145 100 Q 200 80 255 100" stroke="#FF6B6B" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <text x="200" y="75" font-size="20" text-anchor="middle" fill="#FF6B6B">♥</text>
+                    <!-- Similarity indicators -->
+                    <text x="100" y="170" font-size="11" text-anchor="middle" fill="#2D3436">Same interests</text>
+                    <text x="300" y="170" font-size="11" text-anchor="middle" fill="#2D3436">Same values</text>
+                    <!-- Yes arrows -->
+                    <text x="120" y="230" font-size="32" fill="#00B894">✓</text>
+                    <text x="280" y="230" font-size="32" fill="#00B894">✓</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>We're far more likely to say yes to people we like. And we like people who are similar to us, who compliment us, who cooperate with us toward mutual goals, and who are physically attractive. Liking is shorthand for trustworthiness.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Compliments work: even false flattery increases agreement rates</li>
+                    <li>Similarity: people match accents, gestures, and speech patterns of likeable people</li>
+                    <li>Attractiveness bias: beautiful people get better job offers, lighter sentences, and more help</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Want someone to do something for you? Make them like you first. It's not rocket science, but it's why salespeople have nice teeth and smile a lot."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Chatbots that seem to have personality and "like" the user get better engagement. Users anthropomorphize and trust them more.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Influence is the foundation for Thinking Fast & Slow's analysis of likability bias.
+            </div>
+            <div class="quote">"We prefer to say yes to the requests of someone we know and like."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 6: SCARCITY -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">6</div>
+                <span>Scarcity: Only 2 Left!</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Limited items shelf -->
+                    <rect x="80" y="100" width="240" height="20" fill="#2D3436"/>
+                    <!-- Many empty spots -->
+                    <rect x="100" y="70" width="30" height="30" fill="#E0E0E0" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="140" y="70" width="30" height="30" fill="#E0E0E0" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="180" y="70" width="30" height="30" fill="#E0E0E0" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="220" y="70" width="30" height="30" fill="#E0E0E0" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="260" y="70" width="30" height="30" fill="#E0E0E0" stroke="#2D3436" stroke-width="2"/>
+                    <!-- Two items left -->
+                    <rect x="100" y="140" width="30" height="30" fill="#FFE66D" stroke="#FF6B6B" stroke-width="3"/>
+                    <rect x="140" y="140" width="30" height="30" fill="#FFE66D" stroke="#FF6B6B" stroke-width="3"/>
+                    <!-- Warning label -->
+                    <rect x="150" y="30" width="100" height="25" fill="#FF6B6B" rx="5"/>
+                    <text x="200" y="50" font-size="14" font-weight="bold" text-anchor="middle" fill="white">ONLY 2 LEFT!</text>
+                    <!-- Urgency lines -->
+                    <path d="M 70 140 L 50 140" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="3,3"/>
+                    <path d="M 180 140 L 200 140" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="3,3"/>
+                    <!-- Reaching hands -->
+                    <circle cx="60" cy="180" r="8" fill="#FF6B6B"/>
+                    <line x1="68" y1="175" x2="85" y2="160" stroke="#FF6B6B" stroke-width="2"/>
+                    <circle cx="320" cy="180" r="8" fill="#FF6B6B"/>
+                    <line x1="312" y1="175" x2="295" y2="160" stroke="#FF6B6B" stroke-width="2"/>
+                    <!-- Fear/panic -->
+                    <text x="60" y="210" font-size="20" text-anchor="middle">😰</text>
+                    <text x="320" y="210" font-size="20" text-anchor="middle">😰</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>We value things more when they're scarce. The fear of missing out (FOMO) is more powerful than the desire to gain. Scarcity triggers panic-buying and overvaluation. Limited-time offers and exclusive access leverage this universal human weakness.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>"Only 3 items left in stock" increases conversion by 30%+</li>
+                    <li>Black Friday: artificial scarcity through time limits drives billions in sales</li>
+                    <li>Exclusive memberships: the more exclusive, the more desirable</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "There are 50,000 identical widgets in the warehouse, but tell someone 'only 2 left' and suddenly they're willing to pay triple. Scarcity is a beautiful lie we tell ourselves."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Rate limits and token limits in APIs create artificial scarcity that drives subscription adoption. The idea that "you'll run out" makes people buy more.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Nudge explores how default scarcity frames decisions differently.
+            </div>
+            <div class="quote">"Opportunities seem more valuable when their availability is limited."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 7: UNITY -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">7</div>
+                <span>Unity: Shared Identity</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Overlapping circles (Venn diagram style) -->
+                    <circle cx="130" cy="120" r="50" fill="#FF6B6B" opacity="0.4" stroke="#FF6B6B" stroke-width="2"/>
+                    <circle cx="270" cy="120" r="50" fill="#4ECDC4" opacity="0.4" stroke="#4ECDC4" stroke-width="2"/>
+                    <!-- Overlap section (unity) -->
+                    <ellipse cx="200" cy="120" rx="20" ry="50" fill="#A06CD5" opacity="0.6" stroke="#A06CD5" stroke-width="2"/>
+                    <!-- People in each section -->
+                    <text x="100" y="130" font-size="24">👤</text>
+                    <text x="300" y="130" font-size="24">👤</text>
+                    <text x="200" y="130" font-size="24">👫</text>
+                    <!-- Labels -->
+                    <text x="100" y="190" font-size="12" text-anchor="middle" fill="#FF6B6B" font-weight="bold">Group A</text>
+                    <text x="300" y="190" font-size="12" text-anchor="middle" fill="#4ECDC4" font-weight="bold">Group B</text>
+                    <text x="200" y="200" font-size="11" text-anchor="middle" fill="#A06CD5" font-weight="bold">Unity</text>
+                    <!-- Trust indicators -->
+                    <text x="100" y="230" font-size="28" text-anchor="middle" fill="#00B894">✓</text>
+                    <text x="300" y="230" font-size="28" text-anchor="middle" fill="#00B894">✓</text>
+                    <text x="200" y="250" font-size="32" text-anchor="middle" fill="#A06CD5">🤝</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>We trust and cooperate more readily with people who share our identity—our family, our culture, our team, our generation. Unity is deeper than mere similarity; it's a sense of shared fate, belonging, or kinship. In-group bias is one of the most powerful tribal instincts.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Company loyalty: employees trust executives more if they share background</li>
+                    <li>Religion and ethnicity: we're more generous to in-group members</li>
+                    <li>Sports teams: fans will argue fiercely for "their" team despite objective evidence</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Find someone who roots for the same team as you, and you've made a friend for life. Find someone who roots for the rival team, and you've made an enemy. Sports are just tribalism with better uniforms."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Personalization creates false unity—AI models that use "we" language and seem to understand your background get more user engagement and trust.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Thinking Fast & Slow explores in-group bias and tribal thinking.
+            </div>
+            <div class="quote">"People are more trusting, cooperative, and generous toward those they regard as family."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 8: CONTRAST PRINCIPLE -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">8</div>
+                <span>Contrast Principle: Relative Value</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Price comparison -->
+                    <text x="100" y="50" font-size="14" text-anchor="middle" fill="#2D3436" font-weight="bold">Was</text>
+                    <rect x="60" y="60" width="80" height="60" fill="#FFE66D" stroke="#2D3436" stroke-width="2" rx="5"/>
+                    <text x="100" y="105" font-size="24" text-anchor="middle" fill="#2D3436" font-weight="bold">$500</text>
+                    <!-- Arrow -->
+                    <path d="M 160 90 L 220 90" stroke="#2D3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <!-- Now -->
+                    <text x="300" y="50" font-size="14" text-anchor="middle" fill="#2D3436" font-weight="bold">Now</text>
+                    <rect x="260" y="60" width="80" height="60" fill="#FF6B6B" stroke="#FF6B6B" stroke-width="3" rx="5"/>
+                    <text x="300" y="105" font-size="24" text-anchor="middle" fill="white" font-weight="bold">$199</text>
+                    <!-- Contrast lines -->
+                    <line x1="50" y1="140" x2="350" y2="140" stroke="#2D3436" stroke-width="1" stroke-dasharray="5,5"/>
+                    <!-- Perception comparison -->
+                    <circle cx="100" cy="190" r="40" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                    <text x="100" y="200" font-size="28" text-anchor="middle">😐</text>
+                    <text x="100" y="240" font-size="11" text-anchor="middle" fill="#2D3436">Moderate</text>
+                    <circle cx="300" cy="190" r="40" fill="#FF6B6B" stroke="#FF6B6B" stroke-width="3"/>
+                    <text x="300" y="200" font-size="28" text-anchor="middle" fill="white">😍</text>
+                    <text x="300" y="240" font-size="11" text-anchor="middle" fill="#2D3436">Amazing!</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>We don't evaluate things in isolation; we evaluate them in contrast to what came before. The same price seems expensive if presented after a higher price, but cheap if presented after an even higher price. Framing the comparison changes perception dramatically.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Realtor trick: show an overpriced property first, then the real price seems great</li>
+                    <li>Restaurant wine: cheap wine seems more expensive when positioned next to $500 bottles</li>
+                    <li>Salary negotiation: anchor high to make your real ask seem reasonable</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "That $1000 watch seems expensive until you see the $5000 one. Then suddenly it's a bargain. Your brain got hijacked by relativity."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Prompt engineering uses contrast—show the model a bad example before the task, and good examples seem more achievable.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Thinking Fast & Slow explains anchoring effects and relativistic judgment.
+            </div>
+            <div class="quote">"The contrast of any phenomenon with something close to it makes the phenomenon seem more salient and more memorable."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 9: UNCERTAINTY & PROOF -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">9</div>
+                <span>Social Proof in Uncertainty</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Central figure (confused) -->
+                    <circle cx="200" cy="100" r="25" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                    <text x="200" y="110" font-size="24" text-anchor="middle">❓</text>
+                    <!-- Uncertainty spiral -->
+                    <path d="M 200 130 Q 180 140 190 160 Q 200 170 210 155 Q 220 145 210 135" stroke="#FFE66D" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                    <!-- Others providing direction -->
+                    <circle cx="100" cy="180" r="18" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                    <path d="M 108 188 L 130 150" stroke="#4ECDC4" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                    <circle cx="160" cy="220" r="18" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                    <path d="M 168 212 L 190 160" stroke="#4ECDC4" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                    <circle cx="300" cy="180" r="18" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                    <path d="M 292 188 L 270 150" stroke="#4ECDC4" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                    <circle cx="240" cy="220" r="18" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                    <path d="M 232 212 L 210 160" stroke="#4ECDC4" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                    <!-- Result -->
+                    <text x="200" y="280" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Uncertainty → Conformity</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>The more uncertain we are in ambiguous situations, the more we look to others for guidance. This creates a powerful feedback loop where social proof becomes the primary decision-making tool. One person's wrong action can cascade and influence millions.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Pluralistic ignorance: everyone thinks something is normal, so everyone does it</li>
+                    <li>Bystander effect: when unsure if someone needs help, we look at others first</li>
+                    <li>Fake reviews spiral: early reviews shape interpretation of later reviews</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "In an emergency, no one wants to be first to help. So everyone looks at everyone else waiting for someone to move. Then nobody moves and someone dies. That's the power of social proof in uncertain situations."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> LLMs in uncertainty mode amplify the most common patterns in training data, creating a "consensus hallucination" effect.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Predictably Irrational explores bystander effects and conformity under uncertainty.
+            </div>
+            <div class="quote">"When people are uncertain, they look to the actions of others to determine how they themselves should act."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 10: REJECTION-THEN-RETREAT -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">10</div>
+                <span>Rejection-Then-Retreat: Door-in-Face</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Stage 1: Large request -->
+                    <circle cx="80" cy="80" r="20" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="40" y="120" width="80" height="50" fill="#FFE66D" stroke="#2D3436" stroke-width="2" rx="5"/>
+                    <text x="80" y="153" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">BIG ASK</text>
+                    <text x="80" y="170" font-size="10" text-anchor="middle" fill="#FF6B6B">❌ DENIED</text>
+                    <!-- Stage 2: Retreat to smaller ask -->
+                    <circle cx="320" cy="80" r="20" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="280" y="120" width="80" height="50" fill="#FFE66D" stroke="#2D3436" stroke-width="2" rx="5"/>
+                    <text x="320" y="150" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">SMALLER</text>
+                    <text x="320" y="165" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">REQUEST</text>
+                    <text x="320" y="182" font-size="10" text-anchor="middle" fill="#00B894">✓ ACCEPTED</text>
+                    <!-- Arrow connecting -->
+                    <path d="M 160 145 L 240 145" stroke="#2D3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <text x="200" y="135" font-size="11" fill="#2D3436" text-anchor="middle" font-weight="bold">Retreat</text>
+                    <!-- Guilt/obligation -->
+                    <text x="200" y="240" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Guilt → Reciprocity → Yes</text>
+                    <!-- Emotional trajectory -->
+                    <path d="M 80 220 Q 200 190 320 220" stroke="#A06CD5" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>When we make a large request and get rejected, then make a smaller request, people are more likely to say yes to the smaller request. They feel guilty for rejecting the first request and retreat into reciprocity—giving something back as a gesture of fair dealing.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Nonprofits: ask for large donation, then smaller donation has 50% higher acceptance</li>
+                    <li>Negotiation: start high, then retreat makes opponent feel they "won"</li>
+                    <li>Asking for favors: rejected request creates obligation for the next ask</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Ask someone to donate $1000. They'll say no. Ask for $50 immediately after and suddenly you're a genius negotiator. You didn't get $1000, but they feel bad saying no twice."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> In conversations, AI trained on RLHF learns that refusing a first request makes the user more likely to accept refinements—it reciprocates by being more helpful after initial rejection.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Negotiation tactics in Thinking Fast & Slow rely on rejection-then-retreat dynamics.
+            </div>
+            <div class="quote">"By retreating from an initial request to a smaller one, people can get us to make compromises that we would never make had they asked for the smaller favor outright."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 11: CLICK-WHIRR -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">11</div>
+                <span>Click-Whirr: Automatic Triggers</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Trigger (button/cue) -->
+                    <rect x="160" y="40" width="80" height="60" fill="#FF6B6B" stroke="#2D3436" stroke-width="3" rx="8"/>
+                    <text x="200" y="77" font-size="14" text-anchor="middle" fill="white" font-weight="bold">TRIGGER</text>
+                    <!-- Mechanical response (clicking gears) -->
+                    <circle cx="120" cy="150" r="25" fill="none" stroke="#A06CD5" stroke-width="3"/>
+                    <circle cx="120" cy="150" r="15" fill="none" stroke="#A06CD5" stroke-width="2"/>
+                    <circle cx="280" cy="150" r="25" fill="none" stroke="#A06CD5" stroke-width="3"/>
+                    <circle cx="280" cy="150" r="15" fill="none" stroke="#A06CD5" stroke-width="2"/>
+                    <!-- Connection between gears -->
+                    <path d="M 145 150 L 255 150" stroke="#A06CD5" stroke-width="2"/>
+                    <!-- Automatic response arrow -->
+                    <path d="M 200 110 L 200 140" stroke="#2D3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <!-- Result -->
+                    <circle cx="200" cy="220" r="35" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                    <text x="200" y="225" font-size="32" text-anchor="middle">🤖</text>
+                    <text x="200" y="265" font-size="12" text-anchor="middle" fill="#2D3436" font-weight="bold">Automatic Response</text>
+                    <!-- Labels -->
+                    <text x="120" y="195" font-size="10" text-anchor="middle" fill="#A06CD5" font-weight="bold">Stimulus</text>
+                    <text x="280" y="195" font-size="10" text-anchor="middle" fill="#A06CD5" font-weight="bold">Response</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>Humans are creatures of habit. When certain triggers appear, we automatically respond with fixed patterns of behavior without conscious thought. Like a mouse trained in a maze, we click through life's routines on autopilot. Experts leverage these automatic triggers to influence behavior instantly.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Turkey mother and polecat: mother automatically accepts any cheeping sound, ignores polecat predator</li>
+                    <li>Expensive = good quality trigger: price increases purchase rate even for identical products</li>
+                    <li>Babies: we automatically find infant features cute (big eyes, round face) and respond with nurturing</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Your brain isn't making decisions; it's running a script. Someone just has to press the right button and you go through your routine. We're all NPCs responding to triggers."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> LLM outputs are click-whirr responses to prompts—they automatically pattern-match and generate responses without "thinking." The prompt is the trigger.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Atomic Habits is built on understanding these automatic triggers and habit loops.
+            </div>
+            <div class="quote">"We are likely to find ourselves in circumstances where a clearly recognizable piece of the real world triggers a fixed sequence of responses that, having worked in the past, continues to work in the present."</div>
+        </div>
+    </section>
+
+    <!-- LESSON 12: DEFENSE AGAINST INFLUENCE -->
+    <section class="section">
+        <div class="lesson-card">
+            <div class="lesson-title">
+                <div class="lesson-number">12</div>
+                <span>Defense Against Influence</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Shield -->
+                    <polygon points="200,50 280,100 260,200 200,240 140,200 120,100" fill="#4ECDC4" stroke="#2D3436" stroke-width="3"/>
+                    <!-- Attacks bouncing off -->
+                    <circle cx="100" cy="120" r="15" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                    <path d="M 125 110 L 160 100" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowhead)"/>
+                    <circle cx="300" cy="120" r="15" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                    <path d="M 275 110 L 240 100" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowhead)"/>
+                    <!-- Protected figure inside -->
+                    <circle cx="200" cy="220" r="15" fill="#00B894" stroke="#2D3436" stroke-width="2"/>
+                    <!-- Eye (vigilance) -->
+                    <circle cx="190" cy="175" r="8" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                    <!-- Awareness tools -->
+                    <text x="200" y="280" font-size="11" text-anchor="middle" fill="#2D3436" font-weight="bold">Awareness = Best Defense</text>
+                    <text x="200" y="300" font-size="10" text-anchor="middle" fill="#A06CD5">Question. Verify. Don't React.</text>
+                </svg>
+            </div>
+            <div class="lesson-content">
+                <p>The best defense against influence tactics is awareness. When you understand how influence works, you can recognize the triggers and pause before responding automatically. Don't eliminate liking, scarcity, or authority from your life—just make conscious decisions about them rather than automatic ones.</p>
+            </div>
+            <div class="examples">
+                <strong>Real Examples:</strong>
+                <ul>
+                    <li>Recognize when you're being sold to and pause before buying</li>
+                    <li>Question authority—don't assume credibility from titles or appearance</li>
+                    <li>Be aware of automatic triggers: when you feel urgency, check your thinking</li>
+                </ul>
+            </div>
+            <div class="funny-take">
+                "Knowing the tricks doesn't make you immune. It just means when someone tries to manipulate you, you at least get to choose whether to go along. That's something."
+            </div>
+            <div class="ai-connection">
+                <strong>AI Connection:</strong> Understanding prompt injection and adversarial prompts helps users interact more safely with AI systems.
+            </div>
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Thinking Fast & Slow shows how awareness of biases helps (but doesn't eliminate) their effects.
+            </div>
+            <div class="quote">"Once we see through an influence tactic, it loses much of its power over us."</div>
+        </div>
+    </section>
+</body>
+</html>

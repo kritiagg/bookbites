@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antifragile: Illustrated Guide - Nassim Nicholas Taleb</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2D3436 100%);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(45, 52, 54, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
+            border-bottom: 2px solid var(--warm-red);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--warm-red);
+            letter-spacing: 1px;
+        }
+
+        .navbar-subtitle {
+            font-size: 0.9rem;
+            color: var(--teal);
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: var(--warm-red);
+            color: #fff;
+            border-color: var(--warm-red);
+        }
+
+        .nav-link.active {
+            color: var(--warm-red);
+            border-bottom: 2px solid var(--warm-red);
+        }
+
+        /* ========== COVER SECTION ========== */
+        .cover-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1a2e 50%, var(--warm-red) 100%);
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .cover-hydra-svg {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 3rem;
+            filter: drop-shadow(0 10px 40px rgba(225, 112, 85, 0.4));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            line-height: 1.1;
+        }
+
+        .cover-title-accent {
+            color: var(--sunny);
+            display: block;
+            font-style: italic;
+        }
+
+        .cover-author {
+            font-size: 1.3rem;
+            color: var(--teal);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .cover-subtitle {
+            font-size: 1.1rem;
+            color: #ddd;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .cover-cta {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--warm-red);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 2px solid var(--warm-red);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(225, 112, 85, 0.3);
+        }
+
+        .cover-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(225, 112, 85, 0.5);
+            background: transparent;
+            color: var(--warm-red);
+        }
+
+        .cover-bg-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: 0;
+            background: radial-gradient(circle at 20% 50%, var(--teal) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, var(--warm-red) 0%, transparent 50%);
+        }
+
+        /* ========== SECTION STYLES ========== */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-dark {
+            background: linear-gradient(180deg, #1a1a1a 0%, #2D3436 100%);
+        }
+
+        .section-light {
+            background: linear-gradient(180deg, #2D3436 0%, #1a1a1a 100%);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--warm-red);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--teal);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--teal);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: #ddd;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        /* ========== LESSON GRID ========== */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .lesson-card {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(225, 112, 85, 0.1) 100%);
+            border: 2px solid var(--teal);
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--warm-red), var(--sunny), var(--coral));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .lesson-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--warm-red);
+            background: linear-gradient(135deg, rgba(225, 112, 85, 0.15) 0%, rgba(78, 205, 196, 0.15) 100%);
+            box-shadow: 0 20px 50px rgba(225, 112, 85, 0.2);
+        }
+
+        .lesson-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--warm-red);
+            opacity: 0.3;
+            position: absolute;
+            top: -20px;
+            right: 20px;
+        }
+
+        .lesson-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--warm-red);
+            border-radius: 8px;
+            font-size: 1.8rem;
+        }
+
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--sunny);
+        }
+
+        .lesson-description {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .lesson-example {
+            font-size: 0.9rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid var(--teal);
+            border-radius: 4px;
+            color: #aaa;
+            font-style: italic;
+        }
+
+        /* ========== THE TRIAD ========== */
+        .triad-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .triad-box {
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            border: 2px solid;
+            transition: all 0.4s ease;
+        }
+
+        .triad-box.fragile {
+            background: linear-gradient(135deg, rgba(225, 112, 85, 0.2) 0%, rgba(225, 112, 85, 0.05) 100%);
+            border-color: var(--warm-red);
+        }
+
+        .triad-box.fragile:hover {
+            background: linear-gradient(135deg, rgba(225, 112, 85, 0.3) 0%, rgba(225, 112, 85, 0.1) 100%);
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(225, 112, 85, 0.3);
+        }
+
+        .triad-box.robust {
+            background: linear-gradient(135deg, rgba(156, 39, 176, 0.2) 0%, rgba(156, 39, 176, 0.05) 100%);
+            border-color: var(--purple);
+        }
+
+        .triad-box.robust:hover {
+            background: linear-gradient(135deg, rgba(156, 39, 176, 0.3) 0%, rgba(156, 39, 176, 0.1) 100%);
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(156, 39, 176, 0.3);
+        }
+
+        .triad-box.antifragile {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.2) 0%, rgba(78, 205, 196, 0.05) 100%);
+            border-color: var(--teal);
+        }
+
+        .triad-box.antifragile:hover {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.3) 0%, rgba(78, 205, 196, 0.1) 100%);
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.3);
+        }
+
+        .triad-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .triad-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .triad-description {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.7;
+        }
+
+        /* ========== KEY LESSON SECTION ========== */
+        .key-lesson {
+            background: linear-gradient(135deg, rgba(225, 112, 85, 0.15) 0%, rgba(78, 205, 196, 0.15) 100%);
+            border: 2px solid var(--warm-red);
+            border-radius: 12px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .key-lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--sunny);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .key-lesson-title::before {
+            content: '⭐';
+            font-size: 2.5rem;
+        }
+
+        .key-lesson-content {
+            font-size: 1.05rem;
+            color: #ddd;
+            line-height: 1.8;
+        }
+
+        .example-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--teal);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .example-label {
+            font-weight: 700;
+            color: var(--teal);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-text {
+            color: #aaa;
+            font-size: 0.95rem;
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        /* ========== TALEB'S COMBATIVE STYLE ========== */
+        .combative-section {
+            background: linear-gradient(135deg, rgba(160, 108, 213, 0.1) 0%, rgba(225, 112, 85, 0.1) 100%);
+            border-left: 6px solid var(--dark-purple);
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .combative-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--sunny);
+            font-style: italic;
+            font-weight: 600;
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            border-left: 4px solid var(--warm-red);
+            line-height: 1.8;
+        }
+
+        .combative-note {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* ========== AI CONNECTION ========== */
+        .ai-connection {
+            background: linear-gradient(135deg, rgba(9, 132, 227, 0.1) 0%, rgba(85, 239, 196, 0.1) 100%);
+            border: 2px dashed var(--sky);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .ai-connection-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--sky);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .ai-connection-title::before {
+            content: '🤖';
+            font-size: 1.8rem;
+        }
+
+        .ai-connection-text {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .ai-bullet {
+            margin-left: 2rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .ai-bullet strong {
+            color: var(--mint);
+        }
+
+        /* ========== CROSS-BOOK RECOMMENDATIONS ========== */
+        .cross-book {
+            background: linear-gradient(135deg, rgba(255, 230, 109, 0.1) 0%, rgba(253, 203, 110, 0.1) 100%);
+            border: 2px solid var(--orange);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .cross-book-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--orange);
+            margin-bottom: 1.5rem;
+        }
+
+        .book-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .book-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--warm-red);
+            transition: all 0.3s ease;
+        }
+
+        .book-item:hover {
+            transform: translateX(8px);
+            border-left-color: var(--orange);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .book-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--sunny);
+            margin-bottom: 0.5rem;
+        }
+
+        .book-author {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        .book-connection {
+            font-size: 0.85rem;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        /* ========== VISUAL METAPHORS ========== */
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .visual-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid var(--teal);
+            transition: all 0.4s ease;
+        }
+
+        .visual-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--warm-red);
+            box-shadow: 0 15px 40px rgba(225, 112, 85, 0.2);
+        }
+
+        .visual-emoji {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .visual-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--sunny);
+            margin-bottom: 1rem;
+        }
+
+        .visual-description {
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: 3rem 2rem;
+            border-top: 2px solid var(--warm-red);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--warm-red);
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--warm-red);
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: var(--teal);
+            margin: 2rem auto;
+            border-radius: 1px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .section {
+                padding: 3rem 1.5rem;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .triad-container {
+                grid-template-columns: 1fr;
+            }
+
+            .key-lesson {
+                padding: 2rem;
+            }
+
+            .cover-title {
+                font-size: 2.5rem;
+            }
+
+            .lesson-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="navbar">
+        <div>
+            <div class="navbar-title">ANTIFRAGILE</div>
+            <div class="navbar-subtitle">Things That Gain from Disorder</div>
+        </div>
+        <div class="nav-links">
+            <a href="#cover" class="nav-link active">Home</a>
+            <a href="#triad" class="nav-link">The Triad</a>
+            <a href="#lessons" class="nav-link">12 Lessons</a>
+            <a href="#taleb" class="nav-link">Taleb's Style</a>
+            <a href="#ai" class="nav-link">AI Connection</a>
+            <a href="#cross" class="nav-link">Cross-Reading</a>
+        </div>
+    </nav>
+
+    <!-- ========== COVER SECTION ========== -->
+    <section class="cover-section" id="cover">
+        <div class="cover-bg-decoration"></div>
+        <div class="cover-content">
+            <svg class="cover-hydra-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Central Body (Phoenix Rising) -->
+                <ellipse cx="100" cy="120" rx="35" ry="45" fill="#E17055" opacity="0.9"/>
+                <!-- Flames/Energy -->
+                <path d="M 70 80 Q 65 50 80 40 Q 75 55 85 70 Z" fill="#FFE66D" opacity="0.8"/>
+                <path d="M 130 80 Q 135 50 120 40 Q 125 55 115 70 Z" fill="#FFE66D" opacity="0.8"/>
+                <path d="M 100 50 Q 90 20 110 10 Q 100 25 110 55 Z" fill="#FF6B6B" opacity="0.7"/>
+                <!-- Left Head (Hydra) -->
+                <circle cx="50" cy="60" r="20" fill="#E17055" opacity="0.85"/>
+                <circle cx="45" cy="45" r="8" fill="#FFE66D" opacity="0.6"/>
+                <path d="M 50 65 L 45 85 Q 50 90 55 85 Z" fill="#E17055"/>
+                <!-- Right Head (Hydra) -->
+                <circle cx="150" cy="60" r="20" fill="#E17055" opacity="0.85"/>
+                <circle cx="155" cy="45" r="8" fill="#FFE66D" opacity="0.6"/>
+                <path d="M 150 65 L 155 85 Q 150 90 145 85 Z" fill="#E17055"/>
+                <!-- Third Head (Top - Regeneration) -->
+                <circle cx="100" cy="30" r="22" fill="#E17055" opacity="0.85"/>
+                <circle cx="100" cy="12" r="8" fill="#FFE66D" opacity="0.6"/>
+                <path d="M 100 52 L 95 70 Q 100 75 105 70 Z" fill="#E17055"/>
+                <!-- Shattered Elements (Becoming Stronger) -->
+                <path d="M 60 150 L 70 160 L 65 170 Z" fill="#FF6B6B" opacity="0.7"/>
+                <path d="M 140 150 L 130 160 L 135 170 Z" fill="#FF6B6B" opacity="0.7"/>
+                <rect x="95" y="165" width="10" height="20" fill="#E17055" opacity="0.6" transform="rotate(25 100 175)"/>
+                <!-- Cracks to Strength -->
+                <line x1="80" y1="100" x2="85" y2="140" stroke="#4ECDC4" stroke-width="2" opacity="0.6"/>
+                <line x1="120" y1="100" x2="115" y2="140" stroke="#4ECDC4" stroke-width="2" opacity="0.6"/>
+                <!-- Glow Effect -->
+                <circle cx="100" cy="120" r="60" fill="none" stroke="#FFE66D" stroke-width="1" opacity="0.3"/>
+            </svg>
+
+            <h1 class="cover-title">ANTIFRAGILE<span class="cover-title-accent">Things That Gain from Disorder</span></h1>
+            <p class="cover-author">Nassim Nicholas Taleb</p>
+            <p class="cover-subtitle">How to thrive in unpredictability. The philosophy that shattered everything you think you know about risk, resilience, and success.</p>
+            <a href="#lessons" class="cover-cta">Explore the Book</a>
+        </div>
+    </section>
+
+    <!-- ========== TRIAD SECTION ========== -->
+    <section class="section section-dark" id="triad">
+        <h2 class="section-title">The Core Triad</h2>
+        <p class="section-subtitle">Fragile → Robust → Antifragile</p>
+        <p class="section-description">
+            Taleb's fundamental framework redefines how we understand resilience. Three states exist, not two: things break down, things resist breaking down, or things improve when exposed to stressors. The third is almost entirely ignored by most of us.
+        </p>
+
+        <div class="triad-container">
+            <div class="triad-box fragile">
+                <div class="triad-icon">💔</div>
+                <div class="triad-title">Fragile</div>
+                <div class="triad-description">
+                    Deteriorates under stress. The glass vase falls and shatters. The company survives good times but collapses in crisis. Financial systems in 2008. Your grandmother's best china—handle with extreme care.
+                </div>
+            </div>
+
+            <div class="triad-box robust">
+                <div class="triad-icon">⛑️</div>
+                <div class="triad-title">Robust (Resilient)</div>
+                <div class="triad-description">
+                    Resists stress but doesn't improve from it. The Nokia brick phone survives drops. The insurance company breaks even through disasters. An organism maintains equilibrium. Not harmed, but also not strengthened.
+                </div>
+            </div>
+
+            <div class="triad-box antifragile">
+                <div class="triad-icon">🦅</div>
+                <div class="triad-title">Antifragile</div>
+                <div class="triad-description">
+                    Improves and strengthens when exposed to stressors. Muscles grow from lifting weights. Evolution accelerates through hardship. Your immune system strengthens from exposure to pathogens. Disorder is fuel for growth.
+                </div>
+            </div>
+        </div>
+
+        <div class="key-lesson">
+            <div class="key-lesson-title">The Inverse Relationship</div>
+            <div class="key-lesson-content">
+                The absence of harm is NOT the presence of benefit. Fragility means you suffer from volatility. Robustness means volatility doesn't touch you. Antifragility means volatility is your competitive advantage. Most of us design for robustness—Taleb demands we build for antifragility.
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 12 LESSONS SECTION ========== -->
+    <section class="section section-light" id="lessons">
+        <h2 class="section-title">The 12 Core Lessons</h2>
+        <p class="section-subtitle">Principles that reshape your understanding of risk, uncertainty, and living well</p>
+
+        <div class="lessons-grid">
+            <!-- LESSON 1 -->
+            <div class="lesson-card">
+                <div class="lesson-number">1</div>
+                <div class="lesson-icon">🧲</div>
+                <div class="lesson-title">Via Negativa</div>
+                <div class="lesson-description">
+                    What you remove matters more than what you add. Reducing harm is often more powerful than chasing benefit. The most efficient diet is not about adding superfoods—it's about removing poison.
+                </div>
+                <div class="lesson-example">
+                    <strong>Example:</strong> A stoic's path to happiness comes not from pursuing more pleasure, but from removing unnecessary desires.
+                </div>
+            </div>
+
+            <!-- LESSON 2 -->
+            <div class="lesson-card">
+                <div class="lesson-number">2</div>
+                <div class="lesson-icon">⏳</div>
+                <div class="lesson-title">The Lindy Effect</div>
+                <div class="lesson-description">
+                    The old outlasts the new. If something has survived this long, it's likely to survive much longer. A 300-year-old book will likely be read in another 300 years. A viral Twitter trend will not.
+                </div>
+                <div class="lesson-example">
+                    <strong>Example:</strong> Latin, Stoicism, the Bible. More recent tech companies? Far less likely to exist in 100 years.
+                </div>
+            </div>
+
+            <!-- LESSON 3 -->
+            <div class="lesson-card">
+                <div class="lesson-number">3</div>
+                <div class="lesson-icon">⚖️</div>
+                <div class="lesson-title">Skin in the Game</div>
+                <div class="lesson-description">
+                    The asymmetry of risk matters. Those who profit from decisions but don't bear the consequences are dangerous. Bankers who caused 2008 didn't lose their homes. Doctors who practice medicine must carry malpractice insurance.
+                </div>
+                <div class="lesson-example">
+                    <strong>Example:</strong> Your barber's incentive is aligned—bad cuts mean fewer customers. Pharmaceutical reps? Not so much.
+                </div>
+            </div>
+
+            <!-- LESSON 4 -->
+            <div class="lesson-card">
+                <div class="lesson-number">4</div>
+                <div class="lesson-icon">🎲</div>
+                <div class="lesson-title">Optionality</div>
+                <div class="lesson-description">
+                    Having options is antifragile. The value of optionality is asymmetric—you benefit from upside surprises, limited by downside. Stay flexible. Avoid irreversible decisions.
+                </div>
+                <div class="lesson-example">
+                    <strong>Example:</strong> A graduate with a general degree has more options than one with a hyper-specialized degree.
+                </div>
+            </div>
+
+            <!-- LESSON 5 -->
+            <div class="lesson-card">
+                <div class="lesson-number">5</div>
+                <div class="lesson-icon">💪🏋️</div>
+                <div class="lesson-title">The Barbell Strategy</div>
+                <div class="lesson-description">
+                    Extreme safety + extreme risk. Nothing in the middle. Put 90% in ultra-safe assets (Treasury bonds), 10% in high-risk, high-reward bets. Avoid the mushy middle ground of moderate risk for moderate returns.
+                </div>
+                <div class="lesson-example">
+                    <strong>Example:</strong> Secure day job + startup side hustle. Safe income + wild optionality.
+                </div>
+            </div>
+
+            <!-- LESSON 6 -->
+            <div class="lesson-card">
+                <div class="lesson-number">6</div>
+                <div class="lesson-icon">💊</div>
+                <div class="lesson-title">Hormesis</div>
+                <div class="lesson-description">
+                    Small doses of stress strengthen. Fasting improves health. Exercise damages muscles to rebuild them stronger. Cold exposure toughens you. The dose makes the poison. The poison makes the antidote.
+                </div>
+                <div class="lesson-example">
+                    <strong>Example:</strong> Seneca's practice of voluntary discomfort—sleeping on a hard bed to strengthen his resilience.
+                </div>
+            </div>
+
+            <!-- LESSON 7 -->
+            <div class="lesson-card">
+                <div class="lesson-number">7</div>
+                <div class="lesson-icon">🚑</div>
+                <div class="lesson-title">Iatrogenics</div>
+                <div class="lesson-description">
+                    Intervention causing more harm than benefit. Naive interventionism is dangerous. "First, do no harm." Most of medicine's advances came from knowing what NOT to do, not what to do.
+                </div>
+                <div class="lesson-example">
+                    <strong>Example:</strong> Antibiotics overuse creates resistant superbugs. Unnecessary surgery. Over-management destroying company culture.
+                </div>
+            </div>
+
+            <!-- LESSON 8 -->
+            <div class="lesson-card">
+                <div class="lesson-number">8</div>
+                <div class="lesson-icon">🦃</div>
+                <div class="lesson-title">The Turkey Problem</div>
+                <div class="lesson-description">
+                    A turkey is fed for 1,000 days. On day 1,001, it's Thanksgiving. Past data is not predictive when a "black swan" event occurs. We overestimate stability based on narrow experience.
+                </div>
+                <div class="lesson-example">
+                    <strong>Example:</strong> Pre-2008 bankers thought housing would never crash. Nassim was the turkey writing this down.
+                </div>
+            </div>
+
+            <!-- LESSON 9 -->
+            <div class="lesson-card">
+                <div class="lesson-number">9</div>
+                <div class="lesson-icon">🌍</div>
+                <div class="lesson-title">Domain Dependence</div>
+                <div class="lesson-description">
+                    You're smart in one domain, stupid in another. A brilliant physicist may be financially illiterate. An excellent doctor might make terrible business decisions. Knowledge doesn't transfer seamlessly.
+                </div>
+                <div class="lesson-example">
+                    <strong>Example:</strong> Nassim calls this the "nerd problem"—academia thinks linearly; markets are nonlinear.
+                </div>
+            </div>
+
+            <!-- LESSON 10 -->
+            <div class="lesson-card">
+                <div class="lesson-number">10</div>
+                <div class="lesson-icon">📊</div>
+                <div class="lesson-title">Mediocristan vs. Extremistan</div>
+                <div class="lesson-description">
+                    In Mediocristan (height, weight), averages are meaningful. In Extremistan (wealth, book sales), extremes dominate. You can't use Mediocristan logic in an Extremistan world. Most people use wrong statistics.
+                </div>
+                <div class="lesson-example">
+                    <strong>Example:</strong> Your average height tells you little about the population. Your average income tells you almost nothing about wealth distribution.
+                </div>
+            </div>
+
+            <!-- LESSON 11 -->
+            <div class="lesson-card">
+                <div class="lesson-number">11</div>
+                <div class="lesson-icon">🪵</div>
+                <div class="lesson-title">The Green Lumber Fallacy</div>
+                <div class="lesson-description">
+                    Practitioners beat theorists. A green lumber merchant knows more than a PhD economist who studied lumber markets. Doing beats studying. Experience beats models. Action beats analysis.
+                </div>
+                <div class="lesson-example">
+                    <strong>Example:</strong> A carpenter builds better buildings than an architect who's never touched a hammer.
+                </div>
+            </div>
+
+            <!-- LESSON 12 -->
+            <div class="lesson-card">
+                <div class="lesson-number">12</div>
+                <div class="lesson-icon">⚡</div>
+                <div class="lesson-title">The Antifragile Life</div>
+                <div class="lesson-description">
+                    Build systems where shocks improve you. Choose careers with optionality. Diversify small. Keep debt low. Maintain multiple income streams. Make your life a barbell—safe floor, unlimited ceiling.
+                </div>
+                <div class="lesson-example">
+                    <strong>Example:</strong> A writer with a side consultant job. A researcher with a trading account. Flexibility and optionality everywhere.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== KEY LESSON: THE RESTAURANT BUSINESS ========== -->
+    <section class="section section-dark">
+        <h2 class="section-title">The Restaurant Paradox</h2>
+        <p class="section-subtitle">A Real-World Example of Fragility</p>
+
+        <div class="key-lesson">
+            <div class="key-lesson-title">Why Restaurants Are Fragile</div>
+            <div class="key-lesson-content">
+                Most restaurants fail within 5 years. This isn't because they're poorly run—it's because they're structurally fragile. They need consistent revenue. A recession, health crisis, or bad month breaks them. They have no optionality, no barbell strategy.
+
+                <div class="example-box">
+                    <div class="example-label">The Fragile Model</div>
+                    <div class="example-text">
+                        High fixed costs (rent, staff, inventory). Slim margins (3-5%). No buffer for volatility. One bad year bankrupts the owner. They can't downsize quickly. Debt usually crushes them.
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">The Antifragile Model (Taleb's Framework)</div>
+                    <div class="example-text">
+                        Low fixed costs (shared kitchen, minimal staff). High variable margins (premium pricing, unique concept). Optionality to pivot (catering, cooking classes, food products). A barbell: rock-solid core menu + experimental dishes. When crisis hits, they adapt. Volatility becomes opportunity.
+                    </div>
+                </div>
+
+                Most restaurants ignore this. They're turkey thinking they'll survive forever.
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TALEB'S COMBATIVE STYLE ========== -->
+    <section class="section section-light" id="taleb">
+        <h2 class="section-title">Taleb's Combative Philosophy</h2>
+        <p class="section-subtitle">How Nassim Challenges Conventional Wisdom</p>
+
+        <p class="section-description">
+            Taleb doesn't play nice. He insults economists, attacks the academic establishment, and mocks those who confuse confidence with competence. This isn't arrogance—it's his method. He forces you to defend your beliefs or abandon them. His combativeness is itself antifragile.
+        </p>
+
+        <div class="combative-section">
+            <div class="example-label">Key Targets of Taleb's Criticism</div>
+
+            <div class="combative-quote">
+                "There is no medicine that doesn't have a side effect. So any intervention can make you worse off."
+            </div>
+            <div class="combative-note">
+                Nassim on iatrogenics: almost all well-meaning interventions fail.
+            </div>
+
+            <div class="combative-quote">
+                "The greatest risk is not that we don't know enough; it's that we think we know more than we do."
+            </div>
+            <div class="combative-note">
+                On overconfidence: economists, academics, central bankers.
+            </div>
+
+            <div class="combative-quote">
+                "Data makes you dumber if you don't understand nonlinearities."
+            </div>
+            <div class="combative-note">
+                On naive empiricism: more data ≠ better decisions.
+            </div>
+
+            <div class="combative-quote">
+                "I don't want to predict the future; I want to be robust to it."
+            </div>
+            <div class="combative-note">
+                His central philosophy: abandon forecasting, embrace antifragility.
+            </div>
+        </div>
+
+        <div class="key-lesson">
+            <div class="key-lesson-title">Fat Tony vs. Dr. John</div>
+            <div class="key-lesson-content">
+                One of Taleb's most brilliant contrasts: Fat Tony, the street trader with no PhD, vs. Dr. John, the academic economist. Fat Tony survives because he understands risk intuitively. Dr. John blows up because he overestimates his models. The PhD makes you less intelligent about uncertainty, not more.
+
+                <div class="example-box">
+                    <div class="example-label">Fat Tony's Wisdom</div>
+                    <div class="example-text">
+                        "Never bet the farm. Keep your powder dry. Respect tail risk. When everyone agrees, they're usually wrong. Simplicity beats complexity."
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Dr. John's Folly</div>
+                    <div class="example-text">
+                        "But the model shows... My regression analysis proves... The data is normally distributed. Black swans don't exist according to my framework."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="key-lesson">
+            <div class="key-lesson-title">Seneca's Stoicism as Antifragile</div>
+            <div class="key-lesson-content">
+                Taleb reveres Seneca (4 BC - 65 AD) as the original antifragile thinker. Seneca practiced voluntary discomfort:
+
+                <div class="example-box">
+                    <div class="example-label">Seneca's Practice</div>
+                    <div class="example-text">
+                        He would sleep on a rough mat instead of his silk bed. Eat plain bread. Wear cheap clothes. Why? To build immunity to loss. "If you would not have adversity at all, you must court it." He was inoculating himself against misfortune.
+                    </div>
+                </div>
+
+                This is hormesis. This is antifragility. By exposing himself to small doses of poverty and discomfort, Seneca became unbothered by large losses. Stoicism isn't just philosophy—it's a technology for antifragility.
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== AI CONNECTION ========== -->
+    <section class="section section-dark" id="ai">
+        <h2 class="section-title">Antifragile Meets AI</h2>
+        <p class="section-subtitle">How Taleb's Ideas Reshape Machine Learning</p>
+
+        <p class="section-description">
+            Taleb's framework for antifragility is startlingly relevant to modern AI. The same principles that make humans robust in uncertainty apply to neural networks, large language models, and algorithmic systems.
+        </p>
+
+        <div class="ai-connection">
+            <div class="ai-connection-title">Adversarial Robustness as Antifragility</div>
+            <div class="ai-connection-text">
+                Traditional ML training aims for robustness: minimize error on test data. Taleb would say this is fragile—it breaks on adversarial inputs. True antifragile AI improves when attacked. Adversarial training exposes the model to attacks, and it emerges stronger.
+            </div>
+            <div class="ai-bullet">
+                <strong>Taleb's insight:</strong> You don't want a model that handles noise well. You want a model that improves from noise.
+            </div>
+        </div>
+
+        <div class="ai-connection">
+            <div class="ai-connection-title">Via Negativa as Pruning & Regularization</div>
+            <div class="ai-connection-text">
+                Via Negativa says: what you remove matters more than what you add. In ML, this translates to pruning, dropout, and regularization. A massive overparameterized model isn't better—it's fragile. A pruned model with fewer parameters is often more robust.
+            </div>
+            <div class="ai-bullet">
+                <strong>The principle:</strong> Removing bad connections is more valuable than adding good ones.
+            </div>
+        </div>
+
+        <div class="ai-connection">
+            <div class="ai-connection-title">The Lindy Effect Applied to AI Architectures</div>
+            <div class="ai-connection-text">
+                Transformers (2017) are becoming Lindy. The older they get, the more likely they'll persist. CNNs had a shorter lifespan. RNNs are nearly obsolete. Transformers have proven durable across diverse domains. By Taleb's logic, a 7-year-old architecture is more likely to outlast a 2-year-old one.
+            </div>
+            <div class="ai-bullet">
+                <strong>Implication:</strong> Don't chase the newest architecture. Invest in what's survived the test of time.
+            </div>
+        </div>
+
+        <div class="ai-connection">
+            <div class="ai-connection-title">Barbell Strategy in Training Data</div>
+            <div class="ai-connection-text">
+                Most ML training uses balanced, homogeneous data. Taleb would call this fragile. A barbell approach: 80% extremely clean, curated data (ultra-safe) + 20% extremely hard, edge-case examples (extreme risk). This produces optionality—the model handles both the trivial and the impossible.
+            </div>
+            <div class="ai-bullet">
+                <strong>The strategy:</strong> Easy examples + hard examples. Nothing mediocre.
+            </div>
+        </div>
+
+        <div class="ai-connection">
+            <div class="ai-connection-title">Hormesis as Data Augmentation with Noise</div>
+            <div class="ai-connection-text">
+                Small doses of noise during training strengthen models. Dropout, mixup, and noise injection aren't just regularization tricks—they're hormesis. The model gets stressed in controlled ways and emerges more robust. Volatility improves it.
+            </div>
+            <div class="ai-bullet">
+                <strong>Insight:</strong> A model trained on clean data is fragile. A model trained with noise is antifragile.
+            </div>
+        </div>
+
+        <div class="ai-connection">
+            <div class="ai-connection-title">Iatrogenics as Overfitting from Over-Engineering</div>
+            <div class="ai-connection-text">
+                Overfitting is the ML equivalent of iatrogenics: the cure (adding complexity) becomes worse than the disease (underfitting). Hyperparameter tuning, ensemble methods, and over-engineering often reduce generalization. Sometimes, not optimizing is the best strategy.
+            </div>
+            <div class="ai-bullet">
+                <strong>The warning:</strong> More tuning ≠ better performance. Sometimes, simpler is antifragile.
+            </div>
+        </div>
+
+        <div class="ai-connection">
+            <div class="ai-connection-title">Optionality in Model Architecture</div>
+            <div class="ai-connection-text">
+                Ensemble models, mixture-of-experts, and multi-task learning all embed optionality: the system has options for which model to use. When one fails, others step in. This is antifragile. A single monolithic model is fragile.
+            </div>
+            <div class="ai-bullet">
+                <strong>Design principle:</strong> Build systems with multiple options, not single points of failure.
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== VISUAL METAPHORS ========== -->
+    <section class="section section-light">
+        <h2 class="section-title">Visual Metaphors</h2>
+        <p class="section-subtitle">How to Remember the Core Ideas</p>
+
+        <div class="visual-grid">
+            <div class="visual-item">
+                <div class="visual-emoji">💔</div>
+                <div class="visual-label">The Broken Vase</div>
+                <div class="visual-description">
+                    Fragility. Drop it once, and it shatters forever. No recovery. No improvement. Just broken.
+                </div>
+            </div>
+
+            <div class="visual-item">
+                <div class="visual-emoji">🦅</div>
+                <div class="visual-label">The Phoenix Rising</div>
+                <div class="visual-description">
+                    Antifragility. Burned to ash, emerges stronger. Each destruction is regeneration. Setbacks become comebacks.
+                </div>
+            </div>
+
+            <div class="visual-item">
+                <div class="visual-emoji">🦃</div>
+                <div class="visual-label">The Turkey</div>
+                <div class="visual-description">
+                    Thanksgiving problem. Fed every day, thinks life is stable. Day 1,001 changes everything. Past ≠ future.
+                </div>
+            </div>
+
+            <div class="visual-item">
+                <div class="visual-emoji">⚖️</div>
+                <div class="visual-label">The Barbell</div>
+                <div class="visual-description">
+                    Extreme safety (weights on one side) + extreme risk (weights on the other). Never mediocre.
+                </div>
+            </div>
+
+            <div class="visual-item">
+                <div class="visual-emoji">💪</div>
+                <div class="visual-label">The Muscle</div>
+                <div class="visual-description">
+                    Hormesis. Damaged in the gym, rebuilds stronger. Stress creates antifragility. No pain, no gain.
+                </div>
+            </div>
+
+            <div class="visual-item">
+                <div class="visual-emoji">🧬</div>
+                <div class="visual-label">Evolution</div>
+                <div class="visual-description">
+                    Uncertainty and selection pressure create adaptation. Difficulty drives improvement. Volatility is fuel.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CROSS-BOOK RECOMMENDATIONS ========== -->
+    <section class="section section-dark" id="cross">
+        <h2 class="section-title">Cross-Book Reading</h2>
+        <p class="section-subtitle">Antifragile in Context: Related Works That Deepen Understanding</p>
+
+        <div class="cross-book">
+            <div class="cross-book-title">Essential Companions</div>
+            <div class="book-list">
+                <div class="book-item">
+                    <div class="book-title">The Black Swan</div>
+                    <div class="book-author">Nassim Nicholas Taleb</div>
+                    <div class="book-connection">
+                        The precursor to Antifragile. Explains how rare, unpredictable events dominate. A must-read to understand why antifragility matters.
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-title">Thinking, Fast and Slow</div>
+                    <div class="book-author">Daniel Kahneman</div>
+                    <div class="book-connection">
+                        Kahneman explains cognitive biases. Taleb uses Kahneman's framework to show why our intuitions about risk are broken.
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-title">Meditations</div>
+                    <div class="book-author">Marcus Aurelius</div>
+                    <div class="book-connection">
+                        The original antifragile manual. Stoicism as a technology for resilience. Seneca's voluntary discomfort in action.
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-title">Zero to One</div>
+                    <div class="book-author">Peter Thiel</div>
+                    <div class="book-connection">
+                        Optionality meets entrepreneurship. Create options, not predictions. How to build companies with antifragile upside.
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-title">Sapiens</div>
+                    <div class="book-author">Yuval Noah Harari</div>
+                    <div class="book-connection">
+                        Humans survived by being antifragile: adaptable, flexible, non-specialized. How evolution built antifragility into our DNA.
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-title">Skin in the Game</div>
+                    <div class="book-author">Nassim Nicholas Taleb</div>
+                    <div class="book-connection">
+                        The follow-up. Deepens the asymmetry principle. Institutions without skin in the game are inherently fragile.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="key-lesson">
+            <div class="key-lesson-title">How These Books Connect</div>
+            <div class="key-lesson-content">
+                <div class="example-box">
+                    <div class="example-label">The Black Swan → Antifragile</div>
+                    <div class="example-text">
+                        Black Swan identifies the problem (rare events matter). Antifragile provides the solution (build systems that benefit from them).
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Thinking, Fast and Slow → Antifragile</div>
+                    <div class="example-text">
+                        Kahneman shows why we're bad at uncertainty. Taleb shows how to design around that limitation. Understand the bias, then engineer systems that don't depend on overcoming it.
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Meditations + Zero to One → Antifragile Life</div>
+                    <div class="example-text">
+                        Marcus Aurelius teaches resilience through Stoicism. Thiel teaches optionality through entrepreneurship. Taleb synthesizes: be resilient AND keep optionality. That's the antifragile life.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PRACTICAL APPLICATION ========== -->
+    <section class="section section-light">
+        <h2 class="section-title">Implementing Antifragility</h2>
+        <p class="section-subtitle">From Theory to Practice: How to Live Antifragile</p>
+
+        <div class="lessons-grid">
+            <div class="lesson-card">
+                <div class="lesson-icon">💼</div>
+                <div class="lesson-title">Career Antifragility</div>
+                <div class="lesson-description">
+                    Don't specialize narrowly. Keep skills diverse. Have multiple income streams. Practice the barbell: stable job + risky side project. When your industry shifts, you adapt instead of breaking.
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-icon">💰</div>
+                <div class="lesson-title">Financial Antifragility</div>
+                <div class="lesson-description">
+                    Live well below your means. Hold 6-12 months of expenses in cash. Put 80% in ultra-safe instruments, 20% in speculative bets. Debt is fragility. Leverage is fragility. Simplicity is antifragile.
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-icon">🏃</div>
+                <div class="lesson-title">Physical Antifragility</div>
+                <div class="lesson-description">
+                    Hormesis in action. Lift heavy weights. Fast occasionally. Get cold. Sleep on a hard surface sometimes. Build a body that improves from stress, not one that breaks from it.
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-icon">🧠</div>
+                <div class="lesson-title">Intellectual Antifragility</div>
+                <div class="lesson-description">
+                    Read widely across domains. Expose yourself to criticism. Change your mind. Study history, not trends. Build convex payoff: ideas that benefit from volatility and uncertainty.
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-icon">⚡</div>
+                <div class="lesson-title">Decision-Making Antifragility</div>
+                <div class="lesson-description">
+                    Don't try to predict. Design for optionality. Keep decisions reversible. Don't burn bridges. Maintain relationships. Stay in the game. Small bets on many things beat big bets on one.
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-icon">🌱</div>
+                <div class="lesson-title">Social Antifragility</div>
+                <div class="lesson-description">
+                    Strong weak ties matter more than strong strong ties. Maintain diverse networks. Be known for something small and useful. Avoid the middle—be either unknown or famous, not semi-known.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FINAL THOUGHTS ========== -->
+    <section class="section section-dark">
+        <h2 class="section-title">The Antifragile Worldview</h2>
+        <p class="section-subtitle">Why This Matters</p>
+
+        <div class="key-lesson">
+            <div class="key-lesson-title">The Shift in Thinking</div>
+            <div class="key-lesson-content">
+                Most people spend their lives trying to predict the future and prevent bad outcomes. Taleb says this is backwards. You can't predict. You shouldn't try. Instead, build systems where uncertainty is your friend.
+
+                <div class="example-box">
+                    <div class="example-label">Old Paradigm</div>
+                    <div class="example-text">
+                        Forecast perfectly. Eliminate all risk. Optimize for stability. Plan for the known future.
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label">Taleb's Paradigm</div>
+                    <div class="example-text">
+                        Accept unpredictability. Embrace risk asymmetrically. Design for antifragility. Benefit from the unknown.
+                    </div>
+                </div>
+
+                This isn't pessimism. It's radical optimism. If you build antifragile systems, chaos isn't your enemy—it's your fuel. The turkey thinks it's living in a stable world until Thanksgiving. You'll be the one who thrives when Thanksgiving comes.
+            </div>
+        </div>
+
+        <div class="combative-section">
+            <div class="example-label">Taleb's Final Challenge to You</div>
+            <div class="combative-quote">
+                "The problem is not uncertainty. The problem is thinking you have certainty when you don't. Build for fragility, and you're already beaten. Build for antifragility, and you've already won."
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-title">Antifragile: Things That Gain from Disorder</div>
+            <div class="divider"></div>
+            <div class="footer-text">
+                A comprehensive illustrated guide to Nassim Nicholas Taleb's groundbreaking philosophy. <br>
+                Understanding how to thrive in uncertainty, build resilience, and benefit from chaos.
+            </div>
+            <div class="footer-text">
+                "The opposite of fragile is not stable. It is antifragile." — Nassim Nicholas Taleb
+            </div>
+            <div class="divider"></div>
+            <div class="footer-links">
+                <a href="#cover" class="footer-link">↑ Back to Top</a>
+                <a href="#lessons" class="footer-link">The 12 Lessons</a>
+                <a href="#ai" class="footer-link">AI Connection</a>
+                <a href="#cross" class="footer-link">Cross-Reading</a>
+            </div>
+            <div class="footer-text" style="margin-top: 2rem; font-size: 0.8rem; color: #666;">
+                Created with Inter and Playfair Display • Designed for deep learning and contemplation • © 2026 Illustrated Guide Series
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== SMOOTH SCROLL ========== -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

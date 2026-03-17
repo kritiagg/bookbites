@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Body Keeps the Score: An Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef7 100%);
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Cover Section */
+        .cover {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--dark-purple) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .cover-svg-container {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cover svg {
+            max-width: 300px;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin: 1.5rem 0;
+            line-height: 1.2;
+        }
+
+        .cover .subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+        }
+
+        .cover .author {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.85;
+            font-style: italic;
+        }
+
+        .cover-description {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 3rem 0 2rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(90deg, var(--cream) 0%, rgba(255, 255, 255, 0.5) 100%);
+            border-left: 5px solid var(--purple);
+            border-radius: 8px;
+        }
+
+        .section-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--purple);
+            min-width: 60px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* Lesson Cards */
+        .lesson {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid var(--teal);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lesson:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .lesson h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+        }
+
+        .lesson p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .research-box {
+            background: linear-gradient(135deg, var(--sky) 0%, rgba(116, 185, 255, 0.1) 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--deep-blue);
+        }
+
+        .research-box strong {
+            color: var(--deep-blue);
+        }
+
+        .funny-take {
+            background: linear-gradient(135deg, var(--sunny) 0%, rgba(255, 230, 109, 0.15) 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--orange);
+            font-style: italic;
+            color: var(--dark);
+        }
+
+        .funny-take::before {
+            content: "💭 ";
+            margin-right: 0.5rem;
+        }
+
+        .ai-connection {
+            background: linear-gradient(135deg, var(--mint) 0%, rgba(85, 239, 196, 0.15) 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--forest);
+            color: var(--dark);
+        }
+
+        .ai-connection strong {
+            color: var(--forest);
+        }
+
+        .ai-connection::before {
+            content: "⚙️ ";
+            margin-right: 0.5rem;
+        }
+
+        .cross-book {
+            background: linear-gradient(135deg, var(--pink) 0%, rgba(253, 121, 168, 0.15) 100%);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--warm-red);
+            font-size: 0.95rem;
+        }
+
+        .cross-book strong {
+            color: var(--warm-red);
+        }
+
+        .cross-book::before {
+            content: "📚 ";
+            margin-right: 0.5rem;
+        }
+
+        /* SVG Illustrations */
+        .illustration {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .illustration svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Key Takeaways */
+        .key-takeaways {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--sunny) 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .key-takeaways h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .key-takeaways ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-takeaways li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--dark);
+        }
+
+        .key-takeaways li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--purple);
+            font-weight: bold;
+        }
+
+        /* Conclusion */
+        .conclusion {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--deep-blue) 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .conclusion h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .conclusion p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .toc h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--deep-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .toc ol {
+            list-style: none;
+            counter-reset: item;
+        }
+
+        .toc li {
+            counter-increment: item;
+            margin-bottom: 0.8rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .toc li::before {
+            content: counter(item);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: var(--purple);
+            font-size: 1.1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .cover h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .lesson h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cover Section -->
+        <section class="cover">
+            <div class="cover-svg-container">
+                <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Brain outline -->
+                    <defs>
+                        <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FFE66D;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#A06CD5;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4ECDC4;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#74B9FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Body outline -->
+                    <ellipse cx="150" cy="80" rx="40" ry="45" fill="url(#brainGradient)" stroke="white" stroke-width="2"/>
+                    <!-- Neck -->
+                    <rect x="135" y="120" width="30" height="25" fill="url(#bodyGradient)" stroke="white" stroke-width="2"/>
+                    <!-- Torso -->
+                    <ellipse cx="150" cy="180" rx="45" ry="55" fill="url(#bodyGradient)" stroke="white" stroke-width="2"/>
+                    <!-- Arms -->
+                    <line x1="105" y1="160" x2="70" y2="200" stroke="white" stroke-width="3"/>
+                    <line x1="195" y1="160" x2="230" y2="200" stroke="white" stroke-width="3"/>
+                    <!-- Legs -->
+                    <line x1="130" y1="230" x2="120" y2="280" stroke="white" stroke-width="3"/>
+                    <line x1="170" y1="230" x2="180" y2="280" stroke="white" stroke-width="3"/>
+
+                    <!-- Neural connections -->
+                    <circle cx="130" cy="70" r="3" fill="#FFF" opacity="0.8"/>
+                    <circle cx="170" cy="75" r="3" fill="#FFF" opacity="0.8"/>
+                    <circle cx="150" cy="50" r="3" fill="#FFF" opacity="0.8"/>
+                    <line x1="130" y1="70" x2="170" y2="75" stroke="white" stroke-width="1.5" opacity="0.6"/>
+                    <line x1="150" y1="50" x2="150" y2="90" stroke="white" stroke-width="1.5" opacity="0.6"/>
+
+                    <!-- Heart symbol in torso -->
+                    <path d="M 150 160 L 160 150 Q 170 145 175 155 Q 170 165 150 180 Q 130 165 125 155 Q 130 145 140 150 Z" fill="white" opacity="0.7"/>
+                </svg>
+            </div>
+            <h1>The Body Keeps the Score</h1>
+            <div class="subtitle">Brain, Mind, and Body in the Healing of Trauma</div>
+            <div class="author">By Bessel van der Kolk, MD</div>
+            <div class="cover-description">
+                A groundbreaking exploration of how trauma is encoded in the body and nervous system, and how understanding this connection opens pathways to genuine healing. This guide distills 30+ years of research into 12 essential lessons about trauma, the brain, and recovery.
+            </div>
+        </section>
+
+        <!-- Table of Contents -->
+        <section class="toc">
+            <h2>Guide Contents</h2>
+            <ol>
+                <li>Trauma Lives in the Body (Not Just the Mind)</li>
+                <li>The Triune Brain: Reptilian, Limbic, and Neocortex</li>
+                <li>Fight, Flight, Freeze, and Fawn: The Nervous System's Emergency Responses</li>
+                <li>Dissociation as a Survival Mechanism</li>
+                <li>Developmental Trauma vs. PTSD</li>
+                <li>The ACE Study: Measuring Data Quality in Early Life</li>
+                <li>EMDR and the Reprocessing Revolution</li>
+                <li>Yoga and Body-Based Therapies</li>
+                <li>Neurofeedback: Real-Time Monitoring of the Nervous System</li>
+                <li>The Window of Tolerance</li>
+                <li>Interoception: Tuning into Your Own Body</li>
+                <li>Internal Family Systems (IFS): Healing Through Parts Work</li>
+            </ol>
+        </section>
+
+        <!-- Lesson 1 -->
+        <section class="lesson">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <div class="section-title">Trauma Lives in the Body (Not Just the Mind)</div>
+            </div>
+
+            <p>
+                Van der Kolk's central insight: <strong>trauma is not primarily a psychological problem, but a physiological one.</strong> When we experience overwhelming events, the information doesn't integrate normally into autobiographical memory. Instead, it becomes embedded in sensation, emotion, and implicit memory—stored in the body itself.
+            </p>
+
+            <p>
+                Traumatized people don't forget what happened; they relive it in fragments—a smell triggers panic, a touch ignites rage, a sound catapults them back to danger. The body remembers even when the mind cannot speak it.
+            </p>
+
+            <div class="illustration">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4ECDC4;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#74B9FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Body outline -->
+                    <ellipse cx="100" cy="80" rx="30" ry="35" fill="url(#grad1)" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="80" y="110" width="40" height="80" fill="url(#grad1)" stroke="#2D3436" stroke-width="2"/>
+                    <circle cx="70" cy="140" r="20" fill="url(#grad1)" stroke="#2D3436" stroke-width="2"/>
+                    <circle cx="130" cy="140" r="20" fill="url(#grad1)" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="85" y="190" width="13" height="50" fill="url(#grad1)" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="102" y="190" width="13" height="50" fill="url(#grad1)" stroke="#2D3436" stroke-width="2"/>
+
+                    <!-- Trauma patterns (radiating lines) -->
+                    <circle cx="100" cy="150" r="25" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                    <circle cx="100" cy="150" r="40" fill="none" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.5"/>
+                    <circle cx="100" cy="150" r="55" fill="none" stroke="#FF6B6B" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+
+                    <!-- Sensation markers -->
+                    <text x="200" y="60" font-family="Inter" font-size="12" fill="#2D3436" font-weight="bold">Implicit Memory</text>
+                    <line x1="180" y1="65" x2="155" y2="90" stroke="#A06CD5" stroke-width="2"/>
+
+                    <text x="200" y="100" font-family="Inter" font-size="12" fill="#2D3436" font-weight="bold">Sensory Fragments</text>
+                    <line x1="200" y1="105" x2="155" y2="130" stroke="#A06CD5" stroke-width="2"/>
+
+                    <text x="200" y="150" font-family="Inter" font-size="12" fill="#2D3436" font-weight="bold">Emotional Charge</text>
+                    <line x1="200" y1="155" x2="155" y2="155" stroke="#A06CD5" stroke-width="2"/>
+
+                    <text x="200" y="200" font-family="Inter" font-size="12" fill="#2D3436" font-weight="bold">Physical Activation</text>
+                    <line x1="200" y1="205" x2="155" y2="180" stroke="#A06CD5" stroke-width="2"/>
+                </svg>
+            </div>
+
+            <div class="research-box">
+                <strong>The Research:</strong> Van der Kolk's work with combat veterans showed they could accurately describe traumatic events, yet their brains showed no activation in Broca's area (speech production). PET scans revealed heightened activity in emotion-processing regions while speech areas went silent. The brain literally cannot narrate the trauma—it can only experience it.
+            </div>
+
+            <div class="key-takeaways">
+                <h4>Why This Matters</h4>
+                <ul>
+                    <li>Trauma isn't a character flaw or cognitive distortion—it's a nervous system state</li>
+                    <li>Talk therapy alone may not reach traumatic memory stored pre-verbally</li>
+                    <li>The body's sensations are the gateway to healing</li>
+                    <li>Healing requires restoring the ability to communicate what the body knows</li>
+                </ul>
+            </div>
+
+            <div class="funny-take">
+                It's like your brain got startled mid-email and just... never sent it. Except the unsent email is your entire nervous system, which is now convinced the house is on fire. Every time the doorbell rings (or a car backfires, or someone uses that specific tone), the email tries to send again. Talk therapy is offering to proofread the email. What you actually need is to calm down enough to hit send intentionally—or delete it.
+            </div>
+
+            <div class="ai-connection">
+                <strong>AI Parallel:</strong> Imagine training data that contains corrupted examples or poisoned labels. The model learns to recognize "threat" in situations that only tangentially resemble the original danger. Unlike clean training, this data persists as implicit patterns—not easily updated by new information. The model has essentially memorized the error state. Healing is like data cleaning: identifying the corrupted pattern and retraining the system with corrected, coherent information.
+            </div>
+
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Daniel Kahneman's <em>Thinking, Fast and Slow</em> describes System 1 (fast, emotional, pattern-based) as evolutionarily older and more primitive. Van der Kolk shows how trauma locks us into System 1, unable to access System 2 (slow, deliberate, logical) under threat. The healing process literally rewires which system dominates.
+            </div>
+        </section>
+
+        <!-- Lesson 2 -->
+        <section class="lesson">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <div class="section-title">The Triune Brain: Reptilian, Limbic, and Neocortex</div>
+            </div>
+
+            <p>
+                Van der Kolk draws on Paul MacLean's triune brain model (now somewhat debated, but clinically useful) to explain why trauma-hijacks sophisticated thinking. The brain evolved in layers:
+            </p>
+
+            <ul style="margin: 1.5rem 0 1.5rem 2rem; color: #555;">
+                <li><strong>Brainstem (Reptilian Brain):</strong> Ancient, automatic. Governs survival: heart rate, breathing, fight/flight/freeze. No emotion, no thought—pure reaction.</li>
+                <li><strong>Limbic System (Mammalian Brain):</strong> Emotional, social, memory-tied. Fear, attachment, reward. Where emotional memory lives.</li>
+                <li><strong>Neocortex (Primate Brain):</strong> Language, logic, planning, self-awareness. The "thinking" brain. Latest evolutionary arrival, slowest to activate under threat.</li>
+            </ul>
+
+            <p>
+                <strong>The Problem:</strong> Under threat, neural traffic flows downward, not upward. The brainstem takes over. Your sophisticated prefrontal cortex (responsible for rational thought) literally goes offline. You can't talk yourself out of panic because the speech centers are already shut down.
+            </p>
+
+            <div class="illustration">
+                <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="reptilian" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#E17055;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#D63031;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="limbic" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#A06CD5;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#6C5CE7;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="neocortex" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#0984E3;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#74B9FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Brain profile -->
+                    <!-- Brainstem (reptilian) -->
+                    <ellipse cx="200" cy="450" rx="50" ry="30" fill="url(#reptilian)" stroke="#2D3436" stroke-width="2"/>
+                    <text x="200" y="460" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="bold" fill="white">Brainstem</text>
+                    <text x="200" y="480" text-anchor="middle" font-family="Inter" font-size="11" fill="white">(Survival)</text>
+
+                    <!-- Limbic system -->
+                    <ellipse cx="200" cy="300" rx="80" ry="70" fill="url(#limbic)" stroke="#2D3436" stroke-width="2"/>
+                    <text x="200" y="305" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="bold" fill="white">Limbic System</text>
+                    <text x="200" y="330" text-anchor="middle" font-family="Inter" font-size="11" fill="white">(Emotion, Memory)</text>
+
+                    <!-- Neocortex -->
+                    <ellipse cx="200" cy="120" rx="100" ry="80" fill="url(#neocortex)" stroke="#2D3436" stroke-width="2"/>
+                    <text x="200" y="115" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="bold" fill="white">Neocortex</text>
+                    <text x="200" y="140" text-anchor="middle" font-family="Inter" font-size="11" fill="white">(Logic, Language)</text>
+
+                    <!-- Normal flow (up) -->
+                    <g opacity="0.6">
+                        <text x="30" y="250" font-family="Inter" font-size="12" fill="#2D3436" font-weight="bold">Normal:</text>
+                        <path d="M 60 450 L 60 300 L 60 120" stroke="#4ECDC4" stroke-width="3" fill="none" marker-end="url(#arrowUp)"/>
+                    </g>
+
+                    <!-- Trauma flow (down) -->
+                    <g opacity="0.8">
+                        <text x="310" y="250" font-family="Inter" font-size="12" fill="#FF6B6B" font-weight="bold">Trauma:</text>
+                        <path d="M 340 120 L 340 300 L 340 450" stroke="#FF6B6B" stroke-width="4" fill="none" marker-end="url(#arrowDown)"/>
+                    </g>
+
+                    <!-- Arrow markers -->
+                    <defs>
+                        <marker id="arrowUp" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                            <path d="M 0 5 L 5 0 L 10 5 M 5 0 L 5 10" stroke="#4ECDC4" stroke-width="2" fill="none"/>
+                        </marker>
+                        <marker id="arrowDown" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                            <path d="M 0 5 L 5 10 L 10 5 M 5 0 L 5 10" stroke="#FF6B6B" stroke-width="2" fill="none"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="research-box">
+                <strong>Brain Imaging Evidence:</strong> fMRI studies show that during PTSD flashbacks, the prefrontal cortex (responsible for context and decision-making) shows dramatically reduced activation, while the amygdala (fear center) becomes hyperactive. The person literally cannot access the knowledge that they're safe in the present moment.
+            </div>
+
+            <div class="key-takeaways">
+                <h4>Clinical Implications</h4>
+                <ul>
+                    <li>You cannot think your way out of a brainstem activation—it's not a thinking problem</li>
+                    <li>Calming the nervous system must come first; cognitive work comes later</li>
+                    <li>Triggered individuals are temporarily less intelligent (their processing power is redirected to survival)</li>
+                    <li>Healing requires building new pathways that allow top-down regulation from the neocortex</li>
+                </ul>
+            </div>
+
+            <div class="funny-take">
+                When someone is in fight-or-flight, telling them "Just calm down, think rationally" is like asking your laptop to run a spreadsheet while it's performing a full system scan. The CPU resources are allocated elsewhere. You wouldn't yell at the screen. You'd close other applications and let the system finish its emergency sequence.
+            </div>
+
+            <div class="ai-connection">
+                <strong>AI Parallel:</strong> Modern LLMs operate with attention mechanisms across multiple hierarchical layers. Trauma is like introducing adversarial noise that forces the model to allocate all attention to threat-detection (amygdala equivalent), starving higher-order reasoning (prefrontal cortex equivalent). Healing is essentially rebalancing the attention weights so that safety signals can reach reasoning layers again.
+            </div>
+
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> In <em>Behave</em>, Robert Sapolsky details how stress hormones (cortisol, adrenaline) literally impair prefrontal function while enhancing limbic reactivity. The biology is older than psychology—evolution prioritized survival over thoughtfulness.
+            </div>
+        </section>
+
+        <!-- Lesson 3 -->
+        <section class="lesson">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <div class="section-title">Fight, Flight, Freeze, and Fawn: The Nervous System's Emergency Responses</div>
+            </div>
+
+            <p>
+                When the nervous system perceives threat, it has four primitive survival strategies. Different people default to different responses—and these become automatic patterns even when there's no actual danger.
+            </p>
+
+            <div class="illustration">
+                <svg viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Fight -->
+                    <rect x="20" y="20" width="100" height="140" fill="#FF6B6B" stroke="#2D3436" stroke-width="2" rx="8"/>
+                    <text x="70" y="50" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="bold" fill="white">FIGHT</text>
+                    <text x="70" y="90" text-anchor="middle" font-family="Inter" font-size="10" fill="white">Aggression</text>
+                    <text x="70" y="105" text-anchor="middle" font-family="Inter" font-size="10" fill="white">Rage</text>
+                    <text x="70" y="120" text-anchor="middle" font-family="Inter" font-size="10" fill="white">Resistance</text>
+                    <text x="70" y="145" text-anchor="middle" font-family="Inter" font-size="9" fill="white">Adrenaline ↑</text>
+
+                    <!-- Flight -->
+                    <rect x="140" y="20" width="100" height="140" fill="#FFA502" stroke="#2D3436" stroke-width="2" rx="8"/>
+                    <text x="190" y="50" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="bold" fill="white">FLIGHT</text>
+                    <text x="190" y="90" text-anchor="middle" font-family="Inter" font-size="10" fill="white">Anxiety</text>
+                    <text x="190" y="105" text-anchor="middle" font-family="Inter" font-size="10" fill="white">Avoidance</text>
+                    <text x="190" y="120" text-anchor="middle" font-family="Inter" font-size="10" fill="white">Hypervigilance</text>
+                    <text x="190" y="145" text-anchor="middle" font-family="Inter" font-size="9" fill="white">Speed ↑</text>
+
+                    <!-- Freeze -->
+                    <rect x="260" y="20" width="100" height="140" fill="#4ECDC4" stroke="#2D3436" stroke-width="2" rx="8"/>
+                    <text x="310" y="50" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="bold" fill="white">FREEZE</text>
+                    <text x="310" y="90" text-anchor="middle" font-family="Inter" font-size="10" fill="white">Shutdown</text>
+                    <text x="310" y="105" text-anchor="middle" font-family="Inter" font-size="10" fill="white">Numbness</text>
+                    <text x="310" y="120" text-anchor="middle" font-family="Inter" font-size="10" fill="white">Dissociation</text>
+                    <text x="310" y="145" text-anchor="middle" font-family="Inter" font-size="9" fill="white">Immobility</text>
+
+                    <!-- Fawn -->
+                    <rect x="380" y="20" width="100" height="140" fill="#A06CD5" stroke="#2D3436" stroke-width="2" rx="8"/>
+                    <text x="430" y="50" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="bold" fill="white">FAWN</text>
+                    <text x="430" y="90" text-anchor="middle" font-family="Inter" font-size="10" fill="white">Appeasement</text>
+                    <text x="430" y="105" text-anchor="middle" font-family="Inter" font-size="10" fill="white">Compliance</text>
+                    <text x="430" y="120" text-anchor="middle" font-family="Inter" font-size="10" fill="white">Self-abandonment</text>
+                    <text x="430" y="145" text-anchor="middle" font-family="Inter" font-size="9" fill="white">Submission</text>
+
+                    <!-- All lead to... -->
+                    <text x="250" y="200" text-anchor="middle" font-family="Playfair Display" font-size="14" fill="#2D3436" font-weight="bold">All Activate Vagus Nerve & Stress Hormones</text>
+
+                    <!-- Modern costs -->
+                    <text x="250" y="240" text-anchor="middle" font-family="Playfair Display" font-size="12" fill="#2D3436" font-weight="bold">When Activated Chronically:</text>
+                    <text x="250" y="265" text-anchor="middle" font-family="Inter" font-size="10" fill="#2D3436">Inflammation • Sleep disruption • Hypervigilance • Emotional dysregulation • Chronic pain</text>
+                    <text x="250" y="285" text-anchor="middle" font-family="Inter" font-size="10" fill="#2D3436">Addiction • Self-harm • Relationship conflict • Impulsivity • Depression</text>
+                </svg>
+            </div>
+
+            <p style="margin-top: 2rem;">
+                <strong>The Fawn Response</strong> (popularized more recently, though implicit in van der Kolk's work) is crucial for understanding relational trauma. People who grew up in unpredictable or dangerous environments learn: if I anticipate what others need and become invisible, maybe I'll be safe. This becomes a core strategy that persists into adulthood, even in safe relationships.
+            </p>
+
+            <div class="research-box">
+                <strong>The Vagus Nerve:</strong> All four responses involve the vagus nerve, the longest nerve in the body. It connects brain to heart, lungs, and gut. When activated by threat, it either accelerates these systems (fight/flight) or shuts them down (freeze/fawn). Chronic activation leads to inflammation, autoimmune issues, and pain disorders.
+            </div>
+
+            <div class="key-takeaways">
+                <h4>Recognition Matters</h4>
+                <ul>
+                    <li>Your default response is not a moral failure—it's your nervous system's learned survival strategy</li>
+                    <li>Trauma survivors often developed the response most likely to keep them alive in their childhood environment</li>
+                    <li>These patterns generalize beyond danger; you may fight perceived disrespect, flee mild disagreement, or fawn in safe relationships</li>
+                    <li>Healing involves creating new safety so the nervous system can learn different responses</li>
+                </ul>
+            </div>
+
+            <div class="funny-take">
+                Imagine your nervous system is an overprotective bouncer at a club from the 1980s. It learned back then that loud noises meant danger, unfamiliar people meant trouble, and the only way to survive shifts was to either get aggressive, run away, or become invisible. Now it's 2026. The club is your safe home. But the bouncer is still operating on 1980s threat assessment, throwing people out at the slightest provocation or locking you in the back office for safety. The bouncer isn't broken—it just needs to update its threat model.
+            </div>
+
+            <div class="ai-connection">
+                <strong>AI Parallel:</strong> These are default emergency routines, like system-level processes that execute when the model detects an anomaly. Fight, flight, freeze, fawn are the hardcoded responses. In adversarial ML, we see similar cascading failures—once one layer detects threat, entire processing pipelines activate in fixed patterns. Healing is retraining those circuits with new labeled data: "This input is actually safe."
+            </div>
+
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Daniel Goleman's <em>Emotional Intelligence</em> emphasizes emotional awareness as the foundation of regulation. But you cannot regulate responses that activate before emotion—you must first become aware that your body is in emergency mode, then develop skills to shift it.
+            </div>
+        </section>
+
+        <!-- Lesson 4 -->
+        <section class="lesson">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <div class="section-title">Dissociation as a Survival Mechanism</div>
+            </div>
+
+            <p>
+                Dissociation is not a disorder—it's a brilliant feat of biological engineering. When the nervous system detects unbearable threat (especially in children who cannot escape), it disconnects consciousness from sensation. The body may be present, but awareness goes elsewhere.
+            </p>
+
+            <p>
+                <strong>Forms of dissociation include:</strong> Depersonalization (feeling like you're observing yourself from outside your body), derealization (the world feels unreal or dream-like), amnesia for the traumatic event, numbness, and fragmentation of identity.
+            </p>
+
+            <div class="illustration">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="dissoc" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4ECDC4;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#74B9FF;stop-opacity:0.3" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Body -->
+                    <ellipse cx="100" cy="80" rx="25" ry="30" fill="#4ECDC4" stroke="#2D3436" stroke-width="2" opacity="0.5"/>
+                    <rect x="85" y="105" width="30" height="70" fill="#4ECDC4" stroke="#2D3436" stroke-width="2" opacity="0.5"/>
+                    <circle cx="70" cy="140" r="15" fill="#4ECDC4" stroke="#2D3436" stroke-width="2" opacity="0.5"/>
+                    <circle cx="130" cy="140" r="15" fill="#4ECDC4" stroke="#2D3436" stroke-width="2" opacity="0.5"/>
+                    <rect x="87" y="175" width="10" height="50" fill="#4ECDC4" stroke="#2D3436" stroke-width="2" opacity="0.5"/>
+                    <rect x="103" y="175" width="10" height="50" fill="#4ECDC4" stroke="#2D3436" stroke-width="2" opacity="0.5"/>
+
+                    <!-- Awareness floating away -->
+                    <circle cx="280" cy="80" r="40" fill="#FFE66D" stroke="#FFA502" stroke-width="3"/>
+                    <text x="280" y="90" text-anchor="middle" font-family="Inter" font-size="11" fill="#2D3436" font-weight="bold">Awareness</text>
+
+                    <!-- Distance -->
+                    <line x1="130" y1="80" x2="240" y2="80" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+
+                    <!-- Sensation zone (muted) -->
+                    <circle cx="100" cy="140" r="60" fill="none" stroke="#A06CD5" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+                    <text x="100" y="210" text-anchor="middle" font-family="Inter" font-size="10" fill="#A06CD5">Muted Sensation</text>
+
+                    <!-- Labels -->
+                    <text x="280" y="30" text-anchor="middle" font-family="Inter" font-size="11" fill="#2D3436" font-weight="bold">"I'm watching from above"</text>
+                    <text x="100" y="30" text-anchor="middle" font-family="Inter" font-size="11" fill="#2D3436" font-weight="bold">Body Present But...</text>
+                    <text x="100" y="260" text-anchor="middle" font-family="Inter" font-size="10" fill="#2D3436">Mind is Elsewhere</text>
+                </svg>
+            </div>
+
+            <p>
+                <strong>The Problem:</strong> While dissociation saves you from unbearable pain in the moment, it also prevents full information processing. The traumatic memory remains fragmented. The body continues to react to phantom threats because the nervous system never received the signal that danger has passed.
+            </p>
+
+            <div class="research-box">
+                <strong>Child Development Impact:</strong> Van der Kolk's work shows that when children are chronically dissociated, they don't develop secure attachment, emotional regulation, or coherent sense of self. Dissociation in childhood predicts fragmented identity, chronic pain, autoimmune disorders, and complex PTSD in adulthood.
+            </div>
+
+            <div class="key-takeaways">
+                <h4>Understanding Dissociation</h4>
+                <ul>
+                    <li>It's not a sign of weakness; it's evidence of extreme threat and a sophisticated survival adaptation</li>
+                    <li>Dissociation prevents trauma from being integrated into narrative memory</li>
+                    <li>Healing requires safely reconnecting body and awareness, bit by bit</li>
+                    <li>Pushing someone back into their body too quickly can re-traumatize; the pace must be tolerable</li>
+                </ul>
+            </div>
+
+            <div class="funny-take">
+                Dissociation is your mind's emergency ejection seat. The plane is going down, so consciousness evacuates. The problem: the plane lands safely years later, but your seat is still halfway across the country, and the alarm system never shuts off. Your body thinks it's still in freefall. Healing is like slowly piloting consciousness back into the cockpit—but only when the body confirms it's genuinely safe.
+            </div>
+
+            <div class="ai-connection">
+                <strong>AI Parallel:</strong> This is model compartmentalization—segregating dangerous or conflicting data into isolated processing modules that don't communicate with the main system. Dissociation is like a neural network that has learned to partition trauma into a silent silo, unable to integrate it with the rest of experience. Healing is building bridges between partitions.
+            </div>
+
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Viktor Frankl's <em>Man's Search for Meaning</em> describes dissociation in Holocaust survivors: "We felt as though we did not belong to this world. We had lost the ability to feel pleased, and had lost the ability to suffer." Meaning-making requires presence; dissociation is meaning-freezing.
+            </div>
+        </section>
+
+        <!-- Lesson 5 -->
+        <section class="lesson">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <div class="section-title">Developmental Trauma vs. PTSD</div>
+            </div>
+
+            <p>
+                Van der Kolk distinguishes sharply: <strong>PTSD typically follows a single overwhelming event in an adult with an otherwise stable nervous system. Developmental trauma emerges when threat is chronic, unpredictable, and often interpersonal, during the critical periods when the nervous system is organizing.</strong>
+            </p>
+
+            <p>
+                A soldier who experiences a single ambush and develops PTSD has a different injury than a child whose parent is volatile and dangerous. Both have trauma, but the architecture of the nervous system itself was shaped by the chronic threat.
+            </p>
+
+            <table style="width: 100%; margin: 2rem 0; border-collapse: collapse;">
+                <tr style="background: #F0F3F7;">
+                    <td style="padding: 1rem; border: 1px solid #DDD; font-weight: bold; color: #2D3436;">Aspect</td>
+                    <td style="padding: 1rem; border: 1px solid #DDD; font-weight: bold; color: #2D3436;">PTSD</td>
+                    <td style="padding: 1rem; border: 1px solid #DDD; font-weight: bold; color: #2D3436;">Developmental Trauma</td>
+                </tr>
+                <tr>
+                    <td style="padding: 1rem; border: 1px solid #DDD;"><strong>Onset</strong></td>
+                    <td style="padding: 1rem; border: 1px solid #DDD;">Single or few overwhelming events</td>
+                    <td style="padding: 1rem; border: 1px solid #DDD;">Chronic, ongoing threat (months/years)</td>
+                </tr>
+                <tr style="background: #F9F9F9;">
+                    <td style="padding: 1rem; border: 1px solid #DDD;"><strong>Age</strong></td>
+                    <td style="padding: 1rem; border: 1px solid #DDD;">Usually adult</td>
+                    <td style="padding: 1rem; border: 1px solid #DDD;">During critical neurodevelopmental periods</td>
+                </tr>
+                <tr>
+                    <td style="padding: 1rem; border: 1px solid #DDD;"><strong>Primary Issue</strong></td>
+                    <td style="padding: 1rem; border: 1px solid #DDD;">Flashbacks; intrusive memory</td>
+                    <td style="padding: 1rem; border: 1px solid #DDD;">Dysregulation; fragmented identity; shame</td>
+                </tr>
+                <tr style="background: #F9F9F9;">
+                    <td style="padding: 1rem; border: 1px solid #DDD;"><strong>Baseline State</strong></td>
+                    <td style="padding: 1rem; border: 1px solid #DDD;">Relatively stable before event</td>
+                    <td style="padding: 1rem; border: 1px solid #DDD;">Nervous system never developed stability</td>
+                </tr>
+                <tr>
+                    <td style="padding: 1rem; border: 1px solid #DDD;"><strong>Treatment Focus</strong></td>
+                    <td style="padding: 1rem; border: 1px solid #DDD;">Processing the specific memory</td>
+                    <td style="padding: 1rem; border: 1px solid #DDD;">Building fundamental regulation capacity</td>
+                </tr>
+            </table>
+
+            <div class="research-box">
+                <strong>Complex PTSD Recognition:</strong> In 2018, the DSM-5 added "Complex PTSD" as a specifier, reflecting decades of research showing that developmental trauma creates a distinct constellation of symptoms: emotional dysregulation, negative self-perception, interpersonal difficulty, altered perception of the perpetrator, somatization, and altered consciousness (dissociation).
+            </div>
+
+            <div class="key-takeaways">
+                <h4>Why This Distinction Matters</h4>
+                <ul>
+                    <li>PTSD-focused interventions may not address developmental trauma's core issues (identity, attachment, regulation)</li>
+                    <li>Developmental trauma survivors need to rebuild basic nervous system capacity, not just process memories</li>
+                    <li>Shame is often central in developmental trauma (beliefs like "I am broken" or "I deserved this")</li>
+                    <li>Healing typically takes longer and requires building foundational skills before processing trauma directly</li>
+                </ul>
+            </div>
+
+            <div class="funny-take">
+                A person with PTSD is like a car that was in one terrible crash. The chassis is solid; it just has memory of the impact. A person with developmental trauma is like a car whose frame was bent while being built. Every system—steering, brakes, acceleration—developed around that bent frame. Even when the environment is safe, the car handles oddly because that's how it learned to move.
+            </div>
+
+            <div class="ai-connection">
+                <strong>AI Parallel:</strong> PTSD is like a model that learned well during training but encountered adversarial data at inference time. Developmental trauma is like poisoned training data that shaped the entire architecture. You can't just correct the adversarial example (PTSD treatment); you have to partially retrain the foundational weights (developmental trauma healing).
+            </div>
+
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Mihaly Csikszentmihalyi's <em>Flow</em> describes optimal experience as emerging from balance between challenge and skill. Developmental trauma disrupts this: the nervous system is either overwhelmed (challenge exceeds skill) or dissociated (avoiding challenge entirely). Healing is developing the skill base needed to metabolize challenge.
+            </div>
+        </section>
+
+        <!-- Lesson 6 -->
+        <section class="lesson">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <div class="section-title">The ACE Study: Measuring Data Quality in Early Life</div>
+            </div>
+
+            <p>
+                One of van der Kolk's most-cited pieces of research comes from Vincent Felitti and Robert Anda's landmark Adverse Childhood Experiences (ACE) study, conducted at Kaiser Permanente. This study is foundational to understanding how early trauma literally shapes biology.
+            </p>
+
+            <p>
+                <strong>The Study:</strong> Felitti and Anda surveyed over 17,000 adults about 10 categories of childhood adversity: abuse (physical, emotional, sexual), neglect, household dysfunction (domestic violence, parental mental illness, substance abuse, incarceration). They correlated ACE scores with adult health outcomes.
+            </p>
+
+            <div class="illustration">
+                <svg viewBox="0 0 450 380" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="healthGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                            <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#FFA502;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B894;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Title -->
+                    <text x="225" y="30" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="bold" fill="#2D3436">ACE Score Impact on Adult Health</text>
+
+                    <!-- Bars for different ACE scores -->
+                    <!-- ACE 0 -->
+                    <rect x="30" y="280" width="40" height="20" fill="#00B894"/>
+                    <text x="50" y="310" text-anchor="middle" font-family="Inter" font-size="11" fill="#2D3436" font-weight="bold">ACE 0</text>
+                    <text x="50" y="330" text-anchor="middle" font-family="Inter" font-size="10" fill="#2D3436">Baseline</text>
+
+                    <!-- ACE 1-3 -->
+                    <rect x="90" y="250" width="40" height="50" fill="#FFA502"/>
+                    <text x="110" y="320" text-anchor="middle" font-family="Inter" font-size="11" fill="#2D3436" font-weight="bold">ACE 1-3</text>
+                    <text x="110" y="340" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">+30-50% Risk</text>
+
+                    <!-- ACE 4-6 -->
+                    <rect x="150" y="200" width="40" height="100" fill="#FF8C42"/>
+                    <text x="170" y="320" text-anchor="middle" font-family="Inter" font-size="11" fill="#2D3436" font-weight="bold">ACE 4-6</text>
+                    <text x="170" y="340" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">+100-200% Risk</text>
+
+                    <!-- ACE 7+ -->
+                    <rect x="210" y="100" width="40" height="200" fill="#FF6B6B"/>
+                    <text x="230" y="320" text-anchor="middle" font-family="Inter" font-size="11" fill="#2D3436" font-weight="bold">ACE 7+</text>
+                    <text x="230" y="340" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">+300%+ Risk</text>
+
+                    <!-- Outcomes -->
+                    <g opacity="0.7">
+                        <text x="300" y="80" font-family="Inter" font-size="10" fill="#2D3436">Associated Adult Health Problems:</text>
+                        <text x="300" y="100" font-family="Inter" font-size="9" fill="#2D3436">• Obesity</text>
+                        <text x="300" y="115" font-family="Inter" font-size="9" fill="#2D3436">• Heart disease</text>
+                        <text x="300" y="130" font-family="Inter" font-size="9" fill="#2D3436">• Diabetes</text>
+                        <text x="300" y="145" font-family="Inter" font-size="9" fill="#2D3436">• Alcoholism</text>
+                        <text x="300" y="160" font-family="Inter" font-size="9" fill="#2D3436">• Drug abuse</text>
+                        <text x="300" y="175" font-family="Inter" font-size="9" fill="#2D3436">• Depression</text>
+                        <text x="300" y="190" font-family="Inter" font-size="9" fill="#2D3436">• Suicide</text>
+                        <text x="300" y="205" font-family="Inter" font-size="9" fill="#2D3436">• Violence</text>
+                    </g>
+
+                    <!-- Key finding -->
+                    <rect x="30" y="360" width="400" height="20" fill="#FFE66D" rx="3"/>
+                    <text x="230" y="373" text-anchor="middle" font-family="Inter" font-size="10" fill="#2D3436" font-weight="bold">Dose-Response: Higher ACE = Exponentially Higher Risk</text>
+                </svg>
+            </div>
+
+            <div class="research-box">
+                <strong>The Findings:</strong>
+                <ul style="margin-top: 1rem; margin-left: 2rem; color: #555;">
+                    <li><strong>67%</strong> of the population reported at least one ACE</li>
+                    <li><strong>25%</strong> reported 3 or more ACEs</li>
+                    <li>Those with <strong>ACE score of 6 or higher</strong> had a 30-year reduction in life expectancy</li>
+                    <li>The relationship was <strong>dose-dependent:</strong> more ACEs = exponentially higher risk for virtually every major disease and behavioral health problem</li>
+                    <li>The effect persisted across all socioeconomic groups, races, and education levels</li>
+                </ul>
+            </div>
+
+            <p style="margin-top: 1.5rem;">
+                <strong>Why This Matters Biologically:</strong> Early adversity activates the stress response system chronically. Cortisol, adrenaline, and inflammatory markers remain elevated. This physically alters brain structure (especially the hippocampus), suppresses immune function, and sets the body on a trajectory toward disease. It's not psychological damage that later becomes physical—it's physiological damage from the start.
+            </p>
+
+            <div class="key-takeaways">
+                <h4>The ACE Study's Impact</h4>
+                <ul>
+                    <li>It moved trauma from "psychology department" to "public health crisis"</li>
+                    <li>It revealed that trauma is not rare or exceptional—it's endemic</li>
+                    <li>It showed that the body literally keeps score, biologically</li>
+                    <li>It opened the door to prevention and early intervention as health imperatives</li>
+                </ul>
+            </div>
+
+            <div class="funny-take">
+                The ACE study basically proved that your childhood wasn't "just" in your head. The cortisol is real, the inflammation is measurable, the shortened telomeres are physical. You can't "just get over it" because "it" is written in your cells. This is actually liberating: if it's biological, it's treatable with the same seriousness we treat any disease. You wouldn't tell a diabetic to "think positive about insulin resistance."
+            </div>
+
+            <div class="ai-connection">
+                <strong>AI Parallel:</strong> The ACE study is measuring data quality in the training set. High-ACE children experienced poisoned, corrupted, or adversarial training data during critical developmental windows. Like models trained on bad data, they show degraded performance across multiple domains. The dose-response relationship mirrors overfitting to biased training: more exposure to corrupted data = more systematic distortion. The study quantifies training data toxicity.
+            </div>
+
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Robert Sapolsky's <em>Behave</em> explores how early adversity programs the hypothalamic-pituitary-adrenal (HPA) axis for hypersensitivity. The ACE study provides epidemiological evidence for Sapolsky's physiological mechanisms—it's the bridge between molecular biology and population health.
+            </div>
+        </section>
+
+        <!-- Lesson 7 -->
+        <section class="lesson">
+            <div class="section-header">
+                <div class="section-number">7</div>
+                <div class="section-title">EMDR and the Reprocessing Revolution</div>
+            </div>
+
+            <p>
+                Eye Movement Desensitization and Reprocessing (EMDR), developed by Francine Shapiro in the late 1980s, is one of the most scientifically validated trauma treatments. Yet it remains controversial partly because <strong>we don't fully understand why it works.</strong>
+            </p>
+
+            <p>
+                <strong>The Method:</strong> Client recalls a traumatic memory while tracking the therapist's finger moving side-to-side (or using other bilateral stimulation: tapping, auditory). The bilateral stimulation seems to allow the brain to process the memory differently—less as fragmented flashback, more as coherent narrative memory that can be filed away and retrieved normally.
+            </p>
+
+            <div class="illustration">
+                <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Brain outline -->
+                    <ellipse cx="150" cy="150" rx="80" ry="100" fill="#74B9FF" stroke="#2D3436" stroke-width="2" opacity="0.3"/>
+
+                    <!-- Without EMDR: fragmented -->
+                    <text x="40" y="40" font-family="Playfair Display" font-size="12" fill="#2D3436" font-weight="bold">Without EMDR:</text>
+                    <circle cx="40" cy="80" r="15" fill="#FF6B6B" opacity="0.7"/>
+                    <text x="40" y="85" text-anchor="middle" font-family="Inter" font-size="9" fill="white" font-weight="bold">Sound</text>
+                    <circle cx="80" cy="100" r="15" fill="#FF6B6B" opacity="0.7"/>
+                    <text x="80" y="105" text-anchor="middle" font-family="Inter" font-size="9" fill="white" font-weight="bold">Fear</text>
+                    <circle cx="50" cy="140" r="15" fill="#FF6B6B" opacity="0.7"/>
+                    <text x="50" y="145" text-anchor="middle" font-family="Inter" font-size="9" fill="white" font-weight="bold">Chest pain</text>
+                    <circle cx="100" cy="160" r="15" fill="#FF6B6B" opacity="0.7"/>
+                    <text x="100" y="165" text-anchor="middle" font-family="Inter" font-size="9" fill="white" font-weight="bold">Shame</text>
+
+                    <!-- Scattered connections -->
+                    <line x1="40" y1="95" x2="70" y2="110" stroke="#FF6B6B" stroke-width="1" opacity="0.5" stroke-dasharray="3,3"/>
+                    <line x1="80" y1="110" x2="60" y2="145" stroke="#FF6B6B" stroke-width="1" opacity="0.5" stroke-dasharray="3,3"/>
+                    <line x1="50" y1="150" x2="90" y2="160" stroke="#FF6B6B" stroke-width="1" opacity="0.5" stroke-dasharray="3,3"/>
+
+                    <text x="50" y="200" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436" font-weight="bold">Fragmented, Intrusive</text>
+
+                    <!-- Arrow -->
+                    <text x="250" y="150" text-anchor="middle" font-family="Playfair Display" font-size="20" fill="#A06CD5" font-weight="bold">→</text>
+
+                    <!-- With EMDR: integrated -->
+                    <text x="360" y="40" font-family="Playfair Display" font-size="12" fill="#2D3436" font-weight="bold">With EMDR:</text>
+
+                    <!-- Integration arrows (bilateral) -->
+                    <line x1="300" y1="100" x2="380" y2="100" stroke="#4ECDC4" stroke-width="3"/>
+                    <line x1="380" y1="100" x2="300" y2="100" stroke="#4ECDC4" stroke-width="3" opacity="0.5"/>
+
+                    <line x1="300" y1="130" x2="380" y2="130" stroke="#4ECDC4" stroke-width="3"/>
+                    <line x1="380" y1="130" x2="300" y2="130" stroke="#4ECDC4" stroke-width="3" opacity="0.5"/>
+
+                    <line x1="300" y1="160" x2="380" y2="160" stroke="#4ECDC4" stroke-width="3"/>
+                    <line x1="380" y1="160" x2="300" y2="160" stroke="#4ECDC4" stroke-width="3" opacity="0.5"/>
+
+                    <!-- Integrated memory -->
+                    <rect x="320" y="110" width="100" height="70" fill="#4ECDC4" stroke="#2D3436" stroke-width="2" rx="5" opacity="0.6"/>
+                    <text x="370" y="130" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436" font-weight="bold">Coherent Memory</text>
+                    <text x="370" y="145" text-anchor="middle" font-family="Inter" font-size="8" fill="#2D3436">That happened.</text>
+                    <text x="370" y="158" text-anchor="middle" font-family="Inter" font-size="8" fill="#2D3436">It's in the past.</text>
+
+                    <text x="370" y="200" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436" font-weight="bold">Processed, Filed Away</text>
+                </svg>
+            </div>
+
+            <div class="research-box">
+                <strong>The Evidence:</strong> EMDR is one of the few psychotherapies with Level 1 evidence (randomized controlled trials showing efficacy). It's FDA-approved for PTSD. Neuroimaging shows that during successful EMDR, the amygdala (emotional processing) becomes less active while the prefrontal cortex (meaning-making) becomes more active—the opposite of what happens during flashbacks.
+            </div>
+
+            <p style="margin-top: 1.5rem;">
+                <strong>The Mystery:</strong> Why does side-to-side eye movement matter? Theories include:
+            </p>
+            <ul style="margin: 1rem 0 1rem 2rem; color: #555;">
+                <li><strong>REM sleep hypothesis:</strong> Bilateral stimulation mimics the eye movements of REM sleep, where the brain processes memories</li>
+                <li><strong>Working memory depletion:</strong> Simultaneous trauma recall + eye tracking uses up capacity, preventing emotional flooding</li>
+                <li><strong>Adaptive information processing:</strong> The bilateral stimulation somehow unblocks the brain's natural tendency to integrate trauma into narrative</li>
+            </ul>
+
+            <div class="key-takeaways">
+                <h4>EMDR's Clinical Power</h4>
+                <ul>
+                    <li>It bypasses the need for lengthy verbal processing</li>
+                    <li>It works rapidly—often showing results in 8-12 sessions</li>
+                    <li>It's particularly effective for isolated PTSD (less effective for developmental trauma without additional work)</li>
+                    <li>The mechanism remains partially mysterious, which keeps research active</li>
+                </ul>
+            </div>
+
+            <div class="funny-take">
+                EMDR feels weird at first—you're basically reliving your worst moment while watching someone's finger. It's like debugging code while someone waves something in your peripheral vision. It makes no sense until it works, and then you're like, "Wait, I just ... processed that? Without the usual three-hour tearful monologue?" The brain is stranger than we admit.
+            </div>
+
+            <div class="ai-connection">
+                <strong>AI Parallel:</strong> EMDR is essentially a reprocessing algorithm. The brain has stuck data in a maladaptive state (flashback loops). Bilateral stimulation provides a reset signal that allows the system to reprocess the same input with different routing—like retraining a neural network layer while holding everything else constant. The working memory depletion aspect mirrors gradient descent: you're preventing the system from getting stuck in local minima by occupying its capacity budget.
+            </div>
+
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> The integration of emotional (amygdala) and logical (prefrontal) processing that EMDR achieves mirrors Daniel Kahneman's ideal of balancing System 1 and System 2. Trauma is System 1 on overdrive; healing is restoring System 2's ability to context-set.
+            </div>
+        </section>
+
+        <!-- Lesson 8 -->
+        <section class="lesson">
+            <div class="section-header">
+                <div class="section-number">8</div>
+                <div class="section-title">Yoga and Body-Based Therapies</div>
+            </div>
+
+            <p>
+                This might be the least intuitive intervention for trauma, yet van der Kolk dedicates substantial research to it: <strong>trauma lives in the body, so therapies that restore body awareness and control are healing.</strong>
+            </p>
+
+            <p>
+                Yoga, somatic experiencing, dance, martial arts, and breathwork all share a mechanism: they restore agency and sense of control to the nervous system. They teach the body that it can move safely, respond intentionally, and recover from activation.
+            </p>
+
+            <div class="illustration">
+                <svg viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Before: fragmented body -->
+                    <text x="100" y="30" text-anchor="middle" font-family="Playfair Display" font-size="12" fill="#2D3436" font-weight="bold">Before Embodiment Work</text>
+
+                    <g opacity="0.5">
+                        <ellipse cx="80" cy="80" rx="20" ry="25" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                        <rect x="65" y="100" width="30" height="50" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                        <circle cx="55" cy="140" r="12" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                        <circle cx="105" cy="140" r="12" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                        <rect x="70" y="150" width="8" height="35" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                        <rect x="82" y="150" width="8" height="35" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                    </g>
+
+                    <!-- Disconnection symbols -->
+                    <text x="100" y="210" text-anchor="middle" font-family="Inter" font-size="10" fill="#FF6B6B" font-weight="bold">Disconnected</text>
+                    <text x="100" y="225" text-anchor="middle" font-family="Inter" font-size="9" fill="#FF6B6B">Dissociated</text>
+                    <text x="100" y="240" text-anchor="middle" font-family="Inter" font-size="9" fill="#FF6B6B">Immobilized</text>
+
+                    <!-- After: integrated body -->
+                    <text x="380" y="30" text-anchor="middle" font-family="Playfair Display" font-size="12" fill="#2D3436" font-weight="bold">After Embodiment Work</text>
+
+                    <g opacity="1">
+                        <ellipse cx="360" cy="80" rx="20" ry="25" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                        <rect x="345" y="100" width="30" height="50" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                        <circle cx="335" cy="140" r="12" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                        <circle cx="385" cy="140" r="12" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                        <rect x="350" y="150" width="8" height="35" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                        <rect x="362" y="150" width="8" height="35" fill="#4ECDC4" stroke="#2D3436" stroke-width="2"/>
+                    </g>
+
+                    <!-- Connection symbols -->
+                    <circle cx="360" cy="110" r="8" fill="#FFE66D" stroke="#2D3436" stroke-width="1"/>
+                    <circle cx="360" cy="150" r="8" fill="#FFE66D" stroke="#2D3436" stroke-width="1"/>
+                    <line x1="360" y1="118" x2="360" y2="142" stroke="#FFE66D" stroke-width="2"/>
+
+                    <text x="380" y="210" text-anchor="middle" font-family="Inter" font-size="10" fill="#4ECDC4" font-weight="bold">Present</text>
+                    <text x="380" y="225" text-anchor="middle" font-family="Inter" font-size="9" fill="#4ECDC4">Embodied</text>
+                    <text x="380" y="240" text-anchor="middle" font-family="Inter" font-size="9" fill="#4ECDC4">Agentive</text>
+
+                    <!-- Modalities -->
+                    <rect x="50" y="280" width="120" height="50" fill="#FFE66D" stroke="#2D3436" stroke-width="1" rx="5"/>
+                    <text x="110" y="295" text-anchor="middle" font-family="Inter" font-size="10" fill="#2D3436" font-weight="bold">Yoga</text>
+                    <text x="110" y="310" text-anchor="middle" font-family="Inter" font-size="8" fill="#2D3436">Breathwork</text>
+                    <text x="110" y="323" text-anchor="middle" font-family="Inter" font-size="8" fill="#2D3436">Conscious movement</text>
+
+                    <rect x="190" y="280" width="120" height="50" fill="#A06CD5" stroke="#2D3436" stroke-width="1" rx="5"/>
+                    <text x="250" y="295" text-anchor="middle" font-family="Inter" font-size="10" fill="white" font-weight="bold">Dance/Movement</text>
+                    <text x="250" y="310" text-anchor="middle" font-family="Inter" font-size="8" fill="white">Somatic expression</text>
+                    <text x="250" y="323" text-anchor="middle" font-family="Inter" font-size="8" fill="white">Body awareness</text>
+
+                    <rect x="330" y="280" width="120" height="50" fill="#55EFC4" stroke="#2D3436" stroke-width="1" rx="5"/>
+                    <text x="390" y="295" text-anchor="middle" font-family="Inter" font-size="10" fill="#2D3436" font-weight="bold">Martial Arts</text>
+                    <text x="390" y="310" text-anchor="middle" font-family="Inter" font-size="8" fill="#2D3436">Controlled challenge</text>
+                    <text x="390" y="323" text-anchor="middle" font-family="Inter" font-size="8" fill="#2D3436">Safe mastery</text>
+                </svg>
+            </div>
+
+            <div class="research-box">
+                <strong>Van der Kolk's Research:</strong> He conducted a randomized trial of trauma-sensitive yoga with low-income women with PTSD. After eight weeks, women in yoga showed significant reductions in PTSD symptoms, improved interoception (body awareness), and increased parasympathetic activation. Notably, many had previously failed to benefit from talk therapy alone.
+            </div>
+
+            <p style="margin-top: 1.5rem;">
+                <strong>Why It Works:</strong>
+            </p>
+            <ul style="margin: 1rem 0 1rem 2rem; color: #555;">
+                <li><strong>Agency:</strong> Unlike talk therapy (where you're discussing what happened to you), embodiment therapies let you directly practice controlling your body. You're not reliving trauma; you're building new competence.</li>
+                <li><strong>Parasympathetic Activation:</strong> Slow, intentional movement and breathing directly calm the vagus nerve, teaching the nervous system "this is safe."</li>
+                <li><strong>Interoception:</strong> These practices rebuild awareness of internal sensations—the very capacity that trauma disrupted.</li>
+                <li><strong>Integration:</strong> The body learns that it can be present, responsive, and whole.</li>
+            </ul>
+
+            <div class="key-takeaways">
+                <h4>Body-Based Healing</h4>
+                <ul>
+                    <li>Talk alone often isn't enough—the nervous system needs to feel safe through somatic experience</li>
+                    <li>Movement and breathwork bypass the language centers, reaching the deeper brain</li>
+                    <li>Agency (choosing your movement) is healing; forced movement can re-traumatize</li>
+                    <li>Regular practice teaches the body that safety is possible</li>
+                </ul>
+            </div>
+
+            <div class="funny-take">
+                "Just do yoga" sounds like the most dismissive advice possible. "Your trauma is stored in your body. The cure? Downward dog." But it works because it's actually profound: yoga is the only time many traumatized people have practiced *being present in their body without danger.* Your nervous system learns through embodied evidence, not through logic. You can't argue your way into feeling safe; you have to practice it.
+            </div>
+
+            <div class="ai-connection">
+                <strong>AI Parallel:</strong> Embodiment work is like distributed computing that restores functional communication across nodes. The body-brain network was fragmented by trauma; yoga/somatic work rebuild the network topology. Each practice session is a training iteration where the system learns: "This movement sequence completes without activation cascade. The distributed state is stable."
+            </div>
+
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Csikszentmihalyi's <em>Flow</em> describes optimal experience as merging action and awareness with challenge at the edge of skill. Trauma interrupts this flow. Yoga and somatic therapies systematically rebuild the capacity to enter flow—to be present, responsive, and skillful.
+            </div>
+        </section>
+
+        <!-- Lesson 9 -->
+        <section class="lesson">
+            <div class="section-header">
+                <div class="section-number">9</div>
+                <div class="section-title">Neurofeedback: Real-Time Monitoring of the Nervous System</div>
+            </div>
+
+            <p>
+                Neurofeedback is a technology-enabled form of biofeedback: you receive real-time information about your brain or nervous system state, and you learn to modify it. Most commonly, it uses EEG (electroencephalography) to measure brainwave patterns and provide instant feedback.
+            </p>
+
+            <p>
+                <strong>The Logic:</strong> Trauma survivors have brains stuck in dysregulated states (overactivated or underactivated). If they can see their brain state in real-time and practice shifting it, they can rewire these patterns.
+            </p>
+
+            <div class="illustration">
+                <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- EEG helmet -->
+                    <circle cx="250" cy="80" r="60" fill="none" stroke="#2D3436" stroke-width="2"/>
+                    <circle cx="220" cy="60" r="5" fill="#FF6B6B"/>
+                    <circle cx="280" cy="60" r="5" fill="#FF6B6B"/>
+                    <circle cx="200" cy="80" r="5" fill="#FF6B6B"/>
+                    <circle cx="300" cy="80" r="5" fill="#FF6B6B"/>
+                    <circle cx="220" cy="100" r="5" fill="#FF6B6B"/>
+                    <circle cx="280" cy="100" r="5" fill="#FF6B6B"/>
+
+                    <!-- Brain -->
+                    <ellipse cx="250" cy="80" rx="35" ry="40" fill="#74B9FF" stroke="#2D3436" stroke-width="1" opacity="0.3"/>
+
+                    <!-- Monitor showing feedback -->
+                    <rect x="50" y="150" width="150" height="120" fill="white" stroke="#2D3436" stroke-width="2" rx="5"/>
+                    <text x="125" y="170" text-anchor="middle" font-family="Inter" font-size="10" fill="#2D3436" font-weight="bold">Feedback Signal</text>
+
+                    <!-- Wave pattern -->
+                    <path d="M 60 190 Q 70 180 80 190 T 100 190 T 120 190 T 140 190" stroke="#4ECDC4" stroke-width="2" fill="none"/>
+                    <text x="125" y="215" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">Beta (Active)</text>
+
+                    <!-- Status -->
+                    <circle cx="75" cy="235" r="8" fill="#00B894"/>
+                    <text x="95" y="240" font-family="Inter" font-size="9" fill="#2D3436">Target Range</text>
+
+                    <!-- Right side - Clinical outcomes -->
+                    <text x="350" y="170" font-family="Playfair Display" font-size="11" fill="#2D3436" font-weight="bold">Trainable Patterns:</text>
+
+                    <rect x="280" y="185" width="180" height="30" fill="#FFE66D" stroke="#2D3436" stroke-width="1" rx="3"/>
+                    <text x="370" y="205" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">↓ Theta (Avoidance)</text>
+
+                    <rect x="280" y="225" width="180" height="30" fill="#55EFC4" stroke="#2D3436" stroke-width="1" rx="3"/>
+                    <text x="370" y="245" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">↑ Alpha (Calm)</text>
+
+                    <text x="350" y="285" font-family="Inter" font-size="8" fill="#666" text-anchor="middle">Repeated training builds new neural pathways</text>
+                </svg>
+            </div>
+
+            <div class="research-box">
+                <strong>The Evidence:</strong> Several studies show neurofeedback, particularly training to increase alpha waves (associated with calm alertness) and decrease theta waves (associated with dissociation), improves PTSD symptoms, attention, and emotional regulation. However, the effect sizes are modest and inconsistent across studies. It works best as an adjunct to other therapies, not alone.
+            </div>
+
+            <p style="margin-top: 1.5rem;">
+                <strong>Why Neurofeedback Matters (Even if Imperfect):</strong> It provides direct, non-judgmental evidence that the brain is changeable. For trauma survivors who feel permanently broken, seeing "you just shifted your brainwave pattern" is profoundly encouraging. It's essentially meditation with a biofeedback boost.
+            </p>
+
+            <div class="key-takeaways">
+                <h4>Understanding Neurofeedback</h4>
+                <ul>
+                    <li>It's most effective for PTSD and attention problems, less so for developmental trauma</li>
+                    <li>Results require practice and motivation—it's like practicing a musical instrument while watching your fingers</li>
+                    <li>The research is strong enough to support its use, but not universal enough to replace established therapies</li>
+                    <li>The act of observation itself can be therapeutic (increased awareness = increased control)</li>
+                </ul>
+            </div>
+
+            <div class="funny-take">
+                Neurofeedback is basically asking your brain to play a video game where the controller is your own neural activity. "Make the bar go up" = increase alpha waves = activate calm. It's weirdly motivating? Your brain wants to "win," so it practices the skill of self-regulation. It's like gamifying healing.
+            </div>
+
+            <div class="ai-connection">
+                <strong>AI Parallel:</strong> Neurofeedback is real-time model monitoring and correction. You're observing the system's loss function (brainwave state) and learning to minimize it (shift toward calm). This is gradient descent applied to your own neural network. The user isn't optimizing parameters consciously—they're learning through feedback loops, which is how neural networks learn fundamentally.
+            </div>
+
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> This is Kahneman's System 2 (deliberate, slow) applied to System 1 (fast, automatic). By making the automatic visible, you gain the ability to deliberate about it. The feedback loop creates a bridge between unconscious activation and conscious choice.
+            </div>
+        </section>
+
+        <!-- Lesson 10 -->
+        <section class="lesson">
+            <div class="section-header">
+                <div class="section-number">10</div>
+                <div class="section-title">The Window of Tolerance</div>
+            </div>
+
+            <p>
+                Van der Kolk and Daniel Siegel (who popularized the term) describe the <strong>"window of tolerance"</strong> as the optimal arousal zone where the nervous system is neither overactivated nor underactivated.
+            </p>
+
+            <p>
+                <strong>The Zone:</strong> Within your window, you can think clearly, regulate emotions, respond flexibly to challenges. Outside it: hyperarousal (fight/flight panic) or hypoarousal (freeze/dissociation). Trauma narrows the window—you flip between extremes more easily.
+            </p>
+
+            <div class="illustration">
+                <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Labels -->
+                    <text x="40" y="40" font-family="Playfair Display" font-size="11" fill="#2D3436" font-weight="bold">Normal Window of Tolerance</text>
+
+                    <!-- Upper threshold -->
+                    <line x1="50" y1="100" x2="450" y2="100" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+                    <text x="460" y="105" font-family="Inter" font-size="9" fill="#FF6B6B" font-weight="bold">HYPERAROUSAL</text>
+                    <text x="460" y="120" font-family="Inter" font-size="8" fill="#FF6B6B">(Panic, rage,</text>
+                    <text x="460" y="131" font-family="Inter" font-size="8" fill="#FF6B6B">hypervigilance)</text>
+
+                    <!-- Window (green zone) -->
+                    <rect x="50" y="100" width="400" height="150" fill="#4ECDC4" opacity="0.3" stroke="#4ECDC4" stroke-width="2"/>
+
+                    <!-- Optimal arousal labels -->
+                    <text x="250" y="125" text-anchor="middle" font-family="Playfair Display" font-size="12" fill="#00B894" font-weight="bold">WINDOW OF TOLERANCE</text>
+                    <text x="250" y="145" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">Clear thinking • Emotional flexibility</text>
+                    <text x="250" y="160" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">Appropriate response • Learning</text>
+                    <text x="250" y="200" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">Safe zone for healing</text>
+
+                    <!-- Lower threshold -->
+                    <line x1="50" y1="250" x2="450" y2="250" stroke="#4ECDC4" stroke-width="2" stroke-dasharray="5,5"/>
+                    <text x="460" y="255" font-family="Inter" font-size="9" fill="#4ECDC4" font-weight="bold">HYPOAROUSAL</text>
+                    <text x="460" y="270" font-family="Inter" font-size="8" fill="#4ECDC4">(Shutdown,</text>
+                    <text x="460" y="281" font-family="Inter" font-size="8" fill="#4ECDC4">numbness, dissociation)</text>
+
+                    <!-- Trauma-narrowed window -->
+                    <text x="40" y="320" font-family="Playfair Display" font-size="11" fill="#2D3436" font-weight="bold">With Trauma (Narrowed Window):</text>
+
+                    <!-- Narrowed upper -->
+                    <line x1="50" y1="340" x2="450" y2="340" stroke="#FF6B6B" stroke-width="3"/>
+                    <!-- Narrowed window -->
+                    <rect x="180" y="340" width="140" height="20" fill="#FFE66D" opacity="0.5" stroke="#FFE66D" stroke-width="2"/>
+                    <!-- Narrowed lower -->
+                    <line x1="50" y1="360" x2="450" y2="360" stroke="#4ECDC4" stroke-width="3"/>
+
+                    <text x="250" y="375" text-anchor="middle" font-family="Inter" font-size="8" fill="#2D3436" font-weight="bold">Tiny Safe Zone</text>
+                    <text x="250" y="390" text-anchor="middle" font-family="Inter" font-size="8" fill="#2D3436">Easy to flip to panic or collapse</text>
+                </svg>
+            </div>
+
+            <p style="margin-top: 2rem;">
+                <strong>The Healing Goal:</strong> Therapy gradually widens the window. As you feel safer (through somatic work, emotional processing, relationship repair), your nervous system becomes more resilient. You can handle bigger challenges without tipping into dysregulation.
+            </p>
+
+            <div class="research-box">
+                <strong>Neural Basis:</strong> The window is controlled by the vagus nerve and its connections to the prefrontal cortex. Trauma tightens these circuits. Healing therapies activate the parasympathetic branch (rest-and-digest), gradually teaching the system that larger ranges of arousal are safe.
+            </div>
+
+            <div class="key-takeaways">
+                <h4>Working Within Your Window</h4>
+                <ul>
+                    <li>Trauma work must happen within the window—too much intensity re-traumatizes, too little doesn't work</li>
+                    <li>A good therapist helps you find the "just right" level of challenge</li>
+                    <li>Widening your window is a gradual process measured in months/years, not weeks</li>
+                    <li>As your window widens, you naturally develop more emotional flexibility, better relationships, and resilience</li>
+                </ul>
+            </div>
+
+            <div class="funny-take">
+                Before therapy, you might feel like you're on a knife's edge: one mildly irritating conversation flips you into rage-mode, or a small disappointment sends you numb for days. After therapy, the knife's edge widens into a path. You can stay present through bigger challenges. The same stimulus that would have destabilized you before now barely registers. That's the window widening. That's neuroplasticity on display.
+            </div>
+
+            <div class="ai-connection">
+                <strong>AI Parallel:</strong> The window of tolerance is like the operational range of a model. Models trained on poisoned data have narrow operating ranges (they fail catastrophically outside narrow input distributions). Retraining and data cleaning expand the range. A robust model handles input variation without mode collapse. The window is your system's stability margin.
+            </div>
+
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Csikszentmihalyi's <em>Flow</em> describes the optimal balance between challenge and skill—too easy = boredom, too hard = anxiety. The window of tolerance is exactly this zone. Trauma narrows it; healing expands it so you can access flow more reliably.
+            </div>
+        </section>
+
+        <!-- Lesson 11 -->
+        <section class="lesson">
+            <div class="section-header">
+                <div class="section-number">11</div>
+                <div class="section-title">Interoception: Tuning into Your Own Body</div>
+            </div>
+
+            <p>
+                <strong>Interoception is the ability to sense your own internal state:</strong> your heartbeat, breathing, digestion, temperature, muscle tension. It's different from external perception (seeing, hearing) because it's about *internal* signals.
+            </p>
+
+            <p>
+                Trauma damages interoception. Survivors often report: "I don't know what I'm feeling" or "I don't notice I'm stressed until I panic." This disconnection is not laziness—it's a survival adaptation. If you can't feel pain, you can endure pain. But it also means you can't detect safety.
+            </p>
+
+            <div class="illustration">
+                <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Body -->
+                    <ellipse cx="120" cy="80" rx="25" ry="30" fill="#74B9FF" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="105" y="105" width="30" height="70" fill="#74B9FF" stroke="#2D3436" stroke-width="2"/>
+                    <circle cx="90" cy="140" r="15" fill="#74B9FF" stroke="#2D3436" stroke-width="2"/>
+                    <circle cx="150" cy="140" r="15" fill="#74B9FF" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="110" y="175" width="10" height="45" fill="#74B9FF" stroke="#2D3436" stroke-width="2"/>
+                    <rect x="120" y="175" width="10" height="45" fill="#74B9FF" stroke="#2D3436" stroke-width="2"/>
+
+                    <!-- Interoceptive signals -->
+                    <g id="signals">
+                        <!-- Heart -->
+                        <circle cx="120" cy="120" r="4" fill="#FF6B6B" opacity="0.8"/>
+                        <text x="160" y="125" font-family="Inter" font-size="9" fill="#2D3436">Heart rate</text>
+
+                        <!-- Breath -->
+                        <circle cx="135" cy="110" r="4" fill="#FFE66D" opacity="0.8"/>
+                        <text x="160" y="105" font-family="Inter" font-size="9" fill="#2D3436">Breathing</text>
+
+                        <!-- Stomach -->
+                        <circle cx="120" cy="145" r="4" fill="#FFA502" opacity="0.8"/>
+                        <text x="160" y="150" font-family="Inter" font-size="9" fill="#2D3436">Gut sensations</text>
+
+                        <!-- Muscle tension -->
+                        <circle cx="110" cy="135" r="4" fill="#A06CD5" opacity="0.8"/>
+                        <text x="160" y="140" font-family="Inter" font-size="9" fill="#2D3436">Muscle tone</text>
+                    </g>
+
+                    <!-- Arrow to brain -->
+                    <path d="M 150 85 Q 200 85 220 100" stroke="#4ECDC4" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 Z" fill="#4ECDC4"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Brain (receiving or not) -->
+                    <ellipse cx="320" cy="100" rx="50" ry="45" fill="#A06CD5" stroke="#2D3436" stroke-width="2"/>
+                    <text x="320" y="95" text-anchor="middle" font-family="Inter" font-size="10" fill="white" font-weight="bold">Awareness</text>
+                    <text x="320" y="110" text-anchor="middle" font-family="Inter" font-size="8" fill="white">(Integrated)</text>
+
+                    <!-- Left side: Disconnected -->
+                    <text x="120" y="220" text-anchor="middle" font-family="Playfair Display" font-size="11" fill="#FF6B6B" font-weight="bold">Without Interoception</text>
+                    <text x="120" y="240" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">"I don't feel...</text>
+                    <text x="120" y="253" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">...until I'm in crisis"</text>
+                    <text x="120" y="266" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">Emotional numbness</text>
+                    <text x="120" y="278" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">Ignoring body cues</text>
+
+                    <!-- Right side: Connected -->
+                    <text x="320" y="170" text-anchor="middle" font-family="Playfair Display" font-size="11" fill="#4ECDC4" font-weight="bold">With Interoception</text>
+                    <text x="320" y="190" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">"I notice I'm...</text>
+                    <text x="320" y="203" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436">...getting tense before panic"</text>
+                    <text x="320" y="216" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">Early intervention</text>
+                    <text x="320" y="228" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">Emotional awareness</text>
+                </svg>
+            </div>
+
+            <p style="margin-top: 2rem;">
+                <strong>Rebuilding Interoception:</strong> Mindfulness, body scans, yoga, somatic therapies, and even simple practices like "name five things you feel in your body right now" rebuild this capacity.
+            </p>
+
+            <div class="research-box">
+                <strong>The Research:</strong> Studies show that people with higher interoceptive accuracy (ability to sense their own heartbeat, for example) have better emotional regulation, less anxiety, and more successful trauma recovery. Interoception literally predicts therapeutic outcomes.
+            </div>
+
+            <div class="key-takeaways">
+                <h4>Interoception's Healing Power</h4>
+                <ul>
+                    <li>Your body constantly sends signals about your state; trauma teaches you to ignore them</li>
+                    <li>Rebuilding this connection gives you early warning—you feel anxiety starting, not just when it's overwhelming</li>
+                    <li>Interoception enables self-compassion (you can only care for what you can feel)</li>
+                    <li>It's the foundation of emotional intelligence: you cannot regulate what you cannot sense</li>
+                </ul>
+            </div>
+
+            <div class="funny-take">
+                Trauma is like having your phone on silent for years. Messages come in, but you don't notice. Then randomly you look at your phone and see 400 notifications. "Why didn't anyone tell me?!" they did; you just couldn't hear it. Rebuilding interoception is turning the volume back up so you get real-time alerts, not quarterly binges of "oh wow, I was actually anxious the whole time."
+            </div>
+
+            <div class="ai-connection">
+                <strong>AI Parallel:</strong> Interoception is the model's ability to monitor its own state: activation levels, attention distribution, confidence. A model without feedback loops is brittle. One with robust self-monitoring (analogous to interoception) can detect when it's operating outside its training distribution and adjust. That's why adversarial robustness research includes systems that can "feel" when they're being attacked.
+            </div>
+
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> Goleman's <em>Emotional Intelligence</em> places self-awareness as the foundation—and self-awareness begins with interoception. You cannot be aware of emotions you cannot feel. This is the bridge from neurobiology to emotional intelligence.
+            </div>
+        </section>
+
+        <!-- Lesson 12 -->
+        <section class="lesson">
+            <div class="section-header">
+                <div class="section-number">12</div>
+                <div class="section-title">Internal Family Systems (IFS): Healing Through Parts Work</div>
+            </div>
+
+            <p>
+                Internal Family Systems (IFS), developed by Richard Schwartz, is a therapeutic model that treats trauma through the metaphor of internal "parts." Rather than seeing yourself as fragmented/broken, you're a system with multiple parts, some protective, some wounded, all deserving of understanding.
+            </p>
+
+            <p>
+                <strong>The Premise:</strong> Trauma often causes psychological fragmentation. Parts of you that protected you during danger (fight, flee, rage, shutdown) continue operating automatically. Other parts carry the pain. IFS helps these parts communicate, trade burdens, and reorganize toward wholeness.
+            </p>
+
+            <div class="illustration">
+                <svg viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Self at center (blue) -->
+                    <circle cx="250" cy="175" r="40" fill="#74B9FF" stroke="#2D3436" stroke-width="2"/>
+                    <text x="250" y="180" text-anchor="middle" font-family="Playfair Display" font-size="12" fill="white" font-weight="bold">SELF</text>
+
+                    <!-- Protective/Manager Parts -->
+                    <circle cx="100" cy="80" r="35" fill="#FF6B6B" stroke="#2D3436" stroke-width="2"/>
+                    <text x="100" y="75" text-anchor="middle" font-family="Inter" font-size="9" fill="white" font-weight="bold">The Critic</text>
+                    <text x="100" y="90" text-anchor="middle" font-family="Inter" font-size="8" fill="white">(Stay vigilant)</text>
+
+                    <circle cx="200" cy="60" r="35" fill="#FFA502" stroke="#2D3436" stroke-width="2"/>
+                    <text x="200" y="55" text-anchor="middle" font-family="Inter" font-size="9" fill="white" font-weight="bold">The Achiever</text>
+                    <text x="200" y="70" text-anchor="middle" font-family="Inter" font-size="8" fill="white">(Overwork/prove worth)</text>
+
+                    <circle cx="300" cy="80" r="35" fill="#A06CD5" stroke="#2D3436" stroke-width="2"/>
+                    <text x="300" y="75" text-anchor="middle" font-family="Inter" font-size="9" fill="white" font-weight="bold">The Caretaker</text>
+                    <text x="300" y="90" text-anchor="middle" font-family="Inter" font-size="8" fill="white">(Anticipate needs)</text>
+
+                    <circle cx="400" cy="80" r="35" fill="#55EFC4" stroke="#2D3436" stroke-width="2"/>
+                    <text x="400" y="75" text-anchor="middle" font-family="Inter" font-size="9" fill="white" font-weight="bold">The Pleaser</text>
+                    <text x="400" y="90" text-anchor="middle" font-family="Inter" font-size="8" fill="white">(Appease, avoid conflict)</text>
+
+                    <!-- Exiled/Wounded Parts -->
+                    <circle cx="100" cy="270" r="35" fill="#FFE66D" stroke="#2D3436" stroke-width="2" opacity="0.6"/>
+                    <text x="100" y="275" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436" font-weight="bold">The Hurt Child</text>
+                    <text x="100" y="290" text-anchor="middle" font-family="Inter" font-size="7" fill="#2D3436">(Holds original pain)</text>
+
+                    <circle cx="400" cy="270" r="35" fill="#FFE66D" stroke="#2D3436" stroke-width="2" opacity="0.6"/>
+                    <text x="400" y="275" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436" font-weight="bold">The Abandoned Self</text>
+                    <text x="400" y="290" text-anchor="middle" font-family="Inter" font-size="7" fill="#2D3436">(Fear of being alone)</text>
+
+                    <!-- Arrows -->
+                    <line x1="135" y1="115" x2="220" y2="155" stroke="#DDDDDD" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="235" y1="115" x2="245" y2="150" stroke="#DDDDDD" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="265" y1="115" x2="255" y2="150" stroke="#DDDDDD" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="365" y1="115" x2="280" y2="155" stroke="#DDDDDD" stroke-width="1" stroke-dasharray="3,3"/>
+
+                    <line x1="135" y1="235" x2="220" y2="195" stroke="#DDDDDD" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="365" y1="235" x2="280" y2="195" stroke="#DDDDDD" stroke-width="1" stroke-dasharray="3,3"/>
+
+                    <!-- Labels -->
+                    <text x="250" y="320" text-anchor="middle" font-family="Inter" font-size="9" fill="#2D3436" font-weight="bold">Protective Parts try to prevent pain → Exiled Parts remain isolated</text>
+                    <text x="250" y="335" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">IFS Goal: Self (calm, caring) connects with all parts</text>
+                </svg>
+            </div>
+
+            <p style="margin-top: 2rem;">
+                <strong>How It Works:</strong>
+            </p>
+            <ol style="margin: 1rem 0 1rem 2rem; color: #555;">
+                <li><strong>Identify the parts:</strong> Notice the different "voices" or strategies within you (the critic, the caretaker, the hurt child)</li>
+                <li><strong>Hear them:</strong> Instead of fighting or suppressing parts, the therapist helps you listen with curiosity</li>
+                <li><strong>Understand their role:</strong> The critic wasn't trying to harm you; it was trying to prevent shame. The caretaker wasn't abandoning you; it was trying to keep you safe</li>
+                <li><strong>Access your Self:</strong> A deep, calm, compassionate place within you that can hold all parts with understanding</li>
+                <li><strong>Let Self lead:</strong> From that centered place, your system naturally reorganizes. Protective parts relax. Exiled parts heal.</li>
+            </ol>
+
+            <div class="research-box">
+                <strong>IFS Evidence:</strong> Studies show IFS reduces PTSD, depression, and anxiety, and improves relationship quality. It's particularly effective for complex/developmental trauma because it addresses fragmentation directly rather than trying to repress symptoms.
+            </div>
+
+            <div class="key-takeaways">
+                <h4>IFS's Central Insight</h4>
+                <ul>
+                    <li>Your parts aren't your enemies; they were your survival team</li>
+                    <li>Healing isn't eliminating parts; it's improving their internal relationship</li>
+                    <li>Your Self (the calm, wise, connected center) has the wisdom to guide healing</li>
+                    <li>When all parts feel heard and valued, they naturally work together</li>
+                </ul>
+            </div>
+
+            <div class="funny-take">
+                IFS is basically therapy where you get to have a family meeting with your own internal cast of characters. The Critic has been badgering you for 30 years thinking it's helping. The Caretaker is exhausted from trying to prevent disaster by anticipating everyone's needs. The Hurt Child is locked in a closet. And there's a wise part of you (Self) that, once allowed to speak, essentially says "Can we all just chill? You're all doing your best, but you're overdoing it." And somehow, they listen.
+            </div>
+
+            <div class="ai-connection">
+                <strong>AI Parallel:</strong> This is model architecture as therapy. A neural network with multiple competing objectives (loss functions) creates internal conflict. IFS is like identifying the individual objective heads, understanding their purpose, and restructuring the network so they operate cooperatively rather than adversarially. The "Self" is like a superordinate loss function that coordinates the parts.
+            </div>
+
+            <div class="cross-book">
+                <strong>Cross-Book Connection:</strong> This mirrors Goleman's <em>Emotional Intelligence</em> concept of managing multiple emotions and needs simultaneously. Rather than suppressing the angry part to seem professional, or abandoning professional goals to satisfy the anxious part, IFS helps all parts work together. It's emotional intelligence at the intrapsychic level.
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="conclusion">
+            <h2>Healing Beyond the Pages</h2>
+            <p>
+                Van der Kolk's core message is revolutionary in its simplicity: <strong>the body keeps the score.</strong> Trauma isn't processed by willpower or insight alone. It's embedded in physiology—in the nervous system's default responses, in the body's chronic vigilance, in the fragmented way we inhabit ourselves.
+            </p>
+            <p style="margin-top: 1.5rem;">
+                But here's the liberating flip: because trauma is physiological, it's treatable. The nervous system can be retrained. New neural pathways can be built. The body that learned to defend through fight, flight, freeze, or fawn can learn that safety is possible. Slowly, carefully, with support, the body can unlearn its ancient lessons and write new ones.
+            </p>
+            <p style="margin-top: 1.5rem;">
+                Healing is not forgetting. It's integration. It's moving from "That happened to me" (fragmented, unprocessed) to "That happened, and I survived" (coherent, integrated, past-tense). It's widening your window of tolerance until you can be present in your own life. It's rebuilding trust in your own body. It's reconnecting with yourself.
+            </p>
+            <p style="margin-top: 1.5rem;">
+                <em>The body keeps the score</em> says: your symptoms are not your fault. Your nervous system is doing exactly what it learned to do. And—crucially—you can teach it something new.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>This illustrated guide synthesizes key concepts from "The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma" by Bessel van der Kolk, MD (2014).</p>
+            <p style="margin-top: 1rem; font-size: 0.85rem;">Created as a comprehensive learning resource integrating neuroscience, trauma research, cross-disciplinary insights, and practical healing pathways.</p>
+        </footer>
+    </div>
+</body>
+</html>

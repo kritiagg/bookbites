@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==================== COVER PAGE ==================== */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--warm-red) 50%, var(--teal) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 600px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .cover-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .cover-author {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            background: var(--sunny);
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* ==================== SVG ILLUSTRATIONS ==================== */
+        .svg-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+        }
+
+        svg {
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        .nav-sticky {
+            position: sticky;
+            top: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            padding: 15px 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--sunny);
+            color: var(--dark);
+        }
+
+        /* ==================== SECTIONS ==================== */
+        section {
+            background: white;
+            margin: 30px 0;
+            padding: 60px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--warm-red);
+        }
+
+        .section-number {
+            display: inline-block;
+            background: var(--teal);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--teal);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .section-content {
+            margin-top: 30px;
+            line-height: 1.8;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        /* ==================== HIGHLIGHTS ==================== */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(255, 107, 107, 0.1) 100%);
+            border-left: 5px solid var(--teal);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .key-takeaway {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--cream) 100%);
+            border-left: 5px solid var(--orange);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, rgba(116, 185, 255, 0.05) 0%, rgba(85, 239, 196, 0.05) 100%);
+            border: 2px solid var(--sky);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .example-title {
+            font-weight: 700;
+            color: var(--deep-blue);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* ==================== LISTS ==================== */
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        li::marker {
+            color: var(--teal);
+            font-weight: 600;
+        }
+
+        /* ==================== COMPARISON TABLES ==================== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--deep-blue) 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: rgba(78, 205, 196, 0.05);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ==================== CARD GRID ==================== */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .lesson-card {
+            background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            border-color: var(--teal);
+        }
+
+        .lesson-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--warm-red);
+            margin-bottom: 10px;
+        }
+
+        .lesson-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .lesson-description {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* ==================== CASE STUDY ==================== */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+            margin: 40px 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            padding-left: 50px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--teal);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--teal);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 20px;
+            width: 4px;
+            height: calc(100% + 10px);
+            background: var(--teal);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-label {
+            font-weight: 700;
+            color: var(--warm-red);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .timeline-text {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* ==================== AI CONNECTION ==================== */
+        .ai-connection {
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.1) 0%, rgba(225, 112, 85, 0.1) 100%);
+            border: 2px solid var(--dark-purple);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+
+        .ai-connection h3 {
+            color: var(--dark-purple);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        /* ==================== CROSS-REFERENCES ==================== */
+        .cross-ref {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.05) 0%, rgba(255, 107, 107, 0.1) 100%);
+            border-left: 4px solid var(--coral);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .cross-ref-title {
+            font-weight: 700;
+            color: var(--warm-red);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* ==================== FUNNY TAKES ==================== */
+        .humor-box {
+            background: linear-gradient(135deg, var(--pink) 0%, var(--sunny) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-weight: 500;
+            border: 2px dashed var(--warm-red);
+            color: var(--dark);
+        }
+
+        .humor-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 40px;
+            margin-top: 80px;
+            border-radius: 0;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--teal);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--teal);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 20px;
+            text-align: center;
+            color: #aaa;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 40px 25px;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .nav-content {
+                gap: 15px;
+            }
+
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== UTILITY ==================== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-40 {
+            margin-top: 40px;
+        }
+
+        .mb-40 {
+            margin-bottom: 40px;
+        }
+
+        .color-teal {
+            color: var(--teal);
+        }
+
+        .color-red {
+            color: var(--warm-red);
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+        }
+
+        .font-lg {
+            font-size: 1.3rem;
+        }
+
+        .font-sm {
+            font-size: 0.9rem;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== COVER PAGE ==================== -->
+    <div class="cover">
+        <svg class="cover-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Falling Giant SVG -->
+            <g id="s-curve">
+                <!-- Incumbent S-Curve -->
+                <path d="M 50 100 Q 100 50, 150 80 T 250 150" stroke="white" stroke-width="3" fill="none" opacity="0.3" stroke-dasharray="5,5"/>
+                <!-- Disruptor S-Curve -->
+                <path d="M 50 300 Q 100 280, 150 220 T 250 80" stroke="white" stroke-width="3" fill="none" opacity="0.3" stroke-dasharray="5,5"/>
+                <!-- Falling Giant Circle -->
+                <circle cx="250" cy="150" r="30" fill="white" opacity="0.2"/>
+                <text x="250" y="160" text-anchor="middle" font-size="20" fill="white" opacity="0.4">📉</text>
+                <!-- Rising Disruptor Circle -->
+                <circle cx="250" cy="80" r="25" fill="white" opacity="0.15"/>
+                <text x="250" y="90" text-anchor="middle" font-size="18" fill="white" opacity="0.3">🚀</text>
+            </g>
+        </svg>
+        <div class="cover-content">
+            <h1>The Innovator's Dilemma</h1>
+            <p class="cover-subtitle">When New Technologies Cause Great Firms to Fail</p>
+            <p class="cover-author">by Clayton M. Christensen</p>
+            <div class="cover-badge">A Comprehensive Illustrated Guide</div>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <div class="nav-sticky">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#key-concept" class="nav-link">Key Concept</a>
+                <a href="#lessons" class="nav-link">12 Lessons</a>
+                <a href="#case-study" class="nav-link">Disk Drive Case</a>
+                <a href="#rpv-framework" class="nav-link">RPV Framework</a>
+                <a href="#ai-disruption" class="nav-link">AI Disruption</a>
+                <a href="#cross-references" class="nav-link">Cross-References</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <div class="container">
+
+        <!-- ==================== SECTION 1: ABOUT ==================== -->
+        <section id="about">
+            <div class="section-number">1</div>
+            <h2>About This Book</h2>
+            <p class="section-subtitle">Why It Matters (Even More Today)</p>
+
+            <div class="section-content">
+                <p>Published in 1997, Clayton Christensen's <span class="bold">The Innovator's Dilemma</span> remains the most prescient business book ever written. It answers a paradoxical question: <span class="italic">Why do the best-managed companies fail?</span></p>
+
+                <div class="highlight-box">
+                    <strong>The Core Paradox:</strong> Companies that listen to their customers, invest in R&D, and maintain focus on their most profitable markets are precisely the ones that get blindsided by disruptive innovation. Good management itself becomes the problem.
+                </div>
+
+                <p>Christensen studied the hard disk drive industry—an industry that experienced seven distinct technological disruptions across 25 years. Every single time, market leaders lost their positions. Not because they were incompetent, but because they made rational, well-informed decisions based on their value networks and resources.</p>
+
+                <p>This guide reveals the frameworks, mechanisms, and principles that explain why:</p>
+                <ul>
+                    <li><strong>Digital Equipment Corp</strong> (DEC) failed to see the personal computer revolution</li>
+                    <li><strong>Steel minimills</strong> disrupted the integrated steel industry</li>
+                    <li><strong>Honda motorcycles</strong> disrupted established European and American manufacturers</li>
+                    <li><strong>OpenAI</strong> disrupted Google's dominance in search and AI</li>
+                    <li><strong>Transformers</strong> disrupted RNNs in deep learning</li>
+                </ul>
+
+                <div class="key-takeaway">
+                    <strong>🎯 Essential Truth:</strong> Disruption isn't about better technology—it's about a different business model that redefines what "good" means in a market.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 2: KEY CONCEPT ==================== -->
+        <section id="key-concept">
+            <div class="section-number">2</div>
+            <h2>The Core Insight</h2>
+            <p class="section-subtitle">Sustaining vs. Disruptive Innovation</p>
+
+            <div class="section-content">
+                <p>The fundamental distinction Christensen makes divides innovation into two categories:</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Sustaining Innovation</th>
+                            <th>Disruptive Innovation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Trajectory:</strong> Improves existing products along established metrics</td>
+                            <td><strong>Trajectory:</strong> Initially inferior on established metrics</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Customers:</strong> Existing customers demand it</td>
+                            <td><strong>Customers:</strong> New customers or non-consumers adopt it</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Economics:</strong> Higher margins, premium positioning</td>
+                            <td><strong>Economics:</strong> Lower margins, lower cost</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Value Network:</strong> Fits perfectly within existing network</td>
+                            <td><strong>Value Network:</strong> Creates or operates in new value network</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Example:</strong> Faster CPUs, better disk drive density</td>
+                            <td><strong>Example:</strong> Cloud storage replacing local drives</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Winner:</strong> Incumbent firms excel</td>
+                            <td><strong>Winner:</strong> New entrants tend to win</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="humor-box">
+                    <span class="humor-icon">😅</span>
+                    <strong>The Great Irony:</strong> Incumbents are best at the thing that kills them. Their competence at sustaining innovation makes them blind to disruption. It's like being an expert at swimming—right before falling into a volcano.
+                </div>
+
+                <p>Disruptive innovations typically:</p>
+                <ul>
+                    <li>Start in <strong>low-end markets</strong> or entirely new markets</li>
+                    <li>Offer lower prices and simpler products</li>
+                    <li>Appeal to price-sensitive or previously unserved customers</li>
+                    <li>Enable new business models</li>
+                    <li>Eventually improve along valued dimensions and displace incumbents</li>
+                </ul>
+
+                <div class="key-takeaway">
+                    <strong>🎯 The Mechanism:</strong> Disruptive innovations migrate <em>upmarket</em> (toward higher-value customers) over time, while incumbents move toward more complex, premium solutions. They eventually collide, and the incumbent is displaced.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 3: THE S-CURVE ==================== -->
+        <section id="s-curve">
+            <div class="section-number">3</div>
+            <h2>The S-Curve of Technology</h2>
+            <p class="section-subtitle">Why Yesterday's Innovation Becomes Today's Vulnerability</p>
+
+            <div class="svg-container">
+                <svg width="500" height="350" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Grid -->
+                    <line x1="50" y1="300" x2="450" y2="300" stroke="#ddd" stroke-width="2"/>
+                    <line x1="50" y1="50" x2="50" y2="300" stroke="#ddd" stroke-width="2"/>
+                    <!-- Incumbent S-Curve -->
+                    <path d="M 80 280 Q 150 250, 200 150 Q 250 50, 300 30 Q 350 20, 400 15" stroke="#E17055" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <!-- Disruptor S-Curve -->
+                    <path d="M 180 295 Q 230 280, 280 220 Q 320 140, 380 50 Q 420 10, 450 5" stroke="#4ECDC4" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <!-- Labels -->
+                    <text x="420" y="35" font-size="14" fill="#E17055" font-weight="bold">Incumbent</text>
+                    <text x="420" y="25" font-size="14" fill="#4ECDC4" font-weight="bold">Disruption</text>
+                    <!-- Axis labels -->
+                    <text x="450" y="320" font-size="12" fill="#666">Time →</text>
+                    <text x="25" y="50" font-size="12" fill="#666">Performance ↑</text>
+                    <!-- Intersection point -->
+                    <circle cx="300" cy="110" r="8" fill="#FF6B6B" opacity="0.6"/>
+                    <text x="310" y="115" font-size="11" fill="#FF6B6B" font-weight="bold">Market Inflection</text>
+                    <!-- Performance overshooting -->
+                    <line x1="250" y1="30" x2="250" y2="130" stroke="#FFE66D" stroke-width="2" stroke-dasharray="4,4"/>
+                    <text x="255" y="80" font-size="11" fill="#FFE66D" font-weight="bold">Overshooting</text>
+                </svg>
+            </div>
+
+            <div class="section-content">
+                <p>Every technology follows an S-shaped curve of improvement:</p>
+                <ul>
+                    <li><strong>Phase 1 (Slow Start):</strong> Early improvements come slowly as engineers battle fundamental physics</li>
+                    <li><strong>Phase 2 (Rapid Growth):</strong> The sweet spot where innovation accelerates, driving market adoption</li>
+                    <li><strong>Phase 3 (Diminishing Returns):</strong> As the technology approaches physical limits, each marginal improvement requires disproportionate effort</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>The Fatal Mistake:</strong> Incumbents invest heavily during Phase 3 to serve increasingly demanding customers. Meanwhile, disruptors introduce inferior technology (just entering Phase 1) that will eventually out-improve them by operating on a different curve. The incumbent is trapped: they can't invest in the disruption because it offers lower margins and can't capture their best customers.
+                </div>
+
+                <p>The problem compounds through what Christensen calls <strong>Performance Overshooting</strong>: the incumbent's technology improves faster than the market demands. They over-engineer for mainstream customers, while the disruptor offers "good enough" at a fraction of the cost.</p>
+
+                <div class="key-takeaway">
+                    <strong>🎯 The Trap:</strong> By the time the S-curve intersection makes disruption unavoidable, the incumbent's organizational inertia makes it too late to pivot. They're committed to a different trajectory entirely.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 4: WHY LISTENING TO CUSTOMERS IS SOMETIMES WRONG ==================== -->
+        <section id="listening-customers">
+            <div class="section-number">4</div>
+            <h2>Why Listening to Customers Can Be Fatal</h2>
+            <p class="section-subtitle">The Tyranny of Known Demand</p>
+
+            <div class="section-content">
+                <p>One of Christensen's most provocative insights: <span class="italic">companies that carefully listen to their customers will systematically miss disruptive innovation.</span></p>
+
+                <div class="highlight-box">
+                    <strong>The Mechanism:</strong> Customers can articulate needs within their existing value system, but they cannot conceive of markets that don't yet exist. Your best customers have the most to lose from disruption, so they'll advocate against it—sometimes explicitly.
+                </div>
+
+                <p>Examples abound:</p>
+                <ul>
+                    <li><strong>Mainframe manufacturers</strong> asked their customers about the value of personal computers. The response was consistently "not relevant"—customers needed more power, not less.</li>
+                    <li><strong>Disk drive companies</strong> interviewed their customers about smaller drives. The response was indifference—existing customers wanted higher capacity, not smaller form factors.</li>
+                    <li><strong>Kodak</strong> invented the digital camera but dismissed it as irrelevant because their customers (professional photographers) valued film quality, not convenience.</li>
+                    <li><strong>Google</strong> listened to search users who wanted faster, better keyword matching. They didn't ask for large language models to chat with them like a colleague.</li>
+                </ul>
+
+                <div class="humor-box">
+                    <span class="humor-icon">🤦</span>
+                    <strong>Henry Ford Wisdom:</strong> "If I had asked customers what they wanted, they would have said faster horses." Except Christensen's point is darker: Ford asked them, they said it, and he built an even better horse carriage first.
+                </div>
+
+                <p>The irony is that listening to customers is <strong>correct behavior for sustaining innovation</strong>. It's rational. It's data-driven. It's exactly what you should do to serve your market better. But it's precisely the mechanism that blinds you to disruption.</p>
+
+                <div class="key-takeaway">
+                    <strong>🎯 The Paradox:</strong> Listening to customers is simultaneously the right thing to do (for today) and the wrong thing to do (for tomorrow). This is why incumbents lose—not from incompetence, but from being optimized for the present.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 5: THE DISK DRIVE CASE STUDY ==================== -->
+        <section id="case-study">
+            <div class="section-number">5</div>
+            <h2>The Disk Drive Industry</h2>
+            <p class="section-subtitle">The Perfect Case Study for Disruptive Innovation</p>
+
+            <div class="section-content">
+                <p>Christensen spent years studying the hard disk drive industry. It's the perfect case study because:</p>
+                <ul>
+                    <li>The technology had seven distinct disruptions over 25 years</li>
+                    <li>Each disruption's pattern is identical and clear</li>
+                    <li>Market leaders consistently lost positions—but not to poor management</li>
+                    <li>Quantitative data is abundant and unambiguous</li>
+                </ul>
+
+                <div class="svg-container">
+                    <svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Disk sizes shrinking over time -->
+                        <g id="generation1">
+                            <circle cx="80" cy="150" r="50" fill="none" stroke="#E17055" stroke-width="3" opacity="0.7"/>
+                            <text x="80" y="160" text-anchor="middle" font-size="16" fill="#E17055" font-weight="bold">14"</text>
+                            <text x="80" y="200" text-anchor="middle" font-size="12" fill="#666">1970s</text>
+                        </g>
+                        <g id="generation2">
+                            <circle cx="180" cy="150" r="40" fill="none" stroke="#FF9F43" stroke-width="3" opacity="0.8"/>
+                            <text x="180" y="160" text-anchor="middle" font-size="14" fill="#FF9F43" font-weight="bold">8"</text>
+                            <text x="180" y="200" text-anchor="middle" font-size="12" fill="#666">Early 80s</text>
+                        </g>
+                        <g id="generation3">
+                            <circle cx="280" cy="150" r="30" fill="none" stroke="#4ECDC4" stroke-width="3" opacity="0.9"/>
+                            <text x="280" y="160" text-anchor="middle" font-size="12" fill="#4ECDC4" font-weight="bold">5.25"</text>
+                            <text x="280" y="200" text-anchor="middle" font-size="12" fill="#666">Mid 80s</text>
+                        </g>
+                        <g id="generation4">
+                            <circle cx="380" cy="150" r="20" fill="none" stroke="#6C5CE7" stroke-width="3" opacity="1"/>
+                            <text x="380" y="160" text-anchor="middle" font-size="10" fill="#6C5CE7" font-weight="bold">3.5"</text>
+                            <text x="380" y="200" text-anchor="middle" font-size="12" fill="#666">Late 80s</text>
+                        </g>
+                        <g id="generation5">
+                            <circle cx="470" cy="150" r="12" fill="none" stroke="#00B894" stroke-width="2" opacity="1"/>
+                            <text x="470" y="155" text-anchor="middle" font-size="8" fill="#00B894" font-weight="bold">2.5"</text>
+                            <text x="470" y="200" text-anchor="middle" font-size="12" fill="#666">90s</text>
+                        </g>
+                        <!-- Arrow showing disruption -->
+                        <path d="M 60 250 L 480 250" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <text x="270" y="275" text-anchor="middle" font-size="12" fill="#FF6B6B" font-weight="bold">Each transition disrupted market leaders</text>
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#FF6B6B" />
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+
+                <h3 style="color: var(--warm-red); font-size: 1.4rem; margin-top: 40px; margin-bottom: 20px;">The Pattern Repeats Seven Times</h3>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-label">1970s → Early 1980s: 14" → 8" disk drives</div>
+                        <div class="timeline-text">
+                            Shugart and Micropolis led the 14" market. When 8" drives emerged, incumbents dismissed them as inferior (lower capacity). By the time demand was undeniable, market share had shifted to new entrants like Tandon. The 14" leaders' exit was swift.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-label">Early 1980s → Mid 1980s: 8" → 5.25" disk drives</div>
+                        <div class="timeline-text">
+                            The 8" leaders (now different companies) made the same mistake. They asked their customers—minicomputer makers—and got consistent feedback: 5.25" drives lack the capacity we need. The disruption came from the PC market, which didn't exist in their value network.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-label">Mid 1980s → Late 1980s: 5.25" → 3.5" disk drives</div>
+                        <div class="timeline-text">
+                            Repeated again. 5.25" market leaders built better 5.25" drives. Sony and other newcomers built 3.5" drives for the laptop market—a market the incumbents didn't serve and didn't perceive as important.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-label">Late 1980s → 1990s: Mechanical → Solid State</div>
+                        <div class="timeline-text">
+                            The pattern continued with SSDs disrupting mechanical drives. Mechanical drive leaders couldn't invest in SSDs because the markets and economics were completely different. Today, mechanical drives are obsolete for most applications.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-takeaway">
+                    <strong>🎯 The Profound Pattern:</strong> In every single transition across 25 years, the market leaders from the previous generation were not the leaders in the new one. Not because they weren't excellent engineers or managers—many tried to build the new technology. But they couldn't commercialize it within their existing value network. A separate organization with different economic incentives always won.
+                </div>
+
+                <div class="example-box">
+                    <div class="example-title">Why Incumbents Failed at Each Transition</div>
+                    <ul>
+                        <li><strong>Wrong customers:</strong> Existing customers wanted more capacity. New customers (laptop makers, PC makers) couldn't be served with existing cost structures.</li>
+                        <li><strong>Wrong business model:</strong> The new market operated on different economics, required different distribution, and served different use cases.</li>
+                        <li><strong>Organizational inertia:</strong> Sales teams were incentivized to sell high-margin products to existing customers. R&D was working on incremental improvements, not revolutionary designs.</li>
+                        <li><strong>Rational decisions:</strong> It was genuinely rational not to invest in technologies that couldn't serve your best customers and operated on inferior economics.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 6-12: THE 12 LESSONS ==================== -->
+        <section id="lessons">
+            <h2>The 12 Essential Lessons</h2>
+            <p class="section-subtitle">Frameworks and Principles for Understanding Innovation</p>
+
+            <div class="lessons-grid">
+                <!-- Lesson 1 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">1</div>
+                    <div class="lesson-title">Disruptive ≠ Discontinuous</div>
+                    <div class="lesson-description">
+                        Disruptive innovations aren't always technologically discontinuous. They're organizationally discontinuous—they fit a different value network and operate on different economics.
+                    </div>
+                </div>
+
+                <!-- Lesson 2 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">2</div>
+                    <div class="lesson-title">The S-Curve Migration</div>
+                    <div class="lesson-description">
+                        Every technology has an S-curve of improvement. Disruptors enter on a low curve that will eventually surpass the incumbent's improved curve. The intersection point determines displacement.
+                    </div>
+                </div>
+
+                <!-- Lesson 3 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">3</div>
+                    <div class="lesson-title">Customer Listening Trap</div>
+                    <div class="lesson-description">
+                        Listening to existing customers is the right strategy for sustaining innovation but the wrong strategy for disruptive innovation. The paradox is unavoidable within the same organization.
+                    </div>
+                </div>
+
+                <!-- Lesson 4 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">4</div>
+                    <div class="lesson-title">Value Networks Define Vision</div>
+                    <div class="lesson-description">
+                        Companies don't fail because they fail to see the future. They fail because their value network—the ecosystem of customers, suppliers, and partners—makes the future invisible.
+                    </div>
+                </div>
+
+                <!-- Lesson 5 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">5</div>
+                    <div class="lesson-title">Performance Overshooting</div>
+                    <div class="lesson-description">
+                        Incumbent technologies improve faster than markets demand. Over-engineering for premium customers creates an opening for "good enough" disruptors at lower cost points.
+                    </div>
+                </div>
+
+                <!-- Lesson 6 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">6</div>
+                    <div class="lesson-title">The Small Market Problem</div>
+                    <div class="lesson-description">
+                        Large companies cannot target small markets. A $1 billion company needs $100M annual revenue growth—impossible to achieve in nascent disruptive markets. Disruptors are not burdened by this math.
+                    </div>
+                </div>
+
+                <!-- Lesson 7 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">7</div>
+                    <div class="lesson-title">Asymmetric Motivation</div>
+                    <div class="lesson-description">
+                        Disruptors are motivated to continuously improve toward higher-end markets. Incumbents are motivated to protect existing revenue. This asymmetry guarantees the eventual intersection and displacement.
+                    </div>
+                </div>
+
+                <!-- Lesson 8 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">8</div>
+                    <div class="lesson-title">Autonomous Organizations</div>
+                    <div class="lesson-description">
+                        To commercialize disruptive innovation, companies must create separate business units with independent management, economics, and customer relationships. Integration kills disruption.
+                    </div>
+                </div>
+
+                <!-- Lesson 9 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">9</div>
+                    <div class="lesson-title">Resource Allocation Mechanisms</div>
+                    <div class="lesson-description">
+                        How a company allocates capital and evaluates opportunities determines which innovations it will pursue. The existing mechanism ensures disruptive investments starve for resources.
+                    </div>
+                </div>
+
+                <!-- Lesson 10 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">10</div>
+                    <div class="lesson-title">The Principle of Conservation of Modularity</div>
+                    <div class="lesson-description">
+                        As an industry matures, performance improves, and architecture standardizes, the industry becomes modularized. This creates room for disruption by specialists in components.
+                    </div>
+                </div>
+
+                <!-- Lesson 11 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">11</div>
+                    <div class="lesson-title">Jobs-to-Be-Done Theory</div>
+                    <div class="lesson-description">
+                        Customers don't buy products; they hire them to do specific jobs. Disruptors win by redefining what job gets done and for whom, not just by improving existing job dimensions.
+                    </div>
+                </div>
+
+                <!-- Lesson 12 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">12</div>
+                    <div class="lesson-title">Why Good Management Causes Failure</div>
+                    <div class="lesson-description">
+                        The disciplines that make companies successful (customer focus, financial discipline, continuous improvement) are the exact mechanisms that make them vulnerable to disruption.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: VALUE NETWORKS & RPV FRAMEWORK ==================== -->
+        <section id="rpv-framework">
+            <div class="section-number">6</div>
+            <h2>Value Networks & The RPV Framework</h2>
+            <p class="section-subtitle">How Organizational Context Shapes Perception</p>
+
+            <div class="section-content">
+                <p>Christensen's central insight is that companies don't fail because they misunderstand technology. They fail because they misunderstand their <strong>value network</strong>—the ecosystem of suppliers, customers, and complementary products that define how a firm creates and captures value.</p>
+
+                <div class="svg-container">
+                    <svg width="500" height="350" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Value network diagram -->
+                        <!-- Central company -->
+                        <circle cx="250" cy="175" r="40" fill="#4ECDC4" opacity="0.8"/>
+                        <text x="250" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Incumbent</text>
+
+                        <!-- Suppliers -->
+                        <circle cx="100" cy="100" r="35" fill="#FF6B6B" opacity="0.6"/>
+                        <text x="100" y="105" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Suppliers</text>
+
+                        <!-- Customers -->
+                        <circle cx="400" cy="100" r="35" fill="#FF9F43" opacity="0.6"/>
+                        <text x="400" y="105" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Customers</text>
+
+                        <!-- Complementors -->
+                        <circle cx="100" cy="250" r="35" fill="#6C5CE7" opacity="0.6"/>
+                        <text x="100" y="255" text-anchor="middle" font-size="9" font-weight="bold" fill="white">Complementors</text>
+
+                        <!-- Distribution -->
+                        <circle cx="400" cy="250" r="35" fill="#00B894" opacity="0.6"/>
+                        <text x="400" y="255" text-anchor="middle" font-size="9" font-weight="bold" fill="white">Distribution</text>
+
+                        <!-- Connection lines -->
+                        <line x1="140" y1="130" x2="210" y2="160" stroke="#999" stroke-width="2"/>
+                        <line x1="360" y1="130" x2="290" y2="160" stroke="#999" stroke-width="2"/>
+                        <line x1="140" y1="220" x2="210" y2="190" stroke="#999" stroke-width="2"/>
+                        <line x1="360" y1="220" x2="290" y2="190" stroke="#999" stroke-width="2"/>
+
+                        <!-- Disruptor outside network -->
+                        <circle cx="250" cy="350" r="30" fill="#FFE66D" opacity="0.7" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+                        <text x="250" y="355" text-anchor="middle" font-size="11" font-weight="bold" fill="#2D3436">Disruptor</text>
+
+                        <text x="250" y="30" text-anchor="middle" font-size="13" font-weight="bold" fill="#666">Value Network</text>
+                    </svg>
+                </div>
+
+                <h3 style="color: var(--warm-red); font-size: 1.3rem; margin-top: 40px; margin-bottom: 15px;">The RPV Framework: Resources, Processes, Values</h3>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Definition</th>
+                            <th>Impact on Innovation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Resources</strong></td>
+                            <td>People, money, technology, brand, partnerships that companies possess</td>
+                            <td>Abundant resources don't guarantee success with disruption. Startups often out-execute despite having fewer resources by using them differently.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Processes</strong></td>
+                            <td>The way companies habitually execute: how decisions are made, work flows, organizational routines</td>
+                            <td>Processes developed to handle sustaining innovation become liabilities for disruption. They're optimized for the wrong problem.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Values</strong></td>
+                            <td>The criteria by which companies evaluate opportunities and decide what's important</td>
+                            <td>Values that guide capital allocation toward profitable markets prevent investment in low-margin disruptive markets. The gate-keeper is invisible but absolute.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight-box">
+                    <strong>The Core Insight:</strong> A company is defined less by its resources (which can be acquired) than by its processes and values. These are rigid. They're what make the company <em>good</em> at what it does. But they also make it blind to what it should do differently.
+                </div>
+
+                <p><strong>Example: Why DEC Couldn't See the PC</strong></p>
+                <div class="example-box">
+                    <div class="example-title">Digital Equipment Corporation's Value Network</div>
+                    <ul>
+                        <li><strong>Resources:</strong> DEC had brilliant engineers, billions in revenue, state-of-the-art manufacturing</li>
+                        <li><strong>Processes:</strong> Designed to engineer complex systems for large corporate IT departments; sales cycles lasting months; quality standards for mission-critical systems</li>
+                        <li><strong>Values:</strong> Gross margins of 60%+ were required to justify R&D investment. Personal computers had 40% margins—unacceptable by DEC's profitability standards</li>
+                        <li><strong>Result:</strong> Even when DEC built personal computers, they couldn't sell them through their own channels. The value network filtered them out. DEC executives literally said "the personal computer has no future" because their value network made that the rational belief.</li>
+                    </ul>
+                </div>
+
+                <div class="key-takeaway">
+                    <strong>🎯 The Central Question:</strong> Not "Can our company build the new technology?" but "Can our value network sustain a business based on the new technology?" If the answer is no, disruption is nearly inevitable.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: WHY GOOD MANAGEMENT CAUSES FAILURE ==================== -->
+        <section id="good-management">
+            <div class="section-number">7</div>
+            <h2>Why Good Management Causes Failure</h2>
+            <p class="section-subtitle">The Paradox at the Heart of the Dilemma</p>
+
+            <div class="section-content">
+                <p>This is Christensen's most counterintuitive claim: <span class="bold">The practices that make companies successful are the exact practices that make them vulnerable to disruption.</span></p>
+
+                <div class="highlight-box">
+                    <strong>The Mechanism:</strong> Listen to customers, invest where margins are highest, focus on your most profitable customers, improve technology continuously, maintain organizational efficiency—these are the principles of excellent management. They are also the principles that guarantee blindness to disruption.
+                </div>
+
+                <ul>
+                    <li><strong>Listening to customers</strong> → Customers articulate needs within their existing value system → Disruptive opportunities are invisible</li>
+                    <li><strong>Focusing on profitability</strong> → Disruptive markets have low margins → They get deprioritized or killed in planning cycles</li>
+                    <li><strong>Continuous improvement</strong> → Engineers improve along established dimensions → They miss the new dimensions that matter to disruptors</li>
+                    <li><strong>Best customers first</strong> → Best customers have the most to lose → They actively discourage disruption</li>
+                    <li><strong>Financial discipline</strong> → Ventures must show path to profitability quickly → Disruptive ventures (which start small) can't meet hurdle rates</li>
+                </ul>
+
+                <div class="humor-box">
+                    <span class="humor-icon">📊</span>
+                    <strong>The Spreadsheet Trap:</strong> Disruption looks terrible in a business plan. It's unprofitable. The market is tiny. Margins are awful. Growth is slow at first. Every single metric says "kill this project." And you'd be right by traditional analysis—right up until the moment you're completely wrong.
+                </div>
+
+                <p>Christensen's research shows that the companies that <strong>successfully navigated disruption were not those that managed better</strong>—they were those that managed <strong>differently</strong>. Specifically:</p>
+
+                <ul>
+                    <li>They created <strong>autonomous organizations</strong> with separate P&Ls, independent management, and different value criteria</li>
+                    <li>They embedded the disruptive venture in a different organizational context where the business model of disruption made sense</li>
+                    <li>They hired different leaders with different experiences and incentive structures</li>
+                    <li>They asked different questions: not "How do we serve our best customers better?" but "How do we serve emerging customers for new jobs?"</li>
+                </ul>
+
+                <div class="key-takeaway">
+                    <strong>🎯 The Solution Requires Organizational Change:</strong> You can't manage disruption inside the same organizational context that made you successful. The processes and values that drive success actively prevent recognition of disruption. The only solution is structural separation.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: AUTONOMOUS ORGANIZATIONS ==================== -->
+        <section id="autonomous-orgs">
+            <div class="section-number">8</div>
+            <h2>Autonomous Organizations as the Solution</h2>
+            <p class="section-subtitle">Structural Separation as an Organizational Requirement</p>
+
+            <div class="section-content">
+                <p>Christensen's prescription for managing disruptive innovation is counterintuitive: <span class="bold">Create a separate business unit with independent everything.</span></p>
+
+                <div class="highlight-box">
+                    <strong>The Logic:</strong> If your main organization's processes and values prevent investment in disruption, create an organization whose processes and values make disruption rational. Don't try to force cultural change or override decision-making processes—create new ones.
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Dimension</th>
+                            <th>Integrated Approach (Fails)</th>
+                            <th>Autonomous Organization (Works)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>P&L</strong></td>
+                            <td>Consolidated with core business; scrutinized against same metrics</td>
+                            <td>Separate; evaluated on disruption-appropriate metrics (reach, learning, not profit)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Management</strong></td>
+                            <td>Reports to core business leadership</td>
+                            <td>Independent leader with different background, incentives</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Customer Base</strong></td>
+                            <td>Expected to serve existing customers</td>
+                            <td>Deliberately targets new, emerging customers</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Success Metrics</strong></td>
+                            <td>Profitability, market share growth</td>
+                            <td>Learning, customer validation, market expansion rate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Governance</strong></td>
+                            <td>Same board, same approval processes</td>
+                            <td>Independent board involvement; lighter-touch governance</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Real Example: Xerox and Autonomous Ventures</strong></p>
+                <div class="example-box">
+                    <div class="example-title">How Xerox Navigated Digital Disruption</div>
+                    <p>Xerox's core copier business had processes and values perfectly optimized for big, profitable machines sold to corporations. When digital printing emerged, it threatened the entire model. Rather than kill the venture or integrate it into the core, Xerox created autonomous units. This separation allowed:</p>
+                    <ul>
+                        <li>Different economics (lower margins were acceptable)</li>
+                        <li>Different customer focus (small businesses, eventually consumers)</li>
+                        <li>Different speed and decision-making (faster iterations, lower approval thresholds)</li>
+                        <li>Different leadership (people experienced in scaling small ventures, not managing large organizations)</li>
+                    </ul>
+                    <p><strong>Outcome:</strong> Xerox successfully transitioned its business model, preserving both core profitability and the digital growth engine.</p>
+                </div>
+
+                <div class="key-takeaway">
+                    <strong>🎯 The Implementation Challenge:</strong> Creating autonomous organizations is organizationally messy. There's duplication, friction, cultural tension. Shareholders hate it. But it works. The alternative—trying to manage disruption inside the organization that's threatened by it—almost never works.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: ASYMMETRIC MOTIVATION ==================== -->
+        <section id="asymmetric-motivation">
+            <div class="section-number">9</div>
+            <h2>Asymmetric Motivation</h2>
+            <p class="section-subtitle">Why Disruptors Always Move Upmarket</p>
+
+            <div class="section-content">
+                <p>A fundamental but underappreciated mechanism guarantees that disruption eventually displaces incumbents: <span class="bold">asymmetric motivation.</span></p>
+
+                <div class="highlight-box">
+                    <strong>The Asymmetry:</strong> Disruptors are motivated to continuously improve toward higher-value customers and higher margins. Incumbents are motivated to protect existing customers and maximize near-term profits. These motivations point in opposite directions until they collide.
+                </div>
+
+                <p>Here's how it works:</p>
+                <ul>
+                    <li>Disruptors start in low-end, low-margin markets where incumbents have no interest</li>
+                    <li>As disruptors improve and gain capital, they naturally move upmarket (where better margins exist)</li>
+                    <li>Incumbents, meanwhile, also move upmarket in pursuit of premium customers and higher margins</li>
+                    <li>Eventually, these two trajectories intersect</li>
+                    <li>At the intersection, the disruptor's cost structure, speed, and flexibility win against the incumbent's complexity and legacy commitments</li>
+                </ul>
+
+                <div class="svg-container">
+                    <svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Market segments -->
+                        <rect x="50" y="50" width="80" height="60" fill="#FFE66D" opacity="0.7"/>
+                        <text x="90" y="85" text-anchor="middle" font-size="12" font-weight="bold">Low-End</text>
+
+                        <rect x="150" y="50" width="80" height="60" fill="#FDCB6E" opacity="0.7"/>
+                        <text x="190" y="85" text-anchor="middle" font-size="12" font-weight="bold">Mid-Market</text>
+
+                        <rect x="250" y="50" width="80" height="60" fill="#FF9F43" opacity="0.7"/>
+                        <text x="290" y="85" text-anchor="middle" font-size="12" font-weight="bold">Premium</text>
+
+                        <rect x="350" y="50" width="80" height="60" fill="#E17055" opacity="0.7"/>
+                        <text x="390" y="85" text-anchor="middle" font-size="12" font-weight="bold">Ultra-Premium</text>
+
+                        <!-- Incumbent trajectory -->
+                        <path d="M 390 250 L 380 200 L 370 150 L 360 100" stroke="#E17055" stroke-width="3" fill="none" stroke-linecap="round" marker-end="url(#arrowIncumbent)"/>
+                        <text x="410" y="180" font-size="11" fill="#E17055" font-weight="bold">Incumbent moves up</text>
+
+                        <!-- Disruptor trajectory -->
+                        <path d="M 90 250 L 150 200 L 210 150 L 270 100" stroke="#4ECDC4" stroke-width="3" fill="none" stroke-linecap="round" marker-end="url(#arrowDisruptor)"/>
+                        <text x="70" y="270" font-size="11" fill="#4ECDC4" font-weight="bold">Disruptor moves up</text>
+
+                        <!-- Intersection -->
+                        <circle cx="290" cy="130" r="8" fill="#FF6B6B"/>
+                        <text x="310" y="135" font-size="11" fill="#FF6B6B" font-weight="bold">Collision</text>
+
+                        <defs>
+                            <marker id="arrowIncumbent" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#E17055" />
+                            </marker>
+                            <marker id="arrowDisruptor" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#4ECDC4" />
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+
+                <p><strong>Example: Smartphones Disrupting Cameras</strong></p>
+                <div class="example-box">
+                    <div class="example-title">How Smartphones Displaced Camera Incumbents</div>
+                    <ul>
+                        <li><strong>2000s:</strong> Camera companies (Nikon, Canon, Sony) owned the premium market. Smartphones had terrible cameras.</li>
+                        <li><strong>Asymmetry:</strong> Smartphones improved cameras every year (driven by margin expansion). Camera companies improved cameras, but also moved upmarket (DSLRs, mirrorless).</li>
+                        <li><strong>2015:</strong> Smartphone cameras reached "good enough" for most use cases. Canon and Nikon were still focused on professionals, not casual users.</li>
+                        <li><strong>2020:</strong> Smartphone cameras disrupted low-end and mid-market camera sales. Camera companies lost the volume game entirely.</li>
+                        <li><strong>Result:</strong> Nikon and Canon survived (barely) by retreating to ultra-premium. Kodak, Fujifilm, and dozens of others were obliterated.</li>
+                    </ul>
+                </div>
+
+                <div class="key-takeaway">
+                    <strong>🎯 The Mechanism is Inevitable:</strong> You cannot prevent asymmetric motivation. Both companies are rationally pursuing profit. But the asymmetry guarantees that their paths will intersect and the disruptor will win at the intersection. This is why timing is everything in disruption—not whether, but when.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: AI DISRUPTION ==================== -->
+        <section id="ai-disruption">
+            <div class="section-number">10</div>
+            <h2>AI Disruption: A Modern Case Study</h2>
+            <p class="section-subtitle">How Christensen's Principles Explain the AI Revolution</p>
+
+            <div class="ai-connection">
+                <h3>Paradigm Shifts in AI as Disruptive Innovation</h3>
+
+                <p style="margin: 15px 0;"><span class="bold">Transformers disrupting RNNs:</span> RNNs (Recurrent Neural Networks) dominated sequence modeling from 2010-2016. They were sustaining innovations—continuous improvements in understanding, parallelization, and parameter efficiency. When Transformers emerged (2017, "Attention Is All You Need"), they looked inferior by RNN standards: they couldn't handle truly sequential data, required more parameters, and needed massive compute. But they had a different S-curve. They operated in a different value network (didn't require careful sequence engineering). Today, transformers have displaced RNNs almost entirely.</p>
+
+                <p style="margin: 15px 0;"><span class="bold">Performance overshooting as over-parameterization:</span> Large language models like GPT-3 and GPT-4 continued scaling parameters based on the principle that "more parameters = better performance." This was true. But it created an opening for disruptors: efficient models (like Mistral), quantized models, and eventually specialized, fine-tuned models that are "good enough" at 1/10th the size. The incumbent trajectory (bigger is better) is being disrupted by the disruptor trajectory (good enough is cheaper).</p>
+
+                <p style="margin: 15px 0;"><span class="bold">The small market problem:</span> Google, with $280B in revenue, couldn't efficiently pursue a $100M market for specialized AI models (domain-specific fine-tuning, edge deployment). OpenAI, with $100M in revenue, could. The asymmetry of company size vs. market size made disruption inevitable. Google needed billion-dollar businesses. OpenAI could succeed with millions.</p>
+
+                <p style="margin: 15px 0;"><span class="bold">Value networks and ecosystem lock-in:</span> Google's value network was Search. Search has specific requirements: low latency, massive scale, advertising integration. ChatGPT's value network is different: consumer-facing, conversational, premium pricing. These value networks created different optimization criteria. Google couldn't build ChatGPT inside Google because Google's processes, values, and incentives optimize for Search, not for consumer products. (This is why Google's Bard is catching up, but only after creating autonomous units and changing leadership.)</p>
+
+                <p style="margin: 15px 0;"><span class="bold">Jobs-to-be-done in AI:</span> Users don't hire AI models; they hire them to complete specific jobs. ChatGPT's job was different from Google Search's job. Search users hired Google to find factual information fast. ChatGPT users hired it to think through problems, brainstorm, and explain concepts. Google optimized for the search job so thoroughly that it couldn't see the thinking job. The moment you reframe it as job displacement (not product displacement), disruption becomes obvious.</p>
+
+                <p style="margin: 15px 0;"><span class="bold">Why incumbents like Google were disrupted by OpenAI:</span> This is the most interesting application of Christensen. Google had the talent, the compute, the data, the resources. Yet OpenAI (founded by 8 researchers, initially unprofitable) displaced Google's dominance in AI perception in 18 months. Why?</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Google's Value Network Failure:</strong>
+                <ul>
+                    <li><strong>Resources:</strong> Google had everything. ✓</li>
+                    <li><strong>Processes:</strong> Optimized for Search. Approval processes required showing path to $1B revenue. Release timelines measured in quarters. Safety review processes were extreme. Decisions required internal consensus across 10+ teams.</li>
+                    <li><strong>Values:</strong> Advertising was 80% of revenue. Any AI product that couldn't be monetized through ads was viewed skeptically. Consumer-facing products had to achieve massive scale. Premium pricing was philosophically opposed.</li>
+                    <li><strong>Result:</strong> Google couldn't move fast enough, couldn't take the safety risks OpenAI took, couldn't optimize for the consumer experience, couldn't ask the right questions because the value network filtered them out.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">OpenAI's Advantages (Paradoxically, They Were Disadvantages Compared to Google)</div>
+                <ul>
+                    <li><strong>Small size:</strong> Decisions in 24 hours, not 3 months</li>
+                    <li><strong>No legacy business:</strong> Could optimize for consumer experience, not advertising integration</li>
+                    <li><strong>Premium pricing acceptable:</strong> Not optimized for ad-based free models</li>
+                    <li><strong>Risk tolerance:</strong> Could release a product knowing it would hallucinate, because the learning mattered more than perfection</li>
+                    <li><strong>Autonomous:</strong> Separate organizational identity enabled different values and processes</li>
+                    <li><strong>Different value network:</strong> Microsoft partnership instead of advertising ecosystem</li>
+                </ul>
+            </div>
+
+            <div class="key-takeaway">
+                <strong>🎯 The Profound Irony:</strong> Google's dominance in Search made it vulnerable to ChatGPT. Not because Google is poorly managed, but because excellence in one value network creates blindness to adjacent value networks. The same mechanisms that made Google great at Search made it slow at conversational AI. By the time Google recognized the threat, OpenAI had 100M users and a brand association with AI leadership.
+            </div>
+
+            <div class="humor-box">
+                <span class="humor-icon">🤖</span>
+                <strong>The Speed of Disruption:</strong> It took hard disk drive manufacturers 5-10 years to lose dominance to disruptors. It took Google 18 months. The speed of disruption is accelerating because the pace of innovation is accelerating. In AI, disruption moves at internet speed.
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: CROSS-REFERENCES ==================== -->
+        <section id="cross-references">
+            <div class="section-number">11</div>
+            <h2>Cross-References with Other Pivotal Books</h2>
+            <p class="section-subtitle">How These Ideas Connect Across Literature</p>
+
+            <div class="cross-ref">
+                <div class="cross-ref-title">Zero to One by Peter Thiel</div>
+                <p>Thiel's central claim is that startups should create monopolies by doing something completely different (zero to one). Christensen adds the crucial nuance: <strong>not all "different" is disruptive.</strong> A zero-to-one innovation might be sustaining innovation (better existing products) or disruptive innovation (new value network). Thiel's framework is about competitive advantage; Christensen's is about market dynamics. Together: great startups do zero-to-one creation AND operate in disruptive, not sustaining, markets.</p>
+            </div>
+
+            <div class="cross-ref">
+                <div class="cross-ref-title">The Black Swan by Nassim Taleb</div>
+                <p>Taleb discusses high-impact, hard-to-predict events that surprise observers. Disruptive innovation is a kind of black swan—except Christensen makes it predictable by identifying the mechanisms. Taleb emphasizes the randomness and unpredictability of disruption; Christensen reveals the structure. Reading both: disruption has patterns (Christensen) but the exact timing remains uncertain (Taleb). Companies should prepare for inevitable disruption without trying to predict when it happens.</p>
+            </div>
+
+            <div class="cross-ref">
+                <div class="cross-ref-title">Antifragile by Nassim Taleb</div>
+                <p>Taleb's antifragility framework—systems that gain from disorder—maps perfectly onto Christensen's autonomous organizations. By creating separate units for disruption, incumbents make themselves antifragile: they benefit from the disruption of their own market. They're exposed to upside without existential downside. This is Christensen's solution implemented through Taleb's lens.</p>
+            </div>
+
+            <div class="cross-ref">
+                <div class="cross-ref-title">Good to Great by Jim Collins</div>
+                <p>Collins argues that great companies have a hedgehog concept, disciplined culture, and focus. Christensen reveals why these virtues become vices during disruption. Collins shows how to build great companies; Christensen shows why great companies built on Collins's principles are vulnerable to disruption. Reading both: the principles that make a company "great" in a stable market make it vulnerable in a disrupting market. Excellence and vulnerability are two sides of the same coin.</p>
+            </div>
+
+            <div class="cross-ref">
+                <div class="cross-ref-title">Sapiens by Yuval Noah Harari</div>
+                <p>Harari examines how belief systems (narratives, myths, shared stories) hold societies together. Christensen's value networks are analogous: they're shared narratives about what matters, what's profitable, what's important. Disruption works because disruptors operate outside the incumbent's shared narrative. They're not constrained by the same values because they're not embedded in the same network. Understanding disruption requires understanding the narrative systems that blind incumbents to threats.</p>
+            </div>
+
+            <div class="key-takeaway" style="margin-top: 40px;">
+                <strong>📚 The Unified Framework:</strong> These books aren't contradictory—they're orthogonal perspectives on the same phenomenon. Thiel shows how to create new markets. Taleb shows how to survive uncertainty. Collins shows how to excel in existing markets. Christensen explains why excellence in existing markets makes you vulnerable to new ones. Together, they form a complete map of business dynamics.
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: PRACTICAL IMPLICATIONS ==================== -->
+        <section id="practical">
+            <div class="section-number">12</div>
+            <h2>Practical Implications for Leaders</h2>
+            <p class="section-subtitle">What to Do with This Knowledge</p>
+
+            <div class="section-content">
+                <p>Christensen's research isn't just theoretical—it has profound implications for how organizations should be structured and how leaders should think about innovation. Here are the key actionable insights:</p>
+
+                <h3 style="color: var(--warm-red); font-size: 1.3rem; margin-top: 35px; margin-bottom: 15px;">For Incumbent Companies</h3>
+
+                <ul style="margin-bottom: 30px;">
+                    <li><strong>Actively hunt for low-end disruption:</strong> Look for products that are inferior by your metrics but serve new or underserved markets. These are your biggest threats. Assign dedicated teams to watch them.</li>
+                    <li><strong>Create autonomous units for new markets:</strong> Don't try to manage disruption inside the core business. Create separate organizations with different P&Ls, different leaders, and different values. This is expensive and redundant, but it works.</li>
+                    <li><strong>Reframe customer listening:</strong> Don't just listen to existing customers. Listen to non-customers and emerging customers. Why aren't they using your product? What job are they hiring for that you're not addressing?</li>
+                    <li><strong>Watch the value network:</strong> When new business models emerge that don't fit your value network, pay attention. Don't dismiss them as irrelevant just because they don't work within your ecosystem. That's exactly when they're most dangerous.</li>
+                    <li><strong>Question your success metrics:</strong> The financial metrics that determine capital allocation are your biggest blindness. A venture that looks unprofitable by traditional metrics might be a disruptive winner. Create separate evaluation criteria for new markets.</li>
+                </ul>
+
+                <h3 style="color: var(--warm-red); font-size: 1.3rem; margin-top: 35px; margin-bottom: 15px;">For Startup Leaders & Disruptors</h3>
+
+                <ul style="margin-bottom: 30px;">
+                    <li><strong>Don't compete against incumbents directly:</strong> Start in markets where incumbents have no interest. Build your S-curve in their shadow, where they can't see you (yet).</li>
+                    <li><strong>Exploit asymmetric motivation:</strong> Incumbents are motivated to protect existing customers and margins. You're motivated to expand into higher-value markets. This asymmetry is your advantage—use it ruthlessly.</li>
+                    <li><strong>Operate on different economics:</strong> Don't try to beat incumbents at their own game (profitability, scale, quality). Beat them at your game (cost, simplicity, accessibility, speed). Force them to compete on unfamiliar dimensions.</li>
+                    <li><strong>Build for the emerging job:</strong> Understand what job customers want to hire you for, and become indispensable at that specific job, even if you're mediocre at other dimensions.</li>
+                    <li><strong>Watch for the upmarket opportunity:</strong> As you improve and mature, naturally move toward higher-value markets and higher margins. This is the asymmetric trajectory that leads to displacement.</li>
+                </ul>
+
+                <div class="humor-box">
+                    <span class="humor-icon">💡</span>
+                    <strong>The Uncomfortable Truth:</strong> If your innovation is immediately valued by the incumbents' best customers, it's probably sustaining innovation (competition as usual). If it's ignored or dismissed by incumbents, it's probably disruptive (you're the threat). The invisibility to incumbents is a feature, not a bug.
+                </div>
+
+                <h3 style="color: var(--warm-red); font-size: 1.3rem; margin-top: 35px; margin-bottom: 15px;">For Investors & Board Members</h3>
+
+                <ul style="margin-bottom: 30px;">
+                    <li><strong>Distinguish sustaining from disruptive:</strong> The difference determines strategy and risk. Sustaining innovations compete on better; disruptive innovations compete on different.</li>
+                    <li><strong>Question success metrics:</strong> If a potential investment looks bad on traditional metrics (low margins, small market, immature technology, unproven model), ask whether those are the right metrics for a disruptive opportunity.</li>
+                    <li><strong>Watch for value network shifts:</strong> The most valuable investments are those that operate in emerging value networks, not those that improve within existing ones. The market size of the existing network constrains growth; the emerging network is unbounded.</li>
+                    <li><strong>Monitor for organizational structure:</strong> The best incumbent attempts at disruption are those with autonomous units, different leadership, and separate evaluation criteria. Those are the ones that might actually work.</li>
+                </ul>
+
+                <div class="key-takeaway" style="margin-top: 40px;">
+                    <strong>🎯 The Ultimate Insight:</strong> Disruption is not a technology problem or a marketing problem. It's an organizational problem. The same organization that excels at one job cannot simultaneously excel at a different job. This is why disruption is so powerful and why it seems so irrational until it's too late.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CONCLUSION ==================== -->
+        <section id="conclusion">
+            <h2 style="color: var(--teal); border-bottom: 3px solid var(--warm-red); padding-bottom: 20px;">Final Thoughts</h2>
+
+            <div class="section-content">
+                <p style="font-size: 1.1rem; line-height: 1.9; margin-bottom: 25px;">
+                    <span class="font-playfair" style="font-size: 1.3rem;">The Innovator's Dilemma</span> remains the most important business book ever written because it reveals something profoundly uncomfortable: <span class="bold">the forces that make a company excellent are the exact forces that make it vulnerable.</span>
+                </p>
+
+                <p style="font-size: 1.1rem; line-height: 1.9; margin-bottom: 25px;">
+                    Twenty-five years after publication, we've seen the theory validated repeatedly. DEC failed not because it was poorly managed but because it was perfectly optimized for minicomputers. Kodak invented the digital camera but couldn't commercialize it because cameras didn't fit Kodak's value network. Google dominated search so thoroughly that it missed the conversational AI shift. Nokia had the resources, talent, and market position to own smartphones—but its processes and values optimized for phones made it invisible to the smartphone revolution.
+                </p>
+
+                <p style="font-size: 1.1rem; line-height: 1.9; margin-bottom: 25px;">
+                    The insight is not that disruption is possible. It's that disruption is <span class="italic">inevitable</span>. Not because technology always improves, but because organizations are constrained by their value networks and processes. These constraints are features—they enable excellence. But they also enable blindness. And blindness, combined with the right technological S-curve and the right competitive motivation, guarantees displacement.
+                </p>
+
+                <p style="font-size: 1.1rem; line-height: 1.9; margin-bottom: 25px;">
+                    The only solution Christensen offers is structural separation. Don't try to fix the organization—create a different one. This feels wasteful, redundant, and politically painful. It is. But every company that has successfully navigated disruption has done exactly this: created autonomous units with different cultures, different economics, and different values.
+                </p>
+
+                <div class="highlight-box" style="margin-top: 40px; font-size: 1.05rem;">
+                    <strong>The Question Every Leader Must Answer:</strong> Is your company prepared for the disruption that's coming? Not the one you see—the one that's invisible because it doesn't fit your value network, doesn't serve your best customers, and doesn't look profitable by your metrics? That's the one that will kill you. And it's almost certainly already here, just too small to see.
+                </div>
+
+                <p style="font-size: 1rem; margin-top: 30px; color: #888; font-style: italic;">
+                    This guide was created as an illustrated exploration of Clayton Christensen's groundbreaking work. For the complete analysis, data, and case studies, read the original book. The frameworks here are merely entry points to deeper understanding.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Key Concepts</h3>
+                    <ul>
+                        <li><a href="#key-concept">Sustaining vs. Disruptive Innovation</a></li>
+                        <li><a href="#s-curve">The S-Curve of Technology</a></li>
+                        <li><a href="#listening-customers">Listening to Customers</a></li>
+                        <li><a href="#rpv-framework">Value Networks & RPV</a></li>
+                        <li><a href="#asymmetric-motivation">Asymmetric Motivation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Case Studies</h3>
+                    <ul>
+                        <li><a href="#case-study">Disk Drive Industry</a></li>
+                        <li><a href="#ai-disruption">AI Disruption: OpenAI vs. Google</a></li>
+                        <li><a href="#good-management">Digital Equipment Corp (DEC)</a></li>
+                        <li><a href="#autonomous-orgs">Xerox's Autonomous Strategy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Related Books</h3>
+                    <ul>
+                        <li><a href="#">Zero to One — Peter Thiel</a></li>
+                        <li><a href="#">The Black Swan — Nassim Taleb</a></li>
+                        <li><a href="#">Antifragile — Nassim Taleb</a></li>
+                        <li><a href="#">Good to Great — Jim Collins</a></li>
+                        <li><a href="#">Sapiens — Yuval Harari</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Author: Clayton M. Christensen</a></li>
+                        <li><a href="#">Published: 1997</a></li>
+                        <li><a href="#">Updated Edition: 2016</a></li>
+                        <li><a href="#">Harvard Business School</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 The Innovator's Dilemma Illustrated Guide. Created as an educational resource exploring Clayton Christensen's seminal work on disruptive innovation.</p>
+                <p style="margin-top: 10px; font-size: 0.85rem;">This guide synthesizes concepts, case studies, and analysis from the original text. For complete details and data, refer to the original book.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Paradox of Choice: Why More Is Less - Illustrated Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: var(--dark-purple);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--dark-purple);
+            margin-bottom: 1rem;
+            border-bottom: 4px solid var(--coral);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--deep-blue);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        h4 {
+            font-size: 1.3rem;
+            color: var(--purple);
+            margin-top: 1rem;
+            margin-bottom: 0.6rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-left: 8px solid var(--purple);
+        }
+
+        .section:nth-child(odd) {
+            border-left-color: var(--coral);
+        }
+
+        .section:nth-child(3n) {
+            border-left-color: var(--sky);
+        }
+
+        /* Cover Section */
+        .cover-section {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--deep-blue) 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cover-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .cover-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,107,107,0.1);
+            border-radius: 50%;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cover-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--sunny);
+            font-style: italic;
+        }
+
+        .cover-author {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            opacity: 0.9;
+        }
+
+        .doors-svg {
+            width: 100%;
+            max-width: 800px;
+            height: 300px;
+            margin: 2rem auto;
+        }
+
+        /* Grid layouts */
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .lesson-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--coral);
+            transition: all 0.3s ease;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .lesson-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--coral);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-card h4 {
+            color: var(--dark);
+            margin-top: 0;
+        }
+
+        /* Content boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--orange) 100%);
+            border-left: 5px solid var(--warm-red);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-weight: 500;
+        }
+
+        .research-box {
+            background: linear-gradient(135deg, var(--sky) 0%, var(--mint) 100%);
+            border-left: 5px solid var(--deep-blue);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .research-box h4 {
+            color: var(--dark);
+            margin-top: 0;
+        }
+
+        .research-box p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .stat-badge {
+            display: inline-block;
+            background: var(--coral);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+
+        .ai-connection {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .ai-connection h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .ai-connection p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .cross-book {
+            background: linear-gradient(135deg, var(--forest) 0%, var(--teal) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .cross-book h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .cross-book-item {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            margin: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Visual aids */
+        .illustration-box {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255,107,107,0.1) 0%, rgba(74,205,196,0.1) 100%);
+            border-radius: 12px;
+        }
+
+        .svg-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Funny take section */
+        .funny-box {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--sunny) 100%);
+            border: 3px dashed var(--warm-red);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        .funny-box::before {
+            content: '😄 ';
+            font-size: 1.5rem;
+        }
+
+        /* Key lesson callout */
+        .key-lesson {
+            background: linear-gradient(135deg, var(--warm-red) 0%, var(--coral) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            border: 3px solid white;
+        }
+
+        .key-lesson h2 {
+            color: white;
+            border-color: white;
+        }
+
+        .key-lesson h3 {
+            color: var(--sunny);
+        }
+
+        .key-lesson p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Typography */
+        p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+        }
+
+        strong {
+            color: var(--deep-blue);
+            font-weight: 600;
+        }
+
+        em {
+            color: var(--warm-red);
+        }
+
+        .quote {
+            border-left: 5px solid var(--purple);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--dark-purple);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-radius: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            h3 {
+                font-size: 1.4rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--dark);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cover Section -->
+        <section class="cover-section">
+            <div class="cover-content">
+                <div class="cover-title">The Paradox of Choice</div>
+                <div class="cover-subtitle">Why More Is Less</div>
+                <div class="cover-author">By Barry Schwartz</div>
+                <div class="illustration-box">
+                    <svg viewBox="0 0 800 400" class="doors-svg">
+                        <!-- Background -->
+                        <defs>
+                            <linearGradient id="doorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#0984E3;stop-opacity:0.3" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Doors - chaotic arrangement showing overwhelming options -->
+                        <!-- Door 1 -->
+                        <rect x="30" y="80" width="80" height="220" fill="#A06CD5" stroke="white" stroke-width="3" rx="8"/>
+                        <circle cx="100" cy="190" r="6" fill="white"/>
+                        <text x="70" y="320" font-size="14" fill="white" text-anchor="middle" font-weight="bold">Choice 1</text>
+
+                        <!-- Door 2 -->
+                        <rect x="140" y="60" width="80" height="240" fill="#FF6B6B" stroke="white" stroke-width="3" rx="8"/>
+                        <circle cx="210" cy="180" r="6" fill="white"/>
+                        <text x="180" y="320" font-size="14" fill="white" text-anchor="middle" font-weight="bold">Choice 2</text>
+
+                        <!-- Door 3 -->
+                        <rect x="250" y="90" width="80" height="210" fill="#74B9FF" stroke="white" stroke-width="3" rx="8"/>
+                        <circle cx="320" cy="195" r="6" fill="white"/>
+                        <text x="290" y="320" font-size="14" fill="white" text-anchor="middle" font-weight="bold">Choice 3</text>
+
+                        <!-- Door 4 -->
+                        <rect x="360" y="70" width="80" height="230" fill="#55EFC4" stroke="white" stroke-width="3" rx="8"/>
+                        <circle cx="430" cy="185" r="6" fill="white"/>
+                        <text x="400" y="320" font-size="14" fill="white" text-anchor="middle" font-weight="bold">Choice 4</text>
+
+                        <!-- Door 5 -->
+                        <rect x="470" y="100" width="80" height="200" fill="#FD79A8" stroke="white" stroke-width="3" rx="8"/>
+                        <circle cx="540" cy="200" r="6" fill="white"/>
+                        <text x="510" y="320" font-size="14" fill="white" text-anchor="middle" font-weight="bold">Choice 5</text>
+
+                        <!-- Door 6 -->
+                        <rect x="580" y="85" width="80" height="215" fill="#FDCB6E" stroke="white" stroke-width="3" rx="8"/>
+                        <circle cx="650" cy="192" r="6" fill="white"/>
+                        <text x="620" y="320" font-size="14" fill="white" text-anchor="middle" font-weight="bold">Choice 6</text>
+
+                        <!-- Door 7 -->
+                        <rect x="690" y="95" width="80" height="205" fill="#6C5CE7" stroke="white" stroke-width="3" rx="8"/>
+                        <circle cx="760" cy="197" r="6" fill="white"/>
+                        <text x="730" y="320" font-size="14" fill="white" text-anchor="middle" font-weight="bold">Choice 7</text>
+
+                        <!-- Stress lines -->
+                        <line x1="50" y1="40" x2="100" y2="35" stroke="#FFE66D" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+                        <line x1="150" y1="25" x2="220" y2="20" stroke="#FFE66D" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+                        <line x1="300" y1="35" x2="380" y2="30" stroke="#FFE66D" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+                        <line x1="420" y1="45" x2="500" y2="38" stroke="#FFE66D" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+
+                        <!-- Question mark -->
+                        <text x="400" y="370" font-size="36" fill="white" text-anchor="middle" font-weight="bold">?</text>
+                    </svg>
+                </div>
+                <p style="color: white; font-size: 1.1rem; margin-top: 2rem;">An exploration of how abundance becomes anxiety</p>
+            </div>
+        </section>
+
+        <!-- Introduction -->
+        <section class="section">
+            <h2>Introduction: The Problem With Too Many Choices</h2>
+            <p>In a world of unprecedented freedom and choice, why do we feel more paralyzed than ever? Barry Schwartz reveals the hidden psychological cost of infinite options. When faced with too many alternatives, we experience decision paralysis, buyer's remorse, and diminished satisfaction—even when we ultimately get what we want.</p>
+            <p>This guide explores 12 core lessons from <strong>The Paradox of Choice</strong>, grounded in cutting-edge psychology and behavioral economics research. We'll examine how more choices lead to less happiness, and discover strategies for embracing constraints as a path to freedom.</p>
+
+            <div class="highlight-box">
+                <strong>The Central Paradox:</strong> Each additional choice increases the possibility of improving our selection, while simultaneously increasing the likelihood of regret and dissatisfaction. There's an optimal number of choices—beyond that, returns diminish rapidly.
+            </div>
+        </section>
+
+        <!-- The 12 Lessons -->
+        <section class="section">
+            <h2>The 12 Core Lessons</h2>
+            <div class="lesson-grid">
+                <div class="lesson-card">
+                    <div class="lesson-number">1</div>
+                    <h4>The Jam Study & Choice Overload</h4>
+                    <p>The foundational research showing how 24 options paralyzes us while 6 options drives action.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-number">2</div>
+                    <h4>Maximizers vs. Satisficers</h4>
+                    <p>Why some people demand the absolute best and why it makes them miserable.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-number">3</div>
+                    <h4>The Cost of Opportunity</h4>
+                    <p>Every choice means giving up alternatives—and we can't stop thinking about them.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-number">4</div>
+                    <h4>Tyranny of Small Decisions</h4>
+                    <p>How countless micro-choices accumulate into decision fatigue.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-number">5</div>
+                    <h4>Adaptation & the Hedonic Treadmill</h4>
+                    <p>Why the perfect choice becomes just "normal" within weeks.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-number">6</div>
+                    <h4>Regret & Counterfactual Thinking</h4>
+                    <p>The mind's obsessive comparison of what-could-have-been.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-number">7</div>
+                    <h4>Real-World Overload</h4>
+                    <p>Healthcare, retirement plans, and dating prove the theory in practice.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-number">8</div>
+                    <h4>Status Quo Bias</h4>
+                    <p>Why we stick with "good enough" even when better options exist.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-number">9</div>
+                    <h4>Reversible vs. Irreversible</h4>
+                    <p>Permanent decisions paralyze us; temporary ones liberate us.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-number">10</div>
+                    <h4>Learned Helplessness</h4>
+                    <p>Too many choices → failure to choose → learned helplessness.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-number">11</div>
+                    <h4>"Good Enough" as Liberation</h4>
+                    <p>Satisficing beats maximizing; happiness lies in lower expectations.</p>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-number">12</div>
+                    <h4>Voluntary Constraints as Freedom</h4>
+                    <p>Paradoxically, limiting our options increases life satisfaction.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Lesson: The Jam Study -->
+        <section class="key-lesson">
+            <h2>Key Lesson: The Columbia Jam Study</h2>
+            <p>In 1995, psychologists Sheena Iyengar and Mark Lepper conducted a landmark study at Dragas Grocery in Menlo Park, California. Here's what they found:</p>
+
+            <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                <h3 style="margin-top: 0;">The Setup</h3>
+                <p><strong>Display 1:</strong> 6 varieties of gourmet jam</p>
+                <p><strong>Display 2:</strong> 24 varieties of gourmet jam</p>
+                <p>Participants could sample jams and receive a $5 discount coupon on their next purchase.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                <h3 style="margin-top: 0;">The Results</h3>
+                <ul style="margin-top: 1rem;">
+                    <li><strong>Attraction:</strong> 60% of people stopped at the 24-jam display vs. 40% at the 6-jam display</li>
+                    <li><strong>Purchase Rate:</strong> Only 3% of those who saw 24 jams purchased vs. 30% of those who saw 6 jams</li>
+                    <li><strong>Satisfaction:</strong> Those who bought from the smaller selection reported higher satisfaction</li>
+                    <li><strong>Decision Time:</strong> Customers took longer to decide with more options, experienced more regret</li>
+                </ul>
+            </div>
+
+            <h3>Why This Matters</h3>
+            <p>The jam study became the foundational evidence that <strong>more choice paradoxically leads to less purchase and less satisfaction</strong>. The pattern repeats across categories: cereals, salad dressings, technology, vacations, and more.</p>
+
+            <div style="background: rgba(255,255,255,0.2); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border: 2px solid white;">
+                <p style="margin: 0; font-size: 1.2rem;"><strong>The Threshold:</strong> Research suggests an optimal choice range of 3-5 options. Beyond 5, satisfaction drops sharply. Beyond 10, it's dramatically worse. Beyond 25, most people feel paralyzed.</p>
+            </div>
+        </section>
+
+        <!-- Lesson 1 -->
+        <section class="section">
+            <h2>Lesson 1: The Jam Study & Choice Overload</h2>
+            <p>The jam study demonstrated a revolutionary insight: <strong>abundant choice does not increase satisfaction</strong>. Instead, it produces decision paralysis.</p>
+
+            <div class="illustration-box">
+                <svg viewBox="0 0 600 300" class="svg-container">
+                    <!-- Jam jars -->
+                    <!-- Small set (6 jars) -->
+                    <g>
+                        <text x="150" y="30" font-size="16" fill="#2D3436" font-weight="bold" text-anchor="middle">6 Options</text>
+                        <text x="150" y="290" font-size="14" fill="#00B894" font-weight="bold" text-anchor="middle">30% Purchase Rate</text>
+
+                        <rect x="90" y="60" width="25" height="40" fill="#FF6B6B" rx="2"/>
+                        <rect x="120" y="60" width="25" height="40" fill="#FF6B6B" rx="2"/>
+                        <rect x="150" y="60" width="25" height="40" fill="#FF6B6B" rx="2"/>
+                        <rect x="180" y="60" width="25" height="40" fill="#FF6B6B" rx="2"/>
+                        <rect x="105" y="105" width="25" height="40" fill="#FF6B6B" rx="2"/>
+                        <rect x="135" y="105" width="25" height="40" fill="#FF6B6B" rx="2"/>
+
+                        <!-- Happy face -->
+                        <circle cx="150" cy="190" r="25" fill="none" stroke="#00B894" stroke-width="2"/>
+                        <circle cx="140" cy="180" r="3" fill="#00B894"/>
+                        <circle cx="160" cy="180" r="3" fill="#00B894"/>
+                        <path d="M 140 195 Q 150 200 160 195" stroke="#00B894" stroke-width="2" fill="none"/>
+                    </g>
+
+                    <!-- Large set (24 jars) -->
+                    <g>
+                        <text x="450" y="30" font-size="16" fill="#2D3436" font-weight="bold" text-anchor="middle">24 Options</text>
+                        <text x="450" y="290" font-size="14" fill="#E17055" font-weight="bold" text-anchor="middle">3% Purchase Rate</text>
+
+                        <!-- Grid of jars -->
+                        <rect x="380" y="60" width="15" height="30" fill="#74B9FF" rx="2"/>
+                        <rect x="398" y="60" width="15" height="30" fill="#4ECDC4" rx="2"/>
+                        <rect x="416" y="60" width="15" height="30" fill="#A06CD5" rx="2"/>
+                        <rect x="434" y="60" width="15" height="30" fill="#FD79A8" rx="2"/>
+                        <rect x="452" y="60" width="15" height="30" fill="#FDCB6E" rx="2"/>
+                        <rect x="470" y="60" width="15" height="30" fill="#55EFC4" rx="2"/>
+
+                        <rect x="380" y="93" width="15" height="30" fill="#FFE66D" rx="2"/>
+                        <rect x="398" y="93" width="15" height="30" fill="#FF6B6B" rx="2"/>
+                        <rect x="416" y="93" width="15" height="30" fill="#6C5CE7" rx="2"/>
+                        <rect x="434" y="93" width="15" height="30" fill="#00B894" rx="2"/>
+                        <rect x="452" y="93" width="15" height="30" fill="#E17055" rx="2"/>
+                        <rect x="470" y="93" width="15" height="30" fill="#74B9FF" rx="2"/>
+
+                        <rect x="380" y="126" width="15" height="30" fill="#A06CD5" rx="2"/>
+                        <rect x="398" y="126" width="15" height="30" fill="#4ECDC4" rx="2"/>
+                        <rect x="416" y="126" width="15" height="30" fill="#FD79A8" rx="2"/>
+                        <rect x="434" y="126" width="15" height="30" fill="#FDCB6E" rx="2"/>
+                        <rect x="452" y="126" width="15" height="30" fill="#55EFC4" rx="2"/>
+                        <rect x="470" y="126" width="15" height="30" fill="#FFE66D" rx="2"/>
+
+                        <rect x="388" y="159" width="15" height="30" fill="#FF6B6B" rx="2"/>
+                        <rect x="406" y="159" width="15" height="30" fill="#6C5CE7" rx="2"/>
+                        <rect x="424" y="159" width="15" height="30" fill="#00B894" rx="2"/>
+                        <rect x="442" y="159" width="15" height="30" fill="#E17055" rx="2"/>
+                        <rect x="460" y="159" width="15" height="30" fill="#74B9FF" rx="2"/>
+                        <rect x="478" y="159" width="15" height="30" fill="#A06CD5" rx="2"/>
+
+                        <!-- Confused/overwhelmed face -->
+                        <circle cx="450" cy="220" r="25" fill="none" stroke="#E17055" stroke-width="2"/>
+                        <circle cx="440" cy="210" r="3" fill="#E17055"/>
+                        <circle cx="460" cy="210" r="3" fill="#E17055"/>
+                        <circle cx="445" cy="235" r="2" fill="#E17055"/>
+                        <circle cx="455" cy="235" r="2" fill="#E17055"/>
+                        <path d="M 440 228 L 460 228" stroke="#E17055" stroke-width="2"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="research-box">
+                <h4>Why the Paradox Occurs</h4>
+                <ul>
+                    <li><strong>Analysis Paralysis:</strong> More options require more analysis. The cognitive load becomes overwhelming.</li>
+                    <li><strong>Increased Regret:</strong> More unchosen alternatives = more regret about what you missed.</li>
+                    <li><strong>Expectation Inflation:</strong> 24 options suggest that "perfect" must exist somewhere; 6 options suggest you're doing pretty well.</li>
+                    <li><strong>Responsibility Burden:</strong> If there are 24 options and you pick the "wrong" one, it's entirely your fault.</li>
+                    <li><strong>Decision Costs:</strong> Time, mental energy, and emotional wear accumulate with each additional choice.</li>
+                </ul>
+            </div>
+
+            <div class="funny-box">
+                This is why you spend 20 minutes scrolling Netflix only to watch The Office again. The streaming service with 15,000 titles paradoxically makes you less satisfied than cable TV with 4 channels.
+            </div>
+
+            <div class="highlight-box">
+                <strong>The Paradox of Choice Index:</strong> Studies show that for most consumer categories, satisfaction peaks around 5-6 options, then declines sharply. At 24+ options, both purchase rates and satisfaction plummet.
+            </div>
+        </section>
+
+        <!-- Lesson 2 -->
+        <section class="section">
+            <h2>Lesson 2: Maximizers vs. Satisficers</h2>
+            <p>Not all people respond to choice overload equally. Schwartz identifies two personality types: <strong>maximizers</strong> (who demand the absolute best) and <strong>satisficers</strong> (who accept "good enough").</p>
+
+            <div class="illustration-box">
+                <svg viewBox="0 0 600 350" class="svg-container">
+                    <!-- MAXIMIZERS -->
+                    <g>
+                        <text x="150" y="30" font-size="18" fill="#E17055" font-weight="bold" text-anchor="middle">MAXIMIZERS</text>
+
+                        <!-- Bar chart showing effort -->
+                        <rect x="80" y="60" width="30" height="100" fill="#E17055" rx="3"/>
+                        <rect x="120" y="60" width="30" height="150" fill="#E17055" rx="3"/>
+                        <rect x="160" y="60" width="30" height="180" fill="#E17055" rx="3"/>
+                        <text x="100" y="180" font-size="12" fill="#2D3436" text-anchor="middle">Low</text>
+                        <text x="140" y="180" font-size="12" fill="#2D3436" text-anchor="middle">Med</text>
+                        <text x="180" y="180" font-size="12" fill="#2D3436" text-anchor="middle">High</text>
+
+                        <text x="150" y="210" font-size="12" fill="#2D3436" text-anchor="middle">Decision Effort</text>
+
+                        <!-- Traits -->
+                        <text x="150" y="245" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">• Always seeks "the best"</text>
+                        <text x="150" y="265" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">• Explores all options exhaustively</text>
+                        <text x="150" y="285" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">• High satisfaction (outcome)</text>
+                        <text x="150" y="305" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">• High regret & dissatisfaction</text>
+                        <text x="150" y="325" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">• Decision paralysis common</text>
+                    </g>
+
+                    <!-- SATISFICERS -->
+                    <g>
+                        <text x="450" y="30" font-size="18" fill="#00B894" font-weight="bold" text-anchor="middle">SATISFICERS</text>
+
+                        <!-- Bar chart showing effort -->
+                        <rect x="380" y="60" width="30" height="50" fill="#00B894" rx="3"/>
+                        <rect x="420" y="60" width="30" height="70" fill="#00B894" rx="3"/>
+                        <rect x="460" y="60" width="30" height="85" fill="#00B894" rx="3"/>
+                        <text x="400" y="180" font-size="12" fill="#2D3436" text-anchor="middle">Low</text>
+                        <text x="440" y="180" font-size="12" fill="#2D3436" text-anchor="middle">Med</text>
+                        <text x="480" y="180" font-size="12" fill="#2D3436" text-anchor="middle">High</text>
+
+                        <text x="450" y="210" font-size="12" fill="#2D3436" text-anchor="middle">Decision Effort</text>
+
+                        <!-- Traits -->
+                        <text x="450" y="245" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">• Seeks "good enough"</text>
+                        <text x="450" y="265" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">• Sets criteria, chooses first match</text>
+                        <text x="450" y="285" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">• Lower satisfaction (outcome)</text>
+                        <text x="450" y="305" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">• Less regret & anxiety</text>
+                        <text x="450" y="325" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">• Happier overall (process)</text>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="research-box">
+                <h4>The Maximizer Problem</h4>
+                <p>Maximizers suffer a cruel irony: even when they get excellent outcomes, they experience more regret because they know there <em>might</em> be something better out there. They spend more time deciding, experience more decision-related stress, and feel less satisfied despite (potentially) better choices.</p>
+                <p><strong>Key insight:</strong> Maximizers are prime victims of choice overload. Adding more options to their decision set exponentially increases decision time and regret.</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>The Satisficer Advantage:</strong> Those who set criteria ("I want a phone with 128GB storage, under $800, with good camera") and pick the first option that meets them experience less stress, faster decisions, and paradoxically, higher satisfaction. They accept that "best" is a mirage.
+            </div>
+
+            <p>Schwartz argues that satisficing is a more rational strategy in complex environments with truly excellent options. The difference between a very good choice and the "perfect" choice is often trivial, but the psychological cost of finding it is enormous.</p>
+        </section>
+
+        <!-- Lesson 3 -->
+        <section class="section">
+            <h2>Lesson 3: The Cost of Opportunity</h2>
+            <p>Every choice you make means rejecting all the alternatives. The human mind is wired to dwell on what we gave up—a phenomenon called <strong>counterfactual thinking</strong> or <strong>"opportunity cost consciousness."</strong></p>
+
+            <div class="research-box">
+                <h4>The Opportunity Cost Effect</h4>
+                <p>When you choose Option A, you simultaneously lose Options B, C, D, and E. The more options available, the more valuable (in your imagination) the unchosen ones become. You fixate on what you're missing rather than enjoying what you have.</p>
+                <p><strong>Example:</strong> You buy a Samsung phone. But you keep thinking about the iPhone features you could have had. 6 months later, you're less satisfied with your Samsung than someone who bought it when only 3 phones existed (because they had fewer regrets about unchosen alternatives).</p>
+            </div>
+
+            <div class="illustration-box">
+                <svg viewBox="0 0 600 300" class="svg-container">
+                    <!-- Decision tree -->
+                    <!-- Root -->
+                    <circle cx="300" cy="30" r="15" fill="#A06CD5"/>
+                    <text x="300" y="35" font-size="12" fill="white" text-anchor="middle" font-weight="bold">CHOICE</text>
+
+                    <!-- Branches -->
+                    <line x1="300" y1="45" x2="150" y2="80" stroke="#2D3436" stroke-width="2"/>
+                    <line x1="300" y1="45" x2="300" y2="80" stroke="#2D3436" stroke-width="2"/>
+                    <line x1="300" y1="45" x2="450" y2="80" stroke="#2D3436" stroke-width="2"/>
+
+                    <!-- Chosen option (highlighted) -->
+                    <circle cx="300" cy="100" r="20" fill="#00B894" stroke="white" stroke-width="3"/>
+                    <text x="300" y="107" font-size="11" fill="white" text-anchor="middle" font-weight="bold">CHOSEN</text>
+
+                    <!-- Unchosen options (regret) -->
+                    <circle cx="150" cy="100" r="20" fill="#E17055" stroke="white" stroke-width="2" stroke-dasharray="5,5"/>
+                    <text x="150" y="107" font-size="11" fill="white" text-anchor="middle">Regret</text>
+
+                    <circle cx="450" cy="100" r="20" fill="#E17055" stroke="white" stroke-width="2" stroke-dasharray="5,5"/>
+                    <text x="450" y="107" font-size="11" fill="white" text-anchor="middle">Regret</text>
+
+                    <!-- Satisfaction curve -->
+                    <text x="300" y="160" font-size="14" fill="#2D3436" font-weight="bold" text-anchor="middle">Satisfaction Over Time</text>
+
+                    <!-- Few options scenario -->
+                    <text x="120" y="190" font-size="12" fill="#2D3436" text-anchor="middle">Few Options</text>
+                    <polyline points="80,220 100,210 120,215 140,205" fill="none" stroke="#00B894" stroke-width="3"/>
+                    <text x="120" y="250" font-size="11" fill="#00B894" font-weight="bold" text-anchor="middle">Stable, high</text>
+
+                    <!-- Many options scenario -->
+                    <text x="480" y="190" font-size="12" fill="#2D3436" text-anchor="middle">Many Options</text>
+                    <polyline points="440,220 460,205 480,215 500,190" fill="none" stroke="#E17055" stroke-width="3"/>
+                    <text x="480" y="250" font-size="11" fill="#E17055" font-weight="bold" text-anchor="middle">Volatile, declining</text>
+                </svg>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Counterfactual Thinking:</strong> The mind's tendency to imagine how things could have gone differently. More options → more vivid counterfactuals → more regret. It's not that your choice was bad; it's that the alternatives you rejected seem increasingly attractive in hindsight.
+            </div>
+
+            <p>This explains why people are happier with outcomes when they had fewer options. A 1999 study by <strong>Tore Dahlén</strong> found that students who chose their major from a list of 2 options were more satisfied than those who chose from 10, even if they chose the same major.</p>
+        </section>
+
+        <!-- Lesson 4 -->
+        <section class="section">
+            <h2>Lesson 4: The Tyranny of Small Decisions</h2>
+            <p>Choice overload isn't always about one massive decision. Sometimes it's the <strong>accumulation of tiny decisions</strong> that drains our psychological resources.</p>
+
+            <div class="funny-box">
+                You wake up and face: What clothes to wear? (30 options). What breakfast? (dozens). What music? (millions on Spotify). What email to answer first? (47 unread). What route to work? (Google Maps shows 12). What to eat for lunch? (50 restaurants in a 1-mile radius, with 200 reviews each to read). What to watch tonight? (15,000 Netflix titles). By day's end, you've made 3,000 micro-choices and you're mentally exhausted.
+            </div>
+
+            <div class="research-box">
+                <h4>Decision Fatigue</h4>
+                <p>Psychologist Roy Baumeister and others have documented that <strong>each decision depletes a limited cognitive resource</strong>. Whether you make good or bad choices doesn't matter for fatigue; the act of choosing itself exhausts you.</p>
+                <p>By the end of the day, you have <strong>decision fatigue</strong>. Your willpower is depleted. You make worse choices (like eating junk food, impulse shopping, poor parenting). This explains why judges give harsher sentences later in the day—not because later cases are worse, but because judges are mentally exhausted.</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>The Solution:</strong> Eliminate trivial choices through defaults, routines, and constraints. Steve Jobs wore the same black turtleneck every day. This freed his cognitive resources for important decisions. Warren Buffett eats similar foods. They weren't being eccentric; they were being efficient.
+            </div>
+
+            <p>The paradox: <strong>fewer choices in unimportant domains = more energy for important decisions</strong>. By constraining trivial choices, you paradoxically gain freedom in the domains that matter.</p>
+        </section>
+
+        <!-- Lesson 5 -->
+        <section class="section">
+            <h2>Lesson 5: Adaptation & the Hedonic Treadmill</h2>
+            <p>Here's a cruel irony: <strong>we adapt to our choices faster than we think</strong>. That perfect choice you agonized over becomes normal within weeks. This is the <strong>hedonic treadmill</strong>—the tendency for happiness to return to a baseline level regardless of major life events.</p>
+
+            <div class="illustration-box">
+                <svg viewBox="0 0 600 350" class="svg-container">
+                    <!-- Axes -->
+                    <line x1="60" y1="280" x2="560" y2="280" stroke="#2D3436" stroke-width="2"/>
+                    <line x1="60" y1="280" x2="60" y2="40" stroke="#2D3436" stroke-width="2"/>
+
+                    <!-- Labels -->
+                    <text x="30" y="150" font-size="12" fill="#2D3436" font-weight="bold">Happiness</text>
+                    <text x="300" y="310" font-size="12" fill="#2D3436" font-weight="bold" text-anchor="middle">Time</text>
+
+                    <!-- Baseline -->
+                    <line x1="60" y1="200" x2="560" y2="200" stroke="#A06CD5" stroke-width="2" stroke-dasharray="5,5"/>
+                    <text x="40" y="205" font-size="11" fill="#A06CD5">Baseline</text>
+
+                    <!-- Hedonic treadmill curve -->
+                    <polyline points="80,180 120,120 160,90 200,95 240,120 280,150 320,175 360,190 400,200 440,205 480,207 520,208"
+                              fill="none" stroke="#E17055" stroke-width="3"/>
+
+                    <!-- Annotation for peak -->
+                    <circle cx="200" cy="90" r="3" fill="#E17055"/>
+                    <line x1="200" y1="90" x2="200" y2="50" stroke="#E17055" stroke-width="1" stroke-dasharray="3,3"/>
+                    <text x="200" y="45" font-size="11" fill="#E17055" font-weight="bold" text-anchor="middle">Peak</text>
+                    <text x="200" y="60" font-size="10" fill="#E17055" text-anchor="middle">(first week)</text>
+
+                    <!-- Annotation for return -->
+                    <text x="400" y="230" font-size="11" fill="#E17055" font-weight="bold" text-anchor="middle">Adapted</text>
+                    <text x="400" y="245" font-size="10" fill="#E17055" text-anchor="middle">(6-12 weeks)</text>
+
+                    <!-- Example annotations -->
+                    <text x="80" y="320" font-size="10" fill="#2D3436" text-anchor="middle">New Phone</text>
+                    <text x="200" y="320" font-size="10" fill="#2D3436" text-anchor="middle">Thrilled!</text>
+                    <text x="400" y="320" font-size="10" fill="#2D3436" text-anchor="middle">Just a phone</text>
+                </svg>
+            </div>
+
+            <div class="research-box">
+                <h4>The Hedonic Treadmill in Action</h4>
+                <p>Research by <strong>Brickman, Coates, and Janoff-Bulman (1978)</strong> studied lottery winners and accident victims. Surprisingly:</p>
+                <ul>
+                    <li>Lottery winners, months after winning, returned to baseline happiness</li>
+                    <li>Accident victims, months after accidents, returned to baseline happiness</li>
+                    <li>Major life changes produced temporary emotional spikes, then adaptation</li>
+                </ul>
+                <p>This explains why you can't "upgrade" your way to happiness. Buy a nicer house, a better car, fancier clothes—your happiness spikes for weeks, then you adapt. You're back to baseline.</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>The Implication for Choice:</strong> If you're going to agonize for hours over a choice, and you'll adapt to it within 6 weeks anyway, you're irrationally investing effort. The satisfaction difference between a "very good" choice and the "perfect" choice disappears within months.
+            </div>
+
+            <p>This is why Schwartz argues for <strong>satisficing over maximizing</strong>: make a good-enough choice quickly, and you'll be equally happy with it in 3 months as if you'd spent 100 hours researching.</p>
+        </section>
+
+        <!-- Lesson 6 -->
+        <section class="section">
+            <h2>Lesson 6: Regret & Counterfactual Thinking</h2>
+            <p>Regret is perhaps the most painful emotion after a choice—and choice overload amplifies it exponentially. When you have 24 options, there are 23 potential sources of regret.</p>
+
+            <div class="research-box">
+                <h4>Two Types of Regret</h4>
+                <ul>
+                    <li><strong>Regret about the choice:</strong> "I picked the wrong option." This happens when your choice objectively underperforms.</li>
+                    <li><strong>Regret about the choosing:</strong> "I didn't fully evaluate all options." This happens even when your choice is objectively good, because you question whether you were thorough enough.</li>
+                </ul>
+                <p>With many options, the second type dominates. You chose a good jam, but you wonder if one of the 23 unchosen jams would have been better. This haunts you.</p>
+            </div>
+
+            <div class="funny-box">
+                It's like standing in a restaurant with a 30-page menu. You order the salmon, it's delicious, but you spend the meal thinking about what the sea bass would have tasted like. The menu made your meal worse by making you doubt your choice.
+            </div>
+
+            <div class="highlight-box">
+                <strong>Regret Loops:</strong> More options → more regret → lower satisfaction → desire to redo the decision → decision paralysis on future similar choices. It becomes a psychological cycle.
+            </div>
+
+            <p>Interestingly, research shows that <strong>people regret inactions more than actions</strong> in the long term. In the short term, you regret bad choices. But 5 years later, you regret things you didn't try more than things you tried and failed at.</p>
+        </section>
+
+        <!-- Lesson 7 -->
+        <section class="section">
+            <h2>Lesson 7: Real-World Overload (Healthcare, Retirement, Dating)</h2>
+            <p>The Paradox of Choice isn't just about jam. It's a real problem in the domains that matter most.</p>
+
+            <h3>Healthcare Decisions</h3>
+            <div class="research-box">
+                <p>When patients are given too many medical treatment options, they often choose nothing (paralysis). They experience higher anxiety. Studies show that <strong>patients with moderate choice (3-5 options) have better health outcomes than those with excessive options</strong>.</p>
+                <p><strong>Example:</strong> Cancer patients with 10+ treatment options often become decision-paralyzed, delay treatment, and experience worse outcomes. Those guided to 2-3 medically optimal choices proceed faster and feel more satisfied.</p>
+            </div>
+
+            <h3>Retirement Planning</h3>
+            <div class="research-box">
+                <p><strong>Shlomo Benartzi and Richard Thaler's 401(k) Studies:</strong></p>
+                <ul>
+                    <li>Companies with 2 investment options: 70% participation rate</li>
+                    <li>Companies with 8 options: 65% participation rate</li>
+                    <li>Companies with 60 options: 45% participation rate</li>
+                </ul>
+                <p>Each additional option reduced participation by 2%. People weren't choosing better; they were choosing not to save at all due to decision paralysis. This had catastrophic real-world consequences for retirement security.</p>
+            </div>
+
+            <h3>Online Dating</h3>
+            <div class="research-box">
+                <p>Speed dating studies show an interesting pattern:</p>
+                <ul>
+                    <li><strong>Traditional dating (small pool):</strong> Higher satisfaction, more follow-up dates</li>
+                    <li><strong>Online dating (10,000+ profiles):</strong> Lower satisfaction, more "paradox of choice" effects, less follow-up</li>
+                </ul>
+                <p>When you have access to 10,000 potential partners, every actual date is compared to an imagined "perfect partner" with qualities cherry-picked from the entire dating pool. No real person can compete with an ideal composite. This is called the <strong>"paradox of choice in romance."</strong></p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>The Pattern:</strong> Across all major life domains (healthcare, retirement, dating, education), too many choices lead to worse outcomes: lower participation, lower satisfaction, slower decisions, more regret, and more anxiety.
+            </div>
+        </section>
+
+        <!-- Lesson 8 -->
+        <section class="section">
+            <h2>Lesson 8: Status Quo Bias</h2>
+            <p>Paradoxically, while choice overload paralyzes new decisions, it also strengthens <strong>status quo bias</strong>—the tendency to prefer the current state of affairs.</p>
+
+            <div class="research-box">
+                <h4>Why Status Quo Dominates</h4>
+                <ul>
+                    <li><strong>Endowment Effect:</strong> We value things more just because we own them</li>
+                    <li><strong>Loss Aversion:</strong> Losses feel 2x worse than equivalent gains feel good</li>
+                    <li><strong>Inertia:</strong> Switching costs (even small ones) feel heavy when choices are overwhelming</li>
+                    <li><strong>Regret Avoidance:</strong> Keeping status quo feels safer; changing feels risky</li>
+                </ul>
+            </div>
+
+            <div class="funny-box">
+                You hate your phone plan. You know you're overpaying. But switching requires comparing plans, reading fine print, setting up new service. There are 50 plans. You do nothing. You stay miserable but unmoved. This is status quo bias in the presence of choice overload.
+            </div>
+
+            <div class="highlight-box">
+                <strong>The Paradox of Status Quo:</strong> More choices don't create a freer market; they often cement status quo dominance. People stick with "good enough" current states rather than risk the paralysis of evaluation and potential regret.
+            </div>
+
+            <p>This has profound implications. It means that <strong>companies with strong default options dominate</strong>. Microsoft dominated office software not because it was best, but because it was the default and switching costs (in the presence of alternatives) felt too high.</p>
+        </section>
+
+        <!-- Lesson 9 -->
+        <section class="section">
+            <h2>Lesson 9: Reversible vs. Irreversible Decisions</h2>
+            <p>The paralysis of choice depends critically on whether a decision can be undone. <strong>Reversible decisions paralyze us far less than irreversible ones.</strong></p>
+
+            <div class="illustration-box">
+                <svg viewBox="0 0 600 300" class="svg-container">
+                    <!-- Reversible -->
+                    <g>
+                        <text x="150" y="30" font-size="16" fill="#00B894" font-weight="bold" text-anchor="middle">REVERSIBLE</text>
+
+                        <rect x="80" y="60" width="140" height="100" fill="#00B894" opacity="0.2" rx="8" stroke="#00B894" stroke-width="2"/>
+                        <text x="150" y="95" font-size="12" fill="#2D3436" text-anchor="middle" font-weight="bold">Try Restaurant A</text>
+                        <text x="150" y="115" font-size="12" fill="#2D3436" text-anchor="middle">Choose Phone Model B</text>
+                        <text x="150" y="135" font-size="12" fill="#2D3436" text-anchor="middle">Pick Streaming App C</text>
+
+                        <path d="M 150 170 L 150 190" stroke="#00B894" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <text x="150" y="215" font-size="12" fill="#2D3436" text-anchor="middle" font-weight="bold">Low Anxiety</text>
+                        <text x="150" y="235" font-size="11" fill="#00B894" text-anchor="middle">Can undo if bad</text>
+                        <text x="150" y="255" font-size="11" fill="#00B894" text-anchor="middle">Lower stakes</text>
+                        <text x="150" y="275" font-size="11" fill="#00B894" text-anchor="middle">Learn by trying</text>
+                    </g>
+
+                    <!-- Irreversible -->
+                    <g>
+                        <text x="450" y="30" font-size="16" fill="#E17055" font-weight="bold" text-anchor="middle">IRREVERSIBLE</text>
+
+                        <rect x="380" y="60" width="140" height="100" fill="#E17055" opacity="0.2" rx="8" stroke="#E17055" stroke-width="2"/>
+                        <text x="450" y="95" font-size="12" fill="#2D3436" text-anchor="middle" font-weight="bold">Choose Career</text>
+                        <text x="450" y="115" font-size="12" fill="#2D3436" text-anchor="middle">Select College</text>
+                        <text x="450" y="135" font-size="12" fill="#2D3436" text-anchor="middle">Buy House</text>
+
+                        <path d="M 450 170 L 450 190" stroke="#E17055" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                        <text x="450" y="215" font-size="12" fill="#2D3436" text-anchor="middle" font-weight="bold">High Anxiety</text>
+                        <text x="450" y="235" font-size="11" fill="#E17055" text-anchor="middle">Can't undo</text>
+                        <text x="450" y="255" font-size="11" fill="#E17055" text-anchor="middle">High stakes</text>
+                        <text x="450" y="275" font-size="11" fill="#E17055" text-anchor="middle">Maximize to avoid loss</text>
+                    </g>
+
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                            <polygon points="0 0, 10 5, 0 10" fill="#00B894"/>
+                        </marker>
+                        <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                            <polygon points="0 0, 10 5, 0 10" fill="#E17055"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="research-box">
+                <h4>Decision Reversibility Effects</h4>
+                <p>Research shows that when people know they <strong>can easily reverse</strong> a decision, they choose faster and feel less regret. They also learn more (because experimentation is safe).</p>
+                <p>When decisions are <strong>irreversible</strong>, people maximize: they gather more information, deliberate longer, set higher standards, and experience more regret even after choosing.</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Design Implication:</strong> Smart companies and institutions make decisions artificially reversible to reduce paralysis. Trial periods, return policies, and cooling-off periods aren't customer-friendly luxuries—they're freedom enhancers. They reduce decision anxiety and increase actual purchase.
+            </div>
+
+            <p>This explains why Schwartz argues that <strong>we should design life to include more reversible decisions</strong>. Choose a major in college but allow changes. Start a career but allow pivots. These reversibility options paradoxically increase commitment (because they reduce regret).</p>
+        </section>
+
+        <!-- Lesson 10 -->
+        <section class="section">
+            <h2>Lesson 10: Learned Helplessness from Too Many Options</h2>
+            <p>When choice becomes overwhelming enough, people stop trying altogether. This is <strong>learned helplessness</strong>—the psychological condition where repeated failure (or overwhelming choice) leads to giving up.</p>
+
+            <div class="research-box">
+                <h4>The Learned Helplessness Cycle</h4>
+                <ol>
+                    <li><strong>Faced with many options:</strong> "I should evaluate all of these"</li>
+                    <li><strong>Evaluation becomes overwhelming:</strong> "This is impossible"</li>
+                    <li><strong>Decision failure:</strong> "I can't make a good choice"</li>
+                    <li><strong>Learned helplessness:</strong> "Why try? I'll just not decide"</li>
+                    <li><strong>Inaction spiral:</strong> Not deciding becomes the default, even when decision is urgent</li>
+                </ol>
+            </div>
+
+            <div class="funny-box">
+                This is why people don't enroll in 401(k)s with 60+ investment options, even when the company matches contributions (free money!). It's not rational; it's learned helplessness. The complexity overwhelmed them once, so they've given up.
+            </div>
+
+            <div class="highlight-box">
+                <strong>Breaking the Cycle:</strong> Schwartz argues that organizations should <strong>constrain choices by default</strong> to prevent learned helplessness. Give 3-5 good options (not 60). This increases participation and satisfaction.
+            </div>
+
+            <p>In organizational contexts, this is why <strong>choice architecture matters</strong>. How you present options dramatically affects outcomes. Too many, and people opt out entirely.</p>
+        </section>
+
+        <!-- Lesson 11 -->
+        <section class="section">
+            <h2>Lesson 11: "Good Enough" as Liberation</h2>
+            <p>This is perhaps Schwartz's most liberating insight: <strong>accepting "good enough" is not settling; it's freedom</strong>.</p>
+
+            <div class="research-box">
+                <h4>The Satisficing Manifesto</h4>
+                <p>Schwartz argues for embracing <strong>satisficing</strong> as a deliberate philosophy:</p>
+                <ul>
+                    <li>Set clear criteria for what "good" means to you</li>
+                    <li>Stop searching when you find something that meets those criteria</li>
+                    <li>Accept that "best" is often unknowable and not worth the psychological cost</li>
+                    <li>Enjoy what you have instead of regretting what you don't</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <strong>The Math of Perfectionism:</strong> If the "perfect" choice is 1% better than "good enough," but finding it costs 100x the time, you've made a terrible trade. Most of life's satisfaction comes from enjoying what you have, not from the marginal improvement of having found the "best."
+            </div>
+
+            <div class="funny-box">
+                The satisficer's superpower: They buy a coffee maker and enjoy coffee for 5 years. The maximizer reads 200 reviews, compares 15 models, pays 2x as much, and spends the next 5 years wondering if they could have gotten a better deal. Same coffee. Different happiness.
+            </div>
+
+            <p>Schwartz presents evidence that <strong>satisficers report higher overall happiness than maximizers</strong>, despite potentially having "worse" individual choices. The reason: satisficers focus on enjoying what they have; maximizers focus on regretting what they don't.</p>
+
+            <p>This is a philosophical shift: <strong>from "What's the best?" to "What's good?"</strong></p>
+        </section>
+
+        <!-- Lesson 12 -->
+        <section class="section">
+            <h2>Lesson 12: Voluntary Constraints as Freedom</h2>
+            <p>Paradoxically, <strong>constraining our own choices increases our freedom and happiness</strong>. This is Schwartz's most counterintuitive claim, but it's powerfully supported by psychology.</p>
+
+            <div class="illustration-box">
+                <svg viewBox="0 0 600 350" class="svg-container">
+                    <!-- Without constraints (chaotic) -->
+                    <g>
+                        <text x="150" y="30" font-size="14" fill="#E17055" font-weight="bold" text-anchor="middle">No Constraints</text>
+                        <circle cx="100" cy="100" r="8" fill="#FFE66D"/>
+                        <circle cx="180" cy="120" r="8" fill="#FF6B6B"/>
+                        <circle cx="120" cy="80" r="8" fill="#4ECDC4"/>
+                        <circle cx="160" cy="140" r="8" fill="#A06CD5"/>
+                        <circle cx="140" cy="100" r="8" fill="#FD79A8"/>
+                        <circle cx="110" cy="130" r="8" fill="#74B9FF"/>
+                        <circle cx="170" cy="90" r="8" fill="#55EFC4"/>
+
+                        <text x="150" y="200" font-size="12" fill="#2D3436" text-anchor="middle" font-weight="bold">Endless options</text>
+                        <text x="150" y="220" font-size="12" fill="#2D3436" text-anchor="middle">Decision paralysis</text>
+                        <text x="150" y="240" font-size="12" fill="#E17055" text-anchor="middle" font-weight="bold">Anxiety</text>
+                        <text x="150" y="260" font-size="12" fill="#E17055" text-anchor="middle" font-weight="bold">Regret</text>
+                    </g>
+
+                    <!-- With constraints (focused) -->
+                    <g>
+                        <text x="450" y="30" font-size="14" fill="#00B894" font-weight="bold" text-anchor="middle">With Constraints</text>
+                        <circle cx="430" cy="100" r="8" fill="#FFE66D" stroke="#00B894" stroke-width="3"/>
+                        <circle cx="450" cy="100" r="8" fill="#FF6B6B" stroke="#00B894" stroke-width="3"/>
+                        <circle cx="470" cy="100" r="8" fill="#4ECDC4" stroke="#00B894" stroke-width="3"/>
+
+                        <!-- Boundary circle showing constraint -->
+                        <circle cx="450" cy="100" r="50" fill="none" stroke="#00B894" stroke-width="2" stroke-dasharray="5,5"/>
+
+                        <text x="450" y="200" font-size="12" fill="#2D3436" text-anchor="middle" font-weight="bold">Limited options</text>
+                        <text x="450" y="220" font-size="12" fill="#2D3436" text-anchor="middle">Fast decision</text>
+                        <text x="450" y="240" font-size="12" fill="#00B894" text-anchor="middle" font-weight="bold">Peace of mind</text>
+                        <text x="450" y="260" font-size="12" fill="#00B894" text-anchor="middle" font-weight="bold">Satisfaction</text>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="research-box">
+                <h4>How Constraints Increase Freedom</h4>
+                <p><strong>Self-imposed constraints:</strong> A diet with clear rules (e.g., "no sugar during weekdays") paradoxically increases perceived freedom. You're not constantly deciding; you're executing a plan.</p>
+                <p><strong>Commitment devices:</strong> Joining a gym (sunk cost), hiring a trainer, telling friends about your goal—these constraints work because they remove the daily decision burden.</p>
+                <p><strong>Lifestyle constraints:</strong> Steve Jobs wearing black turtlenecks every day wasn't limiting; it was liberating. It removed a daily micro-decision.</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>The Paradox:</strong> By voluntarily constraining our choice set, we paradoxically increase our freedom. We're free from the burden of deciding. We're free from regret (we chose within our constraints). We're free to focus energy on what matters.
+            </div>
+
+            <p>This is why successful people often have deep personal constraints:</p>
+            <ul>
+                <li>Wardrobe uniformity (removes daily decision)</li>
+                <li>Strict morning routines (removes micro-decisions at start of day)</li>
+                <li>Commitment to one craft (removes career decision churn)</li>
+                <li>Financial rules (removes ongoing financial decisions)</li>
+            </ul>
+
+            <p>Schwartz concludes: <strong>In a world of unlimited choice, the wisest choice is to choose your constraints.</strong></p>
+        </section>
+
+        <!-- AI & Computational Connection -->
+        <section class="ai-connection">
+            <h2>AI & Computational Perspective: Choice as Search</h2>
+            <h3>The Choice Paradox as Search Space Explosion</h3>
+            <p>From a computational perspective, choice is a search problem. The human mind faces an intractable search space: with enough options, exhaustive search becomes computationally impossible. Humans, like AI systems, must use bounded rationality strategies.</p>
+
+            <h4>Parallels to AI Systems</h4>
+            <ul style="margin-top: 1rem;">
+                <li><strong>Bounded Rationality:</strong> Humans can't examine all options (infinite utility function evaluations). We use heuristics (rules of thumb) to search efficiently. This is satisficing—exactly what successful AI agents do.</li>
+                <li><strong>Search Complexity:</strong> 24 jams = 24^24 possible orderings to mentally model. Even modest option sets create search spaces that exceed human cognitive capacity. AI faces this same problem and uses constraint satisfaction.</li>
+                <li><strong>Beam Search vs. Exhaustive Search:</strong> Exhaustive search (maximizing: evaluate all options) is O(n!). Beam search (satisficing: keep top k options at each level) is O(k*depth). Satisficers use beam search; it's more rational.</li>
+                <li><strong>Explore-Exploit Dilemma:</strong> The more options available, the more the mind must explore (gather information) rather than exploit (commit to a choice). This is the exploration-exploitation tradeoff that dominates RL (reinforcement learning).</li>
+            </ul>
+
+            <h3>Recommender Systems as Paradox Solution</h3>
+            <p>Paradoxically, <strong>AI recommender systems reduce the Paradox of Choice</strong>. Netflix doesn't show you all 15,000 titles; it shows 10. Amazon doesn't show all products; it shows 5 recommendations. By constraining the choice set (using algorithms to filter), these systems dramatically improve user satisfaction and purchase rates.</p>
+            <p>This is choice architecture through algorithmic filtering. It's the jar experiment in the digital age.</p>
+
+            <h3>Constraint Satisfaction in Agent Design</h3>
+            <p>Modern AI agents use constraint satisfaction to navigate large choice spaces: they set constraints (must optimize for speed, must respect memory limits, must be explainable) and satisfice within those constraints. They don't try to find the globally optimal solution; they find a solution that satisfies the constraints.</p>
+            <p><strong>Lesson for humans:</strong> Adopt the same strategy. Set clear constraints (budget, time, criteria). Then satisfice within them. You'll be both happier and more rational.</p>
+        </section>
+
+        <!-- Cross-Book Connections -->
+        <section class="cross-book">
+            <h2>Cross-Book Connections</h2>
+            <h3>Philosophical & Research Echoes</h3>
+
+            <div class="cross-book-item">Daniel Kahneman - Thinking, Fast and Slow</div>
+            <div class="cross-book-item">Connection: System 1 (intuitive) vs System 2 (deliberative) decision-making. Choice overload forces System 2 overload, causing mental fatigue and poor decisions.</div>
+
+            <div class="cross-book-item" style="display: block; margin-top: 1rem;">Richard Thaler & Cass Sunstein - Nudge</div>
+            <div class="cross-book-item">Connection: Choice architecture matters enormously. How options are presented (defaults, order, framing) affects outcomes more than the options themselves. Sunstein's work on "asymmetric paternalism" suggests constraining choice when it benefits people.</div>
+
+            <div class="cross-book-item" style="display: block; margin-top: 1rem;">Dan Gilbert - Stumbling on Happiness</div>
+            <div class="cross-book-item">Connection: We're terrible at predicting what will make us happy. The perfect choice we deliberate over won't make us happier than a good choice—we're not good at forecasting satisfaction anyway.</div>
+
+            <div class="cross-book-item" style="display: block; margin-top: 1rem;">Dan Ariely - Predictably Irrational</div>
+            <div class="cross-book-item">Connection: We're predictably irrational in systematic ways. Status quo bias, sunk cost fallacy, anchoring—all irrational choice patterns that Schwartz builds on.</div>
+
+            <div class="cross-book-item" style="display: block; margin-top: 1rem;">Aziz Ansari - Modern Romance</div>
+            <div class="cross-book-item">Connection: The "paradox of choice in dating" where having too many profiles on dating apps paradoxically reduces relationship satisfaction (compared to meeting people through limited social circles).</div>
+        </section>
+
+        <!-- Funny Takes Section -->
+        <section class="section">
+            <h2>Modern Examples of Choice Paralysis</h2>
+
+            <div class="funny-box">
+                <strong>Netflix Scrolling:</strong> You have 15,000 titles. You spend 45 minutes scrolling. You watch The Office (again) because deciding was too hard. The paradox in real time.
+            </div>
+
+            <div class="funny-box">
+                <strong>Coffee Shops:</strong> Café A: "We have one coffee. It's good." Café B: "We have 47 coffee drinks." Café A has a line. Café B has anxious people staring at the menu for 5 minutes.
+            </div>
+
+            <div class="funny-box">
+                <strong>Restaurant Menus:</strong> Old diner menu: 12 items. Everyone happy. Modern gastropub: 47 items, 8 special options. 20 people agonizing over every decision. The longer menu made the restaurant worse.
+            </div>
+
+            <div class="funny-box">
+                <strong>Online Shopping:</strong> "9 people are viewing this item." You add to cart. Then you see "showing 1-60 of 847 similar items." You remove from cart and spend 2 hours comparing. You end up buying nothing.
+            </div>
+
+            <div class="funny-box">
+                <strong>401(k) Paralysis:</strong> Your employer offers 60 investment funds. Fewer people enroll in their retirement plan than employers offering 5 funds. Free money sits on the table because choice is paralyzing.
+            </div>
+
+            <div class="funny-box">
+                <strong>Phone Plans:</strong> "We have 47 plans designed for different needs!" You realize you don't know which need you are. You keep your bad plan because switching requires understanding them all.
+            </div>
+
+            <div class="funny-box">
+                <strong>Vacation Planning:</strong> Travel agent says "Take this tour." You book it happily. Airbnb shows you "10,000 options in Barcelona." You spend 6 hours comparing. You're more anxious about your choice than people with limited options.
+            </div>
+
+            <div class="funny-box">
+                <strong>App Selection:</strong> "There are 2 million apps." You use 3. The choice made you overwhelmed, not empowered.
+            </div>
+        </section>
+
+        <!-- Summary & Key Takeaways -->
+        <section class="section">
+            <h2>Summary: From Paralysis to Wisdom</h2>
+
+            <h3>The Core Insight</h3>
+            <p><strong>More choice does not increase freedom; beyond an optimal point, it decreases it.</strong> The Paradox of Choice reveals that</p>
+            <ul>
+                <li>Abundance creates anxiety, not happiness</li>
+                <li>Maximizing is irrational; satisficing is wise</li>
+                <li>Regret is amplified by unchosen alternatives</li>
+                <li>Constraints paradoxically increase freedom</li>
+                <li>Adaptation means our choices matter less than we think</li>
+            </ul>
+
+            <h3>Practical Wisdom from Schwartz</h3>
+            <div class="highlight-box">
+                <strong>1. Choose a Strategy:</strong> Decide whether you're a maximizer or satisficer. If maximizer, acknowledge that maximizing makes you miserable. Consider adopting satisficing even if it feels "wrong."
+            </div>
+
+            <div class="highlight-box">
+                <strong>2. Set Clear Criteria:</strong> Before choosing, define what "good enough" means to you. This radically simplifies decisions. "I want a phone under $600 with a good camera." Done.
+            </div>
+
+            <div class="highlight-box">
+                <strong>3. Eliminate Trivial Choices:</strong> Create defaults and routines for unimportant decisions. Build constraints intentionally. This frees cognitive resources for important choices.
+            </div>
+
+            <div class="highlight-box">
+                <strong>4. Embrace Satisficing:</strong> Stop hunting for the "perfect" anything. A very good choice made quickly is superior to the "best" choice made slowly. You'll adapt to it in 6 weeks anyway.
+            </div>
+
+            <div class="highlight-box">
+                <strong>5. Practice Gratitude Over Regret:</strong> When tempted to dwell on unchosen alternatives, redirect to appreciation of what you chose. Cognitive reframing transforms satisfaction.
+            </div>
+
+            <div class="highlight-box">
+                <strong>6. Make Decisions Reversible:</strong> Whenever possible, choose things you can undo. This reduces anxiety and increases learning. And push organizations to make more decisions reversible.
+            </div>
+
+            <div class="highlight-box">
+                <strong>7. Demand Better Choice Architecture:</strong> Support organizations that constrain choice intelligently (good defaults, curated options) over those that overwhelm. Vote with your attention and wallet.
+            </div>
+
+            <h3>The Ultimate Paradox</h3>
+            <p><strong>Freedom requires constraint.</strong> The most satisfied people aren't those with the most options; they're those who've wisely constrained their options. They've decided what matters, set criteria, and committed to satisficing within those constraints.</p>
+
+            <p>In a world obsessed with "having it all," Schwartz's insight is radical and liberating: <strong>You're happier with less.</strong> Not less options overall—but fewer, better options in each domain. And the power to make that choice is in your hands.</p>
+        </section>
+
+        <!-- Final Quote -->
+        <section class="section" style="background: linear-gradient(135deg, var(--dark-purple) 0%, var(--deep-blue) 100%); color: white; text-align: center; border-left: 8px solid var(--sunny);">
+            <h2 style="color: white; border-color: white;">The Final Wisdom</h2>
+            <p style="font-size: 1.3rem; font-style: italic; margin: 2rem 0;">
+                "The secret to happiness is not in getting what you want; it's in wanting what you have. The secret to freedom is not having unlimited choices; it's constraining your choices wisely."
+            </p>
+            <p style="font-size: 1rem; opacity: 0.9;">— Inspired by Barry Schwartz's The Paradox of Choice</p>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h3>The Paradox of Choice: Why More Is Less</h3>
+        <p>An Illustrated Comprehensive Guide | Barry Schwartz</p>
+        <p>Featuring psychological research, real-world applications, AI perspectives, and practical wisdom</p>
+        <p style="margin-top: 2rem; opacity: 0.8;">© 2024 | Created as an educational exploration of choice architecture and behavioral psychology</p>
+    </footer>
+
+</body>
+</html>

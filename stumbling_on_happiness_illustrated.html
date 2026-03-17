@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stumbling on Happiness - Illustrated</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .cover {
+            background: linear-gradient(135deg, #2a1a3f 0%, #2D3436 50%, #1a0f2a 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .cover p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--pink);
+            margin-bottom: 0.5rem;
+        }
+
+        .cover-svg {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-top: 2rem;
+        }
+
+        .content-section {
+            background: white;
+        }
+
+        .content-section:nth-child(even) {
+            background: linear-gradient(135deg, #fdf4ff 0%, #f5e8ff 100%);
+        }
+
+        .content-wrapper {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--pink);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .lesson-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--pink);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .lesson-card p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .examples {
+            background: rgba(253, 121, 168, 0.05);
+            border-left: 3px solid var(--pink);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .examples h4 {
+            color: var(--pink);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .examples ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .examples li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .examples li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--pink);
+            font-weight: bold;
+        }
+
+        .funny-take, .ai-connection, .cross-connection {
+            background: rgba(160, 108, 213, 0.08);
+            border-left: 3px solid var(--dark-purple);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .funny-take h4, .ai-connection h4, .cross-connection h4 {
+            color: var(--dark-purple);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--pink), var(--dark-purple));
+            border-radius: 2px;
+        }
+
+        .story-card {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, #5a4b99 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .story-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .svg-illustration {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            margin: 0 auto 2rem;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 1.5rem;
+            }
+
+            .lesson-card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- COVER SECTION -->
+    <section class="cover">
+        <div class="cover-content">
+            <h1>Stumbling on Happiness</h1>
+            <p>Why Life Is Not a Problem to Be Solved</p>
+            <svg class="cover-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Cracked crystal ball -->
+                <circle cx="200" cy="150" r="80" fill="none" stroke="var(--pink)" stroke-width="2" opacity="0.6"/>
+                <circle cx="200" cy="150" r="70" fill="none" stroke="var(--pink)" stroke-width="1.5" opacity="0.4"/>
+
+                <!-- Cracks -->
+                <line x1="200" y1="70" x2="200" y2="230" stroke="var(--pink)" stroke-width="2" opacity="0.5"/>
+                <line x1="120" y1="150" x2="280" y2="150" stroke="var(--pink)" stroke-width="2" opacity="0.5"/>
+                <path d="M 150 90 Q 140 150 160 210" stroke="var(--pink)" stroke-width="1.5" fill="none" opacity="0.4"/>
+                <path d="M 250 90 Q 260 150 240 210" stroke="var(--pink)" stroke-width="1.5" fill="none" opacity="0.4"/>
+
+                <!-- Scattered fragments -->
+                <polygon points="100,80 110,70 115,85" fill="var(--dark-purple)" opacity="0.6"/>
+                <polygon points="300,90 310,80 320,95" fill="var(--dark-purple)" opacity="0.6"/>
+                <polygon points="180,220 175,210 190,215" fill="var(--dark-purple)" opacity="0.6"/>
+                <polygon points="220,230 230,225 235,240" fill="var(--dark-purple)" opacity="0.6"/>
+
+                <!-- Light refraction -->
+                <circle cx="200" cy="150" r="60" fill="none" stroke="var(--sky)" stroke-width="1" opacity="0.3" stroke-dasharray="5,5"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- LESSON 1: Affective Forecasting -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>1. Affective Forecasting Fails</h3>
+                <p>You're terrible at predicting your own emotions. You think winning the lottery will make you permanently happier. You think losing a job will destroy you. Neither is true.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Lottery winners: Return to baseline happiness within months</li>
+                        <li>Paraplegic accident survivors: Report similar happiness as before injury within 1 year</li>
+                        <li>You: Massively overestimate impact of future events (good or bad)</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>We're all confident fortune tellers about our own futures, and we're all terrible at it.</p>
+                </div>
+                <div class="ai-connection">
+                    <h4>AI Connection</h4>
+                    <p>Reward model predictions fail to capture actual human well-being. Models trained to maximize predicted happiness often miss what actually makes people happy.</p>
+                </div>
+                <div class="cross-connection">
+                    <h4>Cross-Book Connection</h4>
+                    <p><strong>Thinking, Fast & Slow:</strong> Peak-end rule: we remember moments by peak + end, not total experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 2: Presentism -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>2. Presentism (Your Current State Shapes Prediction)</h3>
+                <p>You predict the future based on your present. Hungry shoppers buy 40% more. You can't imagine future-you's reality because you're trapped in present-you's mind.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Hungry shopper: Buys chips, cookies, ice cream (present hunger blinds future judgment)</li>
+                        <li>Happy day: You overestimate how good a vacation will be</li>
+                        <li>Sad day: You underestimate how quickly you'll recover</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Never make major decisions hungry, tired, or emotional. Future-you is a different person you can't predict.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 3: Impact Bias -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>3. Impact Bias (Events Have Less Impact Than You Think)</h3>
+                <p>You overestimate how much a negative event will devastate you. Your team loses the championship. You'll feel awful... for a while. Then dinner, work, a movie distract you.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Sports loss: You think it'll ruin your week. You recover by dinner.</li>
+                        <li>Rejection: Seems catastrophic in the moment. Forgotten in months.</li>
+                        <li>Breakup: Seems permanent. You adapt, move on, rebuild happiness.</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Your brain is a panic machine. But it's also a recovery machine, and the recovery is faster than you think.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 4: Psychological Immune System -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>4. The Psychological Immune System</h3>
+                <p>Your mind has defenses against unhappiness. Rationalization, reframing, acceptance—your brain protects itself from prolonged suffering.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Rationalization: "I didn't get into Harvard → I didn't want to anyway"</li>
+                        <li>Escapable situation: You stay depressed (keep hoping to change it)</li>
+                        <li>Inescapable situation: You adapt, accept, rebuild (immune system kicks in)</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Your brain is a rationalization machine. And it's actually pretty good at making you feel better.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 5: Focalism -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>5. Focalism (Zoom In, Forget Everything Else)</h3>
+                <p>You focus on one factor and ignore context. "This house has a terrible view!" you say. But you have friends, work, hobbies that matter more than the view.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Home: You obsess over the view, ignore the neighborhood and community</li>
+                        <li>Job: You focus on the title and salary, ignore daily contentment</li>
+                        <li>Relationship: You focus on one flaw, ignore thousands of good days</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>We're all myopic idiots. We zoom in on the one bad thing and forget there's a whole world around it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 6: Immune Neglect -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>6. Immune Neglect (Underestimating Resilience)</h3>
+                <p>You massively underestimate your ability to adapt. Bad thing happens → you think you'll be miserable forever → you're not, you adapt.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Job loss: Seems catastrophic. You find a new job, life continues.</li>
+                        <li>Illness: Seems like permanent suffering. Your brain adapts to new normal.</li>
+                        <li>Disability: Seems unbearable. People adapt and find new sources of happiness.</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Your resilience is your superpower, and you're consistently shocked by how resilient you actually are.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 7: Rationalization -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>7. Rationalization (Making Sense of Disappointment)</h3>
+                <p>You didn't get the job. Your brain immediately says "I didn't want it anyway." This isn't lying; it's a real psychological process that makes you feel better.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Rejection: Brain reframes it. "They wouldn't have appreciated me."</li>
+                        <li>Sour grapes: Denied thing becomes "not that good anyway"</li>
+                        <li>This is your immune system protecting you from despair</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>You're all liars. But you're lying to yourself to feel better, which is kind of sweet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 8: Illusion of Memory -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>8. Illusion of Memory (It's Wikipedia, Not Video)</h3>
+                <p>Your memory isn't a video recording; it's a Wikipedia page you edit constantly. You remember the key points, but you rewrite the details to fit your narrative.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>First date: You remember it as more romantic than it was</li>
+                        <li>Childhood: You edit memories to fit your self-image</li>
+                        <li>False memories: You can convince yourself something happened that didn't</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Everyone is the hero of their own movie, and everyone is also editing the footage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 9: Comparison and Relative Happiness -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>9. Comparison and Relative Happiness</h3>
+                <p>You don't measure happiness absolutely. You measure it relative to others (and your expectations). Bronze medalists are happier than silver because they're comparing down.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Bronze medalist: "I'm glad to be on the podium" (compares to 4th place)</li>
+                        <li>Silver medalist: "I almost won" (compares to gold)</li>
+                        <li>Salary: You're happy until you learn a peer earns more</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Happiness is relative. Never check what others earn. Ignorance = bliss.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 10: Variety Is Overrated -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>10. Variety Is Overrated</h3>
+                <p>You think you want variety, but you're happier with consistency. Same favorite ice cream = happier than rotating flavors. You adapt to variety and stop enjoying it.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Food: Favorite meal eaten weekly beats rotating restaurants</li>
+                        <li>Partner: Consistency and routine build deeper satisfaction than novelty-seeking</li>
+                        <li>Job: Mastery of one role beats constant variety</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>You want spice, but you're happier with salt. Boring consistency wins.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 11: Surrogation (Ask Someone Who's Been There) -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>11. Surrogation (Ask Someone Who's Been There)</h3>
+                <p>Don't trust your own predictions. Instead, ask someone who's actually experienced it. "Is parenthood worth it?" Ask a parent, not your imagination.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>Career change: Ask someone who did it, not your imagination</li>
+                        <li>Living in X city: Ask residents, not Google</li>
+                        <li>College major: Ask alumni, not your fantasy of it</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>Your imagination is a terrible fortune teller. Real people are way more reliable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 12: End of History Illusion -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="lesson-card">
+                <h3>12. End of History Illusion (You'll Never Change Again)</h3>
+                <p>You think you're done changing. "I'm an extrovert now" or "I'm not a morning person." But you'll change. A lot. You just can't predict how.</p>
+                <div class="examples">
+                    <h4>Key Examples</h4>
+                    <ul>
+                        <li>At 20: "I'll never like jazz." At 40: Your favorite genre.</li>
+                        <li>At 25: "I don't want kids." At 35: Different person with different values.</li>
+                        <li>Identity: Feels fixed. Reality: It's fluid and constantly evolving.</li>
+                    </ul>
+                </div>
+                <div class="funny-take">
+                    <h4>Funny Take</h4>
+                    <p>You're the same person you'll never be again.</p>
+                </div>
+                <div class="ai-connection">
+                    <h4>AI Connection</h4>
+                    <p>Model drift: Deployed models trained on past data fail when the real world changes. End of history illusion = assuming your training distribution is permanent.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY: Lottery Winner & Paraplegic -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="story-card">
+                <h3>Story: Lottery Winner & Paraplegic (Hedonic Treadmill)</h3>
+                <p>Gilbert followed up with lottery winners and paraplegic accident survivors one year after life-altering events.</p>
+                <p><strong>Expected:</strong> Winner = ecstatically happy. Paraplegic = deeply miserable.</p>
+                <p><strong>Reality:</strong> Both returned to their baseline happiness.</p>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li><strong>Lottery winner:</strong> Initial euphoria faded. Money became normal. Happiness = pre-lottery baseline.</li>
+                    <li><strong>Paraplegic:</strong> Initial despair faded. Brain adapted. Found new sources of meaning and joy. Happiness ≈ baseline.</li>
+                </ul>
+                <p style="margin-top: 1.5rem;">The hedonic treadmill: You adapt to both good and bad. Your brain is relentlessly trying to return you to equilibrium. This is both depressing (winning the lottery won't make you happy forever) and liberating (your problems won't destroy you forever).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY: Reversibility Experiment -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="story-card">
+                <h3>Story: Reversibility Experiment (Irrevocable Choices = Happier)</h3>
+                <p>Gilbert conducted an experiment with students choosing art posters. One group could swap their poster later (reversible). Another group's choice was final (irrevocable).</p>
+                <p><strong>Results:</strong> The irrevocable-choice group became happier with their poster.</p>
+                <p><strong>Why?</strong> When you can't undo a choice, your psychological immune system kicks in. You rationalize it, find the good in it, convince yourself it was the right choice.</p>
+                <p>When you can undo it, you second-guess yourself. You focus on downsides. You never commit psychologically.</p>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li><strong>Reversible:</strong> You keep one foot in the past. Divided attention = lower happiness.</li>
+                    <li><strong>Irrevocable:</strong> You commit psychologically. Your brain rationalizes it. Higher happiness.</li>
+                </ul>
+                <p style="margin-top: 1.5rem;">The implication: Sometimes you're happier if you burn the bridge. Full commitment triggers the psychological immune system, which then makes you happier with your choice.</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

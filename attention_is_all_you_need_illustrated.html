@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attention Is All You Need — The Illustrated Guide to Transformers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 1em 0 0.5em 0;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--deep-blue);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--dark-purple);
+        }
+
+        h4 {
+            font-size: 1.3rem;
+            color: var(--teal);
+        }
+
+        p {
+            margin: 1em 0;
+            font-size: 1.05rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* ===== COVER ===== */
+        .cover {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--dark-purple) 50%, var(--teal) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(78, 205, 196, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cover-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .cover h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .cover .meta {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .illustration-container {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin: 3rem auto 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        /* ===== LESSONS GRID ===== */
+        .lessons-section {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        .lessons-section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .lesson {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lesson:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .lesson-header {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--teal) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-left: 6px solid var(--sunny);
+        }
+
+        .lesson-header h3 {
+            color: white;
+            margin: 0;
+            font-size: 1.6rem;
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: var(--sunny);
+            color: var(--dark);
+            font-weight: 700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+
+        .lesson-inner {
+            padding: 2rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f5f7ff 0%, #fff5f7 100%);
+            border-left: 4px solid var(--deep-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .card-label {
+            display: inline-block;
+            background: var(--deep-blue);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card p {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .card strong {
+            color: var(--warm-red);
+        }
+
+        .code-inline {
+            background: #f0f0f0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--dark-purple);
+        }
+
+        .equation {
+            background: #f9f3ff;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid var(--dark-purple);
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+
+        .funny-box {
+            background: linear-gradient(135deg, var(--sunny) 0%, var(--orange) 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 2px dashed var(--warm-red);
+            color: var(--dark);
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .funny-box::before {
+            content: '😄 ';
+            font-size: 1.5rem;
+        }
+
+        .ai-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid var(--deep-blue);
+            font-size: 0.95rem;
+        }
+
+        .ai-box h4 {
+            color: var(--deep-blue);
+            margin-top: 0;
+        }
+
+        .connect-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid var(--forest);
+            font-size: 0.95rem;
+        }
+
+        .connect-box h4 {
+            color: var(--forest);
+            margin-top: 0;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, #fce4ec 0%, #fff3e0 100%);
+            border-left: 6px solid var(--pink);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--warm-red);
+            font-weight: 500;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 2.5rem;
+            opacity: 0.3;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-attribution {
+            text-align: right;
+            margin-top: 1rem;
+            font-style: normal;
+            font-size: 0.85rem;
+            color: var(--dark);
+        }
+
+        /* ===== STORY SPOTLIGHTS ===== */
+        .stories-section {
+            background: linear-gradient(135deg, #f5f7ff 0%, #fff5f7 100%);
+            padding: 4rem 2rem;
+        }
+
+        .stories-section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .story {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .story:hover {
+            transform: translateY(-5px);
+        }
+
+        .story-header {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--mint) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .story-header h3 {
+            color: white;
+            margin: 0;
+            font-size: 1.6rem;
+        }
+
+        .story-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .story-inner {
+            padding: 2rem;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .story-inner strong {
+            color: var(--teal);
+        }
+
+        /* ===== CHEATSHEET ===== */
+        .cheatsheet-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-purple) 100%);
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .cheatsheet-section h2 {
+            color: var(--sunny);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .cheatsheet {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .cheatsheet-inner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .cheatsheet-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--teal);
+        }
+
+        .cheatsheet-item h4 {
+            color: var(--sunny);
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+
+        .cheatsheet-item p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--teal);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cheatsheet-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .two-col {
+                flex-direction: column;
+            }
+        }
+
+        .two-col {
+            display: flex;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .two-col > * {
+            flex: 1;
+        }
+
+        .highlight {
+            background: var(--sunny);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+
+        /* ===== TABLE ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        th {
+            background: var(--deep-blue);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* ===== VISUAL SEPARATORS ===== */
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--teal), transparent);
+            margin: 3rem 0;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<section class="cover">
+    <div class="cover-inner">
+        <h1>Attention Is All You Need</h1>
+        <p class="subtitle">The Illustrated Guide to Transformers & the Architecture That Changed Everything</p>
+        <p class="meta">Vaswani et al. (2017) — Google Brain, University of Toronto, NIPS</p>
+
+        <div class="illustration-container">
+            <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Title -->
+                <text x="300" y="30" font-size="20" font-weight="bold" text-anchor="middle" fill="white">Transformer Architecture</text>
+
+                <!-- Input tokens -->
+                <circle cx="50" cy="100" r="20" fill="#FFE66D" opacity="0.9"/>
+                <circle cx="110" cy="100" r="20" fill="#FFE66D" opacity="0.9"/>
+                <circle cx="170" cy="100" r="20" fill="#FFE66D" opacity="0.9"/>
+                <text x="60" y="155" font-size="12" text-anchor="middle" fill="white">Input Tokens</text>
+
+                <!-- Query, Key, Value -->
+                <rect x="20" y="180" width="50" height="30" fill="#FF6B6B" rx="5" opacity="0.9"/>
+                <rect x="100" y="180" width="50" height="30" fill="#4ECDC4" rx="5" opacity="0.9"/>
+                <rect x="180" y="180" width="50" height="30" fill="#55EFC4" rx="5" opacity="0.9"/>
+                <text x="45" y="200" font-size="11" text-anchor="middle" fill="white" font-weight="bold">Query</text>
+                <text x="125" y="200" font-size="11" text-anchor="middle" fill="white" font-weight="bold">Key</text>
+                <text x="205" y="200" font-size="11" text-anchor="middle" fill="white" font-weight="bold">Value</text>
+
+                <!-- Attention computation arrows -->
+                <path d="M 75 210 Q 140 240 170 210" stroke="white" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                <path d="M 155 210 Q 200 240 230 210" stroke="white" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+                <!-- Attention weights -->
+                <circle cx="280" cy="200" r="15" fill="#A06CD5" opacity="0.9"/>
+                <text x="280" y="205" font-size="11" text-anchor="middle" fill="white" font-weight="bold">α</text>
+
+                <!-- Output -->
+                <rect x="380" y="180" width="60" height="30" fill="#74B9FF" rx="5" opacity="0.9"/>
+                <text x="410" y="200" font-size="11" text-anchor="middle" fill="white" font-weight="bold">Output</text>
+
+                <!-- Right side: Multi-head attention -->
+                <text x="500" y="50" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Multi-Head</text>
+                <text x="500" y="70" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Attention</text>
+
+                <rect x="450" y="90" width="35" height="35" fill="#FF6B6B" opacity="0.8" rx="3"/>
+                <rect x="495" y="90" width="35" height="35" fill="#FFE66D" opacity="0.8" rx="3"/>
+                <rect x="540" y="90" width="35" height="35" fill="#55EFC4" opacity="0.8" rx="3"/>
+
+                <text x="467" y="110" font-size="9" text-anchor="middle" fill="white" font-weight="bold">H1</text>
+                <text x="512" y="110" font-size="9" text-anchor="middle" fill="white" font-weight="bold">H2</text>
+                <text x="557" y="110" font-size="9" text-anchor="middle" fill="white" font-weight="bold">H3</text>
+
+                <path d="M 467 130 L 500 150" stroke="white" stroke-width="1.5"/>
+                <path d="M 512 130 L 500 150" stroke="white" stroke-width="1.5"/>
+                <path d="M 557 130 L 500 150" stroke="white" stroke-width="1.5"/>
+
+                <circle cx="500" cy="160" r="12" fill="#A06CD5" opacity="0.9"/>
+                <text x="500" y="165" font-size="9" text-anchor="middle" fill="white" font-weight="bold">Concat</text>
+
+                <!-- Flowing lines from input to output -->
+                <path d="M 110 120 Q 150 150 280 200" stroke="white" stroke-width="1" opacity="0.3" stroke-dasharray="5,5"/>
+                <path d="M 170 120 Q 250 150 340 190" stroke="white" stroke-width="1" opacity="0.3" stroke-dasharray="5,5"/>
+
+                <!-- Arrow marker -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                        <polygon points="0 0, 10 3, 0 6" fill="white"/>
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<!-- ===== LESSONS SECTION ===== -->
+<section class="lessons-section">
+    <div class="container">
+        <h2>The 12 Core Lessons: Understanding Transformers</h2>
+        <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 2rem;">
+            From the sequential bottleneck to the attention revolution—the ideas that shaped modern AI
+        </p>
+
+        <div class="lessons-grid">
+            <!-- LESSON 1 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div><span class="lesson-number">1</span><h3>Why RNNs Failed at Scale: The Sequential Bottleneck</h3></div>
+                </div>
+                <div class="lesson-inner">
+                    <p><strong>The Core Problem:</strong> Recurrent Neural Networks (RNNs, LSTMs, GRUs) process sequences <span class="highlight">one token at a time</span>, sequentially. This creates a fundamental bottleneck: token t can only be computed after token t-1 is fully processed. On long sequences, this becomes a training and inference nightmare.</p>
+
+                    <div class="card">
+                        <span class="card-label">Specifics</span>
+                        <p><strong>RNN Complexity:</strong> To process N tokens, minimum O(N) sequential steps required. Can't parallelize. A 1000-token sequence needs 1000 timesteps.</p>
+                        <p><strong>Vanishing Gradients:</strong> Errors propagate backward through 1000 timesteps → gradients shrink exponentially → forget long-range dependencies.</p>
+                        <p><strong>Real Benchmark (WMT14 Eng→Ger):</strong> BLEU scores plateaued around 28.4 with RNNs. Google's Neural Machine Translation by Attention (Bahdanau, 2015) added attention, reached 28.97.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Examples</span>
+                        <p>📝 <strong>Long Document Translation:</strong> Translating a 500-word legal contract—RNN struggles to "remember" early paragraphs when translating the end.</p>
+                        <p>🎯 <strong>Dependency Parsing:</strong> "The bank executive wearing the blue suit walked..." → "The" and "executive" are 4 tokens apart; RNN loses the connection through the LSTM state.</p>
+                        <p>⏱️ <strong>Training Speed:</strong> A 32-layer transformer trains in hours on GPU clusters. A 32-layer RNN? Days. Sequential dependency = no parallelization.</p>
+                    </div>
+
+                    <div class="funny-box">
+                        RNNs are like a gossip chain: if the first person whispers to the second, who whispers to the third... by token 100, the message is garbled. The sequential constraint is your bottleneck.
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 Modern Implications: Streaming & Efficiency</h4>
+                        <p><strong>Flash Attention:</strong> Today's optimization reduces transformer memory from O(N²) to O(N) via clever I/O awareness, but the RNN problem persists—sequential models can never match parallelism.</p>
+                        <p><strong>KV Cache:</strong> Transformers store previous keys/values to avoid recomputation; RNNs can't do this efficiently because hidden state is dense and low-rank.</p>
+                        <p><strong>Context Windows:</strong> GPT-4's 128K context would be <span class="highlight">impossible</span> with RNNs—training cost would explode quadratically.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>📚 Cross-Book Connection</h4>
+                        <p><strong>Deep Learning (Goodfellow et al.):</strong> Ch. 10 covers RNNs & sequences—the sequential backprop-through-time is elegant but limited.</p>
+                        <p><strong>Superintelligence (Bostrom):</strong> The scaling limit of sequential processing is a constraint on raw compute efficiency.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        The sequential nature of recurrence precludes parallelization within training examples, which becomes critical at longer sequence lengths, as memory constraints limit batching across examples.
+                        <span class="quote-attribution">— Vaswani et al. (2017)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 2 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div><span class="lesson-number">2</span><h3>Self-Attention: The Query-Key-Value Mechanism</h3></div>
+                </div>
+                <div class="lesson-inner">
+                    <p><strong>The Breakthrough:</strong> Instead of sequential processing, <span class="highlight">every token attends to every other token in parallel</span>. A token's representation is a weighted sum of all other tokens, where weights are learned dynamically.</p>
+
+                    <div class="card">
+                        <span class="card-label">The Math (Simplified)</span>
+                        <p><strong>Scaled Dot-Product Attention:</strong></p>
+                        <div class="equation">
+Attention(Q, K, V) = softmax(Q·K^T / √d_k) · V
+                        </div>
+                        <p>• <span class="code-inline">Q</span> (Query): "What am I looking for?"</p>
+                        <p>• <span class="code-inline">K</span> (Key): "What am I labeled as?"</p>
+                        <p>• <span class="code-inline">V</span> (Value): "Here's my information."</p>
+                        <p>• <span class="code-inline">√d_k</span>: Scaling factor (d_k = 64 by default) to stabilize gradients.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Intuition with Examples</span>
+                        <p>🗣️ <strong>Conversation:</strong> "What time is the meeting?" → Q attends to "time" and "meeting" (high attention) vs. "is" (low).</p>
+                        <p>🧩 <strong>Coreference:</strong> "Alice gave Bob a gift. He opened it." → "He" attends to "Bob" and "opened" attends to "gift".</p>
+                        <p>🎨 <strong>Image Regions:</strong> Pixel attends to nearby pixels (texture) and far pixels (object boundaries).</p>
+                    </div>
+
+                    <div class="funny-box">
+                        Attention is literally a popularity contest among tokens. "I" wants to know: "Who should I listen to?" Softmax is the voting mechanism—every other token gets a score, scaled to sum to 1.
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 Modern Implications: Sparse & Efficient Attention</h4>
+                        <p><strong>Sparse Attention:</strong> Full attention is O(N²) memory. BigBird, Longformer use local windows, strided patterns to reduce to O(N log N).</p>
+                        <p><strong>Flash Attention:</strong> Tiling + recomputation reduce I/O from 15× to 1× vs naive implementation. 2-10× speedup in practice.</p>
+                        <p><strong>Mixture of Experts (MoE):</strong> Instead of dense K, V, use sparse routing → only some "experts" attend. GShard (2021) scaled to 1.7T params.</p>
+                        <p><strong>Linear Attention:</strong> Kernel methods (FAVOR+, Performer) approximate softmax to O(N) time.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>📚 Cross-Book Connection</h4>
+                        <p><strong>GEB (Hofstadter):</strong> Symbols binding to symbols—Q/K/V are the mechanism by which a sequence can "refer to itself."</p>
+                        <p><strong>The Black Swan (Taleb):</strong> Attention weights capture how rare (high-attention) vs. common (low-attention) a token is in context.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.
+                        <span class="quote-attribution">— Vaswani et al. (2017), Abstract</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 3 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div><span class="lesson-number">3</span><h3>Multi-Head Attention: Attending to Different Subspaces</h3></div>
+                </div>
+                <div class="lesson-inner">
+                    <p><strong>Why One Head Isn't Enough:</strong> A single attention head learns one pattern (e.g., "find verbs"). With 8 or 16 heads, the model learns <span class="highlight">different aspects simultaneously</span>: syntax, semantics, coreference, long-range dependencies.</p>
+
+                    <div class="card">
+                        <span class="card-label">The Mechanism</span>
+                        <p><strong>Multi-Head Attention:</strong> Split hidden dimension (d_model = 512) into h heads (h = 8), each with d_k = 512/8 = 64.</p>
+                        <div class="equation">
+MultiHead(Q, K, V) = Concat(head_1, ..., head_8) · W^O
+where head_i = Attention(Q · W_i^Q, K · W_i^K, V · W_i^V)
+                        </div>
+                        <p>Each head projects into a smaller subspace → computes attention independently → concatenate → project back.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Real Examples of Head Specialization</span>
+                        <p>🧬 <strong>Head 1:</strong> Attends to previous token (bigram patterns). Used for predicting next word in language model.</p>
+                        <p>🎯 <strong>Head 2:</strong> Attends to subject and verb (long-range syntax). "The cat wearing the blue collar eats" → "eats" attends to "cat".</p>
+                        <p>🔗 <strong>Head 3:</strong> Coreference resolution. "Alice gave Bob a book. He read it." → "He" → "Bob", "it" → "book".</p>
+                        <p>🌐 <strong>Head 4:</strong> Positional—attends to tokens N positions away (fixed distance pattern).</p>
+                    </div>
+
+                    <div class="funny-box">
+                        Multi-head attention is like a committee: one member asks "Is this a noun?", another asks "Is this a verb?", a third asks "Who does this refer to?" All simultaneously. The final decision is the consensus.
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 Modern Implications: Grouped Query Attention</h4>
+                        <p><strong>GQA (Ainslie et al., 2023):</strong> Don't need 32 independent heads. Share K, V across multiple Q heads → 10× faster generation without quality loss (used in Llama 2).</p>
+                        <p><strong>Multi-Query Attention (MQA):</strong> Share K, V across ALL heads → even faster, slight quality trade-off. Used in PaLM, Falcon.</p>
+                        <p><strong>Cross-Attention in Diffusion:</strong> Image tokens attend to text embeddings via separate Q, shared K/V → computationally efficient image generation.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>📚 Cross-Book Connection</h4>
+                        <p><strong>Deep Learning (Goodfellow et al.):</strong> Feature learning at multiple scales—analogous to CNNs learning edges, textures, shapes.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        Multi-head attention allows the model to attend to information from different representation subspaces at different positions.
+                        <span class="quote-attribution">— Vaswani et al. (2017)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 4 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div><span class="lesson-number">4</span><h3>Positional Encoding: Giving Transformers a Sense of Order</h3></div>
+                </div>
+                <div class="lesson-inner">
+                    <p><strong>The Problem:</strong> Attention is <span class="highlight">permutation-invariant</span>. If you shuffle the tokens, the output doesn't change. But sequence order matters: "dog eats cat" ≠ "cat eats dog".</p>
+
+                    <div class="card">
+                        <span class="card-label">The Solution: Positional Encoding</span>
+                        <p><strong>Sine-Cosine Encoding:</strong> Add position-dependent signals to embeddings.</p>
+                        <div class="equation">
+PE(pos, 2i)   = sin(pos / 10000^(2i/d_model))
+PE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))
+                        </div>
+                        <p>• <span class="code-inline">pos</span> = position in sequence (0, 1, 2, ...)</p>
+                        <p>• <span class="code-inline">i</span> = dimension index</p>
+                        <p>• Each dimension oscillates at a different frequency.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Why Sine-Cosine?</span>
+                        <p>✅ <strong>Extrapolation:</strong> Can handle sequences longer than training data (unlike learnable embeddings).</p>
+                        <p>✅ <strong>Periodic Structure:</strong> Low frequencies capture distant relative positions; high frequencies capture local structure.</p>
+                        <p>✅ <strong>Uniqueness:</strong> Each position has a distinct encoding (not always true in practice, but "collision" is rare).</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Real Examples</span>
+                        <p>📍 <strong>Position 0:</strong> sin(0)=0, cos(0)=1 → clearly the start.</p>
+                        <p>📍 <strong>Position 1:</strong> sin(10000^{-2i/512}) ≠ sin(0) for most dimensions → distinct from position 0.</p>
+                        <p>📍 <strong>Relative Distance:</strong> PE(pos+k) and PE(pos) differ predictably → model learns "distance k" implicitly.</p>
+                    </div>
+
+                    <div class="funny-box">
+                        Positional encoding is basically telling the transformer: "Hey, here's a musical note that's unique to each position. Position 0 has a different pitch than position 1." It's like a metronome for sequences.
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 Modern Implications: Rotary Embeddings & RoPE</h4>
+                        <p><strong>RoPE (Su et al., 2021):</strong> Instead of adding PE, rotate Q/K vectors by angle θ = base^{-2i/d} · m. More geometrically elegant, better extrapolation.</p>
+                        <p><strong>ALiBi (Press et al., 2022):</strong> No learned/fixed PE at all—just add bias to attention logits based on distance. Simpler, extrapolates to 2048 tokens from 512 training.</p>
+                        <p><strong>Context Window Extension:</strong> RoPE enables Llama 2's 4K→10K context. Dynamic scaling (interpolation) pushes to 32K or 100K (Yi-34B).</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>📚 Cross-Book Connection</h4>
+                        <p><strong>GEB (Hofstadter):</strong> Tangled Hierarchies—positions are self-referential encodings of themselves.</p>
+                        <p><strong>Deep Learning:</strong> Invariance & Equivariance—positional encoding breaks permutation invariance in a controlled way.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        Since our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence.
+                        <span class="quote-attribution">— Vaswani et al. (2017)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 5 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div><span class="lesson-number">5</span><h3>Encoder-Decoder Architecture: Seq2Seq with Attention</h3></div>
+                </div>
+                <div class="lesson-inner">
+                    <p><strong>The Design:</strong> Transformers are built as Encoder → Decoder, mirroring the seq2seq paradigm. Encoder reads input, produces representations. Decoder generates output token-by-token, attending to encoder outputs.</p>
+
+                    <div class="card">
+                        <span class="card-label">Architecture Breakdown</span>
+                        <p><strong>Encoder (N=6 layers):</strong></p>
+                        <p>• Multi-head self-attention (attends to input sequence)</p>
+                        <p>• Feed-forward network (2-layer MLP with ReLU)</p>
+                        <p>• Residual connections + layer norm</p>
+                        <p></p>
+                        <p><strong>Decoder (N=6 layers):</strong></p>
+                        <p>• Masked multi-head self-attention (can't attend to future tokens)</p>
+                        <p>• Multi-head cross-attention to encoder outputs</p>
+                        <p>• Feed-forward network</p>
+                        <p>• Residual connections + layer norm</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Key Insight: Masked Attention in Decoder</span>
+                        <p><strong>Why Mask?</strong> During training, the decoder shouldn't "cheat" by looking at future output tokens. Set attention weights to 0 for positions > current position.</p>
+                        <div class="equation">
+Attention(Q, K, V)_masked = softmax(Q·K^T / √d_k + mask) · V
+where mask = -∞ for future positions
+                        </div>
+                        <p>This ensures autoregressive generation: predict token 1 from encoder, then token 2 from token 1, etc.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Real Application: Neural Machine Translation</span>
+                        <p>🌍 <strong>English → German:</strong> Encoder reads "The cat is on the mat", produces dense representations. Decoder generates "Die Katze sitzt auf der Matte" one token at a time, attending to the English context at each step.</p>
+                        <p>🎯 <strong>Cross-Attention Flow:</strong> "Katze" (token 2) attends heavily to "cat" in encoder, less to "The" or "mat".</p>
+                        <p>📊 <strong>WMT14 Benchmark (2017):</strong> This architecture scored 28.4 BLEU on Eng→De, 41.8 on Eng→Fr—SOTA at the time.</p>
+                    </div>
+
+                    <div class="funny-box">
+                        The decoder is like a student taking a test: can see the problem (encoder output) but can't peek at the answer key (future tokens). This honesty during training ensures it learns to genuinely understand.
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 Modern Implications: Decoder-Only Models</h4>
+                        <p><strong>GPT Architecture:</strong> Removed encoder, use only decoder with masked self-attention. More efficient for left-to-right generation (language modeling, code generation).</p>
+                        <p><strong>Encoder-Only (BERT):</strong> No decoder, bidirectional attention (no masking). Great for classification, but not for generation.</p>
+                        <p><strong>Prefix-Tuning & Prompt Tuning:</strong> Encoder outputs become "prompts"—frozen context prepended to decoder. Efficient fine-tuning.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>📚 Cross-Book Connection</h4>
+                        <p><strong>Deep Learning:</strong> Seq2seq with attention predates transformers—but transformers scale it to new heights.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        Encoder and decoder both consist of a stack of N=6 identical layers. Each layer has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, position-wise fully connected feed-forward network.
+                        <span class="quote-attribution">— Vaswani et al. (2017)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 6 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div><span class="lesson-number">6</span><h3>Layer Normalization & Residual Connections: Stability & Depth</h3></div>
+                </div>
+                <div class="lesson-inner">
+                    <p><strong>The Challenge:</strong> Training deep networks (6+ layers of attention + FFN) causes gradient flow problems: exploding/vanishing gradients, internal covariate shift (distribution shift).</p>
+
+                    <div class="card">
+                        <span class="card-label">Two Key Techniques</span>
+                        <p><strong>1. Residual Connections (Skip Connections):</strong></p>
+                        <div class="equation">
+Output = SubLayer(x) + x
+                        </div>
+                        <p>Don't replace x; add the computed change. Helps gradient flow—∂Output/∂x includes direct path.</p>
+                        <p></p>
+                        <p><strong>2. Layer Normalization (LayerNorm):</strong></p>
+                        <div class="equation">
+LayerNorm(x) = γ · (x - μ) / √(σ² + ε) + β
+where μ, σ computed per example (not per batch)
+                        </div>
+                        <p>Normalize each token's features to mean 0, std 1. Learnable γ, β restore expressiveness. Stabilizes training without batch statistics.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Why This Matters</span>
+                        <p>✅ <strong>Gradient Flow:</strong> Residual paths allow gradients to flow unimpeded through 6+ layers. Enables training of very deep models.</p>
+                        <p>✅ <strong>Stability:</strong> LayerNorm prevents hidden activations from exploding—each layer operates on normalized inputs.</p>
+                        <p>✅ <strong>Warmup:</strong> Even with these tricks, need learning rate warmup (gradually increase LR)—prevents initial instability.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Real Numbers</span>
+                        <p>🏗️ <strong>Without Residuals:</strong> Loss plateaus or diverges after 3-4 layers.</p>
+                        <p>🏗️ <strong>With Residuals:</strong> Can train 48-layer transformers (T5, GPT-3 backbone).</p>
+                        <p>🏗️ <strong>LayerNorm vs BatchNorm:</strong> LayerNorm works for variable sequence lengths; BatchNorm requires fixed sequence length.</p>
+                    </div>
+
+                    <div class="funny-box">
+                        Residual connections are like a safety net: "If this layer messes up, we still have x to fall back on." LayerNorm is the normalizing parent: "Now, let's all take a deep breath and reset to a sane scale."
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 Modern Implications: Pre-Norm vs Post-Norm</h4>
+                        <p><strong>Post-Norm (Vaswani 2017):</strong> Norm applied after residual → can be unstable for very deep models.</p>
+                        <p><strong>Pre-Norm (Xiong et al., 2020):</strong> Norm applied before sublayer → gradient norm stays stable. Enables 100+ layer transformers without special warmup.</p>
+                        <p><strong>RMSNorm (Zhang & Srivastava, 2023):</strong> Simpler (remove mean)—less computation, same stability. Used in Llama.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>📚 Cross-Book Connection</h4>
+                        <p><strong>Deep Learning (Goodfellow et al.):</strong> Ch. 8 on optimization—residuals & normalization are crucial for training very deep networks.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        We employ a residual connection around each of the two sub-layers, followed by layer normalization.
+                        <span class="quote-attribution">— Vaswani et al. (2017)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 7 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div><span class="lesson-number">7</span><h3>The Feed-Forward Network: Expanding & Filtering</h3></div>
+                </div>
+                <div class="lesson-inner">
+                    <p><strong>Often Overlooked:</strong> Between self-attention heads, there's a simple 2-layer MLP: expand to 4× dimension, apply ReLU, project back. This <span class="highlight">applies per-token</span> (position-wise).</p>
+
+                    <div class="card">
+                        <span class="card-label">The Architecture</span>
+                        <div class="equation">
+FFN(x) = max(0, x·W_1 + b_1)·W_2 + b_2
+where W_1: d_model → 4·d_model (512 → 2048)
+      W_2: 4·d_model → d_model (2048 → 512)
+                        </div>
+                        <p>This is applied <strong>identically</strong> to each token in the sequence. Hence "position-wise."</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Why 4× Expansion?</span>
+                        <p>📈 <strong>Empirically Best:</strong> Expansion ratio of 3-4 works well across architectures. Provides internal representation space for non-linear reasoning.</p>
+                        <p>🧠 <strong>Capacity:</strong> Attention is good at routing (which token to attend to); FFN is good at feature engineering per token.</p>
+                        <p>⚙️ <strong>Gating Mechanism:</strong> ReLU acts as a soft gate—some dimensions pass, others are zeroed. Creates sparse activation patterns.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Modern Variants</span>
+                        <p>🔴 <strong>ReLU (Original):</strong> max(0, x). Simple, works well.</p>
+                        <p>🟢 <strong>GELU (Gaussian Error Linear Unit):</strong> x·Φ(x) where Φ is CDF of standard normal. Smoother, used in BERT/GPT.</p>
+                        <p>🟣 <strong>SwiGLU (Shazeer, 2020):</strong> Split W_1 output into x and gate: (x ⊗ σ(gate))·W_2. More efficient (same quality at lower dim).</p>
+                    </div>
+
+                    <div class="funny-box">
+                        The FFN is the transformer's "thought process": attention gathers information, FFN ponders it deeply. Expand to 2048 hidden dimensions, apply ReLU (thinking), project back down (consolidate insights).
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 Modern Implications: Expert Mixing & Pruning</h4>
+                        <p><strong>Mixture of Experts (MoE):</strong> Instead of one FFN, route each token to sparse set of "experts" → massive parameter scaling with constant compute (GShard, Switch Transformers).</p>
+                        <p><strong>Pruning:</strong> Many FFN weights are inactive—prune them post-training → 50% parameter reduction with minimal quality loss.</p>
+                        <p><strong>Low-Rank Factorization:</strong> Decompose FFN as W ≈ U·V where U/V are much smaller—efficient fine-tuning (LoRA).</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>📚 Cross-Book Connection</h4>
+                        <p><strong>Deep Learning:</strong> MLPs as universal function approximators—but applied position-wise, not globally.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        The feed-forward network consists of two linear transformations with a ReLU activation in between.
+                        <span class="quote-attribution">— Vaswani et al. (2017)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 8 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div><span class="lesson-number">8</span><h3>Training Regime: WMT, BLEU Scores & Optimization</h3></div>
+                </div>
+                <div class="lesson-inner">
+                    <p><strong>Experimental Setup:</strong> Vaswani et al. trained transformers on WMT 2014 machine translation tasks (Eng→De, Eng→Fr). Used Adam optimizer with custom learning rate schedule.</p>
+
+                    <div class="card">
+                        <span class="card-label">Key Details</span>
+                        <p><strong>Dataset:</strong> WMT 2014 English-German: 4.5M sentence pairs, ~100M tokens. English-French: 36M pairs, ~900M tokens.</p>
+                        <p><strong>Evaluation Metric:</strong> <span class="code-inline">BLEU</span> (Bilingual Evaluation Understudy)—n-gram precision + brevity penalty. Range 0-100; higher is better.</p>
+                        <div class="equation">
+BLEU = BP · exp(Σ_n w_n · log p_n)
+where p_n = overlap of n-grams with reference
+      BP = brevity penalty (penalize short outputs)
+      w_n = weights (usually uniform)
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Optimization Tricks</span>
+                        <p><strong>1. Custom Learning Rate Schedule:</strong></p>
+                        <div class="equation">
+lr = d_model^{-0.5} · min(step^{-0.5}, step · warmup_steps^{-1.5})
+                        </div>
+                        <p>Increase LR linearly for warmup_steps (4000), then decrease inversely with √step. This is crucial for stability.</p>
+                        <p></p>
+                        <p><strong>2. Label Smoothing (ε=0.1):</strong> Don't assign 100% probability to target token; smooth with 10% uniform probability. Regularizes, prevents overconfidence.</p>
+                        <p></p>
+                        <p><strong>3. Dropout (rate=0.1):</strong> Applied to embeddings, attention weights, FFN outputs. Prevents overfitting.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Results (BLEU Scores)</span>
+                        <p>📊 <strong>Transformer (Big):</strong> Eng→De 28.4, Eng→Fr 41.8</p>
+                        <p>📊 <strong>Previous SOTA (RNN+Attention):</strong> Eng→De 28.2, Eng→Fr 40.5</p>
+                        <p>📊 <strong>Beam Search (k=4):</strong> Slight improvement over greedy decoding (28.4→28.5 for small models).</p>
+                        <p>✅ <strong>Training Speed:</strong> Transformer (Big) trained on 8 GPUs in 3.5 days. RNN baseline: 1 week.</p>
+                    </div>
+
+                    <div class="funny-box">
+                        The custom learning rate schedule is like easing into a warm bath: start slow (warmup), then gradually decrease intensity as you soak. Too fast, and you shock the system; too slow, and you never optimize.
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 Modern Training Practices</h4>
+                        <p><strong>Gradient Accumulation:</strong> Simulate larger batch sizes by accumulating gradients over multiple steps (essential for large models).</p>
+                        <p><strong>Mixed Precision (FP16/BF16):</strong> Compute in lower precision, store activations in higher precision → 2× memory savings, faster training (Nvidia Apex, PyTorch AMP).</p>
+                        <p><strong>Distributed Training:</strong> Data parallelism (DistributedDataParallel), model parallelism (tensor parallelism, pipeline parallelism) for 100B+ models.</p>
+                        <p><strong>Synthetic Gradients:</strong> Predict gradients early to hide communication latency (Google's recent work).</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>📚 Cross-Book Connection</h4>
+                        <p><strong>Deep Learning (Ch. 11):</strong> Optimization algorithms, learning rate schedules, regularization techniques—all essential for training transformers.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        We used the Adam optimizer with β_1 = 0.9, β_2 = 0.98 and ε = 10^{-9}. We varied the learning rate over the course of training, according to the formula...
+                        <span class="quote-attribution">— Vaswani et al. (2017), Section 5.3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 9 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div><span class="lesson-number">9</span><h3>Scaling Laws: More Parameters = Better Performance</h3></div>
+                </div>
+                <div class="lesson-inner">
+                    <p><strong>Empirical Observation:</strong> Transformer quality (BLEU, perplexity, downstream accuracy) improves with more parameters, more compute, more data—following a smooth power law.</p>
+
+                    <div class="card">
+                        <span class="card-label">Chinchilla Scaling (2022)</span>
+                        <p>Hoffman et al. found optimal allocation: training loss follows</p>
+                        <div class="equation">
+Loss(N, D) = E + A·N^{-α} + B·D^{-β}
+where N = parameters, D = tokens, α ≈ β ≈ 0.07
+                        </div>
+                        <p>For compute budget C ≈ N·D, optimal is N ≈ D ≈ √C (compute-optimal is when parameters and tokens are balanced).</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Scaling Ratios (Empirical)</span>
+                        <p>📈 <strong>Model Size:</strong> 10M → 100M → 1B → 10B → 100B → 1T parameters</p>
+                        <p>📈 <strong>Training Data:</strong> ~20 tokens per parameter is compute-optimal (Chinchilla). GPT-3 used ~300 tokens/param (slightly undertrained on compute).</p>
+                        <p>📈 <strong>BLEU Gains:</strong> WMT14 Eng→De: 25.0 (small) → 26.5 → 27.5 → 28.4 (big transformer)</p>
+                        <p>📈 <strong>Perplexity:</strong> WikiText-103: RNN+LM (46) → Transformer-XL (24) → GPT-2 (17) → GPT-3 (10) → GPT-3.5 (6)</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">The Long Tail of Improvements</span>
+                        <p>🎯 <strong>Laws Scale Smoothly:</strong> No magic threshold—10× compute → ~1-2 point BLEU improvement, consistently.</p>
+                        <p>🎯 <strong>Emergent Abilities:</strong> Large models suddenly exhibit abilities not seen in smaller ones (in-context learning, reasoning). May be due to data composition, not magic.</p>
+                        <p>🎯 <strong>Generalization:</strong> Larger models, when trained on diverse data, generalize better to unseen tasks.</p>
+                    </div>
+
+                    <div class="funny-box">
+                        Scaling laws are the economist's dream: "If we spend 10× more on compute, we're guaranteed to be ~2 points better." It's not always true (depends on data quality, training details), but it's a remarkably reliable heuristic.
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 Modern Scaling: From GPT-3 to GPT-4</h4>
+                        <p><strong>GPT-3 (2020):</strong> 175B parameters, ~300B tokens training data (compute-suboptimal).</p>
+                        <p><strong>PaLM (2022):</strong> 540B parameters, ~780B tokens (closer to Chinchilla optimal).</p>
+                        <p><strong>GPT-4 (2023):</strong> Estimated 1-1.8T parameters (rumors), trained on massive curated data. Not officially disclosed.</p>
+                        <p><strong>Mixture of Experts (MoE):</strong> Switch Transformers (1.6T params, 128K experts)—10-100× more parameters with constant compute via sparse routing.</p>
+                        <p><strong>Efficiency Frontier:</strong> TinyLlama (1.1B), Mistral 7B prove that <span class="highlight">smart data</span> + <span class="highlight">training recipes</span> matter as much as model size.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>📚 Cross-Book Connection</h4>
+                        <p><strong>Superintelligence (Bostrom):</strong> Scaling laws underpin the argument for explosive growth in AI capabilities.</p>
+                        <p><strong>The Black Swan:</strong> Scaling is a hidden tail risk—exponential improvements in rare capabilities (reasoning, code generation).</p>
+                    </div>
+
+                    <div class="quote-box">
+                        We also noticed that the power-law relationship between model size and performance extends far beyond the scales tested here, suggesting that scaling up is a viable path to continued improvements.
+                        <span class="quote-attribution">— Kaplan et al. (2020), "Scaling Laws for Neural Language Models"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 10 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div><span class="lesson-number">10</span><h3>Attention Head Specialization: What Each Head Learns</h3></div>
+                </div>
+                <div class="lesson-inner">
+                    <p><strong>The Question:</strong> We said multi-head attention learns different patterns. But what exactly? Researchers have dissected attention weights to find interpretable heads.</p>
+
+                    <div class="card">
+                        <span class="card-label">Empirical Head Roles (from analysis)</span>
+                        <p>🔗 <strong>Positional Heads:</strong> Attend to tokens at fixed distances (e.g., "always attend to previous token"). Used for bigram patterns, tense agreement.</p>
+                        <p>🎯 <strong>Coreference Heads:</strong> Link pronouns to their referents. "The bank executive... He..." → "He" heavily attends to "executive".</p>
+                        <p>🔑 <strong>Syntax Heads:</strong> Capture grammatical structure. Verbs attend to subjects/objects; adjectives to nouns.</p>
+                        <p>🌐 <strong>Semantic Heads:</strong> Word sense disambiguation. "Bank" (river) vs "bank" (financial) attend to different context words.</p>
+                        <p>🎨 <strong>Rare Token Heads:</strong> Attend to rare/important tokens (punctuation, numbers). Low entropy attention pattern.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Concrete Example: BERT Attention Patterns</span>
+                        <p><strong>Sentence:</strong> "The cat sat on the mat, watching the dog run."</p>
+                        <p></p>
+                        <p><strong>Head 1 (Positional):</strong> "sat" → [on, mat, watching] (distance=1-3)</p>
+                        <p><strong>Head 2 (Syntax):</strong> "sat" → "cat" (subject), "mat" (object)</p>
+                        <p><strong>Head 3 (Semantics):</strong> "dog" → "cat" (related animals), "run" (related action)</p>
+                        <p><strong>Head 4 (Punctuation):</strong> "," → [cat, sat, watching] (nearby meaningful tokens)</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Redundancy & Pruning</span>
+                        <p>⚠️ <strong>Problem:</strong> Many heads are <strong>redundant</strong>. Some heads barely attend anywhere (uniform distribution).</p>
+                        <p>✅ <strong>Solution:</strong> Attention head pruning. Remove low-importance heads → 50% parameter reduction, <1% quality loss (Michel et al., 2019).</p>
+                        <p>✅ <strong>Practical:</strong> Grouped Query Attention (GQA) shares K/V across 2-4 heads, reduces cache size 4× without quality loss.</p>
+                    </div>
+
+                    <div class="funny-box">
+                        Some attention heads are like chatty colleagues at a meeting: they talk a lot but say nothing useful. Pruning removes them. Other heads are like the quiet, attentive colleague who speaks rarely but always says something important.
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 Modern Insights: Interpretability & Mechanistic Understanding</h4>
+                        <p><strong>Mechanistic Interpretability:</strong> Understanding transformers neuron-by-neuron (Anthropic, et al.). Found that some neurons detect specific tokens, others track position, others reason about syntax.</p>
+                        <p><strong>Attention as Feature Router:</strong> Attention isn't just selecting—it's <span class="highlight">routing information</span> based on similarity. This is a form of content-based memory.</p>
+                        <p><strong>Circuits:</strong> Composed of "circuits"—pathways through the network. E.g., detecting indirect object pronouns involves specific heads and neurons working in concert.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>📚 Cross-Book Connection</h4>
+                        <p><strong>GEB (Hofstadter):</strong> Formal systems & symbol grounding—how do attention heads ground abstract tokens to meaning?</p>
+                        <p><strong>Deep Learning:</strong> Feature learning at multiple scales; interpretability as a key frontier.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        We observe that different heads specialize in different aspects of sequence structure, suggesting that the model learns to perform different types of analysis.
+                        <span class="quote-attribution">— Clark et al. (2019), "What does BERT look at? An Analysis of BERT's Attention"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 11 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div><span class="lesson-number">11</span><h3>BERT vs GPT: Encoder-Only vs Decoder-Only & The Fork in the Road</h3></div>
+                </div>
+                <div class="lesson-inner">
+                    <p><strong>The Split:</strong> Transformers can be configured two ways: BERT (bidirectional encoder) for understanding, GPT (unidirectional decoder) for generation. Different tasks, different architectures.</p>
+
+                    <div class="card">
+                        <span class="card-label">BERT (Encoder-Only) — Devlin et al., 2019</span>
+                        <p><strong>Architecture:</strong> Stack of transformer encoders. No decoder. Each token attends to <strong>all other tokens</strong> (bidirectional).</p>
+                        <p><strong>Training:</strong> Masked Language Model (MLM)—mask 15% of tokens, predict them. Also Next Sentence Prediction (NSP).</p>
+                        <p><strong>Strengths:</strong> Great for classification, tagging, similarity. Fast inference (one forward pass).</p>
+                        <p><strong>Weakness:</strong> Can't generate text naturally (would need left-to-right generation, but trained bidirectionally).</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">GPT (Decoder-Only) — Radford et al., 2018-2023</span>
+                        <p><strong>Architecture:</strong> Stack of transformer decoders. Each token attends only to <strong>previous tokens</strong> (causal/autoregressive).</p>
+                        <p><strong>Training:</strong> Language model objective—predict next token. Unsupervised, on massive text corpus.</p>
+                        <p><strong>Strengths:</strong> Natural text generation, few-shot learning, in-context learning (GPT-3+).</p>
+                        <p><strong>Weakness:</strong> Can't see ahead, less efficient for some tasks (e.g., should "The cat" be singular or plural? Need full sentence context).</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Comparison Table</span>
+                        <table>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>BERT (Encoder)</th>
+                                <th>GPT (Decoder)</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Attention</strong></td>
+                                <td>Bidirectional (no mask)</td>
+                                <td>Causal (masked future)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Best for</strong></td>
+                                <td>Classification, tagging, NLU</td>
+                                <td>Generation, LM, reasoning</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Training Data</strong></td>
+                                <td>Curated (Books, Wiki)</td>
+                                <td>Internet-scale (web crawls)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Typical Size</strong></td>
+                                <td>110M–340M (BERT-base, BERT-large)</td>
+                                <td>125M–175B+ (GPT-2 to GPT-3)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Downstream</strong></td>
+                                <td>Fine-tune on task</td>
+                                <td>Few-shot prompting or fine-tune</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="funny-box">
+                        BERT is like someone with full context of a conversation, predicting missing words perfectly. GPT is like someone reading left-to-right, predicting the next word without spoilers. Both are reading, but with different perspectives.
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 Modern Variants: The Zoo of Architectures</h4>
+                        <p><strong>T5 (Encoder-Decoder):</strong> Back to the original transformer design. Treats all NLP as "text-to-text"—even classification is "classify this sentence: [input]" → "positive/negative".</p>
+                        <p><strong>ELECTRA:</strong> More efficient pre-training (replaced-token detection vs masked prediction).</p>
+                        <p><strong>RoBERTa:</strong> Better BERT training (more data, longer training).</p>
+                        <p><strong>Llama/Mistral/Qwen (Decoder):</strong> Modern open-source alternatives to GPT, often trained on higher-quality data (lower compute than GPT-3).</p>
+                        <p><strong>Vision Transformers (ViT):</strong> Apply transformers to images—patch embeddings instead of tokens.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>📚 Cross-Book Connection</h4>
+                        <p><strong>Deep Learning:</strong> Understanding vs generation—fundamental trade-off in neural networks.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        BERT is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers.
+                        <span class="quote-attribution">— Devlin et al. (2019), "BERT: Pre-training of Deep Bidirectional Transformers"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 12 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div><span class="lesson-number">12</span><h3>From Transformers to ChatGPT: The Lineage & Impact on Everything</h3></div>
+                </div>
+                <div class="lesson-inner">
+                    <p><strong>The Timeline:</strong> 2017 Transformer → 2018 GPT → 2019 BERT → 2020 GPT-3 → 2022 ChatGPT → 2023-2024 GPT-4, Llama 2, Gemini, Claude. And that's just language models.</p>
+
+                    <div class="card">
+                        <span class="card-label">Lineage of Modern AI</span>
+                        <p>🌳 <strong>Trunk:</strong> Vaswani et al. (2017) Transformer</p>
+                        <p>🌿 <strong>Branch 1 (GPT Series):</strong> GPT (2018, 117M) → GPT-2 (2019, 1.5B) → GPT-3 (2020, 175B) → GPT-3.5 (2022, ~175B optimized) → GPT-4 (2023, 1T+ rumored)</p>
+                        <p>🌿 <strong>Branch 2 (BERT Series):</strong> BERT (2019, 110M-340M) → RoBERTa → ELECTRA → Custom domain BERTs</p>
+                        <p>🌿 <strong>Branch 3 (T5):</strong> Unified encoder-decoder for all NLP tasks.</p>
+                        <p>🌿 <strong>Branch 4 (Decoder-Only Open):</strong> Llama (2023, 7B-65B) → Llama 2 (2023, improved) → Mistral (2023, 7B efficient) → Qwen, Falcon, etc.</p>
+                        <p>🌿 <strong>Branch 5 (Vision):</strong> Vision Transformers (ViT, 2021) → DALL-E (transformer for images) → Diffusion + Transformers (Imagen, Parti)</p>
+                        <p>🌿 <strong>Branch 6 (Protein):</strong> AlphaFold 2 (2020)—transformers for protein structure prediction (won Nobel consideration)</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Key Innovations (Post-2017)</span>
+                        <p>🔵 <strong>In-Context Learning (Prompt Engineering):</strong> GPT-3 showed that large models can do tasks just from examples in the prompt (no fine-tuning).</p>
+                        <p>🔵 <strong>Instruction Tuning:</strong> Fine-tune on task descriptions (FLAN, InstructGPT). ChatGPT used this + RLHF (Reinforcement Learning from Human Feedback).</p>
+                        <p>🔵 <strong>RLHF (InstructGPT, 2022):</strong> Train reward model on human preferences, fine-tune with PPO (Proximal Policy Optimization). Crucial for ChatGPT safety.</p>
+                        <p>🔵 <strong>Mixture of Experts (2021+):</strong> Switch Transformers, GShard scale to 1.6T parameters with 10× better efficiency.</p>
+                        <p>🔵 <strong>Scaling Laws:</strong> Chinchilla (2022) showed optimal compute allocation—influences all major labs' training strategies.</p>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-label">Why Transformers Conquered the World</span>
+                        <p>✅ <strong>Parallelizable:</strong> Train on massive TPU clusters. RNNs can't.</p>
+                        <p>✅ <strong>Scalable:</strong> Scaling laws are smooth. More compute → predictably better performance.</p>
+                        <p>✅ <strong>Versatile:</strong> Same architecture for NLP, vision, protein folding, code generation, music.</p>
+                        <p>✅ <strong>Interpretable (Relatively):</strong> Attention weights are human-readable. RNNs are black boxes.</p>
+                        <p>✅ <strong>Pre-training Friendly:</strong> Self-supervised objectives (MLM, next token prediction) work great on unlabeled data.</p>
+                    </div>
+
+                    <div class="funny-box">
+                        Before transformers, every domain had specialized architectures (CNNs for vision, RNNs for sequences, etc.). After transformers, every domain asked: "But what if we just used transformers?" And it worked. Every time.
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>🤖 Implications for AI's Future</h4>
+                        <p><strong>Multimodal:</strong> GPT-4V (vision + text), LLaVA, etc. Use same transformer backbone for images and text.</p>
+                        <p><strong>Reasoning:</strong> Chain-of-Thought prompting, tree-of-thought—transformers can't "reason" natively, but prompting tricks elicit reasoning-like behavior.</p>
+                        <p><strong>Alignment & Safety:</strong> RLHF, Constitutional AI (Claude's approach), mechanistic interpretability—all post-transformer innovations trying to make them safer.</p>
+                        <p><strong>Efficiency Frontier:</strong> Modern research focuses on <span class="highlight">doing more with less</span>—distillation (knowledge transfer), quantization (lower precision), pruning, efficient architectures (Mobileformer).</p>
+                        <p><strong>Long Context:</strong> Handling 100K+ tokens (Llama 2, Gemini Pro 1M) via rotary embeddings, sparse attention, KV cache optimizations.</p>
+                        <p><strong>Speculative Decoding:</strong> Use smaller "draft" transformer to predict next tokens, verify with large model → 2-3× faster generation.</p>
+                    </div>
+
+                    <div class="connect-box">
+                        <h4>📚 Cross-Book Connection</h4>
+                        <p><strong>Superintelligence (Bostrom):</strong> Transformers are the substrate of modern AI capabilities. Their scaling properties drive the "intelligence explosion" thesis.</p>
+                        <p><strong>The Black Swan (Taleb):</strong> Transformer's emergence was a black swan event—nobody predicted it would be so general-purpose, so scalable.</p>
+                        <p><strong>GEB (Hofstadter):</strong> Self-reference & recursion—transformers are recursive processors, mirroring minds and symbols.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        The Transformer has become the de facto standard architecture for large-scale language modeling, with massive models like GPT-3 achieving remarkable few-shot learning abilities and setting new benchmarks across NLP tasks.
+                        <span class="quote-attribution">— Wei et al. (2022), "Emergent Abilities of Large Language Models"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== STORY SPOTLIGHTS ===== -->
+<section class="stories-section">
+    <div class="container">
+        <h2>Story Spotlights: The Human Behind the Paper</h2>
+
+        <div class="stories-grid">
+            <!-- STORY 1 -->
+            <div class="story">
+                <div class="story-header">
+                    <div class="story-icon">🧠</div>
+                    <h3>Google Brain Dynamics: Collaboration Across Continents</h3>
+                </div>
+                <div class="story-inner">
+                    <p><strong>The Team:</strong> Eight authors, diverse affiliations. Ashish Vaswani (Google Brain), Noam Shazeer (Google Brain), Parmar, Parikh (Google Brain)—plus Illia Polosukhin, Jakob Uszkoreit, Aidan Gomez, Lukasz Kaiser (University of Toronto, Google).</p>
+                    <p><strong>The Tension:</strong> Recurrent networks were dogma. The idea of "just attention" sounded naive. But Vaswani pushed: "Attention mechanisms are already doing most of the work. What if that's all we need?"</p>
+                    <p><strong>The Breakthrough:</strong> Attention Is All You Need was rejected at top venues initially. Reviewers: "Where's the novelty? Attention + normalization + FFN = just plumbing." But the empirical results spoke louder than theory.</p>
+                    <p><strong>The Impact:</strong> Published at NIPS 2017 (now NeurIPS). Within 2 years, 1000+ citations. Today, 100,000+ citations. Every major AI lab in the world is built on this paper.</p>
+                    <p><strong>Human Element:</strong> The paper's success wasn't predetermined. It required boldness (discarding recurrence entirely), empirical rigor (careful ablations), and luck (timing with GPU/TPU availability). Science is people.</p>
+                </div>
+            </div>
+
+            <!-- STORY 2 -->
+            <div class="story">
+                <div class="story-header">
+                    <div class="story-icon">✨</div>
+                    <h3>"Attention Is All You Need": The Title That Changed History</h3>
+                </div>
+                <div class="story-inner">
+                    <p><strong>The Original Title:</strong> "Sequence-to-Sequence Learning with Transformer Networks" (working title, boring). But in the final draft: "Attention Is All You Need."</p>
+                    <p><strong>Why Bold:</strong> It's a provocative claim. Not "Attention Is Useful." Not "Attention Improves RNNs." But "Is All You Need"—meaning recurrence, convolution, all previous paradigms, are unnecessary.</p>
+                    <p><strong>The Irony:</strong> The title was almost rejected. Reviewers: "Too cheeky. Too provocative for a top venue." But Vaswani team kept it. It became the most memorable part of the paper—and arguably, AI history.</p>
+                    <p><strong>Predictions from the Title:</strong> If someone in 2017 told you "The future of AI is based on a paper titled 'Attention Is All You Need,' not 'Transformers,' not 'Scaled Training'," you'd think they were overselling. But they were undersellingit.</p>
+                    <p><strong>Lesson:</strong> Sometimes the best title is the boldest one. It captures the core insight in a sentence that echoes through history.</p>
+                </div>
+            </div>
+
+            <!-- STORY 3 -->
+            <div class="story">
+                <div class="story-header">
+                    <div class="story-icon">🚀</div>
+                    <h3>The Aftermath: BERT, GPT, and the AI Explosion</h3>
+                </div>
+                <div class="story-inner">
+                    <p><strong>2018-2019 (Birth of GPT & BERT):</strong> Within a year, two teams independently realized the transformer's power. OpenAI published GPT (left-to-right decoder). Google published BERT (bidirectional encoder). Both became instant classics.</p>
+                    <p><strong>The Race Begins:</strong> Google had BERT first, but OpenAI iterated faster. GPT-2 (2019, 1.5B) showed shocking few-shot learning. Suddenly, "prompting" became a strategy.</p>
+                    <p><strong>GPT-3 Moment (2020):</strong> 175B parameters. In-context learning. The paper's examples went viral—few-shot translation, few-shot code generation. "Is AI about to explode?" became a mainstream question.</p>
+                    <p><strong>ChatGPT (2022):</strong> OpenAI applied RLHF to GPT-3.5, released ChatGPT. 1M users in 5 days. Suddenly, everyone had access to a transformer. The world noticed.</p>
+                    <p><strong>Domino Effect:</strong> Google: Bard. Meta: LLaMA (open-sourced). Anthropic: Claude. Microsoft/OpenAI: GPT-4. Every company scrambling to train transformers. All because of one 2017 paper.</p>
+                    <p><strong>The Implication:</strong> Transformers unlocked a scaling regime that nobody predicted. More compute → better performance, with no ceiling in sight. This was the spark for AI's current explosion.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== CHEATSHEET ===== -->
+<section class="cheatsheet-section">
+    <div class="container">
+        <h2>Quick Reference: Transformer Cheatsheet</h2>
+
+        <div class="cheatsheet">
+            <div class="cheatsheet-inner">
+                <div class="cheatsheet-item">
+                    <h4>Self-Attention Formula</h4>
+                    <p><span class="code-inline">Attention(Q, K, V) = softmax(Q·K^T / √d_k) · V</span></p>
+                    <p>Q, K, V are learnable projections of input. √d_k stabilizes gradients. Softmax ensures weights sum to 1.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Multi-Head Attention</h4>
+                    <p>Split d_model (512) into h heads (8), each with d_k = d_model/h (64). Compute attention per head, concatenate, project.</p>
+                    <p>Effect: Learn multiple aspects (syntax, semantics, etc.) in parallel.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Positional Encoding</h4>
+                    <p><span class="code-inline">PE(pos, 2i) = sin(pos / 10000^(2i/d))</span></p>
+                    <p><span class="code-inline">PE(pos, 2i+1) = cos(pos / 10000^(2i/d))</span></p>
+                    <p>Unique encoding per position. Extrapolates to longer sequences.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Encoder-Decoder Stack</h4>
+                    <p><strong>Encoder:</strong> N=6 layers, each with self-attention + FFN + residual + norm.</p>
+                    <p><strong>Decoder:</strong> N=6 layers, each with masked self-attention + cross-attention to encoder + FFN.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Feed-Forward Network</h4>
+                    <p><span class="code-inline">FFN(x) = max(0, x·W_1)·W_2</span></p>
+                    <p>W_1: d_model → 2048 (4× expansion). W_2: 2048 → d_model. Applied per-token.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Residual & Normalization</h4>
+                    <p>Every sublayer: <span class="code-inline">output = LayerNorm(x + Sublayer(x))</span></p>
+                    <p>Enables deep networks (6-48 layers) without gradient collapse.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Training Hyperparameters</h4>
+                    <p>d_model: 512, h: 8, N: 6, d_ff: 2048, dropout: 0.1</p>
+                    <p>Adam with β_1=0.9, β_2=0.98, ε=10^{-9}</p>
+                    <p>LR warmup: 4000 steps, then decay as step^{-0.5}</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Scaling Laws (Chinchilla)</h4>
+                    <p>Optimal: N parameters ≈ D tokens (both ∝ √compute_budget)</p>
+                    <p>Loss decreases as N^{-0.07} (power law). 10× compute → 2-4 point improvement on benchmarks.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>BLEU Score (Machine Translation)</h4>
+                    <p><span class="code-inline">BLEU = BP · exp(Σ log p_n)</span> where p_n = n-gram precision vs reference</p>
+                    <p>Range: 0-100. Transformer (Big): 28.4 on WMT14 Eng→De (human: ~35)</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>BERT vs GPT</h4>
+                    <p><strong>BERT:</strong> Bidirectional, masked LM, great for classification.</p>
+                    <p><strong>GPT:</strong> Autoregressive, next-token prediction, great for generation.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Attention Heads: Common Patterns</h4>
+                    <p>Position heads (attend to previous), syntax heads (subject-verb), coreference heads (pronouns), semantic heads (word sense).</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>Modern Optimizations</h4>
+                    <p><strong>Flash Attention:</strong> 2-10× faster via I/O awareness.</p>
+                    <p><strong>GQA:</strong> Grouped query attention, 4× KV cache reduction.</p>
+                    <p><strong>RoPE:</strong> Rotary positional embeddings, better extrapolation.</p>
+                    <p><strong>ALiBi:</strong> No learned PE, distance-based attention bias.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== ARCHITECTURE DIAGRAM ===== -->
+<section style="background: white; padding: 4rem 2rem;">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 3rem;">Transformer Architecture Diagram</h2>
+
+        <div style="background: linear-gradient(135deg, #f0f4ff 0%, #fff5f7 100%); padding: 3rem; border-radius: 15px; border: 2px solid var(--deep-blue);">
+            <svg viewBox="0 0 1000 900" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+                <!-- Title -->
+                <text x="500" y="30" font-size="28" font-weight="bold" text-anchor="middle" fill="var(--dark)" font-family="Playfair Display">
+                    The Transformer: Encoder-Decoder
+                </text>
+
+                <!-- Input -->
+                <rect x="50" y="80" width="120" height="50" fill="var(--sunny)" rx="5"/>
+                <text x="110" y="112" font-size="14" font-weight="bold" text-anchor="middle" fill="var(--dark)">Input Tokens</text>
+                <text x="110" y="130" font-size="11" text-anchor="middle" fill="var(--dark)">[BOS, Hello, World, EOS]</text>
+
+                <!-- Embedding -->
+                <path d="M 110 130 L 110 170" stroke="var(--dark)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <rect x="60" y="170" width="100" height="40" fill="var(--coral)" rx="5" opacity="0.8"/>
+                <text x="110" y="195" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Embedding</text>
+
+                <!-- Positional Encoding -->
+                <path d="M 160 190 L 220 190" stroke="var(--dark)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <rect x="220" y="170" width="100" height="40" fill="var(--orange)" rx="5" opacity="0.8"/>
+                <text x="270" y="195" font-size="12" font-weight="bold" text-anchor="middle" fill="white">+ Positional</text>
+
+                <!-- ENCODER STACK -->
+                <text x="200" y="260" font-size="18" font-weight="bold" fill="var(--deep-blue)">ENCODER (N=6)</text>
+
+                <!-- Encoder Layer 1 -->
+                <g id="encoder-layer">
+                    <rect x="50" y="280" width="340" height="120" fill="none" stroke="var(--deep-blue)" stroke-width="2" stroke-dasharray="5,5" rx="8"/>
+
+                    <!-- Self-Attention -->
+                    <rect x="60" y="290" width="100" height="50" fill="var(--mint)" rx="5" opacity="0.8"/>
+                    <text x="110" y="310" font-size="11" font-weight="bold" text-anchor="middle" fill="var(--dark)">Multi-Head</text>
+                    <text x="110" y="325" font-size="11" font-weight="bold" text-anchor="middle" fill="var(--dark)">Self-Attention</text>
+
+                    <!-- Arrow to Add & Norm -->
+                    <path d="M 160 315 L 200 315" stroke="var(--dark)" stroke-width="1.5" marker-end="url(#arrowhead-small)"/>
+
+                    <!-- Add & Norm -->
+                    <rect x="200" y="295" width="80" height="40" fill="var(--pink)" rx="5" opacity="0.7"/>
+                    <text x="240" y="320" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Add &</text>
+                    <text x="240" y="332" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Norm</text>
+
+                    <!-- Arrow to FFN -->
+                    <path d="M 110 340 L 110 360" stroke="var(--dark)" stroke-width="1.5" marker-end="url(#arrowhead-small)"/>
+
+                    <!-- FFN -->
+                    <rect x="60" y="360" width="100" height="30" fill="var(--teal)" rx="5" opacity="0.8"/>
+                    <text x="110" y="380" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Feed-Forward</text>
+
+                    <!-- Arrow to Add & Norm -->
+                    <path d="M 160 375 L 200 375" stroke="var(--dark)" stroke-width="1.5" marker-end="url(#arrowhead-small)"/>
+
+                    <!-- Add & Norm -->
+                    <rect x="200" y="355" width="80" height="40" fill="var(--pink)" rx="5" opacity="0.7"/>
+                    <text x="240" y="380" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Add &</text>
+                    <text x="240" y="392" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Norm</text>
+
+                    <!-- Output -->
+                    <path d="M 280 375 L 320 375" stroke="var(--dark)" stroke-width="1.5" marker-end="url(#arrowhead-small)"/>
+                    <text x="350" y="380" font-size="11" font-weight="bold" fill="var(--dark)">× N</text>
+                </g>
+
+                <!-- Encoder Output -->
+                <path d="M 200 410 L 200 450" stroke="var(--dark)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <rect x="130" y="450" width="140" height="50" fill="var(--sky)" rx="5" opacity="0.8"/>
+                <text x="200" y="475" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Encoder Output</text>
+                <text x="200" y="492" font-size="10" text-anchor="middle" fill="white">(Keys & Values)</text>
+
+                <!-- DECODER STACK -->
+                <text x="700" y="260" font-size="18" font-weight="bold" fill="var(--deep-blue)">DECODER (N=6)</text>
+
+                <!-- Output Embedding (Decoder Input) -->
+                <rect x="630" y="80" width="140" height="50" fill="var(--sunny)" rx="5"/>
+                <text x="700" y="105" font-size="12" font-weight="bold" text-anchor="middle" fill="var(--dark)">Output Tokens</text>
+                <text x="700" y="125" font-size="10" text-anchor="middle" fill="var(--dark)">(Shifted right)</text>
+
+                <path d="M 700 130 L 700 170" stroke="var(--dark)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <rect x="650" y="170" width="100" height="40" fill="var(--coral)" rx="5" opacity="0.8"/>
+                <text x="700" y="195" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Embedding</text>
+
+                <path d="M 750 190 L 810 190" stroke="var(--dark)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <rect x="810" y="170" width="100" height="40" fill="var(--orange)" rx="5" opacity="0.8"/>
+                <text x="860" y="195" font-size="12" font-weight="bold" text-anchor="middle" fill="white">+ Positional</text>
+
+                <!-- Decoder Layer 1 -->
+                <g id="decoder-layer">
+                    <rect x="630" y="280" width="380" height="150" fill="none" stroke="var(--deep-blue)" stroke-width="2" stroke-dasharray="5,5" rx="8"/>
+
+                    <!-- Masked Self-Attention -->
+                    <rect x="640" y="290" width="110" height="50" fill="var(--mint)" rx="5" opacity="0.8"/>
+                    <text x="695" y="310" font-size="10" font-weight="bold" text-anchor="middle" fill="var(--dark)">Masked</text>
+                    <text x="695" y="323" font-size="10" font-weight="bold" text-anchor="middle" fill="var(--dark)">Self-Attn</text>
+
+                    <!-- Arrow to Add & Norm -->
+                    <path d="M 750 315 L 790 315" stroke="var(--dark)" stroke-width="1.5" marker-end="url(#arrowhead-small)"/>
+
+                    <!-- Add & Norm -->
+                    <rect x="790" y="295" width="80" height="40" fill="var(--pink)" rx="5" opacity="0.7"/>
+                    <text x="830" y="320" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Add &</text>
+                    <text x="830" y="332" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Norm</text>
+
+                    <!-- Cross-Attention (to encoder output) -->
+                    <path d="M 830 335 L 830 360" stroke="var(--dark)" stroke-width="1.5" marker-end="url(#arrowhead-small)"/>
+                    <rect x="750" y="360" width="160" height="50" fill="var(--forest)" rx="5" opacity="0.8"/>
+                    <text x="830" y="380" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Multi-Head</text>
+                    <text x="830" y="393" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Cross-Attention</text>
+
+                    <!-- Arrow to Add & Norm -->
+                    <path d="M 750 385 L 710 385" stroke="var(--dark)" stroke-width="1.5" marker-end="url(#arrowhead-small)"/>
+
+                    <!-- Add & Norm -->
+                    <rect x="630" y="360" width="80" height="50" fill="var(--pink)" rx="5" opacity="0.7"/>
+                    <text x="670" y="382" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Add &</text>
+                    <text x="670" y="405" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Norm</text>
+
+                    <!-- FFN -->
+                    <path d="M 695 410 L 695 440" stroke="var(--dark)" stroke-width="1.5" marker-end="url(#arrowhead-small)"/>
+                    <rect x="645" y="440" width="100" height="30" fill="var(--teal)" rx="5" opacity="0.8"/>
+                    <text x="695" y="460" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Feed-Forward</text>
+
+                    <!-- Arrow to Add & Norm -->
+                    <path d="M 745 455 L 785 455" stroke="var(--dark)" stroke-width="1.5" marker-end="url(#arrowhead-small)"/>
+
+                    <!-- Add & Norm -->
+                    <rect x="785" y="435" width="80" height="40" fill="var(--pink)" rx="5" opacity="0.7"/>
+                    <text x="825" y="460" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Add &</text>
+                    <text x="825" y="472" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Norm</text>
+
+                    <!-- Output -->
+                    <path d="M 865 455 L 905 455" stroke="var(--dark)" stroke-width="1.5" marker-end="url(#arrowhead-small)"/>
+                    <text x="935" y="460" font-size="11" font-weight="bold" fill="var(--dark)">× N</text>
+                </g>
+
+                <!-- Decoder Output -->
+                <path d="M 830 440 L 830 490" stroke="var(--dark)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <rect x="760" y="490" width="140" height="50" fill="var(--sky)" rx="5" opacity="0.8"/>
+                <text x="830" y="515" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Decoder Output</text>
+                <text x="830" y="532" font-size="10" text-anchor="middle" fill="white">(Per-token reps)</text>
+
+                <!-- Linear + Softmax -->
+                <path d="M 830 540 L 830 580" stroke="var(--dark)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <rect x="760" y="580" width="140" height="50" fill="var(--purple)" rx="5" opacity="0.8"/>
+                <text x="830" y="605" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Linear +</text>
+                <text x="830" y="622" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Softmax</text>
+
+                <!-- Output Probabilities -->
+                <path d="M 830 630 L 830 670" stroke="var(--dark)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <rect x="760" y="670" width="140" height="50" fill="var(--warm-red)" rx="5" opacity="0.8"/>
+                <text x="830" y="695" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Output Probs</text>
+                <text x="830" y="712" font-size="10" text-anchor="middle" fill="white">[0.95, 0.03, ...]</text>
+
+                <!-- Arrow from Encoder Output to Decoder Cross-Attention -->
+                <path d="M 270 475 Q 500 410 750 385" stroke="var(--deep-blue)" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowhead-blue)"/>
+                <text x="450" y="420" font-size="11" fill="var(--deep-blue)" font-weight="bold">K, V from Encoder</text>
+
+                <!-- Defs -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                        <polygon points="0 0, 10 3, 0 6" fill="var(--dark)"/>
+                    </marker>
+                    <marker id="arrowhead-small" markerWidth="8" markerHeight="8" refX="7" refY="2" orient="auto">
+                        <polygon points="0 0, 8 2, 0 4" fill="var(--dark)"/>
+                    </marker>
+                    <marker id="arrowhead-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                        <polygon points="0 0, 10 3, 0 6" fill="var(--deep-blue)"/>
+                    </marker>
+                </defs>
+
+                <!-- Legend -->
+                <g>
+                    <text x="50" y="800" font-size="12" font-weight="bold" fill="var(--dark)">Legend:</text>
+                    <rect x="50" y="810" width="15" height="15" fill="var(--mint)" opacity="0.8"/>
+                    <text x="75" y="822" font-size="11" fill="var(--dark)">Attention</text>
+
+                    <rect x="200" y="810" width="15" height="15" fill="var(--teal)" opacity="0.8"/>
+                    <text x="225" y="822" font-size="11" fill="var(--dark)">Feed-Forward</text>
+
+                    <rect x="420" y="810" width="15" height="15" fill="var(--pink)" opacity="0.7"/>
+                    <text x="445" y="822" font-size="11" fill="var(--dark)">Add & Norm (Residual)</text>
+
+                    <rect x="650" y="810" width="15" height="15" fill="var(--sky)" opacity="0.8"/>
+                    <text x="675" y="822" font-size="11" fill="var(--dark)">Output Representation</text>
+
+                    <rect x="50" y="835" width="15" height="15" fill="var(--forest)" opacity="0.8"/>
+                    <text x="75" y="847" font-size="11" fill="var(--dark)">Cross-Attention (Decoder→Encoder)</text>
+                </g>
+            </svg>
+        </div>
+
+        <p style="text-align: center; margin-top: 2rem; font-size: 0.95rem; color: #666;">
+            <strong>Key Flow:</strong> Input tokens → Embedded + positional encoded → Encoder (6 layers) → Encoder output (K, V) feeds into Decoder cross-attention → Decoder (6 layers, masked self-attention) → Linear projection + Softmax → Output probability distribution
+        </p>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== FINAL TAKEAWAY ===== -->
+<section style="background: linear-gradient(135deg, var(--dark) 0%, var(--dark-purple) 100%); color: white; padding: 4rem 2rem;">
+    <div class="container">
+        <h2 style="color: var(--sunny); text-align: center; margin-bottom: 2rem;">Why "Attention Is All You Need" Changed EVERYTHING</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--coral);">
+                <h3 style="color: var(--coral); margin-top: 0;">For NLP</h3>
+                <p>BERT, GPT, T5 enabled few-shot learning, prompt engineering, ChatGPT. No domain is untouched. Machine translation, summarization, Q&A, semantic search—all dominated by transformers.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--teal);">
+                <h3 style="color: var(--teal); margin-top: 0;">For Vision</h3>
+                <p>Vision Transformers (ViT) match CNNs. Diffusion models (Stable Diffusion, DALL-E) rely on transformers. Medical imaging, satellite imagery—transformers scale beautifully.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--forest);">
+                <h3 style="color: var(--forest); margin-top: 0;">For Biology</h3>
+                <p>AlphaFold 2 uses transformer-like architecture to predict protein structure. Transformer-based models for drug discovery, genomics. Biology's deep learning revolution.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--sunny);">
+                <h3 style="color: var(--sunny); margin-top: 0;">For Scaling</h3>
+                <p>Transformers revealed scaling laws: more compute → predictably better performance. Enabled 100B+M parameter models. No ceiling in sight. This is the substrate of AGI research.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--pink);">
+                <h3 style="color: var(--pink); margin-top: 0;">For Society</h3>
+                <p>ChatGPT, GPT-4, Claude, Gemini are all transformers. They shaped how billions interact with AI. Ethics, alignment, safety—all driven by transformer capabilities.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--orange);">
+                <h3 style="color: var(--orange); margin-top: 0;">For Research</h3>
+                <p>Mechanistic interpretability, sparse autoencoders, circuit analysis—all trying to understand transformers. Transformers are the Rosetta Stone of deep learning.</p>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 3rem; font-size: 1.1rem; line-height: 1.8;">
+            <strong style="color: var(--sunny);">The bottom line:</strong> "Attention Is All You Need" was the paper that unified AI. RNNs, CNNs, specialized architectures—all replaced by a single, elegant framework. <br><br>
+            <strong>It wasn't the most complex paper.</strong> The math is high school—matrix multiplication, softmax, linear projections. <br><br>
+            <strong>It was the most elegant idea.</strong> Attention. No recurrence. No convolution. Just learned relationships between all pairs of positions. <br><br>
+            <strong>And it scaled.</strong> To transformers, we should apply Occam's Razor with a twist: the simplest explanation that scales exponentially is the best.
+        </p>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <p>
+        <strong>Attention Is All You Need: The Illustrated Guide</strong><br>
+        Based on Vaswani, A., Shazeer, N., Parmar, N., et al. (2017). "Attention is All You Need." NIPS.<br>
+        <a href="https://arxiv.org/abs/1706.03762">View original paper on arXiv</a><br><br>
+        This guide builds on foundational texts: "Deep Learning" by Goodfellow, Bengio, Courville; "Gödel, Escher, Bach" by Hofstadter; "Superintelligence" by Bostrom; "The Black Swan" by Taleb.<br><br>
+        Created to illuminate the architecture that changed everything. 🌟
+    </p>
+</footer>
+
+</body>
+</html>

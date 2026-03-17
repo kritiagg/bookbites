@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Craft in the Real World — Illustrated Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+    :root {
+      --coral: #FF6B6B;
+      --teal: #4ECDC4;
+      --sunny: #FFE66D;
+      --purple: #A06CD5;
+      --sky: #74B9FF;
+      --mint: #55EFC4;
+      --pink: #FD79A8;
+      --orange: #FDCB6E;
+      --dark: #2D3436;
+      --cream: #FFEAA7;
+      --deep-blue: #0984E3;
+      --warm-red: #E17055;
+      --forest: #00B894;
+      --dark-purple: #6C5CE7;
+      --craft-gold: #D4AF37;
+      --craft-burgundy: #8B3A3A;
+      --craft-sage: #556B6B;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+
+    /* ===== COVER ===== */
+    .cover {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 40px 20px;
+    }
+
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      color: white;
+      letter-spacing: -2px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 8px;
+    }
+
+    .cover .author {
+      font-size: 1.3rem;
+      color: var(--craft-gold);
+      margin-top: 8px;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .cover .subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 16px;
+      z-index: 2;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .cover svg {
+      margin-top: 40px;
+      z-index: 2;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.08;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(180deg); }
+    }
+
+    /* ===== LESSON SECTIONS ===== */
+    .lesson {
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .lesson-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .lesson-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      margin-bottom: 12px;
+      background: var(--craft-burgundy);
+    }
+
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      margin-bottom: 8px;
+      line-height: 1.2;
+      color: var(--dark);
+    }
+
+    .lesson-subtitle {
+      font-size: 1rem;
+      opacity: 0.7;
+      margin-bottom: 30px;
+      color: var(--dark);
+    }
+
+    .illustration-container {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .illustration-container svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--craft-burgundy);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .quote-box {
+      background: var(--dark);
+      color: white;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--craft-gold);
+    }
+
+    .quote-box .quote-text {
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .quote-box .quote-attr {
+      color: var(--craft-gold);
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+
+    .funny-box {
+      background: #fff5f0;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      border: 2px dashed var(--warm-red);
+    }
+
+    .funny-box .funny-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--warm-red);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .funny-box p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #666;
+      font-style: italic;
+    }
+
+    .ai-box {
+      background: linear-gradient(135deg, #0984E3, #6C5CE7);
+      color: white;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+
+    .ai-box .ai-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--sunny);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .ai-box p {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .connect-box {
+      background: #e8f4fd;
+      border-left: 4px solid var(--deep-blue);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+
+    .connect-box .connect-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--deep-blue);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .connect-box p {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* ===== STORY SPOTLIGHTS ===== */
+    .story {
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      position: relative;
+    }
+
+    .story-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .story h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      margin-bottom: 30px;
+      color: white;
+    }
+
+    .story-content {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .story-illustration {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ===== CHEATSHEET ===== */
+    .cheatsheet {
+      min-height: 100vh;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cheatsheet-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .cheatsheet h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: white;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .cheatsheet-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .cheatsheet-grid { grid-template-columns: 1fr; }
+      .lesson-title { font-size: 1.8rem; }
+      .cover h1 { font-size: 3rem; }
+    }
+
+    .cheatsheet-card {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      color: white;
+    }
+
+    .cheatsheet-card h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--craft-gold);
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .cheatsheet-card p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .cheatsheet-card ul {
+      margin-left: 20px;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+    }
+
+    .cheatsheet-card li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<section class="cover">
+  <div class="particle" style="width: 200px; height: 200px; left: 10%; top: 20%; background: var(--craft-gold);"></div>
+  <div class="particle" style="width: 150px; height: 150px; right: 15%; bottom: 30%; background: var(--craft-burgundy);"></div>
+  <div class="particle" style="width: 180px; height: 180px; left: 70%; top: 40%; background: var(--craft-sage);"></div>
+
+  <h1>Craft in the<br>Real World</h1>
+  <div class="author">Matthew Salesses</div>
+  <div class="subtitle">Rethinking Fiction Writing and Workshopping — A Guide to Decolonizing Craft Criticism</div>
+
+  <svg viewBox="0 0 700 300" width="700" height="300">
+    <!-- Book pages with red pen marks -->
+    <rect x="100" y="50" width="180" height="220" fill="#f5e6d3" stroke="#d4a574" stroke-width="2" rx="4"/>
+    <rect x="320" y="50" width="180" height="220" fill="#f5e6d3" stroke="#d4a574" stroke-width="2" rx="4"/>
+
+    <!-- Text lines on pages -->
+    <line x1="130" y1="90" x2="260" y2="90" stroke="#ccc" stroke-width="2"/>
+    <line x1="130" y1="110" x2="260" y2="110" stroke="#ccc" stroke-width="2"/>
+    <line x1="130" y1="130" x2="260" y2="130" stroke="#ccc" stroke-width="2"/>
+    <line x1="130" y1="150" x2="240" y2="150" stroke="#ccc" stroke-width="2"/>
+    <line x1="130" y1="180" x2="260" y2="180" stroke="#ccc" stroke-width="2"/>
+    <line x1="130" y1="200" x2="260" y2="200" stroke="#ccc" stroke-width="2"/>
+
+    <line x1="350" y1="90" x2="480" y2="90" stroke="#ccc" stroke-width="2"/>
+    <line x1="350" y1="110" x2="480" y2="110" stroke="#ccc" stroke-width="2"/>
+    <line x1="350" y1="130" x2="480" y2="130" stroke="#ccc" stroke-width="2"/>
+    <line x1="350" y1="150" x2="460" y2="150" stroke="#ccc" stroke-width="2"/>
+
+    <!-- Red pen critique marks -->
+    <path d="M 270 95 Q 280 85 290 95" stroke="#e17055" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="245" cy="135" r="8" fill="none" stroke="#e17055" stroke-width="2"/>
+    <path d="M 265 185 L 290 210" stroke="#e17055" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Discussion arrows -->
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#8B3A3A"/>
+      </marker>
+    </defs>
+    <path d="M 200 280 L 300 280" stroke="#8B3A3A" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+    <path d="M 400 280 L 500 280" stroke="#8B3A3A" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+
+    <!-- Perspective voices -->
+    <text x="200" y="240" font-size="12" fill="#556B6B" text-anchor="middle">Critique</text>
+    <text x="400" y="240" font-size="12" fill="#556B6B" text-anchor="middle">Perspective</text>
+  </svg>
+</section>
+
+<!-- ===== LESSON 1: CRAFT ISN'T UNIVERSAL ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f8f5f0 0%, #fff5e6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--craft-burgundy);">1</div>
+    <h2 class="lesson-title">Craft Rules Are Not Universal Laws</h2>
+    <p class="lesson-subtitle">The foundational insight: traditional craft criticism is built on specific cultural aesthetics</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" width="700" height="280">
+        <!-- Three different writing traditions as towers -->
+        <rect x="50" y="150" width="120" height="100" fill="#d4a574" stroke="#8B3A3A" stroke-width="2"/>
+        <rect x="290" y="80" width="120" height="170" fill="#a06cd5" stroke="#6C5CE7" stroke-width="2"/>
+        <rect x="530" y="120" width="120" height="130" fill="#4ECDC4" stroke="#0B8C8B" stroke-width="2"/>
+
+        <text x="110" y="210" font-size="14" font-weight="600" fill="#fff" text-anchor="middle">Western</text>
+        <text x="110" y="230" font-size="11" fill="#fff" text-anchor="middle">Literary</text>
+
+        <text x="350" y="175" font-size="14" font-weight="600" fill="#fff" text-anchor="middle">Oral</text>
+        <text x="350" y="195" font-size="11" fill="#fff" text-anchor="middle">Tradition</text>
+
+        <text x="590" y="190" font-size="14" font-weight="600" fill="#fff" text-anchor="middle">Genre/</text>
+        <text x="590" y="210" font-size="11" fill="#fff" text-anchor="middle">Hybrid</text>
+
+        <!-- Question marks floating -->
+        <text x="110" y="60" font-size="32" fill="#e17055" text-anchor="middle">?</text>
+        <text x="350" y="30" font-size="32" fill="#e17055" text-anchor="middle">?</text>
+        <text x="590" y="50" font-size="32" fill="#e17055" text-anchor="middle">?</text>
+
+        <!-- Connecting lines with "different rules" label -->
+        <path d="M 170 200 L 290 200" stroke="#e17055" stroke-width="2" stroke-dasharray="5,5"/>
+        <path d="M 410 150 L 530 150" stroke="#e17055" stroke-width="2" stroke-dasharray="5,5"/>
+        <text x="350" y="270" font-size="13" fill="#8B3A3A" text-anchor="middle" font-weight="600">Each has legitimate, different rules</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>Salesses argues that "good writing" as taught in MFA workshops is not universal—it's rooted in specific Western literary traditions. When workshop leaders say "show don't tell," "avoid purple prose," or "cut your adjectives," they're applying aesthetics from white, often male, canonical writers. Yet successful writers like Toni Morrison, Ocean Vuong, and Maxine Hong Kingston deliberately violate these "rules" to serve their cultural aesthetics and narrative needs. The problem isn't that writers need to learn these rules—it's that workshops treat them as objective truth rather than cultural preference. A writer using rhetorical questions, direct address, or elaborate metaphor because their literary tradition values it isn't breaking rules; they're following different ones.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Workshops are like going to a restaurant run by people who've only ever eaten one meal: "Your roux is too dark, your plating is too colorful, and where's the 3:1 butter ratio? That's not cuisine, that's chaos." Meanwhile, there's an entire world of cuisines thriving by doing exactly the opposite.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ AI CONNECTION</div>
+      <p>Large language models trained primarily on English literary canon learn that "good writing" = sparse, minimalist, with subtle character development. When prompted to generate creative text, they reproduce these patterns because that's what they learned was "reward-worthy" during training. This is exactly Salesses's critique applied to AI: if you train a model only on certain literary traditions, it learns to treat those aesthetics as universal law. Modern AI writing assistants would benefit from diverse training data—not just Hemingway and contemporary literary fiction, but also epistolary novels, magical realism, genre fiction, and non-Western narrative structures. Otherwise, they become automated perpetuators of a monoculture.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>In <em>Range</em>, David Epstein shows how specialists can become trapped by their domain's conventions. Salesses makes a similar point: workshop specialists are trapped by literary convention. Also echoes <em>The Alchemist</em>'s theme of personal legend—your writing voice is valid even if it doesn't follow the map others drew.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The workshop, as it is currently practiced in the United States, serves a particular kind of writer writing toward a particular kind of story. And that's okay—except when it's not okay, which is when it's presented as the way to teach writing."</div>
+      <div class="quote-attr">— Matthew Salesses, <em>Craft in the Real World</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 2: THE WORKSHOP'S HIDDEN CURRICULUM ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f5f8 0%, #e8f4fd 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--deep-blue);">2</div>
+    <h2 class="lesson-title">Workshops Teach More Than Craft</h2>
+    <p class="lesson-subtitle">The hidden lessons: whose stories matter, whose voice is legitimate, and who gets to critique</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300">
+        <!-- Classroom setup -->
+        <rect x="50" y="100" width="600" height="180" fill="none" stroke="#556B6B" stroke-width="2" stroke-dasharray="5,5"/>
+
+        <!-- Teacher desk (elevated) -->
+        <rect x="300" y="70" width="100" height="40" fill="#D4AF37" stroke="#8B3A3A" stroke-width="2" rx="4"/>
+        <circle cx="310" cy="75" r="6" fill="#333" />
+        <circle cx="330" cy="75" r="6" fill="#333" />
+        <circle cx="350" cy="75" r="6" fill="#333" />
+
+        <!-- Student desks in circle -->
+        <g id="desk-1">
+          <rect x="80" y="130" width="50" height="35" fill="#e8f4fd" stroke="#556B6B" stroke-width="1.5" rx="3"/>
+          <circle cx="107" cy="145" r="5" fill="#FF6B6B" opacity="0.7"/>
+        </g>
+        <g id="desk-2" transform="translate(150, 0)">
+          <rect x="80" y="130" width="50" height="35" fill="#e8f4fd" stroke="#556B6B" stroke-width="1.5" rx="3"/>
+          <circle cx="107" cy="145" r="5" fill="#4ECDC4" opacity="0.7"/>
+        </g>
+        <g id="desk-3" transform="translate(300, 0)">
+          <rect x="80" y="130" width="50" height="35" fill="#e8f4fd" stroke="#556B6B" stroke-width="1.5" rx="3"/>
+          <circle cx="107" cy="145" r="5" fill="#A06CD5" opacity="0.7"/>
+        </g>
+        <g id="desk-4" transform="translate(450, 0)">
+          <rect x="80" y="130" width="50" height="35" fill="#e8f4fd" stroke="#556B6B" stroke-width="1.5" rx="3"/>
+          <circle cx="107" cy="145" r="5" fill="#FFE66D" opacity="0.7"/>
+        </g>
+
+        <!-- Speaking arrows (some larger than others) -->
+        <path d="M 310 105 L 107 130" stroke="#8B3A3A" stroke-width="3" marker-end="url(#arrowhead)" opacity="0.8"/>
+        <path d="M 107 165 L 310 85" stroke="#e17055" stroke-width="1.5" opacity="0.4"/>
+        <path d="M 257 165 L 310 85" stroke="#e17055" stroke-width="1.5" opacity="0.5"/>
+        <path d="M 407 165 L 310 85" stroke="#e17055" stroke-width="1.5" opacity="0.3"/>
+
+        <!-- Power dynamic label -->
+        <text x="350" y="280" font-size="13" fill="#8B3A3A" text-anchor="middle" font-weight="600">Who speaks? Whose voice is valued?</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>Beyond teaching sentence-level craft, workshops embed lessons about authority and legitimacy. Students learn: whose stories are "universal" (white male characters), whose are "niche" (characters of color, queer characters). They learn that critiquing is a privilege—often only confident students (disproportionately white and male) speak freely. They internalize that emotion in writing is "telling not showing," so they strip their work of cultural specificity and voice to sound "objective" and "universal." A queer South Asian writer learns to make their character less explicitly queer, less explicitly South Asian, to be "relatable to everyone." The workshop doesn't teach this explicitly—it teaches it through whose feedback is centered, whose work gets praised as "universal," and whose gets labeled "too specific" or "on-the-nose." This is the hidden curriculum: your voice is only legitimate if it mirrors what's been legitimized before.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Workshop critique is basically a group of people saying "I like this, but make it sound like something I've read before." And the person with the most confident voice—usually someone who's been told their opinions matter—decides what counts as "good writing."</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ AI CONNECTION</div>
+      <p>AI systems trained on human feedback replicate these power dynamics exactly. If you train a language model using reinforcement learning from human feedback (RLHF), and your human feedback comes from a narrow demographic or reflects workshop consensus, the model learns those biases as "quality." ChatGPT and similar models sometimes penalize creative linguistic variation or cultural specificity because that's what got marked as "good" during training. The hidden curriculum becomes hardcoded. This is why diverse training data and diverse feedback sources are critical—otherwise, AI becomes a sophisticated workshop that amplifies the same biases at scale.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>Salesses echoes <em>Mindset</em> (Carol Dweck): the fixed mindset says "good writing is like this," while a growth mindset says "different writing can be good in different ways." Also connects to <em>Influence</em> by Cialdini—authority (the published author, the MFA graduate) creates compliance, so students adopt the "official" rules even unconsciously.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"We teach writers not just how to write, but whose writing is valid, whose is not, and what they should want to sound like."</div>
+      <div class="quote-attr">— Matthew Salesses, paraphrased from core arguments</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 3: DECOLONIZING FEEDBACK ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f5f0f8 0%, #f0e6ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--purple);">3</div>
+    <h2 class="lesson-title">Decolonizing Feedback: What Questions to Ask</h2>
+    <p class="lesson-subtitle">Moving from prescriptive rules to descriptive observations</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 320" width="700" height="320">
+        <!-- Old feedback style (top) -->
+        <g>
+          <rect x="50" y="20" width="300" height="100" fill="#fff5f0" stroke="#e17055" stroke-width="2" rx="6"/>
+          <text x="200" y="45" font-size="14" font-weight="700" fill="#e17055" text-anchor="middle">PRESCRIPTIVE FEEDBACK</text>
+          <text x="70" y="70" font-size="12" fill="#666">"Show, don't tell"</text>
+          <text x="70" y="90" font-size="12" fill="#666">"Cut the adjectives"</text>
+          <text x="70" y="110" font-size="12" fill="#666">"This is purple prose"</text>
+        </g>
+
+        <!-- New feedback style (bottom) -->
+        <g>
+          <rect x="50" y="180" width="300" height="120" fill="#e8f4fd" stroke="#0984E3" stroke-width="2" rx="6"/>
+          <text x="200" y="205" font-size="14" font-weight="700" fill="#0984E3" text-anchor="middle">DESCRIPTIVE FEEDBACK</text>
+          <text x="70" y="230" font-size="12" fill="#333">"When I read this passage, I felt..."</text>
+          <text x="70" y="250" font-size="12" fill="#333">"The language here does what?"</text>
+          <text x="70" y="270" font-size="12" fill="#333">"This style reminds me of..."</text>
+          <text x="70" y="290" font-size="12" fill="#333">"What are you trying to achieve?"</text>
+        </g>
+
+        <!-- Arrow between -->
+        <path d="M 200 130 L 200 170" stroke="#8B3A3A" stroke-width="3" marker-end="url(#arrowhead)"/>
+        <text x="350" y="150" font-size="12" fill="#8B3A3A" font-weight="600">Shift from</text>
+        <text x="350" y="170" font-size="12" fill="#8B3A3A" font-weight="600">judgment to</text>
+        <text x="350" y="190" font-size="12" fill="#8B3A3A" font-weight="600">observation</text>
+
+        <!-- Right side: examples -->
+        <g>
+          <rect x="400" y="20" width="280" height="280" fill="#f5f8ff" stroke="#A06CD5" stroke-width="2" stroke-dasharray="5,5" rx="6"/>
+          <text x="540" y="50" font-size="13" font-weight="700" fill="#6C5CE7" text-anchor="middle">KEY QUESTIONS</text>
+          <text x="420" y="80" font-size="11" fill="#333">1. What is the writer doing here?</text>
+          <text x="420" y="100" font-size="11" fill="#333">2. What effect did it have on me?</text>
+          <text x="420" y="120" font-size="11" fill="#333">3. Does it serve the story?</text>
+          <text x="420" y="140" font-size="11" fill="#333">4. Is this stylistic choice intentional?</text>
+          <text x="420" y="160" font-size="11" fill="#333">5. What literary tradition informs</text>
+          <text x="420" y="175" font-size="11" fill="#333">   this choice?</text>
+          <text x="420" y="195" font-size="11" fill="#333">6. What does the writer want from</text>
+          <text x="420" y="210" font-size="11" fill="#333">   this feedback?</text>
+          <text x="420" y="235" font-size="10" fill="#666" font-style="italic">Not: "Is it good?"</text>
+          <text x="420" y="255" font-size="10" fill="#666" font-style="italic">But: "What's happening and why?"</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>Salesses proposes a radical reframing: instead of telling writers what's "wrong" with universal prescriptions, readers should describe what they observe and ask questions. Real examples: Instead of "Show, don't tell," ask "What does this telling do?" Perhaps the writer is using rhetorical tradition, stream-of-consciousness, or direct address deliberately. Instead of "Your protagonist is too passive," ask "What does their passivity express or accomplish?" Perhaps it's intentional characterization. Instead of "This is too specific/ethnic/queer," ask "What effect does this cultural specificity have?" The shift from prescriptive to descriptive feedback respects the writer's intentions and cultural aesthetics. It transforms the workshop from a court of judgment into a space for inquiry. Salesses offers concrete prompts: "I felt," "I noticed," "This reminds me of," "What are you exploring here?"—questions that center the writer's choices rather than impose external rules.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Traditional feedback: "Your work violates the Geneva Convention of Writing." Decolonized feedback: "Tell me what you were trying to do and I'll tell you if it's working." Turns out, the writer usually knows their own story better than a random workshop peer.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ AI CONNECTION</div>
+      <p>Modern AI writing assistants are beginning to move in this direction. Rather than rule-based linters ("eliminate adverbs," "vary sentence structure"), newer models generate descriptive feedback: "This passage uses strong sensory details" or "The metaphor creates distance between reader and character." This is closer to Salesses's model—observation and context rather than prescription. However, AI still struggles with the question "What are you trying to achieve?" which requires understanding authorial intent. Human feedback excels here; AI feedback can complement it by describing effects without judgment, but the writer must ultimately decide what serves their vision.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This echoes <em>Crucial Conversations</em> (Patterson et al.): move from "you're wrong" to "help me understand." Also parallels <em>Nonviolent Communication</em> principles—observe what happened, describe your reaction, and ask about intention before judgment.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The best feedback doesn't prescribe; it describes. It doesn't tell the writer what to do; it tells them what happened when it was read."</div>
+      <div class="quote-attr">— Matthew Salesses, <em>Craft in the Real World</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 4: CENTERING THE READER ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0faf5 0%, #e6f9f0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--forest);">4</div>
+    <h2 class="lesson-title">Whose Reader Are We Writing For?</h2>
+    <p class="lesson-subtitle">The reader isn't universal—and craft choices serve specific readers</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" width="700" height="280">
+        <!-- Three different readers -->
+        <circle cx="150" cy="100" r="35" fill="#FF6B6B" opacity="0.7"/>
+        <text x="150" y="110" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">Reader A</text>
+
+        <circle cx="350" cy="100" r="35" fill="#4ECDC4" opacity="0.7"/>
+        <text x="350" y="110" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">Reader B</text>
+
+        <circle cx="550" cy="100" r="35" fill="#A06CD5" opacity="0.7"/>
+        <text x="550" y="110" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">Reader C</text>
+
+        <!-- Same passage points to different interpretations -->
+        <rect x="300" y="160" width="100" height="40" fill="#f5e6d3" stroke="#d4a574" stroke-width="2" rx="4"/>
+        <text x="350" y="185" font-size="11" font-weight="600" fill="#333" text-anchor="middle">Same Text</text>
+
+        <!-- Different arrows to interpretations -->
+        <path d="M 200 135 L 150 200" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <path d="M 350 200 L 350 220" stroke="#4ECDC4" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <path d="M 500 135 L 550 200" stroke="#A06CD5" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+        <!-- Different interpretations -->
+        <text x="110" y="240" font-size="11" fill="#333" text-anchor="middle">"This is</text>
+        <text x="110" y="255" font-size="11" fill="#333" text-anchor="middle">confusing"</text>
+
+        <text x="350" y="250" font-size="11" fill="#333" text-anchor="middle">"This is</text>
+        <text x="350" y="265" font-size="11" fill="#333" text-anchor="middle">brilliant"</text>
+
+        <text x="590" y="240" font-size="11" fill="#333" text-anchor="middle">"This is</text>
+        <text x="590" y="255" font-size="11" fill="#333" text-anchor="middle">familiar"</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>Craft isn't about abstract excellence; it's about creating effects on specific readers. A passage that feels confusing to Reader A (who expects linear narrative) might feel brilliant to Reader B (familiar with experimental form) and familiar to Reader C (schooled in the literary tradition the passage draws from). Traditional workshops assume "the reader" is monolithic and white—so they mistake cultural specificity for obscurity. Salesses argues that writers must ask: "Who am I writing for? What does my reader need from this text? What cultural literacy does my reader bring?" A novelist writing for a diasporic audience might use code-switching, which an MFA workshop dismisses as "confusing"—but it's perfectly clear to the intended reader. A writer using oral tradition might repeat phrases in a way that seems redundant to readers trained on modernist minimalism but feels rhythmically right to readers from that tradition. The craft isn't the problem; the assumption about whose reading practices matter is.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Workshop assumes your reader is a white college professor who read too many New Yorker stories and now can't enjoy anything that doesn't begin with a single image on a snowy morning. Your actual reader is your aunt who devours Danielle Steel and romance novels and wants to feel something. Who are you disappointing?</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ AI CONNECTION</div>
+      <p>LLMs are trained on millions of texts, so they learn an average reader. But that average doesn't reflect real readers—it reflects the corpus, which skews literary fiction, English-language, published traditionally. When you prompt an AI writing assistant, it assumes you want something "readable" to that average reader. Salesses's insight applies: better AI writing tools would let you specify your reader. "Write this scene for a reader fluent in magical realism" or "Write this for someone who values emotional directness over subtlety." Jailbreaks like "Write like an author from [culture]" are crude attempts at this. The real solution: writers need tools that let them specify reader assumptions, and AI systems trained on diverse corpora so no single reader is the default.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>In <em>Made to Stick</em> (Chip and Dan Heath), the authors emphasize that messages land differently depending on audience. Salesses applies this to fiction craft: the same technique that "sticks" depends on what your audience already knows and values.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"If we ask 'is this good writing?' we're asking the wrong question. We should ask 'for whom is this writing good, and does it do what the writer intended?'"</div>
+      <div class="quote-attr">— Matthew Salesses, <em>Craft in the Real World</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 5: THE PROBLEM WITH "SHOWING" ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #fff8f0 0%, #ffe8d6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--warm-red);">5</div>
+    <h2 class="lesson-title">Show vs. Tell: A False Binary</h2>
+    <p class="lesson-subtitle">Why "show don't tell" is culturally specific advice</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300">
+        <!-- Two approaches -->
+        <g>
+          <!-- SHOW side -->
+          <rect x="50" y="40" width="280" height="220" fill="#fff5f0" stroke="#e17055" stroke-width="2" rx="8"/>
+          <text x="190" y="70" font-size="13" font-weight="700" fill="#e17055" text-anchor="middle">SHOWING (Mimesis)</text>
+          <text x="70" y="100" font-size="11" fill="#333" font-weight="600">Example:</text>
+          <text x="70" y="120" font-size="10" fill="#444" font-style="italic">"She slammed the door. Her</text>
+          <text x="70" y="135" font-size="10" fill="#444" font-style="italic">fists clenched. Tears streamed</text>
+          <text x="70" y="150" font-size="10" fill="#444" font-style="italic">down her face."</text>
+
+          <text x="70" y="180" font-size="11" fill="#333" font-weight="600">Dominates:</text>
+          <text x="70" y="200" font-size="10" fill="#444">Western realistic fiction</text>
+          <text x="70" y="218" font-size="10" fill="#444">Hemingway, minimalism</text>
+        </g>
+
+        <g>
+          <!-- TELL side -->
+          <rect x="370" y="40" width="280" height="220" fill="#f0f8ff" stroke="#0984E3" stroke-width="2" rx="8"/>
+          <text x="510" y="70" font-size="13" font-weight="700" fill="#0984E3" text-anchor="middle">TELLING (Diegesis)</text>
+          <text x="390" y="100" font-size="11" fill="#333" font-weight="600">Example:</text>
+          <text x="390" y="120" font-size="10" fill="#444" font-style="italic">"She was furious. Devastated.</text>
+          <text x="390" y="135" font-size="10" fill="#444" font-style="italic">The kind of angry that had no</text>
+          <text x="390" y="150" font-size="10" fill="#444" font-style="italic">place to go."</text>
+
+          <text x="390" y="180" font-size="11" fill="#333" font-weight="600">Dominates:</text>
+          <text x="390" y="200" font-size="10" fill="#444">Oral tradition, rhetorical</text>
+          <text x="390" y="218" font-size="10" fill="#444">fiction, didactic literature</text>
+        </g>
+
+        <!-- Label at bottom -->
+        <text x="350" y="280" font-size="12" fill="#8B3A3A" text-anchor="middle" font-weight="600">Not better or worse. Different tools for different jobs.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>The "show don't tell" rule is actually the rule "use mimesis (sensory detail and action) rather than diegesis (narrator telling)." It became universal workshop law because it dominated 20th-century Anglo-American literary fiction (Hemingway, modernism). But it's not universal—it's a choice. Direct telling is fundamental to oral traditions, epistolary fiction, genre fiction, and non-Western narrative. When Toni Morrison writes "Sethe was not a woman who could be arguments with," she's telling, not showing, and it's perfect because she needs narrator authority to interpret Sethe's interiority. When you read magical realism, the narrator constantly tells you impossible things are happening. When you read graphic novels, images show what words could tell. Salesses argues workshops privilege showing because it became naturalized as "invisible" craft (it feels like you're experiencing the story rather than being told it). But that invisibility is itself a cultural choice. A writer using telling is making a valid choice about narrative authority and reader relationship.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Your grandmother tells stories by saying "He was angry, let me tell you." The workshop tells you to show your character throwing things and slamming doors. Both are legitimate. The workshop just values the version it can feel superior about because it "shows" rather than "tells."</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ AI CONNECTION</div>
+      <p>Language models trained on modern literary fiction learn the "show don't tell" rule deeply. They generate sparse description, external action, minimal narrator commentary. This is why AI-generated fiction often feels like imitation Hemingway. If you train on Jane Austen's direct narrator commentary or magical realism's constant exposition, the model learns to value telling. The bias isn't in the model's architecture—it's in the training data. Modern LLMs show what data teaches them to value. This is crucial: every training corpus encodes aesthetic choices. A model trained on 19th-century serialized novels would generate different prose than one trained on contemporary lit fic. Neither is objectively better; both reflect their training data's aesthetic heritage.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This echoes arguments in <em>The Moth: How to Tell a Story</em>—different storytelling traditions value different techniques. Showing is one tool; telling is another. Both matter.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Telling isn't weak. It's a choice. And some stories demand a narrator who speaks, who interprets, who has authority. That's not a failure of craft. That's craft."</div>
+      <div class="quote-attr">— Matthew Salesses, paraphrased from <em>Craft in the Real World</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 6: POWER IN THE WORKSHOP ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f8f5f0 0%, #fff0e6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--craft-burgundy);">6</div>
+    <h2 class="lesson-title">Power Dynamics Shape Workshop Critique</h2>
+    <p class="lesson-subtitle">Who is safe to critique? Whose work gets the kindest reading?</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" width="700" height="280">
+        <!-- Hierarchy of voices -->
+        <g>
+          <!-- Top tier -->
+          <rect x="250" y="30" width="200" height="50" fill="#FFE66D" stroke="#FF9800" stroke-width="2" rx="6"/>
+          <text x="350" y="65" font-size="12" font-weight="700" fill="#333" text-anchor="middle">Published/Prestigious Voice</text>
+
+          <!-- Arrows down -->
+          <path d="M 320 85 L 280 120" stroke="#FF9800" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <path d="M 380 85 L 420 120" stroke="#FF9800" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+          <!-- Middle tier -->
+          <rect x="180" y="120" width="120" height="50" fill="#FDCB6E" stroke="#FF9800" stroke-width="2" rx="6"/>
+          <text x="240" y="155" font-size="11" font-weight="600" fill="#333" text-anchor="middle">Confident Voice</text>
+
+          <rect x="400" y="120" width="120" height="50" fill="#FDCB6E" stroke="#FF9800" stroke-width="2" rx="6"/>
+          <text x="460" y="155" font-size="11" font-weight="600" fill="#333" text-anchor="middle">Insider Voice</text>
+
+          <!-- Arrows down -->
+          <path d="M 240 170 L 220 200" stroke="#FF9800" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <path d="M 460 170 L 480 200" stroke="#FF9800" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+          <!-- Bottom tier -->
+          <rect x="150" y="200" width="150" height="50" fill="#FFB6C1" stroke="#E17055" stroke-width="2" rx="6"/>
+          <text x="225" y="235" font-size="11" font-weight="600" fill="#333" text-anchor="middle">Marginalized Voice</text>
+
+          <rect x="400" y="200" width="150" height="50" fill="#FFB6C1" stroke="#E17055" stroke-width="2" rx="6"/>
+          <text x="475" y="235" font-size="11" font-weight="600" fill="#333" text-anchor="middle">First-Gen Voice</text>
+        </g>
+
+        <!-- Label -->
+        <text x="350" y="270" font-size="11" fill="#8B3A3A" text-anchor="middle" font-weight="600">Whose critique is heard? Whose work is defended?</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>Workshops are not democracy. A confident voice—usually someone socialized to speak publicly, often white and male—dominates the conversation. Their critique carries weight. Meanwhile, marginalized voices often self-censor, worry their feedback will be perceived as "identity politics," or find their critique is overridden. Additionally, work by marginalized writers gets read less charitably. A white male character who's passive gets read as complex, introspective; a Black female character with the same trait gets read as underdeveloped. Dialect is "realistic" in Cormac McCarthy, "hard to parse" in a Black writer using African American Vernacular. Salesses argues workshops need explicit structures: ensuring everyone speaks, giving feedback on the feedback (calling out bias when it appears), and training people to read charitably across difference. The power imbalance isn't just unfair—it's artistically limiting. Diverse feedback makes better work. But it requires acknowledging that some voices have been trained, socialized, and historically rewarded to speak with authority, while others have been trained to doubt themselves.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Workshop dynamics in a nutshell: the loudest person is right, confidence is confused with expertise, and the person whose family has always been in the room is naturally believed, while the person who just arrived has to prove themselves. It's not a poetry workshop, it's a microcosm of everything wrong with institutions.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ AI CONNECTION</div>
+      <p>AI systems replicate these power dynamics from their training data. If training data overrepresents certain voices and perspectives, the model learns to value those. Worse, if a model is fine-tuned using human feedback from a non-diverse group, it learns to optimize for that group's preferences. This is why AI systems sometimes exhibit bias—not because of malicious intent, but because the power dynamics Salesses describes are baked into the training process. Diverse feedback on AI systems is equally critical: you need critiques from people who aren't already represented in the model's defaults. Otherwise, you're automating existing biases.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This parallels <em>Influence</em> (Cialdini) on authority bias and <em>Mindset</em> (Dweck) on how confidence is rewarded regardless of actual expertise. Also echoes <em>Thinking, Fast and Slow</em> on implicit bias and halo effects.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Workshops teach us whose voices matter. And it's usually not the voices of people who've been told their voices don't matter."</div>
+      <div class="quote-attr">— Matthew Salesses, <em>Craft in the Real World</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 7: INTENTION VS. IMPACT ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f8ff 0%, #e0effe 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--sky);">7</div>
+    <h2 class="lesson-title">Intention Matters, But So Does Impact</h2>
+    <p class="lesson-subtitle">The false choice between what you meant and what readers received</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300">
+        <!-- Split screen -->
+        <g>
+          <!-- Writer's side (left) -->
+          <rect x="50" y="50" width="280" height="200" fill="#f0f8ff" stroke="#0984E3" stroke-width="2" rx="8"/>
+          <text x="190" y="85" font-size="13" font-weight="700" fill="#0984E3" text-anchor="middle">WRITER'S INTENTION</text>
+
+          <text x="70" y="120" font-size="11" fill="#333">"I meant to show her</text>
+          <text x="70" y="140" font-size="11" fill="#333">strength through her</text>
+          <text x="70" y="160" font-size="11" fill="#333">silence and endurance."</text>
+
+          <circle cx="190" cy="200" r="30" fill="#0984E3" opacity="0.2" stroke="#0984E3" stroke-width="2"/>
+          <text x="190" y="207" font-size="10" font-weight="600" text-anchor="middle" fill="#0984E3">Good</text>
+          <text x="190" y="220" font-size="10" font-weight="600" text-anchor="middle" fill="#0984E3">Intent</text>
+        </g>
+
+        <g>
+          <!-- Reader's side (right) -->
+          <rect x="370" y="50" width="280" height="200" fill="#fff5f0" stroke="#e17055" stroke-width="2" rx="8"/>
+          <text x="510" y="85" font-size="13" font-weight="700" fill="#e17055" text-anchor="middle">READER'S IMPACT</text>
+
+          <text x="390" y="120" font-size="11" fill="#333">"I read her as voiceless,</text>
+          <text x="390" y="140" font-size="11" fill="#333">powerless, erased. As</text>
+          <text x="390" y="160" font-size="11" fill="#333">someone who didn't matter."</text>
+
+          <circle cx="510" cy="200" r="30" fill="#e17055" opacity="0.2" stroke="#e17055" stroke-width="2"/>
+          <text x="510" y="207" font-size="10" font-weight="600" text-anchor="middle" fill="#e17055">Real</text>
+          <text x="510" y="220" font-size="10" font-weight="600" text-anchor="middle" fill="#e17055">Impact</text>
+        </g>
+
+        <!-- Connecting line -->
+        <path d="M 330 150 L 370 150" stroke="#8B3A3A" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <text x="350" y="140" font-size="10" fill="#8B3A3A" text-anchor="middle" font-weight="600">Gap</text>
+
+        <!-- Question at bottom -->
+        <text x="350" y="280" font-size="12" fill="#8B3A3A" text-anchor="middle" font-weight="600">Whose job is it to close this gap?</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>The intention-versus-impact debate often becomes either "it's okay because I meant well" or "impact is all that matters, intention is irrelevant." Salesses argues both matter, but the power is real: if a reader experiences racism, sexism, or erasure in your text, saying "I didn't mean it that way" doesn't undo their experience. That said, understanding intention also matters—a writer using a slur reclaimed by their community is different from someone using it as an outsider. The craft question isn't whether you're a bad person; it's "Is the gap between intention and impact intentional (serving your story) or accidental (a problem to solve)?" Some questions Salesses suggests: What effect does this passage actually have, regardless of intent? If the impact differs from intent, is it artistically useful? Do readers from [community] experience this as I intended? Is this gap a feature of my story or a bug? Writers can then choose: adjust the work to better serve intent, or lean into the impact if it's interesting, or sometimes realize their intention isn't coming through and needs revision.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Writer: "But I meant it as a compliment!" Reader: "Well, it didn't land that way, and now I feel terrible." Writer: "But that's not what I meant!" Reader: "I know. That's the problem." This goes in circles forever unless someone says "Okay, how do we fix this?"</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ AI CONNECTION</div>
+      <p>AI systems don't have intentions—they generate based on patterns in training data. So the intention-impact distinction collapses. An LLM generating text isn't trying to perpetuate bias; it's just doing what it learned. But the impact is real. This is partly why AI ethics focuses on impact: we can't assume good intent from a model, so we must evaluate outputs. That said, understanding the "intention" (the training process, the data, the objective) helps fix problems. You can retrain on different data, fine-tune on diverse feedback, or modify the generation process. But users experience the impact regardless. This is why explainability matters in AI—not to excuse bias, but to understand it so we can change it.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>Salesses's nuanced take echoes <em>Crucial Conversations</em> and <em>Nonviolent Communication</em>—understand both intent and impact, hold space for both, and work collaboratively to bridge the gap.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Both intention and impact are real. Your intention doesn't erase the reader's experience. The reader's experience doesn't mean you're a bad person. Both things are true. Now figure out how to write with both in mind."</div>
+      <div class="quote-attr">— Matthew Salesses, paraphrased from <em>Craft in the Real World</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 8: SPECIFICITY IS NOT LIMITATION ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f5f0f8 0%, #f0e6ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--dark-purple);">8</div>
+    <h2 class="lesson-title">Specificity Makes Work Universal</h2>
+    <p class="lesson-subtitle">The paradox: the more specific, the more readers find themselves</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300">
+        <!-- Left side: Generic -->
+        <g>
+          <rect x="50" y="50" width="280" height="220" fill="#f8f8f8" stroke="#999" stroke-width="2" rx="8"/>
+          <text x="190" y="85" font-size="13" font-weight="700" fill="#666" text-anchor="middle">GENERIC APPROACH</text>
+
+          <text x="70" y="120" font-size="11" fill="#555">"A woman sat in a chair."</text>
+          <text x="70" y="145" font-size="11" fill="#555">"She was thinking about</text>
+          <text x="70" y="165" font-size="11" fill="#555">something important."</text>
+
+          <text x="70" y="195" font-size="10" fill="#777" font-style="italic">Trying to be universal,</text>
+          <text x="70" y="210" font-size="10" fill="#777" font-style="italic">ends up being no one</text>
+        </g>
+
+        <!-- Right side: Specific -->
+        <g>
+          <rect x="370" y="50" width="280" height="220" fill="#f0e6ff" stroke="#A06CD5" stroke-width="2" rx="8"/>
+          <text x="510" y="85" font-size="13" font-weight="700" fill="#6C5CE7" text-anchor="middle">SPECIFIC APPROACH</text>
+
+          <text x="390" y="120" font-size="11" fill="#333">"Maria sat in her mother's</text>
+          <text x="390" y="140" font-size="11" fill="#333">velvet armchair, the one that</text>
+          <text x="390" y="160" font-size="11" fill="#333">still smelled like her mother's</text>
+          <text x="390" y="180" font-size="11" fill="#333">rose water, wondering if</text>
+          <text x="390" y="200" font-size="11" fill="#333">staying with her father meant</text>
+          <text x="390" y="210" font-size="11" fill="#333">betraying her mother."</text>
+
+          <text x="390" y="250" font-size="10" fill="#666" font-weight="600">Instantly recognizable</text>
+          <text x="390" y="265" font-size="10" fill="#666" font-weight="600">to everyone with a family</text>
+        </g>
+
+        <!-- Arrow -->
+        <path d="M 350 150 L 370 150" stroke="#A06CD5" stroke-width="3" marker-end="url(#arrowhead)" opacity="0.7"/>
+        <text x="350" y="135" font-size="11" fill="#6C5CE7" font-weight="600" text-anchor="middle">More specific</text>
+        <text x="350" y="150" font-size="11" fill="#6C5CE7" font-weight="600" text-anchor="middle">=</text>
+        <text x="350" y="165" font-size="11" fill="#6C5CE7" font-weight="600" text-anchor="middle">More universal</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>Workshops often pressure writers to strip away specificity—cultural detail, dialect, family rituals, specific emotions—to "make it universal." The irony Salesses points out: this makes work more generic, not more universal. When you read Maria in her mother's chair thinking about family loyalty and loss, you recognize your own family loyalty and loss, even if your mother wasn't Caribbean, even if the chair wasn't velvet. Universality comes through specificity, not despite it. The more genuinely specific a story is to a particular person, place, and culture, the more readers from other cultures recognize themselves in the emotional truth. Compare: "The protagonist grappled with family expectations" versus "He heard his mother's voice in his head saying what his father always said, felt the weight of it in his chest." The second is more specific (that particular voice, that particular bodily sensation) and therefore more universally felt. Salesses argues that workshops mistake "universal" for "erased of cultural particularity." But humans are culturally particular. Therefore, writing that honors cultural particularity is more truthful, more resonant, more universal.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Workshop: "Make it less specific so everyone can relate." Translation: "Make it so white people can relate without thinking." Real universality: specific enough that everyone feels something true, even if it's not their exact truth.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ AI CONNECTION</div>
+      <p>Language models trained on diverse data learn that specificity and universality reinforce each other. An LLM trained on writers like Junot Díaz, Yoko Ogawa, and Chinua Achebe learns that cultural detail and emotional resonance go together. But a model trained only on literary fiction that has been stripped of cultural particularity learns that good writing is generic. This is why data diversity matters profoundly: it teaches models that specificity is a feature, not a bug. Modern AI writing tools would be better if they were trained to value specific detail rather than generic smoothness. And writers using AI should prompt for specificity: "Write this scene with cultural details" rather than letting the model default to generic.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This echoes <em>The Alchemist</em>'s idea of personal legend—the most universal truths emerge from your most particular journey. Also relates to <em>Man's Search for Meaning</em>, where Frankl's specific testimony becomes universally meaningful.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The paradox of writing is that the more specific you are, the more universal it becomes. The reader doesn't need a generic 'protagonist'; they need to see someone real."</div>
+      <div class="quote-attr">— Matthew Salesses, <em>Craft in the Real World</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 9: READING ACROSS DIFFERENCE ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f8faf5 0%, #f0f9f5 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--mint);">9</div>
+    <h2 class="lesson-title">Learn to Read Across Difference</h2>
+    <p class="lesson-subtitle">How to give feedback on work from cultures, experiences, and traditions different from your own</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 320" width="700" height="320">
+        <!-- Reader's interior landscape -->
+        <g>
+          <circle cx="350" cy="80" r="50" fill="#55EFC4" opacity="0.3" stroke="#00B894" stroke-width="2"/>
+          <text x="350" y="85" font-size="11" font-weight="700" fill="#00B894" text-anchor="middle">Your Experience</text>
+          <text x="350" y="100" font-size="10" fill="#00B894" text-anchor="middle">& Assumptions</text>
+        </g>
+
+        <!-- Arrow down -->
+        <path d="M 350 135 L 350 160" stroke="#00B894" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+        <!-- Text being read -->
+        <rect x="220" y="160" width="260" height="70" fill="#f5e6d3" stroke="#d4a574" stroke-width="2" rx="6"/>
+        <text x="350" y="185" font-size="12" font-weight="600" fill="#333" text-anchor="middle">Text from Different</text>
+        <text x="350" y="205" font-size="12" font-weight="600" fill="#333" text-anchor="middle">Culture/Experience</text>
+
+        <!-- Bridges (curved paths) -->
+        <path d="M 300 165 Q 250 220 280 260" stroke="#00B894" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+        <path d="M 400 165 Q 450 220 420 260" stroke="#00B894" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+
+        <!-- Left: What to ask -->
+        <g>
+          <rect x="50" y="250" width="240" height="60" fill="#e8f9f5" stroke="#00B894" stroke-width="1.5" rx="6"/>
+          <text x="170" y="270" font-size="11" font-weight="700" fill="#00B894" text-anchor="middle">Ask Questions</text>
+          <text x="70" y="290" font-size="9" fill="#333">"What tradition is this from?"</text>
+          <text x="70" y="305" font-size="9" fill="#333">"What am I not understanding?"</text>
+        </g>
+
+        <!-- Right: Avoid -->
+        <g>
+          <rect x="410" y="250" width="240" height="60" fill="#fff5f0" stroke="#e17055" stroke-width="1.5" rx="6"/>
+          <text x="530" y="270" font-size="11" font-weight="700" fill="#e17055" text-anchor="middle">Don't Assume</text>
+          <text x="430" y="290" font-size="9" fill="#333">"This is confusing" ≠</text>
+          <text x="430" y="305" font-size="9" fill="#333">"This is bad"</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>Reading work from different cultures, traditions, and experiences requires humility. When you encounter a technique you don't recognize—a narrative structure, a rhetorical choice, a cultural reference—your first job isn't to judge. It's to ask: What is this doing? What tradition is this from? What am I not understanding because I'm not from that tradition? Salesses argues that the best workshop feedback comes from readers willing to say "I don't understand this—can you explain?" rather than "This doesn't work." Because "This doesn't work" often means "This doesn't work for me, because I lack the cultural literacy to read it." Real examples: If a writer uses call-and-response, that's African American rhetorical tradition, not a craft failure. If a writer mixes languages, that's diasporic reality, not confusing writing. If a character's emotional expression seems indirect to you, you might be lacking the cultural context to read directness. The craft question becomes: Can I set aside my assumptions and actually listen? Can I ask "What is the effect you're creating?" instead of "Why isn't this what I expected?"</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Workshop reader: "I don't get it." Author: "Yeah, because you're not the reader I wrote it for." Workshop: *shocked Pikachu face* "But shouldn't writing be for EVERYONE?" Author: "It's for people who understand this language, this culture, this tradition. You can learn, or you can accept it's not for you."</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ AI CONNECTION</div>
+      <p>Large language models struggle with this because they have no humility. They generate output based on patterns, and if the pattern is unfamiliar, they often either reproduce it badly or avoid it. This is a major limitation: AI can't learn to read across difference the way humans can. However, modern prompt engineering partially solves this. If you tell an LLM "this is written in [literary tradition], respond appropriately," it can sometimes engage more thoughtfully. But fundamentally, AI lacks the lived experience that creates genuine reading across difference. It can mimic understanding but not actually build cultural literacy over time. This is why human readers in diverse workshops matter more than AI feedback—humans can actually grow in their ability to read across difference. AI can reflect patterns but can't develop the humility and openness that Salesses advocates.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This parallels <em>Never Split the Difference</em> (Chris Voss) on the power of asking questions before judging, and <em>Crucial Conversations</em> on creating safety to understand across disagreement.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"If you don't understand it, that might mean you don't have the cultural context to read it. Your job as a feedback-giver is to ask, not assume."</div>
+      <div class="quote-attr">— Matthew Salesses, <em>Craft in the Real World</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 10: REVISING WITH INTENTION ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #fef5f0 0%, #ffe8d6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--orange);">10</div>
+    <h2 class="lesson-title">Revision as Deepening, Not Erasing</h2>
+    <p class="lesson-subtitle">Revising your work without losing your voice</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" width="700" height="280">
+        <!-- Draft 1 -->
+        <g>
+          <rect x="50" y="40" width="140" height="80" fill="#FFE8D6" stroke="#FDCB6E" stroke-width="2" rx="4"/>
+          <text x="120" y="65" font-size="11" font-weight="700" fill="#FF9800" text-anchor="middle">Draft 1</text>
+          <text x="120" y="85" font-size="9" fill="#333" text-anchor="middle">Raw voice</text>
+          <text x="120" y="100" font-size="9" fill="#333" text-anchor="middle">Specific</text>
+          <text x="120" y="115" font-size="9" fill="#333" text-anchor="middle">Unpolished</text>
+        </g>
+
+        <!-- Feedback -->
+        <path d="M 195 80 L 255 80" stroke="#8B3A3A" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <text x="225" y="70" font-size="9" fill="#8B3A3A" text-anchor="middle" font-weight="600">Questions,</text>
+        <text x="225" y="82" font-size="9" fill="#8B3A3A" text-anchor="middle" font-weight="600">observations</text>
+
+        <!-- Draft 2 -->
+        <g>
+          <rect x="260" y="40" width="140" height="80" fill="#F5E8FF" stroke="#A06CD5" stroke-width="2" rx="4"/>
+          <text x="330" y="65" font-size="11" font-weight="700" fill="#6C5CE7" text-anchor="middle">Draft 2</text>
+          <text x="330" y="85" font-size="9" fill="#333" text-anchor="middle">Deepened</text>
+          <text x="330" y="100" font-size="9" fill="#333" text-anchor="middle">Voice intact</text>
+          <text x="330" y="115" font-size="9" fill="#333" text-anchor="middle">More clear</text>
+        </g>
+
+        <!-- More feedback -->
+        <path d="M 405 80 L 465 80" stroke="#8B3A3A" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <text x="435" y="70" font-size="9" fill="#8B3A3A" text-anchor="middle" font-weight="600">More</text>
+        <text x="435" y="82" font-size="9" fill="#8B3A3A" text-anchor="middle" font-weight="600">questions</text>
+
+        <!-- Draft 3 -->
+        <g>
+          <rect x="470" y="40" width="140" height="80" fill="#E8F9F5" stroke="#00B894" stroke-width="2" rx="4"/>
+          <text x="540" y="65" font-size="11" font-weight="700" fill="#00B894" text-anchor="middle">Draft 3</text>
+          <text x="540" y="85" font-size="9" fill="#333" text-anchor="middle">Refined</text>
+          <text x="540" y="100" font-size="9" fill="#333" text-anchor="middle">Voice crystallized</text>
+          <text x="540" y="115" font-size="9" fill="#333" text-anchor="middle">Powerful</text>
+        </g>
+
+        <!-- Key principle -->
+        <rect x="50" y="160" width="560" height="100" fill="#f5f5f5" stroke="#999" stroke-width="1.5" stroke-dasharray="5,5" rx="6"/>
+        <text x="330" y="185" font-size="12" font-weight="700" fill="#333" text-anchor="middle">The Point: Revision is NOT compromise</text>
+        <text x="330" y="210" font-size="11" fill="#444" text-anchor="middle">You don't weaken your voice to please feedback.</text>
+        <text x="330" y="230" font-size="11" fill="#444" text-anchor="middle">You strengthen it by understanding what you're trying to do,</text>
+        <text x="330" y="250" font-size="11" fill="#444" text-anchor="middle">then making every choice intentional.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>Revising doesn't mean erasing. Salesses argues that many writers, especially marginalized writers in workshops, mistake "respond to feedback" for "erase what makes your work distinctive." The best revision deepens your intention while making it clearer. If someone says "I didn't understand why your character speaks this way," the revision isn't to make them speak generically. It's to understand what you were trying to accomplish with that speech pattern and make it even more effective. Maybe you add a line that clarifies context. Maybe you develop the voice earlier so the reader is prepared. Maybe you realize the effect isn't landing and try a different approach—but still staying true to what you're doing. Salesses emphasizes: every suggestion deserves consideration, but not every suggestion deserves adoption. Your job in revision is to understand your intention clearly enough to distinguish between feedback that helps you achieve it and feedback that asks you to abandon it. Real example: A writer using vernacular dialect gets told "make it more standard English." The revision isn't to eliminate vernacular; it's to decide whether this is intentional and, if so, make it so clear and purposeful that readers understand it's a choice, not a mistake.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Feedback: "This doesn't work for me." Inexperienced writer: *deletes the whole thing, sounds like everyone else now, gets generic praise* Experienced writer: "Interesting, let me think about whether this is working for my intended reader, not you." There's actually a difference.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ AI CONNECTION</div>
+      <p>AI writing assistants can help with this. Rather than accepting AI suggestions wholesale, writers can use AI as a feedback tool: "Here's my passage with this stylistic choice—what effect does it create?" An AI can describe effects without judgment. But AI struggles with the deeper question: "Is this serving my artistic intention?" That requires human judgment. This is why human workshops matter even if AI feedback tools exist. The human can understand intention; the AI can describe effects. Combining both—AI for immediate feedback, humans for intention-checking—creates the best revision process. Writers should use AI to test technical choices but reserve intentional artistic decisions for human collaboration.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This echoes <em>Atomic Habits</em> on systems being more important than goals—revision is a system for strengthening intention over many drafts. Also relates to <em>The Alchemist</em>'s theme of staying true to your personal legend despite external pressure.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Revision isn't about making everyone happy. It's about making your intention so clear and so strong that readers experience what you meant to give them."</div>
+      <div class="quote-attr">— Matthew Salesses, <em>Craft in the Real World</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 11: BUILDING BETTER WORKSHOPS ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f5f8f0 0%, #f0faf5 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--forest);">11</div>
+    <h2 class="lesson-title">Designing Workshops That Serve All Writers</h2>
+    <p class="lesson-subtitle">Concrete structures for decolonized, equitable critique</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 320" width="700" height="320">
+        <!-- Structural elements -->
+        <g>
+          <!-- 1. Diverse feedback -->
+          <rect x="50" y="20" width="150" height="70" fill="#E8F9F5" stroke="#00B894" stroke-width="2" rx="6"/>
+          <text x="125" y="45" font-size="11" font-weight="700" fill="#00B894" text-anchor="middle">1. Diverse</text>
+          <text x="125" y="60" font-size="11" font-weight="700" fill="#00B894" text-anchor="middle">Readers</text>
+          <text x="70" y="80" font-size="9" fill="#333">Not same</text>
+          <text x="70" y="93" font-size="9" fill="#333">demographic</text>
+        </g>
+
+        <g>
+          <!-- 2. Structured questions -->
+          <rect x="275" y="20" width="150" height="70" fill="#F5E8FF" stroke="#A06CD5" stroke-width="2" rx="6"/>
+          <text x="350" y="45" font-size="11" font-weight="700" fill="#6C5CE7" text-anchor="middle">2. Question</text>
+          <text x="350" y="60" font-size="11" font-weight="700" fill="#6C5CE7" text-anchor="middle">Framework</text>
+          <text x="295" y="80" font-size="9" fill="#333">Not rules</text>
+          <text x="295" y="93" font-size="9" fill="#333">about quality</text>
+        </g>
+
+        <g>
+          <!-- 3. Writer choice -->
+          <rect x="500" y="20" width="150" height="70" fill="#FFF5F0" stroke="#E17055" stroke-width="2" rx="6"/>
+          <text x="575" y="45" font-size="11" font-weight="700" fill="#E17055" text-anchor="middle">3. Writer</text>
+          <text x="575" y="60" font-size="11" font-weight="700" fill="#E17055" text-anchor="middle">Agency</text>
+          <text x="520" y="80" font-size="9" fill="#333">Writer decides</text>
+          <text x="520" y="93" font-size="9" fill="#333">what to use</text>
+        </g>
+
+        <!-- Connecting arrows -->
+        <path d="M 200 55 L 275 55" stroke="#556B6B" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <path d="M 425 55 L 500 55" stroke="#556B6B" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+        <!-- Additional structures -->
+        <g>
+          <rect x="50" y="130" width="600" height="170" fill="#f8f5f0" stroke="#d4a574" stroke-width="2" rx="8"/>
+          <text x="350" y="160" font-size="12" font-weight="700" fill="#8B3A3A" text-anchor="middle">WORKSHOP PRACTICES THAT WORK</text>
+
+          <text x="70" y="190" font-size="11" fill="#333" font-weight="600">●  Everyone reads the work before workshop (no first reads)</text>
+          <text x="70" y="210" font-size="11" fill="#333" font-weight="600">●  Author silent during feedback (listen, don't defend)</text>
+          <text x="70" y="230" font-size="11" fill="#333" font-weight="600">●  "What I noticed" over "What doesn't work"</text>
+          <text x="70" y="250" font-size="11" fill="#333" font-weight="600">●  Feedback on the feedback (call out bias when it appears)</text>
+          <text x="70" y="270" font-size="11" fill="#333" font-weight="600">●  Author chooses which feedback to address</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>Salesses doesn't just critique—he offers concrete structures for better workshops. Key principle: make the workshop a space of inquiry, not judgment. Specific practices: (1) Everyone reads the work before workshop—no first reads in group, which means all feedback is informed. (2) Author stays silent during feedback—listen, don't defend. This prevents workshop members from defaulting to whatever the confident voices say. (3) Enforce the question-based framework: "I noticed," "I wondered," "The effect was"—not "This doesn't work." (4) "Feedback on the feedback"—if someone says "This dialect is confusing," another person might ask "Are you saying it's confusing, or that you don't have the cultural literacy to read it?" This creates accountability. (5) Author chooses what to use—workshop is consultation, not law. (6) Diverse workshops matter not just for representation but for varied feedback. If everyone in the room was trained the same way, everyone will give the same feedback. Diverse readers catch different things. (7) Explicit about whose preferences dominate—if you notice the published author in the room speaks constantly, institute a silence rule. If the youngest person is never heard, create structure to ensure they speak. Workshops are designed systems; changing the design changes what gets valued.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Traditional workshop: "Here are the rules everyone must follow." Better workshop: "Here's a structure that helps us understand what you're doing and whether it's working." Former creates conformity; latter creates clarity. Guess which one makes better writing?</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ AI CONNECTION</div>
+      <p>These workshop principles apply to training AI systems too. Instead of training on a single canonical dataset (which creates conformity), train on diverse data. Instead of optimizing for a single "quality" metric (which replicates biases), use multiple feedback channels. Instead of having human raters enforce universal rules, have them ask questions about effects. Instead of the model always suggesting changes, let it offer observations and let users decide. Modern prompt engineering is moving this direction: dynamic few-shot examples from diverse sources, user control over the output, and system messages that encourage descriptive feedback over prescriptive rules. The workshop principles—diversity, inquiry, user agency, accountability—actually improve AI systems too.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This connects to <em>Thinking in Bets</em> (Annie Duke) on building groups that improve decisions through structured inquiry, and <em>Crucial Conversations</em> on creating psychological safety for honest dialogue.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"A workshop designed differently produces different writers. If you want diverse, authentic voices, design a workshop that values diverse, authentic voices."</div>
+      <div class="quote-attr">— Matthew Salesses, <em>Craft in the Real World</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 12: CRAFT AS DECOLONIZATION ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f5f8 0%, #e8f4fd 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--deep-blue);">12</div>
+    <h2 class="lesson-title">Craft Decolonization Is Craft Itself</h2>
+    <p class="lesson-subtitle">The ultimate insight: teaching decolonized craft makes better writers and better writing</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="700" height="300">
+        <!-- Old craft (left) -->
+        <g>
+          <circle cx="180" cy="100" r="60" fill="#FF6B6B" opacity="0.2" stroke="#FF6B6B" stroke-width="2"/>
+          <text x="180" y="90" font-size="11" font-weight="700" fill="#FF6B6B" text-anchor="middle">Old Craft</text>
+          <text x="180" y="108" font-size="10" fill="#666" text-anchor="middle">(Universal</text>
+          <text x="180" y="123" font-size="10" fill="#666" text-anchor="middle">rules)</text>
+
+          <text x="50" y="190" font-size="10" fill="#333" text-anchor="start">• One right way</text>
+          <text x="50" y="210" font-size="10" fill="#333" text-anchor="start">• Rules from above</text>
+          <text x="50" y="230" font-size="10" fill="#333" text-anchor="start">• Conformity</text>
+          <text x="50" y="250" font-size="10" fill="#333" text-anchor="start">• Limited voices</text>
+        </g>
+
+        <!-- Arrow -->
+        <path d="M 240 100 L 320 100" stroke="#8B3A3A" stroke-width="3" marker-end="url(#arrowhead)"/>
+        <text x="280" y="85" font-size="10" fill="#8B3A3A" font-weight="600" text-anchor="middle">Decolonize</text>
+
+        <!-- New craft (right) -->
+        <g>
+          <circle cx="520" cy="100" r="60" fill="#4ECDC4" opacity="0.2" stroke="#4ECDC4" stroke-width="2"/>
+          <text x="520" y="90" font-size="11" font-weight="700" fill="#0B8C8B" text-anchor="middle">Decolonized</text>
+          <text x="520" y="108" font-size="11" font-weight="700" fill="#0B8C8B" text-anchor="middle">Craft</text>
+
+          <text x="380" y="190" font-size="10" fill="#333" text-anchor="start">• Many valid ways</text>
+          <text x="380" y="210" font-size="10" fill="#333" text-anchor="start">• Writers choose</text>
+          <text x="380" y="230" font-size="10" fill="#333" text-anchor="start">• Authenticity</text>
+          <text x="380" y="250" font-size="10" fill="#333" text-anchor="start">• Diverse excellence</text>
+        </g>
+
+        <!-- Outcome -->
+        <rect x="150" y="280" width="400" height="30" fill="#f0f9f5" stroke="#00B894" stroke-width="2" rx="6"/>
+        <text x="350" y="302" font-size="11" font-weight="600" fill="#00B894" text-anchor="middle">Result: Better writing, from more writers, in more voices.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>The ultimate argument of <em>Craft in the Real World</em>: decolonizing craft isn't a moral add-on to writing education. It's not "we should be inclusive because it's nice." It's that decolonized craft produces better writers and better writing. When you move from "here are the universal rules" to "here are many approaches and you need to choose," writers think harder about their work. When you center intention over prescription, writers develop stronger voices. When you read across difference, you discover techniques and traditions you never knew existed. When you honor cultural particularity, stories become more resonant and universal. Writers develop moral clarity—they understand why they're making choices, not just following rules. The workshop becomes a place of genuine inquiry rather than conformity. And practically, this matters for your career: the most successful contemporary writers (N.K. Jemisin, Ocean Vuong, Colson Whitehead, Brit Bennett) are those who write with their full cultural voice, breaking the "rules" as needed. They aren't successful despite decolonizing their craft; they're successful because they did. Salesses argues the workshop still teaches rules—but transparent ones, applicable to particular readers and contexts, not universal laws. This makes writers more intentional, not less disciplined.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Publishing industry: "Why don't we see more diverse voices?" Also publishing: "Everyone has to write like the same people have always written, or it's not 'real' craft." Salesses: "Maybe you have to change what you teach for writers to feel allowed to write authentically?"</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚙️ AI CONNECTION</div>
+      <p>This applies directly to AI training and deployment. Models trained to optimize for a single, universal quality metric become narrow. Models trained on diverse data with diverse feedback signals generate more varied, interesting output. The analogy: decolonizing craft is like diversifying training data. It's not about lowering standards; it's about recognizing that excellence takes many forms. Modern AI research increasingly recognizes this—models trained on diverse text, fine-tuned with diverse feedback, prompted for cultural context generate better, more useful output than monoculture models. The practical insight: if you want your AI system to help writers from diverse backgrounds, train it on diverse writing, teach it to recognize diverse excellence, and let it understand that one approach isn't universal. This is how AI actually becomes useful for many writers rather than reinforcing existing publishing hierarchies.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This is the culmination of themes in <em>Mindset</em> (growth mindset vs. fixed), <em>Range</em> (specialization vs. diverse approaches), and <em>Atomic Habits</em> (systems that serve your goals, not your limitations). It also echoes the core of <em>Man's Search for Meaning</em>: the freedom to choose your own path is what gives life meaning.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"When we teach writers to think about craft instead of following rules, when we center their intentions and cultural voices, we don't get weaker writing. We get stronger, more honest, more necessary work. We get more writers. We get literature that actually reflects the world."</div>
+      <div class="quote-attr">— Matthew Salesses, <em>Craft in the Real World</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 1: THE WORKSHOP MOMENT ===== -->
+<section class="story" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+  <div class="story-inner">
+    <h2>📖 Story Spotlight: The Workshop Moment That Changes Everything</h2>
+
+    <div class="story-illustration">
+      <svg viewBox="0 0 700 300" width="700" height="300">
+        <!-- Classroom -->
+        <rect x="80" y="80" width="540" height="160" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" rx="6"/>
+
+        <!-- Writer at desk (vulnerable) -->
+        <circle cx="150" cy="140" r="20" fill="#4ECDC4" opacity="0.7"/>
+        <rect x="130" y="160" width="40" height="30" fill="#4ECDC4" opacity="0.7"/>
+
+        <!-- Workshop members speaking -->
+        <circle cx="280" cy="130" r="18" fill="rgba(255,255,255,0.3)"/>
+        <text x="280" y="140" font-size="12" fill="#fff" text-anchor="middle" font-weight="600">?</text>
+
+        <circle cx="400" cy="130" r="18" fill="rgba(255,255,255,0.3)"/>
+        <text x="400" y="140" font-size="12" fill="#fff" text-anchor="middle" font-weight="600">?</text>
+
+        <circle cx="550" cy="140" r="18" fill="rgba(255,255,255,0.3)"/>
+        <text x="550" y="150" font-size="12" fill="#fff" text-anchor="middle" font-weight="600">?</text>
+
+        <!-- Speech bubbles (feedback) -->
+        <path d="M 240 100 L 220 80 L 260 70 Z" fill="#FF6B6B" opacity="0.8"/>
+        <text x="240" y="115" font-size="10" fill="#fff" text-anchor="middle">"This is confusing"</text>
+
+        <path d="M 400 100 L 380 75 L 420 65 Z" fill="#FF6B6B" opacity="0.8"/>
+        <text x="400" y="115" font-size="10" fill="#fff" text-anchor="middle">"Make it clearer"</text>
+
+        <path d="M 550 105 L 535 80 L 565 75 Z" fill="#FF6B6B" opacity="0.8"/>
+        <text x="550" y="120" font-size="10" fill="#fff" text-anchor="middle">"Too specific"</text>
+
+        <!-- Moment of realization arrow -->
+        <path d="M 150 80 L 150 40" stroke="#FFE66D" stroke-width="3" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+        <text x="160" y="45" font-size="11" fill="#FFE66D" font-weight="600">Understanding</text>
+      </svg>
+    </div>
+
+    <div class="story-content">
+      <p>Salesses describes a moment that many writers recognize: you're in workshop, sharing a piece informed by your cultural tradition. Maybe it uses a narrative technique from magical realism, or dialect from your grandmother, or direct address from oral storytelling. The workshop responds with confusion: "I don't understand this." "This isn't clear." "It's too specific." And in that moment, a choice crystallizes. You can either: (1) Accept the verdict, erase what makes your work yours, write to please the room. (2) Doubt yourself, assume the room is right and you're wrong. (3) Recognize that the room doesn't understand your tradition, and that's information, not judgment.</p>
+
+      <p>Salesses's intervention: if the workshop leader had said "I don't understand this—what literary tradition informs your approach?" instead of "This doesn't work," everything changes. The writer doesn't internalize shame. They don't erase their voice. They explain—or they realize they need to provide more context for their intended reader, not fewer details. The work deepens. The writer learns they can take feedback (which is valuable) without abandoning intention (which is more valuable). This is the decolonization moment: recognizing that "I don't understand" ≠ "This is bad," and that workshop exists to help you communicate your vision more clearly, not to make you invisible.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 2: TONI MORRISON'S RULES ===== -->
+<section class="story" style="background: linear-gradient(135deg, #1a0f1a 0%, #2d1a3d 50%, #1a1a3e 100%);">
+  <div class="story-inner">
+    <h2>📖 Story Spotlight: When Toni Morrison Breaks the Rules</h2>
+
+    <div class="story-illustration">
+      <svg viewBox="0 0 700 300" width="700" height="300">
+        <!-- Book spine -->
+        <rect x="150" y="60" width="100" height="200" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+        <text x="200" y="150" font-size="14" font-weight="700" fill="#FFE8D6" text-anchor="middle" transform="rotate(-90 200 150)">BELOVED</text>
+
+        <!-- Rule boxes around it -->
+        <!-- Rule 1: Top left -->
+        <rect x="50" y="40" width="80" height="60" fill="#FF6B6B" opacity="0.2" stroke="#FF6B6B" stroke-width="2" rx="4"/>
+        <text x="90" y="55" font-size="9" font-weight="600" fill="#FF6B6B" text-anchor="middle">RULE:</text>
+        <text x="90" y="70" font-size="8" fill="#FF6B6B" text-anchor="middle">Show</text>
+        <text x="90" y="82" font-size="8" fill="#FF6B6B" text-anchor="middle">don't tell</text>
+
+        <!-- Rule 2: Top right -->
+        <rect x="570" y="40" width="80" height="60" fill="#FF6B6B" opacity="0.2" stroke="#FF6B6B" stroke-width="2" rx="4"/>
+        <text x="610" y="55" font-size="9" font-weight="600" fill="#FF6B6B" text-anchor="middle">RULE:</text>
+        <text x="610" y="70" font-size="8" fill="#FF6B6B" text-anchor="middle">Minimize</text>
+        <text x="610" y="82" font-size="8" fill="#FF6B6B" text-anchor="middle">narrator</text>
+
+        <!-- Rule 3: Bottom left -->
+        <rect x="50" y="220" width="80" height="60" fill="#FF6B6B" opacity="0.2" stroke="#FF6B6B" stroke-width="2" rx="4"/>
+        <text x="90" y="235" font-size="9" font-weight="600" fill="#FF6B6B" text-anchor="middle">RULE:</text>
+        <text x="90" y="250" font-size="8" fill="#FF6B6B" text-anchor="middle">Plot is</text>
+        <text x="90" y="262" font-size="8" fill="#FF6B6B" text-anchor="middle">paramount</text>
+
+        <!-- Rule 4: Bottom right -->
+        <rect x="570" y="220" width="80" height="60" fill="#FF6B6B" opacity="0.2" stroke="#FF6B6B" stroke-width="2" rx="4"/>
+        <text x="610" y="235" font-size="9" font-weight="600" fill="#FF6B6B" text-anchor="middle">RULE:</text>
+        <text x="610" y="250" font-size="8" fill="#FF6B6B" text-anchor="middle">Linear</text>
+        <text x="610" y="262" font-size="8" fill="#FF6B6B" text-anchor="middle">narrative</text>
+
+        <!-- X marks breaking rules -->
+        <line x1="160" y1="110" x2="190" y2="140" stroke="#FFE66D" stroke-width="3"/>
+        <line x1="190" y1="110" x2="160" y2="140" stroke="#FFE66D" stroke-width="3"/>
+
+        <line x1="560" y1="110" x2="590" y2="140" stroke="#FFE66D" stroke-width="3"/>
+        <line x1="590" y1="110" x2="560" y2="140" stroke="#FFE66D" stroke-width="3"/>
+
+        <line x1="160" y1="280" x2="190" y2="250" stroke="#FFE66D" stroke-width="3"/>
+        <line x1="190" y1="280" x2="160" y2="250" stroke="#FFE66D" stroke-width="3"/>
+
+        <line x1="560" y1="280" x2="590" y2="250" stroke="#FFE66D" stroke-width="3"/>
+        <line x1="590" y1="280" x2="560" y2="250" stroke="#FFE66D" stroke-width="3"/>
+      </svg>
+    </div>
+
+    <div class="story-content">
+      <p>Toni Morrison's <em>Beloved</em> violates nearly every workshop rule: it tells more than shows ("Sethe was not a woman who could be argued with"); the narrator is omniscient and interpretive; the plot is circular and fragmented, not linear; the emotional truth is in Morrison's voice as much as in action. In a traditional workshop, <em>Beloved</em> would be marked for every craft violation. Yet it's one of the greatest novels in American literature. Why? Because Morrison knew exactly what she was doing. She needed a narrator with authority to interpret Sethe's interiority because Sethe's consciousness couldn't be fully dramatized—her trauma exceeded representation. She needed fragmentation to enact the fragmentary nature of trauma and memory. She needed her voice because this is a story about claiming voice after it's been stolen.</p>
+
+      <p>Salesses uses Morrison as evidence: the most powerful contemporary writing comes from writers who break the "universal" rules because they have a different aesthetic, drawn from their literary tradition. Morrison draws on African American narrative traditions, oral storytelling, and rhetorical power. These aren't lesser techniques; they're different ones, serving different artistic purposes. A workshop that taught Morrison the "right" rules would have diminished one of the greatest writers of our time. The question becomes: how many writers like Morrison never finish because they internalized the workshop's judgment that their voice is wrong? How many stories that could change literature never exist because the writer accepted the verdict that their approach violates rules? Decolonizing craft means creating space for this kind of genius.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 3: FROM MANUSCRIPT TO AUTHENTIC VOICE ===== -->
+<section class="story" style="background: linear-gradient(135deg, #1a2a1e 0%, #1f3a2f 50%, #1a2e24 100%);">
+  <div class="story-inner">
+    <h2>📖 Story Spotlight: The Writer Who Found Her Voice</h2>
+
+    <div class="story-illustration">
+      <svg viewBox="0 0 700 300" width="700" height="300">
+        <!-- Timeline of voice -->
+        <line x1="100" y1="150" x2="600" y2="150" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+
+        <!-- Stage 1: Pre-workshop -->
+        <circle cx="150" cy="150" r="25" fill="#FF6B6B" opacity="0.5"/>
+        <text x="150" y="155" font-size="11" font-weight="600" fill="#fff" text-anchor="middle">1</text>
+        <text x="150" y="190" font-size="10" fill="#fff" text-anchor="middle">Raw voice</text>
+        <text x="150" y="205" font-size="9" fill="rgba(255,255,255,0.7)" text-anchor="middle">(unpolished)</text>
+
+        <!-- Stage 2: Workshop pressure -->
+        <circle cx="300" cy="150" r="25" fill="#FF9800" opacity="0.5"/>
+        <text x="300" y="155" font-size="11" font-weight="600" fill="#fff" text-anchor="middle">2</text>
+        <text x="300" y="190" font-size="10" fill="#fff" text-anchor="middle">Workshop</text>
+        <text x="300" y="205" font-size="9" fill="rgba(255,255,255,0.7)" text-anchor="middle">(erased voice)</text>
+
+        <!-- Stage 3: Questioning -->
+        <circle cx="450" cy="150" r="25" fill="#4ECDC4" opacity="0.5"/>
+        <text x="450" y="155" font-size="11" font-weight="600" fill="#333" text-anchor="middle">3</text>
+        <text x="450" y="190" font-size="10" fill="#fff" text-anchor="middle">Recognition</text>
+        <text x="450" y="205" font-size="9" fill="rgba(255,255,255,0.7)" text-anchor="middle">(asks: whose reader?)</text>
+
+        <!-- Stage 4: Authentic revision -->
+        <circle cx="600" cy="150" r="25" fill="#55EFC4" opacity="0.7"/>
+        <text x="600" y="155" font-size="11" font-weight="600" fill="#333" text-anchor="middle">4</text>
+        <text x="600" y="190" font-size="10" fill="#fff" text-anchor="middle">Craft</text>
+        <text x="600" y="205" font-size="9" fill="rgba(255,255,255,0.7)" text-anchor="middle">(intentional voice)</text>
+
+        <!-- Quote -->
+        <rect x="50" y="250" width="600" height="40" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1" rx="4"/>
+        <text x="350" y="275" font-size="11" fill="#fff" text-anchor="middle" font-style="italic">"I learned I wasn't broken. The workshop was just looking for something different."</text>
+      </svg>
+    </div>
+
+    <div class="story-content">
+      <p>A writer submits to a workshop with a manuscript that has her voice—direct, emotional, with cultural specificity. Workshop feedback: "Show more, tell less." "Trim the family details." "Make the protagonist less passive." She revises, stripping away the elements that made the work hers. The new version gets praise for being "clearer." She continues this way for years, never quite landing a publishing deal, never quite feeling like the work is hers. The voice that made her unique becomes dormant.</p>
+
+      <p>Then something shifts: maybe she reads Salesses, or finds a different community, or reaches a breaking point. She realizes: the original version was doing something intentional. The telling wasn't weak; it was rhetorical authority. The family details weren't clutter; they were the story. The protagonist's patience wasn't passivity; it was a survival strategy her character needed. She goes back to drafts from years ago and starts revising from a place of reclamation, not accommodation. She asks: Who am I writing for? What's my literary tradition? What do I need this story to do? The revision deepens her authentic voice rather than erasing it. The work finds readers who were always her readers—people who value the things she values. She becomes the writer she was always trying to be, not the writer the workshop wanted her to be. This is the promise of decolonized craft: you don't lose discipline or craft. You gain clarity about whose standards matter and why.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHEATSHEET ===== -->
+<section class="cheatsheet">
+  <div class="cheatsheet-inner">
+    <h2>Quick Reference: Decolonized Craft Principles</h2>
+
+    <div class="cheatsheet-grid">
+      <div class="cheatsheet-card">
+        <h3>Core Principle #1: Craft is Cultural</h3>
+        <p>Writing rules aren't universal laws—they're culturally rooted aesthetics. "Show don't tell," "cut adjectives," "linear narrative"—all come from specific literary traditions. Honor other traditions equally.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>Core Principle #2: Whose Reader?</h3>
+        <p>Craft always serves a reader. Not "the reader" (universal myth), but a specific reader with specific cultural literacy. Know who you're writing for. Craft choices serve them.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>For Giving Feedback</h3>
+        <p><strong>Descriptive:</strong> "When I read this, I felt..." "This reminds me of..." "What does this do?"</p>
+        <p><strong>Not prescriptive:</strong> "This doesn't work." "Cut this." "You're violating show/tell."</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>For Receiving Feedback</h3>
+        <p>Distinguish between: (1) Feedback that helps you achieve your intention. (2) Feedback that asks you to abandon it. Take #1; interrogate #2. Your vision matters.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>Red Flag: "Make It Less"</h3>
+        <p>If feedback is "less dialect," "less cultural detail," "less emotion"—ask: Less for whom? If it's less for your intended reader, consider it. If it's less to please someone outside your tradition, be cautious.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>Reading Across Difference</h3>
+        <p>When you don't understand a technique: "What tradition is this from?" before "This doesn't work." What's unfamiliar isn't necessarily ineffective—it might just be unfamiliar to you.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>Revision Framework</h3>
+        <p><strong>Not:</strong> Erase what makes you distinctive to accommodate feedback.</p>
+        <p><strong>Yes:</strong> Deepen your intention so it's clearer to your intended reader.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>Power Dynamics Check</h3>
+        <p>In a workshop: Whose voices dominate? Whose work gets kindest reading? Who self-censors? Design can change this (diverse groups, structured questions, author chooses what to use).</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>Intention ≠ Impact, But Both Matter</h3>
+        <p>Your good intent doesn't erase reader's experience. Reader's experience doesn't mean you're bad. Both are true. The question: Can you honor both and revise intentionally?</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>The Specificity Paradox</h3>
+        <p>The more specific you are (to a person, culture, family, tradition), the more universal it becomes. Strip away specificity trying to be "universal" and you become generic instead.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>Questions That Serve Writers</h3>
+        <ul>
+          <li>What are you trying to do here?</li>
+          <li>What effect does this create?</li>
+          <li>What literary tradition informs this choice?</li>
+          <li>Who is your ideal reader?</li>
+          <li>Does this serve your intention?</li>
+          <li>What happens if you lean further into this?</li>
+        </ul>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>Decolonized Craft Produces Better Writers</h3>
+        <p>Not weaker, not easier. <strong>Better.</strong> More intentional. More honest. More powerful. Writers who know why they make choices, not who just follow rules. That's the point.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

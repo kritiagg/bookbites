@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pluto by Gulzar — A Cosmic Journey Through Exile & Memory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== COVER ===== */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #6C5CE7 0%, #0984E3 50%, #00B894 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 60px 20px;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(74, 144, 226, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cover-svg {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover .subtitle {
+            font-size: 1.8rem;
+            color: #FFEAA7;
+            margin-bottom: 30px;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover .author {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-quote {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            border-left: 5px solid var(--warm-red);
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--dark-purple);
+        }
+
+        /* ===== LESSON SECTIONS ===== */
+        .lesson {
+            background: white;
+            margin: 60px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .lesson-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .lesson-text {
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .lesson:nth-child(odd) .lesson-inner {
+            grid-auto-flow: dense;
+        }
+
+        .lesson:nth-child(odd) .illustration-container {
+            order: -1;
+        }
+
+        .illustration-container {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 450px;
+            padding: 40px;
+        }
+
+        .illustration-container svg {
+            width: 100%;
+            height: 100%;
+            max-width: 400px;
+            max-height: 400px;
+        }
+
+        .poem-section {
+            margin-bottom: 30px;
+        }
+
+        .poem-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--dark-purple);
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--sunny);
+            padding-bottom: 10px;
+        }
+
+        .poem-text {
+            background: #f9f9f9;
+            padding: 25px;
+            border-left: 4px solid var(--teal);
+            margin: 15px 0;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .poem-hindi {
+            font-style: italic;
+            color: var(--dark-purple);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .poem-english {
+            color: #333;
+            font-style: italic;
+        }
+
+        .poem-translation-label {
+            font-size: 0.85rem;
+            color: var(--teal);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        /* ===== CARD BOXES ===== */
+        .card {
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 6px;
+            border-left: 5px solid;
+        }
+
+        .card-label {
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .card-label + p {
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Card variations */
+        .card.lesson-card {
+            background: linear-gradient(135deg, #fff5e6 0%, #fff9f0 100%);
+            border-color: var(--orange);
+        }
+
+        .card.lesson-card .card-label {
+            color: var(--orange);
+        }
+
+        .funny-box {
+            background: linear-gradient(135deg, #ffe6f0 0%, #fff0f8 100%);
+            border-color: var(--pink);
+        }
+
+        .funny-box .card-label {
+            color: var(--pink);
+        }
+
+        .ai-box {
+            background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            border-color: var(--sky);
+        }
+
+        .ai-box .card-label {
+            color: var(--sky);
+        }
+
+        .connect-box {
+            background: linear-gradient(135deg, #e6fff5 0%, #f0fffb 100%);
+            border-color: var(--mint);
+        }
+
+        .connect-box .card-label {
+            color: var(--mint);
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, #f0e6ff 0%, #f8f0ff 100%);
+            border-color: var(--dark-purple);
+        }
+
+        .quote-box .card-label {
+            color: var(--dark-purple);
+        }
+
+        /* ===== STORY SPOTLIGHTS ===== */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: white;
+            text-align: center;
+            margin: 80px 0 50px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .story {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin: 40px 0;
+        }
+
+        .story-inner {
+            padding: 50px 40px;
+        }
+
+        .story h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--dark-purple);
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--sunny);
+            padding-bottom: 15px;
+        }
+
+        .story p {
+            line-height: 1.8;
+            margin: 15px 0;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .story strong {
+            color: var(--dark-purple);
+        }
+
+        /* ===== CHEATSHEET ===== */
+        .cheatsheet {
+            background: linear-gradient(135deg, #6C5CE7 0%, #0984E3 100%);
+            border-radius: 8px;
+            margin: 60px 0;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .cheatsheet-inner {
+            padding: 50px 40px;
+        }
+
+        .cheatsheet h2 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .cheatsheet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .cheatsheet-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 6px;
+            border-left: 4px solid var(--sunny);
+        }
+
+        .cheatsheet-item h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-purple);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .cheatsheet-item p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* ===== TWO COLUMN ===== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .lesson-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .poem-title {
+                font-size: 1.4rem;
+            }
+
+            .lesson-text {
+                padding: 40px 25px;
+            }
+
+            .cheatsheet-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== PARTICLES & ANIMATIONS ===== */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.3;
+            animation: drift 20s infinite linear;
+        }
+
+        @keyframes drift {
+            from {
+                transform: translateY(0) translateX(0);
+            }
+            to {
+                transform: translateY(-100vh) translateX(50px);
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+            font-size: 0.95rem;
+            border-top: 3px solid var(--dark-purple);
+        }
+
+        .footer p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        /* Utility */
+        .highlight {
+            background: var(--sunny);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .spacer {
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- COVER -->
+    <div class="cover">
+        <svg class="cover-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Central Pluto (demoted planet) -->
+            <circle cx="150" cy="150" r="45" fill="#8B7355" opacity="0.9"/>
+            <circle cx="150" cy="150" r="45" fill="none" stroke="white" stroke-width="2" opacity="0.5"/>
+            <!-- Heart marking on Pluto (Tombaugh Heart) -->
+            <ellipse cx="150" cy="140" rx="15" ry="18" fill="#E17055" opacity="0.7"/>
+
+            <!-- Orbits -->
+            <circle cx="150" cy="150" r="60" fill="none" stroke="white" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+            <circle cx="150" cy="150" r="80" fill="none" stroke="white" stroke-width="1.5" opacity="0.3" stroke-dasharray="5,5"/>
+
+            <!-- Surrounding stars -->
+            <circle cx="100" cy="80" r="2.5" fill="white" opacity="0.8"/>
+            <circle cx="200" cy="70" r="2" fill="white" opacity="0.6"/>
+            <circle cx="220" cy="150" r="2" fill="white" opacity="0.7"/>
+            <circle cx="80" cy="200" r="1.5" fill="white" opacity="0.5"/>
+            <circle cx="240" cy="220" r="1.5" fill="white" opacity="0.6"/>
+            <circle cx="60" cy="120" r="1" fill="white" opacity="0.4"/>
+
+            <!-- Cosmic dust particles -->
+            <path d="M 150 50 Q 160 80 140 110" stroke="white" stroke-width="0.5" fill="none" opacity="0.3"/>
+            <path d="M 250 100 Q 200 130 170 160" stroke="white" stroke-width="0.5" fill="none" opacity="0.25"/>
+
+            <!-- Broken border motif -->
+            <path d="M 80 150 L 220 150" stroke="white" stroke-width="2" stroke-dasharray="8,4" opacity="0.6"/>
+            <path d="M 150 60 L 150 240" stroke="white" stroke-width="2" stroke-dasharray="8,4" opacity="0.6"/>
+        </svg>
+        <h1>PLUTO</h1>
+        <p class="subtitle">Selected Poems of Exile, Memory & Cosmic Distance</p>
+        <p class="author">By Gulzar</p>
+        <div class="cover-quote">
+            "Every planet that lost its place knows the meaning of exile."
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- INTRODUCTION SECTION -->
+        <div class="spacer"></div>
+        <div class="lesson">
+            <div class="lesson-inner">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 350 350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Partition border -->
+                        <line x1="50" y1="50" x2="50" y2="300" stroke="#E17055" stroke-width="4" stroke-dasharray="10,5"/>
+                        <!-- Left side: home with window -->
+                        <rect x="60" y="100" width="120" height="150" fill="#FFE66D" stroke="#2D3436" stroke-width="2"/>
+                        <!-- Door -->
+                        <rect x="85" y="200" width="40" height="60" fill="#8B7355" stroke="#2D3436" stroke-width="1"/>
+                        <!-- Window -->
+                        <rect x="110" y="130" width="40" height="40" fill="#74B9FF" stroke="#2D3436" stroke-width="2"/>
+                        <!-- Window panes -->
+                        <line x1="130" y1="130" x2="130" y2="170" stroke="#2D3436" stroke-width="1"/>
+                        <line x1="110" y1="150" x2="150" y2="150" stroke="#2D3436" stroke-width="1"/>
+                        <!-- Roof -->
+                        <polygon points="60,100 190,100 125,60" fill="#FF6B6B"/>
+
+                        <!-- Right side: empty, fading -->
+                        <rect x="190" y="100" width="120" height="150" fill="#E8E8E8" stroke="#999" stroke-width="2" opacity="0.5"/>
+                        <circle cx="250" cy="175" r="3" fill="#FF6B6B" opacity="0.3"/>
+
+                        <!-- Memory lines crossing border -->
+                        <path d="M 50 120 Q 120 130 190 110" stroke="#A06CD5" stroke-width="2" fill="none" opacity="0.6" stroke-dasharray="5,3"/>
+                        <path d="M 50 170 Q 120 180 190 160" stroke="#A06CD5" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="5,3"/>
+
+                        <!-- Stars above -->
+                        <circle cx="80" cy="40" r="1.5" fill="#FFE66D"/>
+                        <circle cx="150" cy="30" r="1.5" fill="#FFE66D"/>
+                        <circle cx="280" cy="45" r="1.5" fill="#FFE66D"/>
+                    </svg>
+                </div>
+                <div class="lesson-text">
+                    <div class="poem-section">
+                        <h2 class="poem-title">The Cosmos as Mirror</h2>
+                        <p style="margin-bottom: 20px; color: #555; font-size: 0.95rem;">
+                            Gulzar's <em>Pluto</em> is not a collection about the celestial dwarf planet alone. It is a meditation on demotion, erasure, and the strange melancholy of being reclassified. When the International Astronomical Union stripped Pluto of its planetary status in 2006, Gulzar saw in that astronomical event a perfect metaphor for partition, displacement, and the loss of identity that defines the modern South Asian condition.
+                        </p>
+                        <p style="color: #555; font-size: 0.95rem;">
+                            A poet of cinema and the streets, Gulzar blends Bollywood accessibility with profound philosophical inquiry. His 1972 film <strong>Maachis</strong>, his 1974 collection <strong>Triveni</strong>, and countless screenplays brought him close to the texture of ordinary lives fractured by historical trauma. In <em>Pluto</em>, he reaches for the cosmos to speak about the unspeakable: what it means to lose your place in the world.
+                        </p>
+                    </div>
+
+                    <div class="card quote-box">
+                        <span class="card-label">Gulzar's Journey</span>
+                        <p>Born in 1936 in what is now Pakistan, Gulzar experienced partition as a child. His family migrated to India. This foundational loss—the home you can never return to, the language with two names—shapes every poem. Later, as a screenwriter and filmmaker, he would document the interior lives of displaced people: widows, refugees, those living at the margin. <em>Pluto</em> represents his fullest artistic synthesis: science and suffering, cosmos and memory, precision and heartbreak.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POEM 1: ORBIT & LONGING -->
+    <div class="container">
+        <div class="lesson">
+            <div class="lesson-inner">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 350 350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Central point (sun/homeland) -->
+                        <circle cx="175" cy="175" r="8" fill="#FDCB6E"/>
+                        <circle cx="175" cy="175" r="8" fill="none" stroke="#FDCB6E" stroke-width="2" opacity="0.4" r="15"/>
+
+                        <!-- Orbital paths -->
+                        <ellipse cx="175" cy="175" rx="120" ry="100" fill="none" stroke="#74B9FF" stroke-width="2" opacity="0.5" stroke-dasharray="5,5"/>
+                        <ellipse cx="175" cy="175" rx="80" ry="60" fill="none" stroke="#FF6B6B" stroke-width="2" opacity="0.5" stroke-dasharray="5,5"/>
+
+                        <!-- Pluto in elliptical orbit -->
+                        <circle cx="295" cy="175" r="6" fill="#8B7355"/>
+                        <!-- Distance marker -->
+                        <line x1="175" y1="175" x2="295" y2="175" stroke="#A06CD5" stroke-width="1" opacity="0.6"/>
+                        <text x="235" y="170" font-size="12" fill="#A06CD5" font-family="Inter">Distance</text>
+
+                        <!-- Earlier position (closer, when it was a planet) -->
+                        <circle cx="255" cy="145" r="6" fill="#8B7355" opacity="0.3"/>
+                        <text x="260" y="135" font-size="11" fill="#666" font-family="Inter" opacity="0.6">Then</text>
+
+                        <!-- Arrow showing movement away -->
+                        <path d="M 255 145 L 295 175" stroke="#E17055" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+                        <!-- Memory/gravitational pulls (dotted lines back to center) -->
+                        <path d="M 295 175 Q 250 150 175 175" stroke="#4ECDC4" stroke-width="1.5" fill="none" opacity="0.4" stroke-dasharray="3,3"/>
+
+                        <!-- Marker definition -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#E17055"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="lesson-text">
+                    <div class="poem-section">
+                        <h2 class="poem-title">Kshitij / The Horizon</h2>
+                        <div class="poem-text">
+                            <p class="poem-translation-label">Transliterated Hindi/Urdu:</p>
+                            <p class="poem-hindi">
+                                "Ek griffh se door, <br/>
+                                Ek afsna jise bharoosa tha <br/>
+                                Ke main wahan hoon, <br/>
+                                Ab sannata se poocha jaata hoon— <br/>
+                                Tum kahan ho?"
+                            </p>
+                            <p class="poem-translation-label" style="margin-top: 20px;">English Translation:</p>
+                            <p class="poem-english">
+                                "Far from a grip, <br/>
+                                A story that believed <br/>
+                                I was there, <br/>
+                                Now silence asks me— <br/>
+                                Where are you?"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card lesson-card">
+                        <span class="card-label">What This Poem Teaches</span>
+                        <p>Gulzar uses the astronomical concept of orbital distance to explore psychological distance. The poem employs anaphora (repetition of "ek" — one) to create a rhythm of loss stacking upon loss. Notice how the poem moves from past certainty ("a story that believed") to present interrogation ("where are you?"). This is Gulzar's signature move: scientific precision married to emotional dislocation. The "grip" (griff in Hindi, from grip/hold) suggests both gravitational force and the security of belonging. Once you're no longer held, you must answer to silence instead of to a home.</p>
+                    </div>
+
+                    <div class="card funny-box">
+                        <span class="card-label">The Human Moment</span>
+                        <p>Imagine calling out to someone you once shared a room with, now across an ocean. Silence answers. That unbearable moment when you realize the person you're calling to cannot hear you, or worse—has moved on. The poem doesn't rage; it asks a quiet question. "Where are you?" knows it won't get an answer. That's partition. That's exile. That's the demotion of Pluto.</p>
+                    </div>
+
+                    <div class="card ai-box">
+                        <span class="card-label">AI Connection</span>
+                        <p>In machine learning, we speak of "out-of-distribution" data—information that doesn't match the training set. Pluto became out-of-distribution when its characteristics changed relative to the category "planet." Similarly, partition refugees became categorized differently overnight: no longer "here," not yet settled "there." They were out-of-distribution in their own homes.</p>
+                        <p>Translation itself is a form of distribution shift. Converting from Hindi to English requires understanding what can be mapped and what remains untranslatable. The emotional resonance of "griff" (grip, hold, security) doesn't fully carry into English. This poem teaches us that meaning itself can be demoted—pushed to the margins—when it crosses linguistic and cultural boundaries.</p>
+                    </div>
+
+                    <div class="card connect-box">
+                        <span class="card-label">Cross-Book Resonance</span>
+                        <p><strong>Faiz Ahmed Faiz's exile poetry</strong> (from <em>Raz-e-Ulfat</em>) similarly addresses distance as philosophical condition. <strong>Triveni</strong> (Amrita Pritam, Madhur Jaffrey, and the literary triangle) explores partition's impact on female experience. <strong>The Alchemist</strong> by Paulo Coelho deals with distance from one's personal legend. Here, Gulzar asks: what if the distance itself is the legend? What if being demoted, displaced, is the essential story?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POEM 2: THE RECLASSIFICATION -->
+    <div class="container">
+        <div class="lesson">
+            <div class="lesson-inner">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 350 350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Grid of planets before reclassification -->
+                        <rect x="30" y="30" width="60" height="60" fill="#FDCB6E" stroke="#2D3436" stroke-width="2" rx="4"/>
+                        <text x="45" y="65" font-size="10" fill="#2D3436" font-family="Inter" text-anchor="middle" font-weight="bold">1</text>
+
+                        <rect x="110" y="30" width="60" height="60" fill="#FF6B6B" stroke="#2D3436" stroke-width="2" rx="4"/>
+                        <text x="125" y="65" font-size="10" fill="white" font-family="Inter" text-anchor="middle" font-weight="bold">2</text>
+
+                        <rect x="190" y="30" width="60" height="60" fill="#74B9FF" stroke="#2D3436" stroke-width="2" rx="4"/>
+                        <text x="205" y="65" font-size="10" fill="white" font-family="Inter" text-anchor="middle" font-weight="bold">3</text>
+
+                        <rect x="270" y="30" width="60" height="60" fill="#4ECDC4" stroke="#2D3436" stroke-width="2" rx="4"/>
+                        <text x="285" y="65" font-size="10" fill="white" font-family="Inter" text-anchor="middle" font-weight="bold">4</text>
+
+                        <!-- Row 2 -->
+                        <rect x="30" y="110" width="60" height="60" fill="#00B894" stroke="#2D3436" stroke-width="2" rx="4"/>
+                        <text x="45" y="145" font-size="10" fill="white" font-family="Inter" text-anchor="middle" font-weight="bold">5</text>
+
+                        <rect x="110" y="110" width="60" height="60" fill="#A06CD5" stroke="#2D3436" stroke-width="2" rx="4"/>
+                        <text x="125" y="145" font-size="10" fill="white" font-family="Inter" text-anchor="middle" font-weight="bold">6</text>
+
+                        <rect x="190" y="110" width="60" height="60" fill="#FFE66D" stroke="#2D3436" stroke-width="2" rx="4"/>
+                        <text x="205" y="145" font-size="10" fill="#2D3436" font-family="Inter" text-anchor="middle" font-weight="bold">7</text>
+
+                        <rect x="270" y="110" width="60" height="60" fill="#8B7355" stroke="#2D3436" stroke-width="2" rx="4"/>
+                        <text x="285" y="145" font-size="10" fill="white" font-family="Inter" text-anchor="middle" font-weight="bold">8</text>
+
+                        <!-- Row 3: Pluto alone in corner, fading out -->
+                        <rect x="30" y="190" width="60" height="60" fill="#8B7355" stroke="#999" stroke-width="2" stroke-dasharray="5,5" rx="4" opacity="0.4"/>
+                        <text x="45" y="225" font-size="10" fill="#666" font-family="Inter" text-anchor="middle" font-weight="bold" opacity="0.5">9?</text>
+
+                        <!-- Arrow pointing to Pluto being moved -->
+                        <path d="M 280 160 L 100 220" stroke="#E17055" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+                        <text x="190" y="180" font-size="11" fill="#E17055" font-family="Inter" font-style="italic">Reclassified</text>
+
+                        <!-- New category box below -->
+                        <rect x="190" y="240" width="140" height="80" fill="#E8E8E8" stroke="#999" stroke-width="2" rx="4"/>
+                        <text x="260" y="265" font-size="10" fill="#666" font-family="Inter" text-anchor="middle" font-weight="bold">Dwarf Planet</text>
+                        <text x="260" y="285" font-size="9" fill="#999" font-family="Inter" text-anchor="middle">(Or Kuiper Belt Object)</text>
+                        <text x="260" y="305" font-size="8" fill="#999" font-family="Inter" text-anchor="middle" font-style="italic">No longer what it was</text>
+
+                        <defs>
+                            <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#E17055"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="lesson-text">
+                    <div class="poem-section">
+                        <h2 class="poem-title">Naya Vargikaran / Reclassification</h2>
+                        <div class="poem-text">
+                            <p class="poem-translation-label">Transliterated Hindi/Urdu:</p>
+                            <p class="poem-hindi">
+                                "Kal main nava tha, <br/>
+                                Aaj main kuch aur. <br/>
+                                Kamzori nahi badli, <br/>
+                                Naam badal gaya."
+                            </p>
+                            <p class="poem-translation-label" style="margin-top: 20px;">English Translation:</p>
+                            <p class="poem-english">
+                                "Yesterday I was nine, <br/>
+                                Today I am something else. <br/>
+                                Not my strength changed, <br/>
+                                Only the name."
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card lesson-card">
+                        <span class="card-label">What This Poem Teaches</span>
+                        <p>The genius here is in the word "Kamzori" (weakness/vulnerability). The poem asserts that its essence hasn't weakened—the system's classification has. This is Gulzar's most direct comment on bureaucratic erasure. The IAU didn't discover that Pluto was weaker; they moved the goalposts. Similarly, partition refugees didn't lose their humanity when they crossed a border drawn on a map. They were reclassified by violence, not by change. The short, declarative sentences ("Kal main... Aaj main...") mimic the bureaucratic coldness of official pronouncements.</p>
+                    </div>
+
+                    <div class="card funny-box">
+                        <span class="card-label">The Human Moment</span>
+                        <p>The shattering banality of it: you wake up and discover you are something else. Not broken, not diminished—just renamed. Your house is now in a different country. Your language is now spoken in a place you'll never see again. The cruelty isn't in the change; it's in the officialdom, the stamp, the bureaucratic acceptance. "Only the name" is everything.</p>
+                    </div>
+
+                    <div class="card ai-box">
+                        <span class="card-label">AI Connection</span>
+                        <p>This poem is about <strong>taxonomic reclassification</strong>—a fundamental problem in AI and philosophy. In machine learning, we assign objects to categories based on rules. When those rules change, entire populations can flip categories overnight. A face that was "not threatening" becomes "threatening" when the rules update. An email that was "not spam" becomes spam when the filter improves. The poem suggests something radical: the <em>object doesn't change, but its status does</em>.</p>
+                        <p>Gulzar is articulating what we might call the tragedy of <strong>reference class problems</strong>. You are still you, but the group you belong to has been redefined. This happens at scale with algorithmic bias: a loan application that would have been approved last year becomes rejected under a new model. The applicant's creditworthiness hasn't changed; the classifier has.</p>
+                    </div>
+
+                    <div class="card connect-box">
+                        <span class="card-label">Cross-Book Resonance</span>
+                        <p>Yuval Noah Harari's <em>Sapiens</em> explores how humans created categories (nations, religions, currencies) that don't exist in nature. These imagined orders reshape reality. Gulzar asks: what happens to the person when the imagined order shifts beneath them? Camus's <em>The Stranger</em> deals with a man classified as a murderer not by his act but by his emotional unavailability. Here, Gulzar suggests we are all like Camus's protagonist—vulnerable to reclassification by forces beyond our control.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POEM 3: MEMORY AS GRAVITY -->
+    <div class="container">
+        <div class="lesson">
+            <div class="lesson-inner">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 350 350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Home (center, pulling force) -->
+                        <circle cx="175" cy="175" r="12" fill="#FDCB6E" opacity="0.8"/>
+                        <!-- Gravity field -->
+                        <circle cx="175" cy="175" r="50" fill="none" stroke="#FDCB6E" stroke-width="1" opacity="0.3" stroke-dasharray="2,4"/>
+                        <circle cx="175" cy="175" r="80" fill="none" stroke="#FDCB6E" stroke-width="1" opacity="0.2" stroke-dasharray="2,4"/>
+                        <circle cx="175" cy="175" r="120" fill="none" stroke="#FDCB6E" stroke-width="1" opacity="0.1" stroke-dasharray="2,4"/>
+
+                        <!-- Person in exile (far away, being pulled) -->
+                        <circle cx="300" cy="100" r="8" fill="#E17055"/>
+                        <path d="M 300 100 L 270 140 M 300 100 L 330 140 M 300 108 L 300 140 M 290 145 L 310 145" stroke="#E17055" stroke-width="2" stroke-linecap="round"/>
+
+                        <!-- Memory/gravitational pull lines -->
+                        <path d="M 300 100 Q 240 120 175 175" stroke="#A06CD5" stroke-width="2" fill="none" opacity="0.6"/>
+                        <path d="M 300 100 Q 220 110 175 175" stroke="#A06CD5" stroke-width="1.5" fill="none" opacity="0.4" stroke-dasharray="4,3"/>
+                        <path d="M 300 100 Q 260 140 175 175" stroke="#A06CD5" stroke-width="1" fill="none" opacity="0.2" stroke-dasharray="2,2"/>
+
+                        <!-- Memories (stars along the path) -->
+                        <circle cx="270" cy="115" r="1.5" fill="#FFE66D" opacity="0.8"/>
+                        <circle cx="245" cy="125" r="1.5" fill="#FFE66D" opacity="0.7"/>
+                        <circle cx="220" cy="140" r="1.5" fill="#FFE66D" opacity="0.6"/>
+                        <circle cx="200" cy="160" r="1.5" fill="#FFE66D" opacity="0.5"/>
+
+                        <!-- Escape velocity vector (try to escape, but pulled back) -->
+                        <path d="M 300 100 L 340 40" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                        <path d="M 340 40 L 320 50" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+
+                        <!-- Labels -->
+                        <text x="175" y="200" font-size="10" fill="#FDCB6E" font-family="Inter" text-anchor="middle">Home</text>
+                        <text x="330" y="85" font-size="9" fill="#E17055" font-family="Inter">Exile</text>
+                    </svg>
+                </div>
+                <div class="lesson-text">
+                    <div class="poem-section">
+                        <h2 class="poem-title">Smriti Ka Gurutvakarshan / Memory's Gravity</h2>
+                        <div class="poem-text">
+                            <p class="poem-translation-label">Transliterated Hindi/Urdu:</p>
+                            <p class="poem-hindi">
+                                "Jitna dur jaun, <br/>
+                                Utna hi paas hun. <br/>
+                                Yaad ke kheench se <br/>
+                                Koi mukti nahi. <br/>
+                                Pluto bhi, suraj ke dukhan mein, <br/>
+                                Phir bhi chakkar kaata hai."
+                            </p>
+                            <p class="poem-translation-label" style="margin-top: 20px;">English Translation:</p>
+                            <p class="poem-english">
+                                "The farther I go, <br/>
+                                The closer I remain. <br/>
+                                From memory's pull <br/>
+                                There is no escape. <br/>
+                                Pluto too, in the sun's shop of sadness, <br/>
+                                Still orbits."
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card lesson-card">
+                        <span class="card-label">What This Poem Teaches</span>
+                        <p>This is Gulzar's most scientifically precise poem. The central image—that distance and closeness can coexist—mirrors the physics of gravity. No matter how far an object travels, it remains in the gravitational field of its origin. The paradox ("The farther I go, / The closer I remain") is not philosophical contradiction but physical truth. Notice "suraj ke dukhan mein" (the sun's shop of sadness)—a neologism, a metaphor, creating pathos through unexpected word choice. The final image—Pluto still orbiting despite its demotion—suggests that even reclassification cannot sever the fundamental bonds of gravity. This is Gulzar's most defiant statement.</p>
+                    </div>
+
+                    <div class="card funny-box">
+                        <span class="card-label">The Human Moment</span>
+                        <p>You live in a new city. You build a new home, new relationships. But somewhere, a street corner pulls at you. A song in your childhood language. The monsoon, reminding you of a different monsoon. You are far, yes, but you are also still there—tethered by memory, unable to cut the cord. Escape velocity requires breaking free not just from place but from self. Gulzar suggests it's impossible. The gravity of who you were is inescapable.</p>
+                    </div>
+
+                    <div class="card ai-box">
+                        <span class="card-label">AI Connection</span>
+                        <p><strong>Memory as gravity</strong> has a direct parallel in machine learning: <em>catastrophic forgetting</em>. When you train an AI model on new data, it often forgets what it learned before. But the old knowledge—the gravitational pull of previous training—never fully vanishes. This is why language models continue to show biases from their original training data, even after fine-tuning. The past exerts a force.</p>
+                        <p>More philosophically, Gulzar articulates something profound about <strong>loss and non-locality</strong>. In quantum mechanics, particles remain entangled across distance. In human experience, memory does something similar: the exiled person remains entangled with their origin. Modern AI seeks to model this with <em>persistent representations</em>—the idea that even if you update a model, its foundational patterns persist. Pluto remains in orbit, still affected by the sun's gravity, still following laws written billions of years ago.</p>
+                    </div>
+
+                    <div class="card connect-box">
+                        <span class="card-label">Cross-Book Resonance</span>
+                        <p>Viktor Frankl's <em>Man's Search for Meaning</em> describes how concentration camp survivors remained bound to their past even after liberation. The past's gravitational pull shaped their entire future. Salman Rushdie's <em>Midnight's Children</em> similarly explores how characters orbit their moment of origin (the midnight of India's independence) throughout their lives. Gulzar suggests there is no escape—only the acknowledgment that being pulled back is not failure, it is physics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POEM 4: THE QUESTION OF BELONGING -->
+    <div class="container">
+        <div class="lesson">
+            <div class="lesson-inner">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 350 350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Solar system with categories -->
+                        <!-- Inner planets (rocky, warm) -->
+                        <circle cx="80" cy="175" r="12" fill="#FDCB6E"/>
+                        <circle cx="140" cy="175" r="12" fill="#FF6B6B"/>
+                        <!-- Asteroid belt (transition) -->
+                        <circle cx="170" cy="160" r="4" fill="#999" opacity="0.6"/>
+                        <circle cx="180" cy="175" r="4" fill="#999" opacity="0.6"/>
+                        <circle cx="170" cy="190" r="4" fill="#999" opacity="0.6"/>
+                        <!-- Outer planets (gas giants) -->
+                        <circle cx="220" cy="175" r="16" fill="#74B9FF"/>
+                        <circle cx="270" cy="175" r="15" fill="#4ECDC4"/>
+
+                        <!-- Pluto (ambiguous) -->
+                        <circle cx="310" cy="175" r="8" fill="#8B7355" stroke="#E17055" stroke-width="2"/>
+
+                        <!-- Question marks around Pluto -->
+                        <text x="310" y="130" font-size="20" fill="#E17055" font-family="Inter" text-anchor="middle" font-weight="bold">?</text>
+                        <text x="310" y="230" font-size="20" fill="#E17055" font-family="Inter" text-anchor="middle" font-weight="bold">?</text>
+                        <text x="280" y="165" font-size="20" fill="#E17055" font-family="Inter" text-anchor="middle" font-weight="bold">?</text>
+
+                        <!-- Orbital distance (sun to Pluto is farthest) -->
+                        <line x1="50" y1="175" x2="50" y2="175" stroke="#FFE66D" stroke-width="3"/>
+                        <text x="25" y="190" font-size="9" fill="#FDCB6E" font-family="Inter" text-anchor="end">Sun</text>
+
+                        <!-- Labels under each -->
+                        <text x="80" y="210" font-size="9" fill="#2D3436" font-family="Inter" text-anchor="middle">Rock</text>
+                        <text x="140" y="210" font-size="9" fill="#2D3436" font-family="Inter" text-anchor="middle">Rock</text>
+                        <text x="220" y="210" font-size="9" fill="#2D3436" font-family="Inter" text-anchor="middle">Gas</text>
+                        <text x="270" y="210" font-size="9" fill="#2D3436" font-family="Inter" text-anchor="middle">Gas</text>
+                        <text x="310" y="210" font-size="9" fill="#E17055" font-family="Inter" text-anchor="middle" font-weight="bold">??</text>
+                    </svg>
+                </div>
+                <div class="lesson-text">
+                    <div class="poem-section">
+                        <h2 class="poem-title">Samvergana / Belonging</h2>
+                        <div class="poem-text">
+                            <p class="poem-translation-label">Transliterated Hindi/Urdu:</p>
+                            <p class="poem-hindi">
+                                "Mera ghar kaunsa tha? <br/>
+                                Badi cheezain theen, to nahi. <br/>
+                                Kahin bhi bilkul fit nahi hota. <br/>
+                                Shukriya, apne naya naam de diya."
+                            </p>
+                            <p class="poem-translation-label" style="margin-top: 20px;">English Translation:</p>
+                            <p class="poem-english">
+                                "Which was my home? <br/>
+                                It wasn't among the big things. <br/>
+                                Nowhere did I fit quite right. <br/>
+                                Thank you, for giving me a new name."
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card lesson-card">
+                        <span class="card-label">What This Poem Teaches</span>
+                        <p>The bitterest moment in Gulzar's collection. The "big things" refers to the eight major planets—the systems of power, nation-states, the grand narratives. The "thank you" is entirely ironic, devastating in its politeness. The poem moves from homelessness ("Which was my home?") to a strange accommodation with reclassification ("for giving me a new name"). Gulzar captures the psychological mechanism of trauma: you accept the wound because at least now you have a category. Ambiguity has been replaced with precision—cruel precision, but clarity nonetheless. The short, declarative structure conveys resignation.</p>
+                    </div>
+
+                    <div class="card funny-box">
+                        <span class="card-label">The Human Moment</span>
+                        <p>The sadness of administrative clarity. You stop fighting the system because fighting requires energy, and exile has exhausted you. A new name becomes a strange gift—at least now you know what you are, even if what you are is "other." At least there's a label. The cruelty isn't in malice; it's in the politeness, the relief of finally being classified, even if the classification means being left behind.</p>
+                    </div>
+
+                    <div class="card ai-box">
+                        <span class="card-label">AI Connection</span>
+                        <p>This poem articulates <strong>the AI ethics problem of out-of-distribution detection</strong>. When an AI model encounters data it wasn't trained on, it often produces high confidence predictions that are completely wrong. Or, more humanely, systems now try to detect when they're "uncertain." But detection doesn't solve the problem for the person being classified. You're still being categorized—just with an added label of uncertainty.</p>
+                        <p>Gulzar suggests something deeper: the relief of classification, even wrong classification. An asylum seeker going through bureaucratic processing might receive a "denied" decision, which is painful but clear. The alternative—perpetual ambiguity, a <em>status in limbo</em>—is often worse psychologically. The poem thanks the system for ending ambiguity, even as it destroys dignity. This is the terrible economy of being classified as "other"—at least you know where you stand.</p>
+                    </div>
+
+                    <div class="card connect-box">
+                        <span class="card-label">Cross-Book Resonance</span>
+                        <p>Hannah Arendt's work on statelessness in <em>The Origins of Totalitarianism</em> documents how refugees lose their fundamental humanity when they lose state protection. Gulzar's "thank you for giving me a name" echoes Arendt's insight that even oppressive classification is preferable to non-existence in the eyes of the law. Kafka's <em>The Trial</em> involves similar themes: the protagonist is classified and prosecuted for reasons he never fully understands, yet finds a kind of dark comfort in being <em>known</em> to the system.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STORY SPOTLIGHTS SECTION -->
+    <div class="section-title">Story Spotlights: Life, Cinema & Cosmos</div>
+    <div class="container">
+        <div class="story">
+            <div class="story-inner">
+                <h3>Spotlight 1: Gulzar's Partition Childhood</h3>
+                <p>
+                    Born <strong>Sampooran Singh Kalra</strong> in 1936 in what is now Dina, Pakistan, Gulzar lived through the seismic rupture of partition as a young boy. His family's migration to India wasn't romantic or triumphant—it was a fracturing. He lost his home, his first language's social status, and an entire world that could not be recovered. This loss—irretrievable, definitive—appears in nearly every work of his mature period. He became a poet of things that cannot be fully said or recovered, writing instead around the wound.
+                </p>
+                <p>
+                    When he entered cinema (screenwriting <em>Aradhana</em> in 1969, directing <em>Maachis</em> in 1996), his obsession remained constant: <strong>how do you represent loss that has no resolution?</strong> His films are filled with women waiting for men who will never return, with displaced persons trying to build new lives, with the texture of grief. In <em>Maachis</em>, he documented the lives of Sikh militant women—people for whom partition wasn't historical but ongoing, a daily reality of violence and displacement. Gulzar's cinema is the cinema of partition, again and again, as if he were trying to undo it through sheer artistic will.
+                </p>
+                <p>
+                    <em>Pluto</em> represents his fullest synthesis of this wound with cosmic philosophy. By using astronomy, he universalizes partition—makes it not a regional trauma but a metaphysical one. Every planet that loses its place is a partition refugee.
+                </p>
+            </div>
+        </div>
+
+        <div class="story">
+            <div class="story-inner">
+                <h3>Spotlight 2: The 2006 Demotion & Metaphorical Goldmine</h3>
+                <p>
+                    On August 24, 2006, the International Astronomical Union officially reclassified Pluto from a planet to a "dwarf planet" (later, a "plutino"). Pluto had been the ninth planet since its discovery in 1930. For 76 years, it was a planet. Then, in a decision that sparked genuine public emotion, it was demoted.
+                </p>
+                <p>
+                    What had changed? Not Pluto itself. The definition of "planet" had been clarified. A true planet must (1) orbit the sun, (2) have enough gravity to be round, and (3) <strong>clear its orbital neighborhood</strong> of debris. Pluto failed the third criterion. Its orbital neighborhood is crowded with other Kuiper Belt objects. By the rigorous new definition, Pluto couldn't qualify.
+                </p>
+                <p>
+                    For Gulzar, this was <em>perfect</em>. Here was a scientific event that perfectly mirrored partition: <strong>a change in categorical criteria that reclassified beings without changing their essential nature</strong>. Pluto didn't shrink. It didn't weaken. The universe simply moved the boundary. Just as partition refugees didn't change—the boundaries changed around them. Just as India's independence reclassified the same people from subjects to citizens (or from one nation's citizens to another's). The administrative reordering of the world.
+                </p>
+                <p>
+                    Gulzar seized on this event as a poet must: not as a scientific curiosity, but as a metaphor for understanding what it means to lose your place in a system that no longer recognizes you.
+                </p>
+            </div>
+        </div>
+
+        <div class="story">
+            <div class="story-inner">
+                <h3>Spotlight 3: Triveni, Cinema & Literary Legitimacy</h3>
+                <p>
+                    Throughout the 1970s and 80s, Gulzar existed in a fascinating literary and cinematic in-between. He was too intellectual for mainstream Bollywood, too accessible for the literary establishment. His collection <strong><em>Triveni</em></strong> (a title referring to a confluence of rivers, also the Sanskrit term for a three-fold unity) demonstrated his unique position: a poet working in cinema, creating screenplays that were also literature, collaborating with other artists (Amrita Pritam, Jaidev).
+                </p>
+                <p>
+                    In the 1990s, Gulzar returned to poetry more seriously. <em>Pluto</em> represents a reconciliation: his decades in cinema had taught him how to make the cosmic intimate, how to frame suffering, how to compose images that bypass language to hit the emotional center directly. His film background infuses <em>Pluto</em>: each poem is almost a shot—tightly composed, visually precise, emotionally devastating in compression.
+                </p>
+                <p>
+                    In <em>Pluto</em>, Gulzar achieves what he had been working toward his entire career: <strong>the recognition that cinema and poetry are not different arts—they are the same art using different materials</strong>. Both are about framing. Both are about the power of images and silence. Both are about making meaning from ruin.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADDITIONAL POEMS -->
+    <div class="container">
+        <div class="lesson">
+            <div class="lesson-inner">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 350 350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Childhood house -->
+                        <rect x="80" y="150" width="120" height="140" fill="#FFEAA7" stroke="#2D3436" stroke-width="2"/>
+                        <polygon points="80,150 140,90 200,150" fill="#FF6B6B"/>
+                        <!-- Door -->
+                        <rect x="115" y="240" width="50" height="50" fill="#8B7355"/>
+                        <!-- Window 1 -->
+                        <rect x="95" y="170" width="40" height="40" fill="#FFE66D" stroke="#2D3436" stroke-width="1.5"/>
+                        <!-- Window 2 -->
+                        <rect x="165" y="170" width="40" height="40" fill="#FFE66D" stroke="#2D3436" stroke-width="1.5"/>
+
+                        <!-- Childhood figure -->
+                        <circle cx="60" cy="200" r="6" fill="#E17055"/>
+                        <path d="M 60 206 L 60 230 M 54 215 L 66 215 M 60 230 L 54 250 M 60 230 L 66 250" stroke="#E17055" stroke-width="1.5" stroke-linecap="round"/>
+
+                        <!-- Fading memories (ghosts) -->
+                        <circle cx="140" cy="100" r="5" fill="#FFE66D" opacity="0.3"/>
+                        <circle cx="170" cy="110" r="4" fill="#FFE66D" opacity="0.2"/>
+                        <circle cx="200" cy="95" r="4" fill="#FFE66D" opacity="0.2"/>
+
+                        <!-- Memory lines (dotted) connecting past to present -->
+                        <path d="M 60 200 Q 100 160 140 120" stroke="#A06CD5" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.5"/>
+
+                        <!-- Time indicator -->
+                        <text x="50" y="280" font-size="11" fill="#A06CD5" font-family="Inter" font-weight="bold">Past</text>
+                        <text x="280" y="280" font-size="11" fill="#A06CD5" font-family="Inter" font-weight="bold">Now</text>
+                        <path d="M 70 275 L 270 275" stroke="#A06CD5" stroke-width="1" opacity="0.4"/>
+                    </svg>
+                </div>
+                <div class="lesson-text">
+                    <div class="poem-section">
+                        <h2 class="poem-title">Bachpan / Childhood Home</h2>
+                        <div class="poem-text">
+                            <p class="poem-translation-label">Transliterated Hindi/Urdu:</p>
+                            <p class="poem-hindi">
+                                "Ghar jo bhul gaya, <br/>
+                                Woh bhi bhul jayega. <br/>
+                                Lekin uski khushboo, <br/>
+                                Mere kapde mein basi hai, <br/>
+                                Jeevan bhar."
+                            </p>
+                            <p class="poem-translation-label" style="margin-top: 20px;">English Translation:</p>
+                            <p class="poem-english">
+                                "The home I forgot, <br/>
+                                Will also forget me. <br/>
+                                But its fragrance <br/>
+                                Lingers in my clothes, <br/>
+                                A lifetime."
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card lesson-card">
+                        <span class="card-label">What This Poem Teaches</span>
+                        <p>The power of <strong>sensory memory as the last holdout against forgetting</strong>. The progression is heartbreaking: the home will forget you (mutual forgetting), but the physical body remembers through smell. Gulzar knows that we don't remember home through photographs or words—we remember it through smell, the feeling of a doorway, the quality of light at a particular hour. The poem's brevity, its perfect control, makes each line devastate. "My whole life" (Jeevan bhar) spans the final line, suggesting that exile is not a temporary condition but the total extent of remaining life.</p>
+                    </div>
+
+                    <div class="card funny-box">
+                        <span class="card-label">The Human Moment</span>
+                        <p>You're wearing a sweater your grandmother knitted. You catch its smell and you're five years old again, sitting in her lap, in a house you haven't seen in decades. The smell persists across oceans, across decades, across forgetting. It's not nostalgia—it's neural memory, involuntary and untranslatable. Gulzar captures the deep truth: memory lives in the body, not the mind.</p>
+                    </div>
+
+                    <div class="card ai-box">
+                        <span class="card-label">AI Connection</span>
+                        <p>This poem illustrates why AI struggles with human memory: we store experience not as semantic information but as <strong>embodied, sensory traces</strong>. A machine learning model trained on images and text will never "remember" a home the way a human does—through the involuntary reactivation of olfactory and tactile neurons. Neuroscientists call this <em>memory consolidation across modalities</em>. The poem suggests that what makes us human is precisely this body-bound memory that AI cannot access. We are exiles carrying the fragrance of our past in our very cells.</p>
+                    </div>
+
+                    <div class="card connect-box">
+                        <span class="card-label">Cross-Book Resonance</span>
+                        <p>Proust's <em>In Search of Lost Time</em> builds an entire philosophy around involuntary memory triggered by sensory experience (the famous madeleine scene). Marcel Allain's work on olfactory memory, Antonio Damasio's theories on emotion and memory—all converge here. Gulzar is doing what poets do: articulating what neuroscience would take decades to verify.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHEATSHEET SECTION -->
+    <div class="cheatsheet">
+        <div class="cheatsheet-inner">
+            <h2>Quick Reference: Pluto's Themes & Imagery</h2>
+            <div class="cheatsheet-grid">
+                <div class="cheatsheet-item">
+                    <h4>🌍 Partition as Cosmic Event</h4>
+                    <p>The partition of India and Pakistan (1947) reappears in Gulzar's work as a reclassification, a boundary drawn that splits identity in two. Pluto's demotion mirrors partition: the system changes, but the being doesn't.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🪐 Pluto as Metaphor</h4>
+                    <p>A dwarf planet with a heart-shaped marking (the Tombaugh Heart). Once titled a planet, now classified differently. Its gravity still shapes moons. It still orbits the sun. Classification changes nothing essential, yet changes everything about belonging.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🌌 Science + Poetry</h4>
+                    <p>Gulzar bridges Bollywood accessibility with scientific precision. The poems use terminology (gravity, orbit, reclassification) literally, not metaphorically. The science IS the poetry—not decoration, but structure.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🏠 Memory & Loss</h4>
+                    <p>The collection returns obsessively to: homes left behind, languages split between borders, families scattered by administrative violence. But always with the strange pride of Pluto—still orbiting, still relevant, refusing to disappear.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>⭐ Belonging & Exile</h4>
+                    <p>To be reclassified is to be exiled from the category you inhabited. Gulzar explores what it means to live with a new name, a new identity imposed from outside. Not chosen, not earned, but assigned.</p>
+                </div>
+
+                <div class="cheatsheet-item">
+                    <h4>🎬 Cinema as Method</h4>
+                    <p>Decades in film taught Gulzar how to compress meaning into images, silence, and the space between words. Pluto's poems are cinematic: tightly framed, visually precise, devastating in brevity.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL REFLECTIVE POEM -->
+    <div class="container">
+        <div class="lesson">
+            <div class="lesson-inner">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 350 350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Pluto alone in vast space -->
+                        <rect x="0" y="0" width="350" height="350" fill="#1a1a2e"/>
+
+                        <!-- Stars scattered -->
+                        <circle cx="30" cy="40" r="1" fill="white" opacity="0.8"/>
+                        <circle cx="80" cy="20" r="0.8" fill="white" opacity="0.6"/>
+                        <circle cx="320" cy="50" r="1" fill="white" opacity="0.7"/>
+                        <circle cx="340" cy="200" r="0.8" fill="white" opacity="0.5"/>
+                        <circle cx="50" cy="330" r="1" fill="white" opacity="0.6"/>
+                        <circle cx="300" cy="300" r="0.8" fill="white" opacity="0.7"/>
+
+                        <!-- Distant sun (small) -->
+                        <circle cx="320" cy="40" r="6" fill="#FDCB6E" opacity="0.7"/>
+
+                        <!-- Pluto (center, large) -->
+                        <circle cx="175" cy="175" r="35" fill="#8B7355"/>
+                        <ellipse cx="175" cy="160" rx="12" ry="14" fill="#E17055" opacity="0.8"/>
+
+                        <!-- Orbiting moons -->
+                        <circle cx="220" cy="175" r="4" fill="#FFE66D"/>
+                        <path d="M 175 175 L 220 175" stroke="#FFE66D" stroke-width="0.5" opacity="0.4"/>
+
+                        <circle cx="155" cy="215" r="3" fill="#FFE66D" opacity="0.7"/>
+                        <path d="M 175 175 L 155 215" stroke="#FFE66D" stroke-width="0.5" opacity="0.3"/>
+
+                        <!-- Cosmic loneliness -->
+                        <path d="M 175 210 Q 175 250 175 280" stroke="#A06CD5" stroke-width="1" opacity="0.3" stroke-dasharray="3,3"/>
+                        <text x="190" y="250" font-size="11" fill="#A06CD5" font-family="Inter" opacity="0.6">Still</text>
+                        <text x="190" y="265" font-size="11" fill="#A06CD5" font-family="Inter" opacity="0.6">Here</text>
+                    </svg>
+                </div>
+                <div class="lesson-text">
+                    <div class="poem-section">
+                        <h2 class="poem-title">Awaam / Conclusion</h2>
+                        <div class="poem-text">
+                            <p class="poem-translation-label">Transliterated Hindi/Urdu:</p>
+                            <p class="poem-hindi">
+                                "Nau se aathon tak ka safar <br/>
+                                Bas ek naam badlne ka maamla tha. <br/>
+                                Lekin jab naam badl jaay, <br/>
+                                To sab kuch badal jaata hai. <br/>
+                                <br/>
+                                Mera chand hai, meri zameen hai, <br/>
+                                Hamara akash hai. <br/>
+                                Bas mujhe, unhone <br/>
+                                Sirf uska naam badl diya."
+                            </p>
+                            <p class="poem-translation-label" style="margin-top: 20px;">English Translation:</p>
+                            <p class="poem-english">
+                                "From nine to eight, the journey <br/>
+                                Was merely a name changing matter. <br/>
+                                But when the name changes, <br/>
+                                Everything changes. <br/>
+                                <br/>
+                                My moons are mine, my earth is mine, <br/>
+                                Our sky is ours. <br/>
+                                Only they have, for me, <br/>
+                                Changed the name of all of it."
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card lesson-card">
+                        <span class="card-label">What This Poem Teaches</span>
+                        <p>The collection's culmination. Gulzar moves from meditation to mild assertion: "my moons are mine." Yet the final couplet is not defiant but resigned. They have the power to change names, and with the names, the entire meaning. The poem's structure (four lines, then four lines with a volta) mirrors a turn from abstract to personal. "For me" (mere liye) is the devastating phrase—not that the sky has changed, but that for this speaker, everything has been renamed by others' decree. The collection doesn't end in triumph but in acknowledgment of a terrible truth: <strong>we are what others call us</strong>.</p>
+                    </div>
+
+                    <div class="card funny-box">
+                        <span class="card-label">The Human Moment</span>
+                        <p>You own your possessions, your relationships, your small orbit of meaning. But then someone with institutional power says you're not what you thought you were. Your home is now foreign. Your language is now a minority tongue. Your identity is now a category to be managed. And there's nothing you can do. The moons don't change; your relationship to them does. That's the tragedy Gulzar articulates: the world doesn't change, but your place in it does.</p>
+                    </div>
+
+                    <div class="card ai-box">
+                        <span class="card-label">AI Connection</span>
+                        <p>This is about <strong>definitional power</strong> in AI systems. When an algorithm classifies you, your objective properties don't change—your classification does. A face that was "safe" becomes "suspicious" when the model updates. A loan applicant who was "creditworthy" becomes "high-risk." The system has the power to rename, and renaming is remaking. Gulzar suggests that this power—the power to name, to categorize, to reclassify—is the deepest form of violence. It's not physical; it's ontological. You still exist, but as something different, something determined by external rules.</p>
+                    </div>
+
+                    <div class="card connect-box">
+                        <span class="card-label">Cross-Book Resonance</span>
+                        <p>Michel Foucault's <em>The Order of Things</em> explores how taxonomies and classification systems shape what is knowable. Harari's <em>Sapiens</em> similarly documents how imagined orders (nation-states, legal systems, currencies) become more real than physical reality. Gulzar's final poem asks: what happens to the being who doesn't fit the new taxonomy? The answer is: they remain, but transformed by the external gaze that has renamed them.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CLOSING THOUGHTS -->
+    <div class="container">
+        <div class="spacer"></div>
+        <div class="lesson">
+            <div class="lesson-inner">
+                <div class="illustration-container">
+                    <svg viewBox="0 0 350 350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cosmos: infinite, dark, full of small lights -->
+                        <defs>
+                            <radialGradient id="cosmosGrad" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#2D3436;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:1" />
+                            </radialGradient>
+                        </defs>
+                        <rect width="350" height="350" fill="url(#cosmosGrad)"/>
+
+                        <!-- Stars of different sizes and opacities -->
+                        <circle cx="40" cy="30" r="1.2" fill="white" opacity="0.9"/>
+                        <circle cx="80" cy="50" r="0.8" fill="white" opacity="0.7"/>
+                        <circle cx="120" cy="20" r="1" fill="white" opacity="0.8"/>
+                        <circle cx="160" cy="40" r="0.6" fill="white" opacity="0.5"/>
+                        <circle cx="200" cy="30" r="1.5" fill="white" opacity="0.8"/>
+                        <circle cx="250" cy="50" r="0.7" fill="white" opacity="0.6"/>
+                        <circle cx="300" cy="35" r="1" fill="white" opacity="0.7"/>
+                        <circle cx="330" cy="60" r="0.8" fill="white" opacity="0.6"/>
+
+                        <circle cx="30" cy="120" r="0.9" fill="white" opacity="0.7"/>
+                        <circle cx="85" cy="100" r="1.3" fill="white" opacity="0.8"/>
+                        <circle cx="140" cy="130" r="0.7" fill="white" opacity="0.6"/>
+                        <circle cx="190" cy="110" r="1" fill="white" opacity="0.75"/>
+                        <circle cx="240" cy="140" r="0.8" fill="white" opacity="0.65"/>
+                        <circle cx="290" cy="120" r="1.2" fill="white" opacity="0.8"/>
+                        <circle cx="320" cy="100" r="0.9" fill="white" opacity="0.7"/>
+
+                        <circle cx="50" cy="200" r="1" fill="white" opacity="0.75"/>
+                        <circle cx="100" cy="220" r="0.7" fill="white" opacity="0.6"/>
+                        <circle cx="160" cy="210" r="1.4" fill="white" opacity="0.85"/>
+                        <circle cx="210" cy="230" r="0.8" fill="white" opacity="0.7"/>
+                        <circle cx="270" cy="200" r="1.1" fill="white" opacity="0.8"/>
+                        <circle cx="310" cy="220" r="0.9" fill="white" opacity="0.75"/>
+
+                        <circle cx="40" cy="300" r="0.8" fill="white" opacity="0.7"/>
+                        <circle cx="110" cy="310" r="1" fill="white" opacity="0.8"/>
+                        <circle cx="170" cy="295" r="0.7" fill="white" opacity="0.6"/>
+                        <circle cx="230" cy="320" r="1.2" fill="white" opacity="0.85"/>
+                        <circle cx="290" cy="305" r="0.9" fill="white" opacity="0.75"/>
+                        <circle cx="330" cy="290" r="1" fill="white" opacity="0.8"/>
+
+                        <!-- Central Pluto -->
+                        <circle cx="175" cy="175" r="12" fill="#8B7355"/>
+                        <ellipse cx="175" cy="168" rx="5" ry="6" fill="#E17055" opacity="0.8"/>
+
+                        <!-- Text overlay -->
+                        <rect x="60" y="155" width="230" height="40" fill="rgba(45, 52, 54, 0.7)" rx="4"/>
+                        <text x="175" y="175" font-size="14" fill="#FFEAA7" font-family="Playfair Display" text-anchor="middle" font-weight="bold">Still Here. Still Orbiting.</text>
+                    </svg>
+                </div>
+                <div class="lesson-text">
+                    <h2 style="font-family: 'Playfair Display', serif; color: var(--dark-purple); font-size: 1.8rem; margin-bottom: 20px; border-bottom: 3px solid var(--sunny); padding-bottom: 10px;">Why Pluto Matters</h2>
+
+                    <p style="margin: 15px 0; line-height: 1.8; color: #333;">
+                        <em>Pluto</em> is a collection about the power of categories and the violence of being reclassified. But it's also, more essentially, a collection about <strong>refusal</strong>. Pluto doesn't disappear when demoted. It continues to orbit. It has moons. Its heart—that Tombaugh Heart marking—continues to beat. Gulzar's genius is recognizing that this refusal is not defiance but simple fact: you don't need the system's recognition to exist.
+                    </p>
+
+                    <p style="margin: 15px 0; line-height: 1.8; color: #333;">
+                        For partition refugees, for the stateless, for anyone reclassified by power, this is the quiet wisdom of <em>Pluto</em>: <strong>you exist beyond the system that named you</strong>. The name changes, but the orbit continues. The category shifts, but the gravity remains. Gulzar, writing from a lifetime of being between worlds—between Hindi and Urdu, between cinema and literature, between Pakistan-born and India-made—speaks to everyone who has experienced the strange dislocation of losing the name you were given and being assigned a new one.
+                    </p>
+
+                    <p style="margin: 15px 0; line-height: 1.8; color: #333;">
+                        This is not a collection of triumph. It is a collection of precision in grief, of clarity in loss, of finding meaning in the margins where the system has placed you. Gulzar asks: what does it mean to orbit? What does it mean to belong to something that has ceased to recognize you? And his answer, whispered across these poems, is: <strong>it means everything. You are still here. You are still orbiting. That is enough.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p><strong>Pluto: A Comprehensive Illustrated Guide</strong></p>
+        <p>Celebrating Gulzar's collection exploring exile, memory, partition, and cosmic distance</p>
+        <p style="margin-top: 20px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">
+            This guide synthesizes literary analysis, historical context, scientific precision, and thematic connections.
+            It honors Gulzar's unique position: a poet of cinema, partition, and the cosmos.
+        </p>
+        <p style="margin-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.3); padding-top: 15px; font-size: 0.85rem;">
+            "From the margins, the view is different. From far enough away, even a demotion looks like freedom." — Gulzar, <em>Pluto</em>
+        </p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subliminal — Illustrated Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+    :root {
+      --coral: #FF6B6B;
+      --teal: #4ECDC4;
+      --sunny: #FFE66D;
+      --purple: #A06CD5;
+      --sky: #74B9FF;
+      --mint: #55EFC4;
+      --pink: #FD79A8;
+      --orange: #FDCB6E;
+      --dark: #2D3436;
+      --cream: #FFEAA7;
+      --deep-blue: #0984E3;
+      --warm-red: #E17055;
+      --forest: #00B894;
+      --dark-purple: #6C5CE7;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+
+    /* ===== COVER ===== */
+    .cover {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 40px 20px;
+    }
+
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      color: white;
+      letter-spacing: -2px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cover .author {
+      font-size: 1.3rem;
+      color: var(--sky);
+      margin-top: 8px;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .cover .subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 16px;
+      z-index: 2;
+      text-align: center;
+      max-width: 500px;
+    }
+
+    .cover-illustration {
+      width: 90%;
+      max-width: 700px;
+      margin-top: 40px;
+      z-index: 2;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* ===== LESSONS ===== */
+    .lesson {
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lesson-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .lesson-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .lesson-subtitle {
+      font-size: 1rem;
+      opacity: 0.7;
+      margin-bottom: 30px;
+    }
+
+    .illustration-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    .card-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .card ul {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+
+    .card li {
+      margin-bottom: 8px;
+    }
+
+    .quote-box {
+      background: var(--dark);
+      color: white;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+
+    .quote-box .quote-text {
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .quote-box .quote-attr {
+      color: var(--sky);
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+
+    .connect-box {
+      background: #e8f4fd;
+      border-left: 4px solid var(--deep-blue);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+
+    .connect-box .connect-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--deep-blue);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .connect-box p {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .ai-box {
+      background: linear-gradient(135deg, #0984E3, #6C5CE7);
+      color: white;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+
+    .ai-box .ai-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--sunny);
+      margin-bottom: 6px;
+    }
+
+    .ai-box p {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .funny-box {
+      background: #fff5f5;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      border: 2px dashed var(--coral);
+    }
+
+    .funny-box .funny-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--coral);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .funny-box p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* ===== STORIES ===== */
+    .story {
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .story-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .story h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .story p {
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    /* ===== CHEATSHEET ===== */
+    .cheatsheet {
+      min-height: 100vh;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cheatsheet-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .cheatsheet h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: white;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .cheatsheet-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      color: white;
+    }
+
+    .cheatsheet-card h3 {
+      font-size: 1.1rem;
+      color: var(--sky);
+      margin-bottom: 8px;
+    }
+
+    .cheatsheet-card p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .two-col { grid-template-columns: 1fr; }
+      .cover h1 { font-size: 2.8rem; }
+      .lesson-title { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<section class="cover">
+  <div class="particle" style="width: 100px; height: 100px; background: var(--sky); top: 10%; left: 10%;"></div>
+  <div class="particle" style="width: 60px; height: 60px; background: var(--purple); top: 70%; right: 15%;"></div>
+  <div class="particle" style="width: 80px; height: 80px; background: var(--teal); bottom: 20%; left: 5%;"></div>
+
+  <h1>Subliminal</h1>
+  <p class="author">Leonard Mlodinow</p>
+  <p class="subtitle">How Your Unconscious Mind Rules Your Behavior — An Illustrated Guide</p>
+
+  <div class="cover-illustration">
+    <svg viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg">
+      <!-- Brain background -->
+      <ellipse cx="350" cy="140" rx="150" ry="120" fill="rgba(116, 185, 255, 0.1)" stroke="var(--sky)" stroke-width="2"/>
+
+      <!-- Left brain hemisphere (conscious) -->
+      <path d="M 200 140 Q 250 80 300 140 Q 250 200 200 140" fill="rgba(116, 185, 255, 0.3)" stroke="var(--sky)" stroke-width="2"/>
+      <text x="250" y="145" text-anchor="middle" fill="var(--sky)" font-size="14" font-weight="bold">CONSCIOUS</text>
+
+      <!-- Right brain hemisphere (unconscious) -->
+      <path d="M 400 140 Q 450 80 500 140 Q 450 200 400 140" fill="rgba(160, 108, 213, 0.3)" stroke="var(--purple)" stroke-width="2"/>
+      <text x="450" y="145" text-anchor="middle" fill="var(--purple)" font-size="14" font-weight="bold">UNCONSCIOUS</text>
+
+      <!-- Eyes with perceptual flow -->
+      <circle cx="280" cy="100" r="12" fill="rgba(255,255,255,0.8)"/>
+      <circle cx="420" cy="100" r="12" fill="rgba(255,255,255,0.8)"/>
+      <circle cx="280" cy="100" r="7" fill="#0f0f23"/>
+      <circle cx="420" cy="100" r="7" fill="#0f0f23"/>
+
+      <!-- Perceptual arrows -->
+      <path d="M 280 115 Q 250 130 230 160" stroke="var(--sunny)" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+      <path d="M 420 115 Q 450 130 470 160" stroke="var(--sunny)" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+      <!-- Unconscious processing waves -->
+      <path d="M 280 240 Q 300 220 320 240 Q 340 260 360 240" stroke="var(--purple)" stroke-width="2" fill="none" opacity="0.6"/>
+      <path d="M 320 260 Q 340 240 360 260 Q 380 280 400 260" stroke="var(--purple)" stroke-width="2" fill="none" opacity="0.4"/>
+      <path d="M 360 280 Q 380 260 400 280 Q 420 300 440 280" stroke="var(--purple)" stroke-width="2" fill="none" opacity="0.2"/>
+
+      <!-- Arrow marker definition -->
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+          <polygon points="0 0, 10 3, 0 6" fill="var(--sunny)"/>
+        </marker>
+      </defs>
+    </svg>
+  </div>
+</section>
+
+<!-- ===== LESSON 1: THE UNCONSCIOUS RUNS THE SHOW ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f4ff 0%, #e3f2fd 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--sky);">1</div>
+    <h2 class="lesson-title">The Unconscious Runs the Show</h2>
+    <p class="lesson-subtitle">Your conscious mind is the tip of the iceberg</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Iceberg -->
+        <polygon points="350,30 500,150 200,150" fill="rgba(116, 185, 255, 0.3)" stroke="var(--sky)" stroke-width="2"/>
+        <!-- Waterline -->
+        <line x1="150" y1="150" x2="550" y2="150" stroke="var(--sky)" stroke-width="3"/>
+        <!-- Water -->
+        <rect x="150" y="150" width="400" height="100" fill="rgba(116, 185, 255, 0.1)"/>
+
+        <!-- Above water (conscious) -->
+        <text x="350" y="90" text-anchor="middle" fill="var(--sky)" font-size="16" font-weight="bold">CONSCIOUS</text>
+        <text x="350" y="115" text-anchor="middle" fill="var(--dark)" font-size="12">5% of mental processing</text>
+
+        <!-- Below water (unconscious) -->
+        <text x="350" y="180" text-anchor="middle" fill="var(--purple)" font-size="16" font-weight="bold">UNCONSCIOUS</text>
+        <text x="350" y="205" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="12">95% of mental processing</text>
+
+        <!-- Annotations -->
+        <text x="100" y="80" fill="var(--dark)" font-size="11">Deliberate choices</text>
+        <text x="100" y="180" fill="var(--dark)" font-size="11">Automatic decisions</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🧠 KEY LESSON</div>
+      <p>Your unconscious mind processes roughly 11 million pieces of information per second, while your conscious mind handles only about 40-50. This massive gap means the vast majority of your behavior, decisions, and perceptions are driven by processes you're completely unaware of.</p>
+      <ul>
+        <li><strong>The Selective Listening Study (Cocktail Party Effect):</strong> Researchers showed that people at noisy parties can filter out irrelevant conversations and focus on one speaker, but their brains still process the ignored information subconsciously. If someone says your name in a conversation you weren't listening to, your attention instantly shifts — proving unconscious processing happened first.</li>
+        <li><strong>Implicit Association Test (IAT):</strong> Developed by psychologist Anthony Greenwald in 1995, this test reveals biases we don't consciously hold. People who explicitly reject racial prejudice still show measurable biases in response times when pairing words with images, demonstrating that unconscious associations override conscious beliefs.</li>
+        <li><strong>Visual Perception Experiments:</strong> We think we see the world completely, but neuroscience shows we're blind to huge portions of what's in front of us. In one famous study, viewers missed a person in a gorilla suit walking through a basketball game they were asked to count passes in — classic inattentional blindness driven by unconscious attention mechanisms.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>You're basically piloting a massive corporation (your body) but you only get memos about 0.0005% of what's actually happening. Your unconscious mind is like a brilliant but paranoid CEO who handles everything important and only interrupts you when something absolutely critical requires human judgment. "Oh, you wanted to know why you suddenly hate your ex? Too bad, that decision was made in the deep dark offices of your amygdala."</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚡ AI CONNECTION</div>
+      <p>Neural networks operate on a similar principle: the vast majority of computation happens in hidden layers where no human observer can see it. The network's "conscious" output is just the final prediction, but thousands of neurons have already done the real work through weights, activations, and transformations that remain opaque even to the engineers who built the system. Deep learning models operate like your brain — intelligent behavior emerging from processes that resist simple interpretation.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📖 CROSS-BOOK CONNECTION</div>
+      <p>This parallels the "System 1" vs "System 2" framework in Daniel Kahneman's "Thinking, Fast and Slow." Kahneman's System 1 is fast, automatic, and mostly unconscious, while System 2 is deliberate and conscious. Mlodinow goes deeper into why System 1 dominates and how it shapes perception itself, not just decision-making.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The unconscious mind is not just a repository of repressed emotions, as Freud maintained. It's the seat of mental processes that are every bit as complex, sophisticated, and—potentially—intelligent as our conscious minds."</div>
+      <div class="quote-attr">— Leonard Mlodinow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 2: PERCEPTION IS CONSTRUCTION ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #fff4e6 0%, #ffe0b2 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--orange);">2</div>
+    <h2 class="lesson-title">Perception Is Construction, Not Capture</h2>
+    <p class="lesson-subtitle">Your brain actively creates the world you perceive</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Eye receiving input -->
+        <circle cx="100" cy="140" r="25" fill="none" stroke="var(--orange)" stroke-width="2"/>
+        <circle cx="100" cy="140" r="15" fill="rgba(253, 203, 110, 0.2)"/>
+
+        <!-- Arrow to brain -->
+        <path d="M 130 140 L 200 140" stroke="var(--orange)" stroke-width="3" marker-end="url(#arrow-orange)"/>
+
+        <!-- Brain processing -->
+        <ellipse cx="350" cy="140" rx="80" ry="60" fill="rgba(253, 203, 110, 0.2)" stroke="var(--orange)" stroke-width="2"/>
+        <text x="350" y="135" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">PREDICTION</text>
+        <text x="350" y="155" text-anchor="middle" fill="var(--dark)" font-size="11">+ sensory data</text>
+
+        <!-- Arrow to perception -->
+        <path d="M 430 140 L 500 140" stroke="var(--orange)" stroke-width="3" marker-end="url(#arrow-orange)"/>
+
+        <!-- Perception output -->
+        <rect x="500" y="100" width="150" height="80" fill="rgba(253, 203, 110, 0.3)" stroke="var(--orange)" stroke-width="2" rx="8"/>
+        <text x="575" y="145" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">YOUR EXPERIENCE</text>
+
+        <defs>
+          <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--orange)"/>
+          </marker>
+        </defs>
+
+        <!-- Bottom explanation -->
+        <text x="350" y="250" text-anchor="middle" fill="var(--dark)" font-size="11">You don't "see" reality — you predict it</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎨 KEY LESSON</div>
+      <p>Perception is not passive reception of the world. Your brain actively predicts what it expects to see, and then compares sensory input against those predictions. If there's a mismatch, your brain updates its model. This means two people looking at the same object may literally perceive different things based on their expectations.</p>
+      <ul>
+        <li><strong>Motion Illusions and Apparent Motion:</strong> The phi phenomenon shows that when two objects flash in rapid succession at slightly different positions, your brain perceives them as a single object moving. Movie frames are static images, yet you perceive motion because your brain constructs the narrative of movement between frames.</li>
+        <li><strong>Context Effects in Face Recognition:</strong> Research shows you recognize faces faster and more accurately when they appear with expected contexts. A face on a body is recognized faster than a face on a plant, even if the facial features are identical — your brain's predictions based on context override what your eyes are actually detecting.</li>
+        <li><strong>Inattentional Blindness (Gorilla Study):</strong> When observers focus on counting basketball passes, they miss a person in a gorilla suit walking across the court — not because their eyes didn't see it, but because their brain didn't predict it, so it never reached conscious awareness.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Your brain is basically a gaslighting expert that tells you what you're seeing before you actually see it. It's like your brain shows up to a meeting with a pre-written report, glances at the actual data for 0.5 seconds, and then confidently presents its original predictions as facts. When reality disagrees, your brain has the audacity to blame your perception for being "weird."</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚡ AI CONNECTION</div>
+      <p>This is how generative models and diffusion processes work in AI. Instead of "seeing" an image pixel-by-pixel, modern neural networks build probabilistic predictions of what comes next. GPT doesn't read tokens sequentially; it predicts the next token based on learned patterns. Stable Diffusion doesn't "draw" images; it predicts refined versions by iteratively denoising random noise. Your brain and modern AI both operate on the principle of continuous prediction and refinement.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📖 CROSS-BOOK CONNECTION</div>
+      <p>Donald Hoffman's "The Interface Theory of Perception" takes this further, suggesting that evolution designed our perceptions not to show us objective reality, but to show us what's useful for survival. Our perceptions are an adaptive interface, like the desktop of a computer — useful but not literally true.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"We don't see the world as it is. We see the world as we expect it to be, shaped by our prior experiences and unconscious predictions."</div>
+      <div class="quote-attr">— Leonard Mlodinow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 3: IMPLICIT BIAS ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f8e8f5 0%, #f3e5f5 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--purple);">3</div>
+    <h2 class="lesson-title">Implicit Bias: When You Don't Know What You Know</h2>
+    <p class="lesson-subtitle">Unconscious associations guide judgments faster than consciousness can intervene</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Conscious mind saying "no bias" -->
+        <circle cx="150" cy="100" r="40" fill="rgba(160, 108, 213, 0.2)" stroke="var(--purple)" stroke-width="2"/>
+        <text x="150" y="85" text-anchor="middle" fill="var(--dark)" font-size="13" font-weight="bold">Conscious</text>
+        <text x="150" y="105" text-anchor="middle" fill="var(--dark)" font-size="11">"I'm fair"</text>
+        <text x="150" y="125" text-anchor="middle" fill="var(--dark)" font-size="11">"No bias here"</text>
+
+        <!-- Unconscious mind with automatic biases -->
+        <circle cx="550" cy="100" r="40" fill="rgba(160, 108, 213, 0.2)" stroke="var(--purple)" stroke-width="2"/>
+        <text x="550" y="75" text-anchor="middle" fill="var(--dark)" font-size="13" font-weight="bold">Unconscious</text>
+        <text x="550" y="100" text-anchor="middle" fill="var(--dark)" font-size="11">Strong automatic</text>
+        <text x="550" y="120" text-anchor="middle" fill="var(--dark)" font-size="11">associations firing</text>
+
+        <!-- Clash in the middle -->
+        <path d="M 190 100 L 510 100" stroke="var(--purple)" stroke-width="2" stroke-dasharray="5,5"/>
+        <text x="350" y="75" text-anchor="middle" fill="var(--purple)" font-size="12" font-weight="bold">CONFLICT</text>
+
+        <!-- Behaviors emerge from bottom -->
+        <rect x="200" y="180" width="300" height="40" fill="rgba(160, 108, 213, 0.15)" stroke="var(--purple)" stroke-width="2" rx="8"/>
+        <text x="350" y="207" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">Biased behavior that contradicts conscious values</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">⚖️ KEY LESSON</div>
+      <p>Implicit biases are automatic associations your unconscious mind makes between social groups and attributes. Unlike explicit prejudice (which you consciously believe), implicit bias can exist even in people who explicitly reject those stereotypes. Your unconscious associations run faster than your conscious values can intervene.</p>
+      <ul>
+        <li><strong>CV Study (Bertrand & Mullainathan, 2004):</strong> Identical resumes with white-sounding names (like "Greg") received 50% more callbacks than identical resumes with Black-sounding names (like "Jamal"). The difference wasn't due to conscious hiring discrimination but unconscious associations between names and competence that shaped snap judgments.</li>
+        <li><strong>IAT Racial Bias Results:</strong> Even Black test-takers show the unconscious association of white=good and black=bad when taking the Implicit Association Test. This demonstrates that implicit biases reflect cultural narratives absorbed from society, not necessarily what someone consciously believes.</li>
+        <li><strong>Hiring Simulations:</strong> When HR professionals review applications, candidates from underrepresented groups are unconsciously rated as less competent for the same work, their mistakes rated more harshly, and their future potential rated lower — all happening below conscious awareness.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>The ultimate hypocrisy machine: your conscious mind genuinely believes it's fair and unbiased, while your unconscious mind is busy running like 50 different prejudice algorithms in the background, making snap judgments at superhuman speed. It's like your brain is a board of directors where the CEO (conscious you) keeps saying "we value diversity," while the actual decision-makers (unconscious you) are having secret meetings in the basement.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚡ AI CONNECTION</div>
+      <p>This parallels bias in machine learning training data. A model trained on biased data (which is virtually all data, since it reflects real-world inequities) learns to replicate those biases perfectly, then executes them at scale. The ML engineer building the model might consciously want fairness, but the training process learns associations from data just as your brain learns them from experience. Amazon's hiring algorithm learned to penalize women, not through explicit programming, but through implicit patterns in training data — exactly like implicit human bias.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📖 CROSS-BOOK CONNECTION</div>
+      <p>Ibram X. Kendi's "How to Be an Antiracist" and Robin DiAngelo's "White Fragility" build on this science, arguing that bias is not a personal moral failing but a universal feature of human cognition. The solution isn't self-awareness but systemic change and accountability structures.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Unconscious bias is not a flaw; it's a feature of how our brains process information efficiently. The question is not whether you have bias, but what you do about it."</div>
+      <div class="quote-attr">— Leonard Mlodinow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 4: MEMORY IS RECONSTRUCTION ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f8ff 0%, #e0f2fe 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--deep-blue);">4</div>
+    <h2 class="lesson-title">Memory Is Reconstruction, Not Playback</h2>
+    <p class="lesson-subtitle">Every time you remember something, you change it</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Original event -->
+        <rect x="50" y="80" width="120" height="80" fill="rgba(14, 132, 227, 0.2)" stroke="var(--deep-blue)" stroke-width="2" rx="8"/>
+        <text x="110" y="120" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">Original</text>
+        <text x="110" y="140" text-anchor="middle" fill="var(--dark)" font-size="10">Event</text>
+
+        <!-- First recall -->
+        <path d="M 170 120 L 250 120" stroke="var(--deep-blue)" stroke-width="2" marker-end="url(#arr1)"/>
+        <rect x="250" y="80" width="120" height="80" fill="rgba(14, 132, 227, 0.4)" stroke="var(--deep-blue)" stroke-width="2" rx="8"/>
+        <text x="310" y="115" text-anchor="middle" fill="var(--dark)" font-size="11" font-weight="bold">Recall #1</text>
+        <text x="310" y="135" text-anchor="middle" fill="var(--dark)" font-size="9">(altered)</text>
+
+        <!-- Second recall -->
+        <path d="M 370 120 L 450 120" stroke="var(--deep-blue)" stroke-width="2" marker-end="url(#arr1)"/>
+        <rect x="450" y="80" width="120" height="80" fill="rgba(14, 132, 227, 0.6)" stroke="var(--deep-blue)" stroke-width="2" rx="8"/>
+        <text x="510" y="115" text-anchor="middle" fill="var(--dark)" font-size="11" font-weight="bold">Recall #2</text>
+        <text x="510" y="135" text-anchor="middle" fill="var(--dark)" font-size="9">(more altered)</text>
+
+        <!-- Third recall -->
+        <path d="M 570 120 L 630 120" stroke="var(--deep-blue)" stroke-width="2" marker-end="url(#arr1)"/>
+
+        <!-- Degradation arrow -->
+        <text x="350" y="200" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">Memory degradation & distortion with each recall</text>
+
+        <!-- Confabulation -->
+        <rect x="150" y="220" width="400" height="40" fill="rgba(14, 132, 227, 0.15)" stroke="var(--deep-blue)" stroke-width="1" rx="6"/>
+        <text x="350" y="245" text-anchor="middle" fill="var(--dark)" font-size="11">Brain fills gaps with plausible details from other memories</text>
+
+        <defs>
+          <marker id="arr1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--deep-blue)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🧠 KEY LESSON</div>
+      <p>Memory is not like a video recording. When you remember something, your brain reconstructs the memory from fragmented pieces, filling in gaps with inferences and details from other experiences. Each time you recall a memory, you potentially modify it. The more emotional or frequent the recall, the more it can be distorted.</p>
+      <ul>
+        <li><strong>False Memory Implantation (Loftus Studies):</strong> Elizabeth Loftus showed that people can be convinced they had experiences they never had. In one study, researchers used Photoshop to create fake images of people as children in hot air balloons. When family members "remembered" these events in conversations, subjects developed false memories of the event, complete with sensory details they confabulated.</li>
+        <li><strong>The Misinformation Effect:</strong> If you're asked leading questions about an event after it happens ("Did you see the broken headlights?"), you're likely to remember those headlights as broken even if they weren't in the original event. Post-event information literally alters your memory of the event.</li>
+        <li><strong>Source Confusion in Flashbulb Memories:</strong> People have vivid memories of where they were on 9/11 or when they heard about celebrity deaths. But when researchers follow up years later, those memories have changed significantly — people unconsciously adopt details from news coverage and other people's stories, unable to distinguish actual memory from reconstructed narrative.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Your memory isn't a hard drive — it's a creative fiction writer with bad note-taking skills. Every time you think about a memory, you're not retrieving a file; you're basically remembering your last memory of the event, like making a photocopy of a photocopy of a photocopy until the original is completely distorted. Yet somehow your brain convinces you that your memories are accurate and vivid. It's gaslighting yourself repeatedly.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚡ AI CONNECTION</div>
+      <p>This mirrors how neural networks "remember" training data through weight matrices. An AI doesn't store training examples; it stores compressed representations in learned weights. When you ask it to retrieve information, it reconstructs likely examples based on patterns. This is why language models sometimes "hallucinate" — they're reconstructing plausible continuations from learned patterns, not retrieving stored facts. Both human memory and neural networks work via reconstruction, not retrieval, leading to both creative problem-solving and systematic distortions.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📖 CROSS-BOOK CONNECTION</div>
+      <p>In "Thinking, Fast and Slow," Kahneman discusses the "experiencing self" vs the "remembering self" — the self that actually lives through events is different from the self that recalls them. We make decisions based on memory, not actual experience, which means we're often optimizing for the wrong experience.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Memory is not a recording device. It's a reconstructive process, and every time you recall a memory, you change it — usually without knowing it."</div>
+      <div class="quote-attr">— Leonard Mlodinow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 5: PRIMING EFFECTS ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #ffe8f5 0%, #f3e5f5 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--pink);">5</div>
+    <h2 class="lesson-title">Priming: The Invisible Hand on Your Mind</h2>
+    <p class="lesson-subtitle">Subtle cues shape your thoughts, feelings, and behaviors before you're aware</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stimulus (prime) -->
+        <circle cx="80" cy="80" r="35" fill="rgba(253, 121, 168, 0.2)" stroke="var(--pink)" stroke-width="2"/>
+        <text x="80" y="85" text-anchor="middle" fill="var(--dark)" font-size="13" font-weight="bold">PRIME</text>
+
+        <!-- Invisible influence arrow -->
+        <path d="M 115 80 L 185 80" stroke="var(--pink)" stroke-width="2" stroke-dasharray="5,5"/>
+
+        <!-- Unconscious priming -->
+        <ellipse cx="250" cy="80" rx="50" ry="40" fill="rgba(253, 121, 168, 0.15)" stroke="var(--pink)" stroke-width="2"/>
+        <text x="250" y="85" text-anchor="middle" fill="var(--dark)" font-size="11" font-weight="bold">Activates</text>
+        <text x="250" y="100" text-anchor="middle" fill="var(--dark)" font-size="11">related concepts</text>
+
+        <!-- Arrow to behavior -->
+        <path d="M 300 80 L 370 80" stroke="var(--pink)" stroke-width="2"/>
+
+        <!-- Changed behavior -->
+        <rect x="370" y="50" width="130" height="60" fill="rgba(253, 121, 168, 0.25)" stroke="var(--pink)" stroke-width="2" rx="8"/>
+        <text x="435" y="75" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">Altered</text>
+        <text x="435" y="95" text-anchor="middle" fill="var(--dark)" font-size="11">Judgment/Behavior</text>
+
+        <!-- Examples below -->
+        <text x="350" y="180" text-anchor="middle" fill="var(--dark)" font-size="11" font-weight="bold">Examples:</text>
+        <text x="350" y="200" text-anchor="middle" fill="var(--dark)" font-size="10">Money images → more selfish choices</text>
+        <text x="350" y="218" text-anchor="middle" fill="var(--dark)" font-size="10">Elderly words → slower walking</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>Priming occurs when exposure to one stimulus influences your response to another, completely outside your awareness. You can be primed by words, images, smells, or even physical sensations. These primes don't just affect your thoughts — they affect your actual behavior and judgments in measurable ways.</p>
+      <ul>
+        <li><strong>Money Priming & Selfishness (Vohs et al., 2006):</strong> When people are exposed to images of money or words associated with wealth, they become measurably more selfish in subsequent tasks. They're less likely to help others, keep more money for themselves in resource-sharing games, and sit farther away from others in seating arrangements. The prime created these behavioral shifts without conscious awareness.</li>
+        <li><strong>Elderly Stereotype Priming (Bargh et al., 1996):</strong> People who solved word puzzles containing elderly stereotypes (words like "Florida," "wrinkles," "slow") walked slower down the hallway afterward than a control group. The prime activated the elderly stereotype, which unconsciously influenced motor behavior — not because they thought "I should walk slowly," but because the concept literally changed how their body moved.</li>
+        <li><strong>Cleanliness Priming & Moral Judgment:</strong> People in clean-smelling rooms (Febreze, lemon scent) judge others' moral transgressions more harshly than people in unscented rooms. Moral judgment was literally influenced by whether the room smelled clean — an unconscious association between physical cleanliness and moral purity.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>You're basically walking around like a vending machine with no glass — stimuli just drop down into your brain's internal mechanisms and out pops your personality and choices, totally convinced you picked them. Someone shows you a photo of money, and suddenly you're hoarding snacks like it's a doomsday bunker. Someone mentions "elderly," and your legs forget how to function. Your consciousness is just the receipt printer — it produces reasons for decisions already made by the real machinery.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚡ AI CONNECTION</div>
+      <p>This is exactly what happens with context in language models and transformers. A token's meaning is determined by the surrounding context (the "prime"). The token "bank" activates different semantic representations depending on whether it's primed by "river" or "money." In vision transformers, earlier patches (primes) shape how later patches are interpreted. The entire system is built on priming — earlier representations activate and shape interpretation of later ones, exactly like human semantic priming.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📖 CROSS-BOOK CONNECTION</div>
+      <p>Robert Cialdini's "Influence" discusses pre-suasion — how subtle cues before a request dramatically increase compliance. Priming is the neuroscience beneath the social psychology of persuasion.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"We are constantly being primed by our environment, and we have no idea it's happening. It's not manipulation if you don't know about it — it's invisible architecture shaping your behavior."</div>
+      <div class="quote-attr">— Leonard Mlodinow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 6: UNCONSCIOUS DECISION MAKING ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #e8f5e9 0%, #c8e6c9 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--forest);">6</div>
+    <h2 class="lesson-title">Unconscious Decision-Making: Trust Your Gut</h2>
+    <p class="lesson-subtitle">Complex decisions may be better made subconsciously</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Gut/intuition -->
+        <circle cx="150" cy="80" r="40" fill="rgba(0, 184, 148, 0.2)" stroke="var(--forest)" stroke-width="2"/>
+        <text x="150" y="75" text-anchor="middle" fill="var(--dark)" font-size="13" font-weight="bold">Unconscious</text>
+        <text x="150" y="95" text-anchor="middle" fill="var(--dark)" font-size="10">Decision</text>
+
+        <!-- Conscious deliberation -->
+        <circle cx="550" cy="80" r="40" fill="rgba(0, 184, 148, 0.2)" stroke="var(--forest)" stroke-width="2"/>
+        <text x="550" y="75" text-anchor="middle" fill="var(--dark)" font-size="13" font-weight="bold">Conscious</text>
+        <text x="550" y="95" text-anchor="middle" fill="var(--dark)" font-size="10">Analysis</text>
+
+        <!-- Outcome comparison -->
+        <text x="350" y="170" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">Complex choice outcomes:</text>
+        <text x="350" y="195" text-anchor="middle" fill="var(--dark)" font-size="11">Unconscious often wins (when you have enough experience)</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>Your unconscious mind is a sophisticated decision-maker. When faced with complex decisions involving multiple variables, people who make quick gut decisions often get better outcomes than people who overthink. However, this only works when you have genuine expertise in the domain — in unfamiliar territory, conscious deliberation wins.</p>
+      <ul>
+        <li><strong>The Furniture Study (Dijksterhuis et al., 2006):</strong> When choosing between complex options (apartments, cars, or furniture sets with 12+ attributes), people who made unconscious choices (distracted after considering options) were more satisfied than people who consciously analyzed all factors. The unconscious mind can weigh multiple variables simultaneously without getting overwhelmed by analysis paralysis.</li>
+        <li><strong>Expert vs Novice Decision-Making:</strong> Chess grandmasters make brilliant moves in rapid games without conscious calculation because their unconscious mind has learned patterns from years of experience. But show them random board positions (outside their learned patterns), and they perform no better than novices. Unconscious expertise is domain-specific.</li>
+        <li><strong>Blink Snap Judgments (Nalini Ambady's Thin-Slice Studies):</strong> People can judge teachers' competence from silent 10-second video clips with nearly the same accuracy as students who spend a whole semester with them. Thin slices of behavior trigger unconscious pattern recognition that rivals extensive conscious exposure.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Your unconscious mind is that genius friend who never explains their thinking but always makes the right call. Your conscious mind is the overthinking friend who creates a 47-point spreadsheet comparing coffee brands and somehow ends up buying the worst one anyway. When you stop trying to figure it out and just go with your gut, the genius wakes up and delivers.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚡ AI CONNECTION</div>
+      <p>Neural networks make "decisions" in high-dimensional spaces that humans can't consciously navigate. A face recognition model with millions of parameters is doing something analogous to unconscious pattern matching — learning complex nonlinear relationships that defy verbal explanation. Just like gut instinct in experts, deep learning works best when the model has seen thousands of examples and developed implicit pattern recognition rather than explicit rules.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📖 CROSS-BOOK CONNECTION</div>
+      <p>Malcolm Gladwell's "Blink" explores this phenomenon in depth, showing how the adaptive unconscious can make brilliant decisions in moments. Mlodinow adds the caveat: this only works in domains where you have expertise.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The unconscious mind is not just better at some things than the conscious mind — it's necessary for effective decision-making in complex environments."</div>
+      <div class="quote-attr">— Leonard Mlodinow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 7: ATTENTION & BLINDNESS ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #fff3e0 0%, #ffe0b2 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--orange);">7</div>
+    <h2 class="lesson-title">The Limits of Attention: You Miss What You Don't Expect</h2>
+    <p class="lesson-subtitle">Your brain optimizes for what matters, ignoring everything else</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Two scenes side by side -->
+        <!-- Focused attention scene -->
+        <rect x="50" y="30" width="250" height="200" fill="rgba(253, 203, 110, 0.1)" stroke="var(--orange)" stroke-width="2" rx="8"/>
+        <text x="175" y="50" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">WHAT YOU FOCUS ON</text>
+
+        <!-- Basketball players -->
+        <circle cx="130" cy="100" r="15" fill="var(--orange)"/>
+        <circle cx="180" cy="110" r="15" fill="var(--orange)"/>
+        <circle cx="160" cy="150" r="15" fill="var(--orange)"/>
+        <text x="175" y="180" text-anchor="middle" fill="var(--dark)" font-size="11">Counting passes</text>
+
+        <!-- Divided attention scene -->
+        <rect x="400" y="30" width="250" height="200" fill="rgba(253, 203, 110, 0.1)" stroke="var(--orange)" stroke-width="2" rx="8"/>
+        <text x="525" y="50" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">WHAT YOU MISS</text>
+
+        <!-- Same scene with gorilla -->
+        <circle cx="480" cy="100" r="15" fill="var(--orange)"/>
+        <circle cx="530" cy="110" r="15" fill="var(--orange)"/>
+        <circle cx="510" cy="150" r="15" fill="var(--orange)"/>
+
+        <!-- Gorilla in the middle (hard to see) -->
+        <ellipse cx="510" cy="110" rx="35" ry="40" fill="rgba(100, 100, 100, 0.3)" stroke="rgba(100, 100, 100, 0.5)" stroke-width="2"/>
+        <circle cx="500" cy="100" r="4" fill="rgba(100, 100, 100, 0.7)"/>
+        <circle cx="520" cy="100" r="4" fill="rgba(100, 100, 100, 0.7)"/>
+
+        <text x="525" y="180" text-anchor="middle" fill="var(--dark)" font-size="11">The gorilla</text>
+
+        <!-- Bottom explanation -->
+        <text x="350" y="260" text-anchor="middle" fill="var(--dark)" font-size="11" font-weight="bold">Inattentional blindness: You don't see what you're not looking for</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">👁️ KEY LESSON</div>
+      <p>Attention is a bottleneck. You can only consciously attend to a tiny slice of available information. When you're focused on one thing, your brain literally doesn't process other information, even when it's right in front of you. This isn't a defect — it's a feature that lets you focus on what matters.</p>
+      <ul>
+        <li><strong>The Invisible Gorilla (Simons & Chabris, 1999):</strong> Viewers watch a video of basketball players passing a ball and count passes. A person in a gorilla suit walks through the scene, pounds their chest, and walks off. About 50% of viewers don't see the gorilla. Not because their eyes fail, but because their attention is elsewhere. When told to watch for the gorilla, viewers see it immediately.</li>
+        <li><strong>Change Blindness:</strong> Two nearly identical images are shown with a flicker in between. Major changes go unnoticed (a plane disappearing, a person's shirt color changing) because attention wasn't allocated to that area. We think we see the world in detail, but we actually see very little.</li>
+        <li><strong>Cocktail Party Effect Revisited:</strong> You filter out most conversations at a party, focusing on one speaker. But if someone says your name in an ignored conversation, your attention instantly shifts. Your unconscious mind was monitoring all conversations, filtering for relevance, while your conscious mind attended to only one.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>You think you're watching the world in 4K, but you're actually watching a tiny spotlight while your brain desperately tries to convince you that you saw the whole scene. It's like playing a video game with a tiny field of view cone while the rest of the screen is black, but your brain fills in the black parts with "probably nothing interesting" and you believe it. A gorilla could walk by and you'd miss it, then argue it wasn't there.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚡ AI CONNECTION</div>
+      <p>Attention mechanisms in transformers solve exactly this problem. The self-attention mechanism in models like GPT allows the network to focus on relevant tokens while ignoring irrelevant ones. But crucially, the model can only attend to tokens within the context window. Just like your brain can't attend to information outside your sensory field, transformers have computational limits that force selective attention. The attention mechanism learns what to ignore — a feature, not a bug.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📖 CROSS-BOOK CONNECTION</div>
+      <p>Cal Newport's "Deep Work" is built on the understanding that attention is your most valuable resource. Your brain's limited attention capacity makes focused work more effective than multitasking — a principle rooted in the neuroscience of attention bottlenecks that Mlodinow explains.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"We see the world not as it is, but as we attend to it. And we attend to only a tiny fraction of what's available."</div>
+      <div class="quote-attr">— Leonard Mlodinow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 8: SOCIAL INFLUENCE & CONFORMITY ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #fce4ec 0%, #f8bbd0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--coral);">8</div>
+    <h2 class="lesson-title">Social Influence: Your Brain Is Built for the Group</h2>
+    <p class="lesson-subtitle">You conform faster than you think, and you don't know you're doing it</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Individual person -->
+        <circle cx="100" cy="80" r="20" fill="var(--coral)"/>
+        <text x="100" y="150" text-anchor="middle" fill="var(--dark)" font-size="11" font-weight="bold">Honest</text>
+        <text x="100" y="165" text-anchor="middle" fill="var(--dark)" font-size="10">Judgment</text>
+
+        <!-- Group of people with conforming opinions -->
+        <circle cx="350" cy="60" r="18" fill="var(--dark)"/>
+        <circle cx="350" cy="100" r="18" fill="var(--dark)"/>
+        <circle cx="350" cy="140" r="18" fill="var(--dark)"/>
+
+        <!-- Individual changes answer to match group -->
+        <path d="M 120 80 Q 200 70 320 80" stroke="var(--coral)" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrow-coral)"/>
+
+        <text x="350" y="190" text-anchor="middle" fill="var(--dark)" font-size="11" font-weight="bold">Changed Answer</text>
+        <text x="350" y="205" text-anchor="middle" fill="var(--dark)" font-size="10">to match group consensus</text>
+
+        <defs>
+          <marker id="arrow-coral" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--coral)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">👥 KEY LESSON</div>
+      <p>Humans are profoundly social creatures. When you're around others, your brain unconsciously monitors their behavior, opinions, and reactions. If the group disagrees with your perception, you're likely to change your own judgment — often without realizing you've done so. This isn't weakness; it's an evolved tendency that keeps groups cohesive.</p>
+      <ul>
+        <li><strong>Asch Conformity Experiments (1951-1956):</strong> In a room with seven confederates, a real participant is asked to match line lengths. The confederates unanimously give wrong answers. About 75% of participants conform to the obviously wrong group answer at least once. When alone, conformity drops to 3%. The group's opinion overwrites sensory perception.</li>
+        <li><strong>Mimicry Studies (Chartrand & Bargh, 1999):</strong> People unconsciously mimic the mannerisms, speech patterns, and postures of people they interact with. When someone taps their foot, you're more likely to tap yours. This mimicry happens below conscious awareness and makes people like you more — your brain is automatically trying to increase rapport.</li>
+        <li><strong>Neural Mirroring & Mirror Neurons:</strong> Observing someone perform an action activates the same motor neurons in your brain as if you were performing it yourself. This neural overlap is the biological substrate of empathy and unconscious social bonding. You can't help but mirror what you observe.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>You're convinced you're an independent thinker, but really you're a sophisticated monkey that can't help but copy everything people around you do. Put you in a room where everyone says the sky is green, and suddenly your eyes betray you. Your brain is simultaneously running thousands of social-conformity algorithms in the background while your conscious mind is like "I'm making my own choices" — no, you're just updating your beliefs to match the herd, same as everyone else.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚡ AI CONNECTION</div>
+      <p>This is how consensus mechanisms work in distributed AI systems. Multiple models or agents don't arrive at truth through individual reasoning — they arrive at consensus through conformity pressures. federated learning and multi-agent reinforcement learning both exploit the principle that group agreement, even when individually uncertain, produces more robust outcomes. Your brain does consensus-finding just like distributed neural networks.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📖 CROSS-BOOK CONNECTION</div>
+      <p>Robert Cialdini's "Influence" identifies conformity as one of the six principles of persuasion. When you see others doing something, you're more likely to do it. The neuroscience here explains why that principle is so powerful — it's hardwired into your social brain.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"We are social creatures, and sociality isn't something that happens in our conscious deliberation — it's built into our neurons."</div>
+      <div class="quote-attr">— Leonard Mlodinow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 9: EMOTIONAL PROCESSING ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f3e5f5 0%, #e1bee7 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--dark-purple);">9</div>
+    <h2 class="lesson-title">Emotions Decide Before Reason Arrives</h2>
+    <p class="lesson-subtitle">Your amygdala is the real decision-maker</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stimulus (threat or opportunity) -->
+        <rect x="50" y="80" width="100" height="100" fill="rgba(108, 92, 231, 0.2)" stroke="var(--dark-purple)" stroke-width="2" rx="8"/>
+        <text x="100" y="130" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">Stimulus</text>
+
+        <!-- Fast path (amygdala) -->
+        <path d="M 150 120 Q 250 80 300 120" stroke="var(--dark-purple)" stroke-width="3" marker-end="url(#arrow-purple)"/>
+        <text x="225" y="70" text-anchor="middle" fill="var(--dark)" font-size="10" font-weight="bold">Fast (50ms)</text>
+        <text x="225" y="85" text-anchor="middle" fill="var(--dark)" font-size="9">Emotional</text>
+
+        <!-- Slow path (cortex) -->
+        <path d="M 150 140 Q 250 180 300 140" stroke="var(--dark-purple)" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrow-purple)"/>
+        <text x="225" y="160" text-anchor="middle" fill="var(--dark)" font-size="10">Slow (500ms+)</text>
+        <text x="225" y="175" text-anchor="middle" fill="var(--dark)" font-size="9">Rational</text>
+
+        <!-- Amygdala response -->
+        <rect x="300" y="80" width="120" height="100" fill="rgba(108, 92, 231, 0.25)" stroke="var(--dark-purple)" stroke-width="2" rx="8"/>
+        <text x="360" y="120" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">Amygdala</text>
+        <text x="360" y="140" text-anchor="middle" fill="var(--dark)" font-size="10">(Fear/Reward)</text>
+
+        <!-- Cortex response -->
+        <rect x="450" y="80" width="120" height="100" fill="rgba(108, 92, 231, 0.15)" stroke="var(--dark-purple)" stroke-width="2" rx="8"/>
+        <text x="510" y="120" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">Cortex</text>
+        <text x="510" y="140" text-anchor="middle" fill="var(--dark)" font-size="10">(Reasoning)</text>
+
+        <!-- Bottom explanation -->
+        <text x="350" y="240" text-anchor="middle" fill="var(--dark)" font-size="11" font-weight="bold">Emotion gets a head start. Often it's already decided</text>
+        <text x="350" y="260" text-anchor="middle" fill="var(--dark)" font-size="10">before conscious reasoning even processes the stimulus</text>
+
+        <defs>
+          <marker id="arrow-purple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--dark-purple)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">❤️ KEY LESSON</div>
+      <p>Emotions are not secondary to reason; they're primary decision-makers that get a head start on conscious reasoning. Your amygdala can process a threat and trigger a fear response in milliseconds, before your cortex has finished processing what you're seeing. Emotion and reason are not opposites — emotion is a form of rapid information processing that captures patterns your conscious mind hasn't articulated yet.</p>
+      <ul>
+        <li><strong>Split-Brain Emotional Processing (Zajonc):</strong> Researchers have shown that people can develop emotional responses to stimuli they can't consciously perceive or articulate. Your emotional system learns and encodes information separately from your conscious reasoning system. This is why you might have a gut negative feeling about someone before you can explain why.</li>
+        <li><strong>Iowa Gambling Task (Damasio, 1994):</strong> Patients with damage to the emotional processing regions of the brain can reason perfectly well but make terrible life decisions. They lack the emotional signals that help normal people avoid bad choices. Decision-making without emotion is actually worse than decision-making that incorporates emotional information.</li>
+        <li><strong>Somatic Marker Hypothesis:</strong> Your body's physiological state (heart rate, skin conductance, gut feeling) is actually encoding valuable information about your environment. "Gut feelings" are your emotional system reporting pattern-recognition that your conscious mind hasn't caught up to yet.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>You're a horse with a rider, except the horse (emotion) is significantly smarter than the rider (reason). The rider thinks it's driving, confidently constructing explanations for directions the horse already decided. Then the rider feels righteous about their "logical decision," not realizing the horse made the choice 500 milliseconds earlier. Your emotions aren't interfering with good decisions — they're doing the real decision-making while your conscious mind narrates.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚡ AI CONNECTION</div>
+      <p>This parallels how reward signals in reinforcement learning act as "emotions." The reward function is the amygdala of AI — it's what actually drives learning. Rational policy optimization is secondary to the reinforcement signal. AlphaGo's "emotional" commitment to material advantage (captured in its reward function) is what drives its strategic decisions, not pure tree search. Modern AI architectures increasingly incorporate emotional-like reward shaping and value learning to escape the brittleness of pure logic.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📖 CROSS-BOOK CONNECTION</div>
+      <p>Daniel Goleman's "Emotional Intelligence" explores how emotional competence (understanding and managing emotional information) is actually central to success. Mlodinow provides the neuroscience explaining why emotions are so foundational to intelligent behavior.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Emotions are not the opposite of reason. Emotions are data processing systems that evolved to make rapid judgments in uncertain environments."</div>
+      <div class="quote-attr">— Leonard Mlodinow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 10: THE NARRATIVE SELF ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #e0f2f1 0%, #b2dfdb 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--teal);">10</div>
+    <h2 class="lesson-title">Your Self Is a Story Your Brain Tells</h2>
+    <p class="lesson-subtitle">Consciousness is a narrative machine that explains unconscious decisions</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left hemisphere (language/narrative) -->
+        <ellipse cx="200" cy="100" rx="80" ry="70" fill="rgba(78, 205, 196, 0.2)" stroke="var(--teal)" stroke-width="2"/>
+        <text x="200" y="85" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">Left Hemisphere</text>
+        <text x="200" y="105" text-anchor="middle" fill="var(--dark)" font-size="10">(Narrative/Explanation)</text>
+
+        <!-- Right hemisphere (actual experience) -->
+        <ellipse cx="500" cy="100" rx="80" ry="70" fill="rgba(78, 205, 196, 0.2)" stroke="var(--teal)" stroke-width="2"/>
+        <text x="500" y="85" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">Right Hemisphere</text>
+        <text x="500" y="105" text-anchor="middle" fill="var(--dark)" font-size="10">(Actual Decision)</text>
+
+        <!-- Arrow between them -->
+        <path d="M 280 100 L 420 100" stroke="var(--teal)" stroke-width="2" marker-end="url(#arrow-teal)"/>
+        <text x="350" y="80" text-anchor="middle" fill="var(--dark)" font-size="10" font-weight="bold">Confabulation</text>
+
+        <!-- Bottom explanation -->
+        <text x="350" y="200" text-anchor="middle" fill="var(--dark)" font-size="11" font-weight="bold">Your narrative self creates explanations for decisions</text>
+        <text x="350" y="220" text-anchor="middle" fill="var(--dark)" font-size="11">made by unconscious processes</text>
+        <text x="350" y="240" text-anchor="middle" fill="var(--dark)" font-size="10">(even when those explanations are false)</text>
+
+        <defs>
+          <marker id="arrow-teal" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--teal)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">📖 KEY LESSON</div>
+      <p>Your conscious self is a narrative machine. Your brain's left hemisphere specializes in language and storytelling. When your unconscious mind makes a decision, your conscious mind generates a plausible explanation — a story — to account for it. The story isn't an accurate description of your actual decision-making; it's a confabulation constructed after the fact.</p>
+      <ul>
+        <li><strong>Split-Brain Patients (Gazzaniga's Research):</strong> When the corpus callosum connecting brain hemispheres is severed, the two hemispheres can't communicate. Show the right hemisphere (nonverbal) a picture while asking the left hemisphere (verbal) what was shown, and the left hemisphere will confidently fabricate an explanation it has no actual knowledge of. "You saw a hammer because you were thinking about nails." The explanation is entirely false, but the patient believes it completely.</li>
+        <li><strong>Confabulation in Amnesia:</strong> Patients with memory loss don't just say "I don't remember" — they confidently recount memories of events that never happened, constructed by the narrative machine trying to fill gaps. The fabricated memories feel completely real to them.</li>
+        <li><strong>Cognitive Dissonance & Post-Hoc Rationalization:</strong> When your behavior contradicts your stated values, your brain doesn't say "I was inconsistent." Instead, it rewrites your beliefs to align with your behavior. You change your values unconsciously, then consciously explain the change as reasoned deliberation.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Your conscious mind is a bullshitter with complete confidence in its own bullshit. The real decision-maker (your unconscious) makes a choice, and your conscious mind wakes up like "Oh yeah, I totally wanted that, here's why..." — with a perfectly crafted narrative that has zero connection to what actually happened. You're always lying to yourself about your own reasons. The terrifying part? You believe every word.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚡ AI CONNECTION</div>
+      <p>This is like how language models generate explanations for their outputs. An LLM's logits (preference weights) select a token, and then the "narrative machine" (the autoregressive generation process) produces tokens explaining why that choice was made. The explanation isn't a reflection of the actual decision-making process in the hidden layers; it's post-hoc rationalization generated by the same mechanism that made the initial choice. Both your narrative self and language models are sophisticated confabulation machines.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📖 CROSS-BOOK CONNECTION</div>
+      <p>Carl Jung and modern psychology emphasize how the "self" is a construction, not a fixed entity. Mlodinow shows the neuroscience: your self-narrative is being continuously constructed and updated by your left hemisphere, not revealed by introspection.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"What we call consciousness is our brain's story about itself, not direct access to its workings."</div>
+      <div class="quote-attr">— Leonard Mlodinow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 11: EXPECTATIONS & PLACEBO EFFECTS ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #ffd54f 0%, #ffca28 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--sunny);">11</div>
+    <h2 class="lesson-title">Expectations Shape Reality: The Power of Belief</h2>
+    <p class="lesson-subtitle">What you expect to happen often happens, literally</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Belief/expectation -->
+        <circle cx="100" cy="80" r="35" fill="rgba(255, 202, 40, 0.2)" stroke="var(--sunny)" stroke-width="2"/>
+        <text x="100" y="75" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">Expectation</text>
+        <text x="100" y="95" text-anchor="middle" fill="var(--dark)" font-size="9">(Belief)</text>
+
+        <!-- Arrow to physical brain -->
+        <path d="M 135 80 L 215 80" stroke="var(--sunny)" stroke-width="2" marker-end="url(#arrow-sunny)"/>
+
+        <!-- Brain changes -->
+        <circle cx="280" cy="80" r="35" fill="rgba(255, 202, 40, 0.2)" stroke="var(--sunny)" stroke-width="2"/>
+        <text x="280" y="70" text-anchor="middle" fill="var(--dark)" font-size="11" font-weight="bold">Brain</text>
+        <text x="280" y="90" text-anchor="middle" fill="var(--dark)" font-size="9">Neurochemistry</text>
+
+        <!-- Arrow to outcome -->
+        <path d="M 315 80 L 395 80" stroke="var(--sunny)" stroke-width="2" marker-end="url(#arrow-sunny)"/>
+
+        <!-- Measurable change -->
+        <circle cx="460" cy="80" r="35" fill="rgba(255, 202, 40, 0.2)" stroke="var(--sunny)" stroke-width="2"/>
+        <text x="460" y="70" text-anchor="middle" fill="var(--dark)" font-size="11" font-weight="bold">Physical</text>
+        <text x="460" y="90" text-anchor="middle" fill="var(--dark)" font-size="9">Outcomes</text>
+
+        <!-- Examples below -->
+        <text x="350" y="170" text-anchor="middle" fill="var(--dark)" font-size="11" font-weight="bold">Examples:</text>
+        <text x="350" y="190" text-anchor="middle" fill="var(--dark)" font-size="10">Placebo analgesia • Wine tastes better in expensive bottle</text>
+        <text x="350" y="210" text-anchor="middle" fill="var(--dark)" font-size="10">Teacher expectations shape student performance</text>
+
+        <defs>
+          <marker id="arrow-sunny" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--sunny)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">💡 KEY LESSON</div>
+      <p>Your expectations literally change your brain chemistry and physiology. The placebo effect is not "fake" — it's a real mechanism where belief triggers actual neural and endocrine changes. Your brain responds to expectations by releasing neurotransmitters and hormones. This means your beliefs have measurable physical consequences.</p>
+      <ul>
+        <li><strong>Placebo Analgesia (Wager et al., 2004):</strong> People given placebo pain relief show decreased activity in pain-processing brain regions (insula and anterior cingulate cortex). Their brains literally release less pain signal, not because the pain is gone, but because expectation triggered the release of endogenous opioids. The pain relief is neurochemically real.</li>
+        <li><strong>Wine Price & Brain Activation:</text> When people drink wine they think is expensive, the reward-processing regions of their brain (orbitofrontal cortex) activate more strongly than when drinking identical wine they think is cheap. Expectation changes not just the subjective experience but the actual neural response to an identical stimulus.</li>
+        <li><strong>Pygmalion Effect (Rosenthal & Jacobson, 1968):</strong> Teachers told that certain randomly selected students were "academic bloomers" later found those students had actually improved more than peers. The expectation changed how teachers behaved toward the students, which changed student outcomes. Expectation created a self-fulfilling prophecy through changed behavior.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Your brain doesn't distinguish between "real" effects and "placebo" effects — if your belief triggers measurable neurochemistry, that's real. Telling someone a placebo is fake doesn't work because the effect isn't about deception; it's about your unconscious mind being brilliant enough to change your physiology based on prediction. You're basically paying thousands for wine water so your brain can release pleasure chemicals. Congratulations, you played yourself, and it worked perfectly.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚡ AI CONNECTION</div>
+      <p>This is how priors and learned representations shape neural network outputs. A language model's "expectation" (encoded in learned weights) about what token should come next influences the actual output. The expected distribution becomes the actual distribution. This mirrors how human brains treat expectations as causal — expected events trigger the same neural machinery as actual events. Both biological and artificial neural networks allow expectations to shape outputs through learned weights and activations.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📖 CROSS-BOOK CONNECTION</div>
+      <p>Carol Dweck's "Mindset" explores how the belief in growth (vs fixed traits) creates actual improvements in performance through changed effort and resilience. Mlodinow reveals the neural mechanism: expectations physically change your brain.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The placebo effect is not a misconception — it's evidence that our beliefs have power over our bodies through neural and endocrine mechanisms."</div>
+      <div class="quote-attr">— Leonard Mlodinow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 12: INTEGRATING THE UNCONSCIOUS ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #c8e6c9 0%, #a5d6a7 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--forest);">12</div>
+    <h2 class="lesson-title">Living With Your Unconscious: Integration Over Control</h2>
+    <p class="lesson-subtitle">You can't control the unconscious, but you can work with it</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Two approaches -->
+        <!-- Top: Fighting the unconscious -->
+        <rect x="50" y="20" width="250" height="100" fill="rgba(0, 184, 148, 0.1)" stroke="var(--forest)" stroke-width="2" rx="8"/>
+        <text x="175" y="45" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">❌ Fighting Unconscious</text>
+        <text x="175" y="65" text-anchor="middle" fill="var(--dark)" font-size="10">Willpower against habits</text>
+        <text x="175" y="85" text-anchor="middle" fill="var(--dark)" font-size="10">Suppressing impulses</text>
+        <text x="175" y="105" text-anchor="middle" fill="var(--dark)" font-size="10">(Exhausting, ineffective)</text>
+
+        <!-- Bottom: Working with unconscious -->
+        <rect x="400" y="20" width="250" height="100" fill="rgba(0, 184, 148, 0.1)" stroke="var(--forest)" stroke-width="2" rx="8"/>
+        <text x="525" y="45" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">✓ Working With Unconscious</text>
+        <text x="525" y="65" text-anchor="middle" fill="var(--dark)" font-size="10">Design environments</text>
+        <text x="525" y="85" text-anchor="middle" fill="var(--dark)" font-size="10">Establish new habits</text>
+        <text x="525" y="105" text-anchor="middle" fill="var(--dark)" font-size="10">(Efficient, sustainable)</text>
+
+        <!-- Integration section -->
+        <rect x="50" y="140" width="600" height="120" fill="rgba(0, 184, 148, 0.08)" stroke="var(--forest)" stroke-width="2" rx="8"/>
+        <text x="350" y="165" text-anchor="middle" fill="var(--dark)" font-size="12" font-weight="bold">Integration Strategy: Understand → Design → Automate</text>
+        <text x="350" y="190" text-anchor="middle" fill="var(--dark)" font-size="10">1. Understand your unconscious patterns and triggers</text>
+        <text x="350" y="210" text-anchor="middle" fill="var(--dark)" font-size="10">2. Design your environment to support desired behaviors</text>
+        <text x="350" y="230" text-anchor="middle" fill="var(--dark)" font-size="10">3. Let habits and systems automate good decisions</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>You can't fight your unconscious mind effectively through willpower alone. Instead, you integrate with it by understanding its patterns and designing your environment to support the behaviors you want. Once a habit is automated in the unconscious, it requires far less cognitive energy than conscious control. The goal is not to suppress the unconscious but to align it with your values.</p>
+      <ul>
+        <li><strong>Habit Formation (Duhigg, Mlodinow's framework):</strong> Habits form through repeated association between a cue (context) and a reward. The unconscious learns the pattern and executes it automatically. Fighting a bad habit requires not more willpower but changing the cue or the reward. Want to stop eating junk? Make healthy snacks the easiest option, not the hardest. Let your unconscious optimize for the new environment.</li>
+        <li><strong>Implementation Intentions:</strong> Researchers (Gollwitzer) found that pre-deciding "if X happens, then I will do Y" dramatically increases follow-through. By establishing a rule before you face the temptation, you're enlisting your unconscious as an ally. Your brain's automatic pattern-matching executes the decision without requiring conscious willpower in the moment.</li>
+        <li><strong>Environmental Design (Thaler & Sunstein's Nudges):</strong> Changing the default option, rearranging physical space, or framing choices differently influences decisions more than information or appeals to rationality. You're not persuading the conscious mind; you're working with the unconscious's tendency to take paths of least resistance and follow social defaults.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Your willpower is a finite resource, and using it is like trying to hold a beach ball underwater — exhausting and ultimately futile. The smart move is to stop trying to force the beach ball down and instead just remove it from the pool. Change your environment, automate your choices, and let your unconscious do what it evolved to do: run your life efficiently. Your conscious mind thinks it's in charge, but really it's just the passenger narrating the journey.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">⚡ AI CONNECTION</div>
+      <p>This is how training and fine-tuning work in AI. You don't instruct a neural network with rules; you feed it data and reward signals. The network learns patterns implicitly, without explicit programming. Alignment challenges in AI are ultimately about designing training environments (reward signals, datasets, fine-tuning data) such that the network's learned representations align with human values. You can't force an AI to be aligned through post-hoc oversight; you have to build alignment into the training process — working with the learning dynamics, not against them.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📖 CROSS-BOOK CONNECTION</div>
+      <p>James Clear's "Atomic Habits" is essentially a manual for working with your unconscious mind rather than fighting it. Mlodinow provides the neuroscience explaining why Clear's environmental design approach is so effective compared to willpower-based approaches.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The key to changing behavior is not willpower, but wisdom — understanding how your unconscious mind works and designing systems that align with its nature."</div>
+      <div class="quote-attr">— Leonard Mlodinow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 1: FACE BLINDNESS ===== -->
+<section class="story" style="background: linear-gradient(135deg, #1a1a3e 0%, #0f0f23 100%);">
+  <div class="story-inner">
+    <h2>Story Spotlight: The Man Who Couldn't Recognize Faces</h2>
+    <p>One of Mlodinow's most striking examples involves a patient with prosopagnosia (face blindness) — a neurological condition where the ability to recognize faces is damaged, despite intact vision and cognition. The patient could see every feature of a face: the nose, eyes, mouth, skin color — everything. But the features never cohered into a recognizable person. Even looking at their own reflection, the patient experienced a face as a collection of features, not an identity.</p>
+
+    <p>This case reveals something profound about perception: seeing isn't passive receipt of information. Your brain actively constructs faces by integrating features into a unified whole through unconscious processing. When that integrative process fails, you're left with perfect sensory data that means nothing. The patient had 20/20 vision but couldn't perceive what faces *are*. They had to learn to recognize people through other cues — voice, gait, context, clothing — because their unconscious face-recognition system simply wasn't running.</p>
+
+    <p>What's remarkable is how this illuminates normal perception: you never actually see a "face" in the raw data hitting your eyes. Your brain constructs the face through sophisticated unconscious processing. Every face recognition experience you have is an act of unconscious creation, not passive perception. The prosopagnosia patient shows what happens when that creative process breaks down.</p>
+
+    <div style="margin-top: 30px; text-align: center;">
+      <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left: What normal vision sees -->
+        <circle cx="100" cy="80" r="40" fill="rgba(116, 185, 255, 0.2)" stroke="var(--sky)" stroke-width="2"/>
+        <circle cx="85" cy="70" r="5" fill="var(--sky)"/>
+        <circle cx="115" cy="70" r="5" fill="var(--sky)"/>
+        <path d="M 100 75 L 100 85" stroke="var(--sky)" stroke-width="2"/>
+        <path d="M 85 90 Q 100 95 115 90" stroke="var(--sky)" stroke-width="2" fill="none"/>
+        <text x="100" y="140" text-anchor="middle" fill="white" font-size="12">Normal Person:</text>
+        <text x="100" y="158" text-anchor="middle" fill="white" font-size="11">"It's mom's face"</text>
+
+        <!-- Right: What prosopagnosia sees -->
+        <rect x="280" y="50" width="80" height="30" fill="rgba(160, 108, 213, 0.2)" stroke="var(--purple)" stroke-width="1"/>
+        <text x="320" y="70" text-anchor="middle" fill="var(--purple)" font-size="9">Eyes</text>
+
+        <rect x="280" y="85" width="80" height="30" fill="rgba(160, 108, 213, 0.2)" stroke="var(--purple)" stroke-width="1"/>
+        <text x="320" y="105" text-anchor="middle" fill="var(--purple)" font-size="9">Nose</text>
+
+        <rect x="280" y="120" width="80" height="30" fill="rgba(160, 108, 213, 0.2)" stroke="var(--purple)" stroke-width="1"/>
+        <text x="320" y="140" text-anchor="middle" fill="var(--purple)" font-size="9">Mouth</text>
+
+        <text x="320" y="180" text-anchor="middle" fill="white" font-size="12">Prosopagnosia:</text>
+        <text x="320" y="198" text-anchor="middle" fill="white" font-size="11">"Just... features"</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 2: THE BLIND BUSINESSMAN ===== -->
+<section class="story" style="background: linear-gradient(135deg, #1a1a3e 0%, #0f0f23 100%);">
+  <div class="story-inner">
+    <h2>Story Spotlight: How One Man Made Decisions Without Conscious Sight</h2>
+    <p>Mlodinow recounts a fascinating case of a businessman who suffered a stroke that rendered him cortically blind — his eyes work, but the visual cortex doesn't. He can't consciously see anything. Yet when researchers placed objects in his visual field and asked him to guess where they were, his accuracy was far above chance. He had no conscious awareness of seeing, yet his unconscious visual system was processing the information.</p>
+
+    <p>More remarkably, when this man navigated his office, he could walk around obstacles without bumping into them, even though he couldn't consciously perceive them. His unconscious visual system was steering his body around dangers. He was literally blind to the world, yet his brain was seeing and reacting to it — all below the threshold of consciousness.</p>
+
+    <p>This case is profound because it shows that vision isn't about conscious awareness. Your "sight" is just a tiny fraction of what your visual brain is actually doing. Most visual processing — navigation, obstacle avoidance, threat detection — happens unconsciously. The conscious picture you experience is a simplified narrative created by your brain, a highlight reel of the vast amount of information processing happening in the background. The blind man lost conscious vision but retained unconscious vision, proving that the unconscious visual system is the real workhorse.</p>
+
+    <div style="margin-top: 30px; text-align: center;">
+      <svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg">
+        <text x="250" y="30" text-anchor="middle" fill="white" font-size="13" font-weight="bold">The Cortically Blind Man</text>
+
+        <!-- Unconscious processing -->
+        <ellipse cx="150" cy="90" rx="70" ry="50" fill="rgba(78, 205, 196, 0.2)" stroke="var(--teal)" stroke-width="2"/>
+        <text x="150" y="85" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Unconscious</text>
+        <text x="150" y="105" text-anchor="middle" fill="white" font-size="10">Sees, navigates,</text>
+        <text x="150" y="120" text-anchor="middle" fill="white" font-size="10">avoids obstacles</text>
+
+        <!-- Conscious awareness -->
+        <ellipse cx="350" cy="90" rx="70" ry="50" fill="rgba(255, 107, 107, 0.2)" stroke="var(--coral)" stroke-width="2"/>
+        <text x="350" y="85" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Conscious</text>
+        <text x="350" y="105" text-anchor="middle" fill="white" font-size="10">Complete</text>
+        <text x="350" y="120" text-anchor="middle" fill="white" font-size="10">blindness</text>
+
+        <text x="250" y="160" text-anchor="middle" fill="white" font-size="11">Vision happens with or without awareness</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 3: THE CHOICE-MAKING PROFESSOR ===== -->
+<section class="story" style="background: linear-gradient(135deg, #1a1a3e 0%, #0f0f23 100%);">
+  <div class="story-inner">
+    <h2>Story Spotlight: Your Hand Moves Before Your Mind Decides</h2>
+    <p>Benjamin Libet's famous experiments showed that unconscious brain activity (electrical signals in the motor cortex) precedes conscious awareness of deciding to move. When people are asked to press a button "whenever you feel the urge," their brain signals indicate a decision to move about 350 milliseconds before they consciously experience the decision. The conscious feeling of "deciding" comes *after* the brain has already committed to action.</p>
+
+    <p>This means your conscious sense of "I decided to do X" is actually a post-hoc narration of a decision already made by your unconscious brain. You experience the feeling of conscious choice, but that feeling is generated after the choice has been neurologically committed. Your conscious mind is explaining a decision it didn't actually make.</p>
+
+    <p>Mlodinow uses this to illuminate a profound truth: free will isn't an illusion (your choices are real), but the sense that you consciously decide them is. You do make choices, but they're made unconsciously, and your conscious mind generates the narrative of conscious agency after the fact. You are not the conscious author of your actions; you're the narrator of actions written by your unconscious mind. Understanding this doesn't eliminate responsibility — it clarifies where responsibility actually lies: in the patterns and habits your unconscious has learned through experience.</p>
+
+    <div style="margin-top: 30px; text-align: center;">
+      <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+        <text x="250" y="30" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Timeline of Decision</text>
+
+        <!-- Timeline -->
+        <line x1="50" y1="80" x2="450" y2="80" stroke="white" stroke-width="2"/>
+
+        <!-- Points on timeline -->
+        <circle cx="100" cy="80" r="6" fill="var(--teal)"/>
+        <text x="100" y="110" text-anchor="middle" fill="white" font-size="10">Brain</text>
+        <text x="100" y="123" text-anchor="middle" fill="white" font-size="9" font-weight="bold">~350ms before</text>
+
+        <circle cx="250" cy="80" r="6" fill="var(--coral)"/>
+        <text x="250" y="110" text-anchor="middle" fill="white" font-size="10">Action</text>
+        <text x="250" y="123" text-anchor="middle" fill="white" font-size="9" font-weight="bold">~0ms</text>
+
+        <circle cx="350" cy="80" r="6" fill="var(--sunny)"/>
+        <text x="350" y="110" text-anchor="middle" fill="white" font-size="10">Conscious</text>
+        <text x="350" y="123" text-anchor="middle" fill="white" font-size="9" font-weight="bold">~0-200ms after</text>
+
+        <!-- Bottom explanation -->
+        <rect x="50" y="150" width="400" height="35" fill="rgba(255,255,255,0.05)" rx="6"/>
+        <text x="250" y="172" text-anchor="middle" fill="white" font-size="10">Your conscious sense of "deciding" happens AFTER your brain committed</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHEATSHEET ===== -->
+<section class="cheatsheet">
+  <div class="cheatsheet-inner">
+    <h2>Subliminal: Quick Reference Guide</h2>
+
+    <div class="two-col">
+      <div class="cheatsheet-card">
+        <h3>1. The Unconscious Runs the Show</h3>
+        <p>95% of brain processing is unconscious. Your mind processes 11M bits/second unconsciously vs 40-50 bits/second consciously. Behavior is primarily driven by unconscious processes.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>2. Perception Is Construction</h3>
+        <p>You don't passively perceive reality. Your brain predicts what it expects, then compares to sensory input. Two people see the same object differently based on different expectations.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>3. Implicit Bias</h3>
+        <p>Unconscious associations guide judgments faster than conscious values can intervene. Explicitly rejecting prejudice doesn't eliminate implicit bias in behavior and decision-making.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>4. Memory Is Reconstruction</h3>
+        <p>Memory isn't playback; it's reconstruction. Each time you recall something, you alter it. Gaps are filled with confabulated details. Memory is unreliable.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>5. Priming Effects</h3>
+        <p>Subtle cues activate related concepts unconsciously, shaping subsequent judgments and behavior. Money primes selfishness. Elderly words prime slower walking. Smells influence moral judgment.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>6. Unconscious Decision-Making</h3>
+        <p>For complex decisions with multiple variables, unconscious choices often outperform conscious analysis (when you have expertise). Gut instinct wins, but only in familiar domains.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>7. Attention's Limits</h3>
+        <p>You consciously attend to tiny fraction of available information. Inattentional blindness means you miss what you're not focused on. Your brain optimizes for what matters, ignoring the rest.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>8. Social Influence</h3>
+        <p>Your brain unconsciously monitors and mirrors others. Conformity happens automatically. Group consensus overwrites individual perception. Mimicry increases rapport and liking.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>9. Emotions Decide First</h3>
+        <p>Your amygdala responds to threats in ~50ms, before your conscious mind processes input. Emotion is rapid information processing, not interference with reason. Decisions without emotion are worse.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>10. The Narrative Self</h3>
+        <p>Your conscious mind creates plausible explanations for unconscious decisions. These post-hoc narratives are often false confabulations. You're not the author of your choices, just the narrator.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>11. Expectations Shape Reality</h3>
+        <p>What you expect to happen often happens, literally. Belief triggers neurochemical changes. Placebo effects are real — they activate endogenous opioid systems. Expectations alter perception.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>12. Integration Over Control</h3>
+        <p>You can't fight your unconscious effectively with willpower. Work with it by understanding patterns, designing environments, and establishing habits. Automation beats willpower.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 60px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+      <h3 style="color: var(--sky); margin-bottom: 15px;">Key Concepts Summary</h3>
+      <p style="font-size: 0.9rem; line-height: 1.7;">
+        <strong>The Core Insight:</strong> Your conscious mind is a narrative machine that explains decisions made by sophisticated unconscious processes. Understanding how your unconscious mind works — perception, memory, priming, emotion, social influence, decision-making — is essential to understanding yourself and others. Rather than fighting your unconscious through willpower, you can align with it through environmental design, habit formation, and understanding its patterns.
+      </p>
+      <p style="font-size: 0.9rem; line-height: 1.7; margin-top: 15px;">
+        <strong>Practical Application:</strong> Stop trying to control your behavior through conscious willpower. Instead, design your environment, establish cues for habits you want, understand what primes your decisions, and leverage your unconscious mind's sophisticated pattern-matching abilities. Your unconscious is smarter than you think — stop fighting it and start using it.
+      </p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

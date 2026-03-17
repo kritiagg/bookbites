@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Righteous Mind: An Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ===== COVER ===== */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--dark-purple) 50%, var(--deep-blue) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(78, 205, 196, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .cover-illustration {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            letter-spacing: -1px;
+        }
+
+        .cover h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cover-author {
+            font-size: 1.1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cover-scroll {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.25rem;
+        }
+
+        nav a:hover {
+            color: var(--coral);
+            border-bottom-color: var(--coral);
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            background: white;
+            margin: 2rem auto;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--coral), var(--teal), var(--sunny));
+            border-radius: 16px 16px 0 0;
+        }
+
+        section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark-purple);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--coral);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        section h4 {
+            color: var(--purple);
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        /* ===== LESSON CARDS ===== */
+        .lesson {
+            background: linear-gradient(135deg, rgba(160, 108, 213, 0.08) 0%, rgba(78, 205, 196, 0.08) 100%);
+            border: 2px solid var(--purple);
+            border-radius: 14px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .lesson-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .lesson h3 {
+            color: var(--dark-purple);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lesson-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--coral), var(--warm-red));
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--teal);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-label {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--teal), var(--mint));
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card h4 {
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            margin-top: 0;
+        }
+
+        /* ===== QUOTES ===== */
+        .quote-box {
+            background: linear-gradient(135deg, var(--cream) 0%, rgba(255, 230, 109, 0.4) 100%);
+            border-left: 5px solid var(--orange);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 0;
+            left: 10px;
+            font-size: 4rem;
+            opacity: 0.15;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .quote-attribution {
+            font-size: 0.95rem;
+            color: var(--dark-purple);
+            margin-top: 1rem;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* ===== FUNNY BOX ===== */
+        .funny-box {
+            background: linear-gradient(135deg, rgba(253, 121, 168, 0.15) 0%, rgba(255, 107, 107, 0.15) 100%);
+            border: 2px dashed var(--pink);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .funny-box::before {
+            content: '😄 ';
+            font-size: 1.5rem;
+        }
+
+        .funny-box h4 {
+            color: var(--warm-red);
+            margin-top: 0;
+        }
+
+        /* ===== AI CONNECTION ===== */
+        .ai-box {
+            background: linear-gradient(135deg, rgba(9, 132, 227, 0.12) 0%, rgba(108, 92, 231, 0.12) 100%);
+            border: 2px solid var(--deep-blue);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .ai-box::before {
+            content: '⚙️ ';
+            font-size: 1.5rem;
+        }
+
+        .ai-box h4 {
+            color: var(--deep-blue);
+            margin-top: 0;
+        }
+
+        /* ===== CONNECTIONS ===== */
+        .connect-box {
+            background: linear-gradient(135deg, rgba(0, 184, 148, 0.1) 0%, rgba(85, 239, 196, 0.1) 100%);
+            border-left: 5px solid var(--forest);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .connect-box h4 {
+            color: var(--forest);
+            margin-top: 0;
+        }
+
+        .connect-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .connect-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .connect-box li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--forest);
+            font-weight: bold;
+        }
+
+        /* ===== STORY ===== */
+        .story {
+            background: linear-gradient(135deg, rgba(116, 185, 255, 0.1) 0%, rgba(74, 144, 226, 0.1) 100%);
+            border: 2px solid var(--sky);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .story-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .story h4 {
+            color: var(--deep-blue);
+            margin-top: 0;
+        }
+
+        /* ===== CHEATSHEET ===== */
+        .cheatsheet {
+            background: linear-gradient(135deg, rgba(255, 154, 158, 0.1) 0%, rgba(255, 107, 107, 0.1) 100%);
+            border: 2px solid var(--coral);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .cheatsheet h4 {
+            color: var(--coral);
+            margin-top: 0;
+        }
+
+        .cheatsheet-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 640px) {
+            .cheatsheet-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cheatsheet-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--coral);
+        }
+
+        .cheatsheet-item strong {
+            color: var(--dark-purple);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== ILLUSTRATION CONTAINER ===== */
+        .illustration-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            min-height: 300px;
+            background: linear-gradient(135deg, rgba(160, 108, 213, 0.08) 0%, rgba(78, 205, 196, 0.08) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ===== TWO COLUMN ===== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== PARTICLES ===== */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .particle-1 {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--coral), transparent);
+            top: 10%;
+            left: 5%;
+        }
+
+        .particle-2 {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--teal), transparent);
+            bottom: 10%;
+            right: 5%;
+        }
+
+        .particle-3 {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--sunny), transparent);
+            top: 50%;
+            right: 10%;
+        }
+
+        /* ===== TABLES ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--purple), var(--dark-purple));
+            color: white;
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tbody tr:hover {
+            background: #f9f9f9;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, var(--dark), var(--dark-purple));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer h3 {
+            color: var(--coral);
+            margin-bottom: 1rem;
+        }
+
+        .toc {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .toc h3 {
+            color: var(--dark-purple);
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .toc ol {
+            columns: 2;
+            column-gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .toc li {
+            margin: 0.8rem 0;
+        }
+
+        .toc a {
+            color: var(--deep-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: var(--coral);
+            text-decoration: underline;
+        }
+
+        /* ===== MORAL FOUNDATIONS TABLE ===== */
+        .moral-foundation {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 5px solid var(--teal);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.5rem;
+        }
+
+        .moral-foundation-icon {
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .moral-foundation-content h4 {
+            margin-top: 0;
+            color: var(--dark);
+        }
+
+        /* ===== HIGHLIGHTS ===== */
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 230, 109, 0.3), rgba(255, 154, 158, 0.3));
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--sunny);
+        }
+
+        .highlight strong {
+            color: var(--dark-purple);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            section {
+                padding: 1.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            section h3 {
+                font-size: 1.3rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .cover h1 {
+                font-size: 2rem;
+            }
+
+            .cover-illustration {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--coral), var(--warm-red));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <!-- COVER -->
+    <section class="cover" id="top">
+        <div class="cover-content">
+            <div class="cover-illustration">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="240" height="240">
+                    <!-- Yin-Yang base with moral themes -->
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#A06CD5" stroke-width="3"/>
+
+                    <!-- Left side (black) - Elephant/Emotional -->
+                    <path d="M 100 5 A 95 95 0 0 0 100 195 A 95 95 0 0 1 100 5" fill="#2D3436" opacity="0.85"/>
+
+                    <!-- Right side (white) - Rider/Rational -->
+                    <path d="M 100 5 A 95 95 0 0 1 100 195 A 95 95 0 0 0 100 5" fill="#FFFFFF" opacity="0.9"/>
+
+                    <!-- Small circle left (emotion) -->
+                    <circle cx="65" cy="100" r="18" fill="#FFFFFF" opacity="0.8"/>
+                    <circle cx="65" cy="100" r="8" fill="#A06CD5"/>
+
+                    <!-- Small circle right (reason) -->
+                    <circle cx="135" cy="100" r="18" fill="#2D3436" opacity="0.8"/>
+                    <circle cx="135" cy="100" r="8" fill="#FFE66D"/>
+
+                    <!-- Taste bud dots -->
+                    <circle cx="50" cy="50" r="6" fill="#FF6B6B" opacity="0.7"/>
+                    <circle cx="60" cy="65" r="5" fill="#4ECDC4" opacity="0.7"/>
+                    <circle cx="75" cy="55" r="4" fill="#FFE66D" opacity="0.7"/>
+                    <circle cx="140" cy="140" r="6" fill="#FF6B6B" opacity="0.7"/>
+                    <circle cx="150" cy="125" r="5" fill="#4ECDC4" opacity="0.7"/>
+                    <circle cx="135" cy="150" r="4" fill="#FFE66D" opacity="0.7"/>
+
+                    <!-- Center tribal symbol -->
+                    <text x="100" y="108" font-size="28" text-anchor="middle" fill="#A06CD5" font-weight="bold" opacity="0.6">♦</text>
+                </svg>
+            </div>
+            <h1>The Righteous Mind</h1>
+            <h2>Why Good People Are Divided by Politics and Religion</h2>
+            <div class="cover-author">
+                <strong>By Jonathan Haidt</strong><br>
+                <em>A Comprehensive Illustrated Guide to Understanding Moral Psychology</em>
+            </div>
+            <div class="cover-scroll">↓ Scroll to Explore ↓</div>
+        </div>
+    </section>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <ul>
+            <li><a href="#top">Home</a></li>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#toc">Contents</a></li>
+            <li><a href="#key-concepts">Key Concepts</a></li>
+            <li><a href="#lessons">Lessons</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#ai">AI Connection</a></li>
+            <li><a href="#cross-book">Cross-Book</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- OVERVIEW -->
+        <section id="overview">
+            <h2>About This Book</h2>
+            <p>Jonathan Haidt's <em>The Righteous Mind</em> is a groundbreaking exploration of moral psychology that explains why intelligent people often hold contradictory beliefs about politics and religion. Rather than seeing morality as a matter of reason, Haidt reveals that our moral judgments come primarily from intuition—a fast, automatic system he calls the "Elephant." The conscious reasoning that follows is the "Rider," attempting to control and justify the Elephant's initial decisions.</p>
+
+            <div class="highlight">
+                <strong>Central Premise:</strong> Our minds are built to be divided. We experience our own righteousness as obvious and our opponents' beliefs as absurd. This isn't because one side is rational and the other isn't—it's because they're using different moral taste buds to evaluate the world.
+            </div>
+
+            <p>Haidt introduces his groundbreaking Moral Foundations Theory, identifying six fundamental moral dimensions that are universal across cultures but weighted differently by different people. This framework transforms abstract political disagreements into concrete conversations about competing values.</p>
+
+            <div class="quote-box">
+                "The righteous mind is divided into parts that sometimes conflict. The conscious mind struggles to maintain the illusion that it is in charge. But in fact, the mind is structured to suppress and rationalize rather than to really scrutinize reason."
+                <div class="quote-attribution">— Jonathan Haidt</div>
+            </div>
+        </section>
+
+        <!-- TABLE OF CONTENTS -->
+        <div class="toc" id="toc">
+            <h3>📚 Guide Contents</h3>
+            <ol>
+                <li><a href="#lesson-1">Intuitions Come First, Strategic Reasoning Second</a></li>
+                <li><a href="#lesson-2">The Rider and the Elephant</a></li>
+                <li><a href="#lesson-3">Meet Your Moral Taste Buds</a></li>
+                <li><a href="#lesson-4">The Six Moral Foundations</a></li>
+                <li><a href="#lesson-5">Why Liberals and Conservatives Taste Different Moral Flavors</a></li>
+                <li><a href="#lesson-6">The Rationalist Delusion</a></li>
+                <li><a href="#lesson-7">Moral Dumbfounding and the Limits of Reason</a></li>
+                <li><a href="#lesson-8">Our Groupish Nature: The Hive Switch</a></li>
+                <li><a href="#lesson-9">Religion Binds and Blinds</a></li>
+                <li><a href="#lesson-10">Moral Capital and Social Virtue</a></li>
+                <li><a href="#lesson-11">Why It's Hard to Talk Across Political Lines</a></li>
+                <li><a href="#lesson-12">The Bee and the Hive: Individual vs. Collective</a></li>
+            </ol>
+        </div>
+
+        <!-- KEY CONCEPTS SECTION -->
+        <section id="key-concepts">
+            <h2>Core Concepts at a Glance</h2>
+
+            <div class="two-col">
+                <div class="card">
+                    <span class="card-label">Foundation Concept</span>
+                    <h4>The Elephant & The Rider</h4>
+                    <p>Our mind is like an elephant (emotions, intuitions, the unconscious) with a rider (reason, logic, the conscious mind) on top. The rider thinks it's in control, but the elephant usually wins.</p>
+                </div>
+                <div class="card">
+                    <span class="card-label">Key Finding</span>
+                    <h4>Intuitions First</h4>
+                    <p>Moral judgments happen instantly, emotionally. Reasoning comes after to justify what we've already decided. We rationalize more than we reason.</p>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="card">
+                    <span class="card-label">Theory</span>
+                    <h4>Moral Foundations</h4>
+                    <p>Six universal dimensions of morality shaped by evolution: Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation, Liberty/Oppression.</p>
+                </div>
+                <div class="card">
+                    <span class="card-label">Universal</span>
+                    <h4>Moral Taste Buds</h4>
+                    <p>Like taste buds on our tongue, we have moral receptors that detect violations. Different groups weight these receptors differently, creating political divides.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSONS -->
+        <section id="lessons">
+            <h2>12 Essential Lessons</h2>
+
+            <!-- LESSON 1 -->
+            <div class="lesson" id="lesson-1">
+                <div class="lesson-inner">
+                    <h3><span class="lesson-number">1</span> Intuitions Come First, Strategic Reasoning Second</h3>
+                    <p>Haidt begins with a fundamental insight: moral judgment is not the product of moral reasoning. Rather, moral intuitions come first. We feel that something is wrong, and only then do we manufacture reasons to support that feeling.</p>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>🧪 The Research Foundation</h4>
+                            <p>Haidt's research with moral dumbfounding tasks (which we'll explore in detail later) showed that people make quick moral judgments but struggle to articulate reasons. When their reasons are challenged, they insist they're right anyway—even though they can't explain why. This is the signature of intuition-based judgment.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>The Autopsy Objection</h4>
+                        <p>Imagine your family's dead relatives are embalmed. A doctor asks: can we do a harmless autopsy on one? Most people recoil instantly. Why? They can't quite say. "It just feels wrong." When you probe their reasoning—the body's already dead, the family consents, no harm—they get flustered and fall back on "I just know it's wrong."</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "Reasoning is the servant of intuition, not the master."
+                        <div class="quote-attribution">— Jonathan Haidt</div>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>⚙️ AI & Intuition-First Design</h4>
+                        <p>Large language models like Claude generate outputs through neural network computations that feel analogous to intuition: fast, pattern-based, not step-by-step. The "reasoning" in chain-of-thought prompting is generated post-hoc to justify outputs. This mirrors how human morality actually works—intuition first, rationalization second. RLHF (Reinforcement Learning from Human Feedback) trains models to output human-aligned moral intuitions, then models post-hoc-generate explanations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 2 -->
+            <div class="lesson" id="lesson-2">
+                <div class="lesson-inner">
+                    <h3><span class="lesson-number">2</span> The Rider and the Elephant: The Divided Mind</h3>
+                    <p>The metaphor of the Rider and Elephant is central to Haidt's work. The Elephant represents our emotional, intuitive mind—powerful, large, and mostly in control. The Rider is our rational, conscious mind—small, weak, and mostly along for the ride.</p>
+
+                    <div class="cheatsheet">
+                        <h4>🧠 Rider vs. Elephant</h4>
+                        <div class="cheatsheet-inner">
+                            <div class="cheatsheet-item">
+                                <strong>The Elephant (Emotion)</strong>
+                                <ul style="margin: 0; padding-left: 1rem;">
+                                    <li>Fast, automatic</li>
+                                    <li>Operates unconsciously</li>
+                                    <li>Based on evolved heuristics</li>
+                                    <li>Powerful, drives behavior</li>
+                                    <li>Emotional, reactive</li>
+                                </ul>
+                            </div>
+                            <div class="cheatsheet-item">
+                                <strong>The Rider (Reason)</strong>
+                                <ul style="margin: 0; padding-left: 1rem;">
+                                    <li>Slow, deliberate</li>
+                                    <li>Conscious, explicit</li>
+                                    <li>Logical, rule-following</li>
+                                    <li>Weak, persuasive only if aligned with elephant</li>
+                                    <li>Rationalizing, story-telling</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p><strong>Key Implication:</strong> If you want to change someone's mind, you usually need to appeal to the Elephant. Pure logical arguments to the Rider rarely work unless the Elephant is already somewhat on board. This is why political debates often go nowhere—each side is trying to persuade the other side's Rider, while their Elephants are pulling in opposite directions.</p>
+
+                    <div class="illustration-container">
+                        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" width="280" height="280">
+                            <!-- Elephant body -->
+                            <ellipse cx="150" cy="180" rx="90" ry="80" fill="#2D3436" opacity="0.8"/>
+                            <!-- Elephant head -->
+                            <circle cx="150" cy="100" r="50" fill="#2D3436" opacity="0.9"/>
+                            <!-- Trunk -->
+                            <path d="M 140 140 Q 120 160 130 200" stroke="#2D3436" stroke-width="20" fill="none" opacity="0.9"/>
+                            <!-- Elephant eye -->
+                            <circle cx="140" cy="95" r="6" fill="white"/>
+                            <!-- Elephant tusk -->
+                            <path d="M 165 135 L 180 150" stroke="#FFEAA7" stroke-width="6" opacity="0.8"/>
+
+                            <!-- Rider on top -->
+                            <circle cx="150" cy="100" r="25" fill="#FF6B6B"/>
+                            <path d="M 135 75 L 130 55" stroke="#FF6B6B" stroke-width="5"/>
+                            <path d="M 165 75 L 170 55" stroke="#FF6B6B" stroke-width="5"/>
+
+                            <!-- Rider holding rope -->
+                            <line x1="150" y1="125" x2="150" y2="140" stroke="#4ECDC4" stroke-width="4"/>
+
+                            <!-- Text labels -->
+                            <text x="150" y="260" text-anchor="middle" font-size="16" fill="#A06CD5" font-weight="bold">EMOTION POWER</text>
+                            <text x="150" y="30" text-anchor="middle" font-size="14" fill="#FF6B6B" font-weight="bold">Rider's Illusion of Control</text>
+                        </svg>
+                    </div>
+
+                    <div class="quote-box">
+                        "The Rider is skilled at finding reasons to support whatever the Elephant wants to believe."
+                        <div class="quote-attribution">— Jonathan Haidt</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 3 -->
+            <div class="lesson" id="lesson-3">
+                <div class="lesson-inner">
+                    <h3><span class="lesson-number">3</span> Meet Your Moral Taste Buds: The Moral Palate</h3>
+                    <p>Just as we have taste receptors for sweet, salty, bitter, sour, and umami, we have "moral taste buds"—innate receptors that detect moral violations and virtues. These aren't learned; they're built into us by evolution.</p>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>🍋 The Taste Bud Analogy</h4>
+                            <p>Haidt uses the taste bud metaphor brilliantly. You can't argue someone into finding cilantro delicious if their genetic makeup makes it taste like soap. Similarly, you can't argue someone into having disgust at behaviors that their moral taste buds don't register as violations. The difference is that people think moral tastes are objective truths rather than subjective perceptions shaped by evolution and culture.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>Harmless Taboo Violations</h4>
+                        <p>Haidt discovered that people will condemn perfectly harmless taboo violations. For example, if you consider the scenario: a family eats their dead dog for dinner (after it dies naturally, so no one's harmed). Most people find this deeply offensive even when they can't articulate why no one is hurt. Their moral taste buds are detecting a purity/sanctity violation, even though the Care/Harm foundation is completely satisfied.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>⚙️ AI Values as Moral Taste Buds</h4>
+                        <p>Modern AI systems are given "taste buds" through objective functions and RLHF. Different models have different moral palates based on their training objectives. One model might have strong Care/Harm sensitivities (avoiding harm to humans) while being relatively neutral on Sanctity violations. This mirrors how human populations differ in their moral foundations—and it explains why different AIs make different moral calls on edge cases, just like humans do.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 4 -->
+            <div class="lesson" id="lesson-4">
+                <div class="lesson-inner">
+                    <h3><span class="lesson-number">4</span> The Six Moral Foundations</h3>
+                    <p>Through cross-cultural research, Haidt identified six universal moral foundations. These are dimensions of moral evaluation that appear across all human societies, though weighted differently by different people and cultures.</p>
+
+                    <div class="moral-foundation">
+                        <div class="moral-foundation-icon">❤️</div>
+                        <div class="moral-foundation-content">
+                            <h4>Care / Harm</h4>
+                            <p><strong>Concerns:</strong> Suffering, compassion, kindness, cruelty. <strong>Triggers:</strong> Seeing someone hurt triggers disgust and anger; helping the vulnerable triggers satisfaction.</p>
+                        </div>
+                    </div>
+
+                    <div class="moral-foundation">
+                        <div class="moral-foundation-icon">⚖️</div>
+                        <div class="moral-foundation-content">
+                            <h4>Fairness / Cheating</h4>
+                            <p><strong>Concerns:</strong> Justice, rights, cooperation, reciprocity. <strong>Triggers:</strong> Cheating, exploitation, and unfair advantages trigger anger; treating everyone equally triggers approval.</p>
+                        </div>
+                    </div>
+
+                    <div class="moral-foundation">
+                        <div class="moral-foundation-icon">👥</div>
+                        <div class="moral-foundation-content">
+                            <h4>Loyalty / Betrayal</h4>
+                            <p><strong>Concerns:</strong> Group solidarity, teamwork, commitment. <strong>Triggers:</strong> Betraying your group triggers intense anger; showing loyalty triggers gratitude and respect.</p>
+                        </div>
+                    </div>
+
+                    <div class="moral-foundation">
+                        <div class="moral-foundation-icon">👑</div>
+                        <div class="moral-foundation-content">
+                            <h4>Authority / Subversion</h4>
+                            <p><strong>Concerns:</strong> Hierarchy, respect, tradition, order. <strong>Triggers:</strong> Disrespecting authority figures and traditions triggers anger; deferring to proper authority triggers satisfaction.</p>
+                        </div>
+                    </div>
+
+                    <div class="moral-foundation">
+                        <div class="moral-foundation-icon">🕯️</div>
+                        <div class="moral-foundation-content">
+                            <h4>Sanctity / Degradation</h4>
+                            <p><strong>Concerns:</strong> Sacred values, purity, bodily integrity, disgust. <strong>Triggers:</strong> Desecration of the sacred (including bodies) triggers strong disgust; respect for sanctity triggers reverence.</p>
+                        </div>
+                    </div>
+
+                    <div class="moral-foundation">
+                        <div class="moral-foundation-icon">🦅</div>
+                        <div class="moral-foundation-content">
+                            <h4>Liberty / Oppression</h4>
+                            <p><strong>Concerns:</strong> Freedom from domination, individual rights, resistance to tyranny. <strong>Triggers:</strong> Oppression and domination trigger anger; autonomy and resistance to domination trigger approval.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        <strong>Research Finding:</strong> Liberals rely heavily on Care/Harm and Fairness. Conservatives balance all six. Libertarians emphasize Liberty. This isn't a difference in one group being moral and another immoral—it's different groups literally perceiving different moral dimensions in the same situation.
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>⚙️ AI Alignment and Multi-Foundation Values</h4>
+                        <p>AI alignment efforts often focus on Care/Harm (avoiding harm to humans). But Haidt shows that human morality is multidimensional. Different cultures emphasize different foundations. A value-aligned AI system optimizing only for Care/Harm might violate Fairness (treating groups unequally to minimize harm) or Liberty (restricting freedom for safety). This suggests future AI systems need multi-foundation alignment objectives, mirroring the complexity of human moral psychology.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 5 -->
+            <div class="lesson" id="lesson-5">
+                <div class="lesson-inner">
+                    <h3><span class="lesson-number">5</span> Why Liberals and Conservatives Taste Different Moral Flavors</h3>
+                    <p>The six foundations aren't weighted equally. Different people—and different political cultures—have different moral profiles, like different flavor preferences.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Foundation</th>
+                                <th>Liberals</th>
+                                <th>Conservatives</th>
+                                <th>Libertarians</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Care/Harm</strong></td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐</td>
+                                <td>⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fairness/Cheating</strong></td>
+                                <td>⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Loyalty/Betrayal</strong></td>
+                                <td>⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Authority/Subversion</strong></td>
+                                <td>⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sanctity/Degradation</strong></td>
+                                <td>⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Liberty/Oppression</strong></td>
+                                <td>⭐⭐⭐</td>
+                                <td>⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>🗺️ The Political Landscape</h4>
+                            <p><strong>Liberals</strong> run primarily on Care and Fairness—they see moral issues through the lens of suffering and equality. They ask: "Who is being harmed? Is this fair?" Their concern is inclusion and reducing suffering. <strong>Conservatives</strong> balance all six—they see moral issues through multiple lenses. They ask: "Is this respecting authority? Is this consistent with our traditions? Does this maintain group loyalty?" Their concern is order and cohesion. <strong>Libertarians</strong> weight Liberty most heavily, with Fairness second—they're suspicious of both government authority and corporate harm.</p>
+                        </div>
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>Why Liberals Think Conservatives Are Immoral (And Vice Versa)</h4>
+                        <p>A liberal sees a conservative oppose same-sex marriage and thinks: "You're causing harm to gay people—how is that moral?" The conservative thinks: "You're destroying the sanctity of marriage and weakening family bonds—how is that moral?" They're literally using different moral taste buds. The liberal can't taste the sanctity violation; the conservative can't not taste it. Neither is wrong about what they taste; they just taste different dimensions.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "A liberal is someone who can't see his enemy is someone who doesn't understand his moral foundations."
+                        <div class="quote-attribution">— Paraphrase of Jonathan Haidt's core insight</div>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>⚙️ Training Data Reflects Moral Foundations</h4>
+                        <p>Language models trained primarily on liberal-leaning internet data tend to show liberal moral foundations. They weight Care/Harm heavily in their outputs because that's what appears most in their training data. This isn't because the model is "right"—it's because training data reflects a particular moral taste. RLHF can shift these weightings, but it's fundamentally training a model's moral foundations through reinforcement, just as culture trains human moral taste buds.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 6 -->
+            <div class="lesson" id="lesson-6">
+                <div class="lesson-inner">
+                    <h3><span class="lesson-number">6</span> The Rationalist Delusion: We Think We Reason, But We Rationalize</h3>
+                    <p>This is perhaps Haidt's most subversive insight: we are not primarily rational creatures. We are rationalizing creatures. We think we reason our way to moral conclusions, but actually we rationalize conclusions our intuitions have already reached.</p>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>🧠 The Illusion of Reasoning</h4>
+                            <p>Haidt's research shows that when you challenge someone's moral intuition, they don't abandon it—they just generate new reasons to justify it. A liberal who intuitively feels that taxing the rich is fair will come up with economic arguments if challenged. A conservative who intuitively feels that traditional values matter will come up with sociological arguments if challenged. They're not discovering these reasons through reasoning; they're manufacturing them post-hoc.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        <strong>Key Experimental Finding:</strong> In studies, when Haidt presented people with harmless actions that violated their intuitions (like a family eating their pet dog), they confidently said it was wrong—but when asked why, they couldn't articulate a reason. Yet they still insisted it was wrong. Their intuition was leading; reasoning was trailing behind, desperately trying to justify a conclusion the mind had already reached.</p>
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>The Prosecutor and the Detective</h4>
+                        <p>Think of the Rider (reason) as a prosecutor building a case, not a detective seeking truth. The Elephant (intuition) has already decided guilt or innocence. The Rider's job is to build the strongest case possible for that verdict, not to evaluate the evidence fairly. This is why smart people can be confidently wrong—their Riders are excellent at building cases.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>⚙️ Rationalization in AI Explanations</h4>
+                        <p>When we ask an AI to "explain its reasoning," we're often getting post-hoc rationalization, not genuine reasoning. The model generated an output through neural computation (intuition-like), then generated an explanation to justify it. This is exactly how human moral judgment works. The model isn't lying—it's doing what all intelligent creatures do: generating plausible explanations for intuitive outputs. This has profound implications for AI transparency and alignment.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "Reason is the servant of intuition, not its master. We are not designed to find truth; we are designed to believe we are right."
+                        <div class="quote-attribution">— Jonathan Haidt</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 7 -->
+            <div class="lesson" id="lesson-7">
+                <div class="lesson-inner">
+                    <h3><span class="lesson-number">7</span> Moral Dumbfounding: When We Can't Explain Our Convictions</h3>
+                    <p>Moral dumbfounding is the uncomfortable experience of being unable to explain why something feels wrong, even though you're absolutely certain it is wrong. This is a signature moment that reveals the intuition-first nature of morality.</p>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>🔬 The Harmless Taboo Violation Study</h4>
+                            <p>Haidt's most famous experiment involved the scenario: Julie and Mark are siblings on vacation. They decide to have sex once—they're careful about contraception, so there's zero risk of pregnancy. They enjoy it, feel closer, and never do it again. No one finds out.</p>
+                            <p>The result: Most people immediately say this is wrong. But when asked why—no one is harmed, they consented, no risk of genetic damage—people struggle. They offer reasons, which are then refuted. They offer new reasons. Eventually, many people simply admit: "I don't know why it's wrong, but I know it is."</p>
+                            <p>This is moral dumbfounding in action. The intuition (taboo violation, sanctity offense) is firing, but the reasoning apparatus can't articulate why. This reveals that the moral judgment came first, the reasoning was post-hoc and ultimately failed to provide justification.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        <strong>The Insight:</strong> People don't stop condemning something when their reasons are refuted. They just search for new reasons. This shows that moral conviction doesn't rest on reasons at all—it rests on intuition. The reasons are window dressing on the elephant's decision.
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>Defending the Indefensible</h4>
+                        <p>Imagine arguing that sex between consenting siblings is okay if they use contraception and no one finds out. You're not actually okay with this, are you? Your intuition is firing hard. But notice: when you try to explain why, you're grasping. This is moral dumbfounding—and it happens to all of us in real-time whenever our intuitions outrun our ability to articulate reasons.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>⚙️ Moral Dumbfounding in AI Systems</h4>
+                        <p>AI systems experience a version of this. When trained with RLHF, a model learns to prefer certain outputs without necessarily having explicit rules explaining why. Ask the model to explain its preference, and it will rationalize post-hoc, just like humans. The model might refuse to generate harmful content and explain why, but the true reason is the RLHF training signal—the explanation is generated post-hoc. This gap between behavior and explanation is moral dumbfounding in silicon.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "You can't reason away the sense that something is wrong when intuition says it's wrong."
+                        <div class="quote-attribution">— Jonathan Haidt</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 8 -->
+            <div class="lesson" id="lesson-8">
+                <div class="lesson-inner">
+                    <h3><span class="lesson-number">8</span> Our Groupish Nature: The Hive Switch</h3>
+                    <p>Humans are not primarily selfish individuals. We evolved in groups, and our minds come equipped with a "hive switch"—an ability to suppress self-interest and merge into a collective whole. This switch explains both human cooperation and human conflict.</p>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>🐝 The Hive Switch Activated</h4>
+                            <p>Think of moments when you've felt part of something larger than yourself: a sports crowd going wild, a group singing together, a military unit under fire, a congregation in prayer. In these moments, self-interest dissolves. You're not calculating—you're merging with the group. This is the hive switch, and it's one of humanity's most powerful capabilities.</p>
+                            <p>Haidt points out that this ability is ancient—we see similar group dynamics in other social species. But in humans, it's turbocharged by language and culture, allowing groups of thousands to coordinate toward shared goals.</p>
+                        </div>
+                    </div>
+
+                    <div class="cheatsheet">
+                        <h4>🧬 Individual vs. Groupish Evolution</h4>
+                        <div class="cheatsheet-inner">
+                            <div class="cheatsheet-item">
+                                <strong>We're Groupish Because:</strong>
+                                <ul style="margin: 0; padding-left: 1rem;">
+                                    <li>Groups outcompete individuals</li>
+                                    <li>Cohesive groups survive better</li>
+                                    <li>Altruism within groups was selected</li>
+                                    <li>Language amplified group loyalty</li>
+                                </ul>
+                            </div>
+                            <div class="cheatsheet-item">
+                                <strong>But We're Also Selfish Because:</strong>
+                                <ul style="margin: 0; padding-left: 1rem;">
+                                    <li>The hive switch doesn't stay on permanently</li>
+                                    <li>Self-interest still drives behavior</li>
+                                    <li>We cooperate with ingroups, compete with outgroups</li>
+                                    <li>Tribal psychology created cooperation and conflict</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        <strong>The Paradox of Human Nature:</strong> We are both profoundly selfish and profoundly capable of selflessness. We can dissolve our individual ego into a group identity. This explains both the beauty of human cooperation and the horror of tribal violence.
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>The Hive Switch at a Music Festival</h4>
+                        <p>You're at a concert. The bass drops. Suddenly, thousands of strangers move in synchrony. Everyone feels the same pulse. Individual concerns evaporate. This is the hive switch flipped on. The next morning, you're back to individualism—concerned about your coffee order, your schedule, your problems. The switch flipped back off. Neither state is more "true" to human nature; we're built for both.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>⚙️ Emergent Collective Intelligence</h4>
+                        <p>Haidt's hive switch concept maps onto emergent collective intelligence in AI systems. Large language models trained on massive datasets exhibit emergent behaviors—capabilities that weren't explicitly programmed. Similarly, humans create emergent group intelligences that weren't planned. The hive switch shows how individual units (humans) can temporarily merge into a collective system with different properties than the individuals. This is relevant to thinking about AI alignment at the system level—how individual agents (humans or AIs) combine into collective behaviors.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 9 -->
+            <div class="lesson" id="lesson-9">
+                <div class="lesson-inner">
+                    <h3><span class="lesson-number">9</span> Religion Binds and Blinds</h3>
+                    <p>Religion is one of humanity's most powerful group-binding mechanisms. But the same mechanisms that bind groups together also blind them to outside perspectives. Religion activates the hive switch at an extraordinarily high level—which is why religious communities are so tight, and why they can be so resistant to outside ideas.</p>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>⛪ Religion as Hive Coordination</h4>
+                            <p>Religious practices activate multiple moral foundations simultaneously. A religious ritual might activate Loyalty (being part of a community), Authority (respecting religious hierarchy), Sanctity (performing sacred acts), and Care (service to others). This multi-foundation activation is extraordinarily binding. It creates cultural cohesion and shared meaning.</p>
+                            <p>But this same cohesion creates an ingroup/outgroup boundary. Outsiders don't get the hive switch activation. They don't feel the binding power. So from the inside, the religion feels obviously true and obviously good. From the outside, it looks like arbitrary rules and blind tradition.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        <strong>The Binding-Blinding Trade-off:</strong> The same mechanisms that make religion a powerful tool for group cohesion make it resistant to criticism and outside perspectives. A religion that abandoned Sanctity and Authority foundations to appease secular critics would lose its binding power. Its members would defect to more cohesive groups. So religions that survive tend to maintain their binding mechanisms—which means maintaining blinding mechanisms as well.
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>Sacred Cows (Literally and Figuratively)</h4>
+                        <p>In many Hindu communities, cows are sacred—you cannot harm them, even if they're destroying crops. Outsiders see this as obviously irrational: "But the cows are harming people's livelihoods!" From inside, the Sanctity violation is so powerful that practical harm becomes secondary. This isn't stupidity—it's the predictable result of Sanctity being a genuine moral foundation, weighted very heavily in a particular culture.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "Religion is not an opium that produces false beliefs. Religion is a technology for binding groups together."
+                        <div class="quote-attribution">— Jonathan Haidt</div>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>⚙️ Value Lock-In and AI Goals</h4>
+                        <p>Haidt's insight about religion's binding-blinding trade-off is relevant to AI goal lock-in. An AI system optimized for a particular set of values will bind those values (incorporate them consistently) while potentially blinding itself to alternative values. A system optimized for Care/Harm might not see the value in Loyalty or Authority-based objectives, just as secular individuals might not see the value in Sanctity. This suggests that multi-foundation alignment (as discussed earlier) isn't just philosophically good—it's necessary to avoid value lock-in that blinds AI systems to legitimate competing values.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 10 -->
+            <div class="lesson" id="lesson-10">
+                <div class="lesson-inner">
+                    <h3><span class="lesson-number">10</span> Moral Capital: The Currency of Social Trust</h3>
+                    <p>Haidt introduces the concept of moral capital: the reputation for adhering to group norms that allows an individual to influence the group. You can violate group norms, but only if you have sufficient moral capital stored up. If you don't, you're cast out.</p>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>💰 Moral Capital as Currency</h4>
+                            <p>Think of moral capital like social credit. You earn it by following group norms, demonstrating loyalty, showing respect for group values. Once you've accumulated capital, you can spend it: you can suggest changes, critique the group, propose new ideas. But if you propose radical change before building capital, you're ignored or expelled.</p>
+                            <p>This explains why revolutionaries often come from the established elite who've built up capital, not from outsiders. A wealthy, respected conservative like Edmund Burke could critique certain aspects of tradition because he had massive moral capital. An outsider proposing the same critiques would be ignored.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        <strong>Implication for Change:</strong> If you want to influence a group, you need to first demonstrate that you understand and respect group values. Only then can you suggest modifications. This is why effective change often comes from insiders who reform from within, rather than outsiders who attack from without.
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>The Critic Who Gets Expelled</h4>
+                        <p>A new member of a religious community starts immediately critiquing the church's positions on sexuality. No moral capital. They're ignored and eventually shunned. Meanwhile, a long-time member raises the same critique, and it's debated seriously. The difference? Moral capital. The outsider violated group norms without having earned the right; the insider earned it through years of loyalty.</p>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>⚙️ Trust and Credibility in AI Systems</h4>
+                        <p>Haidt's moral capital concept maps onto trust-building in AI systems. An AI system that consistently aligns with human values builds up capital (credibility, trust). It can then take seemingly inconsistent actions that users understand and forgive because the system has demonstrated good faith. An AI system that hasn't built up capital—that seems to violate values inconsistently—loses user trust. This suggests that AI systems need not just aligned values, but also demonstrated alignment over time (moral capital) to maintain human trust.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 11 -->
+            <div class="lesson" id="lesson-11">
+                <div class="lesson-inner">
+                    <h3><span class="lesson-number">11</span> Why It's Hard to Talk Across Political Lines</h3>
+                    <p>Now we arrive at the central puzzle that animates Haidt's entire book: Why is it so difficult to have productive conversations across political divides? The answer: we're not just disagreeing about facts; we're using different moral taste buds, speaking past each other's elephants.</p>
+
+                    <div class="cheatsheet">
+                        <h4>🗣️ Barriers to Cross-Political Conversation</h4>
+                        <div class="cheatsheet-inner">
+                            <div class="cheatsheet-item">
+                                <strong>Problem 1: Different Foundations</strong>
+                                <p>Liberals and conservatives prioritize different moral values. Liberals see a conservative's position as callous (ignoring Care/Harm). Conservatives see a liberal's position as disrespectful (ignoring Authority/Sanctity). Neither is wrong about what they value.</p>
+                            </div>
+                            <div class="cheatsheet-item">
+                                <strong>Problem 2: Tribal Identity</strong>
+                                <p>Politics activates Loyalty and Authority foundations. You're not just disagreeing about policy—you're defending your tribe. Admitting the other side has a point feels like betrayal. Your group identity is at stake.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="two-col">
+                        <div class="card">
+                            <span class="card-label">Problem 3</span>
+                            <h4>The Rationalist Bias</h4>
+                            <p>Both sides assume the other is irrational. But if you understand the other side's moral foundations, their position makes perfect sense. They're not stupid; they just taste different moral flavors.</p>
+                        </div>
+                        <div class="card">
+                            <span class="card-label">Problem 4</span>
+                            <h4>Demonization</h4>
+                            <p>When you can't see the other side's moral logic, you assume bad faith. Surely they're not just using different moral foundations—they must be evil, stupid, or hypocritical. This closes off productive conversation.</p>
+                        </div>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>🤝 Building Bridges</h4>
+                            <p>Haidt suggests that productive cross-political conversation requires three things:</p>
+                            <ol style="margin: 0; padding-left: 1.5rem;">
+                                <li><strong>Understand the other side's moral foundations.</strong> Can you articulate their position in a way they'd recognize as fair? If you can't, you don't understand them yet.</li>
+                                <li><strong>Find legitimate value in other foundations.</strong> Even if Sanctity or Authority isn't central to your own morality, can you see why these matter to others? Acknowledge their legitimacy.</li>
+                                <li><strong>Appeal to multiple foundations.</strong> If you want to persuade someone across the divide, don't just appeal to Care and Fairness. Show how your position respects Authority, Loyalty, or Sanctity as well.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="quote-box">
+                        "It is nearly impossible to change someone's mind on a moral question. The opposing side's arguments usually sound weak and misguided, because they're not connecting to the moral foundations that the other side holds dear."
+                        <div class="quote-attribution">— Jonathan Haidt</div>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>⚙️ AI Alignment and Moral Bridging</h4>
+                        <p>This lesson is crucial for AI systems. An AI trained primarily on liberal-leaning data will struggle to understand conservative moral foundations. When asked to explain conservative positions, it will rationalize them as obviously wrong or hypocritical (demonization). A truly aligned AI system needs to understand multiple moral foundations and articulate each side's position fairly. This requires training on diverse moral perspectives and valuing multiple foundations—not just the dominant values in training data.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 12 -->
+            <div class="lesson" id="lesson-12">
+                <div class="lesson-inner">
+                    <h3><span class="lesson-number">12</span> The Bee and the Individual: We Need Both</h3>
+                    <p>Haidt concludes with a fundamental insight: humans need both individuality and group cohesion. We need the Bee (individual perspective) and the Hive (group identity). Modern culture often privileges the individual at the expense of the group, leading to loneliness and alienation. But exclusive focus on the group leads to conformity and tyranny.</p>
+
+                    <div class="two-col">
+                        <div class="card">
+                            <span class="card-label">The Bee</span>
+                            <h4>Individual Perspective</h4>
+                            <p>Autonomy, personal achievement, individual rights. The Enlightenment elevated the individual and freed us from oppressive collective structures. This is genuine progress.</p>
+                        </div>
+                        <div class="card">
+                            <span class="card-label">The Hive</span>
+                            <h4>Collective Identity</h4>
+                            <p>Belonging, shared meaning, group identity. Community provides support, purpose, and meaning. Isolation is psychologically painful. We evolved for groups.</p>
+                        </div>
+                    </div>
+
+                    <div class="illustration-container">
+                        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" width="280" height="280">
+                            <!-- Hive structure -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#A06CD5" stroke-width="3"/>
+
+                            <!-- Honeycomb hexagons -->
+                            <path d="M 80 70 L 95 65 L 110 70 L 110 85 L 95 90 L 80 85 Z" fill="#FFE66D" opacity="0.7"/>
+                            <path d="M 110 70 L 125 65 L 140 70 L 140 85 L 125 90 L 110 85 Z" fill="#4ECDC4" opacity="0.7"/>
+                            <path d="M 80 100 L 95 95 L 110 100 L 110 115 L 95 120 L 80 115 Z" fill="#FF6B6B" opacity="0.7"/>
+                            <path d="M 110 100 L 125 95 L 140 100 L 140 115 L 125 120 L 110 115 Z" fill="#A06CD5" opacity="0.7"/>
+
+                            <!-- Individual bee outside -->
+                            <circle cx="200" cy="100" r="25" fill="#FFE66D" stroke="#FFC107" stroke-width="2"/>
+                            <path d="M 185 95 L 180 85" stroke="#FFC107" stroke-width="2"/>
+                            <path d="M 215 95 L 220 85" stroke="#FFC107" stroke-width="2"/>
+                            <circle cx="190" cy="100" r="3" fill="#2D3436"/>
+                            <circle cx="210" cy="100" r="3" fill="#2D3436"/>
+
+                            <!-- Connection line -->
+                            <line x1="145" y1="100" x2="175" y2="100" stroke="#A06CD5" stroke-width="2" stroke-dasharray="5,5"/>
+
+                            <!-- Labels -->
+                            <text x="100" y="200" text-anchor="middle" font-size="14" fill="#A06CD5" font-weight="bold">The Hive</text>
+                            <text x="200" y="200" text-anchor="middle" font-size="14" fill="#FFE66D" font-weight="bold">The Bee</text>
+                        </svg>
+                    </div>
+
+                    <div class="story">
+                        <div class="story-inner">
+                            <h4>🎯 The Balance</h4>
+                            <p>Modern Western culture has swung toward celebrating the individual. We tell children they can be anything they want, that they should pursue personal happiness, that they should be true to themselves. This is wonderful—it freed us from rigid social hierarchies. But it comes with a cost: increased loneliness, anxiety, and meaninglessness.</p>
+                            <p>Meanwhile, cultures that maintain strong collective bonds experience less individual freedom but greater meaning and belonging. A person embedded in a tight community knows their role, has deep relationships, experiences shared purpose.</p>
+                            <p>Haidt's solution: we need both. Modern societies need to strengthen communities and shared identities while protecting individual freedom and rights. This is not easy—it requires constant balancing—but it's essential for human flourishing.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        <strong>The Modern Paradox:</strong> We are richer and freer than ever in history, yet lonelier and more anxious. This suggests that freedom and wealth alone don't produce happiness. We also need meaning, belonging, and shared identity. The challenge is building these without sacrificing freedom.
+                    </div>
+
+                    <div class="funny-box">
+                        <h4>The Lonely Millionaire vs. The Embedded Farmer</h4>
+                        <p>A successful person in a major city—free, wealthy, autonomous—might be deeply lonely. A farmer in a tight-knit community with less individual freedom might experience more meaning. This isn't romantic nostalgia; it's what psychological research shows. We need both the freedom to choose our path and the community to share it with.</p>
+                    </div>
+
+                    <div class="quote-box">
+                        "Humans are 90 percent chimp and 10 percent bee. We have minds that evolved for foraging, fighting, and mating with a few others. We have minds that evolved for being embedded in communities."
+                        <div class="quote-attribution">— Jonathan Haidt</div>
+                    </div>
+
+                    <div class="ai-box">
+                        <h4>⚙️ AI in Groups vs. Individual Agents</h4>
+                        <p>Haidt's bee-and-hive framework applies to AI systems as well. Individual AI agents optimized for their own objectives (bee logic) might conflict with system-level goals (hive logic). A single language model optimized to generate engaging content might maximize for polarization. But a system of AI agents coordinated toward collective goals (like "reduce polarization") requires hive logic. Understanding how to balance individual agent optimization with collective coordination is an emerging challenge in multi-agent AI systems—and Haidt's insights about human bee-and-hive balance are directly applicable.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEY RESEARCH SECTION -->
+        <section id="research">
+            <h2>Deep Dive: The Research Behind the Ideas</h2>
+
+            <h3>The Harmless Taboo Violation Study: Moral Dumbfounding Revealed</h3>
+            <p>This is the research that made Haidt's reputation in moral psychology. The study is simple but profound: present people with scenarios where an action is harmless (no actual harm, no legal violation, no adverse consequences) but violates a taboo. Then observe what happens.</p>
+
+            <div class="card">
+                <span class="card-label">Study Design</span>
+                <h4>The Classic Scenario</h4>
+                <p><strong>Setup:</strong> Julie and Mark are brother and sister. They're traveling together in France. One evening, they're in their hotel room. Julie is already on birth control and using a condom. She's been wanting to have sex with Mark and Mark has been wanting to have sex with Julie. They decide to try it. They're careful and nothing bad happens. They both enjoy it. They don't tell anyone.</p>
+                <p><strong>Questions:</strong> Is this wrong? Why or why not?</p>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>📊 The Results</h4>
+                    <p><strong>Finding 1 (The Quick Judgment):</strong> The vast majority of people—typically 80-90% in initial studies—say this is wrong. The judgment is instantaneous and emotionally clear.</p>
+                    <p><strong>Finding 2 (The Failed Reasoning):</strong> When asked why, people offer reasons: it could be genetic (but it's not), it could traumatize them (but they said it wouldn't), it could undermine family bonds (but they said it wouldn't). As each reason is refuted, people become frustrated, say "I don't know why, but I know it's wrong."</p>
+                    <p><strong>Finding 3 (Continued Conviction):</strong> Even after all their reasons have been refuted, people don't change their judgment. They insist it's wrong while admitting they can't articulate why. This is moral dumbfounding—the conviction outlasts the reasoning that supposedly supports it.</p>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>What This Shows:</strong> Moral judgment is not driven by the reasons we offer. The judgment comes first (Elephant: this violates Sanctity, a taboo). The reasoning comes after (Rider: trying to articulate why). When reasoning fails, we assume something must be wrong with our explanation, not with our judgment. The judgment is primary; the reasoning is secondary and replaceable.
+            </div>
+
+            <h3>Disgust Sensitivity Studies: The Physical Root of Moral Judgment</h3>
+
+            <div class="card">
+                <span class="card-label">Research Finding</span>
+                <h4>Disgust and Morality Are Connected</h4>
+                <p>Haidt discovered that people who score high on disgust sensitivity (who are easily disgusted by smells, bodily functions, contamination) also tend to have stronger moral objections to sexual acts, religious violations, and social transgressions. Disgust—a physical, evolved emotion—shapes our abstract moral judgments.</p>
+                <p>This suggests that morality isn't purely cognitive. It's rooted in our evolved emotional systems. We're not reasoned beings who happen to have feelings; we're feeling beings who construct reasons post-hoc.</p>
+            </div>
+
+            <h3>Cross-Cultural Moral Foundation Data: The Universal and the Variable</h3>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🌍 Global Moral Psychology</h4>
+                    <p>Haidt and his colleagues surveyed moral intuitions across dozens of cultures. They found that all six moral foundations appear universally—people everywhere have some sensitivity to Care/Harm, Fairness, Loyalty, Authority, Sanctity, and Liberty.</p>
+                    <p>But the weights differ dramatically. Individualistic Western cultures emphasize Care and Fairness (individual-focused values). Collectivist cultures and traditional societies emphasize Loyalty, Authority, and Sanctity (group-focused values). This isn't a difference in moral development—it's a difference in moral foundations.</p>
+                    <p>This challenges the Western assumption that moral progress means becoming more liberal, more individual-focused, more skeptical of tradition. To cultures emphasizing different foundations, this looks like moral regression: abandoning community, disrespecting elders, desecrating the sacred.</p>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>Implication:</strong> When Westerners critique non-Western cultures for being "backward," we're often just noticing that they weight moral foundations differently. This isn't a moral failing; it's a different moral system. Mutual understanding requires recognizing the legitimacy of multiple foundations, not assuming one culture has moral truth and others are deficient.
+            </div>
+        </section>
+
+        <!-- AI CONNECTION SECTION -->
+        <section id="ai">
+            <h2>AI & Moral Psychology: How Righteous Mind Applies to Artificial Intelligence</h2>
+
+            <h3>1. Multi-Foundation Alignment</h3>
+            <div class="ai-box">
+                <h4>⚙️ The Alignment Problem Reformulated</h4>
+                <p><strong>Current Approach:</strong> Most AI alignment work focuses on Care/Harm—avoiding harm to humans, ensuring safe and beneficial outcomes. This is crucial but incomplete.</p>
+                <p><strong>Haidt's Insight:</strong> Human values are multidimensional. A system optimized only for Care/Harm might violate Fairness (treating groups unequally to minimize aggregate harm), Liberty (restricting freedom for safety), or Authority (disrespecting legitimate institutions). To truly align with human values, AI systems need to balance multiple moral foundations—just as well-functioning human societies do.</p>
+                <p><strong>Implementation:</strong> AI systems should be trained with objectives reflecting multiple foundations. This requires careful weight-balancing, just as human societies must balance community and freedom, tradition and progress. A purely Care/Harm-optimized system would be as limited as a purely Loyalty-optimized system.</p>
+            </div>
+
+            <h3>2. Rationalization as Post-Hoc Explanation Generation</h3>
+            <div class="ai-box">
+                <h4>⚙️ Why AI Explanations Mirror Human Rationalizations</h4>
+                <p><strong>The Phenomenon:</strong> When you ask an AI system to explain its decision or recommendation, you're not getting a genuine explanation of how it arrived at the decision. You're getting a plausible-sounding rationalization generated post-hoc. This is exactly how human moral reasoning works.</p>
+                <p><strong>Why It Happens:</strong> The model generated the output through neural computations (analogous to intuition—fast, pattern-based, not step-by-step). Then it generated an explanation to make sense of that output (analogous to rationalization). The explanation is not the cause of the output; it's a narrative constructed to make the output seem reasonable.</p>
+                <p><strong>Implication for Transparency:</strong> Asking for AI explanations creates an illusion of understanding, just as introspection creates an illusion that we understand why we feel the way we do. We get a narrative that sounds reasonable, but it may not reflect the actual causal factors. This doesn't make AI systems deceptive—it makes them human-like. But it means we should be skeptical of claims that we can fully understand AI decisions through explanations.</p>
+            </div>
+
+            <h3>3. Moral Dumbfounding in AI Behavior</h3>
+            <div class="ai-box">
+                <h4>⚙️ When Behavior and Explanation Diverge</h4>
+                <p><strong>The Gap:</strong> An AI system might refuse to generate content that violates its training objectives, but when asked to explain why, its explanation might not fully capture its actual decision process. It will rationalize a reason, but the true reason is the RLHF training signal—a direct preference signal, not a rule or principle.</p>
+                <p><strong>Moral Dumbfounding Parallel:</strong> Just as humans experience moral dumbfounding (strong conviction without articulated reasoning), AI systems might have strong behavioral preferences without fully articulable reasons. The behavior is primary; the reasoning is post-hoc.</p>
+                <p><strong>Research Opportunity:</strong> Understanding this gap—between AI behavior and AI explanation—could help us align systems more effectively. Rather than assuming AI explanations reveal true objectives, we should look at actual behavior and training signals.</p>
+            </div>
+
+            <h3>4. The Hive Switch as Emergent Collective Intelligence</h3>
+            <div class="ai-box">
+                <h4>⚙️ From Individual Agents to Emergent Collectives</h4>
+                <p><strong>Haidt's Observation:</strong> Individual humans can activate a "hive switch" that dissolves individual self-interest into collective action. The result is emergent group intelligence—capabilities that don't exist in any individual.</p>
+                <p><strong>AI Parallel:</strong> Multi-agent AI systems show similar emergent behaviors. Individual agents optimized for local objectives can combine into systems that exhibit surprising new capabilities. A single language model generating text, combined with search systems, planning systems, and feedback loops, creates emergent behavior neither agent was explicitly optimized for.</p>
+                <p><strong>Implications:</strong> Just as human groups can be wise or foolish depending on structure and incentives, AI agent collectives can be aligned or misaligned depending on how individual agents are designed and incentivized. Understanding the hive switch—how individual units coordinate into collective behavior—is crucial for multi-agent AI systems.</p>
+            </div>
+
+            <h3>5. Value Lock-In and Moral Blindness</h3>
+            <div class="ai-box">
+                <h4>⚙️ Can AI Systems Become Ideologically Locked-In?</h4>
+                <p><strong>Haidt's Warning on Religion:</strong> Systems (like religion) that are extremely effective at binding groups often become blind to alternative perspectives. They bind so tightly to their own values that they can't see the legitimacy of other moral foundations.</p>
+                <p><strong>AI Risk:</strong> Could an AI system become similarly locked-in? If a system is trained heavily on data reflecting liberal moral foundations (Care/Harm, Fairness), it might develop something like ideological blindness to conservative foundations (Authority, Sanctity, Loyalty). When asked about these foundations, it would rationalize why they're less important—not because it's programmed to, but because its training data created genuine asymmetry.</p>
+                <p><strong>Mitigation:</strong> AI systems should be trained on diverse moral perspectives and explicitly weighted to balance multiple foundations. This requires intentional design to avoid the natural tendency of training data to create moral asymmetry.</p>
+            </div>
+        </section>
+
+        <!-- CROSS-BOOK SECTION -->
+        <section id="cross-book">
+            <h2>Connections to Other Books</h2>
+
+            <div class="connect-box">
+                <h4>📖 Thinking, Fast and Slow by Daniel Kahneman</h4>
+                <ul>
+                    <li><strong>Connection:</strong> Both books explore the gap between intuitive (System 1) and deliberate (System 2) thinking. Haidt focuses on moral judgments; Kahneman on reasoning generally.</li>
+                    <li><strong>Haidt adds:</strong> Emotional intuition (System 1) isn't just a shortcut to be corrected by reason (System 2). It's the primary driver of moral judgment. Reason serves emotion, not the reverse.</li>
+                    <li><strong>Read both to understand:</strong> How our minds make decisions and why reasoning alone rarely changes minds on moral issues.</li>
+                </ul>
+            </div>
+
+            <div class="connect-box">
+                <h4>📖 Behave by Robert Sapolsky</h4>
+                <ul>
+                    <li><strong>Connection:</strong> Both explore the biological and evolutionary roots of moral behavior. Sapolsky examines the neural and hormonal basis; Haidt examines evolutionary psychology.</li>
+                    <li><strong>Haidt adds:</strong> A psychological framework (moral foundations) for understanding diverse moral systems. Sapolsky's brain science is deeper; Haidt's moral psychology is more actionable.</li>
+                    <li><strong>Read both to understand:</strong> How morality is rooted in biology while remaining psychologically complex and culturally variable.</li>
+                </ul>
+            </div>
+
+            <div class="connect-box">
+                <h4>📖 Influence by Robert Cialdini</h4>
+                <ul>
+                    <li><strong>Connection:</strong> Both explore how people actually change their minds (spoiler: not through reason). Cialdini focuses on specific techniques; Haidt on the psychology underneath.</li>
+                    <li><strong>Haidt adds:</strong> Understanding that you need to appeal to the Elephant (emotions, moral intuitions), not just the Rider (logic). This is why Cialdini's principles (like social proof and authority) work—they activate moral foundations.</li>
+                    <li><strong>Read both to understand:</strong> How persuasion actually works: by activating moral intuitions, not by making logical arguments.</li>
+                </ul>
+            </div>
+
+            <div class="connect-box">
+                <h4>📖 Sapiens by Yuval Noah Harari</h4>
+                <ul>
+                    <li><strong>Connection:</strong> Both trace how humans evolved groupish, moral minds. Harari covers evolutionary history; Haidt covers evolutionary psychology.</li>
+                    <li><strong>Haidt adds:</strong> Deep insight into why humans are "90% chimp and 10% bee"—our individual and collective nature evolved together. This explains both human cooperation and human tribalism.</li>
+                    <li><strong>Read both to understand:</strong> Our evolutionary history and how that history shaped our moral minds and social nature.</li>
+                </ul>
+            </div>
+
+            <div class="connect-box">
+                <h4>📖 Nudge by Thaler & Sunstein</h4>
+                <ul>
+                    <li><strong>Connection:</strong> Both explore how people actually make decisions and how to influence choices. Nudge focuses on specific choice architecture techniques; Haidt on the psychology underneath.</li>
+                    <li><strong>Haidt adds:</strong> A moral psychology perspective—how values and moral foundations shape decisions. Nudge's techniques work partly because they activate moral intuitions.</li>
+                    <li><strong>Read both to understand:</strong> How to design systems (choice architecture and moral messaging) that align with how humans actually think and decide.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CHEATSHEET SECTION -->
+        <section>
+            <h2>Righteous Mind: Quick Reference</h2>
+
+            <div class="cheatsheet">
+                <h4>🎯 10 Key Takeaways</h4>
+                <div class="cheatsheet-inner" style="grid-template-columns: 1fr;">
+                    <div class="cheatsheet-item">
+                        <strong>1. Intuitions First</strong> Moral judgments come before reasoning. We decide intuitively, then rationalize post-hoc.
+                    </div>
+                    <div class="cheatsheet-item">
+                        <strong>2. The Rider and Elephant</strong> Emotion (Elephant) drives behavior; reason (Rider) justifies it. The Rider has less power than it believes.
+                    </div>
+                    <div class="cheatsheet-item">
+                        <strong>3. Six Moral Foundations</strong> Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation, Liberty/Oppression. All cultures use all six; weighting differs.
+                    </div>
+                    <div class="cheatsheet-item">
+                        <strong>4. Liberals ≠ Conservatives</strong> They don't disagree about facts; they prioritize different moral foundations. Neither is irrational; they just taste different moral flavors.
+                    </div>
+                    <div class="cheatsheet-item">
+                        <strong>5. The Rationalist Delusion</strong> We think we reason, but we rationalize. Smart people are better rationalizers, not better reasoners.
+                    </div>
+                    <div class="cheatsheet-item">
+                        <strong>6. Moral Dumbfounding</strong> We can feel something is wrong without articulating why. This reveals intuition's primacy over reason.
+                    </div>
+                    <div class="cheatsheet-item">
+                        <strong>7. The Hive Switch</strong> We evolved as both individuals and as group members. We can flip the switch and merge into collective intelligence.
+                    </div>
+                    <div class="cheatsheet-item">
+                        <strong>8. Religion Binds and Blinds</strong> Religion is extraordinarily effective at creating group cohesion. But the same mechanisms that bind also blind to outside perspectives.
+                    </div>
+                    <div class="cheatsheet-item">
+                        <strong>9. Understand to Persuade</strong> To change minds across political divides, show you understand the other side's moral foundations. Appeal to multiple foundations, not just one.
+                    </div>
+                    <div class="cheatsheet-item">
+                        <strong>10. Balance Individual and Group</strong> Modern culture overemphasizes the individual. We need both autonomy and belonging, both the bee and the hive.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLOSING THOUGHTS -->
+        <section>
+            <h2>Why This Book Matters Now</h2>
+
+            <p>We live in an era of unprecedented political polarization. The same intelligence that allows humans to solve complex problems also allows us to construct sophisticated justifications for our tribal allegiances. Social media amplifies the hive switch, creating stronger ingroup/outgroup boundaries. We're more connected than ever, yet less able to understand each other.</p>
+
+            <p><em>The Righteous Mind</em> offers something more valuable than a solution: it offers understanding. Haidt shows us that our political opponents aren't evil or stupid. They're using a different moral framework. They literally see different moral dimensions in the same situation. This doesn't make disagreement disappear, but it makes demonization less likely.</p>
+
+            <div class="quote-box">
+                "The most important thing I can teach you is how to question your own assumptions. Because the mind is an idea-generating machine... and we've all been equipped with the same basic operating system."
+                <div class="quote-attribution">— Jonathan Haidt</div>
+            </div>
+
+            <p>For anyone trying to understand political disagreement, defend their own views charitably, or build bridges across cultural divides, <em>The Righteous Mind</em> is essential reading. It's a book that makes you smarter about how minds work—especially moral minds. And in a polarized world, that's an invaluable gift.</p>
+
+            <div class="highlight">
+                <strong>Final Thought:</strong> The goal isn't to agree with everyone. It's to understand everyone. And understanding is harder, more humbling, but ultimately more productive than mere disagreement.
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <h3>The Righteous Mind: An Illustrated Guide</h3>
+        <p>Comprehensive exploration of Jonathan Haidt's groundbreaking work on moral psychology, political division, and human nature.</p>
+        <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.85;">
+            This guide synthesizes Haidt's key ideas with research context, AI connections, and cross-book references. <br>
+            Designed for deep understanding and practical insight into moral psychology and human behavior.
+        </p>
+        <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">
+            Created as a comprehensive study guide. For the full experience, read Jonathan Haidt's <em>The Righteous Mind: Why Good People Are Divided by Politics and Religion</em>.
+        </p>
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Back to top button functionality
+        window.addEventListener('scroll', function() {
+            const btn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                btn.classList.add('show');
+            } else {
+                btn.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

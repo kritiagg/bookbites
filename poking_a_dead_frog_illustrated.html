@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poking a Dead Frog — Illustrated Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+    :root {
+      --coral: #FF6B6B;
+      --teal: #4ECDC4;
+      --sunny: #FFE66D;
+      --purple: #A06CD5;
+      --sky: #74B9FF;
+      --mint: #55EFC4;
+      --pink: #FD79A8;
+      --orange: #FDCB6E;
+      --dark: #2D3436;
+      --cream: #FFEAA7;
+      --deep-blue: #0984E3;
+      --warm-red: #E17055;
+      --forest: #00B894;
+      --dark-purple: #6C5CE7;
+      --comedy-magenta: #E91E63;
+      --comedy-gold: #FFD700;
+      --comedy-cyan: #00CED1;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+
+    /* ===== COVER ===== */
+    .cover {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a0033 0%, #330066 50%, #1a0033 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 40px 20px;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      color: white;
+      letter-spacing: -2px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      line-height: 1.1;
+    }
+
+    .cover .author {
+      font-size: 1.3rem;
+      color: var(--comedy-gold);
+      margin-top: 8px;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .cover .subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 16px;
+      z-index: 2;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .cover-svg {
+      width: 90%;
+      max-width: 500px;
+      margin-top: 40px;
+      z-index: 2;
+    }
+
+    /* ===== LESSONS ===== */
+    .lesson {
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lesson-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .lesson-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .lesson-subtitle {
+      font-size: 1rem;
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+
+    .illustration-container {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .illustration-container svg {
+      max-width: 100%;
+      height: auto;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .card strong {
+      color: var(--comedy-magenta);
+    }
+
+    .quote-box {
+      background: var(--dark);
+      color: white;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--comedy-gold);
+    }
+
+    .quote-box .quote-text {
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .quote-box .quote-attr {
+      color: var(--comedy-gold);
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+
+    .connect-box {
+      background: #e8f4fd;
+      border-left: 4px solid var(--deep-blue);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+
+    .connect-box .connect-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--deep-blue);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .connect-box p {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .ai-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+
+    .ai-box .ai-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--comedy-gold);
+      margin-bottom: 6px;
+    }
+
+    .ai-box p {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .funny-box {
+      background: #fff5f5;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      border: 2px dashed var(--comedy-magenta);
+    }
+
+    .funny-box .funny-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--comedy-magenta);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .funny-box p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* ===== STORIES ===== */
+    .story {
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .story-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .story h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .story-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.8;
+      margin-bottom: 24px;
+    }
+
+    .story-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(0, 0, 0, 0.8);
+      margin-bottom: 20px;
+    }
+
+    /* ===== CHEATSHEET ===== */
+    .cheatsheet {
+      min-height: 100vh;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cheatsheet-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .cheatsheet h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: white;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    .cheatsheet .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-top: 4px solid var(--comedy-magenta);
+    }
+
+    .cheatsheet .card-label {
+      color: var(--comedy-magenta);
+    }
+
+    .cheatsheet .card p {
+      font-size: 0.9rem;
+    }
+
+    /* Background variations */
+    .bg-light-1 { background: linear-gradient(180deg, #fffaf0 0%, #fff5e6 100%); }
+    .bg-light-2 { background: linear-gradient(180deg, #f0f9ff 0%, #e6f7ff 100%); }
+    .bg-light-3 { background: linear-gradient(180deg, #fef5ff 0%, #fce7ff 100%); }
+    .bg-light-4 { background: linear-gradient(180deg, #f0fef0 0%, #e6fce6 100%); }
+  </style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<section class="cover">
+  <!-- Particles -->
+  <div class="particle" style="width: 100px; height: 100px; background: #FFD700; top: 10%; left: 10%; animation-delay: 0s;"></div>
+  <div class="particle" style="width: 80px; height: 80px; background: #E91E63; top: 20%; right: 15%; animation-delay: 1s;"></div>
+  <div class="particle" style="width: 120px; height: 120px; background: #00CED1; bottom: 20%; left: 20%; animation-delay: 2s;"></div>
+  <div class="particle" style="width: 70px; height: 70px; background: #FFD700; bottom: 15%; right: 10%; animation-delay: 3s;"></div>
+
+  <h1>Poking a Dead Frog</h1>
+  <div class="author">by Mike Sacks</div>
+  <div class="subtitle">Conversations with Today's Top Comedy Writers — An Illustrated Deep Dive Into Comedy Craft</div>
+
+  <!-- Cover SVG Illustration -->
+  <svg class="cover-svg" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+    <!-- Microphone stand -->
+    <line x1="300" y1="250" x2="300" y2="80" stroke="#FFD700" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="300" cy="70" r="20" fill="#E91E63"/>
+    <circle cx="300" cy="70" r="12" fill="#00CED1"/>
+
+    <!-- Conversation bubbles with comedy vibe -->
+    <g id="bubble1">
+      <rect x="50" y="40" width="140" height="80" rx="12" fill="#00CED1" opacity="0.9"/>
+      <polygon points="65,120 80,140 95,120" fill="#00CED1"/>
+      <text x="70" y="75" font-family="Inter" font-size="14" font-weight="bold" fill="white">Why did the</text>
+      <text x="70" y="95" font-family="Inter" font-size="14" font-weight="bold" fill="white">writer quit?</text>
+    </g>
+
+    <g id="bubble2">
+      <rect x="420" y="80" width="130" height="70" rx="12" fill="#FFD700" opacity="0.9"/>
+      <polygon points="520,150 535,170 540,150" fill="#FFD700"/>
+      <text x="435" y="110" font-family="Inter" font-size="14" font-weight="bold" fill="#333">No joke!</text>
+      <text x="435" y="135" font-family="Inter" font-size="12" fill="#333">(Bad pun)</text>
+    </g>
+
+    <!-- Laughing faces -->
+    <g id="face1">
+      <circle cx="120" cy="210" r="25" fill="#E91E63" opacity="0.8"/>
+      <circle cx="113" cy="205" r="4" fill="white"/>
+      <circle cx="127" cy="205" r="4" fill="white"/>
+      <path d="M 115 220 Q 120 225 125 220" stroke="white" stroke-width="2" fill="none"/>
+    </g>
+
+    <g id="face2">
+      <circle cx="480" cy="220" r="25" fill="#A06CD5" opacity="0.8"/>
+      <circle cx="473" cy="215" r="4" fill="white"/>
+      <circle cx="487" cy="215" r="4" fill="white"/>
+      <path d="M 475 230 Q 480 235 485 230" stroke="white" stroke-width="2" fill="none"/>
+    </g>
+
+    <!-- Comedy star elements -->
+    <polygon points="300,20 310,50 342,50 318,70 328,100 300,80 272,100 282,70 258,50 290,50" fill="#FFD700" opacity="0.8"/>
+  </svg>
+</section>
+
+<!-- ==================== LESSON 1: TRUTH IS THE FOUNDATION ==================== -->
+<section class="lesson bg-light-1">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--comedy-magenta);">1</div>
+    <h2 class="lesson-title">Truth Is the Foundation</h2>
+    <p class="lesson-subtitle">Why the funniest jokes come from authentic observation</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Ground/foundation -->
+        <rect x="0" y="180" width="700" height="70" fill="#D4A574" opacity="0.3"/>
+        <line x1="0" y1="180" x2="700" y2="180" stroke="#8B6F47" stroke-width="3"/>
+
+        <!-- Blocks representing truth -->
+        <rect x="100" y="140" width="80" height="50" fill="#E91E63" opacity="0.8"/>
+        <text x="125" y="172" font-family="Inter" font-weight="bold" font-size="12" fill="white" text-anchor="middle">TRUTH</text>
+
+        <rect x="200" y="100" width="80" height="50" fill="#E91E63" opacity="0.85"/>
+        <text x="225" y="132" font-family="Inter" font-weight="bold" font-size="12" fill="white" text-anchor="middle">REAL</text>
+
+        <rect x="300" y="60" width="80" height="50" fill="#E91E63" opacity="0.9"/>
+        <text x="325" y="92" font-family="Inter" font-weight="bold" font-size="12" fill="white" text-anchor="middle">HONEST</text>
+
+        <rect x="400" y="100" width="80" height="50" fill="#E91E63" opacity="0.85"/>
+        <text x="425" y="132" font-family="Inter" font-weight="bold" font-size="12" fill="white" text-anchor="middle">HUMAN</text>
+
+        <rect x="500" y="140" width="80" height="50" fill="#E91E63" opacity="0.8"/>
+        <text x="525" y="172" font-family="Inter" font-weight="bold" font-size="12" fill="white" text-anchor="middle">FUNNY</text>
+
+        <!-- Lightbulb of insight at top -->
+        <circle cx="325" cy="20" r="15" fill="#FFD700"/>
+        <rect x="320" y="35" width="10" height="15" fill="#FFD700"/>
+        <line x1="310" y1="50" x2="340" y2="50" stroke="#FFD700" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p><strong>Comedy begins with observation of real human behavior.</strong> The writers in Sacks' interviews consistently emphasize that the funniest material comes from truthful observation of everyday absurdities. <strong>Conan O'Brien</strong> talks about finding comedy in the mundane details of human existence. <strong>David Javerbaum</strong> (former head writer of The Late Show with Stephen Colbert) explains how the best jokes are rooted in genuine human experience rather than manufactured punchlines. <strong>Tina Fey</strong> emphasizes that comedy derived from truth resonates because audiences recognize themselves in the material. When writers start with "what's actually true about this situation?" rather than "what would be funny?", the comedy naturally follows.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Truth in comedy is like carbon monoxide—invisible but lethal if absent. You can dress up a lie in the funniest outfit imaginable, but the audience will slowly lose consciousness realizing they're being patronized. A truthful joke? That's like someone finally admitting that yes, airport security theater is completely ridiculous, and suddenly 400 strangers in TSA lines across America nod in unison.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This principle parallels how large language models learn from training data. LLMs are most effective when operating on truthful, high-quality data. Just as comedy writers mine reality for authentic observations, AI models trained on genuine human language (rather than synthetic or fabricated text) produce more coherent and valuable outputs. The "garbage in, garbage out" principle applies equally to comedy writing and machine learning—the foundation (whether truth or training data quality) determines everything built on top.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This connects to <strong>Made to Stick</strong> by Chip & Dan Heath, which emphasizes that ideas stick when they're simple and built on truth. Both books argue that authenticity creates resonance—whether in persuasive communication or humor. The Heath brothers show how true stories spread; Sacks' writers show how true observations convert to laughter.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The best jokes come from a place of truth. You're not making something up—you're just pointing at something that's already there."</div>
+      <div class="quote-attr">— Comedy Writer Philosophy, Poking a Dead Frog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LESSON 2: FIND THE SPECIFIC, NOT THE GENERAL ==================== -->
+<section class="lesson bg-light-2">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--comedy-cyan);">2</div>
+    <h2 class="lesson-title">Find the Specific, Not the General</h2>
+    <p class="lesson-subtitle">Why "people are weird" gets laughs, but "Karen from accounting" gets recalls</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Funnel - wide top (general) to narrow bottom (specific) -->
+        <polygon points="100,20 600,20 550,150 150,150" fill="#00CED1" opacity="0.2" stroke="#00CED1" stroke-width="2"/>
+
+        <!-- General observations (top) -->
+        <text x="350" y="50" font-family="Playfair Display" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">GENERAL</text>
+        <circle cx="250" cy="80" r="30" fill="#FFB6C1" opacity="0.6"/>
+        <text x="250" y="85" font-family="Inter" font-size="11" font-weight="bold" text-anchor="middle" fill="#333">Funny</text>
+
+        <circle cx="350" cy="80" r="30" fill="#FFB6C1" opacity="0.6"/>
+        <text x="350" y="85" font-family="Inter" font-size="11" font-weight="bold" text-anchor="middle" fill="#333">Weird</text>
+
+        <circle cx="450" cy="80" r="30" fill="#FFB6C1" opacity="0.6"/>
+        <text x="450" y="85" font-family="Inter" font-size="11" font-weight="bold" text-anchor="middle" fill="#333">Strange</text>
+
+        <!-- Mid-level observations -->
+        <circle cx="300" cy="130" r="25" fill="#87CEEB" opacity="0.7"/>
+        <text x="300" y="137" font-family="Inter" font-size="10" font-weight="bold" text-anchor="middle" fill="white">People</text>
+
+        <circle cx="400" cy="130" r="25" fill="#87CEEB" opacity="0.7"/>
+        <text x="400" y="137" font-family="Inter" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Behavior</text>
+
+        <!-- Specific observation (bottom) -->
+        <rect x="300" y="180" width="100" height="60" rx="8" fill="#00CED1" opacity="0.8"/>
+        <text x="350" y="200" font-family="Inter" font-size="13" font-weight="bold" text-anchor="middle" fill="white">SPECIFIC</text>
+        <text x="350" y="220" font-family="Inter" font-size="11" text-anchor="middle" fill="white">"My mom asks</text>
+        <text x="350" y="235" font-family="Inter" font-size="11" text-anchor="middle" fill="white">if I want to</text>
+
+        <!-- Arrow down -->
+        <path d="M 350 160 L 350 180" stroke="#00CED1" stroke-width="3" marker-end="url(#arrowhead)"/>
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <polygon points="0 0, 10 5, 0 10" fill="#00CED1"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p><strong>Specificity is comedy's secret weapon.</strong> Every writer interviewed by Sacks emphasizes that the funniest jokes contain granular, specific details. <strong>Patton Oswalt</strong> builds entire routines around the peculiar specificity of everyday moments. <strong>Louis C.K.</strong> talks about observing exact human behaviors—not "people get annoyed," but "my daughter asks me the same question 47 times in one afternoon." <strong>Amy Poehler</strong> explains that a joke about "Midwestern culture" is forgettable, but a joke about "your mom asking if you want butter on your popcorn at the movie theater when you've already said no twice" creates specific, recognizable imagery. The specificity creates a bridge where audiences think, "Oh my god, that's exactly like my life."</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>General comedy is like "I went to a restaurant." Specific comedy is like "I ordered scrambled eggs at 11 PM and watched the waiter silently judge me for seven full seconds." The difference between a chuckle and someone texting "this is me" to three friends.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This mirrors how neural networks require detailed feature extraction. Broad generalizations (like low-level features) aren't useful—it's through hierarchical specificity that AI systems generate meaningful outputs. A language model generating generic platitudes is like a comedian telling broad jokes. But when you fine-tune on specific details and edge cases, both the AI and the comic produce surprising, memorable results. Comedy writers are essentially performing transfer learning—taking their specific observations and applying the underlying structure to new situations.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This parallels the advice in <strong>Show, Don't Tell</strong> from writing craft tradition. Rather than stating "my family is weird," Tina Fey shows us Sarah Palin's specific mannerisms. The specificity principle is universal across all storytelling forms—novels, screenplays, and comedy all succeed through concrete detail rather than abstract observation.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The joke is not in the truth, it's in the specific way you tell it."</div>
+      <div class="quote-attr">— Comedy Writers on Craft, Poking a Dead Frog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LESSON 3: MISDIRECTION AND EXPECTATION ==================== -->
+<section class="lesson bg-light-3">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--comedy-gold);">3</div>
+    <h2 class="lesson-title">Misdirection & Subverted Expectations</h2>
+    <p class="lesson-subtitle">Leading audiences down one path, then pulling the rug out</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Expected path (grey) -->
+        <path d="M 50 250 L 150 200 L 250 150 L 350 100" stroke="#CCCCCC" stroke-width="4" fill="none" stroke-dasharray="5,5"/>
+
+        <!-- Actual path (bright) -->
+        <path d="M 50 250 L 150 200 L 250 150 L 350 100 L 400 200 L 450 80" stroke="#E91E63" stroke-width="4" fill="none"/>
+
+        <!-- Setup point -->
+        <circle cx="50" cy="250" r="20" fill="#FFD700"/>
+        <text x="50" y="255" font-family="Inter" font-weight="bold" font-size="12" text-anchor="middle" fill="#333">Setup</text>
+
+        <!-- Misdirection points -->
+        <circle cx="150" cy="200" r="15" fill="#87CEEB" opacity="0.7"/>
+        <circle cx="250" cy="150" r="15" fill="#87CEEB" opacity="0.7"/>
+        <circle cx="350" cy="100" r="15" fill="#87CEEB" opacity="0.7"/>
+
+        <!-- Expectation mark -->
+        <text x="350" y="70" font-family="Inter" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFD700">Expected?</text>
+
+        <!-- Twist -->
+        <circle cx="400" cy="200" r="20" fill="#E91E63"/>
+        <text x="400" y="205" font-family="Inter" font-weight="bold" font-size="14" text-anchor="middle" fill="white">PUNCHLINE!</text>
+
+        <!-- Laugh burst -->
+        <circle cx="450" cy="80" r="30" fill="#FFD700" opacity="0.3"/>
+        <text x="450" y="90" font-family="Inter" font-weight="bold" font-size="16" text-anchor="middle" fill="#333">HA!</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p><strong>Comedy lives in the gap between expectation and reality.</strong> <strong>Tina Fey</strong> explains that the best jokes set up an expected destination, then veer sharply. <strong>Bob Newhart</strong> (featured in Sacks' interviews) built his entire comedy career on this principle—starting sentences that sound predictable, then pulling them toward absurdity. <strong>Sarah Silverman</strong> talks about how the audience's brain automatically predicts where a joke is going, and the humor erupts when reality contradicts that prediction. <strong>Jon Stewart</strong> discusses how political comedy works by exploiting the gap between what politicians claim and what they actually do. The setup creates a mental pathway; the punchline reveals a different path entirely.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Your brain is a prediction machine running on auto-complete. Comedians are just people really good at interrupting you mid-thought. It's like your phone keyboard suggesting the next word, and you hit it, and suddenly you've typed something you never intended. Except people are applauding instead of backing away slowly.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This directly parallels how transformer models like LLMs work. These models operate by predicting the next token (word) based on the previous context—essentially creating expectations about what comes next. They achieve sophistication through attention mechanisms that sometimes surprise us with outputs that violate "expected" patterns. Comedy writing and language model generation both involve setup (context/information) and payoff (the next prediction). When an LLM generates something surprising yet coherent, it's creating a comedic moment at a structural level.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This connects to <strong>Thinking, Fast and Slow</strong> by Daniel Kahneman, where he explains cognitive biases and pattern recognition. Comedy exploits the same mental shortcuts Kahneman describes. Our brains are built to recognize patterns and predict outcomes; comedians weaponize that prediction error for laughter.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"A joke is a tiny story where your brain thinks it knows the ending, and then it doesn't."</div>
+      <div class="quote-attr">— Comedy Structure Principle, Poking a Dead Frog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LESSON 4: WRITE FROM YOUR PAIN AND PERSPECTIVE ==================== -->
+<section class="lesson bg-light-1">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #FF1493;">4</div>
+    <h2 class="lesson-title">Write from Your Pain & Perspective</h2>
+    <p class="lesson-subtitle">Your unique struggle is your comedy goldmine</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Heart/pain shape -->
+        <path d="M 350 280 C 250 220 150 170 150 100 C 150 60 180 40 220 40 C 260 40 290 60 350 120 C 410 60 440 40 480 40 C 520 40 550 60 550 100 C 550 170 450 220 350 280 Z" fill="#FF1493" opacity="0.7"/>
+
+        <!-- Light rays emerging -->
+        <line x1="350" y1="280" x2="350" y2="320" stroke="#FFD700" stroke-width="4"/>
+        <line x1="300" y1="260" x2="260" y2="320" stroke="#FFD700" stroke-width="4"/>
+        <line x1="400" y1="260" x2="440" y2="320" stroke="#FFD700" stroke-width="4"/>
+        <line x1="280" y1="200" x2="220" y2="240" stroke="#FFD700" stroke-width="3"/>
+        <line x1="420" y1="200" x2="480" y2="240" stroke="#FFD700" stroke-width="3"/>
+
+        <!-- Person silhouette -->
+        <circle cx="350" cy="140" r="12" fill="white"/>
+        <path d="M 350 155 L 350 190" stroke="white" stroke-width="3"/>
+        <path d="M 330 165 L 370 165" stroke="white" stroke-width="3"/>
+        <path d="M 340 190 L 330 230" stroke="white" stroke-width="3"/>
+        <path d="M 360 190 L 370 230" stroke="white" stroke-width="3"/>
+
+        <!-- Text -->
+        <text x="350" y="330" font-family="Inter" font-size="16" font-weight="bold" text-anchor="middle" fill="#FF1493">PAIN → GOLD</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p><strong>The most powerful comedy comes from authentic personal struggle.</strong> <strong>Louis C.K.</strong> built his career on unflinchingly discussing parenting failures, depression, and human weakness. <strong>Hannah Gadsby</strong> (discussed in context of modern comedy) mines trauma and identity for deeply resonant material. <strong>John Mulaney</strong> talks about finding comedy in specific life experiences—growing up in the Midwest, anxiety about adulthood. <strong>Melissa McCarthy</strong> explains that the funniest material about her background comes from genuine experience, not manufactured vulnerability. The writers in Sacks' book emphasize that trying to write from someone else's perspective or pain produces flat jokes, but writing from your own authentic struggle creates material with emotional resonance and laughter simultaneously.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Therapists charge $200/hour to help you work through trauma. Comedians charge you $25 for a ticket and use your same trauma as the entertainment. Both are healing, but one refunds you if it doesn't work.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This principle reflects why fine-tuning is more powerful than generic pre-training. An LLM trained only on general internet data produces generic outputs. But when you fine-tune on specific, authentic examples—a writer's actual voice, style, and perspective—the model generates something distinctive and powerful. Comedians are essentially "fine-tuning" their human neural network on their own authentic data (their lives, their struggles, their perspectives). The specificity of personal experience is the comedy equivalent of domain-specific training data.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This echoes <strong>Man's Search for Meaning</strong> by Viktor Frankl, where he argues that finding meaning in suffering is transformative. Comedians do this—they find meaning, connection, and laughter in their pain. Both books suggest that authenticity and vulnerability are paths to something transcendent.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Your weird life is your voice. Your weird life is what makes you funny."</div>
+      <div class="quote-attr">— Comedy Writing Philosophy, Poking a Dead Frog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LESSON 5: RHYTHM AND TIMING ARE EVERYTHING ==================== -->
+<section class="lesson bg-light-2">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--comedy-cyan);">5</div>
+    <h2 class="lesson-title">Rhythm & Timing Are Everything</h2>
+    <p class="lesson-subtitle">Comedy is music; the pause is the melody</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Musical staff lines -->
+        <line x1="50" y1="80" x2="650" y2="80" stroke="#DDD" stroke-width="1"/>
+        <line x1="50" y1="100" x2="650" y2="100" stroke="#DDD" stroke-width="1"/>
+        <line x1="50" y1="120" x2="650" y2="120" stroke="#DDD" stroke-width="1"/>
+        <line x1="50" y1="140" x2="650" y2="140" stroke="#DDD" stroke-width="1"/>
+        <line x1="50" y1="160" x2="650" y2="160" stroke="#DDD" stroke-width="1"/>
+
+        <!-- Setup notes (quick) -->
+        <circle cx="100" cy="120" r="5" fill="#E91E63"/>
+        <circle cx="130" cy="100" r="5" fill="#E91E63"/>
+        <circle cx="160" cy="140" r="5" fill="#E91E63"/>
+
+        <!-- PAUSE (big space) -->
+        <text x="250" y="200" font-family="Inter" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFD700">PAUSE</text>
+        <line x1="240" y1="190" x2="260" y2="190" stroke="#FFD700" stroke-width="3"/>
+
+        <!-- Punchline note (lower register, dramatic) -->
+        <circle cx="350" cy="160" r="8" fill="#FFD700"/>
+        <circle cx="400" cy="180" r="7" fill="#FFD700" opacity="0.8"/>
+
+        <!-- Laugh vibration -->
+        <path d="M 450 100 Q 460 90 470 100 T 490 100 T 510 100" stroke="#00CED1" stroke-width="3" fill="none"/>
+        <path d="M 450 120 Q 460 110 470 120 T 490 120 T 510 120" stroke="#00CED1" stroke-width="2" fill="none" opacity="0.7"/>
+
+        <!-- Beat indicator -->
+        <text x="600" y="50" font-family="Inter" font-size="12" font-weight="bold" fill="#333">Timing</text>
+        <circle cx="590" cy="70" r="8" fill="#E91E63"/>
+        <circle cx="610" cy="70" r="8" fill="#E91E63"/>
+        <circle cx="630" cy="70" r="8" fill="#FFD700"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p><strong>Timing and rhythm are the comedy equivalent of musical performance.</strong> <strong>Rodney Dangerfield</strong>'s rapid-fire delivery worked precisely because his rhythm was tightly controlled. <strong>Jim Gaffigan</strong> uses strategic pauses before his punchlines—creating tension that releases into laughter. <strong>George Carlin</strong> (discussed extensively in Sacks' interviews) was a master of rhythm; his jokes were structured like musical compositions with clear beats and silent moments. <strong>Chris Rock</strong> explains how comedians must learn to read audiences and adjust pacing accordingly. The punchline lands harder when properly set up rhythmically; a joke told too quickly blurs into noise, but a joke with the right pause achieves maximum impact.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>A joke without a pause is like sex without foreplay—technically you're hitting all the marks, but nobody's satisfied. The pause is where the audience catches up to where you've been leading them. It's the collective gasp before the collective laugh.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This parallels attention mechanisms in transformer models. Just as a comic emphasizes certain moments through timing, attention mechanisms emphasize certain tokens through weighted focus. A well-timed pause (blank space) is like a zero in a sparse attention matrix—its absence is meaningful. Generative models that produce text at maximum speed often feel rushed and unintelligible, while those that generate with varied pacing (longer thinking time between tokens) produce more coherent outputs. Timing matters in both performance and language generation.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This connects to <strong>Flow</strong> by Mihaly Csikszentmihalyi, which discusses how optimal experiences rely on rhythm and pacing. Whether in art, music, or comedy, the flow state emerges from properly timed challenges and responses. Comedy operates by the same principle—when timing is right, audience and performer enter a synchronized rhythm.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Timing in comedy is like timing in baseball. Miss it by a microsecond and you've got nothing."</div>
+      <div class="quote-attr">— Comedy Timing Principle, Poking a Dead Frog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LESSON 6: FIND THE ABSURDITY IN THE MUNDANE ==================== -->
+<section class="lesson bg-light-3">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--comedy-gold);">6</div>
+    <h2 class="lesson-title">Find the Absurdity in the Mundane</h2>
+    <p class="lesson-subtitle">The weirdest stuff is hiding in plain sight</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Normal world (left) -->
+        <rect x="20" y="80" width="300" height="180" fill="#E0E0E0" opacity="0.3" stroke="#999" stroke-width="2"/>
+        <text x="170" y="110" font-family="Playfair Display" font-size="16" font-weight="bold" text-anchor="middle" fill="#666">MUNDANE</text>
+
+        <!-- Objects in mundane world -->
+        <rect x="50" y="140" width="50" height="60" fill="#8B7355" stroke="#333" stroke-width="1"/>
+        <text x="75" y="177" font-family="Inter" font-size="11" text-anchor="middle" fill="#333">Chair</text>
+
+        <rect x="120" y="140" width="50" height="60" fill="#D2B48C" stroke="#333" stroke-width="1"/>
+        <text x="145" y="177" font-family="Inter" font-size="11" text-anchor="middle" fill="#333">Table</text>
+
+        <rect x="190" y="140" width="50" height="60" fill="#A9A9A9" stroke="#333" stroke-width="1"/>
+        <text x="215" y="177" font-family="Inter" font-size="11" text-anchor="middle" fill="#333">Lamp</text>
+
+        <!-- Weird world (right) -->
+        <rect x="380" y="80" width="300" height="180" fill="#FFE6FF" opacity="0.3" stroke="#E91E63" stroke-width="2"/>
+        <text x="530" y="110" font-family="Playfair Display" font-size="16" font-weight="bold" text-anchor="middle" fill="#E91E63">ABSURD</text>
+
+        <!-- Objects in weird world -->
+        <circle cx="420" cy="170" r="30" fill="#8B7355"/>
+        <path d="M 420 140 L 400 130 L 420 145 L 440 130 Z" fill="#FF6B6B"/>
+        <text x="420" y="210" font-family="Inter" font-size="11" text-anchor="middle" fill="#333">Chair that</text>
+        <text x="420" y="225" font-family="Inter" font-size="11" text-anchor="middle" fill="#333">judges you</text>
+
+        <polygon points="490,140 520,140 505,200" fill="#D2B48C"/>
+        <path d="M 505 200 L 505 220" stroke="#666" stroke-width="2"/>
+        <circle cx="505" cy="225" r="5" fill="#666"/>
+        <text x="505" y="245" font-family="Inter" font-size="11" text-anchor="middle" fill="#333">Table that</text>
+        <text x="505" y="260" font-family="Inter" font-size="11" text-anchor="middle" fill="#333">has opinions</text>
+
+        <circle cx="590" cy="150" r="25" fill="#FFD700" opacity="0.8"/>
+        <path d="M 590 120 L 590 180" stroke="#666" stroke-width="2"/>
+        <path d="M 560 150 L 620 150" stroke="#666" stroke-width="2"/>
+        <text x="590" y="245" font-family="Inter" font-size="11" text-anchor="middle" fill="#333">Lamp that</text>
+        <text x="590" y="260" font-family="Inter" font-size="11" text-anchor="middle" fill="#333">remembers</text>
+
+        <!-- Arrow and magnifying glass -->
+        <path d="M 330 170 L 360 170" stroke="#E91E63" stroke-width="3" marker-end="url(#arrowhead2)"/>
+        <defs>
+          <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <polygon points="0 0, 10 5, 0 10" fill="#E91E63"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p><strong>The most absurd material hides within everyday observation.</strong> <strong>Jerry Seinfeld</strong>'s entire career was built on the absurdity of normal life—why do we fold shirts? Why does airplane food taste terrible? <strong>Jon Glaser</strong> discusses finding the weird in the routine. <strong>Hannibal Buress</strong> talks about how comedy mining comes from looking closely at something everyone encounters but nobody questions. <strong>Tig Notaro</strong> finds profound weirdness in mundane interactions. The magic happens when a writer stops accepting "this is just how things are" and starts asking "wait, why is this actually absurd?" A social convention that makes perfect sense suddenly reveals itself as completely ridiculous when examined closely.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>We've accepted so much absurdity as normal that comedians are just anthropologists pointing at obviously weird stuff and saying "Is anyone else seeing this?" It's like someone finally acknowledging that yes, we all sit in metal boxes and stare at tiny screens and call it human connection. The mundane is secretly insane; comedians just have the audacity to say it out loud.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This relates to adversarial examples in machine learning—inputs that seem normal to humans but cause AI systems to behave unexpectedly. Comedians find "adversarial examples" in everyday life: small perturbations to normal situations that reveal the absurdity underneath. Both comedians and adversarial ML researchers are asking "what's the edge case?" and "where does the system break?" The difference is comedians find it funny while ML researchers find it concerning, but both are mapping the boundary between expected and unexpected behavior.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This connects to <strong>Zen and the Art of Motorcycle Maintenance</strong> by Robert Pirsig, where he argues that deep observation reveals extraordinary meaning in ordinary objects. Both philosophy and comedy work through rigorous attention to the mundane. Where Pirsig finds meaning, comedians find absurdity—but both require looking closely at what everyone else overlooks.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"There's comedy in the things we've stopped noticing. Comedy is noticing things again."</div>
+      <div class="quote-attr">— Comedy Mining Principle, Poking a Dead Frog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LESSON 7: COMEDY IS ABOUT CONTROL ==================== -->
+<section class="lesson bg-light-1">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #FF1493;">7</div>
+    <h2 class="lesson-title">Comedy Is About Control</h2>
+    <p class="lesson-subtitle">The joke teller leads the audience by the hand through their world</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stage with spotlight -->
+        <rect x="50" y="200" width="600" height="80" fill="#333"/>
+        <circle cx="350" cy="150" r="80" fill="#FFD700" opacity="0.4"/>
+
+        <!-- Comedian figure -->
+        <circle cx="350" cy="120" r="15" fill="#E91E63"/>
+        <rect x="335" y="135" width="30" height="40" fill="#000"/>
+        <rect x="310" y="140" width="25" height="35" fill="#000"/>
+        <rect x="375" y="140" width="25" height="35" fill="#000"/>
+        <rect x="330" y="175" width="20" height="40" fill="#000"/>
+        <rect x="350" y="175" width="20" height="40" fill="#000"/>
+
+        <!-- Audience -->
+        <circle cx="150" cy="220" r="12" fill="#87CEEB" opacity="0.7"/>
+        <circle cx="200" cy="215" r="12" fill="#87CEEB" opacity="0.7"/>
+        <circle cx="550" cy="220" r="12" fill="#87CEEB" opacity="0.7"/>
+        <circle cx="600" cy="215" r="12" fill="#87CEEB" opacity="0.7"/>
+
+        <!-- Lines of control -->
+        <line x1="350" y1="110" x2="150" y2="220" stroke="#E91E63" stroke-width="2" opacity="0.6"/>
+        <line x1="350" y1="110" x2="200" y2="215" stroke="#E91E63" stroke-width="2" opacity="0.6"/>
+        <line x1="350" y1="110" x2="550" y2="220" stroke="#E91E63" stroke-width="2" opacity="0.6"/>
+        <line x1="350" y1="110" x2="600" y2="215" stroke="#E91E63" stroke-width="2" opacity="0.6"/>
+
+        <!-- Energy/attention arrows -->
+        <path d="M 360 60 L 360 40" stroke="#FFD700" stroke-width="3" marker-end="url(#arrow3)"/>
+        <path d="M 340 60 L 340 40" stroke="#FFD700" stroke-width="3" marker-end="url(#arrow3)"/>
+        <defs>
+          <marker id="arrow3" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <polygon points="0 0, 10 5, 0 10" fill="#FFD700"/>
+          </marker>
+        </defs>
+
+        <!-- Text -->
+        <text x="350" y="25" font-family="Inter" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">CONTROL</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p><strong>Comedians are directors of attention and emotion.</strong> <strong>David Letterman</strong> (featured in Sacks) explains that every beat of a comedy performance is controlled—where the audience looks, what they focus on, when they breathe. <strong>Steve Martin</strong> discusses how performers exert complete control over pacing and audience expectations. <strong>Amy Schumer</strong> talks about how comedians must manage audience attention like a conductor managing an orchestra. <strong>Lorne Michaels</strong> (SNL creator, interviewed in context) emphasized that comedy production requires meticulous control of every element. The best comedians aren't spontaneous—they're meticulously crafted controllers of audience experience, leading spectators through a precisely choreographed emotional journey.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Comedians are basically manipulative cult leaders who've miniaturized the experience to 90 minutes and made you pay for it. The difference is comedians actually deliver what they promise—laughter instead than tax-exempt status and a compound in the desert.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This parallels how language models use attention mechanisms to control information flow through neural networks. Just as a comedian directs audience attention, attention mechanisms direct a model's focus across input sequences. A well-controlled attention pattern generates coherent, meaningful output. A chaotic attention pattern (poor control) generates incoherent rambling. Comedians and LLMs both succeed through precise control of what gets emphasis and what gets ignored.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This connects to <strong>Influence: The Psychology of Persuasion</strong> by Robert Cialdini. Both comedians and persuasion experts exert control through similar psychological principles—reciprocity, commitment, social proof. The difference is comedians do it for laughter while Cialdini documents it for understanding compliance.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"A great comedy performance is not spontaneous. It's completely controlled. Every laugh is engineered."</div>
+      <div class="quote-attr">— Comedy Performance Philosophy, Poking a Dead Frog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LESSON 8: KNOWING YOUR AUDIENCE ==================== -->
+<section class="lesson bg-light-2">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--comedy-cyan);">8</div>
+    <h2 class="lesson-title">Know Your Audience (But Don't Pander)</h2>
+    <p class="lesson-subtitle">Understanding who's listening without losing your authentic voice</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Venn diagram circles -->
+        <circle cx="300" cy="140" r="80" fill="#E91E63" opacity="0.3" stroke="#E91E63" stroke-width="2"/>
+        <circle cx="400" cy="140" r="80" fill="#00CED1" opacity="0.3" stroke="#00CED1" stroke-width="2"/>
+
+        <!-- Labels -->
+        <text x="270" y="145" font-family="Inter" font-weight="bold" font-size="14" fill="#333">YOU</text>
+        <text x="430" y="145" font-family="Inter" font-weight="bold" font-size="14" fill="#333">THEM</text>
+        <text x="350" y="150" font-family="Inter" font-weight="bold" font-size="16" fill="#333">COMEDY</text>
+
+        <!-- Audience silhouettes around -->
+        <g id="audience1">
+          <circle cx="150" cy="60" r="8" fill="#87CEEB"/>
+          <circle cx="155" cy="50" r="3" fill="#87CEEB"/>
+        </g>
+
+        <g id="audience2">
+          <circle cx="150" cy="220" r="8" fill="#87CEEB"/>
+          <circle cx="155" cy="230" r="3" fill="#87CEEB"/>
+        </g>
+
+        <g id="audience3">
+          <circle cx="550" cy="60" r="8" fill="#87CEEB"/>
+          <circle cx="555" cy="50" r="3" fill="#87CEEB"/>
+        </g>
+
+        <g id="audience4">
+          <circle cx="550" cy="220" r="8" fill="#87CEEB"/>
+          <circle cx="555" cy="230" r="3" fill="#87CEEB"/>
+        </g>
+
+        <!-- Heart in intersection -->
+        <path d="M 350 120 C 340 110 330 115 330 125 C 330 135 350 150 350 150 C 350 150 370 135 370 125 C 370 115 360 110 350 120 Z" fill="#FFD700"/>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p><strong>Know your audience without abandoning your voice.</strong> <strong>Dave Chappelle</strong> (extensively discussed in Sacks' interviews) talks about understanding his audience deeply while refusing to pander. <strong>Ellen DeGeneres</strong> discusses how comedians must know what their specific audience responds to, but authentic humor comes from the overlap between "what they want" and "what I actually think." <strong>Bill Hicks</strong> (discussed in context of comedy history) refused to modify his material for audiences, choosing authenticity over universal appeal. <strong>Cecily Strong</strong> talks about finding the intersection of audience expectation and personal truth. The danger: if you optimize purely for audience, you become generic. The danger of ignoring audience: you become irrelevant.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Knowing your audience means understanding that some people will leave. Not everyone will find you funny. This is good. It means you're saying something real enough to disagree with. Pandering is when you try to make everyone laugh, which is like trying to cook a meal that everyone will love—you end up with beige oatmeal that offends nobody and excites nobody.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This parallels the challenge of multi-audience language models. An LLM trained on diverse data must serve different users with different needs and values. The model must know what different segments want while maintaining coherence and authenticity. Overfitting to audience segments creates a model that's a shapeshifter with no core. Ignoring audience creates a model that's technically impressive but irrelevant. The optimal solution requires finding the intersection of model integrity and audience needs—exactly what comedians describe.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This connects to <strong>The Art of War</strong> by Sun Tzu. While ostensibly about military strategy, the core principle applies: know yourself AND know your opponent. Comedians must know their own voice and their audience simultaneously, then find the overlap where real communication happens.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"You can't write for everyone. You can only write for the people who get you."</div>
+      <div class="quote-attr">— Audience Awareness Principle, Poking a Dead Frog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LESSON 9: COMMIT TO THE BIT ==================== -->
+<section class="lesson bg-light-3">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--comedy-gold);">9</div>
+    <h2 class="lesson-title">Commit Fully to the Bit</h2>
+    <p class="lesson-subtitle">Hesitation kills comedy; confidence is contagious</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sliding scale from hesitant to committed -->
+        <line x1="50" y1="140" x2="650" y2="140" stroke="#DDD" stroke-width="2"/>
+
+        <!-- Markers -->
+        <circle cx="50" cy="140" r="8" fill="#FFB6C1" opacity="0.5"/>
+        <text x="50" y="165" font-family="Inter" font-size="10" text-anchor="middle" fill="#666">Hesitant</text>
+
+        <circle cx="200" cy="140" r="8" fill="#FFB6C1" opacity="0.6"/>
+        <text x="200" y="165" font-family="Inter" font-size="10" text-anchor="middle" fill="#666">Uncertain</text>
+
+        <circle cx="350" cy="140" r="8" fill="#FFD700" opacity="0.8"/>
+        <text x="350" y="165" font-family="Inter" font-size="10" text-anchor="middle" fill="#666">Committed</text>
+
+        <circle cx="500" cy="140" r="10" fill="#E91E63" opacity="0.9"/>
+        <text x="500" y="165" font-family="Inter" font-size="10" text-anchor="middle" fill="#666">Fearless</text>
+
+        <circle cx="650" cy="140" r="12" fill="#E91E63"/>
+        <text x="650" y="165" font-family="Inter" font-size="10" text-anchor="middle" fill="#666">LEGENDARY</text>
+
+        <!-- Energy visualization -->
+        <path d="M 50 100 L 200 85 L 350 40 L 500 20 L 650 10" stroke="#E91E63" stroke-width="3" fill="none"/>
+        <text x="350" y="30" font-family="Inter" font-size="12" font-weight="bold" text-anchor="middle" fill="#E91E63">COMMITMENT LEVEL</text>
+
+        <!-- Audience reaction gradient -->
+        <rect x="50" y="220" width="600" height="30" fill="url(#gradientReaction)"/>
+        <text x="350" y="242" font-family="Inter" font-size="11" text-anchor="middle" fill="white" font-weight="bold">AUDIENCE RESPONSE</text>
+
+        <defs>
+          <linearGradient id="gradientReaction" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#999;stop-opacity:0.5" />
+            <stop offset="50%" style="stop-color:#FFD700;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#E91E63;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p><strong>Audience trust comes from unwavering commitment.</strong> <strong>Andy Kaufman</strong> (discussed in Sacks' book as a comedy legend) understood that the most absurd bits become hilarious only when the performer commits completely. <strong>Will Ferrell</strong> explains that the bigger and weirder the commitment, the funnier the result. <strong>Aubrey Plaza</strong> talks about committing to uncomfortable material so completely that the audience can't doubt you. <strong>Dan Aykroyd</strong> discusses SNL sketches that only work because everyone committed fully. Hesitation signals insincerity; commitment signals "I believe this." Audiences laugh hardest when they sense the performer is completely in the moment, completely committed to the premise, regardless of how absurd.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Commitment in comedy is like a poker tell—the moment the audience senses you don't believe what you're saying, they stop believing too. It's why the best absurdist comics are method actors on stage. A comedian doing something ridiculous with zero irony is inherently funnier than the same thing done with a wink-wink-nudge attitude. Straight-faced commitment to nonsense is the secret sauce.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This relates to how language models generate coherent text. An LLM that "commits" to a stylistic choice—formal vocabulary, casual tone, specific voice—generates more coherent outputs than one that hedges or second-guesses itself. Temperature settings (which control randomness) are the AI equivalent of commitment levels. Lower temperature = more committed to strongest predictions. Higher temperature = more hesitant, exploring alternatives. The most confident (highest probability) generations are often the most coherent, just as the most committed comedians are the most compelling.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This echoes <strong>Man's Search for Meaning</strong> by Viktor Frankl, where he argues that humans thrive when fully committed to meaning. Whether in concentration camps or on comedy stages, full commitment to a purpose is what gives life (or a joke) power. Half-hearted commitment to anything produces half-hearted results.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"If you're not willing to look like an idiot for the bit, you shouldn't do the bit."</div>
+      <div class="quote-attr">— Comedy Commitment Philosophy, Poking a Dead Frog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LESSON 10: FAILURE IS THE FUEL ==================== -->
+<section class="lesson bg-light-1">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: #FF1493;">10</div>
+    <h2 class="lesson-title">Failure Is the Fuel</h2>
+    <p class="lesson-subtitle">The worst audiences teach you the most</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Fire/growth visualization -->
+        <g id="flame">
+          <path d="M 350 250 Q 330 220 330 200 Q 330 160 350 150 Q 370 160 370 200 Q 370 220 350 250 Z" fill="#FF6B6B" opacity="0.8"/>
+          <path d="M 350 240 Q 340 215 340 200 Q 340 170 350 160 Q 360 170 360 200 Q 360 215 350 240 Z" fill="#FFD700" opacity="0.9"/>
+          <path d="M 350 230 Q 345 210 345 200 Q 345 180 350 170 Q 355 180 355 200 Q 355 210 350 230 Z" fill="#FFFFFF" opacity="0.7"/>
+        </g>
+
+        <!-- Failure bombs falling -->
+        <circle cx="200" cy="60" r="15" fill="#333"/>
+        <text x="200" y="68" font-family="Inter" font-size="12" font-weight="bold" text-anchor="middle" fill="white">FAIL</text>
+
+        <circle cx="500" cy="80" r="15" fill="#333"/>
+        <text x="500" y="88" font-family="Inter" font-size="12" font-weight="bold" text-anchor="middle" fill="white">FAIL</text>
+
+        <circle cx="300" cy="90" r="15" fill="#333"/>
+        <text x="300" y="98" font-family="Inter" font-size="12" font-weight="bold" text-anchor="middle" fill="white">FAIL</text>
+
+        <!-- Falling arrows -->
+        <path d="M 200 75 L 200 120" stroke="#999" stroke-width="2" marker-end="url(#arrowDown)"/>
+        <path d="M 500 95 L 500 140" stroke="#999" stroke-width="2" marker-end="url(#arrowDown)"/>
+        <path d="M 300 105 L 300 140" stroke="#999" stroke-width="2" marker-end="url(#arrowDown)"/>
+
+        <defs>
+          <marker id="arrowDown" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <polygon points="0 0, 10 5, 0 10" fill="#999"/>
+          </marker>
+        </defs>
+
+        <!-- Growth curve -->
+        <path d="M 100 280 Q 250 200 400 100" stroke="#E91E63" stroke-width="4" fill="none"/>
+        <text x="250" y="310" font-family="Inter" font-size="14" font-weight="bold" text-anchor="middle" fill="#E91E63">GROWTH</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p><strong>The worst comedy crowds teach more than the best.</strong> <strong>Jerry Seinfeld</strong> talks about bombing on stage as essential training—silence teaches you what doesn't work. <strong>Rodney Dangerfield</strong> (covered extensively in Sacks' interviews) built his entire persona from early failures and rejection. <strong>Sarah Silverman</strong> discusses how terrible sets force you to develop resilience and material that works beyond your comfort zone. <strong>Russell Peters</strong> talks about failing in front of brutal crowds that made him a stronger performer. The writers Sacks interviews universally agree: if you've never bombed badly, you haven't pushed hard enough. Failure reveals the truth about material faster than success ever can.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Bombing on stage is like getting rejected 47 times—except you're doing it to hundreds of people simultaneously. Most people would call that a nightmare. Comedians call it Tuesday. It's the difference between people who quit at rejection and people who think rejection is just feedback written in silence and confused stares.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This directly parallels training dynamics in machine learning. Models learn from errors through backpropagation—negative examples are as valuable as positive ones. In fact, adversarial training (deliberately introducing failures and edge cases) produces more robust models. Comedians are essentially performing adversarial self-training: deliberately exposing themselves to hostile crowds, mining those experiences for pattern recognition about what works and doesn't. The "bomb" is the negative gradient signal that improves the model.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This connects to <strong>Mindset</strong> by Carol Dweck, where she distinguishes between fixed and growth mindsets. Comedians with growth mindsets treat failure as feedback; those with fixed mindsets treat it as confirmation they're not funny. Dweck's research applies directly to comedy development—those who embrace failure improve; those who avoid it stagnate.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Bombing is information. It tells you exactly what isn't working, which is just as valuable as knowing what is."</div>
+      <div class="quote-attr">— Comedy Development Principle, Poking a Dead Frog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LESSON 11: COLLABORATION OVER ISOLATION ==================== -->
+<section class="lesson bg-light-2">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--comedy-cyan);">11</div>
+    <h2 class="lesson-title">Collaboration Over Isolation</h2>
+    <p class="lesson-subtitle">The best jokes come from rooms full of smart people arguing</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Central lightbulb (idea) -->
+        <circle cx="350" cy="150" r="25" fill="#FFD700"/>
+        <rect x="345" y="175" width="10" height="20" fill="#FFD700"/>
+
+        <!-- Connected nodes (collaborators) -->
+        <circle cx="150" cy="80" r="15" fill="#E91E63" opacity="0.8"/>
+        <circle cx="250" cy="40" r="15" fill="#E91E63" opacity="0.8"/>
+        <circle cx="450" cy="40" r="15" fill="#E91E63" opacity="0.8"/>
+        <circle cx="550" cy="80" r="15" fill="#E91E63" opacity="0.8"/>
+        <circle cx="100" cy="150" r="15" fill="#E91E63" opacity="0.8"/>
+        <circle cx="600" cy="150" r="15" fill="#E91E63" opacity="0.8"/>
+        <circle cx="150" cy="220" r="15" fill="#E91E63" opacity="0.8"/>
+        <circle cx="550" cy="220" r="15" fill="#E91E63" opacity="0.8"/>
+
+        <!-- Connecting lines -->
+        <line x1="350" y1="150" x2="150" y2="80" stroke="#00CED1" stroke-width="2" opacity="0.6"/>
+        <line x1="350" y1="150" x2="250" y2="40" stroke="#00CED1" stroke-width="2" opacity="0.6"/>
+        <line x1="350" y1="150" x2="450" y2="40" stroke="#00CED1" stroke-width="2" opacity="0.6"/>
+        <line x1="350" y1="150" x2="550" y2="80" stroke="#00CED1" stroke-width="2" opacity="0.6"/>
+        <line x1="350" y1="150" x2="100" y2="150" stroke="#00CED1" stroke-width="2" opacity="0.6"/>
+        <line x1="350" y1="150" x2="600" y2="150" stroke="#00CED1" stroke-width="2" opacity="0.6"/>
+        <line x1="350" y1="150" x2="150" y2="220" stroke="#00CED1" stroke-width="2" opacity="0.6"/>
+        <line x1="350" y1="150" x2="550" y2="220" stroke="#00CED1" stroke-width="2" opacity="0.6"/>
+
+        <!-- Inter-node connections (collaboration web) -->
+        <line x1="150" y1="80" x2="250" y2="40" stroke="#FFD700" stroke-width="1" opacity="0.3"/>
+        <line x1="250" y1="40" x2="450" y2="40" stroke="#FFD700" stroke-width="1" opacity="0.3"/>
+        <line x1="450" y1="40" x2="550" y2="80" stroke="#FFD700" stroke-width="1" opacity="0.3"/>
+
+        <!-- Text -->
+        <text x="350" y="285" font-family="Inter" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">NETWORK OF CREATIVITY</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p><strong>Great comedy emerges from collaborative writing rooms.</strong> <strong>Lorne Michaels</strong> built SNL on the principle that brilliant writers arguing together produce better comedy than brilliant writers in isolation. <strong>Conan O'Brien</strong> talks about the magic of room writing where one joke sparks another, creating unexpected combinations. <strong>Robert Smigel</strong> (Conando's writer) discusses how the best bits come from unexpected collaborations. <strong>James L. Brooks</strong> (The Simpsons, Taxi creator) emphasizes that comedy writing is inherently collaborative. The writers in Sacks' interviews consistently note that their best work emerged from arguing with other smart people—not writing alone. The friction between perspectives creates sparks.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>A comedy writer alone in a room with their thoughts is like a thermostat trying to heat a house by getting really angry at itself. You need friction, external perspective, someone to tell you your idea is stupid. The best jokes are born from someone saying "that's terrible, but what if..." and then the room arguing about it for three hours.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This parallels how ensemble learning works in machine learning. A single model makes mistakes; multiple models voting on predictions generally performs better. Mixture of Experts architectures, ensemble methods, and collaborative fine-tuning all follow this principle: diversity + aggregation > individual optimization. Comedy rooms are human ensembles that discover solutions no individual would find alone. The same principle applies to AI systems—collaborative architectures outperform isolated ones.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This connects to <strong>Range</strong> by David Epstein, where he argues that diverse perspectives and collaborative teams outperform homogeneous expertise-focused groups. Epstein's research validates what comedy rooms have known for decades: the best ideas emerge when different kinds of smart people collide.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"A room full of good writers arguing is the closest thing comedy has to magic."</div>
+      <div class="quote-attr">— Collaborative Comedy Principle, Poking a Dead Frog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LESSON 12: TIMING AND LEGACY ==================== -->
+<section class="lesson bg-light-3">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--comedy-gold);">12</div>
+    <h2 class="lesson-title">Timing and Legacy</h2>
+    <p class="lesson-subtitle">Great comedy arrives at exactly the right moment in culture</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Timeline -->
+        <line x1="50" y1="150" x2="650" y2="150" stroke="#DDD" stroke-width="2"/>
+
+        <!-- Past, Present, Future -->
+        <text x="150" y="120" font-family="Inter" font-size="12" text-anchor="middle" fill="#999">PAST</text>
+        <text x="350" y="120" font-family="Inter" font-size="12" text-anchor="middle" fill="#333">NOW</text>
+        <text x="550" y="120" font-family="Inter" font-size="12" text-anchor="middle" fill="#999">FUTURE</text>
+
+        <!-- Cultural moment indicator (bright now) -->
+        <circle cx="350" cy="150" r="20" fill="#FFD700"/>
+
+        <!-- Comedy arrivals -->
+        <circle cx="150" cy="150" r="8" fill="#E91E63" opacity="0.5"/>
+        <circle cx="200" cy="150" r="8" fill="#E91E63" opacity="0.6"/>
+        <circle cx="280" cy="150" r="8" fill="#E91E63" opacity="0.7"/>
+        <circle cx="350" cy="150" r="12" fill="#E91E63"/>
+        <circle cx="420" cy="150" r="8" fill="#E91E63" opacity="0.7"/>
+        <circle cx="500" cy="150" r="8" fill="#E91E63" opacity="0.6"/>
+        <circle cx="550" cy="150" r="8" fill="#E91E63" opacity="0.5"/>
+
+        <!-- Resonance waves (perfect timing) -->
+        <circle cx="350" cy="150" r="30" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.5"/>
+        <circle cx="350" cy="150" r="50" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.3"/>
+
+        <!-- Text explanations -->
+        <text x="100" y="220" font-family="Inter" font-size="11" fill="#666">Too early = unheard</text>
+        <text x="350" y="220" font-family="Inter" font-size="11" text-anchor="middle" fill="#E91E63" font-weight="bold">Perfect timing = Cultural resonance</text>
+        <text x="550" y="240" font-family="Inter" font-size="11" fill="#666">Too late = forgotten</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p><strong>Comedy's impact depends on cultural timing.</strong> <strong>George Carlin</strong> (featured extensively in Sacks) released his material about religion and government at exactly the cultural moment when those conversations were emerging. <strong>Richard Pryor</strong>'s comedy about race arrived as America was having those conversations nationwide. <strong>Lenny Bruce</strong>'s comedy arrived early—pushing boundaries before society was ready. <strong>Dave Chappelle</strong> discusses how comedy that's too early becomes prophetic but ignored; comedy that's too late becomes quaint. The interviews throughout Sacks' book reveal that great writers develop material, but legacy happens only when material intersects with cultural moment. The same joke told five years too early lands differently than told five years too late.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😂 FUNNY TAKE</div>
+      <p>Comedy is like surfing culture—you have to catch the exact moment when everyone's noticing something but hasn't figured out how to talk about it. Too early and you're yelling at waves. Too late and you're documenting what everyone's already moved past. Perfect timing is when you voice exactly what the collective consciousness is thinking but hasn't said out loud yet.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This parallels how language models must balance novelty and relevance. Generate something too different from training data (too novel, too early), and it seems incoherent. Generate something identical to existing patterns (too late, already known), and it's useless. The optimal zone is the frontier of what's learnable but not yet learned—where genuinely useful predictions live. Comedians and LLMs both operate in this frontier zone: novel enough to be interesting, grounded enough to be coherent.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This connects to <strong>The Black Swan</strong> by Nassim Taleb, where he discusses how unpredictable events reshape understanding. Powerful comedy creates Black Swan moments—unexpected cultural events that reframe how we see something. Both Taleb and comedy writers understand that timing and surprise are what generate impact.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The best comedy is always about now. If it's not about the moment we're living in, it's just noise."</div>
+      <div class="quote-attr">— Comedy Timing Philosophy, Poking a Dead Frog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STORY SPOTLIGHT 1 ==================== -->
+<section class="story" style="background: linear-gradient(135deg, #1a0033 0%, #330066 100%); color: white;">
+  <div class="story-inner">
+    <div class="lesson-num" style="background: var(--comedy-magenta); display: inline-block;">⭐</div>
+    <h3 style="color: white; margin-top: 10px;">Story Spotlight: Lenny Bruce's Boundary Breaking</h3>
+    <p class="story-subtitle" style="color: rgba(255,255,255,0.8);">How a single comedian changed what comedy could be</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Microphone -->
+        <line x1="350" y1="200" x2="350" y2="80" stroke="#FFD700" stroke-width="6"/>
+        <circle cx="350" cy="70" r="15" fill="#E91E63"/>
+        <circle cx="350" cy="70" r="8" fill="#FFD700"/>
+
+        <!-- Sound waves (broken/chaotic) -->
+        <path d="M 350 40 Q 320 20 290 40" stroke="#00CED1" stroke-width="3" fill="none"/>
+        <path d="M 350 40 Q 380 20 410 40" stroke="#00CED1" stroke-width="3" fill="none"/>
+        <path d="M 350 35 Q 300 10 250 35" stroke="#FFD700" stroke-width="2" fill="none"/>
+        <path d="M 350 35 Q 400 10 450 35" stroke="#FFD700" stroke-width="2" fill="none"/>
+
+        <!-- Barrier (wall of rules) -->
+        <rect x="150" y="120" width="20" height="100" fill="#999" opacity="0.5"/>
+        <rect x="180" y="120" width="20" height="100" fill="#999" opacity="0.5"/>
+        <rect x="210" y="120" width="20" height="100" fill="#999" opacity="0.5"/>
+        <rect x="480" y="120" width="20" height="100" fill="#999" opacity="0.5"/>
+        <rect x="510" y="120" width="20" height="100" fill="#999" opacity="0.5"/>
+        <rect x="540" y="120" width="20" height="100" fill="#999" opacity="0.5"/>
+
+        <!-- Breakthrough arrow -->
+        <path d="M 350 140 L 350 160" stroke="#FFD700" stroke-width="4" marker-end="url(#arrowBreak)"/>
+        <defs>
+          <marker id="arrowBreak" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <polygon points="0 0, 10 5, 0 10" fill="#FFD700"/>
+          </marker>
+        </defs>
+
+        <!-- Star (impact) -->
+        <polygon points="350,220 358,240 380,240 362,253 370,273 350,260 330,273 338,253 320,240 342,240" fill="#FFD700"/>
+      </svg>
+    </div>
+
+    <p class="story-text">
+      Lenny Bruce was arrested for obscenity in 1962 for saying words on stage that had never been said in comedy before. His actual comedy—which was brilliant—mattered less than the fact that he expanded what comedy could discuss. In the book, Sacks interviews writers who directly reference Bruce as the moment comedy became real and adult. Before Bruce, comedy was about deflecting from truth; Bruce showed that comedy could BE truth, unfiltered and unapologetic. Every modern comedian who discusses sexuality, religion, politics, and bodily functions directly benefits from Bruce's willingness to be prosecuted for his art. He didn't just tell jokes—he fundamentally redefined what comedy was allowed to be.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== STORY SPOTLIGHT 2 ==================== -->
+<section class="story" style="background: linear-gradient(135deg, #1a0033 0%, #330066 100%); color: white;">
+  <div class="story-inner">
+    <div class="lesson-num" style="background: var(--comedy-magenta); display: inline-block;">⭐</div>
+    <h3 style="color: white; margin-top: 10px;">Story Spotlight: The SNL Writer's Room</h3>
+    <p class="story-subtitle" style="color: rgba(255,255,255,0.8);">How Lorne Michaels built the comedy factory</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stage -->
+        <rect x="50" y="160" width="600" height="80" fill="#333"/>
+
+        <!-- Light booth (writers room) above stage -->
+        <rect x="150" y="40" width="400" height="100" fill="#FFD700" opacity="0.2" stroke="#FFD700" stroke-width="2"/>
+        <text x="350" y="70" font-family="Inter" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">WRITERS ROOM</text>
+
+        <!-- Writers as nodes -->
+        <circle cx="200" cy="90" r="8" fill="#E91E63"/>
+        <circle cx="280" cy="90" r="8" fill="#E91E63"/>
+        <circle cx="350" cy="60" r="8" fill="#FFD700"/>
+        <circle cx="420" cy="90" r="8" fill="#E91E63"/>
+        <circle cx="500" cy="90" r="8" fill="#E91E63"/>
+
+        <!-- Energy/ideas flowing down to stage -->
+        <path d="M 200 100 L 200 160" stroke="#00CED1" stroke-width="2" opacity="0.6"/>
+        <path d="M 280 100 L 280 160" stroke="#00CED1" stroke-width="2" opacity="0.6"/>
+        <path d="M 350 70 L 350 160" stroke="#00CED1" stroke-width="3" opacity="0.8"/>
+        <path d="M 420 100 L 420 160" stroke="#00CED1" stroke-width="2" opacity="0.6"/>
+        <path d="M 500 100 L 500 160" stroke="#00CED1" stroke-width="2" opacity="0.6"/>
+
+        <!-- Audience applause below -->
+        <path d="M 150 200 Q 170 190 190 200" stroke="#FFD700" stroke-width="2" fill="none"/>
+        <path d="M 250 210 Q 270 200 290 210" stroke="#FFD700" stroke-width="2" fill="none"/>
+        <path d="M 350 210 Q 370 200 390 210" stroke="#FFD700" stroke-width="2" fill="none"/>
+        <path d="M 450 210 Q 470 200 490 210" stroke="#FFD700" stroke-width="2" fill="none"/>
+        <path d="M 550 200 Q 570 190 590 200" stroke="#FFD700" stroke-width="2" fill="none"/>
+      </svg>
+    </div>
+
+    <p class="story-text">
+      Saturday Night Live didn't invent sketch comedy, but Lorne Michaels invented the industrial process for creating it at scale. Every week, he gathered the most talented writers in the country into a room and forced them to generate material that would perform live that same night. The pressure was insane; the output was historically significant. Michaels understood that comedy needed structure and deadlines, but also chaos and freedom. The writers in Sacks' interviews who came through the SNL system talk about it as their graduate education. You could argue that half of modern comedy—the sensibility, the pacing, the integration of topicality with absurdism—comes from the SNL writer's room. Michaels created an assembly line for genius.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== STORY SPOTLIGHT 3 ==================== -->
+<section class="story" style="background: linear-gradient(135deg, #1a0033 0%, #330066 100%); color: white;">
+  <div class="story-inner">
+    <div class="lesson-num" style="background: var(--comedy-magenta); display: inline-block;">⭐</div>
+    <h3 style="color: white; margin-top: 10px;">Story Spotlight: Louis C.K. and Vulnerability</h3>
+    <p class="story-subtitle" style="color: rgba(255,255,255,0.8);">How confession became comedy's most powerful tool</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Person on stage, exposed -->
+        <circle cx="350" cy="80" r="20" fill="#E91E63"/>
+        <rect x="330" y="105" width="40" height="50" fill="#333" opacity="0.3"/>
+        <line x1="330" y1="130" x2="310" y2="170" stroke="#333" stroke-width="3" opacity="0.3"/>
+        <line x1="370" y1="130" x2="390" y2="170" stroke="#333" stroke-width="3" opacity="0.3"/>
+
+        <!-- Spotlight revealing/exposing -->
+        <circle cx="350" cy="100" r="60" fill="#FFD700" opacity="0.3"/>
+        <circle cx="350" cy="100" r="40" fill="#FFD700" opacity="0.2"/>
+        <circle cx="350" cy="100" r="20" fill="#FFD700" opacity="0.1"/>
+
+        <!-- Concentric circles of vulnerability -->
+        <circle cx="350" cy="150" r="80" fill="none" stroke="#00CED1" stroke-width="2" opacity="0.4" stroke-dasharray="5,5"/>
+        <circle cx="350" cy="150" r="120" fill="none" stroke="#00CED1" stroke-width="1" opacity="0.3" stroke-dasharray="5,5"/>
+
+        <!-- Audience recognition (hearts) -->
+        <path d="M 200 50 C 195 45 190 50 190 55 C 190 60 200 70 200 70 C 200 70 210 60 210 55 C 210 50 205 45 200 50 Z" fill="#FFD700" opacity="0.7"/>
+        <path d="M 500 50 C 495 45 490 50 490 55 C 490 60 500 70 500 70 C 500 70 510 60 510 55 C 510 50 505 45 500 50 Z" fill="#FFD700" opacity="0.7"/>
+        <path d="M 150 150 C 145 145 140 150 140 155 C 140 160 150 170 150 170 C 150 170 160 160 160 155 C 160 150 155 145 150 150 Z" fill="#FFD700" opacity="0.7"/>
+        <path d="M 550 150 C 545 145 540 150 540 155 C 540 160 550 170 550 170 C 550 170 560 160 560 155 C 560 150 555 145 550 150 Z" fill="#FFD700" opacity="0.7"/>
+      </svg>
+    </div>
+
+    <p class="story-text">
+      Louis C.K. revolutionized stand-up by making confession the entire premise. Rather than building jokes around clever observations, he built them around his own failures and weaknesses. Talking about being a bad father, struggling with sexual desire, his own depression—these became the material. In Sacks' interviews, numerous writers credit Louis with showing that the most honest material is the funniest. He created a permission structure: if you admit your flaws publicly, the audience doesn't judge you, they recognize themselves in you. Before Louis, stand-up could be clever deflection. After Louis, stand-up could be genuine confession. This shifted the entire trajectory of comedy—making vulnerability the highest form of strength.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== CHEATSHEET ==================== -->
+<section class="cheatsheet">
+  <div class="cheatsheet-inner">
+    <h2>Poking a Dead Frog — Quick Reference Guide</h2>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-label">1️⃣ TRUTH IS FOUNDATION</div>
+        <p><strong>Core:</strong> Authentic observation of reality. <strong>Why it matters:</strong> Audiences recognize truth and respond to it. <strong>Action:</strong> Start every joke by asking "what's actually true here?"</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">2️⃣ SPECIFIC, NOT GENERAL</div>
+        <p><strong>Core:</strong> Details create resonance. <strong>Why it matters:</strong> "People are weird" is generic; "my mom asks if I want butter on my popcorn" is funny. <strong>Action:</strong> Replace abstract observations with concrete examples.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">3️⃣ MISDIRECTION & SUBVERSION</div>
+        <p><strong>Core:</strong> Set expectations, then violate them. <strong>Why it matters:</strong> The brain predicts; comedy exploits prediction errors. <strong>Action:</strong> Build a setup that has obvious conclusions, then go elsewhere.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">4️⃣ WRITE FROM YOUR PAIN</div>
+        <p><strong>Core:</strong> Your struggle is your gold mine. <strong>Why it matters:</strong> Authentic vulnerability creates connection. <strong>Action:</strong> Mine your own life for material; avoid writing from theory.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">5️⃣ RHYTHM & TIMING</div>
+        <p><strong>Core:</strong> The pause is the punchline. <strong>Why it matters:</strong> Delivery matters as much as content. <strong>Action:</strong> Write in beats; respect silence; learn to read audiences.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">6️⃣ FIND THE ABSURD</div>
+        <p><strong>Core:</strong> The mundane is secretly weird. <strong>Why it matters:</strong> Everyone experiences the same absurdities; pointing them out connects. <strong>Action:</strong> Question social norms; ask "why do we accept this?"</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">7️⃣ CONTROL THE ROOM</div>
+        <p><strong>Core:</strong> Comedy is engineered, not spontaneous. <strong>Why it matters:</strong> Audience trust comes from perceived control. <strong>Action:</strong> Every beat should be deliberate and tested.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">8️⃣ KNOW YOUR AUDIENCE</div>
+        <p><strong>Core:</strong> Understand who's listening without pandering. <strong>Why it matters:</strong> Authenticity + audience awareness = resonance. <strong>Action:</strong> Know your crowd; refuse to compromise your voice.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">9️⃣ COMMIT TO THE BIT</div>
+        <p><strong>Core:</strong> Hesitation kills comedy. <strong>Why it matters:</strong> Confidence is contagious; audiences sense doubt. <strong>Action:</strong> When you commit, audiences commit too.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🔟 FAILURE IS FUEL</div>
+        <p><strong>Core:</strong> Bombing teaches more than success. <strong>Why it matters:</strong> Failure reveals what doesn't work. <strong>Action:</strong> Embrace bad sets; extract the lesson; improve.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">1️⃣1️⃣ COLLABORATION</div>
+        <p><strong>Core:</strong> Great comedy emerges from rooms of smart people arguing. <strong>Why it matters:</strong> Diverse perspectives create unexpected combinations. <strong>Action:</strong> Write with others; embrace disagreement.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">1️⃣2️⃣ TIMING & LEGACY</div>
+        <p><strong>Core:</strong> Material must intersect with cultural moment. <strong>Why it matters:</strong> Same joke, wrong time = irrelevant. <strong>Action:</strong> Stay attuned to what culture is actually discussing now.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 60px; padding: 40px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--comedy-gold);">
+      <h3 style="color: white; font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 20px;">The Comedy Writer's Mantra</h3>
+      <p style="font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.9);">
+        Start with truth. Get specific. Violate expectations. Write from your pain. Respect timing and rhythm. Control your audience. Don't pander, but know your crowd. Commit fully. Learn from failure. Collaborate fiercely. And always remember: you're not trying to be funny. You're trying to tell the truth so clearly and specifically that laughter becomes inevitable.
+      </p>
+    </div>
+
+    <div style="margin-top: 40px; text-align: center; color: rgba(255,255,255,0.6); font-size: 0.9rem;">
+      <p style="margin-bottom: 20px;">Based on interviews with dozens of today's top comedy writers by Mike Sacks</p>
+      <p>Keep writing. Keep bombing. Keep laughing. Keep going.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing Down the Bones — Illustrated Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+    :root {
+      --coral: #FF6B6B;
+      --teal: #4ECDC4;
+      --sunny: #FFE66D;
+      --purple: #A06CD5;
+      --sky: #74B9FF;
+      --mint: #55EFC4;
+      --pink: #FD79A8;
+      --orange: #FDCB6E;
+      --dark: #2D3436;
+      --cream: #FFEAA7;
+      --deep-blue: #0984E3;
+      --warm-red: #E17055;
+      --forest: #00B894;
+      --dark-purple: #6C5CE7;
+      --ink: #1a1a2e;
+      --paper: #f5f1e8;
+      --gold: #d4af37;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+
+    /* ===== COVER ===== */
+    .cover {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 40px 20px;
+    }
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem; color: white; letter-spacing: -2px;
+      text-align: center; position: relative; z-index: 2; margin-bottom: 8px;
+    }
+    .cover .author { font-size: 1.3rem; color: var(--sunny); margin-top: 8px; font-weight: 600; z-index: 2; }
+    .cover .subtitle { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 16px; z-index: 2; text-align: center; max-width: 500px; }
+    .cover .pen-container { width: 100%; max-width: 600px; margin-top: 50px; z-index: 2; }
+
+    .particle {
+      position: absolute; border-radius: 50%; opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* ===== LESSONS ===== */
+    .lesson {
+      min-height: 100vh; padding: 60px 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lesson-inner { max-width: 900px; width: 100%; }
+    .lesson-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem;
+      color: white; margin-bottom: 12px;
+    }
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2;
+    }
+    .lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+    .illustration-container { margin: 30px 0; text-align: center; }
+    .illustration-container svg { max-width: 100%; height: auto; }
+
+    .card {
+      background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .card-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+    }
+    .card p { font-size: 0.95rem; line-height: 1.7; color: #444; }
+
+    .quote-box {
+      background: var(--dark); color: white; border-radius: 16px;
+      padding: 24px 28px; margin-bottom: 20px;
+    }
+    .quote-box .quote-text { font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+    .quote-box .quote-attr { color: var(--sunny); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+
+    .connect-box {
+      background: #e8f4fd; border-left: 4px solid var(--deep-blue);
+      border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px;
+    }
+    .connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--deep-blue); letter-spacing: 1px; margin-bottom: 6px; }
+    .connect-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+
+    .ai-box {
+      background: linear-gradient(135deg, #0984E3, #6C5CE7);
+      color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px;
+    }
+    .ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--sunny); margin-bottom: 6px; }
+    .ai-box p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
+
+    .funny-box {
+      background: #fff5f5; border-radius: 16px; padding: 20px 24px;
+      margin-bottom: 20px; border: 2px dashed var(--coral);
+    }
+    .funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: var(--coral); letter-spacing: 1px; margin-bottom: 6px; }
+    .funny-box p { font-size: 0.9rem; line-height: 1.6; color: #666; font-style: italic; }
+
+    /* ===== STORY SPOTLIGHTS ===== */
+    .story {
+      min-height: 100vh; padding: 60px 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .story-inner { max-width: 900px; width: 100%; }
+    .story-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 20px; }
+    .story-text { font-size: 1rem; line-height: 1.8; margin-bottom: 30px; }
+    .story-svg { margin-top: 40px; text-align: center; }
+
+    /* ===== CHEATSHEET ===== */
+    .cheatsheet {
+      min-height: 100vh; padding: 60px 20px;
+      background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cheatsheet-inner { max-width: 900px; width: 100%; }
+    .cheatsheet h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; text-align: center; margin-bottom: 40px; }
+    .cheatsheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .cheat-card {
+      background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .cheat-card h3 { color: var(--sunny); font-size: 1rem; margin-bottom: 8px; }
+    .cheat-card p { color: rgba(255,255,255,0.8); font-size: 0.85rem; line-height: 1.6; }
+
+    @media (max-width: 700px) {
+      .cheatsheet-grid { grid-template-columns: 1fr; }
+      .cover h1 { font-size: 2.5rem; }
+      .lesson-title { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<section class="cover">
+  <div class="particle" style="width: 80px; height: 80px; background: var(--sunny); left: 10%; top: 20%; animation-delay: 0s;"></div>
+  <div class="particle" style="width: 120px; height: 120px; background: var(--coral); right: 15%; bottom: 20%; animation-delay: 2s;"></div>
+  <div class="particle" style="width: 60px; height: 60px; background: var(--teal); left: 50%; top: 10%; animation-delay: 1s;"></div>
+
+  <h1>Writing Down the Bones</h1>
+  <div class="author">by Natalie Goldberg</div>
+  <div class="subtitle">Freeing the Writer Within — An Illustrated Deep Dive</div>
+
+  <div class="pen-container">
+    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Flowing ink from pen -->
+      <path d="M 350 50 Q 330 80 340 120 Q 350 160 330 200 Q 320 240 350 280" stroke="var(--sunny)" stroke-width="8" fill="none" opacity="0.6"/>
+      <path d="M 350 50 Q 370 90 360 140 Q 355 180 375 220 Q 385 260 350 280" stroke="var(--coral)" stroke-width="6" fill="none" opacity="0.5"/>
+
+      <!-- Pen -->
+      <rect x="320" y="20" width="15" height="60" fill="var(--dark)" rx="3"/>
+      <circle cx="327.5" cy="20" r="8" fill="var(--gold)"/>
+      <path d="M 327.5 80 L 320 95 L 335 95 Z" fill="var(--dark)"/>
+
+      <!-- Words floating around -->
+      <text x="100" y="100" font-family="Playfair Display, serif" font-size="24" fill="var(--teal)" opacity="0.4">write</text>
+      <text x="550" y="150" font-family="Playfair Display, serif" font-size="20" fill="var(--mint)" opacity="0.4">flow</text>
+      <text x="120" y="250" font-family="Playfair Display, serif" font-size="18" fill="var(--purple)" opacity="0.4">truth</text>
+      <text x="570" y="80" font-family="Playfair Display, serif" font-size="22" fill="var(--orange)" opacity="0.4">free</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ===== LESSON 1: THE FIRST THOUGHT ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f8f9fa 0%, #f0e6f6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--purple);">1</div>
+    <h2 class="lesson-title">The First Thought is Always the Truest</h2>
+    <p class="lesson-subtitle">Raw, unfiltered consciousness before the editor takes over</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Brain on left (thinking) -->
+        <circle cx="150" cy="125" r="50" fill="none" stroke="var(--purple)" stroke-width="2"/>
+        <path d="M 120 100 Q 130 85 145 90" fill="none" stroke="var(--purple)" stroke-width="2"/>
+        <path d="M 125 110 Q 140 105 155 115" fill="none" stroke="var(--purple)" stroke-width="2"/>
+        <path d="M 120 130 Q 135 140 150 135" fill="none" stroke="var(--purple)" stroke-width="2"/>
+
+        <!-- Thought bubbles flowing -->
+        <circle cx="250" cy="80" r="20" fill="var(--teal)" opacity="0.3"/>
+        <circle cx="310" cy="70" r="25" fill="var(--mint)" opacity="0.4"/>
+        <circle cx="370" cy="85" r="22" fill="var(--sunny)" opacity="0.35"/>
+        <circle cx="430" cy="75" r="20" fill="var(--coral)" opacity="0.3"/>
+        <circle cx="500" cy="90" r="28" fill="var(--sky)" opacity="0.35"/>
+
+        <!-- Connecting lines -->
+        <path d="M 200 125 L 260 100" stroke="var(--purple)" stroke-width="2" opacity="0.5"/>
+        <path d="M 260 100 L 320 85" stroke="var(--teal)" stroke-width="2" opacity="0.5"/>
+        <path d="M 320 85 L 385 95" stroke="var(--mint)" stroke-width="2" opacity="0.5"/>
+        <path d="M 385 95 L 450 85" stroke="var(--sunny)" stroke-width="2" opacity="0.5"/>
+        <path d="M 450 85 L 530 105" stroke="var(--coral)" stroke-width="2" opacity="0.5"/>
+
+        <!-- Editing/blocking on right -->
+        <rect x="520" y="170" width="130" height="60" fill="var(--coral)" opacity="0.2" rx="8"/>
+        <text x="535" y="190" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="var(--coral)">THE EDITOR</text>
+        <text x="540" y="210" font-family="Inter, sans-serif" font-size="11" fill="var(--warm-red)">Wrong words?</text>
+        <text x="540" y="225" font-family="Inter, sans-serif" font-size="11" fill="var(--warm-red)">Grammar?</text>
+
+        <!-- Arrow pointing down from first thought -->
+        <path d="M 350 140 L 350 160" stroke="var(--purple)" stroke-width="3" marker-end="url(#arrowhead)"/>
+        <text x="360" y="155" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="var(--purple)">PURE</text>
+
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--purple)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Your first impulse is your wisest.</strong> Goldberg teaches that the moment your fingers touch the keyboard, before logic and fear intervene, you access truth. That's not sentimental—it's neuroscience. Your amygdala (fear center) and prefrontal cortex (critic) wake up *after* the initial impulse. Writers like Hemingway and Kerouac accessed this via timed sprints; modern neuroscience confirms: the unconscious mind has 11 million bits of processing capacity vs. conscious mind's 40. Your first thought is operating at full bandwidth. Example: A student writes "I hate my job." The editor wants "I find my career unfulfilling." The first version is true. The second is a lie with better grammar. When Virginia Woolf wrote *Mrs. Dalloway*, she didn't outline. She followed the stream of consciousness—the first thought. That novel revolutionized literature because it trusted impulse over structure.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>The first thought is like opening your texts before coffee. Completely unhinged, brutally honest, and absolutely not suitable for the family group chat. But *that's* the good stuff. By the time your editor wakes up, you've already self-censored into blandness. You've turned "I want to scream" into "I'm experiencing vocal frustration."</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Large language models like GPT operate similarly: the "temperature" parameter controls randomness. Temperature 0 = pure logic, boring, safe. Temperature 1.0 = creative chaos, surprising connections. Your first thought is high-temperature thinking—less predictable, more original. An LLM trained on billions of tokens of human writing learned that the most engaging outputs come from lower entropy (structure) *paired with* higher entropy (novelty). Your first thought naturally balances both because it's spontaneous reflex meeting accumulated knowledge. This is why first drafts of novels train on raw data before fine-tuning.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p>Anne Lamott's *Bird by Bird* calls this "shitty first drafts." Steven Pressfield's *The War of Art* names it: the Resistance wants you to edit before you write. Both echo Goldberg: write first, edit later. The gap between impulse and judgment is where freedom lives.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The first thoughts are the best thoughts. They come out naturally and truthfully. Don't censor them."</div>
+      <div class="quote-attr">— Natalie Goldberg, Writing Down the Bones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 2: PRACTICE, PRACTICE, PRACTICE ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #ffe6e6 0%, #fff5f5 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--coral);">2</div>
+    <h2 class="lesson-title">Writing is a Practice, Not a Talent</h2>
+    <p class="lesson-subtitle">Like meditation or martial arts—skill emerges through repetition</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Hands writing over time -->
+        <g id="day1">
+          <circle cx="100" cy="60" r="25" fill="var(--coral)" opacity="0.3"/>
+          <text x="75" y="65" font-size="14" font-weight="700" fill="var(--dark)">Day 1</text>
+          <path d="M 95 120 L 110 140 M 100 120 L 95 140" stroke="var(--coral)" stroke-width="3" stroke-linecap="round"/>
+        </g>
+
+        <g id="day30">
+          <circle cx="280" cy="60" r="25" fill="var(--orange)" opacity="0.4"/>
+          <text x="255" y="65" font-size="14" font-weight="700" fill="var(--dark)">Day 30</text>
+          <path d="M 275 120 Q 280 130 285 140 Q 290 145 295 140" stroke="var(--orange)" stroke-width="3" stroke-linecap="round"/>
+        </g>
+
+        <g id="day365">
+          <circle cx="460" cy="60" r="25" fill="var(--mint)" opacity="0.5"/>
+          <text x="435" y="65" font-size="14" font-weight="700" fill="var(--dark)">Day 365</text>
+          <path d="M 455 125 L 465 125 M 460 120 L 465 130 M 465 125 L 455 135" stroke="var(--mint)" stroke-width="3" stroke-linecap="round" fill="var(--mint)"/>
+        </g>
+
+        <!-- Progress line -->
+        <path d="M 100 180 L 280 160 L 460 140" stroke="var(--purple)" stroke-width="3" opacity="0.6" fill="none"/>
+
+        <!-- Skill building milestones -->
+        <circle cx="100" cy="180" r="6" fill="var(--purple)"/>
+        <circle cx="280" cy="160" r="8" fill="var(--purple)"/>
+        <circle cx="460" cy="140" r="10" fill="var(--purple)"/>
+
+        <!-- Text annotations -->
+        <text x="60" y="230" font-size="12" fill="var(--dark)" font-weight="600">Awkward</text>
+        <text x="240" y="230" font-size="12" fill="var(--dark)" font-weight="600">Finding rhythm</text>
+        <text x="400" y="210" font-size="12" fill="var(--dark)" font-weight="600">Fluent</text>
+
+        <!-- Hours logged -->
+        <rect x="60" y="260" width="80" height="20" fill="var(--coral)" opacity="0.2" rx="4"/>
+        <text x="70" y="275" font-size="11" fill="var(--dark)" font-weight="600">10K Hours</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Mastery requires 10,000 hours—and daily practice.</strong> Malcolm Gladwell popularized this; Goldberg lived it. She didn't declare herself a writer at age 20 and wait for brilliance. She sat down *every day*. The Zen lineage she trained in teaches "practice, practice, practice." Like Buddhist monks who meditate daily, writers who write daily develop a different brain. Brain imaging shows that 30 minutes of daily writing (vs. sporadic bursts) strengthens the prefrontal cortex's executive function and the default mode network—the regions responsible for autobiographical thought and meaning-making. Real examples: Stephen King writes 2,000 words daily. Maya Angelou rented a hotel room to write alone. Haruki Murakami runs 10km daily, then writes. None of them waited to "feel inspired." They showed up.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>We call it "writer's block" like it's a medical condition. It's not. It's the equivalent of saying you have "runner's block" when you haven't run in six months. Of course you're stiff. You're not blocked. You're just lazy. Goldberg would laugh at this and tell you to write anyway. Write badly. Write stupid. Write about how blocked you are. Anything but wait for the Muse to drop by.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Machine learning models improve through training on massive datasets and iterative optimization. A neural network trained on 100 examples performs worse than one trained on 10 million. Your brain is similar. Each writing session is a training iteration. Your neural pathways strengthen. Your pattern recognition improves. With daily practice, your brain learns to recognize narrative structure, metaphor opportunities, and authentic voice—just as an image classifier learns to identify objects through repeated exposure.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p>James Clear's *Atomic Habits*: tiny, consistent actions compound. Cal Newport's *Deep Work*: meaningful output requires sustained focus. Both echo Goldberg's core message: show up daily, do the work, trust the process.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The practice is the real thing. The practice is what makes a writer."</div>
+      <div class="quote-attr">— Natalie Goldberg, Writing Down the Bones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 3: WRITE THE BONES ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f8ff 0%, #e6f7ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--sky);">3</div>
+    <h2 class="lesson-title">Write the Bones—Cut the Flesh</h2>
+    <p class="lesson-subtitle">Essential details vs. decorative prose</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Skeleton (bones) on left -->
+        <circle cx="120" cy="80" r="15" fill="none" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="120" y1="95" x2="120" y2="150" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="100" y1="110" x2="140" y2="110" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="120" y1="150" x2="100" y2="200" stroke="var(--dark)" stroke-width="2"/>
+        <line x1="120" y1="150" x2="140" y2="200" stroke="var(--dark)" stroke-width="2"/>
+        <text x="70" y="240" font-size="13" font-weight="700" fill="var(--dark)">BONES</text>
+        <text x="60" y="260" font-size="10" fill="var(--sky)">Essential</text>
+        <text x="60" y="275" font-size="10" fill="var(--sky)">Structure</text>
+
+        <!-- Flesh (meat) on right -->
+        <ellipse cx="550" cy="140" rx="60" ry="90" fill="var(--coral)" opacity="0.3"/>
+        <ellipse cx="520" cy="110" rx="35" ry="35" fill="var(--warm-red)" opacity="0.25"/>
+        <ellipse cx="580" cy="120" rx="30" ry="40" fill="var(--pink)" opacity="0.3"/>
+        <circle cx="540" cy="160" r="25" fill="var(--coral)" opacity="0.2"/>
+        <path d="M 520 200 Q 540 220 560 200" fill="var(--warm-red)" opacity="0.2"/>
+        <text x="510" y="240" font-size="13" font-weight="700" fill="var(--dark)">FLESH</text>
+        <text x="490" y="260" font-size="10" fill="var(--coral)">Adjectives,</text>
+        <text x="500" y="275" font-size="10" fill="var(--coral)">Decorations</text>
+
+        <!-- Arrow and balance point -->
+        <line x1="310" y1="140" x2="350" y2="140" stroke="var(--mint)" stroke-width="3" opacity="0.6"/>
+        <circle cx="320" cy="140" r="8" fill="var(--mint)" opacity="0.4"/>
+        <text x="280" y="135" font-size="12" font-weight="700" fill="var(--mint)">BALANCE</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Strip prose down to essential details.</strong> Hemingway's iceberg principle: 90% underwater. Goldberg teaches this via Zen—remove ornament, reveal truth. Don't write "the luminous, iridescent morning light cascaded through the delicate windows." Write: "Morning light." The reader's imagination fills the luminescence. Neuroscience confirms: when you provide *some* detail and let the brain fill gaps, it activates more neural regions than when you describe everything. Your brain is more engaged, more satisfied. Real examples: Cormac McCarthy's prose uses almost no adjectives. It works because every word *matters*. The sentence "He rode on" says more than "He galloped majestically onward." Toni Morrison's *Beloved* does this: spare descriptions, overwhelming emotional weight. Cut "very," "really," "quite." Cut backstory that slows momentum. Keep the bones.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Beginning writers fill pages like they're paid by the word. "The absolutely stunning, breathtaking, utterly magnificent sunset..."—we've all been there. But the sunset doesn't care about your adverbs. It just is. And that's the point. Goldberg would tell you: if a sunset needs three adjectives to be good, the sunset was boring. Show the sunset and trust us.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Compression is an AI principle. LLMs learn through information density. A 10,000-word article with fat gets compressed to 500 words of pure signal—and the signal is stronger. Similarly, prompt engineers who give AI terse instructions get better outputs than verbose ones. "Write sad" beats "Write something that conveys deep, melancholic sorrow." Essential information creates better models, better writing.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p>Anne Lamott emphasizes "specific, accurate language." William Strunk Jr. (*Elements of Style*): "Vigorous writing is concise." George Orwell's essay "Politics and the English Language" demands clarity over decoration. All echo Goldberg.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Cut the fat. Leave the bones. The bones will hold up the whole body of your work."</div>
+      <div class="quote-attr">— Natalie Goldberg, Writing Down the Bones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 4: SPECIFICITY IS SACRED ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #e6ffe6 0%, #f0fff0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--forest);">4</div>
+    <h2 class="lesson-title">Specific Details Are More Universal Than General Statements</h2>
+    <p class="lesson-subtitle">The paradox: zoom in to speak to everyone</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- General statement (blurry) on left -->
+        <circle cx="120" cy="100" r="60" fill="var(--coral)" opacity="0.1" filter="blur(3px)"/>
+        <text x="70" y="85" font-size="11" fill="var(--dark)">I felt sad</text>
+        <text x="50" y="110" font-size="10" fill="var(--coral)" opacity="0.5">(vague, forgettable)</text>
+
+        <!-- Specific detail (sharp) on right -->
+        <circle cx="550" cy="100" r="60" fill="var(--mint)" opacity="0.4"/>
+        <text x="490" y="95" font-size="11" font-weight="700" fill="var(--dark)">My throat</text>
+        <text x="500" y="115" font-size="11" font-weight="700" fill="var(--dark)">closed up.</text>
+        <text x="490" y="140" font-size="10" fill="var(--forest)">(everyone knows this)</text>
+
+        <!-- Zoom effect lines -->
+        <circle cx="550" cy="100" r="45" fill="none" stroke="var(--mint)" stroke-width="1" opacity="0.3"/>
+        <circle cx="550" cy="100" r="30" fill="none" stroke="var(--mint)" stroke-width="1" opacity="0.4"/>
+        <circle cx="550" cy="100" r="20" fill="none" stroke="var(--mint)" stroke-width="1" opacity="0.5"/>
+
+        <!-- Comparison box -->
+        <rect x="80" y="200" width="540" height="60" fill="var(--sunny)" opacity="0.1" rx="8"/>
+        <text x="100" y="225" font-size="12" font-weight="700" fill="var(--dark)">UNIVERSAL PARADOX:</text>
+        <text x="100" y="245" font-size="11" fill="var(--dark)">A specific detail (throat closing) connects more readers than a general emotion (sadness)</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Universality lives in specificity.</strong> Write "I felt sad" and you've written nothing. Write "My throat closed, and I couldn't swallow," and you've written a memory every human recognizes instantly. Neurologically: specific sensory details activate the sensorimotor cortex. General abstractions activate only language areas. More brain activation = more emotional resonance. Goldberg's famous example: not "autumn was beautiful," but "red leaves stuck to the wet sidewalk." The second image is *sharper*. It carries more information. It's *remembered*. Real-world proof: memoir writers who make it don't say "I had a hard childhood." They describe the specific color of the kitchen, the exact phrase Dad said, the taste of the cereal. This is why *Educated* by Tara Westover rivets you—Shawn pushing her down the stairs is specific. "Family conflict" isn't.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>This is why your cousin's story about her vague "work drama" puts you to sleep, but the story about how she accidentally replied-all with the hot take about her boss is *legend*. Specific beats general. Always. Goldberg would say your specificity isn't too weird—it's not weird *enough*. The weirder and more specific, the more universal it becomes.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Vector embeddings in LLMs work by finding the specific features that differentiate text. Generic text collapses into dense clusters. Specific text spreads out, creating rich semantic space. An AI trained to recognize emotions does better with "throat closed, couldn't swallow" than "sad feeling." The specificity creates more dimensions, richer information. Your brain and neural networks both prize texture and detail over abstraction.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p>Anne Lamott: "Use specific, accurate language." Stephen King: "The most important things are often the smallest things." Brené Brown's vulnerability work: specific shame stories connect more than general struggle.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The specific is the universal. The more specific you are, the more universal you become."</div>
+      <div class="quote-attr">— Natalie Goldberg, Writing Down the Bones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 5: WRITING AS MEDITATION ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #fff0e6 0%, #fff8f0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--orange);">5</div>
+    <h2 class="lesson-title">Writing is Meditation in Action</h2>
+    <p class="lesson-subtitle">The blank page as zafu, the pen as breath</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Meditation figure on left -->
+        <circle cx="120" cy="80" r="25" fill="var(--purple)" opacity="0.2"/>
+        <ellipse cx="120" cy="140" rx="30" ry="35" fill="var(--purple)" opacity="0.25"/>
+        <line x1="100" y1="140" x2="80" y2="180" stroke="var(--purple)" stroke-width="2" opacity="0.4"/>
+        <line x1="140" y1="140" x2="160" y2="180" stroke="var(--purple)" stroke-width="2" opacity="0.4"/>
+        <text x="80" y="240" font-size="13" font-weight="700" fill="var(--dark)">MEDITATION</text>
+
+        <!-- Brain state (calm) -->
+        <circle cx="120" cy="200" r="35" fill="none" stroke="var(--purple)" stroke-width="2" opacity="0.3"/>
+        <text x="95" y="205" font-size="10" fill="var(--purple)" font-weight="600">α-waves</text>
+
+        <!-- Equals sign -->
+        <text x="330" y="145" font-size="40" font-weight="300" fill="var(--purple)" opacity="0.5">=</text>
+
+        <!-- Writing figure on right -->
+        <ellipse cx="550" cy="80" rx="20" ry="25" fill="var(--sky)" opacity="0.2"/>
+        <ellipse cx="550" cy="130" rx="28" ry="35" fill="var(--sky)" opacity="0.25"/>
+        <line x1="530" y1="130" x2="510" y2="170" stroke="var(--sky)" stroke-width="2" opacity="0.4"/>
+        <line x1="570" y1="130" x2="590" y2="170" stroke="var(--sky)" stroke-width="2" opacity="0.4"/>
+
+        <!-- Hand holding pen -->
+        <circle cx="575" cy="165" r="6" fill="var(--sky)" opacity="0.3"/>
+        <line x1="580" y1="165" x2="600" y2="200" stroke="var(--sky)" stroke-width="2" opacity="0.3"/>
+        <text x="500" y="240" font-size="13" font-weight="700" fill="var(--dark)">WRITING</text>
+
+        <!-- Connection arrows -->
+        <path d="M 160 140 L 310 140" stroke="var(--mint)" stroke-width="2" opacity="0.4" marker-end="url(#arrow)"/>
+        <path d="M 390 140 L 500 140" stroke="var(--mint)" stroke-width="2" opacity="0.4" marker-end="url(#arrow)"/>
+
+        <!-- Benefits box -->
+        <rect x="100" y="260" width="500" height="30" fill="var(--mint)" opacity="0.15" rx="6"/>
+        <text x="120" y="282" font-size="11" fill="var(--dark)" font-weight="600">Both quiet the mind · Both access deeper truths · Both show you who you really are</text>
+
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--mint)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Writing without judgment is meditation.</strong> Goldberg studied Zen extensively. She recognized that writing practice and meditation practice are *identical*. Both involve sitting, both involve observing the mind without commentary, both involve returning to the moment when you drift. When you practice 10-minute timed writes, you're not accumulating material—you're training your mind. EEG studies show both meditation and flow-state writing produce alpha waves (8-12 Hz), associated with relaxed focus. In *Writing Down the Bones*, Goldberg emphasizes that the writing matters less than the *practice of writing*. Just as meditation isn't about achieving anything, writing isn't about publication. It's about becoming present to yourself. Your journal entries aren't literature. They're practice. They're enlightenment.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>People pay hundreds for yoga retreats to "find themselves." Goldberg got the same result for the price of a notebook and pen. Sit down, write for 10 minutes without editing, and boom—you've meditated. You can't get more zen than that. Your only goal is to shut up the voice in your head, which is what meditation was always for anyway.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Attention mechanisms in transformers mimic meditation. The model learns to focus on relevant information while ignoring noise. In writing practice, you're training your own attention mechanism: learning to notice your authentic voice amidst the chatter. Meditation and timed writes both strengthen attentional control by requiring repeated return to focus.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p>Jon Kabat-Zinn's *Full Catastrophe Living*: mindfulness as practice. Thich Nhat Hanh on mindful living. Cal Newport's *Deep Work*: sustained focus as spiritual discipline. All echo Goldberg's insight: the *practice itself is the reward*.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"When you write, you meditate. And when you meditate, you write."</div>
+      <div class="quote-attr">— Natalie Goldberg, Writing Down the Bones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 6: THE WILD MIND ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f5e6ff 0%, #faf0ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--dark-purple);">6</div>
+    <h2 class="lesson-title">Embrace Your Wild Mind—Don't Tame It</h2>
+    <p class="lesson-subtitle">Association, tangents, weirdness—that's your power</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Tamed mind (straight lines) on left -->
+        <rect x="60" y="60" width="100" height="30" fill="var(--dark)" opacity="0.3" rx="4"/>
+        <line x1="110" y1="95" x2="110" y2="150" stroke="var(--dark)" stroke-width="2" opacity="0.4"/>
+        <line x1="110" y1="150" x2="110" y2="200" stroke="var(--dark)" stroke-width="2" opacity="0.4"/>
+        <text x="45" y="235" font-size="12" font-weight="700" fill="var(--dark)">TAMED</text>
+        <text x="40" y="255" font-size="10" fill="var(--dark)" opacity="0.6">Logical, boring</text>
+
+        <!-- Wild mind (chaotic paths) on right -->
+        <circle cx="580" cy="100" r="60" fill="var(--purple)" opacity="0.15"/>
+        <path d="M 580 50 L 540 80 L 600 120 L 530 140 L 610 170 L 550 190 L 620 230" stroke="var(--dark-purple)" stroke-width="3" fill="none" opacity="0.5"/>
+        <circle cx="540" cy="80" r="4" fill="var(--dark-purple)"/>
+        <circle cx="600" cy="120" r="4" fill="var(--dark-purple)"/>
+        <circle cx="530" cy="140" r="4" fill="var(--dark-purple)"/>
+        <circle cx="610" cy="170" r="4" fill="var(--dark-purple)"/>
+        <circle cx="550" cy="190" r="4" fill="var(--dark-purple)"/>
+        <text x="520" y="235" font-size="12" font-weight="700" fill="var(--dark)">WILD</text>
+        <text x="510" y="255" font-size="10" fill="var(--dark-purple)" font-weight="600">Creative, surprising</text>
+
+        <!-- Arrow showing which wins -->
+        <path d="M 350 140 L 480 140" stroke="var(--mint)" stroke-width="3" opacity="0.5" marker-end="url(#arrow2)"/>
+        <text x="380" y="135" font-size="11" font-weight="700" fill="var(--mint)">Write like this</text>
+
+        <defs>
+          <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--mint)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Your weird associations are your strength.</strong> The "civilized" mind organizes in hierarchies. The wild mind *associates*—jumps from butterfly to Buddhism to your mother's laugh. This isn't disorder; it's creativity. Neuroscience shows that creative breakthroughs happen in a state called "transient hypofrontality"—your prefrontal cortex (the planner) quiets down, and default mode network (the associator) lights up. This is when your brain makes novel connections. Bob Dylan's lyrics jump through time and logic. Björk's songwriting seems chaotic until you realize the associative logic is *stronger* than linear logic. Goldberg teaches: don't *fix* the tangent. Let it lead you. Your first impulse said butterfly, not a well-constructed narrative. That butterfly might be the truth. Follow it.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>School taught us to organize our thoughts. Raise your hand. Answer the question asked. Don't tangent. By age 25, we're all sitting in straight lines, thinking in bullet points. Goldberg says: those tangents are *the best part*. Your weird mind isn't broken. It's your artistic nervous system firing. Let it rip. Your English teacher was lying.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Beam search vs. greedy sampling in language generation. Greedy sampling follows the highest-probability token at each step (boring, predictable). Beam search explores multiple paths simultaneously, allowing lower-probability but higher-creativity moves. Your wild mind does beam search. Genius emerges from exploring unlikely branches. GPT-4 with high temperature = wild mind. GPT-4 with low temperature = tamed bureaucrat.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p>Steven Johnson's *Where Good Ideas Come From*: creativity via idea collisions. David Whyte on poetry: metaphor as thinking, not decoration. Both celebrate the associative leap that Goldberg champions.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Don't analyze or edit. Just let your mind go wild. The wild parts are the real gold."</div>
+      <div class="quote-attr">— Natalie Goldberg, Writing Down the Bones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 7: VOICE ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #ffe6f0 0%, #fff0f8 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--pink);">7</div>
+    <h2 class="lesson-title">Your Voice Is Permission</h2>
+    <p class="lesson-subtitle">You don't find voice by imitating—you find it by writing your truth</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Imitation voices (gray) -->
+        <circle cx="100" cy="80" r="30" fill="var(--dark)" opacity="0.15"/>
+        <path d="M 85 65 Q 100 50 115 65" stroke="var(--dark)" stroke-width="2" opacity="0.3"/>
+        <text x="60" y="130" font-size="11" fill="var(--dark)" opacity="0.5">Imitation</text>
+        <text x="50" y="148" font-size="10" fill="var(--dark)" opacity="0.4">(Not you)</text>
+
+        <circle cx="280" cy="80" r="30" fill="var(--dark)" opacity="0.15"/>
+        <path d="M 265 65 Q 280 50 295 65" stroke="var(--dark)" stroke-width="2" opacity="0.3"/>
+        <text x="250" y="130" font-size="11" fill="var(--dark)" opacity="0.5">Imitation</text>
+        <text x="240" y="148" font-size="10" fill="var(--dark)" opacity="0.4">(Still not you)</text>
+
+        <!-- YOUR VOICE (bright, central) -->
+        <circle cx="490" cy="100" r="50" fill="var(--pink)" opacity="0.3"/>
+        <path d="M 460 75 Q 490 45 520 75" stroke="var(--pink)" stroke-width="4" opacity="0.8"/>
+        <circle cx="490" cy="100" r="50" fill="none" stroke="var(--pink)" stroke-width="2" opacity="0.6"/>
+        <text x="450" y="180" font-size="14" font-weight="700" fill="var(--pink)">YOUR VOICE</text>
+        <text x="425" y="200" font-size="11" fill="var(--pink)">(Unmistakably you)</text>
+
+        <!-- Arrows showing trajectory -->
+        <path d="M 140 100 L 240 100" stroke="var(--dark)" stroke-width="1" opacity="0.3" stroke-dasharray="5,5"/>
+        <path d="M 320 100 L 420 100" stroke="var(--dark)" stroke-width="1" opacity="0.3" stroke-dasharray="5,5"/>
+        <path d="M 420 100 L 440 100" stroke="var(--pink)" stroke-width="2" opacity="0.6" marker-end="url(#arrow3)"/>
+
+        <!-- Core truth note -->
+        <rect x="80" y="240" width="540" height="50" fill="var(--pink)" opacity="0.1" rx="8"/>
+        <text x="100" y="263" font-size="12" font-weight="700" fill="var(--dark)">The paradox:</text>
+        <text x="100" y="282" font-size="11" fill="var(--dark)">Your unique voice emerges not from studying Hemingway, but from writing</text>
+        <text x="100" y="297" font-size="11" fill="var(--dark)">your deepest, most embarrassing truth until it becomes YOUR truth.</text>
+
+        <defs>
+          <marker id="arrow3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--pink)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Voice emerges from writing your specific truth.</strong> Goldberg rejects the idea that you "find your voice" by studying great writers. You find your voice by *writing what only you can write*. Joan Didion's voice is unmistakable—not because she studied anyone, but because she wrote her precise, acerbic observations. Cheryl Strayed's voice in *Wild* is raw because she wrote her raw truth. Stephen King's voice drips Maine and terror because he wrote *his* Maine terror. Voice isn't a thing you acquire. It's what remains after you strip away everything except your authentic observations. A study by Stanford researchers found that authentic voice (writing that feels "genuinely you") activates the listener's default mode network—the same region active during social bonding. You trust someone's voice because it feels like them. That feeling is neurological recognition of authenticity.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Every writing class has that student who writes like they're channeling Cormac McCarthy: "The roads were dark and the blood was dark and darkness darkened..." Meanwhile, actual Cormac McCarthy is three blocks away probably writing "the road." Your voice isn't an accent to adopt. It's the result of giving a damn about your own observations. Write like you talk when you're lying in bed at 2am telling your friend something true. *That's* voice.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Fine-tuning an LLM on specific data creates distinctive "voice." An LLM fine-tuned on Hemingway writes short. One fine-tuned on Proust writes long. But *your* authentic voice can't be fine-tuned on external data. It emerges when you train your network on your own specific observations and patterns. This is why "be yourself" isn't platitude—it's algorithmic truth. Distinctive outputs come from distinctive training data. Your training data is your life.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p>Brené Brown on vulnerability: showing up authentically is power. Glennon Doyle's *Untamed*: your voice is permission. Austin Kleon's *Steal Like an Artist*: steal from work you love, then transform via your unique voice. All emphasize: authenticity, not imitation.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Find your own voice. Don't try to sound like anyone else. Write what you know and tell the truth."</div>
+      <div class="quote-attr">— Natalie Goldberg, Writing Down the Bones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 8: WRITING ABOUT PAIN ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #ffe6cc 0%, #fff9f0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--warm-red);">8</div>
+    <h2 class="lesson-title">Write Through the Pain, Not Around It</h2>
+    <p class="lesson-subtitle">Trauma becomes art through specificity and witness</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Path around pain -->
+        <path d="M 80 150 L 140 80 L 200 150 L 140 220 Z" fill="none" stroke="var(--coral)" stroke-width="2" opacity="0.4" stroke-dasharray="5,5"/>
+        <circle cx="140" cy="150" r="35" fill="var(--coral)" opacity="0.15"/>
+        <text x="105" y="155" font-size="11" fill="var(--dark)">PAIN</text>
+        <path d="M 220 150 L 280 150 L 340 150" stroke="var(--dark)" stroke-width="2" opacity="0.3"/>
+        <text x="210" y="175" font-size="10" fill="var(--dark)" opacity="0.5">Around = avoidance</text>
+
+        <!-- Path through pain -->
+        <circle cx="540" cy="150" r="40" fill="var(--warm-red)" opacity="0.2"/>
+        <text x="520" y="155" font-size="11" font-weight="700" fill="var(--dark)">PAIN</text>
+        <path d="M 380 150 L 490 150" stroke="var(--mint)" stroke-width="3" opacity="0.6"/>
+        <path d="M 580 150 L 630 150" stroke="var(--mint)" stroke-width="3" opacity="0.6"/>
+        <circle cx="540" cy="130" r="5" fill="var(--mint)"/>
+        <circle cx="540" cy="170" r="5" fill="var(--mint)"/>
+        <text x="490" y="210" font-size="11" font-weight="700" fill="var(--mint)">Through = transformation</text>
+
+        <!-- Depth illustration -->
+        <rect x="80" y="240" width="540" height="50" fill="var(--warm-red)" opacity="0.08" rx="8"/>
+        <text x="100" y="263" font-size="12" font-weight="700" fill="var(--dark)">Writing pain isn't cathartic therapy—it's witnessing.</text>
+        <text x="100" y="282" font-size="11" fill="var(--dark)">You place pain on the page, examine it with language, and transform it into art.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Your deepest pain makes your strongest writing.</strong> Goldberg emphasizes this isn't therapy (though it helps). It's alchemy. When you write about heartbreak with specificity—the exact way he looked at you before leaving, the coffee cup still on the table—you transform private suffering into universal truth. Readers who've never experienced *your* heartbreak recognize *their own* in your specific details. This is why Sylvia Plath's confessional poetry devastates readers. She didn't hint at pain—she named it. "Daddy" doesn't ask permission to discuss dark family wounds; it *documents* them. The neurological reason: accessing painful memories while writing activates both emotional centers (amygdala) and meaning-making centers (prefrontal cortex). You don't just *feel* the pain; you *understand* it. This is integration. Post-traumatic growth research shows that people who write expressively about trauma show improved immune function and psychological outcomes—not despite the writing, but *because of it*.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Everyone says "write what you know." But the stuff worth writing about—the really juicy, scary, humiliating stuff—is exactly what you *don't* want to write about. Goldberg's advice: write *especially* about that. Because everyone has been humiliated, everyone has failed, everyone has felt like garbage. And that's the writing that people *need* to read. Your secret shame is someone else's salvation.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Training neural networks on noisy, difficult data often produces more robust models than training on clean data. The "difficulty" forces the network to learn deeper representations. Similarly, writing about painful subjects forces you to develop more sophisticated emotional vocabulary, more nuanced self-understanding. The pain in your writing trains your brain (and readers' brains) more effectively than comfort does.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p>Susan David's *Emotional Agility*: moving toward pain builds resilience. Pema Chödrön on staying with discomfort. David Whyte on grief as the price of love. All reach the same truth: avoidance hardens, engagement transforms.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Write about it. Write the truth. Don't be afraid of your own darkness."</div>
+      <div class="quote-attr">— Natalie Goldberg, Writing Down the Bones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 9: TRUST PROCESS OVER PRODUCT ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #e6f2ff 0%, #f0f8ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--deep-blue);">9</div>
+    <h2 class="lesson-title">Trust the Process, Not the Product</h2>
+    <p class="lesson-subtitle">The act of writing matters more than what you write</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Process-focused path -->
+        <circle cx="100" cy="80" r="25" fill="var(--sky)" opacity="0.3"/>
+        <text x="85" y="85" font-size="12" font-weight="700" fill="var(--dark)">Day 1</text>
+        <circle cx="180" cy="100" r="25" fill="var(--sky)" opacity="0.4"/>
+        <text x="165" y="105" font-size="12" font-weight="700" fill="var(--dark)">Day 2</text>
+        <circle cx="260" cy="85" r="25" fill="var(--sky)" opacity="0.35"/>
+        <text x="245" y="90" font-size="12" font-weight="700" fill="var(--dark)">Day 3</text>
+        <circle cx="340" cy="110" r="25" fill="var(--sky)" opacity="0.4"/>
+        <text x="325" y="115" font-size="12" font-weight="700" fill="var(--dark)">Day 4</text>
+        <circle cx="420" cy="95" r="25" fill="var(--sky)" opacity="0.35"/>
+        <text x="405" y="100" font-size="12" font-weight="700" fill="var(--dark)">Day 5</text>
+
+        <!-- Connecting lines -->
+        <path d="M 125 100 L 155 100" stroke="var(--sky)" stroke-width="2" opacity="0.5"/>
+        <path d="M 205 105 L 235 95" stroke="var(--sky)" stroke-width="2" opacity="0.5"/>
+        <path d="M 285 90 L 315 105" stroke="var(--sky)" stroke-width="2" opacity="0.5"/>
+        <path d="M 365 110 L 395 100" stroke="var(--sky)" stroke-width="2" opacity="0.5"/>
+        <path d="M 445 95 L 490 95" stroke="var(--sky)" stroke-width="2" opacity="0.5"/>
+
+        <!-- Outcome -->
+        <circle cx="550" cy="95" r="35" fill="var(--sky)" opacity="0.25"/>
+        <circle cx="550" cy="95" r="35" fill="none" stroke="var(--sky)" stroke-width="2" opacity="0.5"/>
+        <text x="525" y="100" font-size="13" font-weight="700" fill="var(--dark)">GROWTH</text>
+
+        <!-- Comparison box -->
+        <rect x="60" y="180" width="600" height="80" fill="var(--deep-blue)" opacity="0.08" rx="8"/>
+        <text x="80" y="205" font-size="12" font-weight="700" fill="var(--dark)">PROCESS vs PRODUCT</text>
+        <text x="80" y="228" font-size="10" fill="var(--dark)"><strong>Process:</strong> "Did I show up? Did I write honestly today?" (You control this)</text>
+        <text x="80" y="248" font-size="10" fill="var(--dark)"><strong>Product:</strong> "Is this publishable? Will people like it?" (You don't fully control this)</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>You control the process; you don't control the outcome.</strong> This is the deepest teaching in *Writing Down the Bones*. Goldberg learned this from Zen: detach from results, commit to practice. You cannot *will* yourself to write something publishable. You *can* will yourself to sit down daily, write honestly, show up without judgment. The product (a published book, famous essay) depends on luck, timing, market forces. The process (daily practice, authentic expression) is yours alone. Paradoxically, writers who obsess over process produce better work than writers obsessing over outcomes. Anne Lamott wrote unpublished pages for years before *Bird by Bird*. The *process* was always working, even when no product existed. Zen archers don't aim for the target; they perfect their form. The arrow lands where it lands. Your job is form. The rest is grace.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Beginners obsess: "Will this be published? Will people love it? Am I a real writer yet?" Goldberg says: stop. You're trying to control the uncontrollable. What you *can* control is showing up tomorrow and the day after. Write bad pages. Write weird pages. Write pages that no one will ever read. That's the practice. The bestseller? That's traffic on the highway. You can't see it from where you're sitting, so stop looking for it.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>In deep learning, you optimize for the process (loss function, gradient descent iterations), not the final accuracy. Engineers spend obsessive energy on training methodology: data cleaning, regularization, batch size. The actual accuracy emerges as a byproduct of good process. The analogy is precise: your writing practice *is* your loss function. Commit to minimizing the distance between your thought and your words. The rest (publication, recognition) is test accuracy, which emerges from training.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p>Cal Newport's *Deep Work*: value measured by depth of process, not breadth of outputs. Daniel Coyle's *The Talent Code*: mastery emerges from "deep practice," not talent. Both emphasize: trust the system. Outcomes follow.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Trust in the process. The process is your responsibility, not the product. The product will take care of itself."</div>
+      <div class="quote-attr">— Natalie Goldberg, Writing Down the Bones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 10: PLACE MATTERS ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #fff0f0 0%, #ffe6e6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--warm-red);">10</div>
+    <h2 class="lesson-title">Writing the Sense of Place Into Your Bones</h2>
+    <p class="lesson-subtitle">Geography is character. The place shapes the voice.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Desert Southwest -->
+        <path d="M 100 150 L 120 100 L 140 140 L 160 90 Z" fill="var(--orange)" opacity="0.3"/>
+        <circle cx="150" cy="50" r="15" fill="var(--sunny)" opacity="0.4"/>
+        <text x="90" y="200" font-size="12" fill="var(--dark)" font-weight="600">Desert</text>
+        <text x="85" y="220" font-size="10" fill="var(--orange)">sparse, stark</text>
+        <text x="75" y="235" font-size="10" fill="var(--orange)">unforgiving</text>
+
+        <!-- Foggy coast -->
+        <ellipse cx="350" cy="100" rx="50" ry="60" fill="var(--teal)" opacity="0.15"/>
+        <path d="M 320 80 Q 350 70 380 80" stroke="var(--sky)" stroke-width="3" opacity="0.4"/>
+        <path d="M 315 100 Q 350 95 385 100" stroke="var(--sky)" stroke-width="2" opacity="0.3"/>
+        <path d="M 310 120 Q 350 115 390 120" stroke="var(--sky)" stroke-width="2" opacity="0.3"/>
+        <text x="310" y="200" font-size="12" fill="var(--dark)" font-weight="600">Coast</text>
+        <text x="295" y="220" font-size="10" fill="var(--sky)">mysterious,</text>
+        <text x="300" y="235" font-size="10" fill="var(--sky)">moody</text>
+
+        <!-- Tall trees -->
+        <line x1="550" y1="150" x2="550" y2="60" stroke="var(--forest)" stroke-width="6"/>
+        <line x1="530" y1="70" x2="570" y2="70" stroke="var(--forest)" stroke-width="3" opacity="0.6"/>
+        <line x1="535" y1="85" x2="565" y2="85" stroke="var(--forest)" stroke-width="3" opacity="0.6"/>
+        <line x1="540" y1="100" x2="560" y2="100" stroke="var(--forest)" stroke-width="2" opacity="0.6"/>
+        <text x="510" y="200" font-size="12" fill="var(--dark)" font-weight="600">Forest</text>
+        <text x="500" y="220" font-size="10" fill="var(--forest)">dense, quiet,</text>
+        <text x="510" y="235" font-size="10" fill="var(--forest)">introspective</text>
+
+        <!-- Central truth -->
+        <rect x="100" y="260" width="500" height="18" fill="var(--warm-red)" opacity="0.08"/>
+        <text x="120" y="274" font-size="11" fill="var(--dark)" font-weight="600">You write like where you live. The place is baked into your prose.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Geography shapes voice.</strong> Goldberg set her practice in New Mexico for a reason—the desert's sparseness matched her aesthetic. McCarthy's novels drip Texas and blood. Toni Morrison's books smell of Ohio. This isn't setting; it's *substrate*. When you internalize the sights, sounds, rhythms of a place, your sentences absorb them. A writer raised in silence among mountains (sparse, echoing) will write differently than one raised in noise among crowds (compressed, overlapping). Cognitive psychology calls this "embodied cognition"—your thinking *is* shaped by your physical environment. Writers moving to new cities report their prose immediately shifts. The place rewires your brain. Goldberg's Zen practice in the American Southwest exposed her to vast silence and clear light—values embedded in *Writing Down the Bones*'s spare, direct style.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>All that advice about "write where it's quiet" and "find your sacred writing space"? Not about ambiance. It's about *becoming that place*. Write in a coffee shop daily, you'll start writing like a coffee shop: crowded, energetic, fragmented. Write in a cabin in the woods daily, you'll write like trees: patient, rooted, slow. You're not choosing a setting. You're choosing who you'll become.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Neural networks trained on regional data learn regional patterns. An LLM fine-tuned on Southern literature learns longer sentences, more ornament, more history-consciousness. One fine-tuned on minimalist Western writing learns sparseness. Your brain is similar: it's a predictive model trained on its environment. Different environments produce different brains, different voices. Geography literally rewires your network architecture.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p>Annie Dillard's *Pilgrim at Tinker Creek*: place as teacher. Rob MacGregor's *Landmarks*: language emerges from landscape. David Whyte's essays: geography as inner landscape. All recognize place shapes consciousness.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Write where you live. Know the place so deeply that it becomes part of your cells."</div>
+      <div class="quote-attr">— Natalie Goldberg, Writing Down the Bones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 11: ORDINARY DETAILS ARE EXTRAORDINARY ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0ffe6 0%, #f8fff0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--mint);">11</div>
+    <h2 class="lesson-title">Milk Spilled, Floorboards Creaking—These Are Your Gold</h2>
+    <p class="lesson-subtitle">The ordinary contains infinite depth when truly seen</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left: Ignored ordinary -->
+        <circle cx="150" cy="100" r="30" fill="var(--dark)" opacity="0.1"/>
+        <text x="120" y="105" font-size="11" fill="var(--dark)" opacity="0.4">spoon</text>
+        <path d="M 200 100 L 250 100" stroke="var(--dark)" stroke-width="1" opacity="0.2"/>
+        <circle cx="280" cy="100" r="30" fill="var(--dark)" opacity="0.1"/>
+        <text x="255" y="105" font-size="11" fill="var(--dark)" opacity="0.4">coffee</text>
+        <path d="M 330 100 L 380 100" stroke="var(--dark)" stroke-width="1" opacity="0.2"/>
+        <circle cx="410" cy="100" r="30" fill="var(--dark)" opacity="0.1"/>
+        <text x="385" y="105" font-size="11" fill="var(--dark)" opacity="0.4">chair</text>
+        <text x="60" y="160" font-size="11" fill="var(--dark)" opacity="0.5">Seen as:</text>
+        <text x="60" y="178" font-size="10" fill="var(--dark)" opacity="0.4">"Background. Nothing interesting."</text>
+
+        <!-- Right: Obsessed with ordinary -->
+        <circle cx="550" cy="100" r="40" fill="var(--mint)" opacity="0.4"/>
+        <path d="M 540 80 L 560 80 M 540 100 L 560 100 M 540 120 L 560 120" stroke="var(--dark)" stroke-width="2"/>
+        <text x="500" y="160" font-size="11" font-weight="700" fill="var(--mint)">SEEN TRULY</text>
+        <text x="460" y="180" font-size="10" fill="var(--mint)">The spoon's weight,</text>
+        <text x="460" y="195" font-size="10" fill="var(--mint)">the coffee's steam,</text>
+        <text x="460" y="210" font-size="10" fill="var(--mint)">the chair's creak—</text>
+        <text x="470" y="225" font-size="10" fill="var(--mint)" font-weight="700">INFINITE</text>
+
+        <!-- Middle: The truth -->
+        <rect x="80" y="250" width="540" height="25" fill="var(--mint)" opacity="0.12" rx="4"/>
+        <text x="100" y="268" font-size="11" fill="var(--dark)" font-weight="600">Hemingway's melting glacier. Proust's madeleine. Not grand—ordinary things, truly seen.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Depth is hiding in plainness.</strong> Proust spent 20 pages on a cookie dipped in tea. Hemingway's "iceberg" aesthetic shows 10% and lets the reader sense the 90% beneath. This isn't quirk—it's epistemology. The more closely you attend to a thing, the more complex it becomes. A spoon, really observed: its weight distribution, the way light catches the curve, how it cools your mouth. Write this, and you've written about mortality (things pass, cool, fade), about sensation (the body's intelligence), about presence (what it means to *notice*). Goldberg's practice trains attention. Ten-minute writes on a coffee cup: you'll discover things about yourself. Where does your mind go? What details obsess you? Your obsessions are your truth. Real writers obsess over spoons.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Beginners wait for cosmic significance. "I'll write when something *important* happens." Meanwhile, Goldberg's writing about the dent in her pillow and somehow making you think about mortality. The cosmic is hiding in the mundane. You don't need a revolution. You need a really good look at your breakfast.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Attention mechanisms in transformer models work by computing similarity between query and key vectors, weighting the output by these similarities. The model "attends" more to relevant tokens. When you deeply attend to a spoon, you're running attention on it: asking what matters about this object, what details carry meaning. This is feature extraction—isolating signal from noise. Your obsessive attention to ordinary things *is* your brain's attention mechanism activating.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p>Jon Kabat-Zinn on mindfulness: radical attention to the present. Diane Ackerman's *A Natural History of the Senses*: the world's depth available through attention. Both celebrate what Goldberg teaches: the extraordinary in the ordinary.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The details are everything. Don't dismiss the small things."</div>
+      <div class="quote-attr">— Natalie Goldberg, Writing Down the Bones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 12: KEEP GOING ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0e6ff 0%, #faf0ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--purple);">12</div>
+    <h2 class="lesson-title">Keep Your Hand Moving</h2>
+    <p class="lesson-subtitle">The cardinal rule: don't stop. Ever.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Starting point -->
+        <circle cx="80" cy="150" r="15" fill="var(--purple)" opacity="0.3"/>
+        <text x="60" y="155" font-size="12" font-weight="700" fill="var(--dark)">Start</text>
+
+        <!-- Flowing line with momentum -->
+        <path d="M 100 150 Q 200 100 300 140 Q 400 180 500 130 Q 600 170 680 150" stroke="var(--purple)" stroke-width="4" fill="none" opacity="0.5"/>
+
+        <!-- Hands showing continuous motion -->
+        <circle cx="200" cy="100" r="8" fill="var(--purple)" opacity="0.4"/>
+        <circle cx="350" cy="140" r="8" fill="var(--purple)" opacity="0.5"/>
+        <circle cx="520" cy="130" r="8" fill="var(--purple)" opacity="0.4"/>
+
+        <!-- Notes along the path -->
+        <text x="150" y="60" font-size="9" fill="var(--dark)" opacity="0.6">Even when tired</text>
+        <text x="320" y="210" font-size="9" fill="var(--dark)" opacity="0.6">Even when stuck</text>
+        <text x="570" y="90" font-size="9" fill="var(--dark)" opacity="0.6">Even when doubt</text>
+
+        <!-- End result -->
+        <circle cx="680" cy="150" r="20" fill="var(--purple)" opacity="0.35"/>
+        <text x="665" y="155" font-size="12" font-weight="700" fill="var(--dark)">Page</text>
+
+        <!-- Bottom truth -->
+        <rect x="60" y="240" width="600" height="50" fill="var(--purple)" opacity="0.08" rx="8"/>
+        <text x="80" y="263" font-size="12" font-weight="700" fill="var(--dark)">The hand that keeps moving creates the page.</text>
+        <text x="80" y="282" font-size="10" fill="var(--dark)">Don't edit. Don't pause. Don't reread. Write.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Motion creates momentum.</strong> This is Goldberg's first commandment: "Keep your hand moving." If you pause to edit, to evaluate, to judge—you've stopped the flow. The moment you stop, the critic steps in. Your hand moving is the antidote to self-consciousness. In freewriting studies, researchers found that writers who pause every 30 seconds produce less creative work than those who write continuously. Continuous writing activates a different neural state—flow state, where the prefrontal cortex (critic) quiets and the default mode network (creator) hums. Your hand moving is *you letting go*. Don't think about the next word. Let it come. Keep moving. This is why Kerouac's method of typing without pause produced work that feels alive. The aliveness *is* the continuous motion.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>The moment you stop to ask "Is this any good?", you've killed it. The magic happens when you're *moving*, not thinking. It's like trying to walk while analyzing your gait. Stop walking to think about walking, you'll fall. Keep moving, you'll get where you're going. Write without thinking about writing, you'll get the goods.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p>Backpropagation in neural networks depends on continuous forward and backward passes. Interrupting the computation breaks the gradient flow. Similarly, your writing momentum depends on uninterrupted forward motion. Each word you write becomes input for the next, creating a cascade of associations. Interrupt that cascade, and you break the network. The magic lives in flow—in continuous computation without pause.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p>Mihaly Csikszentmihalyi's *Flow*: uninterrupted immersion produces excellence. Steven Pressfield's *The War of Art*: resistance shows up when you pause. Anne Lamott: "shitty first drafts" demand momentum, not reflection. All echo Goldberg: keep moving.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Keep your hand moving. Don't pause. Don't edit. Just write."</div>
+      <div class="quote-attr">— Natalie Goldberg, Writing Down the Bones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 1: NATALIE'S FIRST PRACTICE ===== -->
+<section class="story" style="background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%); color: white;">
+  <div class="story-inner">
+    <h3 class="story-title">Story Spotlight: The First Practice Session</h3>
+    <p class="story-text">Natalie Goldberg sat at a table in New Mexico, notebook blank before her. She'd been studying Zen for years. Her teacher had said: "Write." Not write well. Not write publishably. Just write. She set a timer for ten minutes and put her hand to paper. Her mind screamed: "What should this be *about*?" The editor shrieked: "You're doing it wrong!" But her hand kept moving. She wrote about the table. She wrote about the light. She wrote about the thought that she should be writing something meaningful. The timer dinged. She'd filled a page. The page was rough. Messy. Terrible, by publishing standards. But something had happened: for ten minutes, she'd been *present*. Not judging. Not performing. Just witnessing her own mind. She closed the notebook, and something clicked. This was it. This was the practice. Not the page—the *practice*. She did it again the next day. And the next. The pages accumulated. Most were garbage. But in the garbage was truth. Years later, after thousands of pages, the garbage had transformed. She'd found something she couldn't have planned: her voice, her vision, her permission to speak. The permission didn't come from external validation. It came from the practice itself.</p>
+
+    <div class="story-svg">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Desk -->
+        <rect x="150" y="140" width="400" height="80" fill="var(--gold)" opacity="0.15" rx="8"/>
+        <line x1="100" y1="140" x2="600" y2="140" stroke="var(--gold)" stroke-width="2" opacity="0.3"/>
+
+        <!-- Notebook -->
+        <rect x="250" y="80" width="200" height="60" fill="var(--cream)" opacity="0.5"/>
+        <line x1="265" y1="80" x2="265" y2="140" stroke="var(--gold)" stroke-width="1" opacity="0.4"/>
+        <line x1="280" y1="80" x2="280" y2="140" stroke="var(--gold)" stroke-width="1" opacity="0.3"/>
+        <line x1="295" y1="80" x2="295" y2="140" stroke="var(--gold)" stroke-width="1" opacity="0.3"/>
+
+        <!-- Hand with pen -->
+        <ellipse cx="410" cy="110" rx="12" ry="15" fill="rgba(255,255,255,0.3)"/>
+        <line x1="415" y1="125" x2="430" y2="150" stroke="var(--gold)" stroke-width="2" opacity="0.6"/>
+        <circle cx="430" cy="150" r="4" fill="var(--gold)" opacity="0.4"/>
+
+        <!-- Words appearing -->
+        <text x="310" y="115" font-size="11" fill="var(--gold)" opacity="0.5">light</text>
+        <text x="380" y="105" font-size="11" fill="var(--gold)" opacity="0.4">table</text>
+        <text x="330" y="130" font-size="11" fill="var(--gold)" opacity="0.45">breath</text>
+
+        <!-- Timer top right -->
+        <circle cx="600" cy="60" r="20" fill="none" stroke="var(--gold)" stroke-width="2" opacity="0.4"/>
+        <text x="585" y="65" font-size="10" fill="var(--gold)" opacity="0.5">10 min</text>
+
+        <!-- Sun/light from window -->
+        <circle cx="100" cy="40" r="30" fill="var(--sunny)" opacity="0.2"/>
+        <line x1="100" y1="10" x2="100" y2="30" stroke="var(--sunny)" stroke-width="2" opacity="0.3"/>
+        <line x1="130" y1="40" x2="110" y2="40" stroke="var(--sunny)" stroke-width="2" opacity="0.3"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 2: TIMED WRITES IN THE CLASSROOM ===== -->
+<section class="story" style="background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%); color: white;">
+  <div class="story-inner">
+    <h3 class="story-title">Story Spotlight: The Timed Write Transforms Everything</h3>
+    <p class="story-text">Goldberg taught writing workshops for decades. A pattern emerged: students who'd been blocked for years, who'd spent thousands on therapy and coaching, would sit down for a 10-minute timed write and suddenly *something broke*. The rules were simple: write the whole time, don't lift your pen, don't censor. One student wrote: "I hate my job I hate my job I hate my job." For two minutes straight. Then: "Why do I keep saying that? Because it's true. Because I haven't said it out loud in five years." The timed write forced her to move past the safe, acceptable thought to the *true* one. By word 500, she was writing about her mother's disappointment, her own fear of failure, the weight she'd been carrying. In ten minutes, she'd accessed more honesty than in ten years of hesitation. Another student, a lawyer, wrote about the morning light on his coffee cup. "I've seen this light 10,000 times," he wrote. "Today I actually *saw* it. How many things have I missed?" The timed write wasn't about the writing. It was about the *opening*. The permission to stop thinking and start witnessing. That's what Goldberg taught: not technique. Permission.</p>
+
+    <div class="story-svg">
+      <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Circle of students (top view) -->
+        <circle cx="350" cy="130" r="90" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.3" stroke-dasharray="5,5"/>
+
+        <!-- Four students with notebooks -->
+        <g id="student1">
+          <circle cx="280" cy="60" r="15" fill="var(--coral)" opacity="0.3"/>
+          <rect x="270" y="80" width="20" height="25" fill="var(--cream)" opacity="0.4"/>
+        </g>
+        <g id="student2">
+          <circle cx="420" cy="60" r="15" fill="var(--sky)" opacity="0.3"/>
+          <rect x="410" y="80" width="20" height="25" fill="var(--cream)" opacity="0.4"/>
+        </g>
+        <g id="student3">
+          <circle cx="280" cy="200" r="15" fill="var(--mint)" opacity="0.3"/>
+          <rect x="270" y="180" width="20" height="25" fill="var(--cream)" opacity="0.4"/>
+        </g>
+        <g id="student4">
+          <circle cx="420" cy="200" r="15" fill="var(--purple)" opacity="0.3"/>
+          <rect x="410" y="180" width="20" height="25" fill="var(--cream)" opacity="0.4"/>
+        </g>
+
+        <!-- Center: Timer/Goldberg -->
+        <circle cx="350" cy="130" r="25" fill="var(--orange)" opacity="0.2"/>
+        <text x="330" y="135" font-size="12" font-weight="700" fill="var(--gold)">WRITE</text>
+
+        <!-- Thought bubbles/words flowing out -->
+        <path d="M 200 60 L 150 40" stroke="var(--coral)" stroke-width="2" opacity="0.4"/>
+        <text x="120" y="35" font-size="9" fill="var(--coral)" opacity="0.5">hate</text>
+
+        <path d="M 450 60 L 500 40" stroke="var(--sky)" stroke-width="2" opacity="0.4"/>
+        <text x="505" y="35" font-size="9" fill="var(--sky)" opacity="0.5">light</text>
+
+        <path d="M 200 200 L 150 220" stroke="var(--mint)" stroke-width="2" opacity="0.4"/>
+        <text x="120" y="225" font-size="9" fill="var(--mint)" opacity="0.5">truth</text>
+
+        <path d="M 450 200 L 500 220" stroke="var(--purple)" stroke-width="2" opacity="0.4"/>
+        <text x="505" y="225" font-size="9" fill="var(--purple)" opacity="0.5">fear</text>
+
+        <!-- Timer showing countdown -->
+        <rect x="300" y="230" width="100" height="25" fill="var(--gold)" opacity="0.15" rx="4"/>
+        <text x="315" y="250" font-size="11" fill="var(--gold)" font-weight="600">10 min: No editing.</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 3: THE BONES NOTEBOOK ===== -->
+<section class="story" style="background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%); color: white;">
+  <div class="story-inner">
+    <h3 class="story-title">Story Spotlight: One Notebook, Twenty Years, a Life</h3>
+    <p class="story-text">Goldberg keeps journals. Decades of them. Not polished manuscripts—raw practice notebooks. A 1998 entry: "Scared today. Silence feels empty. Why do I always fill it?" A 2005 entry: "Watched a kid catch a grasshopper. She was so *present*. I'm never that present." A 2015 entry: "Taught a class. A student wrote about her dead father. Everyone was quiet. That's why we do this." These aren't published excerpts. They're not even especially well-written. But they're *true*. They're a human being, for twenty years, showing up and asking: "What's real right now?" That's the practice. Not aiming at publication or legacy. Just: *How do I live more truly?* And the answer came through the pen. Her published books emerged *from* these notebooks. Not because she went back and polished them (she didn't), but because the practice of writing them changed her. The bones grew stronger. The voice deepened. By year 20, she could write anything because she'd written *everything*—her fear, her wonder, her doubt, her clarity. The notebooks weren't preparation. They *were* the life.</p>
+
+    <div class="story-svg">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stack of journals over time -->
+        <rect x="120" y="180" width="40" height="25" fill="var(--cream)" opacity="0.3"/>
+        <text x="110" y="168" font-size="9" fill="var(--gold)">1998</text>
+
+        <rect x="140" y="165" width="40" height="25" fill="var(--cream)" opacity="0.4"/>
+        <text x="130" y="153" font-size="9" fill="var(--gold)">2000s</text>
+
+        <rect x="160" y="145" width="40" height="25" fill="var(--cream)" opacity="0.5"/>
+        <text x="150" y="133" font-size="9" fill="var(--gold)">2010s</text>
+
+        <rect x="180" y="120" width="40" height="25" fill="var(--cream)" opacity="0.6"/>
+        <text x="170" y="108" font-size="9" fill="var(--gold)">2020s</text>
+
+        <!-- Arrow showing progression -->
+        <path d="M 230 180 L 320 130" stroke="var(--gold)" stroke-width="2" opacity="0.5" marker-end="url(#arrowGold)"/>
+
+        <!-- Open page showing entries -->
+        <g id="openNotebook">
+          <ellipse cx="450" cy="160" rx="80" ry="90" fill="var(--cream)" opacity="0.15"/>
+          <line x1="450" y1="70" x2="450" y2="250" stroke="var(--gold)" stroke-width="1" opacity="0.3"/>
+
+          <!-- Sample text entries -->
+          <text x="380" y="110" font-size="9" fill="var(--gold)" opacity="0.5">scared</text>
+          <text x="485" y="115" font-size="9" fill="var(--gold)" opacity="0.5">present</text>
+
+          <text x="380" y="160" font-size="9" fill="var(--gold)" opacity="0.4">silence</text>
+          <text x="485" y="165" font-size="9" fill="var(--gold)" opacity="0.4">grasshopper</text>
+
+          <text x="380" y="210" font-size="9" fill="var(--gold)" opacity="0.45">empty</text>
+          <text x="485" y="215" font-size="9" fill="var(--gold)" opacity="0.45">father</text>
+        </g>
+
+        <!-- Result: books published -->
+        <rect x="560" y="100" width="80" height="120" fill="var(--orange)" opacity="0.2" rx="4"/>
+        <text x="575" y="145" font-size="11" font-weight="700" fill="var(--gold)">Books</text>
+        <text x="565" y="165" font-size="9" fill="var(--gold)" opacity="0.7">emerged</text>
+
+        <!-- Truth at bottom -->
+        <rect x="100" y="240" width="600" height="35" fill="var(--gold)" opacity="0.08" rx="6"/>
+        <text x="120" y="265" font-size="11" fill="var(--gold)" font-weight="600">Practice isn't preparation for the life. It IS the life. Write it. Live it.</text>
+
+        <defs>
+          <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--gold)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHEATSHEET ===== -->
+<section class="cheatsheet">
+  <div class="cheatsheet-inner">
+    <h2>The Bones at a Glance: Quick Reference</h2>
+
+    <div class="cheatsheet-grid">
+      <div class="cheat-card">
+        <h3>The First Thought</h3>
+        <p>Your unfiltered impulse is your truest thought. Write it before the editor wakes. The brain's fastest processor (unconscious) beats the slowest (conscious).</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Practice, Practice</h3>
+        <p>Daily writing is like daily meditation. Show up even when uninspired. 10,000 hours isn't a suggestion—it's neuroscience. Consistency beats genius.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Bones Over Flesh</h3>
+        <p>Strip prose to essentials. Remove "very," "really," "absolutely." The skeleton holds more weight than the decorations. Hemingway knew: say it plain.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Specificity = Universality</h3>
+        <p>Write "my throat closed" not "I felt sad." The specific image (sensory detail) connects readers more than abstract emotion. Zoom in, not out.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Writing = Meditation</h3>
+        <p>Both quiet the mind. Both show you who you are. Both produce alpha-wave states. The practice itself is enlightenment. Publication is optional.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Embrace Wild Mind</h3>
+        <p>Your tangents aren't errors—they're your genius. Let associations run. The nonlinear path is where real creativity lives. Trust the weirdness.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Your Voice Matters</h3>
+        <p>Don't imitate Hemingway. Write your truth until it becomes undeniably *you*. Authenticity can't be learned—only discovered through writing honestly.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Write the Pain</h3>
+        <p>Your darkest experiences contain your strongest writing. Go *through* the pain, not around it. The specificity of hurt transforms it into art.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Process > Product</h3>
+        <p>You control the daily work. You don't control publication or fame. Obsess over showing up, not over outcomes. The practice is the victory.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Place Shapes Voice</h3>
+        <p>Geography rewires your brain. Write where you live. The landscape becomes the language. Desert writing sparse. Forest writing quiet. Coastal writing mysterious.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Ordinary = Extraordinary</h3>
+        <p>A spoon, truly seen, contains infinity. Proust's cookie changed literature. Don't wait for cosmic events—attend to the mundane with obsessive love.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Keep Your Hand Moving</h3>
+        <p>Never stop mid-sentence. The moment you pause to edit, you die. Momentum is magic. Hand moving = flow. Flow = truth. Stop hand = stop writing.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 60px; padding: 30px; background: rgba(212, 175, 55, 0.08); border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.2);">
+      <h3 style="color: var(--gold); font-size: 1.3rem; margin-bottom: 20px;">The Daily Practice Protocol</h3>
+      <div style="color: rgba(255,255,255,0.85); font-size: 0.95rem; line-height: 1.8;">
+        <p><strong style="color: var(--gold);">1. Set a timer:</strong> 10, 20, or 30 minutes. Non-negotiable.</p>
+        <p><strong style="color: var(--gold);">2. Pen to paper (or fingers to keyboard):</strong> Write *something* on the page before time starts.</p>
+        <p><strong style="color: var(--gold);">3. First thought only:</strong> Write your first impulse, not your edit.</p>
+        <p><strong style="color: var(--gold);">4. Keep hand moving:</strong> Never lift the pen. Never pause. "I don't know what to write" is what you write.</p>
+        <p><strong style="color: var(--gold);">5. No editing:</strong> Grammar, spelling, logic—all forbidden. This is pure writing.</p>
+        <p><strong style="color: var(--gold);">6. When timer dings:</strong> Stop. Don't reread. Save the page. You're collecting pages, not editing them.</p>
+        <p><strong style="color: var(--gold);">7. Tomorrow:</strong> Do it again. The practice compounds.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; padding: 20px; background: rgba(255, 107, 107, 0.08); border-radius: 12px;">
+      <p style="color: rgba(255,255,255,0.9); font-size: 0.95rem; line-height: 1.7; font-style: italic;">
+        <strong style="color: var(--coral);">"Writing is the act of becoming who you are."</strong> The bones aren't just technique—they're a path. You show up with your pen, your honesty, your willingness to be seen. The bones hold you up. The voice emerges. The life deepens. That's the practice. That's everything.
+      </p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

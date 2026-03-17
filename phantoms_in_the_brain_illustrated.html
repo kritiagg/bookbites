@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantoms in the Brain: Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+            color: var(--dark);
+            line-height: 1.8;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
+            z-index: 1000;
+            border-bottom: 3px solid var(--teal);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, var(--coral), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        nav a:hover {
+            background: var(--sunny);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        /* Cover Section */
+        .cover {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--teal) 100%);
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            margin: 2rem auto;
+            max-width: 900px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,107,107,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .cover svg {
+            max-width: 300px;
+            height: auto;
+            margin: 2rem 0;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin: 1rem 0;
+            line-height: 1.2;
+        }
+
+        .cover h2 {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+        }
+
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: rgba(255,255,255,0.15);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .meta-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .meta-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Introduction */
+        .intro {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem auto;
+            max-width: 900px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 6px solid var(--coral);
+        }
+
+        .intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark-purple);
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        .intro-highlight {
+            background: linear-gradient(120deg, var(--sunny) 0%, var(--cream) 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--orange);
+        }
+
+        /* Lessons Grid */
+        .lessons-container {
+            margin: 4rem auto;
+            max-width: 1200px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark);
+            text-align: center;
+            margin: 3rem 0 2rem 0;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal), var(--coral), var(--purple));
+            border-radius: 2px;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--teal);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+        }
+
+        .lesson-card:nth-child(2) {
+            border-top-color: var(--coral);
+        }
+
+        .lesson-card:nth-child(3) {
+            border-top-color: var(--purple);
+        }
+
+        .lesson-card:nth-child(4) {
+            border-top-color: var(--sky);
+        }
+
+        .lesson-card:nth-child(5) {
+            border-top-color: var(--forest);
+        }
+
+        .lesson-card:nth-child(6) {
+            border-top-color: var(--warm-red);
+        }
+
+        .lesson-card:nth-child(7) {
+            border-top-color: var(--mint);
+        }
+
+        .lesson-card:nth-child(8) {
+            border-top-color: var(--pink);
+        }
+
+        .lesson-card:nth-child(9) {
+            border-top-color: var(--orange);
+        }
+
+        .lesson-card:nth-child(10) {
+            border-top-color: var(--dark-purple);
+        }
+
+        .lesson-card:nth-child(11) {
+            border-top-color: var(--deep-blue);
+        }
+
+        .lesson-card:nth-child(12) {
+            border-top-color: var(--cream);
+            border-top: 5px solid #DAA520;
+        }
+
+        .lesson-visual {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(78,205,196,0.1) 0%, rgba(160,108,213,0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-visual svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .lesson-content {
+            padding: 2rem;
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--teal), var(--purple));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-card:nth-child(2) .lesson-number {
+            background: linear-gradient(135deg, var(--coral), var(--warm-red));
+        }
+
+        .lesson-card:nth-child(3) .lesson-number {
+            background: linear-gradient(135deg, var(--purple), var(--dark-purple));
+        }
+
+        .lesson-card:nth-child(4) .lesson-number {
+            background: linear-gradient(135deg, var(--sky), var(--deep-blue));
+        }
+
+        .lesson-card:nth-child(5) .lesson-number {
+            background: linear-gradient(135deg, var(--forest), #00A86B);
+        }
+
+        .lesson-card:nth-child(6) .lesson-number {
+            background: linear-gradient(135deg, var(--warm-red), var(--coral));
+        }
+
+        .lesson-card:nth-child(7) .lesson-number {
+            background: linear-gradient(135deg, var(--mint), var(--forest));
+        }
+
+        .lesson-card:nth-child(8) .lesson-number {
+            background: linear-gradient(135deg, var(--pink), #FF85A2);
+        }
+
+        .lesson-card:nth-child(9) .lesson-number {
+            background: linear-gradient(135deg, var(--orange), #FFB347);
+        }
+
+        .lesson-card:nth-child(10) .lesson-number {
+            background: linear-gradient(135deg, var(--dark-purple), #7B68EE);
+        }
+
+        .lesson-card:nth-child(11) .lesson-number {
+            background: linear-gradient(135deg, var(--deep-blue), #1E90FF);
+        }
+
+        .lesson-card:nth-child(12) .lesson-number {
+            background: linear-gradient(135deg, #DAA520, #FFD700);
+        }
+
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .lesson-description {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .lesson-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: rgba(78, 205, 196, 0.15);
+            color: var(--teal);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .tag.key {
+            background: rgba(255, 107, 107, 0.15);
+            color: var(--coral);
+        }
+
+        .tag.ai {
+            background: rgba(160, 108, 213, 0.15);
+            color: var(--purple);
+        }
+
+        .tag.book {
+            background: rgba(116, 185, 255, 0.15);
+            color: var(--sky);
+        }
+
+        /* Detailed Lessons */
+        .detailed-lesson {
+            background: white;
+            padding: 3rem;
+            margin: 3rem auto;
+            max-width: 900px;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-left: 6px solid var(--teal);
+        }
+
+        .detailed-lesson:nth-child(odd) {
+            border-left-color: var(--coral);
+        }
+
+        .detailed-lesson h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-purple);
+        }
+
+        .patient-story {
+            background: linear-gradient(135deg, rgba(116,185,255,0.1) 0%, rgba(78,205,196,0.1) 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--sky);
+            font-style: italic;
+        }
+
+        .patient-story strong {
+            font-style: normal;
+            color: var(--deep-blue);
+        }
+
+        .experiment-box {
+            background: linear-gradient(135deg, rgba(255,107,107,0.05) 0%, rgba(255,198,0,0.05) 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 2px solid var(--orange);
+        }
+
+        .experiment-box h4 {
+            color: var(--warm-red);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .wit-quote {
+            background: linear-gradient(135deg, rgba(160,108,213,0.08) 0%, rgba(74,185,255,0.08) 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--purple);
+            font-size: 1.05rem;
+            color: #333;
+            position: relative;
+            font-style: italic;
+        }
+
+        .wit-quote::before {
+            content: '"';
+            position: absolute;
+            top: -5px;
+            left: 20px;
+            font-size: 3rem;
+            color: var(--purple);
+            opacity: 0.3;
+        }
+
+        .ai-connection {
+            background: linear-gradient(135deg, rgba(160,108,213,0.1) 0%, rgba(78,205,196,0.1) 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border-top: 4px solid var(--dark-purple);
+            border-bottom: 4px solid var(--teal);
+        }
+
+        .ai-connection h4 {
+            color: var(--dark-purple);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .ai-connection p {
+            color: #444;
+            line-height: 1.8;
+        }
+
+        .cross-reference {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border: 2px dashed var(--sky);
+        }
+
+        .cross-reference h4 {
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cross-reference ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .cross-reference li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .cross-reference li::before {
+            content: '📚';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-purple) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 6px solid var(--teal);
+        }
+
+        footer .container {
+            text-align: center;
+        }
+
+        footer h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            opacity: 0.9;
+        }
+
+        footer .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--teal), transparent);
+            margin: 2rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .cover h1 {
+                font-size: 2rem;
+            }
+
+            .cover h2 {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .lesson-title {
+                font-size: 1.1rem;
+            }
+
+            .detailed-lesson {
+                padding: 1.5rem;
+            }
+
+            .detailed-lesson h3 {
+                font-size: 1.5rem;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cover-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-4 {
+            margin-top: 3rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 3rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(255,107,107,0.2), rgba(78,205,196,0.2));
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .accent-coral {
+            color: var(--coral);
+        }
+
+        .accent-teal {
+            color: var(--teal);
+        }
+
+        .accent-purple {
+            color: var(--purple);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <h1>Phantoms in the Brain</h1>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#lessons">12 Lessons</a></li>
+                <li><a href="#detailed">Deep Dive</a></li>
+                <li><a href="#connections">AI & Books</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Cover Section -->
+        <section class="cover">
+            <div class="cover-content">
+                <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Brain outline -->
+                    <ellipse cx="150" cy="120" rx="70" ry="80" fill="none" stroke="white" stroke-width="2" opacity="0.6"/>
+
+                    <!-- Neural connections -->
+                    <circle cx="120" cy="100" r="4" fill="white" opacity="0.7"/>
+                    <circle cx="180" cy="100" r="4" fill="white" opacity="0.7"/>
+                    <circle cx="150" cy="150" r="4" fill="white" opacity="0.7"/>
+                    <circle cx="130" cy="60" r="3" fill="white" opacity="0.5"/>
+                    <circle cx="170" cy="60" r="3" fill="white" opacity="0.5"/>
+
+                    <line x1="120" y1="100" x2="150" y2="150" stroke="white" stroke-width="1.5" opacity="0.4"/>
+                    <line x1="180" y1="100" x2="150" y2="150" stroke="white" stroke-width="1.5" opacity="0.4"/>
+                    <line x1="130" y1="60" x2="120" y2="100" stroke="white" stroke-width="1" opacity="0.3"/>
+                    <line x1="170" y1="60" x2="180" y2="100" stroke="white" stroke-width="1" opacity="0.3"/>
+
+                    <!-- Phantom limb suggestion (faded outline) -->
+                    <path d="M 150 180 L 140 240 Q 135 260 140 280" fill="none" stroke="white" stroke-width="2" stroke-dasharray="5,5" opacity="0.4"/>
+                    <path d="M 150 180 L 160 240 Q 165 260 160 280" fill="none" stroke="white" stroke-width="2" stroke-dasharray="5,5" opacity="0.4"/>
+
+                    <!-- Mirror reflection -->
+                    <line x1="50" y1="50" x2="50" y2="250" stroke="white" stroke-width="3" opacity="0.3"/>
+                    <text x="20" y="160" font-size="12" fill="white" opacity="0.5" font-family="Inter">Mirror</text>
+                </svg>
+
+                <h1>Phantoms in the Brain</h1>
+                <h2>Probing the Mysteries of the Human Mind</h2>
+
+                <div class="cover-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Author</div>
+                        <div class="meta-value">V.S. Ramachandran</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Focus</div>
+                        <div class="meta-value">Neuroscience & Mind</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Approach</div>
+                        <div class="meta-value">Patient Case Studies</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction -->
+        <section id="overview" class="intro">
+            <h2>A Window into the Mysteries of Mind</h2>
+            <p>
+                V.S. Ramachandran's groundbreaking work takes us on a fascinating journey through the peculiar disorders that reveal how our brains construct reality. By examining patients with bizarre neurological conditions—those who feel pain in limbs that don't exist, those who deny their own paralysis, those who believe their loved ones are imposters—Ramachandran unveils the hidden workings of human consciousness.
+            </p>
+            <p>
+                This guide explores twelve profound lessons from the book, each illuminating a different aspect of how the brain creates the self, perceives the body, and generates the subjective experience we call mind. From the elegant simplicity of the mirror box to the perplexing nature of qualia, Ramachandran's insights challenge everything we think we know about perception, consciousness, and the relationship between brain and body.
+            </p>
+
+            <div class="intro-highlight">
+                <strong>Key Insight:</strong> The brain doesn't simply receive sensory input—it actively constructs reality. When that construction process breaks down, it reveals the hidden mechanics of mind. A patient who cannot move his arm but insists he can move it perfectly fine. A woman who sees her husband but believes he's an imposter. These aren't failures of the mind—they're windows into its fundamental architecture.
+            </div>
+
+            <p>
+                Throughout this guide, you'll discover how Ramachandran's experiments—particularly his revolutionary <span class="highlight">mirror box</span>—have transformed our understanding of pain, disability, and the plasticity of the human nervous system. You'll also explore surprising connections between these neurological phenomena and modern artificial intelligence, where similar patterns emerge in how neural networks process information.
+            </p>
+        </section>
+
+        <!-- 12 Lessons Grid -->
+        <section id="lessons" class="lessons-container">
+            <h2 class="section-title">12 Profound Lessons</h2>
+
+            <div class="lessons-grid">
+                <!-- Lesson 1 -->
+                <div class="lesson-card">
+                    <div class="lesson-visual">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#4ECDC4" stroke-width="2" opacity="0.3"/>
+                            <path d="M 100 40 Q 80 100 100 160" fill="none" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="5,5"/>
+                            <path d="M 100 40 Q 120 100 100 160" fill="none" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="5,5"/>
+                            <circle cx="100" cy="40" r="5" fill="#FF6B6B" opacity="0.6"/>
+                            <circle cx="100" cy="160" r="5" fill="#FF6B6B" opacity="0.3"/>
+                        </svg>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-number">1</div>
+                        <h3 class="lesson-title">Phantom Limbs</h3>
+                        <p class="lesson-description">Amputees feel intense pain and sensations in limbs that no longer exist. The brain maintains a body map that outlives the body itself.</p>
+                        <div class="lesson-tags">
+                            <span class="tag key">Patient Experience</span>
+                            <span class="tag">Body Maps</span>
+                            <span class="tag">Sensation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 2 -->
+                <div class="lesson-card">
+                    <div class="lesson-visual">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="100" y1="20" x2="100" y2="180" stroke="#FF6B6B" stroke-width="3" opacity="0.6"/>
+                            <rect x="40" y="60" width="50" height="70" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                            <rect x="110" y="60" width="50" height="70" fill="none" stroke="#4ECDC4" stroke-width="2" opacity="0.4" stroke-dasharray="3,3"/>
+                            <text x="30" y="180" font-size="14" fill="#FF6B6B">Real</text>
+                            <text x="130" y="180" font-size="14" fill="#4ECDC4">Reflection</text>
+                        </svg>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-number">2</div>
+                        <h3 class="lesson-title">The Mirror Box</h3>
+                        <p class="lesson-description">Ramachandran's ingenious $5 solution: a mirror tricks the brain into believing the phantom limb has returned, relieving pain instantly.</p>
+                        <div class="lesson-tags">
+                            <span class="tag key">Breakthrough</span>
+                            <span class="tag">Visual Illusion</span>
+                            <span class="tag ai">Clever Hack</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 3 -->
+                <div class="lesson-card">
+                    <div class="lesson-visual">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="#A06CD5" stroke-width="2" opacity="0.4"/>
+                            <ellipse cx="70" cy="80" rx="8" ry="12" fill="#A06CD5" opacity="0.6"/>
+                            <ellipse cx="130" cy="80" rx="8" ry="12" fill="#A06CD5" opacity="0.6"/>
+                            <circle cx="70" cy="110" r="6" fill="#A06CD5" opacity="0.4"/>
+                            <circle cx="130" cy="110" r="6" fill="#A06CD5" opacity="0.4"/>
+                            <path d="M 100 130 Q 85 145 70 155" fill="none" stroke="#A06CD5" stroke-width="2" opacity="0.6"/>
+                            <path d="M 100 130 Q 115 145 130 155" fill="none" stroke="#A06CD5" stroke-width="2" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-number">3</div>
+                        <h3 class="lesson-title">Body Image & Brain Maps</h3>
+                        <p class="lesson-description">The brain contains a detailed map of the body. Some body parts (lips, hands) occupy disproportionate territory in the motor cortex.</p>
+                        <div class="lesson-tags">
+                            <span class="tag key">Homunculus</span>
+                            <span class="tag">Cortical Mapping</span>
+                            <span class="tag">Neuroscience</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 4 -->
+                <div class="lesson-card">
+                    <div class="lesson-visual">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="60" fill="none" stroke="#74B9FF" stroke-width="2" opacity="0.4"/>
+                            <path d="M 60 100 Q 100 140 140 100" fill="none" stroke="#74B9FF" stroke-width="3"/>
+                            <circle cx="60" cy="100" r="5" fill="#74B9FF"/>
+                            <circle cx="140" cy="100" r="5" fill="#74B9FF"/>
+                            <text x="70" y="60" font-size="14" fill="#74B9FF">Can't move?</text>
+                            <text x="70" y="155" font-size="14" fill="#74B9FF">I CAN move it!</text>
+                        </svg>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-number">4</div>
+                        <h3 class="lesson-title">Anosognosia</h3>
+                        <p class="lesson-description">Denial of paralysis. The brain fabricates false explanations rather than admit disability. A patient denies their own obvious paralysis with complete conviction.</p>
+                        <div class="lesson-tags">
+                            <span class="tag key">Confabulation</span>
+                            <span class="tag ai">Confident Hallucination</span>
+                            <span class="tag">Self-Deception</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 5 -->
+                <div class="lesson-card">
+                    <div class="lesson-visual">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="65" fill="none" stroke="#00B894" stroke-width="2" opacity="0.4"/>
+                            <path d="M 100 40 L 100 160" stroke="#00B894" stroke-width="2"/>
+                            <path d="M 40 100 L 160 100" stroke="#00B894" stroke-width="2"/>
+                            <circle cx="100" cy="60" r="8" fill="#00B894" opacity="0.7"/>
+                            <circle cx="100" cy="140" r="8" fill="#00B894" opacity="0.7"/>
+                            <text x="50" y="95" font-size="12" fill="#00B894">Mom?</text>
+                            <text x="110" y="95" font-size="12" fill="#00B894">Imposter!</text>
+                        </svg>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-number">5</div>
+                        <h3 class="lesson-title">Capgras Delusion</h3>
+                        <p class="lesson-description">Patients recognize a loved one's face but believe they are an impostor. Emotion systems are disconnected from facial recognition.</p>
+                        <div class="lesson-tags">
+                            <span class="tag key">Face Recognition</span>
+                            <span class="tag ai">Emotion Failure</span>
+                            <span class="tag">Dissociation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 6 -->
+                <div class="lesson-card">
+                    <div class="lesson-visual">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="65" fill="none" stroke="#E17055" stroke-width="2" opacity="0.4"/>
+                            <path d="M 50 100 Q 100 50 150 100" fill="none" stroke="#E17055" stroke-width="3"/>
+                            <circle cx="70" cy="85" r="3" fill="#E17055"/>
+                            <circle cx="100" cy="60" r="3" fill="#E17055"/>
+                            <circle cx="130" cy="85" r="3" fill="#E17055"/>
+                            <text x="60" y="145" font-size="11" fill="#E17055">"I can see"</text>
+                            <text x="85" y="160" font-size="11" fill="#E17055">(Actually can!)</text>
+                        </svg>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-number">6</div>
+                        <h3 class="lesson-title">Blindsight</h3>
+                        <p class="lesson-description">Patients with occipital lobe damage deny being able to see, yet navigate obstacles perfectly. Vision without awareness.</p>
+                        <div class="lesson-tags">
+                            <span class="tag key">Unconscious Vision</span>
+                            <span class="tag ai">Processing w/o Attention</span>
+                            <span class="tag">Consciousness</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 7 -->
+                <div class="lesson-card">
+                    <div class="lesson-visual">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="65" fill="none" stroke="#55EFC4" stroke-width="2" opacity="0.4"/>
+                            <path d="M 70 70 L 130 130" stroke="#FF6B6B" stroke-width="3" opacity="0.6"/>
+                            <text x="50" y="60" font-size="16" fill="#FFE66D">♫</text>
+                            <text x="130" y="130" font-size="16" fill="#FF6B6B">Red</text>
+                            <text x="75" y="110" font-size="12" fill="#55EFC4">= taste</text>
+                        </svg>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-number">7</div>
+                        <h3 class="lesson-title">Synesthesia</h3>
+                        <p class="lesson-description">Cross-wired senses: tasting shapes, seeing sounds as colors, feeling numbers as textures. A breakdown reveals the brain's modular structure.</p>
+                        <div class="lesson-tags">
+                            <span class="tag key">Cross-Modal</span>
+                            <span class="tag ai">Neural Cross-talk</span>
+                            <span class="tag">Perception</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 8 -->
+                <div class="lesson-card">
+                    <div class="lesson-visual">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="65" fill="none" stroke="#FD79A8" stroke-width="2" opacity="0.4"/>
+                            <path d="M 70 90 Q 85 110 100 115 Q 115 110 130 90" fill="none" stroke="#FD79A8" stroke-width="2"/>
+                            <circle cx="85" cy="75" r="3" fill="#FD79A8"/>
+                            <circle cx="115" cy="75" r="3" fill="#FD79A8"/>
+                            <path d="M 80 95 Q 100 100 120 95" fill="none" stroke="#FD79A8" stroke-width="2"/>
+                            <text x="45" y="155" font-size="12" fill="#FD79A8">Ha ha ha!</text>
+                        </svg>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-number">8</div>
+                        <h3 class="lesson-title">Laughter & Neuroscience</h3>
+                        <p class="lesson-description">Laughter is far more complex than a response to jokes. It reveals emotional contagion and the brain's social machinery.</p>
+                        <div class="lesson-tags">
+                            <span class="tag key">Social Neuroscience</span>
+                            <span class="tag">Emotion</span>
+                            <span class="tag">Evolution</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 9 -->
+                <div class="lesson-card">
+                    <div class="lesson-visual">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="65" fill="none" stroke="#FDCB6E" stroke-width="2" opacity="0.4"/>
+                            <circle cx="100" cy="70" r="12" fill="#FDCB6E" opacity="0.6"/>
+                            <path d="M 100 82 Q 95 95 90 100" fill="none" stroke="#FDCB6E" stroke-width="2"/>
+                            <path d="M 100 82 Q 105 95 110 100" fill="none" stroke="#FDCB6E" stroke-width="2"/>
+                            <path d="M 90 100 L 80 130" fill="none" stroke="#FDCB6E" stroke-width="2"/>
+                            <path d="M 110 100 L 120 130" fill="none" stroke="#FDCB6E" stroke-width="2"/>
+                            <text x="30" y="160" font-size="11" fill="#FDCB6E">God Module?</text>
+                        </svg>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-number">9</div>
+                        <h3 class="lesson-title">The God Module</h3>
+                        <p class="lesson-description">Temporal lobe stimulation triggers profound spiritual experiences. Does the brain generate religious feelings, or does it perceive something real?</p>
+                        <div class="lesson-tags">
+                            <span class="tag key">Spirituality</span>
+                            <span class="tag">Temporal Lobe</span>
+                            <span class="tag">Philosophy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 10 -->
+                <div class="lesson-card">
+                    <div class="lesson-visual">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="65" fill="none" stroke="#0984E3" stroke-width="2" opacity="0.4"/>
+                            <rect x="60" y="70" width="80" height="60" fill="none" stroke="#0984E3" stroke-width="2"/>
+                            <text x="80" y="100" font-size="18" fill="#0984E3">?</text>
+                            <path d="M 100 130 L 100 160" stroke="#0984E3" stroke-width="2"/>
+                            <text x="75" y="180" font-size="11" fill="#0984E3">Qualia</text>
+                            <text x="70" y="195" font-size="11" fill="#0984E3">"What it's like"</text>
+                        </svg>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-number">10</div>
+                        <h3 class="lesson-title">Qualia & Consciousness</h3>
+                        <p class="lesson-description">The subjective feeling of red, the painfulness of pain. Qualia are the hard problem of consciousness—what explains the "what it's like-ness" of experience?</p>
+                        <div class="lesson-tags">
+                            <span class="tag key">Philosophy of Mind</span>
+                            <span class="tag">Phenomenology</span>
+                            <span class="tag">Mystery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 11 -->
+                <div class="lesson-card">
+                    <div class="lesson-visual">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="65" fill="none" stroke="#6C5CE7" stroke-width="2" opacity="0.4"/>
+                            <line x1="100" y1="40" x2="100" y2="160" stroke="#6C5CE7" stroke-width="3" opacity="0.5"/>
+                            <rect x="40" y="70" width="60" height="60" fill="#6C5CE7" opacity="0.2"/>
+                            <rect x="100" y="70" width="60" height="60" fill="none" stroke="#6C5CE7" stroke-width="2" stroke-dasharray="3,3"/>
+                            <text x="30" y="150" font-size="12" fill="#6C5CE7">Seen</text>
+                            <text x="115" y="150" font-size="12" fill="#6C5CE7">Ignored</text>
+                        </svg>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-number">11</div>
+                        <h3 class="lesson-title">Neglect Syndrome</h3>
+                        <p class="lesson-description">Patients ignore the entire left half of the world after right hemisphere injury. A profound dissociation between seeing and awareness.</p>
+                        <div class="lesson-tags">
+                            <span class="tag key">Spatial Awareness</span>
+                            <span class="tag">Hemispheric Neglect</span>
+                            <span class="tag ai">Attention Failure</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 12 -->
+                <div class="lesson-card">
+                    <div class="lesson-visual">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="65" fill="none" stroke="#DAA520" stroke-width="2" opacity="0.4"/>
+                            <ellipse cx="100" cy="100" rx="50" ry="60" fill="none" stroke="#DAA520" stroke-width="2" opacity="0.3"/>
+                            <ellipse cx="100" cy="100" rx="35" ry="45" fill="none" stroke="#DAA520" stroke-width="2" opacity="0.5"/>
+                            <circle cx="100" cy="100" r="15" fill="#DAA520" opacity="0.4"/>
+                            <text x="70" y="145" font-size="12" fill="#DAA520">Distorted</text>
+                            <text x="75" y="160" font-size="12" fill="#DAA520">Body Map</text>
+                        </svg>
+                    </div>
+                    <div class="lesson-content">
+                        <div class="lesson-number">12</div>
+                        <h3 class="lesson-title">The Homunculus</h3>
+                        <p class="lesson-description">The "little man" in the motor cortex. Proportionally distorted, revealing how the brain prioritizes different body parts for control.</p>
+                        <div class="lesson-tags">
+                            <span class="tag key">Sensorimotor Mapping</span>
+                            <span class="tag">Cortical Representation</span>
+                            <span class="tag">Neuroscience</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Lessons Section -->
+        <section id="detailed" class="lessons-container">
+            <h2 class="section-title">Deep Dive: Key Lessons Explained</h2>
+
+            <!-- Lesson 1 Deep Dive -->
+            <article class="detailed-lesson">
+                <h3>Phantom Limbs: The Ghost In The Machine</h3>
+
+                <p>
+                    One of Ramachandran's most famous patients is Tom. After a motorcycle accident amputated his left arm, Tom experienced excruciating pain shooting through fingers that no longer existed. Not metaphorical pain—real, intense, debilitating pain. For years, Tom lived with the sensation that his phantom hand was clenched into a fist, nails digging into the palm.
+                </p>
+
+                <div class="patient-story">
+                    <strong>Tom's Story:</strong> "The hand was always clenched. I could feel every fingernail digging into my palm. Sometimes the pain was so bad I wanted to die. I've tried everything—medications, surgery, psychotherapy—nothing worked. I wanted to cut off the stump because the pain was unbearable."
+                </div>
+
+                <p>
+                    The key insight is that phantom limb pain isn't imaginary—it's neuroscientifically real. The brain maintains a detailed body map in the somatosensory cortex, an area that creates your sense of where your body parts are and how they feel. When a limb is amputated, the map doesn't simply disappear. Instead, it becomes isolated—still active, still sending signals, but disconnected from reality.
+                </p>
+
+                <div class="experiment-box">
+                    <h4>Why Phantom Limb Pain Occurs</h4>
+                    <p>
+                        When an arm is amputated, the neurons in the somatosensory cortex that used to receive input from that arm become "orphaned." They don't get input from peripheral nerves anymore, so they begin spontaneously firing. The brain interprets this spontaneous activity as coming from the missing limb. Moreover, the body map can become "corrupted"—neurons encoding different sensations get cross-wired, so a light touch on the stump might feel like intense pressure in the phantom hand. The brain has literally lost its ability to accurately map the missing limb's position, so it defaults to extreme or unusual postures (like the famous clenched fist).
+                    </p>
+                </div>
+
+                <p>
+                    Phantom limb pain reveals a profound truth: <span class="highlight">your conscious experience of your body is not a direct reflection of your body, but a construction created by your brain.</span> The brain builds this construction using neural machinery that exists independently of sensory input. This realization underpins everything Ramachandran discovered about how the brain constructs the self.
+                </p>
+
+                <div class="wit-quote">
+                    "If you have a body and you're conscious, then you have a sense of where your body is and what it's doing. But that sense is a ghost. It's an image in the mind, not a direct perception of the real thing."
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Connection: Hallucinated Features in Neural Networks</h4>
+                    <p>
+                        Modern neural networks can "hallucinate" features that aren't in the input. A language model might confidently generate text about events that never happened. A vision model might detect objects that aren't there. In a sense, phantom limb pain is exactly this phenomenon occurring in biological neural networks. The brain's "training data" no longer includes input from the missing limb, but the neural pathways encoding the limb's presence still fire spontaneously. The network confidently outputs predictions (pain, position, sensation) for inputs that no longer exist. This is a biological neural network hallucinating a feature (the limb) that was once strongly represented in its weights but is no longer grounded in reality.
+                    </p>
+                </div>
+
+                <div class="cross-reference">
+                    <h4>Cross-References</h4>
+                    <ul>
+                        <li><em>Incognito</em> by David Eagleman - explores the hidden processes behind consciousness</li>
+                        <li><em>The Man Who Mistook His Wife for a Hat</em> by Oliver Sacks - similar case studies of neurological oddities</li>
+                        <li><em>Behave</em> by Robert Sapolsky - neurobiology of consciousness and body mapping</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Lesson 2 Deep Dive -->
+            <article class="detailed-lesson">
+                <h3>The Mirror Box: Fooling the Brain for Healing</h3>
+
+                <p>
+                    If phantom limb pain is caused by a disconnection between the brain's body map and actual sensory input, then Ramachandran's solution is elegant: give the brain the visual evidence it needs to recalibrate. Enter the mirror box—a simple cardboard box with a mirror down the middle that costs about five dollars to build.
+                </p>
+
+                <p>
+                    Here's how it works: The patient places their intact arm on one side of the mirror and the phantom limb stump on the other side. When they look down, the mirror reflects the intact arm, creating a perfect visual illusion that the phantom limb has returned. When the patient then moves their intact arm, they see their "phantom limb" moving—which violates the expectation that the phantom is frozen or clenched.
+                </p>
+
+                <div class="experiment-box">
+                    <h4>The Mirror Box Experiment</h4>
+                    <p>
+                        Ramachandran asked Tom to put his intact right arm on one side of the mirror and his amputated left arm stump on the other. "Now look in the mirror," Ramachandran said. Tom saw his right arm reflected as if it were his missing left arm. Then Ramachandran asked him to move both arms in mirror-image fashion. As Tom moved his right arm, he saw the reflected image moving in the mirror, which his brain interpreted as his left arm moving.
+                    </p>
+                    <p>
+                        <strong>The result:</strong> Tom immediately felt pain relief. For the first time in years, Tom felt his phantom hand unclench. The visual evidence that his arm could move again gave his brain permission to update its body map. Over time, with repeated sessions, the phantom pain diminished dramatically.
+                    </p>
+                </div>
+
+                <p>
+                    This is not placebo. This is the brain's fundamental need for consistency between different sensory streams. The visual input (seeing the arm move) contradicts the proprioceptive expectation (the arm should be clenched and immobile). The brain resolves this contradiction by recalibrating its body map. Visual input overrides proprioceptive expectations because vision has higher bandwidth and is more directly about the external world.
+                </p>
+
+                <div class="wit-quote">
+                    "The mirror box costs five dollars. You could charge $5,000 for it and it would still be a bargain compared to morphine drips and surgery. The brain is willing to be fooled because visual evidence is more reliable than pain signals from a missing limb."
+                </div>
+
+                <p>
+                    The mirror box reveals something profound about consciousness and healing: <span class="highlight">the brain is fundamentally a predictive, constructive organ that can be healed by changing its predictions about the world.</span> You don't have to wait for peripheral nerves to heal. You can directly update the brain's model. This insight has revolutionized pain management and rehabilitation after stroke and spinal injury.
+                </p>
+
+                <div class="ai-connection">
+                    <h4>AI Connection: Clever Prompt Engineering</h4>
+                    <p>
+                        The mirror box is a form of prompt engineering applied to biological neural networks. You're not changing the underlying architecture (the brain's body map still exists). You're changing the input (visual evidence) to manipulate the output (pain perception). Similarly, in modern AI, prompt engineering manipulates model outputs by carefully structuring inputs. Asking a language model "Let's think step-by-step" fundamentally changes its behavior without retraining. The mirror box is the biological equivalent: a simple input manipulation that cascades through the brain's entire inference process, causing it to recompute its predictions about the body.
+                    </p>
+                </div>
+            </article>
+
+            <!-- Lesson 3 Deep Dive -->
+            <article class="detailed-lesson">
+                <h3>Body Image & Brain Maps: The Homunculus Rules</h3>
+
+                <p>
+                    Your conscious sense of your body—where your limbs are, how they feel—isn't distributed evenly across the brain. Instead, there's a specific region, the somatosensory cortex, that contains a detailed map of your entire body. This map isn't proportional to your actual body. It's wildly distorted.
+                </p>
+
+                <p>
+                    If you were to draw a diagram of this neural representation, you'd get the famous "homunculus"—a grotesque little man with enormous lips and hands, a tiny torso, and barely any legs. This distortion isn't random. It reflects how much neural tissue is devoted to sensing each body part. Your lips and fingertips have dense sensory receptors and require lots of neural tissue to process their input. Your back, by contrast, is relatively insensate and gets minimal cortical representation.
+                </p>
+
+                <div class="experiment-box">
+                    <h4>The Penfield Homunculus</h4>
+                    <p>
+                        In the 1930s, neurosurgeon Wilder Penfield used electrical stimulation to map the somatosensory cortex during surgery. He'd touch a patient's finger and find the corresponding spot in the cortex that responded. Then he'd stimulate that spot electrically and ask patients where they felt the stimulation. By mapping hundreds of spots, Penfield created a complete topographic map of the body in the cortex. What emerged was shocking: the map was profoundly distorted. Fingers and lips were represented by enormous cortical regions, while the trunk and legs were squeezed into a tiny area.
+                    </p>
+                </div>
+
+                <p>
+                    The homunculus is more than just a curiosity—it explains why you're exquisitely sensitive to touch on your lips and fingertips but relatively insensate on your back. It also explains why facial pain can be so intense (the trigeminal nerve sends massive input to a large cortical region) while back pain, though severe, doesn't necessarily involve as much cortical tissue devoted to that region.
+                </p>
+
+                <p>
+                    Ramachandran discovered something even more interesting: this cortical map is not fixed. It's plastic. When a finger is lost or numbed, the cortical territory that used to represent it gets invaded by neighboring body parts. A person who loses a hand might find that stimulation to their face now produces sensations in the phantom hand. The brain reallocates cortical real estate.
+                </p>
+
+                <div class="wit-quote">
+                    "The brain doesn't care about your actual body. It cares about representing your functional body—the parts you use to interact with the world. Lips get more cortex than lower back because lips matter more for how you navigate reality."
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Connection: Neural Resource Allocation</h4>
+                    <p>
+                        The homunculus is an example of how biological neural networks allocate computational resources based on task importance. In transformer models, attention is distributed unevenly—some tokens get far more attention weight than others, creating a kind of computational "homunculus" where certain features are amplified while others are suppressed. The brain does the same thing: it dedicates more neural tissue to processing information from behaviorally important body parts. This isn't inefficient—it's optimal. It's the biological equivalent of using more parameters in your neural network for features that matter most to your loss function.
+                    </p>
+                </div>
+            </article>
+
+            <!-- Lesson 4 Deep Dive -->
+            <article class="detailed-lesson">
+                <h3>Anosognosia: When the Brain Lies to Itself</h3>
+
+                <p>
+                    Imagine waking up from a stroke and discovering that your left arm is completely paralyzed. You can't move it at all. Most people would be horrified. But some patients are not. They insist they can move their arm perfectly fine, even as neurologists watch them fail to lift it even a millimeter.
+                </p>
+
+                <p>
+                    This is anosognosia—the inability to recognize one's own disability. It's not a motivational problem. It's not denial in the psychological sense. It's a genuine neurological failure of self-perception, and it reveals something shocking about how the brain constructs its sense of self.
+                </p>
+
+                <div class="patient-story">
+                    <strong>A Classic Case:</strong> A patient with right-hemisphere stroke lies in bed, completely unable to move her left arm. The neurologist says, "Can you move your left arm?" The patient replies, "Of course I can." "Try moving it now," says the neurologist. The patient's arm doesn't move. "I just did," the patient insists. When shown her motionless arm, she invents an explanation: "My sister is holding my arm down." When the neurologist points out there's no one holding her arm, she generates another explanation: "I'm tired." Any contradiction between expectation and reality is met with a confabulation—a false explanation that preserves her sense of agency and control.
+                </div>
+
+                <p>
+                    Ramachandran's insight is that anosognosia isn't a failure of perception—it's a failure of comparison. The right hemisphere (which is more damaged in these cases) is specialized for noticing discrepancies between expected and actual sensory input. When the right hemisphere is damaged, the brain loses its ability to notice that the arm didn't move. The left hemisphere, which generates narratives and explanations, fills in the gap with a story that makes sense given the available information.
+                </p>
+
+                <div class="experiment-box">
+                    <h4>The Contradiction Test</h4>
+                    <p>
+                        Ramachandran performed a clever experiment. He showed a patient with anosognosia her arm and asked, "Is this your arm?" The patient said yes. He then asked, "Can you move this arm?" The patient said yes. He said, "Okay, I'm going to hold your arm and you try to move it." He held her arm immobile and asked her to try moving it. Her arm didn't move. He then asked, "Did you move your arm?" The patient replied, "Yes, I moved it." He asked, "Then why didn't it move?" The patient replied, "Because you were holding it down."
+                    </p>
+                    <p>
+                        The patient's brain had ample opportunity to notice the contradiction—the motor command should produce movement, but it didn't. Instead of updating her model (the arm is paralyzed), she updated her narrative (the experimenter is preventing movement). She's not being irrational. She's doing what her brain does best: generating explanations that preserve her sense of intentionality and agency.
+                    </p>
+                </div>
+
+                <p>
+                    Anosognosia is a window into the architecture of self-awareness. Your sense of agency—the feeling that you're in control of your body—is not based on direct sensory feedback from the periphery. It's based on a predictive model. The brain predicts what should happen when it sends a motor command, and it compares that prediction to actual sensory input. When they match, you feel in control. When they don't match, normally you update your model. But when the comparison mechanism is broken, you can't do that—so you update your narrative instead.
+                </p>
+
+                <div class="wit-quote">
+                    "The brain is a storytelling machine. When confronted with ambiguous evidence, it will generate any story, no matter how bizarre, to maintain narrative consistency. Anosognosia shows us that the brain prefers a consistent lie to an inconsistent truth."
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Connection: Confident Hallucination</h4>
+                    <p>
+                        Anosognosia is the biological version of what happens when a large language model hallucinates confidently. The model generates a response, and rather than updating its weights when confronted with contradictory evidence, it generates further responses to justify the original output. Just as the anosognosic patient confabulates explanations for her immobile arm, a language model will confabulate citations for false claims or confabulate justifications for nonsensical outputs. The brain and the model both suffer from the same fundamental problem: they commit to outputs and then rationalize them rather than updating their underlying models. This is why constitutional AI and techniques like RLHF (reinforcement learning from human feedback) try to detect when models are confabulating and retrain them to avoid it—trying to give the model something like a functioning right hemisphere that notices contradictions.
+                    </p>
+                </div>
+
+                <div class="cross-reference">
+                    <h4>Cross-References</h4>
+                    <ul>
+                        <li><em>Thinking, Fast and Slow</em> by Daniel Kahneman - explains cognitive biases and confabulation</li>
+                        <li><em>The Man Who Mistook His Wife for a Hat</em> by Oliver Sacks - other cases of neurological self-deception</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Lesson 5 Deep Dive -->
+            <article class="detailed-lesson">
+                <h3>Capgras Delusion: When Love Breaks From Recognition</h3>
+
+                <p>
+                    Imagine looking at your mother's face and recognizing it perfectly—you know exactly who she is—but simultaneously believing she's an impostor. Not because you doubt her identity, but because she feels wrong. She looks right, she sounds right, she says the things your mother would say, but there's an absence of the emotional warmth you should feel. Your brain concludes: this is an impostor wearing your mother's face.
+                </p>
+
+                <p>
+                    This is Capgras delusion, and it reveals that face recognition isn't a single unified process. It's two separate systems working in parallel: one that identifies who a person is, and another that registers the emotional significance of that person.
+                </p>
+
+                <div class="patient-story">
+                    <strong>Capgras Case Study:</strong> A patient after brain injury insisted his wife was an impostor. "She looks exactly like my wife, but she's not my wife. She's someone who looks like my wife and is pretending to be my wife." He wasn't delusional about her appearance—his visual recognition system was working fine. But his emotional system—the part of the brain that generates the feeling of familiarity and warmth—was disconnected from his recognition system. So he had perfect recognition without the emotional weight that should accompany recognition of a loved one.
+                </div>
+
+                <p>
+                    The neurological basis is becoming clear: the inferior temporal cortex recognizes faces, but the amygdala (which processes emotional significance) is disconnected from it. The patient can identify the face but doesn't feel the emotional resonance. The conscious mind notices this discrepancy and generates an explanation: the person is an impostor.
+                </p>
+
+                <div class="experiment-box">
+                    <h4>The Galvanic Skin Response Experiment</h4>
+                    <p>
+                        One of Ramachandran's most elegant experiments involved measuring the galvanic skin response (GSR)—a physiological measure of emotional arousal. He showed Capgras patients pictures of their loved ones and strangers while measuring their GSR. Normal people show a larger GSR response to pictures of loved ones than strangers—because the amygdala becomes active, causing emotional arousal, which affects skin conductivity. Capgras patients showed no difference in GSR between loved ones and strangers. Yet when explicitly asked, they could identify the loved one's face correctly. This proved that the problem wasn't face recognition—it was the emotional pathway. The amygdala simply wasn't responding to the face, even though the face was being recognized elsewhere in the brain.
+                    </p>
+                </div>
+
+                <p>
+                    What makes Capgras particularly interesting is that it's a conscious delusion built on a real neurological dissociation. The patient isn't hallucinating or losing their grip on reality. They're responding rationally to abnormal sensory input. Imagine if your sensory systems reported: "This face is your mother's AND something is deeply wrong." Most of us would conclude: "This is an impostor." The Capgras patient is making a logically sound inference given the broken sensory data they're receiving.
+                </p>
+
+                <div class="wit-quote">
+                    "The brain separates identity from emotional significance for a reason. You can admire someone's physical appearance while disliking them as a person. But when the separation becomes too extreme, the result is uncanny: someone who looks right but feels wrong."
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Connection: Face Recognition Failure with Preserved Emotional Loss</h4>
+                    <p>
+                        Modern face recognition systems excel at identifying faces but entirely lack emotional responses. They can tell you "this is person X" with high confidence, but they can't tell you how you should feel about person X. In a sense, every AI face recognition system is built in a Capgras-like state: perfect identification without emotional context. This is why AI-generated recommendations can feel uncanny—they're technically accurate but emotionally tone-deaf. Conversely, if you had an AI system that generated emotional responses to faces without properly identifying them, you'd get the opposite of Capgras: deep affection for faces you don't recognize. The Capgras delusion shows us that human social cognition requires both pathways working together. Separate them, and you get either a cold identifier or an emotionally attached stranger.
+                    </p>
+                </div>
+
+                <div class="cross-reference">
+                    <h4>Cross-References</h4>
+                    <ul>
+                        <li><em>The Man Who Mistook His Wife for a Hat</em> by Oliver Sacks - the title case has elements of visual agnosia</li>
+                        <li><em>Incognito</em> by David Eagleman - explores hidden neural systems and emotion</li>
+                        <li><em>Thinking, Fast and Slow</em> by Daniel Kahneman - heuristics and cognitive biases</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Lesson 6 Deep Dive -->
+            <article class="detailed-lesson">
+                <h3>Blindsight: Seeing Without Knowing You Can See</h3>
+
+                <p>
+                    When Ramachandran tested a patient with damage to the visual cortex (the primary visual processing area at the back of the brain), the patient reported complete blindness in that region. "I can't see anything," the patient insisted. Yet when Ramachandran placed an obstacle in the patient's blind field and asked him to walk across the room, the patient navigated around it perfectly. When asked how he did it, the patient was baffled. "I have no idea," he said truthfully. "I can't see anything there."
+                </p>
+
+                <p>
+                    This is blindsight: the ability to see without being conscious of seeing. It seems to violate everything we think we know about vision. How can you see if you don't know you can see?
+                </p>
+
+                <p>
+                    The answer involves understanding that the visual cortex isn't the only part of the brain that processes visual information. In fact, there are multiple visual systems—the primary visual cortex (which generates conscious visual experience) is just one of them. Other systems, particularly the superior colliculus and areas in the parietal cortex, also process visual information. They do so largely unconsciously, using the information for action and navigation rather than for conscious perception.
+                </p>
+
+                <div class="experiment-box">
+                    <h4>The Blindsight Experiment</h4>
+                    <p>
+                        A famous blindsight patient, DB, had a large tumor in his visual cortex removed. Afterward, he was blind in the left half of his visual field. Yet when researchers presented a light in his blind field and asked him to point to it, he did so accurately, claiming to be guessing. When asked to discriminate between horizontal and vertical lines in his blind field, he performed far better than chance, insisting he was just guessing. When presented with faces and houses, he could correctly categorize them, even though he reported seeing nothing. His brain was processing visual information, extracting meaning from it, and using that information to guide behavior—all without any conscious awareness.
+                    </p>
+                </div>
+
+                <p>
+                    Blindsight shatters a comfortable assumption: that consciousness is necessary for all intelligent behavior. An unconscious visual system can recognize faces, navigate obstacles, and extract meaningful information from the environment. Consciousness seems to be something extra—a reporting system that narrates what other parts of the brain are already doing.
+                </p>
+
+                <p>
+                    This raises a profound question: what is consciousness for if the brain can already see, recognize, and respond intelligently without it? Ramachandran's answer is that consciousness might be specialized for social communication and planning. It's the difference between navigating an obstacle course (which blindsight can do) and explaining to someone else how to navigate the course (which requires conscious access to the information).
+                </p>
+
+                <div class="wit-quote">
+                    "Your conscious visual experience isn't the only thing seeing. There's a whole other visual system inside your head that's watching the world, learning from it, and telling your body what to do—and you'll never know what it saw."
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Connection: Processing Without Attention</h4>
+                    <p>
+                        Blindsight is like a neural network with multiple processing pathways where only one pathway has "attention" applied to it. In transformer models, attention determines what gets processed deeply and what gets processed shallowly. You can have information being processed and used by the model without that information ever making it into the attention-weighted output. Blindsight patients have unconscious visual processing without conscious attention. Modern language models might extract semantic information from text without ever "attending" to it in the sense of making it part of the final output. Consciousness might be attention's echo—the subjective experience of what the attention mechanism is currently focused on.
+                    </p>
+                </div>
+
+                <div class="cross-reference">
+                    <h4>Cross-References</h4>
+                    <ul>
+                        <li><em>Incognito</em> by David Eagleman - explores the vast unconscious processing happening in the brain</li>
+                        <li><em>Thinking, Fast and Slow</em> by Daniel Kahneman - System 1 vs System 2 thinking</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Lesson 7 Deep Dive -->
+            <article class="detailed-lesson">
+                <h3>Synesthesia: When Senses Cross-Talk</h3>
+
+                <p>
+                    Some people taste colors. Others see music as geometric shapes. When they hear a trumpet, they see a particular shade of brown or a specific shape. This isn't poetic language or metaphor. For synesthetes, these cross-modal associations are as real and automatic as normal perception.
+                </p>
+
+                <p>
+                    Synesthesia demonstrates that the senses aren't sealed off from each other in the brain. They're connected by neural pathways that, in synesthetes, are unusually well-developed or fail to be pruned away during development. Each sensory system can tickle the other, creating genuine cross-modal experiences.
+                </p>
+
+                <p>
+                    The most common form is grapheme-color synesthesia: seeing specific colors when looking at letters or numbers. A synesthete might see the number 5 as always blue, and 7 as always red. This isn't learned or arbitrary—it's consistent across their lifetime. And it's not a choice. The color appears automatically when they see the number.
+                </p>
+
+                <div class="experiment-box">
+                    <h4>Testing Synesthesia</h4>
+                    <p>
+                        To test whether synesthetes were genuinely experiencing colors or just reporting what they expected, Ramachandran conducted a clever visual search experiment. He showed synesthetes an array of numbers, some of which (say, all the 5s) should appear the same color due to synesthesia, while others appeared in different colors. In normal people, finding one color among many colors is hard—it requires scanning. But for synesthetes, the 5s (which all appeared blue to them) popped out effortlessly. Their visual search was faster than normal people's, suggesting they were genuinely perceiving colors, not just reporting expectations. Brain imaging confirmed that the color-processing region of the brain was activated by numbers in synesthetes, even though numbers don't normally activate color-processing regions.
+                    </p>
+                </div>
+
+                <p>
+                    Why is synesthesia interesting? Because it reveals the modularity of the brain. The sensory systems aren't unified. They're separate modules that normally don't communicate directly, but in synesthetes, connections that exist in all of us are just much stronger. You might have latent synesthesia—connections between modules that don't normally activate. But through learning or practice, you might strengthen them (this is sometimes called acquired synesthesia).
+                </p>
+
+                <p>
+                    Synesthesia also raises questions about qualia—the subjective feel of experience. When a synesthete sees a number as blue, are they having the same experience as someone with normal color vision seeing blue? Or is synesthetic color a different kind of experience entirely? We can't know because we can't directly access other people's subjective experiences.
+                </p>
+
+                <div class="wit-quote">
+                    "We assume everyone sees red the same way. But synesthetes prove that the senses can connect in completely different ways. Your neighbor might be seeing a symphony of colors when they hear music, and you'd never know."
+                </div>
+
+                <div class="ai-connection">
+                    <h4>AI Connection: Cross-Modal Neural Connections</h4>
+                    <p>
+                        Synesthesia is what happens when cross-modal connections in neural networks are particularly strong. In multimodal AI systems that process text and images together, information flows between the text embedding space and the image embedding space. The connections between these spaces determine the model's cross-modal understanding. If you had an image-text model where the connections between the visual color-processing region and the language embedding for numbers were abnormally strong, the model would develop a kind of artificial synesthesia: it would consistently associate certain numbers with certain colors. Synesthetes reveal that the human brain can develop these kinds of abnormal inter-modal connections naturally, suggesting that human cross-modal understanding might rely on relatively strong connections between normally-modular processing systems.
+                    </p>
+                </div>
+
+                <div class="cross-reference">
+                    <h4>Cross-References</h4>
+                    <ul>
+                        <li><em>Thinking, Fast and Slow</em> by Daniel Kahneman - memory and sensory associations</li>
+                        <li><em>GEB: Gödel, Escher, Bach</em> by Douglas Hofstadter - explores cross-domain mappings and consciousness</li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+
+        <!-- AI & Cross-Book Connections -->
+        <section id="connections" class="lessons-container">
+            <h2 class="section-title">AI & Cross-Book Connections</h2>
+
+            <article class="detailed-lesson">
+                <h3>How Phantoms in the Brain Speaks to Modern AI</h3>
+
+                <p>
+                    The neurological phenomena Ramachandran describes in <em>Phantoms in the Brain</em> aren't just fascinating oddities. They're windows into fundamental principles that also apply to modern artificial intelligence. When we build neural networks, we're often unknowingly replicating the same architectural and computational principles that the brain uses—and sometimes replicating its failures as well.
+                </p>
+
+                <h4>Hallucination as Phantom Sensation</h4>
+                <p>
+                    When a language model generates false information with high confidence, we call it hallucination. But this is exactly what happens in phantom limb pain: the brain's prediction systems are firing in the absence of real sensory input, and the brain experiences these predictions as genuine sensations. A language model hallucinating a citation is like the brain hallucinating pain from a phantom limb. Both are cases of the system's generative mechanisms firing without grounding in external reality.
+                </p>
+
+                <h4>Mirror Box as Prompt Engineering</h4>
+                <p>
+                    The mirror box is fundamentally a form of input manipulation that changes system behavior without changing the system's underlying architecture. This is exactly what prompt engineering does: by carefully structuring the input (the prompt), we manipulate the model's behavior without fine-tuning or retraining. Both are examples of exploiting how neural systems rely on sensory/informational input to construct their outputs. Both show that you don't need to rewire the system—you just need to give it the right input to recalibrate its predictions.
+                </p>
+
+                <h4>Anosognosia as Confident Confabulation</h4>
+                <p>
+                    Anosognosia is confabulation at the neurological level. When confronted with contradiction, the system generates explanations rather than updating its model. This is exactly what language models do when their initial outputs are contradicted: they generate further text to justify the original output rather than acknowledging the error. The parallel is exact: both systems commit to outputs and then rationalize them.
+                </p>
+
+                <h4>Capgras as Facial Recognition Without Emotional Context</h4>
+                <p>
+                    Every current facial recognition system is operating in a Capgras-like state: it can identify faces perfectly but has no emotional context. This is fine for security applications, but it means the system is fundamentally alien—it recognizes you without knowing what you mean to it. Real human social cognition requires both recognition and emotional significance. Systems that separate these are missing the emotional bandwidth that makes recognition meaningful.
+                </p>
+
+                <h4>Blindsight as Unconscious Processing</h4>
+                <p>
+                    Most of what neural networks do is unconscious in the sense that only the final output is "attended to." The billions of internal computations happen below the threshold of what we observe. Blindsight suggests that consciousness is not necessary for intelligent behavior—only for reporting on that behavior. An AI system might be doing intelligent visual processing on every pixel of input without any of that processing being accessible to its output stream.
+                </p>
+
+                <h4>Synesthesia as Cross-Modal Connectivity</h4>
+                <p>
+                    Multimodal AI systems (systems that process text and images together) naturally develop cross-modal associations. If these associations become too strong, you get artificial synesthesia: the model overly mapping features from one modality onto another. Synesthesia in humans suggests that the brain is fundamentally a multimodal system where information flows between specialized processors, and anomalies in these connections produce strange experiences.
+                </p>
+            </article>
+
+            <article class="detailed-lesson">
+                <h3>Reading These Books Together</h3>
+
+                <p>
+                    <em>Phantoms in the Brain</em> is part of a larger intellectual conversation about consciousness, neuroscience, and mind. Reading it alongside these books creates a rich web of understanding:
+                </p>
+
+                <div class="cross-reference">
+                    <h4>Essential Companion Readings</h4>
+                    <ul>
+                        <li><strong>The Man Who Mistook His Wife for a Hat</strong> by Oliver Sacks - Similar case studies of neurological oddities, written with profound empathy. Where Ramachandran asks "how does the brain do this?", Sacks asks "what is it like to experience this?" Together, they give you the full picture.</li>
+                        <li><strong>Incognito</strong> by David Eagleman - Explores the vast unconscious processing that determines behavior. Ramachandran focuses on what breaks; Eagleman explores the normal hidden architecture. Together, they explain what consciousness is and what it's not.</li>
+                        <li><strong>Thinking, Fast and Slow</strong> by Daniel Kahneman - Explains cognitive biases and heuristics. Many of Ramachandran's phenomena (anosognosia, confabulation) are extreme cases of normal cognitive processes that Kahneman describes with data from experiments on typical people.</li>
+                        <li><strong>GEB: Gödel, Escher, Bach</strong> by Douglas Hofstadter - A meditation on self-reference, strange loops, and consciousness. Hofstadter asks "what allows a physical system to become aware of itself?" Ramachandran shows what happens when that self-awareness breaks down in specific ways.</li>
+                        <li><strong>Behave</strong> by Robert Sapolsky - Provides the evolutionary and hormonal context for behavior. Ramachandran's patients have brain damage; Sapolsky explains how normal brains developed and why they work the way they do.</li>
+                    </ul>
+                </div>
+
+                <p>
+                    Together, these five books form a complete picture of the human mind:
+                </p>
+
+                <p>
+                    <strong>Ramachandran</strong> shows you what the mind looks like when it breaks—the pathology reveals the architecture. <strong>Sacks</strong> shows you what it's like to have the mind break—the phenomenology of neurological disorders. <strong>Eagleman</strong> shows you what's happening in normal brains that you never notice—the unconscious machinery. <strong>Kahneman</strong> shows you how that machinery makes predictable errors—the systematic biases. <strong>Hofstadter</strong> shows you why self-reference is necessary for consciousness—the meta-level architecture. <strong>Sapolsky</strong> shows you where it all came from evolutionarily and hormonally—the deep history.
+                </p>
+
+                <p>
+                    Start with Ramachandran's <em>Phantoms in the Brain</em> for the shock of recognition—the "wow, the brain is weird" feeling. Move to Sacks for the humanity. Then Eagleman for the unconscious machinery. Kahneman for understanding your own biases. Hofstadter for the philosophical vertigo. Sapolsky for the evolutionary perspective. By the end, you'll have a coherent picture of what the mind is, how it works, what goes wrong, and why consciousness feels the way it does.
+                </p>
+            </article>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3>Phantoms in the Brain: Illustrated Guide</h3>
+            <p><strong>Author:</strong> V.S. Ramachandran</p>
+            <p><strong>Focus:</strong> Neuroscience, neurological case studies, consciousness, perception, pain, disability</p>
+
+            <div class="divider"></div>
+
+            <p>This comprehensive illustrated guide explores twelve profound lessons about how the brain constructs reality, especially through the lens of neurological disorders that reveal hidden mental architecture.</p>
+            <p>Discover phantom limbs, the mirror box solution, anosognosia, Capgras delusion, blindsight, synesthesia, and the hard problem of consciousness itself.</p>
+
+            <div class="divider"></div>
+
+            <p style="font-size: 0.9rem; opacity: 0.8;">
+                Created with Inter + Playfair Display fonts • Teal, Coral, Purple color palette • 2026
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

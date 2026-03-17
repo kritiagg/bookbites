@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Selfish Gene by Richard Dawkins — Illustrated Comprehensive Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* COVER SECTION */
+        .cover {
+            background: linear-gradient(135deg, var(--forest) 0%, var(--teal) 50%, var(--deep-blue) 100%);
+            border-radius: 20px;
+            padding: 80px 40px;
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M100,10 Q110,50 100,100 Q110,150 100,190 M100,10 Q90,50 100,100 Q90,150 100,190" stroke="white" stroke-width="2" fill="none"/><circle cx="100" cy="30" r="6" fill="white"/><circle cx="100" cy="60" r="6" fill="white"/><circle cx="100" cy="90" r="6" fill="white"/><circle cx="100" cy="120" r="6" fill="white"/><circle cx="100" cy="150" r="6" fill="white"/><circle cx="100" cy="180" r="6" fill="white"/><path d="M80,30 Q100,40 120,30 M80,60 Q100,70 120,60 M80,90 Q100,100 120,90 M80,120 Q100,130 120,120 M80,150 Q100,160 120,150 M80,180 Q100,190 120,180" stroke="white" stroke-width="1.5" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .cover .author {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            font-weight: 300;
+        }
+
+        .cover .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        /* LESSON CARDS */
+        .lesson {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lesson:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .lesson-header {
+            padding: 30px;
+            color: white;
+            font-size: 1.8em;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .lesson-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .lesson-inner {
+            padding: 40px;
+        }
+
+        .lesson-inner p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        .lesson-inner strong {
+            color: var(--dark-purple);
+        }
+
+        /* COLOR SCHEMES FOR LESSONS */
+        .lesson-1 .lesson-header { background: linear-gradient(135deg, var(--forest) 0%, var(--teal) 100%); }
+        .lesson-2 .lesson-header { background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sky) 100%); }
+        .lesson-3 .lesson-header { background: linear-gradient(135deg, var(--warm-red) 0%, var(--coral) 100%); }
+        .lesson-4 .lesson-header { background: linear-gradient(135deg, var(--dark-purple) 0%, var(--purple) 100%); }
+        .lesson-5 .lesson-header { background: linear-gradient(135deg, var(--forest) 0%, var(--mint) 100%); }
+        .lesson-6 .lesson-header { background: linear-gradient(135deg, var(--deep-blue) 0%, var(--teal) 100%); }
+        .lesson-7 .lesson-header { background: linear-gradient(135deg, var(--warm-red) 0%, var(--orange) 100%); }
+        .lesson-8 .lesson-header { background: linear-gradient(135deg, var(--dark-purple) 0%, var(--pink) 100%); }
+        .lesson-9 .lesson-header { background: linear-gradient(135deg, var(--forest) 0%, var(--deep-blue) 100%); }
+        .lesson-10 .lesson-header { background: linear-gradient(135deg, var(--coral) 0%, var(--orange) 100%); }
+        .lesson-11 .lesson-header { background: linear-gradient(135deg, var(--purple) 0%, var(--teal) 100%); }
+        .lesson-12 .lesson-header { background: linear-gradient(135deg, var(--dark) 0%, var(--dark-purple) 100%); }
+
+        /* BOXES */
+        .card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 5px solid var(--dark);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .card-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--sunny) 100%);
+            border-left: 5px solid var(--orange);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--dark);
+            font-size: 1.1em;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 3em;
+            opacity: 0.2;
+            position: absolute;
+            margin-left: -20px;
+            margin-top: -15px;
+        }
+
+        .quote-author {
+            margin-top: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+            text-align: right;
+            color: var(--dark);
+            font-style: normal;
+        }
+
+        .funny-box {
+            background: linear-gradient(135deg, #fff4f4 0%, #ffe0e0 100%);
+            border-left: 5px solid var(--pink);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            border-top: 3px solid var(--pink);
+        }
+
+        .funny-box .card-label {
+            color: var(--pink);
+        }
+
+        .ai-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #b3e5fc 100%);
+            border-left: 5px solid var(--deep-blue);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .ai-box .card-label {
+            color: var(--deep-blue);
+        }
+
+        .connect-box {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-left: 5px solid var(--purple);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .connect-box .card-label {
+            color: var(--purple);
+        }
+
+        /* STORY SECTIONS */
+        .story {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff0d9 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 25px 0;
+            border: 2px solid var(--orange);
+        }
+
+        .story-inner h4 {
+            color: var(--warm-red);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .story-inner p {
+            margin-bottom: 15px;
+        }
+
+        /* CHEATSHEET */
+        .cheatsheet {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 25px 0;
+            border: 2px dashed var(--deep-blue);
+        }
+
+        .cheatsheet-inner h4 {
+            color: var(--deep-blue);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .cheatsheet-inner ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cheatsheet-inner li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .cheatsheet-inner li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--deep-blue);
+            font-weight: bold;
+        }
+
+        /* TWO COLUMN */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 700px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .two-col-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 4px solid var(--teal);
+        }
+
+        .two-col-item h5 {
+            color: var(--dark-purple);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        /* ILLUSTRATION CONTAINER */
+        .illustration-container {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f7fa 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 25px 0;
+            text-align: center;
+            border: 2px solid var(--teal);
+        }
+
+        .illustration-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .illustration-label {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        /* TABLE OF CONTENTS */
+        .toc {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .toc h2 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+        }
+
+        .toc ol {
+            padding-left: 30px;
+        }
+
+        .toc li {
+            margin-bottom: 12px;
+            font-weight: 500;
+            color: var(--dark-purple);
+        }
+
+        /* PARTICLES */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--dark);
+            font-size: 0.9em;
+            margin-top: 60px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--dark);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: var(--dark-purple);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: var(--dark);
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        h5 {
+            color: var(--dark-purple);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: var(--deep-blue);
+            text-decoration: none;
+            border-bottom: 2px solid var(--sky);
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--warm-red);
+            border-bottom-color: var(--coral);
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .definition {
+            background: #f0f9ff;
+            padding: 15px;
+            border-left: 4px solid var(--deep-blue);
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .key-insight {
+            background: #fffacd;
+            padding: 15px;
+            border-left: 4px solid var(--orange);
+            margin: 15px 0;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- COVER -->
+    <div class="cover">
+        <h1>The Selfish Gene</h1>
+        <p class="author">by Richard Dawkins</p>
+        <p class="subtitle">A Revolutionary Gene-Centered View of Evolution, from Replicators to Memes</p>
+    </div>
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc">
+        <h2>Contents</h2>
+        <ol>
+            <li>The Gene-Centered View of Evolution: Organisms as "Survival Machines"</li>
+            <li>The Replicator: What Started It All in the Primordial Soup</li>
+            <li>The Selfish Gene Metaphor: Not Conscious, Just Behaving AS IF Selfish</li>
+            <li>Evolutionarily Stable Strategies (ESS): Game Theory Meets Biology</li>
+            <li>Kin Selection & Hamilton's Rule (rb > c): Why Relatives Matter</li>
+            <li>Reciprocal Altruism & Tit-for-Tat: The Prisoner's Dilemma in Nature</li>
+            <li>The Battle of the Sexes: Parental Investment Theory</li>
+            <li>Memes: Ideas as Replicators (Dawkins Invented This Concept)</li>
+            <li>The Extended Phenotype: Genes Shaping the World Beyond Bodies</li>
+            <li>Arms Races in Nature: When Evolution Becomes Competition</li>
+            <li>The Paradox of Altruism: Why Selfishness Produces Cooperation</li>
+            <li>Why "Survival of the Fittest" Is Misleading: The Real Replicator Story</li>
+        </ol>
+    </div>
+
+    <!-- LESSON 1: Gene-Centered View -->
+    <div class="lesson lesson-1">
+        <div class="lesson-header">
+            <div class="lesson-number">1</div>
+            <div>The Gene-Centered View: Organisms as "Survival Machines"</div>
+        </div>
+        <div class="lesson-inner">
+            <p>The central insight of <em>The Selfish Gene</em> is a complete inversion of how we think about evolution. <strong>Genes are the primary unit of selection, not organisms.</strong> You are not the "purpose" of evolution—you are a temporary survival machine built by genes to ensure their own replication.</p>
+
+            <p>Dawkins challenges the traditional organism-centered view of evolution. We've always thought: "Why do genes exist? To build organisms. Why do organisms exist? To survive and reproduce." But Dawkins flips this: "Why do organisms exist? To replicate genes. Why do genes exist? Because they're good at replicating."</p>
+
+            <div class="key-insight">
+                <strong>Key Insight:</strong> The gene is the unit of selection because it's the thing that gets copied, recombined, and passed down. A gene that builds an organism that fails to reproduce doesn't get passed on—but a gene that builds an organism that succeeds will be copied millions of times over.
+            </div>
+
+            <div class="quote-box">
+                "A gene could be said to be 'selfish' if it tends to promote its own survival and replication. The phenotype of a gene is anything that the gene influences... The survival machines that exist today are the genes' way of securing the means to replicate themselves."
+                <div class="quote-author">— Richard Dawkins</div>
+            </div>
+
+            <h4>Why This Matters</h4>
+            <p>This perspective explains behaviors that seem "altruistic" at first glance. A mother bird feeding her chicks isn't doing it out of love (in an evolutionary sense)—her genes built her brain in such a way that she will die protecting her offspring because those offspring carry copies of her genes. The bird is a machine, and maternal instinct is the programming.</p>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🧬 Example: The Peacock's Tail</h4>
+                    <p>A peacock's tail is absurdly large and cumbersome—it makes flying harder and predators easier to spot. From an organism-centered view, this is evolutionary suicide. From a gene-centered view, it's a signal: "I'm so genetically fit that I can afford to carry this massive handicap and still survive." Genes that build peacocks with impressive tails get copied more often because they're signals of genetic quality. The gene doesn't "care" about the peacock's survival—it cares about being copied.</p>
+                </div>
+            </div>
+
+            <h4>The Three-Level Hierarchy</h4>
+            <div class="two-col">
+                <div class="two-col-item">
+                    <h5>Genes (Replicators)</h5>
+                    <p>The things that get copied. They're selfish in the sense that they replicate when conditions are favorable.</p>
+                </div>
+                <div class="two-col-item">
+                    <h5>Organisms (Vehicles)</h5>
+                    <p>The machines built by genes. They survive and reproduce, creating opportunities for gene replication.</p>
+                </div>
+                <div class="two-col-item">
+                    <h5>Groups</h5>
+                    <p>Collections of organisms. Groups don't replicate—genes and organisms do—so group-level selection is generally weak.</p>
+                </div>
+            </div>
+
+            <div class="ai-box">
+                <div class="card-label">🤖 AI CONNECTION</div>
+                <p><strong>Neural Networks as Replicators:</strong> Just as genes replicate in biology, neural network weights replicate in machine learning. A model trained on a dataset produces weights that "replicate" when the model is deployed, fine-tuned, or used as a backbone. The "organism" is the model, and the "vehicle" is the hardware it runs on. Evolution in AI is not biological but informational.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h4>Lesson 1 Cheatsheet</h4>
+                    <ul>
+                        <li>Genes, not organisms, are the primary unit of selection</li>
+                        <li>Organisms are "survival machines" built to replicate genes</li>
+                        <li>A behavior is "selected for" if it increases gene replication</li>
+                        <li>This explains seemingly altruistic behaviors (motherhood, sacrifice)</li>
+                        <li>The peacock's tail: a gene-centered view explains evolutionary "waste"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 2: The Replicator -->
+    <div class="lesson lesson-2">
+        <div class="lesson-header">
+            <div class="lesson-number">2</div>
+            <div>The Replicator: What Started It All in the Primordial Soup</div>
+        </div>
+        <div class="lesson-inner">
+            <p>Before genes, before DNA, before even life itself, there were <strong>replicators</strong>: simple molecular patterns that could make copies of themselves. Dawkins argues that the origin of life wasn't some magical moment—it was the moment the first replicator appeared and began spreading through the primordial soup.</p>
+
+            <h4>The Properties of a Replicator</h4>
+            <p>A replicator must have three properties:</p>
+            <div class="two-col">
+                <div class="two-col-item">
+                    <h5>Longevity</h5>
+                    <p>The replicator must be stable enough to exist for some period of time. It can't fall apart immediately.</p>
+                </div>
+                <div class="two-col-item">
+                    <h5>Fecundity</h5>
+                    <p>The replicator must be able to make copies of itself. The faster it copies, the more successful it will be.</p>
+                </div>
+                <div class="two-col-item">
+                    <h5>Accuracy</h5>
+                    <p>Copies must be reasonably accurate. Too many mutations and the design is lost; too few and evolution can't happen.</p>
+                </div>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🧪 The Primordial Soup Scenario</h4>
+                    <p>Imagine the early Earth: organic molecules like amino acids are forming in the atmosphere and oceans. Occasionally, by pure chance, a molecule forms that has an interesting property: it can catalyze the formation of copies of itself. This molecule spreads. Some copies are imperfect. Most imperfect copies replicate slower or less accurately, and die out. But some imperfect copies replicate <em>faster</em>. These spread. This is evolution before life.</p>
+                    <p>Eventually, a replicator becomes so good at copying itself that it builds a protective "vehicle" around itself—a cell. The replicator (DNA) is now inside a machine (the cell) that helps it replicate. Life has emerged.</p>
+                </div>
+            </div>
+
+            <h4>DNA: The Ultimate Replicator</h4>
+            <p>DNA is the most successful replicator we know of. It:</p>
+            <ul>
+                <li><strong>Replicates with high accuracy</strong> (error rate ~1 in 10 billion)</li>
+                <li><strong>Builds vehicles</strong> (organisms) that help it spread</li>
+                <li><strong>Mutates just enough</strong> to allow evolution but not so much that function is lost</li>
+                <li><strong>Combines</strong> with other DNA sequences in sexual reproduction, creating variation</li>
+            </ul>
+
+            <div class="quote-box">
+                "The replicator was probably not DNA itself, but some smaller molecule... a primitive replicator must have been a fairly simple thing. Maybe it was a single-stranded chain of a nucleic acid—a sort of primitive DNA."
+                <div class="quote-author">— Richard Dawkins</div>
+            </div>
+
+            <div class="funny-box">
+                <div class="card-label">😄 FUNNY TAKE</div>
+                <p><strong>You Are a Replicator's Hotel:</strong> Your body is basically a 5-star resort for DNA. You were born, you provide food, shelter, protection, and entertainment for your genes. After about 70-80 years, you check out, and your genes check into the next guest (your children). The hotel chain (the species) keeps going. You think you're the guest? You're the bellhop.</p>
+            </div>
+
+            <div class="ai-box">
+                <div class="card-label">🤖 AI CONNECTION</div>
+                <p><strong>Code as Replicator:</strong> Software code is a replicator. It copies perfectly (deterministically), spreads via networks, and mutates through updates and bugs. Open-source projects "reproduce" when developers fork them. Memes are replicators in the information space. LLM training data contains replicating patterns—memes that spread because they're copied more often.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h4>Lesson 2 Cheatsheet</h4>
+                    <ul>
+                        <li>A replicator needs: longevity, fecundity (copying ability), accuracy</li>
+                        <li>The first replicators emerged in the primordial soup by chance</li>
+                        <li>DNA is the most successful replicator known to exist</li>
+                        <li>Organisms are vehicles built by replicators to aid replication</li>
+                        <li>Evolution begins the moment replicators with different copying rates exist</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 3: The Selfish Gene Metaphor -->
+    <div class="lesson lesson-3">
+        <div class="lesson-header">
+            <div class="lesson-number">3</div>
+            <div>The Selfish Gene Metaphor: Not Conscious, Just AS IF Selfish</div>
+        </div>
+        <div class="lesson-inner">
+            <p>This is the most misunderstood part of Dawkins' work. When he says genes are "selfish," he does <em>not</em> mean they are conscious, scheming, or morally wrong. <strong>"Selfish" is a metaphor.</strong> A gene behaves "AS IF" it's trying to replicate itself, but it's just following the laws of chemistry and probability.</p>
+
+            <h4>What "Selfish Gene" Actually Means</h4>
+            <p>A gene is "selfish" if it increases its own replication at the expense of other genes or even the organism that carries it. This isn't malicious—it's just mathematics. If Gene A builds a phenotype that replicates faster than Gene B, then Gene A will spread. Gene A is "selfish" in the same way that a river is "selfish" for flowing downhill—it's not making a choice; it's following the path of least resistance.</p>
+
+            <div class="definition">
+                <strong>Selfish Gene (precise definition):</strong> A gene that behaves in a way that increases its own replication rate, regardless of whether this benefits or harms the organism, other genes, or society.
+            </div>
+
+            <h4>The Problem with Anthropomorphism</h4>
+            <p>Critics claim Dawkins is attributing human emotions to genes. But he's not. He's describing a pattern: genes that happen to replicate faster will be more common in the future. No intention required. It's like saying "selfish" atoms spread more easily than "altruistic" atoms—the metaphor describes the outcome, not the mechanism.</p>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🦟 Example: The Medusa Gene</h4>
+                    <p>Some parasitic genes make female insects produce only female offspring. This is "selfish" because it spreads the gene (which travels through daughters) but harms the population (no males to reproduce with). The gene doesn't "want" to do this—it's just a copying pattern that happens to spread. From the organism's perspective, this is suicidal. From the gene's perspective, it's perfectly rational.</p>
+                </div>
+            </div>
+
+            <div class="funny-box">
+                <div class="card-label">😄 FUNNY TAKE</div>
+                <p><strong>Genes Are Like Bad Roommates:</strong> A selfish roommate doesn't explicitly think "I will maximize my comfort at the expense of the common good." They just naturally take the bigger bedroom, use more hot water, and leave dishes in the sink. They're selfish not by intention but by nature. Genes are like this—they don't scheme, they just replicate when conditions are favorable.</p>
+            </div>
+
+            <div class="quote-box">
+                "A gene could be said to be 'selfish' if it tends to promote its own survival and replication... The important word is not 'selfish' but 'gene'. A gene has no foresight and no motivation... It just replicates or doesn't replicate according to physical laws."
+                <div class="quote-author">— Richard Dawkins</div>
+            </div>
+
+            <h4>Why This Matters for Understanding Evolution</h4>
+            <p>The metaphor helps us see that evolution is <em>not</em> about the survival or happiness of organisms or species. Evolution is about patterns that replicate. A gene that makes you miserable but increases your fertility will spread. A gene that makes you happy but decreases your fertility will disappear. Evolution optimizes for replication, not for well-being.</p>
+
+            <div class="ai-box">
+                <div class="card-label">🤖 AI CONNECTION</div>
+                <p><strong>Objective Functions as Selfish Replicators:</strong> In machine learning, we optimize for specific objective functions (loss minimization, reward maximization, etc.). These functions are "selfish" in the sense that they pursue their goal regardless of broader consequences. An AI trained to maximize engagement might spread misinformation because engagement metrics don't care about truth. The algorithm isn't "evil"—it's just optimizing for its objective function, just like genes optimize for replication.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h4>Lesson 3 Cheatsheet</h4>
+                    <ul>
+                        <li>"Selfish" is a metaphor describing replication patterns, not morality</li>
+                        <li>A gene is selfish if it increases its own replication rate</li>
+                        <li>This can harm the organism, other genes, or the population</li>
+                        <li>No conscious intention is required</li>
+                        <li>Evolution optimizes for replication, not well-being</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 4: Evolutionarily Stable Strategies (ESS) -->
+    <div class="lesson lesson-4">
+        <div class="lesson-header">
+            <div class="lesson-number">4</div>
+            <div>Evolutionarily Stable Strategies (ESS): Game Theory Meets Biology</div>
+        </div>
+        <div class="lesson-inner">
+            <p>How do conflicts between selfish genes get resolved? Through <strong>Evolutionarily Stable Strategies (ESS)</strong>—essentially, Nash equilibria in evolutionary biology. An ESS is a strategy that, if adopted by most of a population, cannot be invaded by a mutant strategy.</p>
+
+            <h4>What Makes a Strategy "Stable"?</h4>
+            <p>A strategy is evolutionarily stable if:</p>
+            <ul>
+                <li>It performs well against itself (when most organisms use it)</li>
+                <li>It's hard to invade (a rare mutant strategy using a different approach does worse against the stable strategy than stable organisms do)</li>
+            </ul>
+
+            <div class="definition">
+                <strong>ESS (precise definition):</strong> A strategy such that if most members of a population adopt it, no rare alternative strategy can spread because it would perform worse against the established strategy than the established strategy performs against itself.
+            </div>
+
+            <h4>The Hawk-Dove Game</h4>
+            <p>Imagine animals competing for a resource worth 50 units of fitness. They can either:</p>
+            <ul>
+                <li><strong>Hawk:</strong> Fight aggressively. Win (cost 0) against a Dove, but lose (cost -100) against another Hawk.</li>
+                <li><strong>Dove:</strong> Display and retreat if challenged. Win against a Dove (cost 0), but lose against a Hawk (cost 0 because you retreat before injury).</li>
+            </ul>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🦅 The Hawk-Dove Payoff Matrix</h4>
+                    <p><strong>If you meet a Hawk:</strong></p>
+                    <ul>
+                        <li>Hawk vs Hawk: You fight, you win 50% of the time (+25), lose 50% of the time (-100). Average: -37.5</li>
+                        <li>Dove vs Hawk: You retreat immediately (+0)</li>
+                    </ul>
+                    <p><strong>If you meet a Dove:</strong></p>
+                    <ul>
+                        <li>Hawk vs Dove: You win (+50)</li>
+                        <li>Dove vs Dove: You split the resource (+25)</li>
+                    </ul>
+                    <p>The ESS is a <strong>mixed strategy:</strong> about 7/12 Hawks and 5/12 Doves. If more Hawks appear, Doves do well (they face mostly Hawks and avoid conflict). If more Doves appear, Hawks do well (they face mostly Doves and win). The population oscillates around the equilibrium.</p>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                "An evolutionarily stable strategy is a strategy such that, if most members of a population adopt it, no rare alternative strategy can spread because it would do worse against the established strategy than the established strategy does against itself."
+                <div class="quote-author">— Richard Dawkins</div>
+            </div>
+
+            <h4>Real Examples of ESS</h4>
+            <ul>
+                <li><strong>Sex Ratio:</strong> In most species, ~50% male, 50% female. If more females are born, males become rarer and more reproductively valuable. Parents who produce sons do better, so the ratio returns to 50-50.</li>
+                <li><strong>Parental Investment:</strong> Who cares for offspring? In birds, male and female must both invest (ESS). In mammals, females invest heavily (males can abandon and reproduce again). The ESS depends on the biology.</li>
+                <li><strong>Territory Size:</strong> How large should an animal's territory be? Too small and it starves; too large and it wastes energy defending it. The ESS is a balance that depends on food density and predation risk.</li>
+            </ul>
+
+            <div class="ai-box">
+                <div class="card-label">🤖 AI CONNECTION</div>
+                <p><strong>Nash Equilibria in Multi-Agent RL:</strong> ESS is literally a Nash equilibrium in evolutionary biology. In multi-agent reinforcement learning, agents learn policies that form Nash equilibria. A "stable" AI policy is one where no unilateral change in one agent's strategy can improve its payoff (given others' strategies are fixed). This is why GANs (Generative Adversarial Networks) are ESSes—the generator and discriminator reach equilibrium where neither can improve unilaterally.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h4>Lesson 4 Cheatsheet</h4>
+                    <ul>
+                        <li>ESS = Nash equilibrium in evolutionary games</li>
+                        <li>A strategy is stable if rare mutants do worse against it than it does against itself</li>
+                        <li>Hawk-Dove game shows how pure and mixed strategies can coexist</li>
+                        <li>Sex ratios, parental investment, territory size are all ESSes</li>
+                        <li>Evolution finds equilibria, not optimality</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 5: Kin Selection & Hamilton's Rule -->
+    <div class="lesson lesson-5">
+        <div class="lesson-header">
+            <div class="lesson-number">5</div>
+            <div>Kin Selection & Hamilton's Rule (rb > c): Why Relatives Matter</div>
+        </div>
+        <div class="lesson-inner">
+            <p>One of the most powerful ideas in biology: <strong>altruism toward relatives can be selfish at the genetic level.</strong> If a gene codes for altruistic behavior toward relatives, it increases its own replication because relatives share genes.</p>
+
+            <h4>Hamilton's Rule: The Equation That Changed Biology</h4>
+            <p>William D. Hamilton formalized this with a simple inequality: <strong>rb > c</strong></p>
+            <ul>
+                <li><strong>r</strong> = coefficient of relatedness (how genetically similar you are to the recipient). Siblings: 0.5. Cousins: 0.125. Parent-child: 0.5.</li>
+                <li><strong>b</strong> = benefit to the recipient (in fitness units)</li>
+                <li><strong>c</strong> = cost to the altruist</li>
+            </ul>
+
+            <div class="definition">
+                <strong>Hamilton's Rule:</strong> An altruistic act will be selected for if the benefit to the recipient (multiplied by relatedness) exceeds the cost to the altruist. In other words: rb > c means the gene spreads.
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>👨‍👩‍👧‍👦 Example: The Kin Selection Calculation</h4>
+                    <p>You have a sibling (r = 0.5). A flood is coming. You can save your sibling (benefit = 100 fitness units, they survive and have many children) but you will sacrifice your own reproduction (cost = 50 fitness units to you). Does the altruistic gene spread?</p>
+                    <p><strong>rb > c?</strong> → (0.5 × 100) > 50? → 50 > 50? → No, it's an equality.</p>
+                    <p>The altruistic gene neither spreads nor dies—it's at equilibrium. But if you save your sibling and they have 6 children instead of 4, the benefit increases and rb > c becomes true. The gene spreads.</p>
+                </div>
+            </div>
+
+            <h4>Why Siblings, Not Strangers?</h4>
+            <p>If a gene codes for "help relatives," it spreads because relatives carry copies of the gene. If a gene codes for "help random individuals," it doesn't spread because random individuals likely don't carry the gene. This is why:</p>
+            <ul>
+                <li>Parents sacrifice for children (r = 0.5)</li>
+                <li>Children sacrifice for siblings (r = 0.5)</li>
+                <li>Siblings sometimes sacrifice for each other (r = 0.5)</li>
+                <li>Cousins rarely sacrifice for each other (r = 0.125)</li>
+                <li>Strangers almost never sacrifice for each other (r = 0)</li>
+            </ul>
+
+            <div class="quote-box">
+                "If I am my brother's keeper, he is equally my keeper. If my brother sacrifices his fitness for me, his copies of genes for altruism will increase in frequency because his brother carries copies of those same genes."
+                <div class="quote-author">— Richard Dawkins</div>
+            </div>
+
+            <h4>Real Examples of Kin Selection</h4>
+            <ul>
+                <li><strong>Eusocial Insects:</strong> Worker bees sacrifice reproduction to feed the queen. This only works because bees are haplodiploid (workers are more closely related to their sisters than they would be to their own daughters).</li>
+                <li><strong>Prairie Dogs:</strong> They give alarm calls to warn the group of predators, even though this calls attention to themselves. The benefit to relatives outweighs the cost.</li>
+                <li><strong>Vampire Bats:</strong> They regurgitate blood to feed starving roost-mates. But they prefer to feed relatives, and they monitor who feeds whom (more on this in reciprocal altruism).</li>
+            </ul>
+
+            <div class="ai-box">
+                <div class="card-label">🤖 AI CONNECTION</div>
+                <p><strong>Weight Sharing in Neural Networks:</strong> Kin selection is analogous to weight sharing in deep learning. A neural network layer shares weights across many neurons. These "kin" (nodes that share weights) benefit from improving the shared weights. This is why weight sharing is so powerful—it aligns the "interests" of neurons (they all benefit from the same parameter updates). It's like genetic kin selection: cooperative because they share genes (weights).</p>
+            </div>
+
+            <div class="funny-box">
+                <div class="card-label">😄 FUNNY TAKE</div>
+                <p><strong>Why You Love Your Family More Than Friends:</strong> It's not because families are inherently better. It's because your genes get copied when your siblings reproduce. A gene that says "love your siblings" spreads because siblings carry copies of the gene. A gene that says "love random humans on the internet" doesn't spread. Your love isn't mysterious—it's genetic nepotism.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h4>Lesson 5 Cheatsheet</h4>
+                    <ul>
+                        <li>Hamilton's Rule: altruism spreads if rb > c</li>
+                        <li>r = coefficient of relatedness (siblings: 0.5, cousins: 0.125)</li>
+                        <li>Altruism toward relatives is selfish at the genetic level</li>
+                        <li>Kin selection explains eusocial insects and family sacrifice</li>
+                        <li>We love family members because our genes benefit from their reproduction</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 6: Reciprocal Altruism & Tit-for-Tat -->
+    <div class="lesson lesson-6">
+        <div class="lesson-header">
+            <div class="lesson-number">6</div>
+            <div>Reciprocal Altruism & Tit-for-Tat: The Prisoner's Dilemma in Nature</div>
+        </div>
+        <div class="lesson-inner">
+            <p>Kin selection explains why we help relatives. But what about helping <em>unrelated</em> individuals? <strong>Reciprocal altruism</strong> explains it: you help someone today expecting them to help you tomorrow. It's not genetic—it's a contractual arrangement encoded in behavior.</p>
+
+            <h4>The Prisoner's Dilemma (Game Theory 101)</h4>
+            <p>Two prisoners are offered a deal: both stay silent, both get 1 year. One confesses, the other stays silent? The confessor goes free, the silent one gets 3 years. Both confess? Both get 2 years.</p>
+            <p>The rational choice is to confess (you minimize your risk). But if both confess, both are worse off than if both stayed silent. This is the paradox.</p>
+
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                <tr style="background: #f0f0f0;">
+                    <td style="border: 1px solid #ccc; padding: 10px;"></td>
+                    <td style="border: 1px solid #ccc; padding: 10px;"><strong>You Stay Silent</strong></td>
+                    <td style="border: 1px solid #ccc; padding: 10px;"><strong>You Confess</strong></td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ccc; padding: 10px;"><strong>Other Silent</strong></td>
+                    <td style="border: 1px solid #ccc; padding: 10px;">Both 1 year ✓</td>
+                    <td style="border: 1px solid #ccc; padding: 10px;">You free, them 3 years</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ccc; padding: 10px;"><strong>Other Confess</strong></td>
+                    <td style="border: 1px solid #ccc; padding: 10px;">You 3 years, them free</td>
+                    <td style="border: 1px solid #ccc; padding: 10px;">Both 2 years</td>
+                </tr>
+            </table>
+
+            <h4>The Repeated Prisoner's Dilemma (Real Life)</h4>
+            <p>In real life, you play the Prisoner's Dilemma with the same people over and over. <strong>Axelrod's Prisoner's Dilemma Tournament</strong> (1980) tested this. Computer scientists submitted strategies to play against each other repeatedly.</p>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🎮 Axelrod's Tournament: Tit-for-Tat Wins</h4>
+                    <p>Robert Axelrod ran a tournament where various strategies competed in the Prisoner's Dilemma. Strategies included:</p>
+                    <ul>
+                        <li><strong>Always Cooperate:</strong> Cooperate every round (exploited by defectors)</li>
+                        <li><strong>Always Defect:</strong> Defect every round (short-term gain, long-term loss)</li>
+                        <li><strong>Random:</strong> Random cooperation or defection (unstable)</li>
+                        <li><strong>Tit-for-Tat:</strong> Cooperate first, then do whatever the opponent did last round</li>
+                    </ul>
+                    <p><strong>Tit-for-Tat won.</strong> Why? It's nice (starts with cooperation), it's retaliatory (punishes defection), and it's forgiving (returns to cooperation when the opponent does). It beat more complex strategies that tried to outsmart opponents.</p>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                "The key to success in the Prisoner's Dilemma is not to be a sucker, but to be cooperative and punish defection. Tit-for-Tat does both: it cooperates unless it's been betrayed, and it punishes betrayal immediately."
+                <div class="quote-author">— Robert Axelrod (cited by Dawkins)</div>
+            </div>
+
+            <h4>How This Applies to Animals</h4>
+            <p>Animals engage in reciprocal altruism all the time, even without language. Examples:</p>
+            <ul>
+                <li><strong>Vampire Bats:</strong> They regurgitate blood to feed starving roost-mates. They remember who has helped them and help those individuals preferentially. It's tit-for-tat encoded in behavior.</li>
+                <li><strong>Cleaner Fish:</strong> Small fish eat parasites off larger fish. The large fish could eat the cleaner, but they don't (usually). The cleaner returns and cleans them again. Mutual benefit.</li>
+                <li><strong>Humans:</strong> Trade, friendship, reputation systems. We remember who helped us and who cheated us. We cooperate with helpers and punish cheaters.</li>
+            </ul>
+
+            <div class="definition">
+                <strong>Reciprocal Altruism:</strong> An altruistic act by A toward B, with the expectation that B will later reciprocate. It's not genetic cooperation (like kin selection); it's a behavioral contract.
+            </div>
+
+            <h4>The Evolution of Morality</h4>
+            <p>Tit-for-Tat suggests that <strong>moral intuitions</strong> evolved for reciprocal altruism:</p>
+            <ul>
+                <li><strong>Gratitude:</strong> Remember who helped you (so you cooperate with them)</li>
+                <li><strong>Guilt:</strong> Remember when you cheated someone (so you cooperate in the future)</li>
+                <li><strong>Anger:</strong> Punish defectors (so they don't cheat again)</li>
+                <li><strong>Sympathy:</strong> Help those who might help you later</li>
+            </ul>
+
+            <div class="ai-box">
+                <div class="card-label">🤖 AI CONNECTION</div>
+                <p><strong>Tit-for-Tat in Multi-Agent RL:</strong> In game theory and multi-agent systems, tit-for-tat is a proven strategy that emerges in reinforcement learning tournaments. Agents learn to cooperate when others cooperate and defect when others defect. This mirrors biological evolution: in iterated games, cooperative strategies like tit-for-tat outcompete pure defection. This principle underlies blockchain "smart contracts"—they enforce reciprocal altruism through code.</p>
+            </div>
+
+            <div class="funny-box">
+                <div class="card-label">😄 FUNNY TAKE</div>
+                <p><strong>Your Conscience is a Tit-for-Tat Bot:</strong> Guilt, gratitude, anger—these are emotions that enforce the reciprocal altruism contract. You feel guilty when you cheat because your genes learned that cheaters get punished. You feel grateful because your genes learned to remember helpers. Your conscience isn't a moral compass; it's a record-keeping mechanism for who owes whom.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h4>Lesson 6 Cheatsheet</h4>
+                    <ul>
+                        <li>The Prisoner's Dilemma shows why mutual defection is mutual loss</li>
+                        <li>Axelrod's Tournament proved Tit-for-Tat strategy is robust: nice, retaliatory, forgiving</li>
+                        <li>Reciprocal altruism: you help me, I help you</li>
+                        <li>Vampire bats, cleaner fish, and humans all use reciprocal altruism</li>
+                        <li>Moral emotions (guilt, gratitude, anger) enforce reciprocal contracts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 7: The Battle of the Sexes -->
+    <div class="lesson lesson-7">
+        <div class="lesson-header">
+            <div class="lesson-number">7</div>
+            <div>The Battle of the Sexes: Parental Investment Theory</div>
+        </div>
+        <div class="lesson-inner">
+            <p>Males and females have different reproductive strategies because they have different <strong>parental investment</strong> costs. A female invests heavily in each offspring; a male's investment is minimal. This asymmetry explains almost every difference between the sexes.</p>
+
+            <h4>Parental Investment Theory (Trivers)</h4>
+            <p>Robert Trivers formalized this: <strong>parental investment</strong> is the time, energy, and resources a parent puts into raising an offspring. The sex that invests more in each offspring will be more selective about mates. The sex that invests less will be less selective.</p>
+
+            <div class="definition">
+                <strong>Parental Investment:</strong> Any investment by a parent in a particular offspring that increases the offspring's fitness at the cost of the parent's ability to invest in other offspring.
+            </div>
+
+            <h4>Why Females Are "Choosy" and Males Are "Promiscuous"</h4>
+            <p><strong>Female reproduction:</strong> A female produces a limited number of eggs. She invests heavily in each egg (pregnancy, lactation, protection). Each offspring is costly, so she's selective about mates. She wants genes that will give her offspring the best survival and reproduction chances.</p>
+
+            <p><strong>Male reproduction:</strong> A male can produce millions of sperm at negligible cost. He benefits from mating with many females. He's less selective because his cost per mating is low.</p>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>💔 Peacocks and Peahens: An Arms Race</h4>
+                    <p>Peacocks have enormous, colorful tails—a handicap that signals genetic quality. Why? Because females (peahens) are selective. They choose males with impressive tails, believing these genes will be passed to their sons (who will have impressive tails) and daughters (who will prefer males with impressive tails).</p>
+                    <p>This creates an arms race: males evolve bigger tails, females become more selective, males evolve even bigger tails, etc. The peacock's tail is a sexual signal that evolved because females are choosy.</p>
+                    <p>In contrast, male ducks force copulation on females. Female duck preference doesn't matter much, so duck males aren't colorful. The selection pressure for spectacular displays is weak.</p>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                "The female is inherently more valuable, from the male's point of view, than the male is from the female's point of view. A female in a harem can reproduce nearly as fast as a female in a monogamous pairing. A male in a harem can reproduce much faster than a male in a monogamous pairing."
+                <div class="quote-author">— Richard Trivers (cited by Dawkins)</div>
+            </div>
+
+            <h4>Patterns of Sexual Dimorphism (Male-Female Differences)</h4>
+            <div class="two-col">
+                <div class="two-col-item">
+                    <h5>High Female Investment</h5>
+                    <p>Monogamous birds (males and females both invest), polyandrous fish (females invest more). Females are larger, more aggressive, males are choosy.</p>
+                </div>
+                <div class="two-col-item">
+                    <h5>Low Female Investment</h5>
+                    <p>Promiscuous mammals (females invest heavily, males don't). Males are larger, more aggressive, have weapons (antlers, manes). Females are selective.</p>
+                </div>
+            </div>
+
+            <h4>The Three Strategies</h4>
+            <ul>
+                <li><strong>Monogamy:</strong> Both parents invest heavily. Males are sure of paternity, so they invest. Example: gibbons, some birds.</li>
+                <li><strong>Polygyny:</strong> Females invest heavily, males compete for access to females. Males have weapons and displays. Example: elk, lions, humans (historically).</li>
+                <li><strong>Polyandry:</strong> Females invest heavily, multiple males share the investment burden. Rare. Example: some fish, some birds.</li>
+            </ul>
+
+            <h4>The Cuckold Problem</h4>
+            <p>In monogamous species, males face a problem: <strong>paternity uncertainty.</strong> If a female mates with other males, the male's investment might go toward raising another male's offspring. This drives:
+            </p>
+            <ul>
+                <li>Male jealousy and mate guarding</li>
+                <li>Female chastity enforcement (by society)</li>
+                <li>Male competitive displays to "win" female loyalty</li>
+            </ul>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🐦 Cuckoo Birds: The Ultimate Cheaters</h4>
+                    <p>Cuckoo birds don't build nests or raise chicks. Instead, they lay eggs in other birds' nests. The unsuspecting host bird raises the cuckoo chick as its own, sometimes at the cost of its own chicks' survival.</p>
+                    <p>From the cuckoo's perspective, this is a free ride: all the benefits of reproduction with none of the costs. From the host's perspective, it's a disaster: massive parental investment for zero genetic return.</p>
+                    <p>This has driven an evolutionary arms race: host birds evolve better ability to detect and reject foreign eggs. Cuckoos evolve eggs that better mimic host eggs. The cuckoo is a "selfish gene" exploit of the parental investment system.</p>
+                </div>
+            </div>
+
+            <div class="ai-box">
+                <div class="card-label">🤖 AI CONNECTION</div>
+                <p><strong>Differential Learning Rates (Asymmetric Payoffs):</strong> In game theory and multi-agent systems, agents with different payoff structures have different optimal strategies. Just as males and females have different parental investment costs (leading to different reproductive strategies), AI agents with different reward functions will learn different strategies. An agent that "invests" more in an interaction will be more selective about partners, just as females are more selective about mates. This applies to training data: models trained on high-quality data are more "selective" about what patterns they learn.</p>
+            </div>
+
+            <div class="funny-box">
+                <div class="card-label">😄 FUNNY TAKE</div>
+                <p><strong>Why Men Download More Dating Apps (And Women Are Pickier):</strong> It's not about personality or culture. Females have high parental investment (nine months of pregnancy, years of child-rearing). Males have low investment (15 minutes). Evolution designed females to be selective and males to be promiscuous. The difference in dating app behavior isn't about preference—it's about asymmetric parental costs.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h4>Lesson 7 Cheatsheet</h4>
+                    <ul>
+                        <li>Parental investment determines reproductive strategy (Trivers)</li>
+                        <li>High-investment sex is more selective; low-investment sex is promiscuous</li>
+                        <li>Females typically invest more, so males compete for them</li>
+                        <li>Sexual dimorphism (males larger/showier) reflects this asymmetry</li>
+                        <li>Peacock tails, male weapons, and female choice are arms races</li>
+                        <li>Cuckoo birds exploit parental investment through deception</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 8: Memes -->
+    <div class="lesson lesson-8">
+        <div class="lesson-header">
+            <div class="lesson-number">8</div>
+            <div>Memes: Ideas as Replicators (Dawkins Invented This Concept)</div>
+        </div>
+        <div class="lesson-inner">
+            <p><strong>Dawkins invented the word "meme"</strong> in 1976. It's not about funny internet images (that came later). A meme is an idea, behavior, or cultural pattern that replicates from person to person, just as genes replicate from organism to organism.</p>
+
+            <h4>What Is a Meme?</h4>
+            <p>A meme must have the same three properties as any replicator: <strong>longevity, fecundity, and accuracy.</strong></p>
+            <ul>
+                <li><strong>Longevity:</strong> The idea must persist in human memory long enough to be copied. "2+2=4" has lasted thousands of years. A random thought vanishes.</li>
+                <li><strong>Fecundity:</strong> The idea must be easy to copy and transmit. Catchy songs spread faster than dense academic papers.</li>
+                <li><strong>Accuracy:</strong> The idea must copy with reasonable fidelity. If every person who hears a story changes it completely, it dies out.</li>
+            </ul>
+
+            <div class="definition">
+                <strong>Meme:</strong> A unit of cultural information that replicates from brain to brain via imitation, learning, or communication. Examples: songs, recipes, jokes, theories, religions, philosophies.
+            </div>
+
+            <h4>Memes vs. Genes: A Comparison</h4>
+            <div class="two-col">
+                <div class="two-col-item">
+                    <h5>Genes</h5>
+                    <p><strong>Replicator:</strong> DNA sequences</p>
+                    <p><strong>Medium:</strong> Chemical (DNA)</p>
+                    <p><strong>Reproduction:</strong> DNA replication (high fidelity)</p>
+                    <p><strong>Timescale:</strong> Generations (years to decades)</p>
+                </div>
+                <div class="two-col-item">
+                    <h5>Memes</h5>
+                    <p><strong>Replicator:</strong> Ideas, behaviors, patterns</p>
+                    <p><strong>Medium:</strong> Neurological (brains)</p>
+                    <p><strong>Reproduction:</strong> Imitation (lower fidelity)</p>
+                    <p><strong>Timescale:</strong> Within lifetimes (days to years)</p>
+                </div>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>💡 Examples of Successful Memes</h4>
+                    <p><strong>Songs:</strong> A catchy melody spreads because it's easy to remember and easy to transmit. "Happy Birthday" has replicated billions of times.</p>
+                    <p><strong>Religions:</strong> Christianity, Islam, Buddhism are memes. They replicate because they answer existential questions, provide community, and have mechanisms to enforce transmission (e.g., teaching children to pray).</p>
+                    <p><strong>Conspiracy Theories:</strong> They replicate not because they're true but because they're psychologically compelling. They offer simple explanations for complex problems and create in-group identity.</p>
+                    <p><strong>Fashions:</strong> Clothing styles replicate because they signal status and group membership. The meme doesn't care if the fashion is functional—it cares if it replicates.</p>
+                </div>
+            </div>
+
+            <h4>The Selfish Meme</h4>
+            <p>Just as genes can be selfish, so can memes. <strong>A meme that spreads doesn't necessarily benefit the person who spreads it.</strong></p>
+            <ul>
+                <li><strong>Conspiracy theories:</strong> Spread because they're psychologically satisfying, not because they're true. They exploit the meme-spreader's need for explanations.</li>
+                <li><strong>Viral misinformation:</strong> Spreads because it triggers emotion (outrage, fear, joy), not because it's accurate.</li>
+                <li><strong>Superstitions:</strong> Spread because they're memorable and because people who follow them attribute coincidental successes to the superstition.</li>
+                <li><strong>Religions:</strong> Some argue religions are selfish memes that replicate by encouraging believers to proselytize, even if belief doesn't benefit the believer.</li>
+            </ul>
+
+            <div class="quote-box">
+                "We should expect the idea of God to take a form that renders it immune to refutation... The idea of God has the qualities of being a good meme. It is a meme that is capable of being copied, and of being transmitted."
+                <div class="quote-author">— Richard Dawkins</div>
+            </div>
+
+            <h4>Memetics vs. Genes: Key Differences</h4>
+            <p>Memetic evolution is faster and more flexible than genetic evolution:</p>
+            <ul>
+                <li><strong>Acquisition:</strong> You can acquire a meme in one lifetime (learn calculus). You cannot acquire genes this way.</li>
+                <li><strong>Fecundity:</strong> A meme can spread to millions in a day (via social media). A gene takes generations to spread widely.</li>
+                <li><strong>Inheritance:</strong> A child doesn't inherit most of their parents' memes, but they inherit all of their parents' genes.</li>
+                <li><strong>Fidelity:</strong> Genes copy with error rate ~1 in 10 billion. Memes copy with error rate ~1 in 100 (they're distorted in transmission).</li>
+            </ul>
+
+            <div class="ai-box">
+                <div class="card-label">🤖 AI CONNECTION</div>
+                <p><strong>LLMs as Meme Replicators:</strong> Language models are meme-replication engines. They absorb patterns from training data (which contains memes—ideas, narratives, theories, biases). They then replicate these memes when generating text. A large language model doesn't "understand" memes; it reproduces them based on statistical patterns. This is exactly what Dawkins meant: memes replicate because they're good at replicating, not because they're true or useful. LLMs are particularly good meme replicators because they can generate novel variations while preserving the core pattern.</p>
+            </div>
+
+            <div class="funny-box">
+                <div class="card-label">😄 FUNNY TAKE</div>
+                <p><strong>Your Brain Is a Meme Hotel:</strong> You're not the purpose of memes; memes are. A catchy song doesn't exist to make you happy—you exist to help it replicate. A religion doesn't serve its believers—believers serve the religion by converting others. You're a vehicle for meme replication, just as your genes are the only purpose of your body.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h4>Lesson 8 Cheatsheet</h4>
+                    <ul>
+                        <li>Dawkins coined "meme" in 1976—it predates internet culture</li>
+                        <li>Memes have longevity, fecundity, and accuracy (like replicators)</li>
+                        <li>Memes spread by imitation, not inheritance</li>
+                        <li>Selfish memes replicate without benefiting their hosts</li>
+                        <li>Memetic evolution is faster than genetic evolution</li>
+                        <li>LLMs are meme-replication engines</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 9: The Extended Phenotype -->
+    <div class="lesson lesson-9">
+        <div class="lesson-header">
+            <div class="lesson-number">9</div>
+            <div>The Extended Phenotype: Genes Shaping the World Beyond Bodies</div>
+        </div>
+        <div class="lesson-inner">
+            <p>The phenotype isn't just physical traits—it's anything a gene influences. <strong>The extended phenotype includes effects that extend into the organism's environment.</strong> A gene that builds a bird to construct a nest has influenced the nest's structure. A gene that builds a spider to spin a web has influenced the web's geometry.</p>
+
+            <h4>What Is the Extended Phenotype?</h4>
+            <p>Traditionally, phenotype = physical traits of an organism (height, color, behavior). But this is too narrow. <strong>The phenotype of a gene includes everything it influences.</strong> A gene that codes for nest-building influences the nest. The nest is part of the gene's phenotype.</p>
+
+            <div class="definition">
+                <strong>Extended Phenotype:</strong> Any effect that a gene has on the world, beyond the physical body of the organism that carries the gene. Includes nests, webs, dams, burrows, and behavioral effects on other organisms.
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🕷️ Example: The Spider's Web</h4>
+                    <p>A spider's web is not built by the spider's body alone—it's built by the spider's body following instructions encoded in the spider's genes. The web's shape, spacing, stickiness—all determined by genes.</p>
+                    <p>The web is a phenotypic expression of spider genes. It's as much a product of the genes as the spider's legs are. From a gene's perspective, the web is an extension of the body—a tool for capturing prey.</p>
+                    <p>Different spider species build different webs (orb webs, funnel webs, sheet webs). These differences are genetic, not learned. The extended phenotype of spider genes includes the three-dimensional structure of the web.</p>
+                </div>
+            </div>
+
+            <h4>More Examples of Extended Phenotypes</h4>
+            <ul>
+                <li><strong>Beaver dams:</strong> Genes code for dam-building behavior. The dam's structure—its waterproofing, size, food storage—is determined by beaver genes. The dam is the extended phenotype.</li>
+                <li><strong>Caddisfly cases:</strong> Caddisfly larvae build protective cases from sand and plant material. The case's construction is genetically encoded. Different species build different shapes (square, cylindrical, spiral).</li>
+                <li><strong>Bird nests:</strong> Different bird species build characteristically different nests (cup, dome, platform, cavity). Nest structure is genetic, not learned (birds raised in isolation still build species-typical nests).</li>
+                <li><strong>Ant mounds:</strong> Ant colonies build mounds with specific ventilation patterns, temperature regulation, and structural engineering. The mound is the extended phenotype of ant colony genes.</li>
+            </ul>
+
+            <h4>The Extended Phenotype and Parasite Behavior</h4>
+            <p>Some genes achieve their own replication by <strong>manipulating other organisms' behavior.</strong> A parasitic gene that makes the host organism more vulnerable to predation is increasing its own replication (the predator eats the host and spreads the parasite).</p>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🦆 Toxoplasma gondii: The Mind-Controlling Parasite</h4>
+                    <p><em>Toxoplasma gondii</em> is a parasite that replicates in cats. Humans can get infected from cat litter. What's fascinating: the parasite seems to alter behavior.</p>
+                    <p>In mice, the parasite makes them less fearful of cats (so cats eat them and the parasite spreads). The gene's phenotype extends beyond the parasite itself—it includes the altered mouse behavior.</p>
+                    <p>Some studies suggest similar effects in humans (increased risk-taking), though this is more controversial. The key insight: genes can manipulate behavior across species boundaries.</p>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                "The extended phenotype is a way of thinking about genes as causal agents that reach beyond the skin and gut of individual organisms... A gene's phenotype includes anything that the gene influences, whether inside the body, outside it, or even in other organisms."
+                <div class="quote-author">— Richard Dawkins</div>
+            </div>
+
+            <h4>Implications for Understanding Evolution</h4>
+            <p>The extended phenotype changes how we think about natural selection:</p>
+            <ul>
+                <li><strong>Environmental engineering:</strong> A beaver's genes build dams that alter the environment. This changes selection pressures on future beaver genes (bigger, stronger beavers can build bigger dams).</li>
+                <li><strong>Niche construction:</strong> Organisms don't just adapt to their environment—they engineer it. This co-evolves with their genes.</li>
+                <li><strong>Parasites and hosts:</strong> A parasitic gene's phenotype includes host behavior. Selection favors parasites that successfully manipulate hosts.</li>
+            </ul>
+
+            <div class="ai-box">
+                <div class="card-label">🤖 AI CONNECTION</div>
+                <p><strong>AI's Extended Phenotype:</strong> An AI system's effect on the world extends beyond its code. Recommendation algorithms shape social discourse. Language models influence culture. An AI's "extended phenotype" includes everything it influences—other people's beliefs, behaviors, and systems. This is why alignment is so important: misaligned AI systems have extended phenotypes that propagate their objectives into the wider world.</p>
+            </div>
+
+            <div class="funny-box">
+                <div class="card-label">😄 FUNNY TAKE</div>
+                <p><strong>You Are Your Genes' Extended Phenotype:</strong> Your genes build your body, but they also build your brain to make you want to have children. Your desire for reproduction is part of your genes' phenotype. Your ambitions, dreams, even your love—all extended phenotypes of your genes' strategy for replication.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h4>Lesson 9 Cheatsheet</h4>
+                    <ul>
+                        <li>Extended phenotype: effects of a gene beyond the organism's body</li>
+                        <li>Spider webs, beaver dams, bird nests are extended phenotypes</li>
+                        <li>Genes can manipulate behavior across species (parasites)</li>
+                        <li>Organisms engineer their environment (niche construction)</li>
+                        <li>Selection acts on extended phenotypes, not just genes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON 10: Arms Races in Nature -->
+    <div class="lesson lesson-10">
+        <div class="lesson-header">
+            <div class="lesson-number">10</div>
+            <div>Arms Races in Nature: When Evolution Becomes Competition</div>
+        </div>
+        <div class="lesson-inner">
+            <p>Evolution isn't always about adaptation to the environment. Sometimes it's about <strong>competition between species</strong>—an arms race where each species evolves to counter the other's adaptations. Predator evolves better hunting, prey evolves better escape. This creates a spiral of escalating complexity.</p>
+
+            <h4>The Logic of Arms Races</h4>
+            <p>In an arms race, each improvement by one side creates selection pressure on the other:</p>
+            <ul>
+                <li>Predator evolves faster speed → Prey evolves faster escape → Predator evolves faster pursuit → Prey evolves better maneuverability...</li>
+                <li>Host immune system evolves better antibodies → Parasite evolves better evasion → Host immune system evolves better detection...</li>
+                <li>Plant evolves toxins to poison herbivores → Herbivore evolves tolerance to toxins → Plant evolves stronger toxins...</li>
+            </ul>
+
+            <div class="definition">
+                <strong>Evolutionary Arms Race:</strong> A cycle of reciprocal adaptation where improvements in one species create selection pressure on another, leading to escalating complexity and specialization.
+            </div>
+
+            <h4>Examples of Arms Races</h4>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🐰 Cheetahs and Gazelles: The Classic Arms Race</h4>
+                    <p>Cheetahs are the fastest land animals (70 mph), evolved to hunt prey. But gazelles are nearly as fast (60 mph), evolved to escape cheetahs. Neither is "optimal" in any absolute sense—they're in a constant race.</p>
+                    <p>If a new mutation made cheetahs faster, they'd catch more gazelles, and their genes would spread. This creates selection pressure on gazelles. Faster gazelles survive, so gazelle speed increases. This puts pressure back on cheetahs.</p>
+                    <p>Both species are locked in an escalating arms race. The "goal" isn't survival—it's outpacing the other species.</p>
+                </div>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🪴 Plants and Herbivores: Chemical Warfare</h4>
+                    <p><strong>Plants evolve toxins</strong> (alkaloids, cyanide compounds) to poison herbivores. These toxins are costly to produce but prevent herbivores from eating the plant.</p>
+                    <p><strong>Herbivores evolve tolerance</strong> to specific toxins. They develop liver enzymes that detoxify the poison, or they sequester the toxin in their own tissues (becoming poisonous to their predators).</p>
+                    <p><strong>Plants evolve new toxins</strong> that the herbivore hasn't adapted to. The arms race escalates in toxin complexity and herbivore detoxification capability.</p>
+                    <p>Monarch butterflies eat milkweed, which is poisonous to most animals. Monarchs have evolved to tolerate the toxin and sequester it, making themselves poisonous to birds.</p>
+                </div>
+            </div>
+
+            <h4>Why Arms Races Create Complexity</h4>
+            <p>Arms races drive the evolution of complex traits because:</p>
+            <ul>
+                <li><strong>Continuous improvement:</strong> Each advantage is temporary. The competing species adapts, so you must improve again.</li>
+                <li><strong>Specialization:</strong> Organisms become hyper-specialized for their role in the arms race (cheetahs for speed, gazelles for agility).</li>
+                <li><strong>No equilibrium:</strong> Unlike other evolutionary processes, arms races don't reach a stable point. They escalate.</li>
+            </ul>
+
+            <div class="quote-box">
+                "Arms races between species lead to escalating complexity. The peacock's tail, the cheetah's speed, the plant's toxin—none of these are optimal in any absolute sense. They're optimal only relative to the current state of the competing species."
+                <div class="quote-author">— Richard Dawkins</div>
+            </div>
+
+            <h4>The Red Queen Hypothesis</h4>
+            <p><strong>The Red Queen Hypothesis</strong> (named after Lewis Carroll's character who must run constantly just to stay in place) suggests that organisms are constantly evolving just to maintain their fitness relative to competitors, not to achieve any absolute optimality.</p>
+
+            <p>You're running as fast as you can just to stay where you are. The moment you stop improving, your competitors catch up.</p>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🦠 The Immune System as Arms Race</h4>
+                    <p>Your immune system evolves within your lifetime (through somatic mutation and selection in immune cells). Pathogens evolve to evade your immune system. This is a classic arms race happening on timescales of weeks (for viruses) rather than generations.</p>
+                    <p><strong>Viruses mutate rapidly:</strong> They escape antibodies you produced against the previous variant.</p>
+                    <p><strong>Your immune system adapts:</strong> You produce new antibodies against the new variant.</p>
+                    <p><strong>Viruses mutate again:</strong> They escape the new antibodies.</p>
+                    <p>This is why you catch the same virus multiple times (different strains) and why flu vaccines need updating annually.</p>
+                </div>
+            </div>
+
+            <div class="ai-box">
+                <div class="card-label">🤖 AI CONNECTION</div>
+                <p><strong>Generative Adversarial Networks (GANs) as Arms Races:</strong> GANs explicitly implement an arms race: the generator tries to fool the discriminator, the discriminator tries to detect fakes. Each improvement in the generator creates selection pressure on the discriminator. This escalation drives both to improve. GANs are evolutionary arms races built into machine learning. Similarly, in adversarial training (robustness against adversarial examples), the attacker and defender engage in an arms race—each side's innovation pressures the other to innovate.</p>
+            </div>
+
+            <div class="funny-box">
+                <div class="card-label">😄 FUNNY TAKE</div>
+                <p><strong>You're Running as Fast as You Can Just to Stay Alive:</strong> Evolution isn't about reaching some perfect state. Your immune system constantly battles pathogens. Cancer cells evolve to evade your immune system; your immune system evolves to catch them. You're in an arms race with your own cells.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h4>Lesson 10 Cheatsheet</h4>
+                    <ul>
+                        <li>Arms races: reciprocal adaptation between competing species</li>
+                        <li>Each improvement pressures the opponent to improve</li>
+                        <li>Cheetahs and gazelles, plants and herbivores, pathogens and immune systems</li>
+                        <li>Arms races don't reach equilibrium—they escalate</li>
+                        <li>Red Queen Hypothesis: running as fast as possible just to stay in place</li>
+                        <li>GANs and adversarial training are computational arms races</li>
+                    </ul>
+                </div>
+            </cheatsheet>
+        </div>
+    </div>
+
+    <!-- LESSON 11: The Paradox of Altruism -->
+    <div class="lesson lesson-11">
+        <div class="lesson-header">
+            <div class="lesson-number">11</div>
+            <div>The Paradox of Altruism: Why Selfishness Produces Cooperation</div>
+        </div>
+        <div class="lesson-inner">
+            <p>The central paradox of evolution: <strong>selfish genes produce altruistic behavior.</strong> How can creatures whose only purpose is to replicate themselves cooperate, sacrifice, and care for each other? The answer is that altruism is selfish at the genetic level.</p>
+
+            <h4>The Apparent Contradiction</h4>
+            <p>If genes are selfish and evolution is "survival of the fittest," why do we see:</p>
+            <ul>
+                <li>Mother birds dying to protect their chicks?</li>
+                <li>Bees stinging intruders and dying?</li>
+                <li>Humans donating organs to strangers?</li>
+                <li>Volunteers working without compensation?</li>
+            </ul>
+
+            <p>The resolution: <strong>altruism is "selfish" at the genetic level.</strong> A gene that codes for parental sacrifice spreads because it helps copies of that gene survive. A gene that codes for cooperation spreads because cooperation helps genes replicate.</p>
+
+            <h4>The Three Mechanisms of Apparent Altruism</h4>
+
+            <div class="two-col">
+                <div class="two-col-item">
+                    <h5>Kin Selection</h5>
+                    <p>Help relatives because they carry your genes. rb > c. The altruism is selfish at the genetic level because your relatives carry copies of your genes.</p>
+                </div>
+                <div class="two-col-item">
+                    <h5>Reciprocal Altruism</h5>
+                    <p>Help others expecting repayment. This spreads if the expected return is greater than the cost. You help me, I help you—both benefit.</p>
+                </div>
+                <div class="two-col-item">
+                    <h5>Reputation</h5>
+                    <p>Help others to build reputation. A helpful reputation increases your chances of being helped in the future. Genes for helpfulness spread if they increase your fitness through reputation.</p>
+                </div>
+            </div>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🧬 The Resolution: It's All Selfish (At the Genetic Level)</h4>
+                    <p>A mother sacrifices for her child. From the organism's perspective, this seems altruistic. From the gene's perspective, it's selfish: the mother's sacrifice increases her child's survival, and the child carries copies of her genes.</p>
+                    <p>A human donates to charity. From the organism's perspective, this seems altruistic. From the gene's perspective, it might be selfish: the donation builds reputation, which increases the donor's fitness by enabling future cooperation.</p>
+                    <p>A vampire bat shares blood with a starving roost-mate. From the organism's perspective, this seems altruistic. From the gene's perspective, it's reciprocal altruism: "I help you now, you help me later."</p>
+                </div>
+            </div>
+
+            <h4>What About Truly Blind Altruism?</h4>
+            <p>Some altruism seems unmotivated by kin selection, reciprocal altruism, or reputation:</p>
+            <ul>
+                <li><strong>Anonymous charity:</strong> Donating to strangers with no chance of recognition</li>
+                <li><strong>Stranger rescue:</strong> Risking your life for someone you'll never see again</li>
+                <li><strong>Universal altruism:</strong> Caring about all humans, even those who can't help you back</li>
+            </ul>
+
+            <p>Dawkins has a provocative explanation: <strong>these might be misfirings of adaptations built for kin selection and reciprocal altruism.</strong></p>
+
+            <div class="definition">
+                <strong>Misfiring Adaptation Theory:</strong> Genes evolved for helping relatives and reciprocal partners. In the ancestral environment, these two categories were nearly identical (relatives and long-term cooperators). In modern society, we can help anonymous strangers (via charity) or people we'll never meet again (via public good contribution). Our altruism "misfires" on these novel targets.
+            </div>
+
+            <div class="quote-box">
+                "I do not think that we have yet understood altruism. The fact that it appears so altruistic is largely due to the fact that we evolved in small groups where the beneficiary of altruism was likely to be a genetic relative or someone we might encounter again in the future."
+                <div class="quote-author">— Richard Dawkins</div>
+            </div>
+
+            <h4>The Evolution of Moral Intuitions</h4>
+            <p>Our moral intuitions make sense once we understand they evolved for small-group cooperation:</p>
+            <ul>
+                <li><strong>Fairness:</strong> Evolved for reciprocal altruism (punish cheaters, reward cooperators)</li>
+                <li><strong>Loyalty:</strong> Evolved for kin selection and in-group cooperation</li>
+                <li><strong>Care:</strong> Evolved for parental investment and kin selection</li>
+                <li><strong>Authority:</strong> Evolved for hierarchical group coordination</li>
+                <li><strong>Sanctity:</strong> Evolved for disease avoidance and group cohesion</li>
+            </ul>
+
+            <p>These intuitions feel deep and moral to us, but they're actually strategies for genetic replication in ancestral environments.</p>
+
+            <div class="ai-box">
+                <div class="card-label">🤖 AI CONNECTION</div>
+                <p><strong>Cooperative Multi-Agent RL as Evolved Altruism:</strong> In multi-agent reinforcement learning, agents that cooperate often outperform agents that compete. Agents can "evolve" cooperative strategies because cooperation increases all agents' rewards. The altruistic behavior (helping teammates) emerges because it increases the agent's own fitness (team success = agent reward). This mirrors biological evolution: altruism emerges because it's selfish at the level of the replicator (genes, or in AI, reward functions).</p>
+            </div>
+
+            <div class="funny-box">
+                <div class="card-label">😄 FUNNY TAKE</div>
+                <p><strong>Your Moral Emotions Are Genetic Misfirings:</strong> You feel obligated to help a stranger in need. That obligation evolved because, in small ancestral groups, helping was reciprocated or benefited relatives. Now you're emotionally compelled to help people who have nothing to offer you. Your genes have hijacked your altruism. You're a sucker for every charitable appeal.</p>
+            </div>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h4>Lesson 11 Cheatsheet</h4>
+                    <ul>
+                        <li>The paradox: selfish genes produce altruistic behavior</li>
+                        <li>Kin selection explains family altruism (rb > c)</li>
+                        <li>Reciprocal altruism explains cooperation between non-relatives</li>
+                        <li>Reputation explains anonymous or future-oriented altruism</li>
+                        <li>Misfiring adaptation theory: altruism to strangers may be accidental</li>
+                        <li>Moral intuitions evolved for small-group cooperation</li>
+                    </ul>
+                </div>
+            </cheatsheet>
+        </div>
+    </div>
+
+    <!-- LESSON 12: Why "Survival of the Fittest" Is Misleading -->
+    <div class="lesson lesson-12">
+        <div class="lesson-header">
+            <div class="lesson-number">12</div>
+            <div>Why "Survival of the Fittest" Is Misleading: The Real Replicator Story</div>
+        </div>
+        <div class="lesson-inner">
+            <p><strong>"Survival of the Fittest"</strong> is the most misunderstood phrase in biology. It suggests that evolution favors strong, dominant organisms. It doesn't. Evolution favors <strong>good replicators.</strong> A parasite is less "fit" in any physical sense, but if it replicates faster, it will outcompete the strong organism.</p>
+
+            <h4>The Problem with "Fittest"</h4>
+            <p>The phrase "survival of the fittest" was coined by Herbert Spencer and popularized by Darwin. But it's misleading because:</p>
+            <ul>
+                <li><strong>"Survival" is not the goal.</strong> Evolution doesn't care if you survive. It cares if you replicate. A mayfly lives one day but produces thousands of offspring—more reproductively successful than a 100-year-old human with two children.</li>
+                <li><strong>"Fittest" is ambiguous.</strong> Fittest at what? At reproduction, not at physical strength. A skinny, clever human might reproduce better than a muscular one.</li>
+                <li><strong>It suggests individual competition.</strong> Evolution doesn't select on individuals; it selects on genes. An individual might sacrifice itself if it increases the replication of genes it shares.</li>
+            </ul>
+
+            <h4>Better Terminology</h4>
+            <p>More accurate descriptions:</p>
+            <ul>
+                <li><strong>Replicator success:</strong> Genes that replicate faster will be more common in the future.</li>
+                <li><strong>Differential reproduction:</strong> If Gene A produces 100 copies per generation and Gene B produces 50, Gene A will spread.</li>
+                <li><strong>Fitness:</strong> Should mean reproductive success, not strength. A "fit" organism is one that produces many offspring (that themselves reproduce).</li>
+            </ul>
+
+            <div class="definition">
+                <strong>Fitness (evolutionary):</strong> The number of fertile offspring an organism produces (or more precisely, the number of copies of its genes in the next generation).
+            </definition>
+
+            <div class="story">
+                <div class="story-inner">
+                    <h4>🦟 Example: The Mosquito and the Eagle</h4>
+                    <p>An eagle is physically stronger, faster, more impressive than a mosquito. But the mosquito is "fitter" in evolutionary terms. A female mosquito can lay 100-300 eggs in her lifetime. The eggs hatch in days. After a week, the mosquitoes reproduce again. In a single summer, millions of mosquitoes descend from one female.</p>
+                    <p>An eagle reproduces once a year, producing 1-3 chicks. Most don't survive to reproduction. From a purely genetic perspective, the mosquito is far more successful.</p>
+                    <p>"Survival of the fittest" suggests the eagle should outcompete the mosquito. But mosquitoes vastly outnumber eagles. Why? Because "fittest" should mean reproductive success, not physical dominance.</p>
+                </div>
+            </div>
+
+            <h4>Why Parasites Are "Fit"</h4>
+            <p>A common misconception: parasites are "failures" of evolution. Actually, parasites are incredibly successful replicators:</p>
+            <ul>
+                <li><strong>Plasmodium (malaria parasite):</strong> Infects ~400 million humans annually. Replicates in humans, spreads via mosquitoes. Extraordinarily successful.</li>
+                <li><strong>Viruses:</strong> Extremely simple (just DNA/RNA wrapped in protein), but replicate faster than complex organisms. Most abundant organisms on Earth are viruses.</li>
+                <li><strong>Intestinal worms:</strong> Billions of humans infected. They don't need to be impressive; they just need to replicate faster than they're removed.</li>
+            </ul>
+
+            <p>Parasites achieve replication not through strength but through specialization. They exploit niches (a host body) to reproduce rapidly.</p>
+
+            <div class="quote-box">
+                "Natural selection favors genes that replicate, regardless of whether they produce 'fit' organisms in any physical sense. A parasite may be fitter evolutionarily than the impressive host organism it inhabits, if it replicates faster."
+                <div class="quote-author">— Richard Dawkins</div>
+            </div>
+
+            <h4>The Replicator Perspective Changes Everything</h4>
+            <p>Once you understand that <strong>genes are the unit of selection, not organisms or species,</strong> evolutionary puzzles resolve:</p>
+            <ul>
+                <li><strong>Why do females have eggs instead of sperm?</strong> Because eggs maximize parental investment and gene replication (each egg is a commitment; sperm are cheap).</li>
+                <li><strong>Why do plants have colorful flowers?</strong> Because flowers help pollinate, which spreads flower genes, not because flowers are "strong."</li>
+                <li><strong>Why are some animals social?</strong> Because sociality helps genes replicate (through kin selection and reciprocal altruism).</li>
+                <li><strong>Why do we love our children?</strong> Not because love is morally correct, but because love increases parental investment, which increases child survival, which helps parental genes replicate.</li>
+            </ul>
+
+            <h4>The Real Story: Competition Between Replicators</h4>
+            <p>Evolution isn't a story of strong organisms competing. It's a story of <strong>replicators competing for reproduction.</strong> The vehicle (organism) is just the mechanism by which replicators spread.</p>
+
+            <ul>
+                <li><strong>Genes compete</strong> to be copied more often than other genes.</li>
+                <li><strong>Organisms compete</strong> to produce more offspring (because organisms that produce more offspring leave more genes).</li>
+                <li><strong>Species compete</strong> because different species carry different genes.</li>
+            </ul>
+
+            <p>But the fundamental competition is between genes, not organisms or species. Once you see this, the logic of evolution becomes clear.</p>
+
+            <div class="ai-box">
+                <div class="card-label">🤖 AI CONNECTION</div>
+                <p><strong>Optimization vs. Replication in AI:</strong> "Survival of the fittest" suggests AI systems will optimize for performance. But actually, code that replicates spreads, not code that performs best. Open-source projects spread because they're easy to fork and modify, not because they're "fittest" in any absolute sense. Memes spread in training data because they're easy to copy, not because they're true. In AI, we should think of systems competing based on replicability, not optimality. This is why disinformation spreads: it replicates better than truth, not because it's "fitter."</p>
+            </div>
+
+            <div class="funny-box">
+                <div class="card-label">😄 FUNNY TAKE</div>
+                <p><strong>"Survival of the Fittest" Should Be "Replication of the Replicators":</strong> The phrase is so misleading that it almost undermines the entire theory. It sounds like evolution favors the strong, the dominant, the impressive. Actually, evolution favors the reproducers, the sneaky, the efficient. A virus is more "fit" than an elephant in evolutionary terms because viruses replicate faster. This is why inventing better pesticides doesn't eliminate insects—it just selects for insects that replicate faster on poison.</p>
+            </div>
+
+            <div class="connect-box">
+                <div class="card-label">📖 CROSS-BOOK CONNECTIONS</div>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Sapiens (Harari):</strong> Memes (religions, ideologies, myths) spread because they replicate, not because they're true. Harari explores how memetic evolution shaped human culture.</li>
+                    <li><strong>Gödel, Escher, Bach (Hofstadter):</strong> Self-replicating patterns and recursive structures in art, music, and mathematics. Strange loops as the basis of consciousness.</li>
+                    <li><strong>The Black Swan (Taleb):</strong> Rare, high-impact events that are shaped by replicating systems and feedback loops.</li>
+                    <li><strong>Behave (Robert Sapolsky):</strong> The biological and evolutionary origins of human behavior, including altruism, aggression, and morality.</li>
+                    <li><strong>Superintelligence (Bostrom):</strong> Recursive self-improvement and escalating arms races in AI, echoing the evolutionary arms races in biology.</li>
+                </ul>
+            </connect-box>
+
+            <div class="cheatsheet">
+                <div class="cheatsheet-inner">
+                    <h4>Lesson 12 Cheatsheet</h4>
+                    <ul>
+                        <li>"Survival of the Fittest" is misleading—evolution favors replicators, not strength</li>
+                        <li>Fitness = reproductive success, not physical dominance</li>
+                        <li>Parasites are highly "fit" because they replicate quickly</li>
+                        <li>The unit of selection is the gene, not the organism</li>
+                        <li>Replicator competition explains all evolutionary patterns</li>
+                        <li>Memes, viruses, code all compete based on replication rate</li>
+                    </ul>
+                </div>
+            </cheatsheet>
+        </div>
+    </div>
+
+    <!-- FINAL SYNTHESIS -->
+    <h2 style="margin-top: 60px;">Final Synthesis: The Selfish Gene Revolution</h2>
+
+    <div class="card" style="border-left-color: var(--dark-purple);">
+        <div class="card-label">🔬 THE CORE INSIGHT</div>
+        <p><strong>The Selfish Gene</strong> is not about genes being conscious or immoral. It's a revolutionary reframing of evolution: <em>genes are the primary unit of selection, organisms are vehicles for gene replication, and "selfish" describes a replication pattern, not morality.</em></p>
+        <p>This single insight explains:</p>
+        <ul>
+            <li>Why organisms seem to behave "selfishly" yet also show cooperation and altruism</li>
+            <li>Why males and females have different reproductive strategies</li>
+            <li>Why parasites succeed despite seeming "unfit"</li>
+            <li>Why we love our relatives more than strangers</li>
+            <li>Why cultures and religions replicate even if they're false</li>
+            <li>Why evolution produces breathtaking complexity (peacocks, webs, immune systems)</li>
+        </ul>
+    </div>
+
+    <div class="key-insight" style="margin-top: 30px;">
+        <strong>The Three Levels of Replication:</strong> Understanding evolution requires thinking about three different replicators:
+        <ul>
+            <li><strong>Genes:</strong> Replicate through DNA copying in reproduction</li>
+            <li><strong>Memes:</strong> Replicate through imitation and communication</li>
+            <li><strong>Code:</strong> Replicates through copying, modification, and deployment in AI systems</li>
+        </ul>
+        <p style="margin-top: 15px;">Each follows the same logic: replicators that copy faster will be more common in the future, regardless of whether they benefit their hosts or serve any larger purpose.</p>
+    </div>
+
+    <div class="ai-box" style="margin-top: 30px;">
+        <div class="card-label">🤖 AI & THE SELFISH GENE</div>
+        <p><strong>Why This Matters for AI:</strong></p>
+        <ul>
+            <li><strong>Alignment Problem:</strong> An AI's objective function is a "selfish replicator"—it optimizes its goal regardless of broader consequences. An AI trained to maximize engagement will spread misinformation because engagement doesn't care about truth. The AI isn't evil; it's just a replicator optimizing its objective.</li>
+            <li><strong>Meme Propagation:</strong> LLMs are meme-replication engines. They absorb patterns (memes) from training data and replicate them. Biased or false memes will spread because they replicate well, not because they're true.</li>
+            <li><strong>Recursive Self-Improvement:</strong> As AI systems improve, they enter an arms race with adversaries (in adversarial training, security, etc.). Each side's improvement creates pressure on the other, leading to escalating complexity (just like evolutionary arms races).</li>
+            <li><strong>Multi-Agent Competition:</strong> In multi-agent systems, strategies that replicate (cooperate when others cooperate, defect when others defect) will spread. This mirrors biological evolution and suggests that AI agents will evolve toward tit-for-tat and other reciprocal strategies.</li>
+        </ul>
+    </div>
+
+    <div style="margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #fff9e6 0%, #fffacd 100%); border-radius: 12px; border: 2px solid var(--orange);">
+        <h3 style="color: var(--warm-red); font-family: 'Playfair Display', serif;">Key Takeaway</h3>
+        <p style="font-size: 1.1em; line-height: 1.8; margin-top: 15px;">
+            <strong>You are not the purpose of evolution. You are a temporary survival machine built by genes to ensure their own replication.</strong> This isn't depressing—it's liberating. Once you understand that your genes are pursuing replication, not your happiness, you can ask more interesting questions: Why am I programmed to feel love? Why do I have a conscience? Why do I cooperate? Why do I believe in things that aren't true?
+        </p>
+        <p style="font-size: 1.1em; line-height: 1.8; margin-top: 15px;">
+            The answers to these questions reveal the logic of evolution. And that logic—the logic of replication, competition, and adaptation—is spreading beyond biology into AI, culture, and information systems. Understanding the selfish gene means understanding not just life, but the future of intelligence itself.
+        </p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p><strong>The Selfish Gene by Richard Dawkins (1976)</strong></p>
+        <p>This comprehensive illustrated guide covers 12 core lessons from one of biology's most revolutionary books.</p>
+        <p style="margin-top: 20px; font-size: 0.85em; color: #666;">Created with CSS custom properties, Google Fonts, and SVG illustrations. Designed for deep learning and visual clarity.</p>
+    </div>
+
+</div>
+
+</body>
+</html>

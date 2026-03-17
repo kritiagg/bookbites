@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draft No. 4 — On the Writing Process — Illustrated Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+    :root {
+      --coral: #FF6B6B;
+      --teal: #4ECDC4;
+      --sunny: #FFE66D;
+      --purple: #A06CD5;
+      --sky: #74B9FF;
+      --mint: #55EFC4;
+      --pink: #FD79A8;
+      --orange: #FDCB6E;
+      --dark: #2D3436;
+      --cream: #FFEAA7;
+      --deep-blue: #0984E3;
+      --warm-red: #E17055;
+      --forest: #00B894;
+      --dark-purple: #6C5CE7;
+      --ink-blue: #1e3a8a;
+      --paper-cream: #faf5f0;
+      --editor-red: #dc2626;
+      --writer-gold: #d97706;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+
+    /* ===== COVER ===== */
+    .cover {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 50%, #16213e 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 40px 20px;
+    }
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem; color: white; letter-spacing: -2px;
+      text-align: center; position: relative; z-index: 2;
+      text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+    }
+    .cover .author {
+      font-size: 1.3rem; color: var(--writer-gold); margin-top: 8px; font-weight: 600; z-index: 2;
+    }
+    .cover .subtitle {
+      font-size: 1rem; color: rgba(255,255,255,0.7); margin-top: 16px; z-index: 2; text-align: center; max-width: 600px; line-height: 1.6;
+    }
+    .cover-svg-container { width: 100%; max-width: 700px; margin-top: 50px; z-index: 2; }
+
+    .particle {
+      position: absolute; border-radius: 50%; opacity: 0.08;
+      animation: float 8s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(180deg); }
+    }
+
+    /* ===== LESSONS ===== */
+    .lesson {
+      min-height: 100vh; padding: 60px 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lesson-inner { max-width: 900px; width: 100%; }
+    .lesson-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem;
+      color: white; margin-bottom: 12px;
+    }
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2;
+    }
+    .lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+    .illustration-container {
+      margin: 30px 0 40px 0;
+      display: flex;
+      justify-content: center;
+    }
+    .illustration-container svg { max-width: 100%; height: auto; }
+
+    .card {
+      background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .card-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    }
+    .card p { font-size: 0.95rem; line-height: 1.8; color: #444; margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .card ul { margin-left: 20px; font-size: 0.95rem; line-height: 1.8; color: #444; }
+    .card li { margin-bottom: 8px; }
+
+    .quote-box {
+      background: var(--ink-blue); color: white; border-radius: 16px;
+      padding: 24px 28px; margin-bottom: 20px;
+      border-left: 5px solid var(--writer-gold);
+    }
+    .quote-box .quote-text { font-style: italic; font-size: 1.05rem; line-height: 1.8; color: rgba(255,255,255,0.95); }
+    .quote-box .quote-attr { color: var(--writer-gold); font-weight: 600; font-size: 0.85rem; margin-top: 12px; }
+
+    .connect-box {
+      background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+      border-left: 5px solid var(--deep-blue);
+      border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px;
+    }
+    .connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--deep-blue); letter-spacing: 1px; margin-bottom: 8px; }
+    .connect-box p { font-size: 0.85rem; color: #1e40af; line-height: 1.7; }
+
+    .ai-box {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px;
+    }
+    .ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--sunny); margin-bottom: 8px; }
+    .ai-box p { font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.95); margin-bottom: 8px; }
+    .ai-box p:last-child { margin-bottom: 0; }
+
+    .funny-box {
+      background: #fef3c7; border-radius: 16px; padding: 20px 24px;
+      margin-bottom: 20px; border: 2px dashed var(--writer-gold);
+    }
+    .funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: var(--writer-gold); letter-spacing: 1px; margin-bottom: 8px; }
+    .funny-box p { font-size: 0.9rem; line-height: 1.7; color: #78350f; font-style: italic; }
+
+    /* ===== STORY SPOTLIGHTS ===== */
+    .story {
+      min-height: 100vh; padding: 60px 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .story-inner { max-width: 900px; width: 100%; }
+    .story h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; margin-bottom: 20px; line-height: 1.2;
+    }
+    .story p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 16px; }
+    .story-svg { margin: 30px 0; }
+
+    /* ===== CHEATSHEET ===== */
+    .cheatsheet {
+      min-height: 100vh; padding: 60px 20px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 50%, #16213e 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cheatsheet-inner { max-width: 900px; width: 100%; }
+    .cheatsheet h2 {
+      font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white;
+      text-align: center; margin-bottom: 40px;
+    }
+    .cheatsheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .cheatsheet-card {
+      background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .cheatsheet-card h3 { font-size: 1.1rem; color: var(--writer-gold); margin-bottom: 12px; font-weight: 700; }
+    .cheatsheet-card p { font-size: 0.85rem; color: rgba(255,255,255,0.85); line-height: 1.6; }
+
+    @media (max-width: 700px) {
+      .cover h1 { font-size: 2.8rem; }
+      .lesson-title { font-size: 1.8rem; }
+      .cheatsheet-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div class="particle" style="width: 60px; height: 60px; top: 10%; left: 10%;"></div>
+  <div class="particle" style="width: 100px; height: 100px; top: 60%; right: 5%; animation-delay: 1s;"></div>
+  <div class="particle" style="width: 80px; height: 80px; top: 20%; right: 15%; animation-delay: 2s;"></div>
+  <div class="particle" style="width: 120px; height: 120px; bottom: 10%; left: 20%; animation-delay: 3s;"></div>
+
+  <h1>DRAFT No. 4</h1>
+  <div class="author">On the Writing Process</div>
+  <div class="subtitle">John McPhee's Essential Guide to the Craft of Writing—From Research to Revision, Discovery to Discipline</div>
+
+  <div class="cover-svg-container">
+    <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+      <!-- Typewriter illustration -->
+      <rect x="50" y="100" width="600" height="100" fill="#2a4a6a" rx="8"/>
+      <rect x="70" y="90" width="560" height="20" fill="#d97706" rx="4"/>
+
+      <!-- Keys -->
+      <g id="key">
+        <rect width="30" height="28" fill="#0f3460" rx="3"/>
+        <rect width="28" height="26" x="1" y="1" fill="#1a5f7a" rx="2"/>
+      </g>
+
+      <use href="#key" x="80" y="115"/>
+      <use href="#key" x="115" y="115"/>
+      <use href="#key" x="150" y="115"/>
+      <use href="#key" x="185" y="115"/>
+      <use href="#key" x="220" y="115"/>
+      <use href="#key" x="255" y="115"/>
+      <use href="#key" x="290" y="115"/>
+      <use href="#key" x="325" y="115"/>
+      <use href="#key" x="360" y="115"/>
+      <use href="#key" x="395" y="115"/>
+
+      <!-- Paper rolling out -->
+      <path d="M 500 100 Q 550 85 600 100 L 595 160 Q 545 175 500 160 Z" fill="#faf5f0" opacity="0.9"/>
+      <text x="520" y="135" font-family="'Playfair Display', serif" font-size="18" fill="#1e3a8a">Draft</text>
+
+      <!-- Pen marking up -->
+      <line x1="620" y1="100" x2="640" y2="140" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="640" cy="140" r="4" fill="#dc2626"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ LESSON 1: THE STRUCTURE OF NARRATIVE ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #f8f9fa 0%, #e8f4f8 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--ink-blue);">1</div>
+    <h2 class="lesson-title">The Architecture of Stories</h2>
+    <p class="lesson-subtitle">How McPhee builds narrative like a structural engineer</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Building blocks of narrative structure -->
+        <rect x="50" y="200" width="100" height="80" fill="#d97706" opacity="0.8"/>
+        <text x="100" y="250" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="white">FOUNDATION</text>
+
+        <rect x="160" y="140" width="100" height="80" fill="#0984e3" opacity="0.8"/>
+        <text x="210" y="190" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="white">RESEARCH</text>
+
+        <rect x="270" y="100" width="100" height="80" fill="#6c5ce7" opacity="0.8"/>
+        <text x="320" y="150" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="white">DETAIL</text>
+
+        <rect x="380" y="80" width="100" height="80" fill="#00b894" opacity="0.8"/>
+        <text x="430" y="130" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="white">VOICE</text>
+
+        <rect x="490" y="120" width="100" height="80" fill="#fd79a8" opacity="0.8"/>
+        <text x="540" y="170" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="white">SHAPE</text>
+
+        <!-- Connectors -->
+        <path d="M 150 240 L 160 180" stroke="#ddd" stroke-width="2" fill="none"/>
+        <path d="M 260 180 L 270 140" stroke="#ddd" stroke-width="2" fill="none"/>
+        <path d="M 370 140 L 380 120" stroke="#ddd" stroke-width="2" fill="none"/>
+        <path d="M 480 120 L 490 160" stroke="#ddd" stroke-width="2" fill="none"/>
+
+        <!-- Label -->
+        <text x="350" y="30" text-anchor="middle" font-family="'Playfair Display', serif" font-size="20" font-weight="700" fill="#1e3a8a">The Building Process</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">⚙️ KEY LESSON</div>
+      <p>McPhee treats narrative structure as an engineering problem. He doesn't build stories linearly; he constructs them architecturally, with multiple load-bearing walls supporting the weight of meaning.</p>
+      <p><strong>How it works:</strong></p>
+      <ul>
+        <li>Start with the foundation: What is the central truth or paradox your story explores?</li>
+        <li>Layer your research like structural supports—not all facts are equal; some carry more weight than others</li>
+        <li>Create scaffolding through detail—specific moments, dialogue, sensory observations that make the reader trust your authority</li>
+        <li>Design the shape consciously—does your story need a chronological spine, a thematic architecture, or a recursive loop?</li>
+        <li>Balance weight and space—too much detail suffocates; too little creates a hollow frame</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Most writers approach structure like they're building with Legos: throw stuff together, hope it holds, and if it falls apart, glue it. McPhee treats it like he's constructing a cathedral. Before writing sentence one, he's already got the blueprints, the load calculations, and a contingency plan if the buttresses fail.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>McPhee's structural approach parallels transformer neural networks. Just as transformers use attention mechanisms to weight connections between distant tokens, McPhee's narrative architecture strategically weights which details connect to which themes. He's essentially building an attention map for the reader's mind—some story threads are highly "attended to" while others provide subtle context.</p>
+      <p>Large language models struggle with long-form narrative structure because they lack the global planning capacity McPhee demonstrates. He holds an entire architecture in mind while writing; most LLMs generate locally without that overarching design blueprint.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>Compare with <em>Made to Stick</em> by Chip & Dan Heath, which argues memorable ideas need structure (SUCCESs framework). McPhee takes structure further: it's not just about stickiness but about the load-bearing capacity of narrative itself. He's building cathedrals; others are making billboards.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The piece cannot be rushed. Writing cannot be rushed. You will only fool yourself into thinking you have something when you haven't."</div>
+      <div class="quote-attr">— John McPhee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 2: THE RESEARCH OBSESSION ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f4f8 0%, #fef3e2 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--writer-gold);">2</div>
+    <h2 class="lesson-title">Research as a Discipline, Not a Constraint</h2>
+    <p class="lesson-subtitle">Why knowing too much is the only way to know enough</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Library metaphor -->
+        <g id="shelf">
+          <rect x="0" y="0" width="200" height="150" fill="#8b7355" rx="4"/>
+          <line x1="0" y1="30" x2="200" y2="30" stroke="#a0826d" stroke-width="2"/>
+          <line x1="0" y1="60" x2="200" y2="60" stroke="#a0826d" stroke-width="2"/>
+          <line x1="0" y1="90" x2="200" y2="90" stroke="#a0826d" stroke-width="2"/>
+          <line x1="0" y1="120" x2="200" y2="120" stroke="#a0826d" stroke-width="2"/>
+
+          <!-- Books -->
+          <rect x="10" y="35" width="15" height="20" fill="#dc2626"/>
+          <rect x="30" y="40" width="15" height="15" fill="#0984e3"/>
+          <rect x="50" y="35" width="15" height="20" fill="#6c5ce7"/>
+          <rect x="70" y="38" width="15" height="17" fill="#d97706"/>
+          <rect x="90" y="35" width="15" height="20" fill="#00b894"/>
+          <rect x="110" y="42" width="15" height="13" fill="#fd79a8"/>
+          <rect x="130" y="36" width="15" height="19" fill="#a06cd5"/>
+          <rect x="150" y="40" width="15" height="15" fill="#4ecdc4"/>
+          <rect x="170" y="35" width="15" height="20" fill="#ff6b6b"/>
+
+          <!-- More books on other shelves -->
+          <rect x="15" y="65" width="15" height="20" fill="#ffd93d"/>
+          <rect x="40" y="70" width="15" height="15" fill="#ff6b6b"/>
+          <rect x="65" y="63" width="15" height="22" fill="#6c5ce7"/>
+          <rect x="90" y="68" width="15" height="17" fill="#0984e3"/>
+          <rect x="115" y="65" width="15" height="20" fill="#d97706"/>
+          <rect x="140" y="70" width="15" height="15" fill="#00b894"/>
+          <rect x="165" y="62" width="15" height="23" fill="#fd79a8"/>
+
+          <rect x="20" y="98" width="15" height="17" fill="#dc2626"/>
+          <rect x="45" y="95" width="15" height="20" fill="#4ecdc4"/>
+          <rect x="70" y="100" width="15" height="15" fill="#a06cd5"/>
+          <rect x="95" y="97" width="15" height="18" fill="#ff6b6b"/>
+          <rect x="120" y="100" width="15" height="15" fill="#0984e3"/>
+          <rect x="145" y="95" width="15" height="20" fill="#d97706"/>
+          <rect x="170" y="98" width="15" height="17" fill="#6c5ce7"/>
+        </g>
+
+        <use href="#shelf" x="0" y="0"/>
+        <use href="#shelf" x="220" y="0"/>
+        <use href="#shelf" x="440" y="0"/>
+
+        <!-- Central figure researcher -->
+        <circle cx="650" cy="80" r="20" fill="#2d3436"/>
+        <ellipse cx="650" cy="120" rx="18" ry="25" fill="#ffc0cb"/>
+        <line x1="632" y1="130" x2="620" y2="180" stroke="#2d3436" stroke-width="4"/>
+        <line x1="668" y1="130" x2="680" y2="180" stroke="#2d3436" stroke-width="4"/>
+        <line x1="640" y1="105" x2="600" y2="85" stroke="#2d3436" stroke-width="4"/>
+        <line x1="660" y1="105" x2="700" y2="85" stroke="#2d3436" stroke-width="4"/>
+
+        <!-- Notebook -->
+        <rect x="620" y="150" width="50" height="40" fill="#faf5f0" stroke="#d97706" stroke-width="2"/>
+        <line x1="625" y1="158" x2="665" y2="158" stroke="#d97706" stroke-width="1"/>
+        <line x1="625" y1="165" x2="665" y2="165" stroke="#d97706" stroke-width="1"/>
+        <line x1="625" y1="172" x2="665" y2="172" stroke="#d97706" stroke-width="1"/>
+        <line x1="625" y1="179" x2="665" y2="179" stroke="#d97706" stroke-width="1"/>
+
+        <!-- Label -->
+        <text x="350" y="240" text-anchor="middle" font-family="'Playfair Display', serif" font-size="18" font-weight="700" fill="#1e3a8a">Research: The Invisible Foundation</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🔬 KEY LESSON</div>
+      <p>McPhee doesn't research to write. He researches until he becomes a kind of expert, and *then* writes. The research phase isn't preliminary—it's transformative. He immerses himself so completely that he thinks like his subject.</p>
+      <p><strong>His approach includes:</strong></p>
+      <ul>
+        <li>Attending the events or locations he's writing about—not interviewing subjects in offices, but accompanying them in the field</li>
+        <li>Reading everything: primary sources, technical manuals, history, competitor work—building a knowledge architecture</li>
+        <li>Taking elaborate notes with cross-references, timestamps, and sensory details that most writers discard</li>
+        <li>Using constraint creatively—when writing about geology, he becomes fluent in mineralogy; when writing about basketball, he understands the physics</li>
+        <li>Accepting that 80% of research becomes invisible but makes the 20% that appears irrefutable</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>McPhee researches like a method actor preparing for a role, except he's preparing to write a magazine article. Most writers do the interview on Zoom. McPhee camps with the geologists. Most writers spend three weeks on research; McPhee spends three months. Then he wonders why his articles feel authoritative.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>McPhee's research obsession mirrors the scaling principle in deep learning: more data (and deeper understanding) always beats clever architectures. His approach is like training on a massive, domain-specific corpus rather than a general pre-trained model. When he writes about Alaska or orangutans, he's not generating from general knowledge—he's drawing from a specialized knowledge base built through immersion.</p>
+      <p>This is why AI-generated content often feels hollow: it's trained to generate plausibly, not to deeply know. McPhee's knowledge is the inverse—it's deep enough to be selective about what to reveal.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>Compare with <em>Deep Work</em> by Cal Newport, which emphasizes sustained focus on complex tasks. McPhee's research phase exemplifies deep work taken to extremes—he's not multitasking or sampling; he's achieving flow state at scale. The difference: Newport teaches deep work as a competitive advantage; McPhee shows it as a moral obligation to the subject.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"With nonfiction you don't ultimately have a lot of choice in what you do with material. You're always constrained by the truth."</div>
+      <div class="quote-attr">— John McPhee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 3: THE ART OF OMISSION ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #f9faf8 0%, #f0f4e6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--forest);">3</div>
+    <h2 class="lesson-title">What You Don't Write Is Everything</h2>
+    <p class="lesson-subtitle">The algebra of omission: knowing what to cut</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Iceberg metaphor -->
+        <path d="M 150 150 L 300 200 L 450 150 L 400 280 L 200 280 Z" fill="#e0f2fe" stroke="#0984e3" stroke-width="3"/>
+        <text x="300" y="180" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="#1e40af">What Shows</text>
+        <text x="300" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#1e40af" opacity="0.7">(30% of research)</text>
+
+        <path d="M 200 280 L 150 400 L 450 400 L 400 280 Z" fill="#dbeafe" stroke="#0984e3" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+        <text x="300" y="340" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#1e40af" opacity="0.6">What Stays Hidden</text>
+        <text x="300" y="360" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#1e40af" opacity="0.6">(70% of research)</text>
+
+        <!-- Scissors cutting -->
+        <line x1="520" y1="100" x2="580" y2="160" stroke="#dc2626" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="540" cy="130" r="8" fill="none" stroke="#dc2626" stroke-width="3"/>
+        <circle cx="600" cy="150" r="8" fill="none" stroke="#dc2626" stroke-width="3"/>
+
+        <!-- Numbers -->
+        <text x="350" y="30" text-anchor="middle" font-family="'Playfair Display', serif" font-size="20" font-weight="700" fill="#1e3a8a">The Omission Principle</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">✂️ KEY LESSON</div>
+      <p>McPhee describes writing as an algebra: "I write, and then I subtract. What you subtract is as important as what you keep." The invisible architecture—all the research you don't use—gives authority to what remains.</p>
+      <p><strong>The omission strategy:</strong></p>
+      <ul>
+        <li><strong>Know everything about what you're writing</strong>, then write as if you know nothing. This reversal teaches the reader as if discovering alongside you.</li>
+        <li><strong>Cut anything that pauses the narrative</strong>, no matter how interesting. If a fact slows momentum, it goes—even if it took you three weeks to obtain.</li>
+        <li><strong>Use specificity as omission</strong>. By naming exact details (a geological stratum, a specific tree species), you create the impression of depth without explaining everything.</li>
+        <li><strong>Let readers feel your restraint</strong>. When you omit skillfully, readers sense there's more below the surface. It creates trust.</li>
+        <li><strong>Test omission against structure</strong>. Does cutting this paragraph weaken your load-bearing walls? If yes, keep it. If no, let it go.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>McPhee spends three months researching, writes ten thousand words, then cuts five thousand. The deleted words didn't fail because they were bad—they failed because they were honest. He's essentially practicing controlled lying: showing you a door without mentioning the 47 rooms behind it, trusting you won't ask what's inside.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Language models have no sense of omission—they're trained to generate, not to subtract. Given a prompt, they produce all the information they can access, often including filler and redundancy. McPhee's practice is the opposite: he's doing feature selection in prose, keeping only the variables that carry signal.</p>
+      <p>This aligns with regularization techniques in machine learning: adding penalty terms that discourage complexity. McPhee's editing process is essentially L1/L2 regularization applied to narrative—eliminating unnecessary features to improve the model's generalization.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This echoes Hemingway's iceberg theory: show only the tip, let the bulk remain invisible. But McPhee adds a professional writer's detail: the omission isn't artistic mystery—it's structural necessity. You omit because the structure demands it, not because omission is itself an aesthetic.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"I go back and cut whatever doesn't help. The pieces are extremely tight. It's like working in stone."</div>
+      <div class="quote-attr">— John McPhee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 4: CONSTRAINT AS LIBERATION ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #fef9e7 0%, #f8f5e6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--sunny);">4</div>
+    <h2 class="lesson-title">Constraint Breeds Creativity</h2>
+    <p class="lesson-subtitle">Why limitations force you to discover what you actually want to say</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Box constraints expanding -->
+        <rect x="50" y="80" width="100" height="100" fill="#ffd93d" opacity="0.3" stroke="#d97706" stroke-width="3"/>
+        <text x="100" y="140" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#d97706">Constraint</text>
+
+        <path d="M 100 180 L 150 220" stroke="#d97706" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+        <!-- Expanding possibilities -->
+        <circle cx="350" cy="130" r="80" fill="#ffd93d" opacity="0.3" stroke="#d97706" stroke-width="3" stroke-dasharray="5,5"/>
+        <text x="350" y="135" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#d97706">Creative</text>
+        <text x="350" y="155" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#d97706">Solutions</text>
+
+        <!-- Examples floating -->
+        <g id="constraint-example">
+          <rect x="0" y="0" width="60" height="40" fill="#ffeaa7" stroke="#d97706" stroke-width="2" rx="4"/>
+          <text x="30" y="26" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#d97706">Word Limit</text>
+        </g>
+
+        <use href="#constraint-example" x="220" y="220"/>
+        <use href="#constraint-example" x="320" y="220"/>
+        <use href="#constraint-example" x="420" y="220"/>
+
+        <text x="220" y="272" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#555">Form</text>
+        <text x="320" y="272" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#555">Subject</text>
+        <text x="420" y="272" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#555">Tone</text>
+
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <polygon points="0 0, 10 5, 0 10" fill="#d97706"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🔒 KEY LESSON</div>
+      <p>McPhee doesn't see constraints as obstacles—they're the creative *force*. When a magazine assigns him 3,000 words instead of 5,000, or dictates he write in a specific form, he treats it like a puzzle: "How do I say what I need to say within these bounds?"</p>
+      <p><strong>Types of constraint he celebrates:</strong></p>
+      <ul>
+        <li><strong>Structural constraints</strong>: A 2,000-word limit forces you to omit everything inessential, revealing what you truly believe matters</li>
+        <li><strong>Form constraints</strong>: Writing a profile, a technical essay, or a narrative—each form demands different choices and produces different insights</li>
+        <li><strong>Subject constraints</strong>: Focusing deeply on one topic (orangutans, geology, tennis) creates expertise and distinctiveness</li>
+        <li><strong>Temporal constraints</strong>: A deadline forces commitment; unlimited time enables procrastination</li>
+        <li><strong>Voice constraints</strong>: Limiting yourself to present tense, or first person, or avoiding certain words creates unexpected eloquence elsewhere</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>McPhee's the opposite of a writer complaining about deadlines. Ask him to write 2,000 words and he acts like you've given him the greatest gift: permission to be ruthless. Most writers treat constraints like oppression; McPhee treats them like a strength trainer adding resistance—harder to move, but you get stronger.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This mirrors pruning and regularization in neural networks. Unconstrained models overfit, generating verbose, repetitive, or incoherent outputs. Adding constraints—dropout rates, weight penalties, architecture limitations—forces the network to learn more generalizable representations. McPhee's constraints operate similarly: they force the writing to extract signal from noise, to find the most efficient path to meaning.</p>
+      <p>A language model with no token limit rambles; one with a hard limit searches for precision. Constraint breeds compression, and compression breeds clarity.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This echoes David Epstein's <em>Range</em>, which argues constraints enable mastery by forcing specialization. But McPhee goes further: constraints aren't just enablers—they're *liberators*. They free you from the paralysis of infinite possibilities.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The tighter the constraints, the more creative you have to be. I thrive on that."</div>
+      <div class="quote-attr">— John McPhee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 5: STRUCTURE VARIATIONS ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #f5f3ff 0%, #e8e0ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--purple);">5</div>
+    <h2 class="lesson-title">Multiple Architectures, Multiple Truths</h2>
+    <p class="lesson-subtitle">How the form you choose determines what you can discover</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Three story structures side by side -->
+
+        <!-- Linear -->
+        <line x1="80" y1="50" x2="80" y2="250" stroke="#a06cd5" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="80" cy="70" r="8" fill="#a06cd5"/>
+        <circle cx="80" cy="130" r="8" fill="#a06cd5"/>
+        <circle cx="80" cy="190" r="8" fill="#a06cd5"/>
+        <circle cx="80" cy="250" r="8" fill="#a06cd5"/>
+        <text x="80" y="280" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#555">CHRONOLOGICAL</text>
+
+        <!-- Spiral -->
+        <path d="M 280 50 Q 300 80 280 110 Q 260 140 280 170 Q 300 200 280 230"
+              stroke="#6c5ce7" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <circle cx="280" cy="50" r="8" fill="#6c5ce7"/>
+        <circle cx="280" cy="230" r="8" fill="#6c5ce7"/>
+        <text x="280" y="280" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#555">RECURSIVE</text>
+
+        <!-- Thematic branches -->
+        <line x1="450" y1="150" x2="480" y2="150" stroke="#9f7aea" stroke-width="6"/>
+        <line x1="420" y1="100" x2="450" y2="150" stroke="#9f7aea" stroke-width="6"/>
+        <line x1="420" y1="200" x2="450" y2="150" stroke="#9f7aea" stroke-width="6"/>
+        <line x1="480" y1="150" x2="510" y2="100" stroke="#9f7aea" stroke-width="6"/>
+        <line x1="480" y1="150" x2="510" y2="200" stroke="#9f7aea" stroke-width="6"/>
+        <circle cx="420" cy="100" r="8" fill="#9f7aea"/>
+        <circle cx="420" cy="200" r="8" fill="#9f7aea"/>
+        <circle cx="450" cy="150" r="8" fill="#9f7aea"/>
+        <circle cx="510" cy="100" r="8" fill="#9f7aea"/>
+        <circle cx="510" cy="200" r="8" fill="#9f7aea"/>
+        <text x="465" y="280" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#555">THEMATIC</text>
+
+        <!-- Title -->
+        <text x="350" y="30" text-anchor="middle" font-family="'Playfair Display', serif" font-size="18" font-weight="700" fill="#1e3a8a">Narrative Architectures</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🏗️ KEY LESSON</div>
+      <p>McPhee doesn't write the same structure twice. In <em>Coming Into the Country</em>, he uses a recursive structure, cycling through geography, history, and personal narrative. In <em>Orangutan</em> pieces, he uses linear chronology. In essays on topics, he uses thematic branching.</p>
+      <p><strong>His structural vocabulary includes:</strong></p>
+      <ul>
+        <li><strong>Chronological spine</strong>: Time as the load-bearing wall; best for journey narratives or historical arcs</li>
+        <li><strong>Recursive spirals</strong>: Return to the same theme from different angles, each pass revealing new layers—like zooming in on a fractal</li>
+        <li><strong>Thematic branching</strong>: Start with a central idea, branch into sub-topics, then reconverge—useful for technical or conceptual essays</li>
+        <li><strong>Contrast structures</strong>: Build two parallel narratives that illuminate by comparison (wilderness vs. civilization, past vs. present)</li>
+        <li><strong>Inverted pyramid</strong>: Start with specificity, then zoom out—or vice versa—depending on what you want the reader to *feel* by the end</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Most writers have one structure—the five-paragraph essay learned in high school, repeated forever. McPhee treats structure like a jazz musician treats chords: infinite variations on the same fundamental principles. He doesn't ask "How do I write this?" He asks, "What shape does this truth require?"</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This parallels different neural network architectures solving different problems. A CNN is linear—good for sequential data. A transformer uses recursive attention—good for long-range dependencies. A graph neural network branches thematically. McPhee's intuition is architectural: the structure you choose determines what patterns the reader can perceive, just as the network architecture determines what features the model can learn.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This parallels the Heaths' <em>Made to Stick</em> distinction between different types of stickiness. McPhee would argue: form *creates* stickiness. A recursive structure sticks by making readers circle back with new understanding. A linear structure sticks through momentum. The choice of structure isn't cosmetic—it's semantic.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The form of a piece is always an attempt to tell the truth."</div>
+      <div class="quote-attr">— John McPhee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 6: THE SENTENCE AS UNIT ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0fdf4 0%, #e0fce8 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--sky);">6</div>
+    <h2 class="lesson-title">The Sentence Is the Smallest Truth-Unit</h2>
+    <p class="lesson-subtitle">Why you must master the sentence before you can master prose</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Building blocks: words to sentences to paragraphs -->
+
+        <!-- Words -->
+        <g id="word-block">
+          <rect width="25" height="25" fill="#74b9ff" rx="2"/>
+        </g>
+        <text x="50" y="180" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#555">Words</text>
+
+        <use href="#word-block" x="25" y="100"/>
+        <use href="#word-block" x="55" y="100"/>
+        <use href="#word-block" x="85" y="100"/>
+        <use href="#word-block" x="115" y="100"/>
+
+        <!-- Sentences -->
+        <g id="sentence-block">
+          <rect width="85" height="30" fill="#55efc4" stroke="#00b894" stroke-width="2" rx="4"/>
+          <text x="42.5" y="22" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" font-weight="600" fill="#00b894">Sentence</text>
+        </g>
+        <use href="#sentence-block" x="200" y="100"/>
+        <use href="#sentence-block" x="200" y="140"/>
+        <text x="245" y="200" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#555">Sentences</text>
+
+        <!-- Paragraph -->
+        <rect x="380" y="100" width="140" height="80" fill="#ffd93d" stroke="#d97706" stroke-width="3" rx="6"/>
+        <line x1="390" y1="115" x2="510" y2="115" stroke="#d97706" stroke-width="1" opacity="0.5"/>
+        <line x1="390" y1="130" x2="510" y2="130" stroke="#d97706" stroke-width="1" opacity="0.5"/>
+        <line x1="390" y1="145" x2="510" y2="145" stroke="#d97706" stroke-width="1" opacity="0.5"/>
+        <line x1="390" y1="160" x2="505" y2="160" stroke="#d97706" stroke-width="1" opacity="0.5"/>
+        <text x="450" y="200" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#555">Paragraph</text>
+
+        <!-- Connectors -->
+        <path d="M 150 115 L 200 115" stroke="#999" stroke-width="2" marker-end="url(#arrowhead-small)"/>
+        <path d="M 330 125 L 380 135" stroke="#999" stroke-width="2" marker-end="url(#arrowhead-small)"/>
+
+        <text x="350" y="30" text-anchor="middle" font-family="'Playfair Display', serif" font-size="18" font-weight="700" fill="#1e3a8a">Building Blocks of Prose</text>
+
+        <defs>
+          <marker id="arrowhead-small" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <polygon points="0 0, 10 5, 0 10" fill="#999"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">✍️ KEY LESSON</div>
+      <p>McPhee treats the sentence as a unit of meaning that can be audited for clarity, rhythm, and truthfulness. Each sentence must earn its place. He edits sentences as a composer edits bars of music.</p>
+      <p><strong>His sentence-level principles:</strong></p>
+      <ul>
+        <li><strong>Rhythm before grammar</strong>: A sentence that sounds right often *is* right. Read your work aloud; your ear catches what your eyes miss.</li>
+        <li><strong>Specificity over elegance</strong>: "He walked" is weaker than "He shuffled in his slippers." Specific verbs carry authority.</li>
+        <li><strong>Active voice as a default</strong>: Passive voice slows sentences. Make the subject do things, not have things done to it.</li>
+        <li><strong>Varying sentence length deliberately</strong>: Short. Medium. Long sentences—one after another. The variation creates rhythm and emphasis.</li>
+        <li><strong>Cut dead words</strong>: "Very," "really," "actually"—these are sentence cancer. Every word must pull weight.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Most writers think a sentence is successful if it's grammatically correct. McPhee thinks a sentence is successful if, when read aloud, it makes you want to hear the next one. He's basically asking: if my prose were a song, would anyone want to listen to the next verse, or would they skip to the next track?</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Language model training uses token prediction—each token is validated against the next token in sequence. McPhee's sentence-level attention mirrors this: each sentence predicts and justifies the next. But he adds a layer models lack: *intention*. A sentence doesn't just follow logically—it draws the reader forward because of rhythm, specificity, and implicit promise of what comes next.</p>
+      <p>Models optimize for likelihood; McPhee optimizes for inevitability—the sense that this sentence had to follow the previous one, no other option existed.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This connects to George Saunders' <em>A Swim in a Pond in the Rain</em>, which teaches close reading of sentences in Tolstoy and Chekhov. Both writers argue: become obsessed with sentences first. Master that, and everything else flows from it.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"If you tell the reader where something is, you probably don't need to tell the reader what it looks like."</div>
+      <div class="quote-attr">— John McPhee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 7: DIALOGUE AS CHARACTERIZATION ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #fef3f2 0%, #fde2e4 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--coral);">7</div>
+    <h2 class="lesson-title">Speech Patterns Reveal Character</h2>
+    <p class="lesson-subtitle">Why what someone says matters less than how they say it</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Three speakers with different dialogue patterns -->
+
+        <!-- Speaker 1: Technical -->
+        <circle cx="100" cy="100" r="20" fill="#dc2626"/>
+        <ellipse cx="100" cy="140" rx="18" ry="25" fill="#fcc2c2"/>
+        <line x1="82" y1="150" x2="70" y2="200" stroke="#dc2626" stroke-width="3"/>
+        <line x1="118" y1="150" x2="130" y2="200" stroke="#dc2626" stroke-width="3"/>
+        <line x1="90" y1="115" x2="50" y2="95" stroke="#dc2626" stroke-width="3"/>
+        <line x1="110" y1="115" x2="150" y2="95" stroke="#dc2626" stroke-width="3"/>
+
+        <rect x="50" y="40" width="100" height="50" fill="#fee2e2" stroke="#dc2626" stroke-width="2" rx="4"/>
+        <text x="100" y="55" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#b91c1c">Technical,</text>
+        <text x="100" y="70" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#b91c1c">Precise</text>
+
+        <!-- Speaker 2: Lyrical -->
+        <circle cx="350" cy="100" r="20" fill="#0984e3"/>
+        <ellipse cx="350" cy="140" rx="18" ry="25" fill="#bae6fd"/>
+        <line x1="332" y1="150" x2="320" y2="200" stroke="#0984e3" stroke-width="3"/>
+        <line x1="368" y1="150" x2="380" y2="200" stroke="#0984e3" stroke-width="3"/>
+        <line x1="340" y1="115" x2="300" y2="95" stroke="#0984e3" stroke-width="3"/>
+        <line x1="360" y1="115" x2="400" y2="95" stroke="#0984e3" stroke-width="3"/>
+
+        <rect x="300" y="40" width="100" height="50" fill="#e0f2fe" stroke="#0984e3" stroke-width="2" rx="4"/>
+        <text x="350" y="55" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#0c4a6e">Flowery,</text>
+        <text x="350" y="70" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#0c4a6e">Metaphorical</text>
+
+        <!-- Speaker 3: Sparse -->
+        <circle cx="600" cy="100" r="20" fill="#6c5ce7"/>
+        <ellipse cx="600" cy="140" rx="18" ry="25" fill="#d8d5ff"/>
+        <line x1="582" y1="150" x2="570" y2="200" stroke="#6c5ce7" stroke-width="3"/>
+        <line x1="618" y1="150" x2="630" y2="200" stroke="#6c5ce7" stroke-width="3"/>
+        <line x1="590" y1="115" x2="550" y2="95" stroke="#6c5ce7" stroke-width="3"/>
+        <line x1="610" y1="115" x2="650" y2="95" stroke="#6c5ce7" stroke-width="3"/>
+
+        <rect x="550" y="40" width="100" height="50" fill="#ede9fe" stroke="#6c5ce7" stroke-width="2" rx="4"/>
+        <text x="600" y="55" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#4c1d95">Terse,</text>
+        <text x="600" y="70" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#4c1d95">Direct</text>
+
+        <!-- Bottom: same content, different effect -->
+        <rect x="80" y="230" width="560" height="30" fill="#f9fafb" stroke="#ddd" stroke-width="1" rx="4"/>
+        <text x="350" y="252" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#666">Same words, different voices = different truths</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">💬 KEY LESSON</div>
+      <p>McPhee believes you can reveal character through speech patterns without commentary. A geologist speaks in precise terminology; a mountaineer in metaphors; a miner in short, direct sentences. By capturing how people speak, you show *what they pay attention to*.</p>
+      <p><strong>His dialogue techniques:</strong></p>
+      <ul>
+        <li><strong>Respect vernacular</strong>: Don't "clean up" speech to make it grammatically correct. Authenticity beats elegance.</li>
+        <li><strong>Selective dialogue</strong>: Include the revealing moments, omit the filler. A few lines of authentic speech outweigh pages of paraphrase.</li>
+        <li><strong>Speech rhythms vary</strong>: Technical experts use complex sentence structures; working people use simpler ones. Mirror this in dialogue.</li>
+        <li><strong>Vocabulary reveals class, region, education</strong>: A character who says "ain't" is showing you their world. Don't judge; just show.</li>
+        <li><strong>What's unsaid matters</strong>: Sometimes a character trails off, or avoids a topic. That silence is dialogue too.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Most writers use dialogue to move plot forward. McPhee uses it to move understanding forward. He'll include a 20-word sentence spoken by a geologist not because it's plot-essential but because the specificity of that speech reveals how geologists see the world. It's like linguistic fingerprinting: you've been in the presence of this person's mind.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Large language models struggle with authentic dialogue because they're trained on aggregate text data—they average out distinctive voices. McPhee's approach is the inverse: intensify distinctive patterns, exaggerate what makes someone *them*. This is like adversarial learning: find the features that distinguish, then amplify them.</p>
+      <p>A generated dialogue sounds plausible but generic. McPhee's dialogue sounds specific because he's isolated the linguistic features that encode identity.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This aligns with Elmore Leonard's famous rule: "If it sounds like writing, rewrite it." But McPhee adds nuance: let it sound like *talking*. The difference is huge. Writing is formal; talking is authentic.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"When someone speaks, you have them. Don't paraphrase them—put down exactly what they said."</div>
+      <div class="quote-attr">— John McPhee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 8: EDITING IS DISCOVERY ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #f5f3ff 0%, #ede9fe 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--dark-purple);">8</div>
+    <h2 class="lesson-title">Revision Teaches You What You Think</h2>
+    <p class="lesson-subtitle">Why the first draft is just research for the real writing</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Iterative refinement -->
+        <circle cx="100" cy="100" r="60" fill="#e9d5ff" stroke="#9f7aea" stroke-width="3"/>
+        <text x="100" y="105" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#6b21a8">DRAFT 1</text>
+        <text x="100" y="125" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#7c3aed">Raw</text>
+
+        <path d="M 160 100 L 220 100" stroke="#9f7aea" stroke-width="2" marker-end="url(#arrowhead-purple)"/>
+
+        <circle cx="280" cy="100" r="50" fill="#ddd6fe" stroke="#9f7aea" stroke-width="3"/>
+        <text x="280" y="105" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#6b21a8">DRAFT 2</text>
+        <text x="280" y="123" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#7c3aed">Clearer</text>
+
+        <path d="M 330 100 L 390 100" stroke="#9f7aea" stroke-width="2" marker-end="url(#arrowhead-purple)"/>
+
+        <circle cx="450" cy="100" r="40" fill="#c4b5fd" stroke="#9f7aea" stroke-width="3"/>
+        <text x="450" y="105" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#6b21a8">DRAFT 3</text>
+        <text x="450" y="122" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#7c3aed">Precise</text>
+
+        <path d="M 490 100 L 550 100" stroke="#9f7aea" stroke-width="2" marker-end="url(#arrowhead-purple)"/>
+
+        <circle cx="600" cy="100" r="30" fill="#a78bfa" stroke="#9f7aea" stroke-width="3"/>
+        <text x="600" y="107" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="white">FINAL</text>
+
+        <!-- Annotation -->
+        <text x="350" y="200" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#555">Each revision contracts volume, expands clarity</text>
+
+        <!-- Stats -->
+        <text x="100" y="250" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#555">2000 words</text>
+        <text x="280" y="250" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#555">1500 words</text>
+        <text x="450" y="250" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#555">1200 words</text>
+        <text x="600" y="250" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#555">1000 words</text>
+
+        <defs>
+          <marker id="arrowhead-purple" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <polygon points="0 0, 10 5, 0 10" fill="#9f7aea"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">✏️ KEY LESSON</div>
+      <p>McPhee doesn't separate writing from editing—they're the same process. As you edit, you discover what you actually believe. The first draft is an argument with yourself; the final draft is the resolution.</p>
+      <p><strong>His editing strategy:</strong></p>
+      <ul>
+        <li><strong>Read for clarity first</strong>: Does the reader understand what I'm saying? If not, everything else is decoration.</li>
+        <li><strong>Remove redundancy ruthlessly</strong>: If the same idea appears twice, the second appearance must add something or go.</li>
+        <li><strong>Cut paragraphs that don't move you forward</strong>: "Am I still learning? Is the reader?" If yes, keep it. If no, delete it.</li>
+        <li><strong>Check structure against thesis</strong>: Does the story's architecture support what I'm trying to prove? If not, restructure.</li>
+        <li><strong>Edit for rhythm last</strong>: Once clarity and structure are solid, fine-tune the music. But don't let rhythm override sense.</li>
+        <li><strong>Expect to cut 20-30% of words</strong>: If you're not losing material, you haven't revised—you've just polished.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Most writers think revising means correcting typos and fixing grammar. McPhee thinks revising means having a philosophical conversation with yourself across multiple drafts. By draft five, you've either convinced yourself you were right, or you've realized you were wrong and rewritten the whole thing. It's exhausting and liberating simultaneously.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This mirrors backpropagation in neural networks: after the forward pass (drafting), you reverse through the network, adjusting weights (editing) based on loss (clarity and structure). Each editing pass is like an optimization step—you're descending the gradient toward a clearer representation of your idea.</p>
+      <p>Language models generate once and stop. McPhee's process is iterative refinement—more like reinforcement learning, where each feedback loop updates understanding.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>Anne Lamott's <em>Bird by Bird</em> talks about "shitty first drafts"—you write badly first, then fix it. McPhee would agree but add: the fixing isn't cosmetic. It's a complete reconception. Your first draft isn't a rough version of the final draft; it's research into what you need to say.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"I think editing is the central act of writing. I don't write pieces. I edit them into existence."</div>
+      <div class="quote-attr">— John McPhee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 9: FINDING YOUR SUBJECT ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #fef2f2 0%, #fee2e2 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--warm-red);">9</div>
+    <h2 class="lesson-title">The Subject Chooses You</h2>
+    <p class="lesson-subtitle">How to recognize what truly deserves a book</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Subject discovery process -->
+
+        <!-- Many possible subjects -->
+        <circle cx="100" cy="80" r="25" fill="#fee2e2" stroke="#dc2626" stroke-width="2" opacity="0.5"/>
+        <text x="100" y="85" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#991b1b">Subject</text>
+
+        <circle cx="180" cy="100" r="25" fill="#fee2e2" stroke="#dc2626" stroke-width="2" opacity="0.5"/>
+        <text x="180" y="105" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#991b1b">Subject</text>
+
+        <circle cx="140" cy="160" r="25" fill="#fee2e2" stroke="#dc2626" stroke-width="2" opacity="0.5"/>
+        <text x="140" y="165" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#991b1b">Subject</text>
+
+        <!-- Spotlight on one -->
+        <circle cx="350" cy="120" r="35" fill="#fca5a5" stroke="#b91c1c" stroke-width="3"/>
+        <text x="350" y="127" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="white">THE ONE</text>
+
+        <!-- Arrow of focus -->
+        <path d="M 260 130 L 310 125" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowhead-red)"/>
+
+        <!-- Expanding knowledge -->
+        <circle cx="550" cy="120" r="20" fill="#dc2626" opacity="0.3"/>
+        <circle cx="550" cy="120" r="35" fill="#dc2626" opacity="0.2"/>
+        <circle cx="550" cy="120" r="50" fill="#dc2626" opacity="0.15"/>
+        <text x="550" y="125" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#991b1b">DEPTH</text>
+
+        <!-- Arrow -->
+        <path d="M 390 120 L 500 120" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowhead-red)"/>
+
+        <!-- Labels -->
+        <text x="140" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#555">Many Possibilities</text>
+        <text x="350" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#555">Selection</text>
+        <text x="550" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#555">Mastery</text>
+
+        <defs>
+          <marker id="arrowhead-red" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <polygon points="0 0, 10 5, 0 10" fill="#dc2626"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🎯 KEY LESSON</div>
+      <p>McPhee says he doesn't pick subjects—they persist until he admits they've picked him. A subject worth writing about is one that generates *endless* questions, not a topic he can exhaust in a few interviews.</p>
+      <p><strong>Signs a subject deserves deep work:</strong></p>
+      <ul>
+        <li><strong>It fascinates you across multiple dimensions</strong>: Not just one angle, but layers that keep unfolding (orangutans aren't just animals; they're mirrors for human nature, symbols of extinction, windows into consciousness)</li>
+        <li><strong>It reveals something about how the world actually works</strong>: A good subject isn't trivial. It teaches readers something fundamental.</li>
+        <li><strong>It has human stakes</strong>: Even when writing about geology, McPhee finds the people: the geologists, the hikers, the communities shaped by stone.</li>
+        <li><strong>You keep discovering new contradictions</strong>: If your subject is simple, you've misunderstood it. Real subjects are paradoxes that resist neat resolution.</li>
+        <li><strong>You'd pursue it even without an assignment</strong>: This is the key test. Would you research this for free? If not, keep looking.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>McPhee doesn't choose subjects like a shopper at a store—"I'll have the orangutan essay, please." Instead, a subject stalks him. He'll read something, it nags at him for months, he tries to ignore it, it keeps appearing in conversation, and finally he surrenders: "Fine, I'll write about it." The subject has defeated him through attrition.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>This parallels the exploration-exploitation tradeoff in reinforcement learning. You could write about many subjects (exploration), but deep work requires exploiting one subject until you've maximized your knowledge of it. McPhee's approach is: don't explore a new subject until you've exhausted the last one. Go deep, not wide.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>Cal Newport's <em>Deep Work</em> argues that mastery requires 10,000 hours on a single skill. McPhee's principle is similar but applied to writing subjects: don't jump between topics. Find one subject that fascinates you and stay until you've written it completely.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The subject that persists is the one worth writing about."</div>
+      <div class="quote-attr">— John McPhee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 10: THE PERSONAL VOICE ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--forest);">10</div>
+    <h2 class="lesson-title">Your Voice Is Your Truth Filter</h2>
+    <p class="lesson-subtitle">Why style and honesty are inseparable</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Voice as fingerprint -->
+        <g id="fingerprint-line">
+          <path d="M 0 0 Q 5 5 10 0 Q 15 -5 20 0" stroke="#00b894" stroke-width="2" fill="none"/>
+        </g>
+
+        <!-- Wave pattern -->
+        <use href="#fingerprint-line" x="50" y="50" transform="scale(1, 1)"/>
+        <use href="#fingerprint-line" x="50" y="70" transform="scale(1, 1)"/>
+        <use href="#fingerprint-line" x="50" y="90" transform="scale(1, 1)"/>
+        <use href="#fingerprint-line" x="50" y="110" transform="scale(1, 1)"/>
+        <use href="#fingerprint-line" x="50" y="130" transform="scale(1, 1)"/>
+        <use href="#fingerprint-line" x="50" y="150" transform="scale(1, 1)"/>
+        <use href="#fingerprint-line" x="50" y="170" transform="scale(1, 1)"/>
+
+        <text x="100" y="120" text-anchor="start" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#00b894">Voice as</text>
+        <text x="100" y="140" text-anchor="start" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#00b894">Unique Pattern</text>
+
+        <!-- Truth -->
+        <circle cx="400" cy="100" r="60" fill="#d1fae5" stroke="#00b894" stroke-width="3"/>
+        <text x="400" y="95" text-anchor="middle" font-family="'Playfair Display', serif" font-size="16" font-weight="700" fill="#065f46">TRUTH</text>
+        <text x="400" y="120" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#047857">Revealed Through</text>
+        <text x="400" y="135" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#047857">Authentic Voice</text>
+
+        <!-- Warning -->
+        <rect x="150" y="210" width="400" height="35" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
+        <text x="350" y="235" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#78350f">Adopting false style = concealing truth</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🗣️ KEY LESSON</div>
+      <p>McPhee argues that your voice isn't something to construct—it's something to discover. It emerges when you stop trying to sound like a "writer" and instead sound like yourself thinking on the page.</p>
+      <p><strong>Developing authentic voice:</strong></p>
+      <ul>
+        <li><strong>Write the way you speak, only better</strong>: Your natural sentence rhythms are your baseline. Refine from there, don't rebuild from scratch.</li>
+        <li><strong>Your voice reveals what you care about</strong>: Specific word choices, metaphor preferences, sentence structures—these are fingerprints of attention. Keep them.</li>
+        <li><strong>Authenticity is audible</strong>: Readers sense when you're performing versus being present. A false voice is like a fake accent—everyone notices.</li>
+        <li><strong>Your voice evolves with your knowledge</strong>: As you research deeper, your voice shifts. Let it. This is growth, not inconsistency.</li>
+        <li><strong>Don't adopt a "writerly" voice</strong>: Florid adjectives, complex syntax, vocabulary above your actual diction—these are performance that distances you from truth.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>McPhee would say most bad writing comes from writers trying to sound smart. They adopt a false voice, use words they wouldn't say aloud, construct sentences no human would ever speak. The result? Writing that sounds like a bad actor performing "Writer." McPhee's trick: be so genuinely interested in your subject that your natural voice emerges through enthusiasm. Authenticity requires no acting.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Large language models have no authentic voice—they synthesize across training data, producing a probabilistic average. McPhee's principle is the inverse: maximize distinctiveness, not coverage. He's not trying to sound like "a writer"; he's trying to sound like *himself*, which paradoxically makes him more distinctive and memorable than writers chasing generic excellence.</p>
+      <p>This is why generated text feels flat: it's optimized for general acceptability, not authentic particularity.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>Austin Kleon's <em>Steal Like an Artist</em> argues your style emerges from your influences and interests. McPhee would agree but emphasize: your voice comes from your *honesty*, not your influences. The more authentic you are, the more distinctive you become.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Write in a way that comes naturally to you. If you don't sound like yourself, you don't sound like anyone."</div>
+      <div class="quote-attr">— John McPhee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 11: MASTERY THROUGH OBSESSION ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #fef3f2 0%, #fef0f0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--pink);">11</div>
+    <h2 class="lesson-title">Mastery Requires Total Commitment</h2>
+    <p class="lesson-subtitle">Why there are no shortcuts to expertise</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Mastery curve: 10,000 hours -->
+        <line x1="50" y1="230" x2="650" y2="230" stroke="#999" stroke-width="2"/>
+        <line x1="50" y1="50" x2="50" y2="230" stroke="#999" stroke-width="2"/>
+
+        <!-- Axes labels -->
+        <text x="700" y="235" font-family="'Inter', sans-serif" font-size="10" fill="#555">Time</text>
+        <text x="20" y="50" font-family="'Inter', sans-serif" font-size="10" fill="#555">Depth</text>
+
+        <!-- Expertise curve -->
+        <path d="M 50 220 Q 200 200 300 140 Q 400 80 650 60"
+              stroke="#fd79a8" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+        <!-- Points on curve -->
+        <circle cx="100" cy="210" r="5" fill="#fd79a8"/>
+        <text x="100" y="250" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#555">Year 1</text>
+
+        <circle cx="250" cy="160" r="5" fill="#fd79a8"/>
+        <text x="250" y="250" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#555">Year 3</text>
+
+        <circle cx="400" cy="110" r="5" fill="#fd79a8"/>
+        <text x="400" y="250" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#555">Year 6</text>
+
+        <circle cx="550" cy="75" r="5" fill="#fd79a8"/>
+        <text x="550" y="250" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#555">Year 10+</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">🏆 KEY LESSON</div>
+      <p>McPhee's career is built on depth, not breadth. He doesn't write about many subjects at surface level; he writes about his chosen subjects at depths that took years to achieve. Mastery isn't quick. It requires sustained obsession.</p>
+      <p><strong>The mastery arc:</strong></p>
+      <ul>
+        <li><strong>Year 1-2: Acquisition</strong>: Learning the basics. You're clumsy. That's normal. Embrace it.</li>
+        <li><strong>Year 3-5: Competence</strong>: You can do the work. Quality improves. But you're still following templates.</li>
+        <li><strong>Year 6-10: Expertise</strong>: You understand *why* the templates work. You can break rules intelligently.</li>
+        <li><strong>Year 10+: Mastery</strong>: You can't remember when writing became natural. Your knowledge is so deep it's invisible.</li>
+        <li><strong>Never stop learning</strong>: Even after 60 years of writing, McPhee takes writing seminars and tests new techniques. Mastery is a practice, not a destination.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>McPhee has spent more time thinking about orangutans than most people spend thinking about their own lives. He's not just an expert—he's the kind of person who genuinely wonders what an orangutan is thinking while reading the newspaper. That level of obsession looks like madness to normal people. It's actually prerequisite for genius.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>McPhee's mastery trajectory parallels neural network training: early epochs show rapid improvement (learning fundamentals), middle epochs show steady gains (fine-tuning representations), late epochs show diminishing returns but increasing consistency (expertise becomes stable). The key difference: humans can *intentionally* pursue depth; models just converge to a local optimum.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>Malcolm Gladwell's "10,000-hour rule" in <em>Outliers</em> is based on research by Anders Ericsson. McPhee's career exemplifies this: decades of deliberate practice, seeking feedback, continuous refinement. But McPhee would add: the 10,000 hours must be *purposeful*, not just repetition.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"You don't have to be a genius to be a writer. You just have to be stubborn."</div>
+      <div class="quote-attr">— John McPhee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LESSON 12: THE ETHICS OF REPRESENTATION ============ -->
+<section class="lesson" style="background: linear-gradient(180deg, #fef2f2 0%, #fce8e8 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--warm-red);">12</div>
+    <h2 class="lesson-title">Your Subject Deserves Your Honesty</h2>
+    <p class="lesson-subtitle">Writing as an ethical practice, not just a craft</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Two paths: truth vs. fiction -->
+
+        <!-- Left: Truth -->
+        <rect x="50" y="100" width="120" height="120" fill="#fee2e2" stroke="#dc2626" stroke-width="3" rx="8"/>
+        <text x="110" y="135" text-anchor="middle" font-family="'Playfair Display', serif" font-size="14" font-weight="700" fill="#991b1b">TRUTH</text>
+        <text x="110" y="155" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#991b1b">Constrained</text>
+        <text x="110" y="170" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#991b1b">by facts</text>
+        <text x="110" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#991b1b">Authentic</text>
+        <text x="110" y="200" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#991b1b">Powerful</text>
+
+        <!-- Right: Fiction -->
+        <rect x="530" y="100" width="120" height="120" fill="#f0fdf4" stroke="#00b894" stroke-width="3" stroke-dasharray="5,5" rx="8" opacity="0.5"/>
+        <text x="590" y="135" text-anchor="middle" font-family="'Playfair Display', serif" font-size="14" font-weight="700" fill="#047857">FICTION</text>
+        <text x="590" y="155" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#047857">Unconstrained</text>
+        <text x="590" y="170" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#047857">by facts</text>
+        <text x="590" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#047857">Less power</text>
+        <text x="590" y="200" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#047857">Less real</text>
+
+        <!-- Bridge between: Nonfiction -->
+        <ellipse cx="350" cy="160" rx="50" ry="70" fill="#fef9e7" stroke="#d97706" stroke-width="3"/>
+        <text x="350" y="150" text-anchor="middle" font-family="'Playfair Display', serif" font-size="13" font-weight="700" fill="#b45309">NONFICTION</text>
+        <text x="350" y="170" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#b45309">Truth as</text>
+        <text x="350" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#b45309">possibility space</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">⚖️ KEY LESSON</div>
+      <p>McPhee treats nonfiction writing as a moral practice. You're representing real people, real events, real subjects. That creates obligations. You must be accurate, but accuracy alone isn't enough—you must also be *fair*.</p>
+      <p><strong>His ethical principles:</strong></p>
+      <ul>
+        <li><strong>Get the facts right</strong>: This is nonnegotiable. Check dates, verify quotes, respect chronology. If you guess and you're wrong, you've lied.</li>
+        <li><strong>Present people as complex</strong>: Don't flatten subjects into heroes or villains. Reality is contradictory; let it be.</li>
+        <li><strong>Represent their perspective faithfully</strong>: Even if you disagree with someone, represent their thinking as they'd recognize it. No strawmanning.</li>
+        <li><strong>Don't exploit vulnerability</strong>: If someone shares something intimate, you carry that trust. Don't sensationalize it for effect.</li>
+        <li><strong>Choose omission over falsehood</strong>: If you can't tell the truth, don't tell a lie. Leave it out.</li>
+        <li><strong>Remember: your subject will read this</strong>: Write as if they're looking over your shoulder. If that makes you uncomfortable, you're doing something unethical.</li>
+      </ul>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>McPhee's relationship to his subjects is like a respectful stalker. He observes them intensely, learns their patterns, understands them deeply, and then writes about them with such precision they can't deny recognition. But he never betrays their trust. He's obsessed but ethical—a rare combination in nonfiction writing.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Language models have no ethical framework. They generate plausibly without regard for truth, accuracy, or fairness. McPhee's approach is the inverse: constrain generation by ethical obligation, not just by probability. This is alignment in action—aligning output with values, not just maximizing likelihood.</p>
+      <p>The difference: an LLM might generate a plausible biography that's completely false. McPhee would verify every fact, cross-check sources, and omit anything uncertain. Constraint through ethics, not training.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p>This connects to <em>Man's Search for Meaning</em> by Viktor Frankl: meaning comes from responsibility. McPhee treats writing as a responsible act. You're accountable to your subject, to the reader, to language itself. That responsibility is what makes the work matter.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"With nonfiction you don't ultimately have a lot of choice in what you do with material. You're always constrained by the truth."</div>
+      <div class="quote-attr">— John McPhee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY SPOTLIGHT 1: ENCOUNTERS WITH ORANGUTANS ============ -->
+<section class="story" style="background: linear-gradient(135deg, #fff5f0 0%, #ffe8dc 100%);">
+  <div class="story-inner">
+    <h2>Story Spotlight: The Orangutan Encounter</h2>
+    <p>McPhee's essay on orangutans exemplifies his research obsession. He didn't just interview primatologists—he traveled to Borneo, spent weeks in the field, observed orangutans in their natural habitat, and spoke with the researchers who'd devoted their lives to understanding them.</p>
+
+    <p>The genius of his approach: he doesn't just report what he learned. He reconstructs the *experience* of learning it. The reader accompanies him through the jungle heat, feels the frustration of searching for an animal that hides in canopy, senses the moment when an orangutan finally appears.</p>
+
+    <p>By the time McPhee tells you the science—the cognitive abilities, the tool use, the social structure—you've already *felt* why these animals matter. You've experienced the difficulty of their study, the fragility of their existence, the wonder of their presence. The facts land harder because they're embedded in experience.</p>
+
+    <div class="story-svg">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Jungle scene -->
+        <rect x="0" y="0" width="700" height="300" fill="#4a7c5a"/>
+
+        <!-- Trees -->
+        <rect x="50" y="150" width="40" height="150" fill="#2d5a2d"/>
+        <polygon points="70,150 40,80 100,80" fill="#3d7a3d"/>
+
+        <rect x="200" y="120" width="50" height="180" fill="#2d5a2d"/>
+        <polygon points="225,120 180,20 270,20" fill="#3d7a3d"/>
+
+        <rect x="400" y="140" width="45" height="160" fill="#2d5a2d"/>
+        <polygon points="422,140 390,60 455,60" fill="#3d7a3d"/>
+
+        <rect x="600" y="100" width="60" height="200" fill="#2d5a2d"/>
+        <polygon points="630,100 585,-20 675,-20" fill="#3d7a3d"/>
+
+        <!-- Canopy foliage -->
+        <ellipse cx="70" cy="100" rx="50" ry="40" fill="#5a9a5a" opacity="0.7"/>
+        <ellipse cx="225" cy="80" rx="60" ry="50" fill="#5a9a5a" opacity="0.7"/>
+        <ellipse cx="422" cy="110" rx="55" ry="45" fill="#5a9a5a" opacity="0.7"/>
+        <ellipse cx="630" cy="70" rx="65" ry="55" fill="#5a9a5a" opacity="0.7"/>
+
+        <!-- Orangutan -->
+        <circle cx="225" cy="95" r="18" fill="#cc6633"/>
+        <circle cx="225" cy="75" r="14" fill="#d97c4a"/>
+        <circle cx="215" cy="85" r="6" fill="#2d3436"/>
+        <circle cx="235" cy="85" r="6" fill="#2d3436"/>
+
+        <!-- Arms reaching -->
+        <line x1="207" y1="90" x2="180" y2="75" stroke="#cc6633" stroke-width="5"/>
+        <line x1="243" y1="90" x2="270" y2="70" stroke="#cc6633" stroke-width="5"/>
+
+        <!-- Researcher below -->
+        <circle cx="300" cy="240" r="8" fill="#2d3436"/>
+        <ellipse cx="300" cy="255" rx="7" ry="10" fill="#d4a574"/>
+        <line x1="293" y1="260" x2="280" y2="280" stroke="#2d3436" stroke-width="2"/>
+        <line x1="307" y1="260" x2="320" y2="280" stroke="#2d3436" stroke-width="2"/>
+
+        <!-- Binoculars -->
+        <circle cx="320" cy="245" r="4" fill="#555"/>
+        <circle cx="328" cy="245" r="4" fill="#555"/>
+        <line x1="320" y1="245" x2="328" y2="245" stroke="#555" stroke-width="1"/>
+
+        <!-- Sun through canopy -->
+        <circle cx="600" cy="50" r="30" fill="#ffd93d" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <p><strong>The lesson:</strong> Research isn't preparation for writing—it's *where* writing happens. McPhee discovered his actual story not in an archive but in a Borneo jungle, watching an animal that would haunt his thinking for months afterward.</p>
+  </div>
+</section>
+
+<!-- ============ STORY SPOTLIGHT 2: THE GEOLOGY OF PLACE ============ -->
+<section class="story" style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);">
+  <div class="story-inner">
+    <h2>Story Spotlight: Reading the Earth</h2>
+    <p>McPhee's geology essays are profound because he treats geological formation not as abstraction but as *narrative*. When he writes about the Appalachian Mountains, he's not just giving you a geological timeline—he's telling the story of continental collision, mineral transformation, the slow violence of plate tectonics.</p>
+
+    <p>He traveled with geologist David Love across the Wyoming landscape, and Love taught him to read the rock formations as text. A stratum told a story: ocean levels, climate change, extinction, emergence. The rocks were documents that had been there longer than language.</p>
+
+    <p>McPhee's genius: he makes you understand that the ground beneath your feet has a history as dramatic as any human story. By the end, you see landscapes differently. You understand that time operates on scales your intuition can't grasp, and that geological thinking—reading layers, understanding deep time—is a form of humility.</p>
+
+    <div class="story-svg">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Geological layers -->
+        <rect x="100" y="20" width="500" height="30" fill="#a0826d"/>
+        <text x="350" y="42" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="white">Quaternary (Recent)</text>
+
+        <rect x="100" y="50" width="500" height="35" fill="#b0936d"/>
+        <text x="350" y="75" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="white">Tertiary</text>
+
+        <rect x="100" y="85" width="500" height="40" fill="#8b7d6b"/>
+        <text x="350" y="112" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="white">Cretaceous</text>
+
+        <rect x="100" y="125" width="500" height="45" fill="#9b8d7b"/>
+        <text x="350" y="155" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="white">Jurassic</text>
+
+        <rect x="100" y="170" width="500" height="50" fill="#7b6d5b"/>
+        <text x="350" y="202" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="white">Paleozoic</text>
+
+        <rect x="100" y="220" width="500" height="40" fill="#5b4d3b"/>
+        <text x="350" y="245" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="white">Archean (Ancient)</text>
+
+        <!-- Timeline on right -->
+        <line x1="630" y1="25" x2="670" y2="25" stroke="#555" stroke-width="1"/>
+        <text x="675" y="30" font-family="'Inter', sans-serif" font-size="9" fill="#555">0 years ago</text>
+
+        <line x1="630" y1="260" x2="670" y2="260" stroke="#555" stroke-width="1"/>
+        <text x="675" y="265" font-family="'Inter', sans-serif" font-size="9" fill="#555">4 billion+ years ago</text>
+
+        <!-- Geologist figure -->
+        <circle cx="70" cy="150" r="8" fill="#2d3436"/>
+        <ellipse cx="70" cy="165" rx="6" ry="9" fill="#d4a574"/>
+        <line x1="64" y1="170" x2="50" y2="190" stroke="#2d3436" stroke-width="2"/>
+        <line x1="76" y1="170" x2="90" y2="190" stroke="#2d3436" stroke-width="2"/>
+
+        <!-- Pointing at layers -->
+        <line x1="90" y1="140" x2="100" y2="140" stroke="#2d3436" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <p><strong>The lesson:</strong> McPhee understood that structure, form, and truth are interdependent. A geological essay about deep time requires a different structure than a contemporary narrative. The form must mirror the content—to understand the earth, you must slow down, layer observations, read carefully, and accept that meaning takes geological epochs to unfold.</p>
+  </div>
+</section>
+
+<!-- ============ STORY SPOTLIGHT 3: SPORT AS METAPHOR ============ -->
+<section class="story" style="background: linear-gradient(135deg, #fef3f2 0%, #fef0f0 100%);">
+  <div class="story-inner">
+    <h2>Story Spotlight: Basketball and Basketball Philosophy</h2>
+    <p>McPhee's basketball writing is extraordinary because he approaches the sport as a complex system, not just an entertainment. In "Levels of the Game," he interweaves two tennis players' match—Arthur Ashe and Clark Graebner—with their internal thoughts, backgrounds, philosophical approaches.</p>
+
+    <p>He doesn't just describe shots; he explains the decision-making, the risk calculations, the personality of play. One player is aggressive, the other conservative—and those styles aren't just different tactics, they're different *ways of being*.</p>
+
+    <p>McPhee taught himself tennis deeply enough to write about it with authority. He studied the physics, interviewed the players repeatedly, and watched matches obsessively. Only after that immersion could he write about sport as philosophy, where every point becomes a negotiation between aggression and restraint, risk and safety, ambition and humility.</p>
+
+    <div class="story-svg">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- Tennis court -->
+        <rect x="100" y="50" width="500" height="150" fill="#8b7355" rx="4"/>
+
+        <!-- Court lines -->
+        <line x1="100" y1="130" x2="600" y2="130" stroke="white" stroke-width="2"/>
+        <line x1="350" y1="50" x2="350" y2="200" stroke="white" stroke-width="2"/>
+        <rect x="150" y="70" width="400" height="110" fill="none" stroke="white" stroke-width="2"/>
+
+        <!-- Net -->
+        <line x1="100" y1="125" x2="600" y2="125" stroke="#ddd" stroke-width="3"/>
+        <circle cx="100" cy="125" r="3" fill="#999"/>
+        <circle cx="200" cy="125" r="3" fill="#999"/>
+        <circle cx="300" cy="125" r="3" fill="#999"/>
+        <circle cx="400" cy="125" r="3" fill="#999"/>
+        <circle cx="500" cy="125" r="3" fill="#999"/>
+        <circle cx="600" cy="125" r="3" fill="#999"/>
+
+        <!-- Player 1 (Aggressive) -->
+        <circle cx="150" cy="180" r="8" fill="#dc2626"/>
+        <ellipse cx="150" cy="195" rx="6" ry="8" fill="#fcc2c2"/>
+        <line x1="144" y1="200" x2="130" y2="220" stroke="#dc2626" stroke-width="2"/>
+        <line x1="156" y1="200" x2="170" y2="220" stroke="#dc2626" stroke-width="2"/>
+
+        <!-- Racket mid-swing -->
+        <line x1="160" y1="185" x2="190" y2="140" stroke="#555" stroke-width="3"/>
+        <ellipse cx="195" cy="135" rx="8" ry="10" fill="none" stroke="#555" stroke-width="2"/>
+
+        <!-- Ball approaching -->
+        <circle cx="280" cy="122" r="4" fill="#ffd93d"/>
+
+        <!-- Player 2 (Conservative) -->
+        <circle cx="500" cy="75" r="8" fill="#0984e3"/>
+        <ellipse cx="500" cy="90" rx="6" ry="8" fill="#bae6fd"/>
+        <line x1="494" y1="95" x2="480" y2="115" stroke="#0984e3" stroke-width="2"/>
+        <line x1="506" y1="95" x2="520" y2="115" stroke="#0984e3" stroke-width="2"/>
+
+        <!-- Defensive stance -->
+        <line x1="490" y1="78" x2="460" y2="100" stroke="#555" stroke-width="3"/>
+
+        <!-- Label -->
+        <text x="350" y="230" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#555">Risk vs. Restraint</text>
+      </svg>
+    </div>
+
+    <p><strong>The lesson:</strong> McPhee treats any subject—sport, geology, orangutans—as a window into human nature and decision-making. Sport isn't just action; it's philosophy made visible. Players reveal their values through play, and the writer's job is to make those values legible to the reader.</p>
+  </div>
+</section>
+
+<!-- ============ CHEATSHEET ============ -->
+<section class="cheatsheet">
+  <div class="cheatsheet-inner">
+    <h2>The Draft No. 4 Cheatsheet</h2>
+
+    <div class="cheatsheet-grid">
+      <div class="cheatsheet-card">
+        <h3>1. Structure Matters</h3>
+        <p>Build narrative architecturally. Multiple structures exist (chronological, recursive, thematic). Choose the form that reveals your truth.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>2. Research Until You Vanish</h3>
+        <p>Know everything. Research until 70% becomes invisible. Authority comes from what you know but don't show.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>3. Omission Is Art</h3>
+        <p>Write, then subtract. Skilled omission creates the impression of depth. Let readers feel what's beneath the surface.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>4. Constraints Liberate</h3>
+        <p>Limits force creativity. A 2,000-word limit is a gift. It reveals what you truly believe matters.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>5. Structure Creates Meaning</h3>
+        <p>The form you choose determines what the reader can perceive. Different structures reveal different truths about the same subject.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>6. Sentences Are Units</h3>
+        <p>Master the sentence first. Rhythm, specificity, active voice. Each sentence must earn its place.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>7. Dialogue Reveals Character</h3>
+        <p>Speech patterns show you what people care about. Don't paraphrase—record the exact words and let readers interpret.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>8. Editing Is Discovery</h3>
+        <p>First draft is research. Editing is where you discover what you actually think. Expect to cut 20-30% of words.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>9. Find Your Subject</h3>
+        <p>Your subject chooses you—it persists until you surrender. A worthy subject generates endless questions, not a finite topic.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>10. Voice Is Truth</h3>
+        <p>Your authentic voice emerges when you stop performing. Sound like yourself thinking on the page. Authenticity is audible.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>11. Mastery Through Obsession</h3>
+        <p>No shortcuts. 10,000 hours of deliberate practice. Mastery looks like madness to outsiders—that's how you know it's real.</p>
+      </div>
+
+      <div class="cheatsheet-card">
+        <h3>12. Honesty Is Ethical</h3>
+        <p>Get facts right. Represent people fairly. Write as if your subject will read it. Nonfiction carries ethical weight.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--writer-gold);">
+      <p style="color: rgba(255,255,255,0.9); font-size: 0.95rem; line-height: 1.8; margin-bottom: 12px;">
+        <strong>McPhee's Core Insight:</strong> Writing is a discipline. Not inspiration, not talent—discipline. You show up. You research obsessively. You write, cut, revise. You don't wait for the perfect moment or the right mood. You commit to the subject, to the structure, to the reader's attention.
+      </p>
+      <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; font-style: italic;">
+        "The piece cannot be rushed. Writing cannot be rushed. You will only fool yourself into thinking you have something when you haven't."
+      </p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

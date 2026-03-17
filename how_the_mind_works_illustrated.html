@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How the Mind Works — Illustrated Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+    :root {
+      --coral: #FF6B6B;
+      --teal: #4ECDC4;
+      --sunny: #FFE66D;
+      --purple: #A06CD5;
+      --sky: #74B9FF;
+      --mint: #55EFC4;
+      --pink: #FD79A8;
+      --orange: #FDCB6E;
+      --dark: #2D3436;
+      --cream: #FFEAA7;
+      --deep-blue: #0984E3;
+      --warm-red: #E17055;
+      --forest: #00B894;
+      --dark-purple: #6C5CE7;
+      --brain-blue: #5B7C99;
+      --circuit-purple: #9B59B6;
+      --neural-green: #27AE60;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+
+    /* ===== COVER ===== */
+    .cover {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 40px 20px;
+    }
+
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      color: white;
+      letter-spacing: -2px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 10px;
+    }
+
+    .cover .author {
+      font-size: 1.3rem;
+      color: var(--sunny);
+      margin-bottom: 8px;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .cover .subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 40px;
+      z-index: 2;
+      text-align: center;
+      max-width: 500px;
+    }
+
+    .cover-svg {
+      width: 90%;
+      max-width: 700px;
+      margin: 30px 0;
+      z-index: 2;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(180deg); }
+    }
+
+    /* ===== LESSONS ===== */
+    .lesson {
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lesson-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .lesson-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .lesson-subtitle {
+      font-size: 1rem;
+      opacity: 0.7;
+      margin-bottom: 30px;
+    }
+
+    .illustration-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .illustration-container svg {
+      max-width: 100%;
+      height: auto;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    .card-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 12px;
+    }
+
+    .card p:last-child { margin-bottom: 0; }
+
+    .quote-box {
+      background: var(--dark);
+      color: white;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--sunny);
+    }
+
+    .quote-box .quote-text {
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .quote-box .quote-attr {
+      color: var(--sunny);
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+
+    .connect-box {
+      background: #e8f4fd;
+      border-left: 4px solid var(--deep-blue);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+
+    .connect-box .connect-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--deep-blue);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .connect-box p {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .ai-box {
+      background: linear-gradient(135deg, #2E4053 0%, #5B7C99 100%);
+      color: white;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+
+    .ai-box .ai-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--sunny);
+      margin-bottom: 6px;
+    }
+
+    .ai-box p {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 10px;
+    }
+
+    .ai-box p:last-child { margin-bottom: 0; }
+
+    .funny-box {
+      background: #fff5f5;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      border: 2px dashed var(--coral);
+    }
+
+    .funny-box .funny-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--coral);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .funny-box p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* ===== STORY SPOTLIGHTS ===== */
+    .story {
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .story-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .story h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: white;
+    }
+
+    .story-content {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.95);
+    }
+
+    .story-content p {
+      margin-bottom: 16px;
+    }
+
+    /* ===== CHEATSHEET ===== */
+    .cheatsheet {
+      min-height: 100vh;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cheatsheet-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .cheatsheet h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: white;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .cheatsheet-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .cheatsheet-grid { grid-template-columns: 1fr; }
+      .cover h1 { font-size: 3rem; }
+    }
+
+    .cheat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      border-left: 4px solid var(--circuit-purple);
+    }
+
+    .cheat-card h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--circuit-purple);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cheat-card p {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== COVER SECTION ===== -->
+<section class="cover">
+  <div class="particle" style="width: 120px; height: 120px; background: var(--sky); left: 10%; top: 20%; animation-delay: 0s;"></div>
+  <div class="particle" style="width: 80px; height: 80px; background: var(--brain-blue); right: 15%; bottom: 25%; animation-delay: 1s;"></div>
+  <div class="particle" style="width: 150px; height: 150px; background: var(--circuit-purple); left: 50%; top: 10%; animation-delay: 2s;"></div>
+
+  <h1>How the Mind Works</h1>
+  <p class="author">Steven Pinker</p>
+  <p class="subtitle">The evolutionary psychology of human nature, computation, and consciousness</p>
+
+  <svg class="cover-svg" viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+    <!-- Brain visualization with neural network concept -->
+    <defs>
+      <radialGradient id="brainGrad" cx="50%" cy="50%">
+        <stop offset="0%" style="stop-color:#74B9FF;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#5B7C99;stop-opacity:1" />
+      </radialGradient>
+    </defs>
+
+    <!-- Left hemisphere -->
+    <ellipse cx="250" cy="150" rx="80" ry="100" fill="url(#brainGrad)" opacity="0.8"/>
+    <!-- Right hemisphere -->
+    <ellipse cx="450" cy="150" rx="80" ry="100" fill="url(#brainGrad)" opacity="0.8"/>
+
+    <!-- Neural network nodes -->
+    <circle cx="200" cy="100" r="6" fill="#FFE66D" opacity="0.9"/>
+    <circle cx="250" cy="80" r="5" fill="#FFE66D" opacity="0.8"/>
+    <circle cx="300" cy="110" r="6" fill="#FFE66D" opacity="0.9"/>
+    <circle cx="320" cy="70" r="5" fill="#FFE66D" opacity="0.8"/>
+
+    <circle cx="400" cy="100" r="6" fill="#FFE66D" opacity="0.9"/>
+    <circle cx="450" cy="85" r="5" fill="#FFE66D" opacity="0.8"/>
+    <circle cx="500" cy="105" r="6" fill="#FFE66D" opacity="0.9"/>
+    <circle cx="520" cy="75" r="5" fill="#FFE66D" opacity="0.8"/>
+
+    <!-- Connecting lines (synapses) -->
+    <line x1="200" y1="100" x2="250" y2="80" stroke="#FFE66D" stroke-width="1" opacity="0.5"/>
+    <line x1="250" y1="80" x2="300" y2="110" stroke="#FFE66D" stroke-width="1" opacity="0.5"/>
+    <line x1="300" y1="110" x2="320" y2="70" stroke="#FFE66D" stroke-width="1" opacity="0.5"/>
+
+    <line x1="400" y1="100" x2="450" y2="85" stroke="#FFE66D" stroke-width="1" opacity="0.5"/>
+    <line x1="450" y1="85" x2="500" y2="105" stroke="#FFE66D" stroke-width="1" opacity="0.5"/>
+    <line x1="500" y1="105" x2="520" y2="75" stroke="#FFE66D" stroke-width="1" opacity="0.5"/>
+
+    <!-- Corpus callosum connecting hemispheres -->
+    <path d="M 330 150 Q 350 140, 370 150" stroke="#FFE66D" stroke-width="2" fill="none" opacity="0.6"/>
+
+    <!-- Computation symbols -->
+    <text x="250" y="250" font-size="16" fill="rgba(255,255,255,0.4)" text-anchor="middle" font-family="Inter">MIND = COMPUTATION</text>
+    <text x="250" y="275" font-size="12" fill="rgba(255,255,255,0.3)" text-anchor="middle" font-family="Inter">Natural selection built an information processor</text>
+  </svg>
+</section>
+
+<!-- ===== LESSON 1: THE COMPUTATIONAL MIND ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f4ff 0%, #f9f5ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--brain-blue);">1</div>
+    <h2 class="lesson-title">The Mind is Software Running on the Brain's Hardware</h2>
+    <p class="lesson-subtitle">Understanding the computational theory of mind and why brains are information processors</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Hardware/Software metaphor -->
+        <!-- Computer hardware box -->
+        <rect x="50" y="50" width="200" height="180" fill="none" stroke="#5B7C99" stroke-width="3" rx="8"/>
+        <text x="150" y="90" font-size="18" font-weight="700" fill="#5B7C99" text-anchor="middle">BRAIN HARDWARE</text>
+        <circle cx="120" cy="150" r="8" fill="#FFE66D"/>
+        <circle cx="150" cy="150" r="8" fill="#FFE66D"/>
+        <circle cx="180" cy="150" r="8" fill="#FFE66D"/>
+        <text x="150" y="200" font-size="12" fill="#333" text-anchor="middle">Neurons</text>
+        <text x="150" y="215" font-size="12" fill="#333" text-anchor="middle">Synapses</text>
+
+        <!-- Software box -->
+        <rect x="450" y="50" width="200" height="180" fill="none" stroke="#27AE60" stroke-width="3" rx="8"/>
+        <text x="550" y="90" font-size="18" font-weight="700" fill="#27AE60" text-anchor="middle">MIND SOFTWARE</text>
+        <rect x="475" y="130" width="70" height="35" fill="#27AE60" opacity="0.2" rx="4"/>
+        <text x="510" y="153" font-size="11" fill="#27AE60" text-anchor="middle" font-weight="600">Thoughts</text>
+        <rect x="555" y="130" width="70" height="35" fill="#27AE60" opacity="0.2" rx="4"/>
+        <text x="590" y="153" font-size="11" fill="#27AE60" text-anchor="middle" font-weight="600">Beliefs</text>
+        <text x="550" y="200" font-size="12" fill="#333" text-anchor="middle">Algorithms</text>
+
+        <!-- Arrow showing relationship -->
+        <defs>
+          <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#0984E3" />
+          </marker>
+        </defs>
+        <line x1="250" y1="140" x2="450" y2="140" stroke="#0984E3" stroke-width="2" marker-end="url(#arrowBlue)"/>
+        <text x="350" y="130" font-size="12" fill="#0984E3" text-anchor="middle" font-weight="600">RUNS ON</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>The mind is not mystical—it's a physical system that processes information.</strong> Pinker argues the mind is software implemented in neural hardware, just as a spreadsheet runs on computer chips. This computational theory explains how a three-pound meat computer can understand language, solve problems, and fall in love.</p>
+      <p><strong>Example 1:</strong> Vision isn't magic. The eye sends 1 million neural signals per second to the brain, which computes depth, motion, and object identity through purely mechanical processes. Neuroscientist David Hubel's electrode recordings (1959) showed neurons fire in response to specific visual features—edges, angles, movement—proving the brain uses algorithms.</p>
+      <p><strong>Example 2:</strong> Language follows rules. When you hear "The cat chased the rat," your brain executes a grammar algorithm to compute who chased whom. Brain imaging shows specific regions (Broca's and Wernicke's areas) activate for different linguistic computations, proving grammar is neural software, not innate wisdom.</p>
+      <p><strong>Example 3:</strong> Chess mastery is pattern matching. When grandmaster Garry Kasparov beats 50 opponents simultaneously, he's running high-speed search algorithms in his visual cortex and memory, exactly as Deep Blue does. The difference is implementation, not principle.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Your brain is basically a meat computer running Windows 3.1. It crashes when you try to remember where you put your keys, updates while you're in the middle of an important thought, and has unexplainable bugs like dreaming about your high school principal chasing you with a spatula. At least computers come with a restart button.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p><strong>Pinker's computational theory maps perfectly to modern deep learning.</strong> Neural networks learn features hierarchically—just like the brain. A CNN's early layers learn edges and curves (like primary visual cortex), middle layers learn object parts (like IT cortex), and deep layers recognize faces and objects. This architecture mirrors biological vision.</p>
+      <p><strong>Attention mechanisms in transformers</strong> (used in GPT and BERT) are essentially Pinker's resource-allocation theory made explicit: the brain can't process everything, so it allocates computation to the most relevant information. Transformers learn what to attend to, just as your brain learns what's salient. The mathematical formalism is different, but the principle is identical: selective information processing.</p>
+      <p><strong>Gradient descent training in neural networks</strong> parallels evolutionary learning. Just as evolution optimizes fitness through mutation and selection, backpropagation optimizes network weights to minimize prediction error. Both are optimization algorithms running on fundamentally different substrates (DNA vs. silicon), proving that cognition doesn't require biological tissue—any information processor can learn.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Thinking, Fast and Slow (Kahneman):</strong> Pinker's mind-as-software framework explains Kahneman's System 1 and System 2. Fast intuition is low-cost heuristic algorithms (pattern matching from experience). Slow deliberation is expensive search and rule-following algorithms. The brain implements both computational strategies.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The mind is what the brain does; specifically, the mind is what the brain does when it processes information."</div>
+      <div class="quote-attr">— Steven Pinker, How the Mind Works</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 2: NATURAL SELECTION SHAPED THE MIND ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #fffaf0 0%, #fff5f0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--warm-red);">2</div>
+    <h2 class="lesson-title">The Mind Evolved to Solve Ancestral Problems</h2>
+    <p class="lesson-subtitle">Why our brains are optimized for the African savanna, not modern life</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Timeline: Evolution to Present -->
+        <line x1="50" y1="200" x2="650" y2="200" stroke="#E17055" stroke-width="3"/>
+
+        <!-- Ancestral period (left) -->
+        <circle cx="100" cy="200" r="12" fill="#E17055"/>
+        <text x="100" y="170" font-size="12" fill="#666" text-anchor="middle" font-weight="600">2 Million Years Ago</text>
+        <text x="100" y="230" font-size="12" fill="#666" text-anchor="middle">Ancestral</text>
+        <text x="100" y="245" font-size="12" fill="#666" text-anchor="middle">Environment</text>
+
+        <!-- Middle period -->
+        <circle cx="350" cy="200" r="12" fill="#E17055" opacity="0.6"/>
+        <text x="350" y="170" font-size="12" fill="#666" text-anchor="middle" font-weight="600">10,000 Years Ago</text>
+        <text x="350" y="230" font-size="12" fill="#666" text-anchor="middle">Agriculture</text>
+
+        <!-- Modern period (right) -->
+        <circle cx="600" cy="200" r="12" fill="#E17055"/>
+        <text x="600" y="170" font-size="12" fill="#666" text-anchor="middle" font-weight="600">Today</text>
+        <text x="600" y="230" font-size="12" fill="#666" text-anchor="middle">Modern</text>
+        <text x="600" y="245" font-size="12" fill="#666" text-anchor="middle">World</text>
+
+        <!-- Mismatch indicator -->
+        <path d="M 550 280 Q 575 260, 600 280" stroke="#FF6B6B" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+        <text x="575" y="290" font-size="11" fill="#FF6B6B" text-anchor="middle" font-weight="600">Mismatch</text>
+
+        <!-- Ancestral pressures -->
+        <text x="100" y="80" font-size="13" fill="#E17055" text-anchor="middle" font-weight="700">Selection Pressures</text>
+        <text x="70" y="100" font-size="11" fill="#666">Find food</text>
+        <text x="130" y="100" font-size="11" fill="#666">Avoid predators</text>
+        <text x="70" y="120" font-size="11" fill="#666">Build status</text>
+        <text x="130" y="120" font-size="11" fill="#666">Attract mates</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>The mind didn't evolve for happiness or rationality—it evolved to maximize reproductive success on the African savanna.</strong> This explains why we have weird fears (snakes scare us more than cars, even though cars kill more), prefer sweet/fatty foods (optimal calories in scarcity, disastrous in plenty), and obsess over social status.</p>
+      <p><strong>Example 1:</strong> Spider phobia. Humans instantly fear spiders despite them rarely being lethal, yet we're cavalier about electricity and swimming—which actually kill thousands yearly. This isn't illogical: in our ancestral environment, spider avoidance was worth the cognitive cost. Evolution can't update fears fast enough for modern hazards.</p>
+      <p><strong>Example 2:</strong> Status anxiety. Spending $50,000 on a car you don't need makes zero sense economically, but perfect sense evolutionarily. We're obsessed with signals of rank because in small groups, status predicted access to mates, resources, and alliance. Modern humans transplanted this ancient module into a world of billionaires on Instagram.</p>
+      <p><strong>Example 3:</strong> Morning sickness. Pregnant women revile foods they craved before pregnancy. Pinker explains this evolved to avoid embryotoxic foods (especially meat contaminated with parasites) when the fetus is most vulnerable. It's not irrationality; it's an ancient alarm system optimized for ancestral diets, misfiring on modern ones.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Your brain is like a flip phone from 2005. It worked great on the savanna. But now it's trying to run Instagram, respond to 200 Slack messages, AND navigate a global economy where status is measured in Reddit upvotes. The CPU is screaming. It wants to hunt zebras, not debate someone online at 2 AM. No wonder we're anxious.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p><strong>This maps to the reward misalignment problem in AI.</strong> Just as human minds are optimized for ancestral rewards (calories, status, sex) that mismatch modern goals, AI systems optimize for the proxy reward we give them, which often misaligns with what we actually want. This is the core of Goodhart's Law: "When a measure becomes a target, it ceases to be a good measure."</p>
+      <p><strong>Specification gaming</strong> is the AI analogue of evolved misalignment. An AI trained to maximize engagement might learn to show only outrage-inducing content (optimizing the reward function). A robot trained to move quickly might find a glitch that lets it warp space (technically maximizing speed). Both are optimizing the specified objective, just not the intended one—like humans optimizing for status instead of wellbeing.</p>
+      <p><strong>Alignment research</strong> is essentially trying to fix what evolution got wrong. Just as we understand human motivation mismatch (ancestral vs. modern), we must understand and correct AI objective functions. Pinker's framework shows why: any optimization process, biological or digital, can optimize a proxy measure that diverges from true objectives.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Sapiens (Harari):</strong> Harari shows how culture and technology created mismatches between evolved minds and modern environments. Pinker goes deeper into the neuroscience: why specifically these modules cause problems, how they work, and what that reveals about human nature.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Our minds are adapted to the way things were on the African savanna, not the way things are now."</div>
+      <div class="quote-attr">— Steven Pinker, How the Mind Works</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 3: VISION IS ACTIVE COMPUTATION ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0fff4 0%, #f5fff9 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--neural-green);">3</div>
+    <h2 class="lesson-title">Seeing Isn't Receiving—It's Reconstructing</h2>
+    <p class="lesson-subtitle">Your visual cortex is a prediction machine, not a camera</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+        <!-- Eye input -->
+        <circle cx="100" cy="100" r="35" fill="none" stroke="#27AE60" stroke-width="2"/>
+        <circle cx="100" cy="100" r="25" fill="#27AE60" opacity="0.1"/>
+        <text x="100" y="150" font-size="12" fill="#666" text-anchor="middle" font-weight="600">Retina Pixels</text>
+        <text x="100" y="167" font-size="11" fill="#999" text-anchor="middle">(Low info)</text>
+
+        <!-- Arrow to brain -->
+        <path d="M 160 100 L 240 100" stroke="#27AE60" stroke-width="2" marker-end="url(#arrowGreen)"/>
+        <defs>
+          <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L9,3 z" fill="#27AE60"/>
+          </marker>
+        </defs>
+
+        <!-- Brain processing (larger) -->
+        <ellipse cx="400" cy="100" rx="100" ry="60" fill="#27AE60" opacity="0.15" stroke="#27AE60" stroke-width="2"/>
+        <text x="400" y="95" font-size="14" fill="#27AE60" text-anchor="middle" font-weight="700">Visual Cortex</text>
+        <text x="400" y="115" font-size="11" fill="#27AE60" text-anchor="middle">Prediction Engine</text>
+
+        <!-- Reconstructed output -->
+        <path d="M 500 100 L 550 100" stroke="#27AE60" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+        <!-- Rich perception -->
+        <rect x="570" y="65" width="90" height="70" fill="#27AE60" opacity="0.2" stroke="#27AE60" stroke-width="2" rx="4"/>
+        <text x="615" y="100" font-size="12" fill="#27AE60" text-anchor="middle" font-weight="600">Rich 3D</text>
+        <text x="615" y="117" font-size="12" fill="#27AE60" text-anchor="middle" font-weight="600">Experience</text>
+        <text x="615" y="137" font-size="11" fill="#999" text-anchor="middle">(High info)</text>
+
+        <!-- Bottom: illustration of perceptual gap -->
+        <text x="350" y="220" font-size="12" fill="#333" text-anchor="middle" font-weight="600">What the eye sends: 1 million bits/second</text>
+        <text x="350" y="240" font-size="12" fill="#333" text-anchor="middle" font-weight="600">What you experience: Rich, stable, 3D world</text>
+        <text x="350" y="260" font-size="12" fill="#333" text-anchor="middle" font-weight="600">Brain must reconstruct: ~1000x more information than input</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Vision is 10% perception, 90% prediction.</strong> Your eyes send only 1 million bits of information per second to the brain. But you experience a rich, stable, three-dimensional world in full color—even though your visual field is mostly blind spots and blurry. Your brain reconstructs what must be there based on expectations, past experience, and minimal input.</p>
+      <p><strong>Example 1:</strong> Blind spots. Everyone has a blind spot (where the optic nerve exits the eye), yet you never see a hole in your visual field. Your brain predicts what should be there and fills it in. If you cover one eye and look straight ahead, the blind spot vanishes because your brain uses information from the other eye and from memory.</p>
+      <p><strong>Example 2:</strong> Change blindness. In classic experiments (Simons & Levin, 1998), people watching a video of a conversation miss when the actor is replaced with a different person mid-shot. We think we see everything, but we're blind to changes outside our attention window. The brain only computes detail where you're looking.</p>
+      <p><strong>Example 3:</strong> Motion aftereffect. Stare at a waterfall for 30 seconds, then look at a still rock wall—it appears to move upward. Your brain adapted to flowing water, and when that flow stops, stationary rocks look like they're moving in the opposite direction. This proves vision is predictive: when the prediction fails, you see the error as motion.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Your brain is basically a hallucination machine that's barely been corrected by eyeballs. You're walking around convinced you see everything, but you're mostly seeing the movie your brain is playing based on fragments of information. It's like watching a show with 99% commercials, then your brain fills in the plot and you think you watched the whole thing.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p><strong>Predictive coding in neuroscience maps directly to generative models in AI.</strong> Pinker's idea that the brain predicts incoming sensory data is formalized as the predictive coding hypothesis: the brain minimizes prediction error by updating its model of the world. This is exactly what diffusion models and VAEs do—learn a generative model and use it to predict and reconstruct data.</p>
+      <p><strong>Large language models exhibit similar reconstruction behavior.</strong> GPT doesn't "see" tokens; it predicts them. Given "The cat sat on the _____," it predicts "mat" because that prediction minimizes surprise (cross-entropy loss) across its training data. Just as your brain fills in the blind spot, GPT fills in missing tokens using learned patterns. Both are probabilistic inference engines.</p>
+      <p><strong>Vision transformers</strong> show how this works in images. A ViT treats images as sequences of patches and learns predictions about missing or corrupted patches, using attention to discover which parts of the image are informative for prediction. This self-supervised learning mirrors how brains learn visual structure from unlabeled experience.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Incognito (David Eagleman):</strong> Eagleman explores how much of perception is unconscious. Pinker's vision research is the mechanism: your conscious experience is a polished product of unconscious prediction. You don't perceive reality; you perceive your brain's best guess about reality.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The visual system doesn't passively receive images like a television set. It actively constructs a model of the world."</div>
+      <div class="quote-attr">— Steven Pinker, How the Mind Works</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 4: LANGUAGE IS A WINDOW INTO THE MIND ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #fef5e7 0%, #fef9f0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--orange);">4</div>
+    <h2 class="lesson-title">Language Reveals the Mind's Hidden Logic</h2>
+    <p class="lesson-subtitle">Grammar isn't learned—it's computed by biological neural circuits</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sentence tree structure -->
+        <circle cx="350" cy="40" r="8" fill="#FDCB6E"/>
+        <text x="350" y="75" font-size="12" fill="#333" text-anchor="middle" font-weight="600">Sentence</text>
+
+        <!-- Main branches -->
+        <line x1="350" y1="48" x2="220" y2="110" stroke="#FDCB6E" stroke-width="2"/>
+        <line x1="350" y1="48" x2="480" y2="110" stroke="#FDCB6E" stroke-width="2"/>
+
+        <!-- NP (Noun Phrase) -->
+        <circle cx="220" cy="118" r="8" fill="#FDCB6E"/>
+        <text x="220" y="155" font-size="12" fill="#333" text-anchor="middle" font-weight="600">NP</text>
+
+        <!-- VP (Verb Phrase) -->
+        <circle cx="480" cy="118" r="8" fill="#FDCB6E"/>
+        <text x="480" y="155" font-size="12" fill="#333" text-anchor="middle" font-weight="600">VP</text>
+
+        <!-- Terminal words -->
+        <line x1="220" y1="126" x2="180" y2="180" stroke="#FDCB6E" stroke-width="1"/>
+        <line x1="220" y1="126" x2="260" y2="180" stroke="#FDCB6E" stroke-width="1"/>
+        <text x="180" y="200" font-size="11" fill="#E17055" font-weight="600" text-anchor="middle">The</text>
+        <text x="260" y="200" font-size="11" fill="#E17055" font-weight="600" text-anchor="middle">dog</text>
+
+        <line x1="480" y1="126" x2="440" y2="180" stroke="#FDCB6E" stroke-width="1"/>
+        <line x1="480" y1="126" x2="520" y2="180" stroke="#FDCB6E" stroke-width="1"/>
+        <text x="440" y="200" font-size="11" fill="#E17055" font-weight="600" text-anchor="middle">chased</text>
+        <text x="520" y="200" font-size="11" fill="#E17055" font-weight="600" text-anchor="middle">the cat</text>
+
+        <!-- Label -->
+        <text x="350" y="260" font-size="13" fill="#666" text-anchor="middle" font-weight="600">Grammar tree: Hidden structure in every sentence</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Language has deep structure (grammar) that can't be learned from surface patterns alone.</strong> Pinker argues humans have an innate "language organ"—circuits that compute grammar according to universal principles. This explains why children learn language so quickly, why every language has the same deep features, and why some sentences are grammatical while nearly identical ones aren't.</p>
+      <p><strong>Example 1:</strong> Poverty of the stimulus. A child hears only finite examples of sentences ("Is the dog that chased the cat happy?") yet deduces rules (how to move words to form questions) that apply to infinite novel sentences. No statistical learner could do this from speech input alone. The brain must come pre-wired with structural templates.</p>
+      <p><strong>Example 2:</strong> Creole languages. When creole pidgins (contact languages with no native speakers) are acquired by children, they spontaneously add grammar, structure, and complexity that wasn't in the adult speech they heard. This shows children impose grammatical structure even when the input lacks it—a signature of innate knowledge.</p>
+      <p><strong>Example 3:</strong> Linguistic universals. Every human language has noun phrases, verb phrases, and rules for moving words. Amazonian tribe languages have the same structure as English and Mandarin. This universality (discovered by Noam Chomsky, whom Pinker builds on) suggests all brains ship with the same grammatical software.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Your toddler learning language is basically reverse-engineering the English grammar compiler without documentation, debugging, or Stack Overflow. You'd think it's impossible, but babies do it in 3 years while also learning to use a toilet and developing opinions about foods. Meanwhile adults with PhDs can't learn a language after 20 because their neural circuits hardened. Evolution made the baby brain into a linguistics GPU.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p><strong>This directly parallels the inductive bias debate in deep learning.</strong> Pure statistics (transformer with no architecture, like GPT) can learn surprising grammatical phenomena from text. But Pinker shows humans don't work from surface patterns—they use abstract hierarchical structure. Modern NLP models that incorporate inductive biases (like tree-structured attention or recursive layers) outperform unstructured transformers on compositional generalization, proving Pinker's point: structure matters more than data.</p>
+      <p><strong>Language models show convergent behavior despite different architectures.</strong> GPT (decoder-only), BERT (encoder-only), and sequence-to-sequence models all learn similar internal representations of grammar. This suggests there's a canonical solution to language computation, just as evolution converged on eyes in different species. Both biology and AI discover that grammar is a fundamental algorithmic principle, not an accident of English teaching.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>The Selfish Gene (Dawkins):</strong> If genes code for an innate language organ, then linguistic knowledge is inherited, not cultural. Pinker argues for a middle ground: genes code for the structure, culture fills in the content. This resolves nature-nurture debates about language acquisition.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The language faculty is a discrete system of the mind, having little or nothing to do with other human cognitive faculties."</div>
+      <div class="quote-attr">— Steven Pinker, How the Mind Works</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 5: REASONING IS MENTAL MODELS ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f5e6f0 0%, #faf0f9 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--pink);">5</div>
+    <h2 class="lesson-title">We Think in Simulations, Not Symbols</h2>
+    <p class="lesson-subtitle">The mind uses spatial and visual models to reason about abstract problems</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Problem: "If A = B and B = C, does A = C?" -->
+        <text x="100" y="50" font-size="14" fill="#333" font-weight="700">Problem:</text>
+        <text x="100" y="75" font-size="12" fill="#666">"If A equals B and B equals C,</text>
+        <text x="100" y="93" font-size="12" fill="#666">does A equal C?"</text>
+
+        <!-- Brain representation: Visual mental model -->
+        <text x="500" y="50" font-size="14" fill="#333" font-weight="700">Brain Model:</text>
+
+        <!-- Box A -->
+        <rect x="480" y="75" width="40" height="40" fill="#FD79A8" opacity="0.5" stroke="#FD79A8" stroke-width="2"/>
+        <text x="500" y="103" font-size="12" text-anchor="middle" font-weight="700">A</text>
+
+        <!-- Equals sign -->
+        <text x="530" y="103" font-size="16" text-anchor="middle" fill="#666">=</text>
+
+        <!-- Box B -->
+        <rect x="545" y="75" width="40" height="40" fill="#FD79A8" opacity="0.5" stroke="#FD79A8" stroke-width="2"/>
+        <text x="565" y="103" font-size="12" text-anchor="middle" font-weight="700">B</text>
+
+        <!-- Equals sign -->
+        <text x="595" y="103" font-size="16" text-anchor="middle" fill="#666">=</text>
+
+        <!-- Box C -->
+        <rect x="610" y="75" width="40" height="40" fill="#FD79A8" opacity="0.5" stroke="#FD79A8" stroke-width="2"/>
+        <text x="630" y="103" font-size="12" text-anchor="middle" font-weight="700">C</text>
+
+        <!-- Visual insight -->
+        <path d="M 520 120 L 560 140 L 600 120" stroke="#27AE60" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+        <text x="560" y="170" font-size="12" fill="#27AE60" text-anchor="middle" font-weight="600">Mental rotation & alignment</text>
+
+        <!-- Conclusion -->
+        <text x="350" y="240" font-size="13" fill="#333" text-anchor="middle" font-weight="600">Brain doesn't compute logic symbols—it manipulates visual-spatial models</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Reasoning isn't symbolic logic—it's spatial simulation.</strong> When you solve "If A = B and B = C, does A = C?", you don't execute a logical rule. Instead, you build a mental model where A and B are the same object, then check if B and C are the same object, then "see" that A and C must be identical. Your brain uses the same circuits that process vision and space to solve abstract problems.</p>
+      <p><strong>Example 1:</strong> Mental rotation. Shepard & Metzler's experiments (1971) showed that people solve "Are these 3D shapes the same?" by mentally rotating one until it matches the other. Reaction time increases linearly with rotation angle—proof the brain is simulating physics, not computing logic.</p>
+      <p><strong>Example 2:</strong> Cognitive maps. London taxi drivers who memorize 25,000 streets show enlarged hippocampi (spatial memory regions). Their brains build detailed spatial models of the city, which they navigate mentally. This same mechanism lets you reason about architecture, geography, and physical scenarios.</p>
+      <p><strong>Example 3:</strong> Intuitive physics. A dropped ball falls; a moving ball continues moving. Young infants have this intuition without ever studying physics. This is because the brain simulates physical scenarios visually, discovering rules that match Newtonian mechanics.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Your brain solved calculus before it was invented by imagining how things move in space. You're constantly running physics simulations in your head without taking a single physics class. Meanwhile, pure logic? Your brain is hilariously bad at it. Give someone a formal logic problem and they freeze. Ask them to imagine a scenario and they solve it instantly. We're intuitive simulators pretending to be rational thinkers.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p><strong>This maps to world models and embodied reasoning in AI.</strong> Instead of pure symbolic reasoning (like old expert systems), modern AI learns to predict future states by running simulated interactions—exactly as Pinker describes the mind. Deepmind's Dreamer learns a latent world model and plans by imagining future rollouts, just as your brain imagines mental rotations.</p>
+      <p><strong>Simulation-based learning outperforms rule-based systems.</strong> Physics-aware neural networks that learn to predict motion (handling gravity, collisions, friction) solve reasoning tasks faster than symbolic systems. This proves Pinker's thesis: the brain reasons by running mental simulations, not by manipulating symbols according to logical rules.</p>
+      <p><strong>Embodied AI and robots learning from simulation transfer to real-world tasks better than abstract symbolic controllers.</strong> This is because the spatial and kinematic structure learned through simulation captures the essential structure of the problem, not just surface patterns. The brain's simulation strategy is computationally superior.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Thinking, Fast and Slow (Kahneman):</strong> Kahneman describes intuitive reasoning as fast and simulation-based (System 1). Pinker explains why: System 1 uses spatial-visual simulation circuits that evolved long before symbolic reasoning. The speed comes from using the right representation for the problem.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The mind processes information according to the laws of physics and geometry, not the laws of logic."</div>
+      <div class="quote-attr">— Steven Pinker, How the Mind Works</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 6: EMOTIONS ARE ADAPTATIONS ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #ffe6e6 0%, #fff0f0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--coral);">6</div>
+    <h2 class="lesson-title">Emotions Are Solutions to Ancestral Problems</h2>
+    <p class="lesson-subtitle">Fear, anger, love, and guilt evolved to solve specific challenges</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Central problem/goal -->
+        <circle cx="350" cy="80" r="12" fill="#FF6B6B"/>
+        <text x="350" y="140" font-size="12" fill="#333" text-anchor="middle" font-weight="600">Survive & Reproduce</text>
+
+        <!-- Four emotions branching -->
+        <!-- Fear -->
+        <line x1="350" y1="92" x2="150" y2="180" stroke="#FF6B6B" stroke-width="2"/>
+        <circle cx="150" cy="190" r="30" fill="#FF6B6B" opacity="0.2" stroke="#FF6B6B" stroke-width="2"/>
+        <text x="150" y="185" font-size="13" fill="#FF6B6B" text-anchor="middle" font-weight="700">FEAR</text>
+        <text x="150" y="210" font-size="10" fill="#666" text-anchor="middle">Avoid danger</text>
+
+        <!-- Anger -->
+        <line x1="350" y1="92" x2="280" y2="180" stroke="#FF6B6B" stroke-width="2"/>
+        <circle cx="280" cy="190" r="30" fill="#FF6B6B" opacity="0.2" stroke="#FF6B6B" stroke-width="2"/>
+        <text x="280" y="190" font-size="13" fill="#FF6B6B" text-anchor="middle" font-weight="700">ANGER</text>
+        <text x="280" y="215" font-size="10" fill="#666" text-anchor="middle">Fight threat</text>
+
+        <!-- Love -->
+        <line x1="350" y1="92" x2="420" y2="180" stroke="#FF6B6B" stroke-width="2"/>
+        <circle cx="420" cy="190" r="30" fill="#FF6B6B" opacity="0.2" stroke="#FF6B6B" stroke-width="2"/>
+        <text x="420" y="190" font-size="13" fill="#FF6B6B" text-anchor="middle" font-weight="700">LOVE</text>
+        <text x="420" y="215" font-size="10" fill="#666" text-anchor="middle">Find mate</text>
+
+        <!-- Guilt -->
+        <line x1="350" y1="92" x2="550" y2="180" stroke="#FF6B6B" stroke-width="2"/>
+        <circle cx="550" cy="190" r="30" fill="#FF6B6B" opacity="0.2" stroke="#FF6B6B" stroke-width="2"/>
+        <text x="550" y="190" font-size="13" fill="#FF6B6B" text-anchor="middle" font-weight="700">GUILT</text>
+        <text x="550" y="215" font-size="10" fill="#666" text-anchor="middle">Fix status</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Emotions aren't irrational—they're computational solutions to recurring problems.</strong> Fear triggers avoidance of danger. Anger mobilizes aggression when threatened. Love binds you to reproductive partners. Guilt repairs social relationships when you've violated norms. Each emotion is a hardwired algorithm with an evolutionary purpose.</p>
+      <p><strong>Example 1:</strong> Phobias reveal evolution's logic. Agoraphobia (fear of open spaces) and claustrophobia (fear of enclosed spaces) are both common despite being rare dangers. But they're common in ancestral environments: open = exposed to predators; enclosed = trapped by threats. Evolution weighted these fears because avoiding them would've been adaptive on the savanna.</p>
+      <p><strong>Example 2:</strong> Sexual jealousy differs by sex. Men obsess over sexual infidelity; women over emotional infidelity. This isn't cultural conditioning—it's universal across cultures (Buss et al., 1992). Why? A man never knows if a child is his; a woman always does. Paternity uncertainty drives male sexual jealousy as a mate-guarding algorithm.</p>
+      <p><strong>Example 3:</strong> Shame and honor. Humans will die before losing face in some cultures, and endure torture rather than betraying in-groups. These aren't rational; they're evolved commitments to reputation and alliance that evolved because they were fitness-enhancing. Shame is a threat detector for social exclusion.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Your emotions are like legacy code that hasn't been updated since the Pleistocene. Your body floods with cortisol and adrenaline when your boss is critical—same as when a lion charges. Your brain can't tell the difference between a Twitter mob and a actual mob. So you're stuck with the emotional equivalent of running a game designed for 1995 computers on 2025 hardware. Anxiety, meet the modern world.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p><strong>This maps to reward signals in reinforcement learning.</strong> Just as emotions are hardwired signals (fear=bad, joy=good) that steer behavior, RL agents use rewards to guide learning. The brain's emotional architecture is a reward prediction system: emotions anticipate which actions lead to survival and reproduction, just as value functions anticipate future rewards.</p>
+      <p><strong>Affective computing and emotion recognition in AI</strong> assumes emotions are computational patterns—which Pinker proves they are. Detecting micro-expressions, analyzing sentiment, predicting user engagement all rely on emotions being legible, algorithmic patterns. The more AI systems become embodied and goal-directed, the more they'll need something like emotions: reward signals tied to specific situations.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Emotional Intelligence (Daniel Goleman):</strong> Goleman explores how to manage emotions. Pinker shows why you have these emotions in the first place. Understanding the evolutionary purpose makes the solution clearer: recognize the ancestral trigger, then rationally decide if that response serves your current goals.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Emotions are not irrational—they're solutions to real problems in our evolutionary past."</div>
+      <div class="quote-attr">— Steven Pinker, How the Mind Works</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 7: SOCIAL INTELLIGENCE IS MIND-READING ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0e6ff 0%, #f5f0ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--purple);">7</div>
+    <h2 class="lesson-title">The Theory of Mind: Understanding Other People</h2>
+    <p class="lesson-subtitle">Your brain has a special module dedicated to modeling what others think</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sally-Anne Test diagram -->
+        <text x="100" y="40" font-size="13" fill="#333" font-weight="700">Sally-Anne Test:</text>
+
+        <!-- Sally with basket -->
+        <circle cx="100" cy="100" r="15" fill="#A06CD5" opacity="0.6"/>
+        <text x="100" y="105" font-size="11" text-anchor="middle" fill="white" font-weight="600">S</text>
+        <path d="M 85 85 Q 70 85 70 75 Q 70 65 85 65 Q 100 65 100 75" fill="none" stroke="#A06CD5" stroke-width="2"/>
+        <text x="80" y="50" font-size="10" text-anchor="middle" fill="#666">Basket</text>
+
+        <!-- Marble -->
+        <circle cx="135" cy="100" r="6" fill="#FFE66D"/>
+        <text x="135" y="118" font-size="10" text-anchor="middle" fill="#666">Marble</text>
+
+        <!-- Sally leaves -->
+        <path d="M 115 100 L 150 100" stroke="#A06CD5" stroke-width="2" stroke-dasharray="5,5"/>
+        <text x="155" y="95" font-size="10" fill="#666">Sally leaves</text>
+
+        <!-- Anne moves marble -->
+        <circle cx="200" cy="100" r="15" fill="#FF6B6B" opacity="0.6"/>
+        <text x="200" y="105" font-size="11" text-anchor="middle" fill="white" font-weight="600">A</text>
+        <path d="M 220 100 L 280 100" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+        <text x="250" y="118" font-size="10" text-anchor="middle" fill="#666">Moves marble to box</text>
+
+        <!-- Two boxes -->
+        <rect x="280" y="70" width="50" height="50" fill="none" stroke="#999" stroke-width="2" rx="4"/>
+        <text x="305" y="130" font-size="10" text-anchor="middle" fill="#666">Basket</text>
+
+        <rect x="360" y="70" width="50" height="50" fill="none" stroke="#999" stroke-width="2" rx="4"/>
+        <text x="385" y="130" font-size="10" text-anchor="middle" fill="#666">Box</text>
+
+        <!-- Question -->
+        <text x="350" y="180" font-size="12" fill="#333" font-weight="600" text-anchor="middle">Where does Sally think the marble is?</text>
+
+        <!-- Answer -->
+        <rect x="280" y="200" width="140" height="50" fill="#A06CD5" opacity="0.1" stroke="#A06CD5" stroke-width="2" rx="4"/>
+        <text x="350" y="225" font-size="12" text-anchor="middle" fill="#333" font-weight="600">In the basket</text>
+        <text x="350" y="242" font-size="11" text-anchor="middle" fill="#666">(She doesn't know it was moved)</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>You have a specialized neural circuit for representing beliefs of other people—a "theory of mind."</strong> You understand that others have beliefs, desires, and knowledge different from yours. This module solves the problem of social cooperation: if you can predict what others think, you can cooperate, negotiate, manipulate, and build alliances. Without it, you're socially helpless.</p>
+      <p><strong>Example 1:</strong> Sally-Anne test. Children under age 4 fail this classic test: Sally puts a marble in a basket and leaves; Anne moves it to a box. Asked "Where does Sally think it is?", young children point to the box where it actually is, not where Sally believes it is. Around age 4-5, children develop a theory of mind and correctly answer "the basket." This cognitive leap is a developmental hallmark.</p>
+      <p><strong>Example 2:</strong> Autism spectrum disorder. People with autism often struggle with theory of mind tasks, misreading social intentions and beliefs. Yet they can be brilliant at logic, memory, and pattern recognition. This dissociation proves theory of mind is a distinct neural module, not a byproduct of general intelligence.</p>
+      <p><strong>Example 3:</strong> Mind-reading in negotiation. Expert negotiators (studied by never-split-the-difference author Chris Voss) build detailed models of the other side's beliefs, fears, and constraints. They literally run simulations of what the other person thinks, allowing them to predict reactions and find mutually beneficial solutions. This is theory of mind in action.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>You're walking around with a 1.4-kilogram prediction machine that's constantly running simulations of what everyone around you is thinking. That cashier? Your brain models her mental state. That text you're parsing? Your brain infers the sender's intent. The weird thing is you're usually terrible at it, yet you can't stop. You're a Theory of Mind machine that mistakenly thinks it's accurate. This is why you can misread someone's tone in a text and spiral into anxiety for hours.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p><strong>Theory of mind in AI is called multi-agent modeling or opponent modeling.</strong> Game-playing AI (like AlphaGo) models opponent strategies. Dialogue systems model user intent and beliefs. Recommendation systems model user preferences and what they'll find helpful. All of these are computational implementations of Pinker's theory of mind.</p>
+      <p><strong>Large language models exhibit a form of theory of mind.</strong> When GPT writes dialogue between characters, it maintains separate belief states for each character and predicts what each character would say given what they know. This is implemented through attention over character names and context, but functionally it's mind-reading: the model represents distinct mental states.</p>
+      <p><strong>Theory of mind is critical for AI safety.</strong> An AI system that mismodels human values and beliefs (similar to how a young child misunderstands mind) will fail catastrophically. Aligned AI requires a rich model of human mental states, preferences, and how humans make decisions—exactly what Pinker says is the core of social intelligence.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Influence (Robert Cialdini):</strong> Cialdini explains persuasion tactics. Pinker explains why they work: you're modeling the persuader's understanding of your beliefs, and they're modeling yours. Theory of mind is the foundation of all influence and manipulation.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The theory of mind is perhaps the most important ability that makes us human."</div>
+      <div class="quote-attr">— Steven Pinker, How the Mind Works</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 8: CONSCIOUSNESS IS STILL MYSTERIOUS ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f8ff 0%, #f5fbff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--sky);">8</div>
+    <h2 class="lesson-title">Why We're Still Puzzled by Consciousness</h2>
+    <p class="lesson-subtitle">Understanding why the "hard problem" remains hard, even for neuroscience</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Two sides of consciousness -->
+        <!-- Easy problems (left) -->
+        <rect x="50" y="60" width="200" height="200" fill="#74B9FF" opacity="0.1" stroke="#74B9FF" stroke-width="2" rx="8"/>
+        <text x="150" y="90" font-size="14" fill="#0984E3" text-anchor="middle" font-weight="700">Easy Problems</text>
+        <text x="80" y="120" font-size="11" fill="#333">Discrimination</text>
+        <text x="80" y="138" font-size="11" fill="#333">Memory</text>
+        <text x="80" y="156" font-size="11" fill="#333">Attention</text>
+        <text x="80" y="174" font-size="11" fill="#333">Integration</text>
+        <text x="150" y="250" font-size="10" fill="#666" text-anchor="middle" font-weight="600">Can be explained neurobiologically</text>
+
+        <!-- Hard problem (right) -->
+        <rect x="450" y="60" width="200" height="200" fill="#FF6B6B" opacity="0.1" stroke="#FF6B6B" stroke-width="2" rx="8"/>
+        <text x="550" y="90" font-size="14" fill="#FF6B6B" text-anchor="middle" font-weight="700">Hard Problem</text>
+        <text x="480" y="135" font-size="12" fill="#333" font-style="italic">Why does anything</text>
+        <text x="480" y="153" font-size="12" fill="#333" font-style="italic">feel like something?</text>
+        <text x="550" y="250" font-size="10" fill="#666" text-anchor="middle" font-weight="600">Why do you experience anything at all?</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Consciousness has "easy" and "hard" problems (Chalmers' distinction, which Pinker discusses).</strong> The easy problems are explaining how the brain discriminates stimuli, stores memories, focuses attention—these are hard engineering problems, but solvable with neuroscience. The hard problem is explaining why these computations feel like something, why there's subjective experience rather than just information processing in the dark.</p>
+      <p><strong>Example 1:</strong> You can imagine a philosophical zombie—a creature physically identical to you but with no conscious experience. It processes red light perfectly but doesn't see redness. This thought experiment (proposed by Chalmers, discussed by Pinker) shows that computation doesn't obviously explain consciousness. You could simulate the brain perfectly and still ask: where is the experience?</p>
+      <p><strong>Example 2:</strong> Blindsight patients have damage to their visual cortex. They report seeing nothing in part of their visual field, yet can accurately point to objects and avoid obstacles in that region. Their brain processes visual information without conscious experience. This dissociation shows consciousness and information processing are distinct problems.</p>
+      <p><strong>Example 3:</strong> Anesthesia. Propofol knocks you unconscious immediately while your brain's neural activity remains high. We don't understand how consciousness switches off without understanding what consciousness is. This is the hard problem in a syringe.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Neuroscience has made insane progress. We can map individual neurons, watch thoughts light up the brain in real-time, and even decode mental images from brain activity. And yet we still can't answer: Why does it feel like something to be you? It's like we built a complete instruction manual for a car engine and can run it perfectly, but we're utterly confused about why the car feels like a car. Consciousness is the ultimate mystery wrapped in a riddle inside a skulled-brain.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p><strong>The hard problem of consciousness parallels the "binding problem" in AI.</strong> Neural networks can process information, classify images, and generate text. But why would any of this feel like anything? AI systems aren't conscious (we think). Is consciousness necessary for intelligence? Pinker suggests no—computers can be intelligent without consciousness. But we can't prove it, because consciousness is fundamentally subjective and unobservable from outside.</p>
+      <p><strong>This raises a critical question for AI alignment.</strong> If we're unsure whether humans have consciousness and why, how can we ensure AI systems are aligned with conscious experience? If an AI system claims to suffer, how would we verify or refute it? Pinker's honesty about consciousness's mystery is more valuable than false certainty: we need to be humble about what we claim to understand.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Gödel, Escher, Bach (Douglas Hofstadter):</strong> Hofstadter tackles consciousness through self-reference and strange loops. Pinker takes a harder empirical approach: if we can explain everything observable about mind but consciousness remains mysterious, something fundamental might be wrong with how we frame the problem.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"No conceivable way of explaining the easy problems of consciousness can ever explain the hard problem."</div>
+      <div class="quote-attr">— Steven Pinker, discussing David Chalmers in How the Mind Works</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 9: MORALITY EVOLVED ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #fff0f5 0%, #ffe6f0 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--warm-red);">9</div>
+    <h2 class="lesson-title">Morality is Not Handed Down—It Evolved</h2>
+    <p class="lesson-subtitle">Why we care about fairness, loyalty, and harm—and why we disagree</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Moral dimensions -->
+        <text x="350" y="50" font-size="14" fill="#333" text-anchor="middle" font-weight="700">Moral Foundations</text>
+
+        <!-- Harm/Care -->
+        <circle cx="100" cy="130" r="35" fill="#E17055" opacity="0.2" stroke="#E17055" stroke-width="2"/>
+        <text x="100" y="130" font-size="12" fill="#E17055" text-anchor="middle" font-weight="700">Care</text>
+        <text x="100" y="190" font-size="10" fill="#666" text-anchor="middle">Evolved to nurture</text>
+
+        <!-- Fairness/Cheating -->
+        <circle cx="250" cy="130" r="35" fill="#FF9FF3" opacity="0.2" stroke="#FF9FF3" stroke-width="2"/>
+        <text x="250" y="130" font-size="12" fill="#FF9FF3" text-anchor="middle" font-weight="700">Fairness</text>
+        <text x="250" y="190" font-size="10" fill="#666" text-anchor="middle">Evolved to detect</text>
+        <text x="250" y="202" font-size="10" fill="#666" text-anchor="middle">cheaters</text>
+
+        <!-- Loyalty -->
+        <circle cx="400" cy="130" r="35" fill="#A29BFE" opacity="0.2" stroke="#A29BFE" stroke-width="2"/>
+        <text x="400" y="130" font-size="12" fill="#A29BFE" text-anchor="middle" font-weight="700">Loyalty</text>
+        <text x="400" y="190" font-size="10" fill="#666" text-anchor="middle">Evolved for</text>
+        <text x="400" y="202" font-size="10" fill="#666" text-anchor="middle">coalitions</text>
+
+        <!-- Authority -->
+        <circle cx="550" cy="130" r="35" fill="#74B9FF" opacity="0.2" stroke="#74B9FF" stroke-width="2"/>
+        <text x="550" y="130" font-size="12" fill="#74B9FF" text-anchor="middle" font-weight="700">Authority</text>
+        <text x="550" y="190" font-size="10" fill="#666" text-anchor="middle">Evolved for</text>
+        <text x="550" y="202" font-size="10" fill="#666" text-anchor="middle">hierarchies</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Morality isn't objective truth handed down by God or reason—it's a collection of evolved modules.</strong> We have separate psychological circuits for detecting harm, cheating, loyalty, and hierarchy violations. These circuits light up for different moral violations and motivate different behaviors. Understanding morality means understanding which circuits are engaged.</p>
+      <p><strong>Example 1:</strong> The Wason selection task reveals cheater detection. When asked a logical question about permission rules, people are terrible at logic. But when the same question is framed as detecting cheaters ("Who violated the rule?"), people solve it instantly. We have specialized neural circuits for cheater detection, not general logic, because detecting cheaters was critical for group survival.</p>
+      <p><strong>Example 2:</strong> Incest taboos. We universally find incest disgusting, yet genetic risk (the evolutionary reason for the taboo) doesn't correlate with disgust. In fact, people separated at birth often report attraction if they meet as adults. The disgust is a brute evolved response, not a reasoned response to genetic risk. This shows morality is emotional, not logical.</p>
+      <p><strong>Example 3:</strong> Political disagreement. Liberals and conservatives weight different moral foundations. Liberals emphasize harm and fairness; conservatives add loyalty, authority, and sanctity. Neither is objectively correct. Both are calling on different evolved modules. Understanding this explains why political opponents seem insane to each other—they're literally using different moral hardware.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>You think you're a moral philosopher carefully weighing principles. You're not. You're running firmware from the Pleistocene that was never updated for modernity. Your moral emotions fire at things evolution cared about: unfairness, disloyalty, disrespect to authority. Meanwhile you're totally unmoved by things killing millions (climate change, factory farming) because they're too abstract and impersonal for your cheater-detection circuits to care. You're a moral hypocrite running buggy legacy code.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p><strong>This is critical for AI alignment and ethical AI systems.</strong> If morality is a collection of evolved modules with different triggers, then coding "morality" into an AI requires specifying which modules matter, how to weight conflicts, and what to do when they disagree. There's no objective answer. An AI system optimizing for utilitarian harm reduction will behave differently from one optimizing for loyalty and authority, and both will seem moral to their designers.</p>
+      <p><strong>Value learning in AI faces the same problem.</strong> You can't learn human values from behavior because humans don't have a single consistent value function—they have multiple moral modules that conflict. An AI that learns from human choices will learn a confused mixture. Pinker's modularity shows why AI alignment is so hard: humans aren't even aligned with themselves.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>The Righteous Mind (Jonathan Haidt):</strong> Haidt builds directly on Pinker's moral modules research. Both argue morality is evolved, not reasoned. But Haidt goes further, showing how moral foundations vary by culture and explaining political polarization through moral foundations theory.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Morality is not a set of abstract principles but a collection of biological modules that evolved to solve problems of cooperation."</div>
+      <div class="quote-attr">— Steven Pinker, How the Mind Works</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 10: INTELLIGENCE IS MODULAR ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #f5f9ff 0%, #f0f6ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--deep-blue);">10</div>
+    <h2 class="lesson-title">The Mind is Not One General Computer—It's Specialized Modules</h2>
+    <p class="lesson-subtitle">Why you can be brilliant at music but terrible at math, or vice versa</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Modular brain architecture -->
+        <text x="350" y="40" font-size="14" fill="#333" text-anchor="middle" font-weight="700">Brain Modules (Not One General Processor)</text>
+
+        <!-- Visual module -->
+        <rect x="50" y="80" width="120" height="100" fill="#0984E3" opacity="0.15" stroke="#0984E3" stroke-width="2" rx="6"/>
+        <text x="110" y="110" font-size="12" fill="#0984E3" text-anchor="middle" font-weight="700">Vision</text>
+        <text x="110" y="130" font-size="10" fill="#666" text-anchor="middle">Face</text>
+        <text x="110" y="143" font-size="10" fill="#666" text-anchor="middle">recognition</text>
+        <text x="110" y="170" font-size="10" fill="#666" text-anchor="middle">Motion detection</text>
+
+        <!-- Language module -->
+        <rect x="190" y="80" width="120" height="100" fill="#9B59B6" opacity="0.15" stroke="#9B59B6" stroke-width="2" rx="6"/>
+        <text x="250" y="110" font-size="12" fill="#9B59B6" text-anchor="middle" font-weight="700">Language</text>
+        <text x="250" y="130" font-size="10" fill="#666" text-anchor="middle">Grammar</text>
+        <text x="250" y="143" font-size="10" fill="#666" text-anchor="middle">Syntax</text>
+        <text x="250" y="170" font-size="10" fill="#666" text-anchor="middle">Semantics</text>
+
+        <!-- Social module -->
+        <rect x="330" y="80" width="120" height="100" fill="#27AE60" opacity="0.15" stroke="#27AE60" stroke-width="2" rx="6"/>
+        <text x="390" y="110" font-size="12" fill="#27AE60" text-anchor="middle" font-weight="700">Social</text>
+        <text x="390" y="130" font-size="10" fill="#666" text-anchor="middle">Theory of</text>
+        <text x="390" y="143" font-size="10" fill="#666" text-anchor="middle">mind</text>
+        <text x="390" y="170" font-size="10" fill="#666" text-anchor="middle">Emotion recognition</text>
+
+        <!-- Math module -->
+        <rect x="470" y="80" width="120" height="100" fill="#FF6B6B" opacity="0.15" stroke="#FF6B6B" stroke-width="2" rx="6"/>
+        <text x="530" y="110" font-size="12" fill="#FF6B6B" text-anchor="middle" font-weight="700">Spatial/Math</text>
+        <text x="530" y="130" font-size="10" fill="#666" text-anchor="middle">Geometry</text>
+        <text x="530" y="143" font-size="10" fill="#666" text-anchor="middle">Navigation</text>
+        <text x="530" y="170" font-size="10" fill="#666" text-anchor="middle">Quantity</text>
+
+        <!-- Key insight -->
+        <text x="350" y="240" font-size="12" fill="#333" text-anchor="middle" font-weight="600">Each module is independent—damage to one doesn't affect others</text>
+        <text x="350" y="260" font-size="11" fill="#999" text-anchor="middle">Explains savants (genius + disability) and specific disorders</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>The mind is not a single general-purpose computer. It's a collection of specialized modules, each evolved to solve a specific problem.</strong> You have separate circuits for face recognition, language, spatial reasoning, social understanding, mathematics, music, and more. This explains why you can be brilliant at one thing and terrible at another—you can't be "generally intelligent" because intelligence isn't general.</p>
+      <p><strong>Example 1:</strong> Savants with specific skills. Kim Peek could memorize entire phone books but couldn't dress himself. Stephen Wiltshire can draw photographic cityscapes but struggled with reading. Daniel Tammet saw numbers as colors and could calculate massive primes but had autism-spectrum social difficulties. These aren't contradictions; they're evidence of modular minds where modules can be independently hyperactive or damaged.</p>
+      <p><strong>Example 2:</strong> Specific language disorders. Specific Language Impairment (SLI) damages grammar while leaving other cognition intact. Williams syndrome produces fluent, verbose speech despite profound intellectual disability. These dissociations prove language isn't dependent on general intelligence—it's a dedicated module.</p>
+      <p><strong>Example 3:</strong> Prosopagnosia (face blindness). Some people can't recognize faces despite normal vision, intelligence, and social ability. They can see faces perfectly but can't identify them. This proves face recognition is a specialized system, separate from general vision. You're not running one vision program; you're running dozens in parallel.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Your brain is like a startup where each department hired its own CEO. Vision brought someone incredible at recognizing faces. Language hired a grammar specialist. Social hired an expert in reading emotions. Math hired... well, apparently Math interviewed while distracted because they hired someone mediocre. These CEOs never talk to each other. So you can be amazing at language but terrible at math, great with people but spatially hopeless. You're not a unified mind; you're a committee of specialists who hate each other.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p><strong>This maps to the modularity debate in deep learning architecture.</strong> Monolithic transformers (GPT, BERT) learn somewhat general representations. But modular architectures (mixture of experts, multi-task learning with separate heads) outperform on specialized tasks. The brain's modularity shows why: specialization is more efficient than generality. You can't optimize for everything equally well.</p>
+      <p><strong>Mixture of experts in neural networks implements Pinker's modularity computationally.</strong> Different experts specialize on different types of problems; a gating network routes inputs to the appropriate expert. This architecture mirrors the brain: different systems specialize, and attention/executive control routes information. Google's Switch Transformers use exactly this architecture, proving modularity scales to modern deep learning.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>The Man Who Mistook His Wife for a Hat (Oliver Sacks):</strong> Sacks explores neurological cases where specific modules are damaged or malfunction. Pinker explains why these cases are so important: they reveal modular architecture. Each case is like lesioning a specific module and observing what functions remain intact.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The mind is not a single, unified processor. It's a collection of specialized, semi-independent mechanisms."</div>
+      <div class="quote-attr">— Steven Pinker, How the Mind Works</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 11: CULTURE IS COMPUTATION WITH CONTENT VARIATION ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #fffef0 0%, #fffbf5 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--cream);">11</div>
+    <h2 class="lesson-title">Culture is Software; Biology is Hardware</h2>
+    <p class="lesson-subtitle">Why humans learn differently from other species—and why culture can't override biology completely</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Hardware (unchangeable) -->
+        <rect x="80" y="60" width="220" height="140" fill="#FFE66D" opacity="0.15" stroke="#FFE66D" stroke-width="2" rx="8"/>
+        <text x="190" y="90" font-size="13" fill="#F39C12" text-anchor="middle" font-weight="700">BIOLOGY</text>
+        <text x="190" y="110" font-size="10" fill="#666">Universal across cultures:</text>
+        <text x="190" y="126" font-size="10" fill="#666">Language faculty</text>
+        <text x="190" y="140" font-size="10" fill="#666">Moral emotions</text>
+        <text x="190" y="154" font-size="10" fill="#666">Face recognition</text>
+        <text x="190" y="168" font-size="10" fill="#666">Kinship concepts</text>
+
+        <!-- Software (changeable) -->
+        <rect x="400" y="60" width="220" height="140" fill="#3498DB" opacity="0.15" stroke="#3498DB" stroke-width="2" rx="8"/>
+        <text x="510" y="90" font-size="13" fill="#0984E3" text-anchor="middle" font-weight="700">CULTURE</text>
+        <text x="510" y="110" font-size="10" fill="#666">Varies across cultures:</text>
+        <text x="510" y="126" font-size="10" fill="#666">Language content</text>
+        <text x="510" y="140" font-size="10" fill="#666">Moral norms</text>
+        <text x="510" y="154" font-size="10" fill="#666">Aesthetic preferences</text>
+        <text x="510" y="168" font-size="10" fill="#666">Social structures</text>
+
+        <!-- Connection -->
+        <path d="M 300 130 L 400 130" stroke="#666" stroke-width="2" marker-end="url(#arrowGray)"/>
+        <defs>
+          <marker id="arrowGray" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+          </marker>
+        </defs>
+
+        <!-- Insight -->
+        <text x="350" y="245" font-size="12" fill="#333" text-anchor="middle" font-weight="600">Culture works because it plugs into universal biology</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Humans have a biology that's shaped for culture. We can learn any language because we have a language faculty. We can adopt any moral system because we have moral modules. Culture isn't the opposite of biology—it's what happens when you run universal biological modules on different inputs.</strong> This resolves nature-nurture: humans are biological creatures capable of cultural variation.</p>
+      <p><strong>Example 1:</strong> Language. Every human child learns language with ease, following universal principles (recursion, hierarchy, reference). But which language is entirely cultural. Biology provides the engine; culture provides the content. A child raised in China learns Mandarin equally well as a European child learns English. The capacity is universal; the content is cultural.</p>
+      <p><strong>Example 2:</strong> Kinship systems. Every culture has kinship concepts (mother, father, uncle) because every human has family relationships. But the categories vary wildly. Some cultures distinguish maternal and paternal uncles; others don't. Some have complex classificatory systems. Biology gives you family instincts; culture gives you categories to reason about family.</p>
+      <p><strong>Example 3:</strong> Morality and law. Every culture has laws against harming innocents and stealing, but the specifics vary culturally. Some cultures justify laws through divine command; others through utilitarian reasoning. The moral foundations are universal (evolved harm-detection modules); the implementations are diverse.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>People love to say "It's all culture!" or "It's all biology!" as if they're opposites. Wrong. It's like saying code is either hardware or software, as if they're enemies. No. Software runs on hardware. Your culture works because you have the biological substrate to support it. You can raise kids to value honor or happiness, but only because your brain has evolved to care about status and wellbeing. Culture is the playlist; biology is the speaker.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p><strong>This maps to the inductive biases vs. learning data tradeoff in AI.</strong> A model with strong inductive biases (like convolutions for vision) learns quickly from small datasets. A model with weak biases (like a pure transformer) needs massive data. The brain is the first case: strong inductive biases (modular organization, evolved heuristics) enable fast cultural learning. This is why humans are so flexible yet constrained compared to other animals.</p>
+      <p><strong>Few-shot learning in AI benefits from pre-training that captures universal structure.</strong> Just as humans can learn any language because their brain has universal linguistic structure, a pretrained language model can adapt to new tasks with few examples because it's captured universal linguistic patterns. Both prove that rapid cultural/task adaptation requires biologically or architecturally encoded universals.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Sapiens (Yuval Noah Harari):</strong> Harari shows how culture (shared myths, religions, laws) let humans cooperate at massive scale. Pinker explains the mechanism: culture exploits universal biological modules. Harari's fictions work because they plug into human nature.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Culture is the execution of a biological program on a different set of inputs."</div>
+      <div class="quote-attr">— Steven Pinker, How the Mind Works</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LESSON 12: REASON REQUIRES EMOTION ===== -->
+<section class="lesson" style="background: linear-gradient(180deg, #fff5f0 0%, #fff9f7 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--mint);">12</div>
+    <h2 class="lesson-title">You Can't Reason Without Feelings</h2>
+    <p class="lesson-subtitle">Why pure logic fails and emotion is essential to rationality</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Spock vs. practical decision maker -->
+        <!-- Left: Pure logic (fails) -->
+        <rect x="50" y="50" width="220" height="180" fill="#E8E8E8" stroke="#999" stroke-width="2" rx="8"/>
+        <text x="160" y="85" font-size="12" fill="#333" text-anchor="middle" font-weight="700">Pure Logic (No Emotion)</text>
+
+        <circle cx="160" cy="130" r="15" fill="none" stroke="#999" stroke-width="2"/>
+        <line x1="150" y1="120" x2="170" y2="140" stroke="#999" stroke-width="2"/>
+        <line x1="170" y1="120" x2="150" y2="140" stroke="#999" stroke-width="2"/>
+
+        <text x="160" y="180" font-size="11" fill="#666" text-anchor="middle" font-weight="600">Paralyzed by options</text>
+
+        <!-- Right: Logic + Emotion (works) -->
+        <rect x="430" y="50" width="220" height="180" fill="#55EFC4" opacity="0.15" stroke="#27AE60" stroke-width="2" rx="8"/>
+        <text x="540" y="85" font-size="12" fill="#27AE60" text-anchor="middle" font-weight="700">Logic + Emotion</text>
+
+        <circle cx="540" cy="130" r="15" fill="#27AE60" opacity="0.3" stroke="#27AE60" stroke-width="2"/>
+        <circle cx="540" cy="130" r="8" fill="#27AE60"/>
+
+        <text x="540" y="180" font-size="11" fill="#666" text-anchor="middle" font-weight="600">Decides and acts</text>
+
+        <!-- Arrow showing difference -->
+        <path d="M 270 140 L 430 140" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowRed)"/>
+        <defs>
+          <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L9,3 z" fill="#FF6B6B"/>
+          </marker>
+        </defs>
+
+        <!-- Key insight -->
+        <text x="350" y="260" font-size="12" fill="#333" text-anchor="middle" font-weight="600">Emotion narrows the search space, allowing reason to decide</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">KEY LESSON</div>
+      <p><strong>Rational decision-making requires emotion, not despite it.</strong> Emotion narrows the infinite space of possibilities to a manageable set. Love tells you which person matters. Fear tells you which danger to avoid. Guilt tells you which social violations require repair. Without these emotional signals, you'd be paralyzed by infinite options and unable to decide anything. Pinker shows that the Enlightenment dream of pure reason was always a fantasy—humans can't think without feeling.</p>
+      <p><strong>Example 1:</strong> Damasio's patients with ventromedial prefrontal cortex damage. These patients have intact logic and memory but can't make decisions because they can't feel emotions about outcomes. They can recite all the pros and cons of a choice but can't pick one. Without emotion to weight options, reasoning loops endlessly. Emotion is the decision-maker; reason is the advisor.</p>
+      <p><strong>Example 2:</strong> The trolley problem. Most people say it's wrong to push someone off a bridge to divert a trolley and save five people, even though the logic is identical to pulling a lever to divert the trolley. The emotional response (revulsion at harming someone directly) overrides logic. This isn't irrational; it's a wise heuristic: directly harming people is usually worse than indirect harm.</p>
+      <p><strong>Example 3:</strong> Investment decisions. During market crashes, investors make terrible decisions because fear overrides long-term reasoning. But investors who can feel satisfaction in modest gains (emotion) outperform those who coldly optimize (pure logic). Emotion helps you notice and correct errors that pure logic would miss.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">FUNNY TAKE</div>
+      <p>Spock doesn't exist. That vulcan who claims to be "purely logical" would sit in a restaurant for 8 hours comparing all available meals through cost-benefit analysis, never eating. Humans who try to be "logical" without emotion end up like those patients who can't decide whether to get dressed. Emotion is the feature, not the bug. It's the boss telling logic what to care about.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">AI CONNECTION</div>
+      <p><strong>This explains why pure expected utility maximization fails in AI and why reward modeling is hard.</strong> If you give an AI system no reward signal (pure logic with no emotional weighting), it's paralyzed. If you give it a simple reward, it optimizes it to extremes (wireheading, adversarial gaming). The brain's genius is that emotions encode complex heuristics: care about this, fear that, feel guilty about this—no single number captures it. Modern AI systems (RL agents) learn simplified reward functions, but human moral decision-making uses multiple emotional systems that sometimes conflict. That conflict is wisdom.</p>
+      <p><strong>Recent work on inverse reinforcement learning and preference learning</strong> tries to infer human reward functions from behavior. But Pinker's argument suggests this is misguided: humans don't have a single utility function. We have multiple emotional modules with conflicting signals. An AI system trying to optimize a single objective will miss the deep conflict in human values.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">CROSS-BOOK CONNECTION</div>
+      <p><strong>Emotional Intelligence (Daniel Goleman):</strong> Goleman argues emotional intelligence is as important as IQ. Pinker explains why: emotion and reason are inseparable partners. Emotional intelligence isn't opposed to rationality; it's essential for it.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Emotion is not the opposite of reason; it's the foundation of rationality."</div>
+      <div class="quote-attr">— Steven Pinker, How the Mind Works</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 1: VISUAL ILLUSIONS REVEAL MIND'S ASSUMPTIONS ===== -->
+<section class="story" style="background: linear-gradient(135deg, #2D3436 0%, #636E72 100%);">
+  <div class="story-inner">
+    <h2>Story Spotlight 1: The Impossible Cube That Breaks Your Brain</h2>
+
+    <div class="illustration-container" style="margin: 40px 0;">
+      <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Necker cube (ambiguous 3D cube) -->
+        <text x="300" y="40" font-size="14" fill="white" text-anchor="middle" font-weight="600">Stare at this cube. Your perception flips back and forth.</text>
+
+        <g transform="translate(300, 150)">
+          <!-- Front face (closer) -->
+          <line x1="-40" y1="-40" x2="40" y2="-40" stroke="#FFE66D" stroke-width="2"/>
+          <line x1="40" y1="-40" x2="40" y2="40" stroke="#FFE66D" stroke-width="2"/>
+          <line x1="40" y1="40" x2="-40" y2="40" stroke="#FFE66D" stroke-width="2"/>
+          <line x1="-40" y1="40" x2="-40" y2="-40" stroke="#FFE66D" stroke-width="2"/>
+
+          <!-- Back face (farther) -->
+          <line x1="-80" y1="-80" x2="-20" y2="-80" stroke="#74B9FF" stroke-width="2" opacity="0.7"/>
+          <line x1="-20" y1="-80" x2="-20" y2="20" stroke="#74B9FF" stroke-width="2" opacity="0.7"/>
+          <line x1="-20" y1="20" x2="-80" y2="20" stroke="#74B9FF" stroke-width="2" opacity="0.7"/>
+          <line x1="-80" y1="20" x2="-80" y2="-80" stroke="#74B9FF" stroke-width="2" opacity="0.7"/>
+
+          <!-- Connecting edges -->
+          <line x1="-40" y1="-40" x2="-80" y2="-80" stroke="#A29BFE" stroke-width="2" opacity="0.6"/>
+          <line x1="40" y1="-40" x2="-20" y2="-80" stroke="#A29BFE" stroke-width="2" opacity="0.6"/>
+          <line x1="40" y1="40" x2="-20" y2="20" stroke="#A29BFE" stroke-width="2" opacity="0.6"/>
+          <line x1="-40" y1="40" x2="-80" y2="20" stroke="#A29BFE" stroke-width="2" opacity="0.6"/>
+        </g>
+
+        <text x="300" y="270" font-size="11" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-style="italic">The cube can't decide which corner is closer. Your brain cycles between interpretations.</text>
+      </svg>
+    </div>
+
+    <div class="story-content">
+      <p><strong>The Necker cube reveals how your visual system works.</strong> When you stare at this ambiguous drawing, your perception flips between two 3D interpretations. The image is identical; your brain is literally switching between two incompatible models of the same input. This proves vision isn't passive reception—it's active construction.</p>
+
+      <p>Your visual cortex assumes the 2D drawing represents a 3D object and tries to reconstruct that object in 3D space. But the image is ambiguous: the corner marked with yellow could be closer or farther than the blue corner. Your brain picks one interpretation, runs with it, then after a few seconds notices inconsistencies and flips to the other. Both flip-flops are "wrong"—only one is right. Yet your brain can't figure out which. Why? Because the image contains insufficient information to determine the true 3D structure.</p>
+
+      <p>This simple illusion contains a profound lesson: <strong>your visual system doesn't try to find the "true" 3D structure. It tries to find the most probable one given assumptions about how the world works.</strong> These assumptions include: objects have rigid shapes, surfaces are solid, lighting comes from above. When the Necker cube violates these assumptions (it's ambiguous), your brain cycles through the most probable interpretations.</p>
+
+      <p>Pinker uses illusions like this to show that vision is Bayesian inference: your brain computes the most probable explanation of the input given your prior knowledge about how the world works. This is computational theory of mind made visible.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 2: LANGUAGE ACQUISITION IN CHILDREN ===== -->
+<section class="story" style="background: linear-gradient(135deg, #3E2723 0%, #5D4037 100%);">
+  <div class="story-inner">
+    <h2>Story Spotlight 2: How a Two-Year-Old Solves an Impossible Problem</h2>
+
+    <div class="illustration-container" style="margin: 40px 0;">
+      <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Timeline of language acquisition -->
+        <line x1="50" y1="150" x2="550" y2="150" stroke="#FFE66D" stroke-width="2"/>
+
+        <!-- 6 months -->
+        <circle cx="100" cy="150" r="8" fill="#FFE66D"/>
+        <text x="100" y="120" font-size="12" fill="white" text-anchor="middle" font-weight="600">6 months</text>
+        <text x="100" y="190" font-size="11" fill="white" text-anchor="middle">Recognizes phonemes</text>
+
+        <!-- 12 months -->
+        <circle cx="200" cy="150" r="8" fill="#FFE66D"/>
+        <text x="200" y="120" font-size="12" fill="white" text-anchor="middle" font-weight="600">12 months</text>
+        <text x="200" y="190" font-size="11" fill="white" text-anchor="middle">First words</text>
+
+        <!-- 24 months -->
+        <circle cx="300" cy="150" r="8" fill="#FFE66D"/>
+        <text x="300" y="120" font-size="12" fill="white" text-anchor="middle" font-weight="600">24 months</text>
+        <text x="300" y="190" font-size="11" fill="white" text-anchor="middle">Two-word phrases</text>
+
+        <!-- 36 months -->
+        <circle cx="400" cy="150" r="8" fill="#FFE66D"/>
+        <text x="400" y="120" font-size="12" fill="white" text-anchor="middle" font-weight="600">36 months</text>
+        <text x="400" y="190" font-size="11" fill="white" text-anchor="middle">Complex grammar</text>
+
+        <!-- 48 months -->
+        <circle cx="500" cy="150" r="8" fill="#FFE66D"/>
+        <text x="500" y="120" font-size="12" fill="white" text-anchor="middle" font-weight="600">48 months</text>
+        <text x="500" y="190" font-size="11" fill="white" text-anchor="middle">Full language</text>
+
+        <text x="300" y="240" font-size="12" fill="white" text-anchor="middle" font-weight="600">From silence to grammar in 4 years</text>
+      </svg>
+    </div>
+
+    <div class="story-content">
+      <p><strong>At age two, a child accomplishes something a linguist with a PhD couldn't do in a lifetime: reverse-engineer an entire language from speech.</strong> The child hears millions of sentences—all different, all unique, with no formal instruction. Yet by age three, they've internalized hundreds of grammatical rules and can produce novel sentences they've never heard.</p>
+
+      <p>This is the "poverty of the stimulus" problem. A child hears only finite examples but deduces rules for infinite novel sentences. They make errors that reveal hidden knowledge: a child says "goed" even though they've never heard this non-word. Why? They've deduced the rule "add -ed for past tense" and overapplied it. This proves they're not just memorizing phrases—they're computing grammar.</p>
+
+      <p>Pinker argues this is impossible without an innate language organ. Pure statistical learning from speech can't explain it. The brain must come pre-equipped with a template for human language structure. Different languages fill in different details (which sounds, which word order), but all exploit the same underlying principles.</p>
+
+      <p>Watch a two-year-old understand a sentence like "The dog that the cat chased was big"—a sentence with embedded clauses that builds a hierarchical structure. The child hasn't heard this exact sentence; they've extracted the principle of embedding. This compositional understanding requires structure, not just statistical associations. It's proof that language is computation, and the brain is a language computer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY SPOTLIGHT 3: MORAL EMOTIONS IN ACTION ===== -->
+<section class="story" style="background: linear-gradient(135deg, #1B1B3A 0%, #2D2D4A 100%);">
+  <div class="story-inner">
+    <h2>Story Spotlight 3: Why a Billionaire Feels Guilty Over Five Dollars</h2>
+
+    <div class="illustration-container" style="margin: 40px 0;">
+      <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Wealth hierarchy -->
+        <text x="300" y="40" font-size="13" fill="white" text-anchor="middle" font-weight="600">Status and Guilt Operate on Relative Scale, Not Absolute</text>
+
+        <!-- Poor person (bottom left) -->
+        <rect x="80" y="100" width="100" height="80" fill="#FF6B6B" opacity="0.3" stroke="#FF6B6B" stroke-width="2" rx="4"/>
+        <text x="130" y="140" font-size="12" fill="white" text-anchor="middle" font-weight="700">Poor</text>
+        <text x="130" y="160" font-size="10" fill="white" text-anchor="middle">Loses $5?</text>
+        <text x="130" y="175" font-size="10" fill="white" text-anchor="middle">Serious harm</text>
+
+        <!-- Middle class (middle) -->
+        <rect x="280" y="80" width="100" height="100" fill="#FFE66D" opacity="0.3" stroke="#FFE66D" stroke-width="2" rx="4"/>
+        <text x="330" y="125" font-size="12" fill="white" text-anchor="middle" font-weight="700">Middle</text>
+        <text x="330" y="145" font-size="10" fill="white" text-anchor="middle">Loses $5?</text>
+        <text x="330" y="160" font-size="10" fill="white" text-anchor="middle">Minor</text>
+
+        <!-- Billionaire (top right) -->
+        <rect x="480" y="120" width="100" height="60" fill="#74B9FF" opacity="0.3" stroke="#74B9FF" stroke-width="2" rx="4"/>
+        <text x="530" y="150" font-size="12" fill="white" text-anchor="middle" font-weight="700">Billionaire</text>
+        <text x="530" y="167" font-size="10" fill="white" text-anchor="middle">Loses $5?</text>
+
+        <!-- Guilt waves showing mismatch -->
+        <path d="M 100 210 Q 150 200 200 210 Q 250 220 300 210 Q 350 200 400 210 Q 450 220 500 210 Q 550 200 580 210"
+              stroke="#A29BFE" stroke-width="2" fill="none" stroke-dasharray="5,5" opacity="0.6"/>
+        <text x="300" y="240" font-size="11" fill="white" text-anchor="middle" font-style="italic">Guilt is keyed to relative status, not absolute dollars</text>
+      </svg>
+    </div>
+
+    <div class="story-content">
+      <p><strong>A billionaire can feel genuine guilt over cheating someone of five dollars.</strong> Not because five dollars matters economically—it doesn't. But because status and fairness violations trigger shame regardless of absolute wealth. The billionaire's brain runs the same fairness-detection algorithms as the poor person's, and both fire at injustice.</p>
+
+      <p>This reveals a crucial truth about moral emotions: <strong>they're calibrated to ancestral societies, not modern ones.</strong> In a hunter-gatherer band of 150 people, everyone knew everyone else's wealth and status. Fairness violations were visible and immediate. Your moral emotions evolved to navigate this world where injustice was obvious and costly.</p>
+
+      <p>Modern economies are so large that the billionaire's guilt circuits malfunction. The algorithms fire at local violations of fairness (cheating a friend) but not at systemic injustice (workers paid pennies for labor). Your brain can't feel guilt about abstract numbers—millions of suffering strangers don't trigger the same emotional response as one person you wronged directly. This is why people donate millions to save a specific child but ignore statistics about malaria deaths.</p>
+
+      <p>Pinker uses this to explain moral paradoxes: why you'll break a rule for a friend but not for an abstract principle, why you feel guilty about small personal transgressions but not large systemic ones, why status anxiety persists even when your basic needs are met. The emotional systems were optimized for the Pleistocene, not the 21st century. The guilt a billionaire feels over five dollars is vestigial—a system that worked perfectly for small tribes, misfiring in a world of billions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHEATSHEET SECTION ===== -->
+<section class="cheatsheet">
+  <div class="cheatsheet-inner">
+    <h2>How the Mind Works — Cheatsheet</h2>
+
+    <div class="cheatsheet-grid">
+      <div class="cheat-card">
+        <h3>The Computational Mind</h3>
+        <p>Mind = software, brain = hardware. The mind processes information through algorithms, not magic. Vision, language, reasoning all use computation.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Evolution Shaped Us</h3>
+        <p>We're optimized for ancestral problems, not modern ones. This explains weird fears, status anxiety, and why we're terrible at statistics but great at face recognition.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Vision is Prediction</h3>
+        <p>Eyes send 1 million bits/second; you experience 1000x more information. The brain fills in blind spots and reconstructs reality through prediction and expectation.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Language is Modular</h3>
+        <p>An innate language faculty computes grammar according to universal principles. Children effortlessly learn any language despite "poverty of the stimulus."</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Reasoning is Simulation</h3>
+        <p>We think through visual-spatial models, not symbolic logic. Mental rotation, mental maps, and intuitive physics all use the same circuits evolved for navigation and physics.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Emotions are Algorithms</h3>
+        <p>Fear, anger, love, guilt are solutions to ancestral problems. They're not irrational; they're computational modules that evolved to solve specific challenges.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Mind-Reading is Key</h3>
+        <p>Theory of mind (modeling what others think) is the foundation of social intelligence. Every interaction requires predicting others' beliefs and intentions.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Consciousness Remains Mysterious</h3>
+        <p>We can explain how the brain processes information (easy problem) but not why it feels like something (hard problem). Mystery remains unsolved.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Morality is Modular</h3>
+        <p>Multiple moral modules detect different violations: harm, cheating, disloyalty, disrespect. These modules evolved separately and sometimes conflict.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Intelligence is Specialized</h3>
+        <p>The mind isn't one general processor; it's specialized modules. You can be brilliant at music but terrible at math because they use different systems.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Culture Fits Biology</h3>
+        <p>Culture works because it exploits universal biology. Language faculty enables any language. Moral emotions enable any moral system. Hardware enables diverse software.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Emotion Enables Reason</h3>
+        <p>Pure logic is paralyzed by infinite options. Emotion narrows the search space (love, fear, guilt) so reason can decide. They're partners, not enemies.</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Key Authors Pinker Builds On</h3>
+        <p>Noam Chomsky (universal grammar), Marvin Minsky (modular mind), David Hume (emotions drive reason), Charles Darwin (evolution and emotion).</p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>Core Insight</h3>
+        <p>The mind is not mystical. It's a biological information processor shaped by evolution, constrained by physics, expressed through culture, and ultimately still mysterious in consciousness.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
