@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Essentialism: The Disciplined Pursuit of Less — Illustrated Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+    :root {
+      --coral: #FF6B6B; --teal: #4ECDC4; --sunny: #FFE66D;
+      --purple: #A06CD5; --sky: #74B9FF; --mint: #55EFC4;
+      --pink: #FD79A8; --orange: #FDCB6E; --dark: #2D3436;
+      --cream: #FFEAA7; --deep-blue: #0984E3; --warm-red: #E17055;
+      --forest: #00B894; --dark-purple: #6C5CE7;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+    .cover { min-height: 100vh; background: linear-gradient(135deg, #1a1a0a 0%, #2e2e1a 50%, #1a1a0a 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 40px 20px; }
+    .cover h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; color: white; letter-spacing: -2px; text-align: center; position: relative; z-index: 2; }
+    .cover .author { font-size: 1.3rem; color: var(--sunny); margin-top: 8px; font-weight: 600; z-index: 2; position: relative; }
+    .cover .subtitle { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 16px; z-index: 2; text-align: center; max-width: 500px; position: relative; }
+    .particle { position: absolute; border-radius: 50%; opacity: 0.15; animation: float 6s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
+    .lesson { min-height: 100vh; padding: 60px 20px; display: flex; align-items: center; justify-content: center; }
+    .lesson-inner { max-width: 900px; width: 100%; }
+    .lesson-num { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem; color: white; margin-bottom: 12px; }
+    .lesson-title { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2; }
+    .lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+    .card { background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    .card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .card p { font-size: 0.95rem; line-height: 1.7; color: #444; }
+    .quote-box { background: var(--dark); color: white; border-radius: 16px; padding: 24px 28px; margin-bottom: 20px; }
+    .quote-box .quote-text { font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+    .quote-box .quote-attr { color: var(--sunny); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+    .connect-box { background: #e8f4fd; border-left: 4px solid var(--deep-blue); border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px; }
+    .connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--deep-blue); letter-spacing: 1px; margin-bottom: 6px; }
+    .connect-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+    .ai-box { background: linear-gradient(135deg, #0984E3, #6C5CE7); color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px; }
+    .ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--sunny); margin-bottom: 6px; }
+    .ai-box p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
+    .funny-box { background: #fff5f5; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px; border: 2px dashed var(--coral); }
+    .funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: var(--coral); letter-spacing: 1px; margin-bottom: 6px; }
+    .funny-box p { font-size: 0.9rem; line-height: 1.6; color: #666; font-style: italic; }
+    .story { min-height: 100vh; padding: 60px 20px; display: flex; align-items: center; justify-content: center; }
+    .story-inner { max-width: 900px; width: 100%; }
+    .cheatsheet { min-height: 100vh; padding: 60px 20px; background: linear-gradient(135deg, #0f0f23, #1a1a3e); display: flex; align-items: center; justify-content: center; }
+    .cheatsheet-inner { max-width: 900px; width: 100%; }
+    .cheatsheet h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; text-align: center; margin-bottom: 40px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* Additional custom styles */
+    .cover-visual { position: relative; width: 300px; height: 200px; margin-bottom: 40px; }
+    .focus-arrow { position: absolute; }
+    .arrow-main { width: 80px; height: 8px; background: linear-gradient(90deg, var(--sunny), var(--orange)); border-radius: 4px; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .arrow-head { width: 0; height: 0; border-left: 12px solid transparent; border-right: 0 solid transparent; border-top: 6px solid var(--orange); border-bottom: 6px solid var(--orange); position: absolute; right: -10px; top: 1px; }
+    .scattered-arrow { position: absolute; opacity: 0.25; }
+    .color-1 { background: #FFB6B9; }
+    .color-2 { background: #FFD4D4; }
+    .color-3 { background: #FFE8E8; }
+
+    .lesson-color-1 { background: linear-gradient(135deg, #FFE66D, #FDCB6E); }
+    .lesson-color-2 { background: linear-gradient(135deg, #4ECDC4, #55EFC4); }
+    .lesson-color-3 { background: linear-gradient(135deg, #A06CD5, #6C5CE7); }
+    .lesson-color-4 { background: linear-gradient(135deg, #FF6B6B, #E17055); }
+    .lesson-color-5 { background: linear-gradient(135deg, #74B9FF, #0984E3); }
+    .lesson-color-6 { background: linear-gradient(135deg, #FD79A8, #FF6B6B); }
+    .lesson-color-7 { background: linear-gradient(135deg, #FDCB6E, #FFE66D); }
+    .lesson-color-8 { background: linear-gradient(135deg, #00B894, #55EFC4); }
+    .lesson-color-9 { background: linear-gradient(135deg, #6C5CE7, #A06CD5); }
+    .lesson-color-10 { background: linear-gradient(135deg, #E17055, #FF6B6B); }
+    .lesson-color-11 { background: linear-gradient(135deg, #0984E3, #4ECDC4); }
+    .lesson-color-12 { background: linear-gradient(135deg, #FFE66D, #FD79A8); }
+
+    .story-highlight { background: #fff8e1; border-left: 5px solid var(--warm-red); padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 20px; }
+    .story-highlight h3 { color: var(--warm-red); font-size: 1.1rem; margin-bottom: 8px; }
+    .story-highlight p { color: #555; line-height: 1.6; font-size: 0.95rem; }
+
+    .concept-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    @media (max-width: 900px) { .concept-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .concept-grid { grid-template-columns: 1fr; } }
+    .concept-card { background: white; padding: 18px; border-radius: 12px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .concept-card strong { color: var(--dark); display: block; margin-bottom: 6px; }
+    .concept-card p { font-size: 0.85rem; color: #666; }
+
+    .action-list { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .action-list ol { margin-left: 24px; }
+    .action-list li { margin-bottom: 12px; font-size: 0.95rem; color: #444; line-height: 1.6; }
+
+    footer { background: #0f0f23; color: white; text-align: center; padding: 40px 20px; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); }
+  </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div style="position: absolute; width: 100%; height: 100%; pointer-events: none;">
+    <div class="particle" style="width: 200px; height: 200px; background: var(--sunny); left: 10%; top: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="width: 150px; height: 150px; background: var(--coral); right: 15%; top: 20%; animation-delay: 1s;"></div>
+    <div class="particle" style="width: 120px; height: 120px; background: var(--teal); left: 20%; bottom: 15%; animation-delay: 2s;"></div>
+    <div class="particle" style="width: 180px; height: 180px; background: var(--purple); right: 10%; bottom: 20%; animation-delay: 3s;"></div>
+  </div>
+
+  <div class="cover-visual">
+    <div style="position: relative; width: 100%; height: 100%;">
+      <!-- Main focused arrow -->
+      <div class="focus-arrow" style="left: 10%; top: 45%;">
+        <div class="arrow-main">
+          <div class="arrow-head"></div>
+        </div>
+      </div>
+      <!-- Scattered faint arrows -->
+      <div class="scattered-arrow color-1" style="width: 40px; height: 4px; right: 15%; top: 20%; border-radius: 2px; opacity: 0.2;"></div>
+      <div class="scattered-arrow color-2" style="width: 35px; height: 4px; right: 20%; top: 35%; border-radius: 2px; opacity: 0.15;"></div>
+      <div class="scattered-arrow color-3" style="width: 45px; height: 4px; right: 10%; top: 50%; border-radius: 2px; opacity: 0.2;"></div>
+      <div class="scattered-arrow color-1" style="width: 40px; height: 4px; right: 18%; top: 65%; border-radius: 2px; opacity: 0.15;"></div>
+      <div class="scattered-arrow color-2" style="width: 38px; height: 4px; right: 12%; bottom: 20%; border-radius: 2px; opacity: 0.2;"></div>
+    </div>
+  </div>
+
+  <h1>Essentialism</h1>
+  <p class="author">by Greg McKeown</p>
+  <p class="subtitle">The Disciplined Pursuit of Less</p>
+  <p style="color: rgba(255,255,255,0.5); margin-top: 20px; font-size: 0.9rem; position: relative; z-index: 2;">Illustrated Guide & Deep Dive</p>
+</div>
+
+<!-- LESSON 1: THE SUCCESS PARADOX -->
+<div class="lesson" style="background: linear-gradient(135deg, #f5f1e8, #faf8f3);">
+  <div class="lesson-inner">
+    <div class="lesson-num lesson-color-1">01</div>
+    <h2 class="lesson-title" style="color: var(--dark);">The Success Paradox</h2>
+    <p class="lesson-subtitle">How Achievement Becomes a Trap</p>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--orange);">⚡ Core Insight</div>
+      <p>The paradox of success: as you achieve more, you gain more options, face more demands, and become increasingly pulled in different directions. Success is not additive—it's multiplicative in its complexity. The clarity you once had dissolves into overwhelming choice.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--warm-red);">🔍 The Clarity Paradox</div>
+      <p>Early in your career, constraints force clarity. You have few options, so you focus intensely. But each success removes a constraint and multiplies possibilities. The successful entrepreneur gets invited to serve on boards, speak at conferences, mentor startups. Each invitation feels valuable. But saying yes to everything means excelling at nothing.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Success is a terrible teacher. It seduces smart people into thinking they can't lose."</div>
+      <div class="quote-attr">— Greg McKeown, Essentialism</div>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">💡 AI Connection: The Overfitting Trap</div>
+      <p>In machine learning, overfitting occurs when a model trains on too many features and memorizes noise rather than learning true patterns. A model trained to predict every edge case becomes brittle. Similarly, a life optimized for every opportunity becomes fragile. Both require regularization—selective removal of non-essential features to preserve generalization.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 Cross-Book Connection</div>
+      <p><strong>The Paradox of Choice (Barry Schwartz):</strong> More options paradoxically decrease satisfaction. Decision paralysis sets in. Essentialism is the antidote—ruthlessly limiting your menu so each choice matters.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 McKeown's Observation</div>
+      <p>He noticed his most successful clients were also his most frazzled—running in circles, exhausted, wondering why winning felt like losing.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON 2: ONLY THREE THINGS MATTER -->
+<div class="lesson" style="background: linear-gradient(135deg, #f0fef0, #f5fdf5);">
+  <div class="lesson-inner">
+    <div class="lesson-num lesson-color-2">02</div>
+    <h2 class="lesson-title" style="color: var(--dark);">Only Three Things Matter</h2>
+    <p class="lesson-subtitle">The Closet Analogy & Buffett's 5/25 Rule</p>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--teal);">🧥 The Closet Metaphor</div>
+      <p>Imagine a closet where everything is equally important. You wear every outfit regularly. None stands out. You never feel truly put-together. But when you edit ruthlessly—keeping only clothes you love and that fit—suddenly every morning is easier and you look better. That's essentialism applied to your calendar, goals, and commitments.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--deep-blue);">📊 Buffett's 5/25 Exercise</div>
+      <p>Warren Buffett had his pilot write down 25 career goals. Buffett reviewed them, then asked: "Which 5 matter most?" The pilot, shocked, said "All of them!" Buffett replied: "You're wrong. Everything not on this list of 5 is a distraction." The 20 items weren't "nice-to-haves"—they were active distractions pulling energy from what truly mattered.</p>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <strong>The Myth</strong>
+        <p>"If everything is a priority, nothing is—but I need it all."</p>
+      </div>
+      <div class="concept-card">
+        <strong>The Reality</strong>
+        <p>Prioritization is subtraction. Your top 3 matter infinitely more than positions 4-20.</p>
+      </div>
+      <div class="concept-card">
+        <strong>The Practice</strong>
+        <p>Write down 25. Cross out 20. Commit to protecting the 5 fiercely.</p>
+      </div>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"If you don't prioritize your life, someone else will."</div>
+      <div class="quote-attr">— Greg McKeown</div>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">💡 AI Connection: Pruning & Model Compression</div>
+      <p>Large neural networks contain redundant neurons. Pruning—removing non-essential connections—produces smaller, faster models with equal performance. Similarly, removing non-essential activities can increase your throughput and clarity without sacrificing results.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON 3: THE ESSENTIALIST MINDSET -->
+<div class="lesson" style="background: linear-gradient(135deg, #fdf5f0, #fef9f6);">
+  <div class="lesson-inner">
+    <div class="lesson-num lesson-color-4">03</div>
+    <h2 class="lesson-title" style="color: var(--dark);">The Essentialist Mindset</h2>
+    <p class="lesson-subtitle">Three Core Beliefs That Change Everything</p>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--warm-red);">🎯 Belief 1: I Have a Choice</div>
+      <p>Non-essentialists feel victimized by circumstance. "I have to attend this meeting." "I have no choice but to say yes." Essentialists reject this fiction. You always have a choice, even if every option has costs. Recognizing agency is the first step to reclaiming it.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--warm-red);">🔊 Belief 2: Almost Everything Is Noise</div>
+      <p>In a world of infinite information and opportunity, the signal-to-noise ratio is brutal. Most requests, invitations, and opportunities are noise—valuable for someone, perhaps, but not for you. Essentialism is about learning to filter relentlessly and celebrate what you reject as much as what you embrace.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--warm-red);">⚖️ Belief 3: Tradeoffs Are Inescapable</div>
+      <p>There is no such thing as a free lunch. Choosing one thing means explicitly not choosing another. Non-essentialists pretend this isn't true, hoping to "have it all." Essentialists face the tradeoff directly and make peace with it. "Which single thing will I say no to in order to say yes to this?"</p>
+    </div>
+
+    <div class="action-list">
+      <strong style="display: block; margin-bottom: 16px; color: var(--dark);">How to Adopt the Essentialist Mindset:</strong>
+      <ol>
+        <li><strong>Recognize your agency:</strong> Write down one "I have to" and reframe it as "I choose to" or "I choose not to."</li>
+        <li><strong>Filter for signal:</strong> When offered a new opportunity, ask: "Is this in the top 10% of opportunities for me?" If not, it's noise.</li>
+        <li><strong>Name the tradeoff:</strong> Before saying yes, articulate what you're implicitly saying no to. Sit with the discomfort.</li>
+      </ol>
+    </action-list>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 Cross-Book Connection</div>
+      <p><strong>Deep Work (Cal Newport):</strong> The essentialist mindset is the prerequisite for deep work. You can't produce your best work in a thousand shallow channels. You need to choose depth.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON 4: EXPLORE BEFORE DECIDING -->
+<div class="lesson" style="background: linear-gradient(135deg, #f0f5ff, #f5f9ff);">
+  <div class="lesson-inner">
+    <div class="lesson-num lesson-color-5">04</div>
+    <h2 class="lesson-title" style="color: var(--dark);">Explore Before Deciding</h2>
+    <p class="lesson-subtitle">The Counterintuitive Truth About Essentialist Research</p>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--deep-blue);">🔬 The Paradox</div>
+      <p>Non-essentialists think exploration is inefficient. They jump quickly from decision to decision, optimizing for speed. Essentialists do the opposite: they invest heavily in exploration before committing. This seems backwards—but it prevents catastrophic mistakes and ensures your eventual commitment is informed and confident.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--deep-blue);">🎓 Essentialists Explore Widely</div>
+      <p>Read broadly. Have conversations with people in different fields. Visit new places. Take on small projects in areas of curiosity. This isn't procrastination—it's research. You're calibrating your intuition so that when you do commit, the decision is rooted in genuine understanding, not wishful thinking or surface appeal.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The essentialist doesn't ask, 'How can I do this?' but 'Is this worth doing?'—and you can't answer that without exploring first."</div>
+      <div class="quote-attr">— Greg McKeown</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 The Job Interview That Saved a Career</div>
+      <p>McKeown almost accepted a high-paying job that looked perfect on paper. During exploration—site visits, conversations with employees—he noticed the company's culture was misaligned with his values. He passed. The exploratory work prevented a three-year mistake.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">💡 AI Connection: Exploration vs. Exploitation</div>
+      <p>In reinforcement learning, exploration (trying new actions to discover their payoffs) and exploitation (choosing actions known to be rewarding) are in tension. Pure exploitation is myopic; pure exploration is wasteful. The optimal strategy balances both. Essentialism suggests: explore thoroughly upfront, then exploit your best finding relentlessly.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 Cross-Book Connection</div>
+      <p><strong>Zero to One (Peter Thiel):</strong> Thiel emphasizes the importance of understanding unique insights before scaling. Essentialist exploration builds those insights.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON 5: THE ART OF THE GRACEFUL NO -->
+<div class="lesson" style="background: linear-gradient(135deg, #ffe8e8, #fff0f0);">
+  <div class="lesson-inner">
+    <div class="lesson-num lesson-color-6">05</div>
+    <h2 class="lesson-title" style="color: var(--dark);">The Art of the Graceful No</h2>
+    <p class="lesson-subtitle">"No" Is a Complete Sentence</p>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--pink);">💬 The Challenge</div>
+      <p>Most people say yes to preserve relationships, avoid disappointing others, or maintain a "nice" reputation. But each yes is a mortgage on your future. You're borrowing time and energy you don't have. The essentialist learns to say no—clearly, kindly, and without excessive justification.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--pink);">🧪 The "Hell Yeah or No" Test</div>
+      <p>Derek Sivers' simple rule: When evaluating an opportunity, if the answer isn't "Hell yeah!"—it's no. This removes the gray zone where mediocre yeses live. It's either an enthusiastic, energizing yes, or it's no. This doesn't require explanation; it requires clarity about your standards.</p>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <strong>Common Trap</strong>
+        <p>"Maybe" or long justifications for saying no.</p>
+      </div>
+      <div class="concept-card">
+        <strong>Essentialist Move</strong>
+        <p>"No, this isn't a priority for me right now."</p>
+      </div>
+      <div class="concept-card">
+        <strong>The Magic Phrase</strong>
+        <p>"That's not for me" feels less harsh than "I'm too busy."</p>
+      </div>
+    </concept-grid>
+
+    <div class="quote-box">
+      <div class="quote-text">"No is a complete sentence. You don't need to defend it, explain it, or soften it. No. Done."</div>
+      <div class="quote-attr">— Greg McKeown</div>
+    </div>
+
+    <div class="action-list">
+      <strong style="display: block; margin-bottom: 16px; color: var(--dark);">How to Say No Gracefully:</strong>
+      <ol>
+        <li><strong>Be direct but kind:</strong> "I appreciate you thinking of me. This isn't a priority for me right now."</li>
+        <li><strong>Offer an alternative:</strong> "I can't do this, but here's someone who might be a better fit."</li>
+        <li><strong>Don't over-explain:</strong> Extra justification invites negotiation. Keep it simple.</li>
+        <li><strong>Practice uncomfortable silence:</strong> After saying no, resist the urge to fill the void. Let them respond first.</li>
+      </ol>
+    </action-list>
+
+    <div class="ai-box">
+      <div class="ai-label">💡 AI Connection: Rejection Sampling</div>
+      <p>In AI, rejection sampling involves accepting only samples that meet certain criteria and rejecting the rest. The "Hell Yeah or No" filter is a rejection sampling strategy for your time and energy.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON 6: UNCOMMIT -->
+<div class="lesson" style="background: linear-gradient(135deg, #f0f8ff, #f5faff);">
+  <div class="lesson-inner">
+    <div class="lesson-num lesson-color-11">06</div>
+    <h2 class="lesson-title" style="color: var(--dark);">Uncommit</h2>
+    <p class="lesson-subtitle">The Sunk Cost Fallacy & How to Exit Gracefully</p>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--deep-blue);">⏰ The Sunk Cost Trap</div>
+      <p>You've been on a project for two years. It's not working. You know you should quit, but you think, "I've already invested so much—if I quit now, that time is wasted." Wrong. That time is already spent. The only question is: What will you do with the time you have left? If the answer is "continue failing," you're letting past decisions trap your future.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--deep-blue);">🚪 The Essentialist Exit Strategy</div>
+      <p>Essentialists regularly conduct audits of their commitments. For each one, they ask: "If I didn't already have this commitment, would I take it on today?" If the answer is no, it's a candidate for uncommitting. This isn't failure—it's course correction. The sunk cost is gone; don't throw good time after bad.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The past is a poor measure of the future. Sunk costs are sunk. Uncommitting requires that you let them go."</div>
+      <div class="quote-attr">— Greg McKeown</div>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 The Board Member's Liberation</div>
+      <p>A nonprofit board member realized he'd been serving out of guilt for "all the time he'd put in." When he finally quit, he felt lighter. His five years of contributions didn't require a lifetime of obligation.</p>
+    </div>
+
+    <div class="action-list">
+      <strong style="display: block; margin-bottom: 16px; color: var(--dark);">How to Uncommit Without Burning Bridges:</strong>
+      <ol>
+        <li><strong>Be honest about the situation:</strong> "I've realized this isn't the best use of my time or energy."</li>
+        <li><strong>Give notice:</strong> Don't quit abruptly. Offer to transition your responsibilities.</li>
+        <li><strong>Express gratitude:</strong> "I've learned a lot, and I appreciate the opportunity."</li>
+        <li><strong>Don't apologize excessively:</strong> You're making a rational decision, not committing a crime.</li>
+      </ol>
+    </action-list>
+
+    <div class="ai-box">
+      <div class="ai-label">💡 AI Connection: Early Stopping in Training</div>
+      <p>In machine learning, early stopping halts training when validation loss stops improving. This prevents overfitting and wastes no more compute on unproductive iterations. Uncommitting is early stopping for your life.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON 7: EDIT -->
+<div class="lesson" style="background: linear-gradient(135deg, #fff8e1, #fffbe6);">
+  <div class="lesson-inner">
+    <div class="lesson-num lesson-color-7">07</div>
+    <h2 class="lesson-title" style="color: var(--dark);">Edit</h2>
+    <p class="lesson-subtitle">Subtraction as Skill and Discipline</p>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--orange);">✏️ The Editor's Mindset</div>
+      <p>A great editor doesn't add; she removes. She cuts purple prose, redundant paragraphs, tangential anecdotes. The final draft is stronger because of what's absent. Essentialism applies this editorial discipline to life: less is more. Your calendar, your projects, your goals—all benefit from ruthless editing.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--orange);">🗿 The Sculptor's Approach</div>
+      <p>Michelangelo said he freed the angel trapped in the marble by removing everything that wasn't the angel. He didn't add marble; he subtracted. The same logic applies to your life. You're not becoming a better version of yourself by adding more skills, projects, or goals. You're becoming better by removing everything that isn't essential to your unique contribution.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The things which matter most must never be at the mercy of the things which matter least."</div>
+      <div class="quote-attr">— Johann Wolfgang von Goethe</div>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <strong>Additive Thinking</strong>
+        <p>"How can I do more?"</p>
+      </div>
+      <div class="concept-card">
+        <strong>Subtractive Thinking</strong>
+        <p>"What can I remove?"</p>
+      </div>
+      <div class="concept-card">
+        <strong>Essentialist Result</strong>
+        <p>Less, but infinitely better.</p>
+      </div>
+    </concept-grid>
+
+    <div class="action-list">
+      <strong style="display: block; margin-bottom: 16px; color: var(--dark);">Editing Exercises:</strong>
+      <ol>
+        <li><strong>Calendar audit:</strong> Delete three recurring meetings that don't move your key metrics.</li>
+        <li><strong>Project inventory:</strong> Kill one project you're mediocre at to excel at another.</li>
+        <li><strong>Communication edit:</strong> Write an email, then remove 25% of the words. Does it still work? Better?</li>
+        <li><strong>Life audit:</strong> List commitments. Cross out the bottom 10%. What changes?</li>
+      </ol>
+    </action-list>
+
+    <div class="ai-box">
+      <div class="ai-label">💡 AI Connection: Regularization & Feature Selection</div>
+      <p>In machine learning, L1 regularization (Lasso) actively removes low-importance features during training, driving their coefficients to zero. This produces sparse, interpretable models. Editing your life is applying L1 regularization to your commitments.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON 8: SET BOUNDARIES -->
+<div class="lesson" style="background: linear-gradient(135deg, #e8f5f0, #f0faf8);">
+  <div class="lesson-inner">
+    <div class="lesson-num lesson-color-8">08</div>
+    <h2 class="lesson-title" style="color: var(--dark);">Set Boundaries</h2>
+    <p class="lesson-subtitle">How Limits Create Freedom</p>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--forest);">🚧 The Paradox of Boundaries</div>
+      <p>Non-essentialists fear boundaries. "If I set limits, I'll miss opportunities. I'll look uncommitted." But boundaries are not walls; they're guardrails. They channel your energy into what matters most. A river without banks is a swamp. With banks, it has power and direction.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--forest);">🛡️ Boundary vs. Wall</div>
+      <p>A wall is rigid, rejecting all comers. A boundary is permeable and purposeful. It says: "This time/space/energy is protected, but here's how you can access it if it's truly important." Clear boundaries paradoxically create opportunity because they prevent diffusion. You have genuine availability for what matters.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"When you have clear boundaries, you can say yes to the few things that matter without guilt about the many you're saying no to."</div>
+      <div class="quote-attr">— Greg McKeown</div>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <strong>No Boundaries</strong>
+        <p>Always available. Reactive. Scattered.</p>
+      </div>
+      <div class="concept-card">
+        <strong>Clear Boundaries</strong>
+        <p>Protected time. Proactive. Focused.</p>
+      </div>
+      <div class="concept-card">
+        <strong>Rigid Walls</strong>
+        <p>Closed off. Unavailable. Isolating.</p>
+      </div>
+    </concept-grid>
+
+    <div class="action-list">
+      <strong style="display: block; margin-bottom: 16px; color: var(--dark);">Boundary-Setting Practices:</strong>
+      <ol>
+        <li><strong>Time boundaries:</strong> "I don't check email after 6pm on weekdays" or "I take Sundays off."</li>
+        <li><strong>Space boundaries:</strong> "I reserve my mornings for deep work. Schedule meetings after 2pm."</li>
+        <li><strong>Energy boundaries:</strong> "I can mentor three people at a time. I'm at capacity."</li>
+        <li><strong>Transparency:</strong> Communicate your boundaries clearly so others can respect them.</li>
+      </ol>
+    </action-list>
+
+    <div class="ai-box">
+      <div class="ai-label">💡 AI Connection: Constrained Optimization</div>
+      <p>In optimization problems, constraints aren't limitations—they're definitions of the problem. A boundary on computation time, memory, or model size forces more elegant solutions. Similarly, personal boundaries force more intentional choices.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON 9: CREATE SPACE TO THINK -->
+<div class="lesson" style="background: linear-gradient(135deg, #f5f1e8, #faf8f3);">
+  <div class="lesson-inner">
+    <div class="lesson-num lesson-color-9">09</div>
+    <h2 class="lesson-title" style="color: var(--dark);">Create Space to Think</h2>
+    <p class="lesson-subtitle">White Space as the Prerequisite for Clarity</p>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--dark-purple);">🧠 The Busyness Trap</div>
+      <p>When your calendar is wall-to-wall, there's no room for thinking. You move from meeting to meeting, reacting to crises, drowning in firefighting. Essentialism requires protecting white space—unscheduled time when your only job is to think deeply about what matters.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--dark-purple);">🗓️ Bill Gates' Think Weeks</div>
+      <p>For decades, Gates blocked two weeks a year to read, reflect, and think strategically. No email, no meetings—just books, ideas, and contemplation. These thinking retreats shaped Microsoft's direction. He credits think weeks with some of his best insights. Most high performers don't protect this time. Essentialism says: it's non-negotiable.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--dark-purple);">🪵 Abe Lincoln's Whittling</div>
+      <p>Lincoln was famous for whittling during strategy meetings. Casual observers thought he was distracted. Actually, whittling—a simple, repetitive activity—freed his mind to think strategically. The motion was meditative; it allowed deep work without the pressure of sitting idle. What's your whittling? Walking? Journaling? The medium matters less than the protection.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Without white space, there is no time to think. And without thinking, there is no wisdom."</div>
+      <div class="quote-attr">— Greg McKeown</div>
+    </div>
+
+    <div class="action-list">
+      <strong style="display: block; margin-bottom: 16px; color: var(--dark);">How to Protect White Space:</strong>
+      <ol>
+        <li><strong>Block thinking time:</strong> Schedule 2-4 hours weekly for strategic reflection. Treat it like a board meeting—non-negotiable.</li>
+        <li><strong>Go solo:</strong> No phone, no interruptions. Truly alone.</li>
+        <li><strong>Change your environment:</strong> A new setting can spark fresh thinking. Go to a café, a park, or just a different room.</li>
+        <li><strong>Keep a thinking notebook:</strong> Capture insights as they arise. Later, review and act on them.</li>
+      </ol>
+    </action-list>
+
+    <div class="ai-box">
+      <div class="ai-label">💡 AI Connection: Inference vs. Training</div>
+      <p>In machine learning, inference is fast decisions using a trained model. Training is slow, computationally expensive learning. Most organizations are stuck in inference mode—executing without learning. Essentialism requires blocking training time. White space is your training compute.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 Cross-Book Connection</div>
+      <p><strong>Deep Work (Cal Newport):</strong> White space enables deep work. You can't produce meaningful output without protected thinking time.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON 10: PLAY AND SLEEP AS ESSENTIAL -->
+<div class="lesson" style="background: linear-gradient(135deg, #ffe8e8, #fff0f0);">
+  <div class="lesson-inner">
+    <div class="lesson-num lesson-color-10">10</div>
+    <h2 class="lesson-title" style="color: var(--dark);">Play and Sleep as Essential</h2>
+    <p class="lesson-subtitle">Why Rest Is Not the Opposite of Productivity</p>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--warm-red);">🎮 The Research on Play for Adults</div>
+      <p>Neuroscience shows that play isn't frivolous. It's how brains explore, create, and innovate. Adults who play—whether through sports, music, games, or creative hobbies—show higher problem-solving ability, better mood, and greater resilience. Play is not the reward for productivity; it's a prerequisite.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--warm-red);">😴 Sleep as Cognitive Performance</div>
+      <p>The myth of "I'll sleep when I'm dead" is a productivity disaster. Sleep deprivation degrades decision-making, impairs creativity, weakens immune function, and increases inflammation. One night of poor sleep is equivalent to a 0.05 BAC (legal intoxication limit). And you repeat this daily. There is no cognitive output without adequate sleep. None. It's not an indulgence; it's infrastructure.</p>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <strong>The Myth</strong>
+        <p>More work hours = more output.</p>
+      </div>
+      <div class="concept-card">
+        <strong>The Science</strong>
+        <p>Rest + sleep = optimal output.</p>
+      </div>
+      <div class="concept-card">
+        <strong>The Practice</strong>
+        <p>Schedule play and sleep like meetings.</p>
+      </div>
+    </concept-grid>
+
+    <div class="quote-box">
+      <div class="quote-text">"If you wish to be creative, you must embrace play as essential. If you wish to produce your best work, you must prioritize sleep as non-negotiable."</div>
+      <div class="quote-attr">— Greg McKeown</div>
+    </div>
+
+    <div class="action-list">
+      <strong style="display: block; margin-bottom: 16px; color: var(--dark);">How to Reclaim Play and Sleep:</strong>
+      <ol>
+        <li><strong>Schedule play:</strong> Block time for something purely fun. No productivity metric. No outcome. Just joy.</li>
+        <li><strong>Protect sleep:</strong> A consistent bedtime is as important as exercise. Your brain needs it.</li>
+        <li><strong>Track sleep quality:</strong> Use a simple journal. After a week, notice how better sleep improves your decisions.</li>
+        <li><strong>Kill the glorification of tiredness:</strong> Being exhausted is not a badge of honor. It's a sign you're not essentializing properly.</li>
+      </ol>
+    </action-list>
+
+    <div class="ai-box">
+      <div class="ai-label">💡 AI Connection: Model Capacity & Generalization</div>
+      <p>Overtraining a model without regularization or proper validation leads to overfitting. Sleep is your brain's regularization process. During sleep, your brain prunes unnecessary neural connections and consolidates learning. Without sleep (regularization), you overfit on recent experiences and lose generalization ability.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON 11: FLOW -->
+<div class="lesson" style="background: linear-gradient(135deg, #f0f5ff, #f5f9ff);">
+  <div class="lesson-inner">
+    <div class="lesson-num lesson-color-5">11</div>
+    <h2 class="lesson-title" style="color: var(--dark);">Flow</h2>
+    <p class="lesson-subtitle">Designing Systems That Make the Right Thing Default</p>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--deep-blue);">⚙️ The Power of Defaults</div>
+      <p>Humans are lazy in beautiful ways. We take paths of least resistance. Essentialism exploits this: design your environment and systems so that the essential choice is the default. Make the hard thing easy. Remove friction from what matters. Multiply friction for what doesn't.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--deep-blue);">🎯 Creating Natural Flow</div>
+      <p>If you want to exercise, lay out your gym clothes the night before. If you want to write, open a blank document at the start of your day. If you want to read, keep a book on your nightstand. You're not relying on motivation; you're relying on environmental design. The path of least resistance becomes the path toward your essentials.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Make the essential the path of least resistance. The right choice should be the easiest choice."</div>
+      <div class="quote-attr">— Greg McKeown</div>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <strong>High Friction</strong>
+        <p>Going to the gym (travel, change, return)</p>
+      </div>
+      <div class="concept-card">
+        <strong>Low Friction</strong>
+        <p>Gym clothes at home + 5-min walk</p>
+      </div>
+      <div class="concept-card">
+        <strong>Zero Friction</strong>
+        <p>Home gym + always ready</p>
+      </div>
+    </concept-grid>
+
+    <div class="action-list">
+      <strong style="display: block; margin-bottom: 16px; color: var(--dark);">System Design for Flow:</strong>
+      <ol>
+        <li><strong>Remove choice:</strong> One coffee maker, not ten. One morning routine, not five options.</li>
+        <li><strong>Batch decisions:</strong> Plan meals weekly so daily eating is automatic. Pick outfits Sunday so mornings are easy.</li>
+        <li><strong>Automate:</strong> Automatic bill payment, automatic savings transfers, automatic calendar blocks.</li>
+        <li><strong>Create habits through environment:</strong> Books visible → more reading. Unhealthy snacks hidden → better eating.</li>
+      </ol>
+    </action-list>
+
+    <div class="ai-box">
+      <div class="ai-label">💡 AI Connection: Learning Rate & Gradient Descent</div>
+      <p>In machine learning, a well-tuned learning rate guides the model efficiently toward the optimum. Too high and you overshoot; too low and you stagnate. Friction is your learning rate for habit formation. Calibrate it to guide yourself toward essentials without overwhelm.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 Cross-Book Connection</div>
+      <p><strong>Getting Things Done (David Allen):</strong> GTD's strength is system design—capturing everything so your brain is free. Essentialism builds on this: after capturing, ruthlessly prioritize.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON 12: THE ESSENTIALIST LIFE -->
+<div class="lesson" style="background: linear-gradient(135deg, #fff8e1, #fffbe6);">
+  <div class="lesson-inner">
+    <div class="lesson-num lesson-color-12">12</div>
+    <h2 class="lesson-title" style="color: var(--dark);">The Essentialist Life</h2>
+    <p class="lesson-subtitle">What It Looks Like in Practice</p>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--orange);">🔄 Continuous Discipline</div>
+      <p>Essentialism is not a one-time decision. It's a perpetual practice. You don't achieve it and stay there. Success, once again, creates new options and new pressures. You must regularly revisit what's essential. That's not failure—it's the nature of the discipline.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color: var(--orange);">🎯 The CEO's Reset</div>
+      <p>One CEO realized his calendar had become chaos—inherited from years of saying yes. He did something radical: he deleted everything and rebuilt from zero. He asked: "What would my ideal week look like if I could design it?" Then he protected it ferociously. His team initially panicked. Within weeks, his productivity and clarity doubled. He had to disappoint some people. He did it anyway.</p>
+    </div>
+
+    <div class="story-highlight">
+      <h3>The Story That Started It All</h3>
+      <p>McKeown wrote Essentialism after witnessing a young mother, two days after childbirth, drowning in stress about work events and obligations. She'd just given birth and was already overwhelmed by non-essential demands. That image crystallized everything: If we can't say no to the non-essential even after a major life event, when will we? The book was born from that moment of clarity.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The way of the essentialist is the way of less but better. It's not about doing more in less time. It's about doing only what matters, and doing it excellently."</div>
+      <div class="quote-attr">— Greg McKeown</div>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <strong>Non-Essentialist</strong>
+        <p>Yes to everything, excellent at nothing.</p>
+      </div>
+      <div class="concept-card">
+        <strong>Essentialist</strong>
+        <p>Yes to few things, excellent at those.</p>
+      </div>
+      <div class="concept-card">
+        <strong>The Result</strong>
+        <p>Clarity. Impact. Peace.</p>
+      </div>
+    </concept-grid>
+
+    <div class="action-list">
+      <strong style="display: block; margin-bottom: 16px; color: var(--dark);">Building an Essentialist Life:</strong>
+      <ol>
+        <li><strong>Do the Buffett exercise:</strong> Write 25 goals. Circle your top 5. Make peace with ignoring the rest.</li>
+        <li><strong>Audit your calendar:</strong> What would you delete if starting fresh? Delete it anyway.</li>
+        <li><strong>Name your one thing:</strong> What is the single contribution only you can make? Protect time for it ferociously.</li>
+        <li><strong>Build quarterly:</strong> Every three months, revisit: What's still essential? What's become noise?</li>
+        <li><strong>Teach others:</strong> Essentialism spreads. Help colleagues and friends do this work too.</li>
+      </ol>
+    </action-list>
+
+    <div class="ai-box">
+      <div class="ai-label">💡 AI Connection: Specialization vs. Generalization</div>
+      <p>A specialized model excels in its domain. A generalist tries to do everything and does nothing well. Scale and success favor specialists. Essentialism is specialization applied to your life: deep expertise in your essential domain, graceful incompetence everywhere else.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 Cross-Book Connections</div>
+      <p><strong>Deep Work, Getting Things Done, Zero to One:</strong> All three assume essentialism as the foundation. Deep work requires protecting focus. GTD requires ruthless prioritization. Zero to One demands singular vision. Essentialism is the prerequisite for all of them.</p>
+    </div>
+  </div>
+</div>
+
+<!-- STORY SPOTLIGHTS SECTION -->
+<div class="story" style="background: linear-gradient(135deg, #fff8e1, #fffbe6);">
+  <div class="story-inner">
+    <h2 class="lesson-title" style="color: var(--dark); margin-bottom: 40px;">Story Spotlights: The Moments That Shaped Essentialism</h2>
+
+    <div class="story-highlight">
+      <h3>The New Mother, Two Days Postpartum</h3>
+      <p>This is the moment McKeown credits with crystallizing the entire concept. A successful client gave birth, and within 48 hours, she was stressed about missing work events and keeping up with professional obligations. She'd just undergone one of life's most transformative experiences—and instead of resting, recovering, and bonding with her newborn, she was drowning in "important" work demands. McKeown realized: if we can't say no to the non-essential at a moment like that, we never will. That moment became the emotional core of Essentialism.</p>
+    </div>
+
+    <div class="story-highlight">
+      <h3>Warren Buffett's 5/25 Goals Exercise</h3>
+      <p>Buffett's pilot asked for career advice. Buffett had him write 25 goals, then asked him to circle his top 5. The pilot balked: "But I care about all of them!" Buffett's response was ruthless: "Everything not on your list of 5 is a distraction that will take you away from your goals. Avoid them." This exercise became a signature McKeown teaching tool. It's uncomfortable because it forces a truth: prioritization is subtraction, and you probably aren't willing to subtract anything. But you must.</p>
+    </div>
+
+    <div class="story-highlight">
+      <h3>The CEO Who Deleted His Calendar and Started Over</h3>
+      <p>A CEO realized his calendar was a mess—years of accumulated yeses with no coherent strategy. Instead of trying to surgically remove commitments one by one, he did something radical: deleted everything. Then, from scratch, he asked: "What should my ideal week look like?" He rebuilt his calendar intentionally. Some people were upset. Many commitments disappeared. His calendar became 60% less full. His productivity and focus doubled. His team initially panicked but soon realized his newfound availability for strategy was more valuable than his scattered presence in a hundred meetings.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHEATSHEET SECTION -->
+<div class="cheatsheet">
+  <div class="cheatsheet-inner">
+    <h2>The Essentialist Cheatsheet</h2>
+
+    <div class="two-col">
+      <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+        <h3 style="color: var(--dark); margin-bottom: 16px; font-size: 1.1rem;">The Core Beliefs</h3>
+        <ul style="list-style: none; margin: 0;">
+          <li style="margin-bottom: 10px; color: #444; font-size: 0.9rem;"><strong>I have a choice</strong> — Agency matters. Reclaim it.</li>
+          <li style="margin-bottom: 10px; color: #444; font-size: 0.9rem;"><strong>Almost everything is noise</strong> — Most opportunities aren't for you.</li>
+          <li style="margin-bottom: 10px; color: #444; font-size: 0.9rem;"><strong>Tradeoffs exist</strong> — Choosing one means not choosing another. Name it.</li>
+        </ul>
+      </div>
+
+      <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+        <h3 style="color: var(--dark); margin-bottom: 16px; font-size: 1.1rem;">The Core Practices</h3>
+        <ul style="list-style: none; margin: 0;">
+          <li style="margin-bottom: 10px; color: #444; font-size: 0.9rem;"><strong>Explore widely</strong> — Before committing, understand your options.</li>
+          <li style="margin-bottom: 10px; color: #444; font-size: 0.9rem;"><strong>Say no gracefully</strong> — "Hell yeah or no" test. No extra explanation.</li>
+          <li style="margin-bottom: 10px; color: #444; font-size: 0.9rem;"><strong>Edit ruthlessly</strong> — Subtraction is an art. Practice it daily.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top: 20px;">
+      <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+        <h3 style="color: var(--dark); margin-bottom: 16px; font-size: 1.1rem;">The Essentials You Need</h3>
+        <ul style="list-style: none; margin: 0;">
+          <li style="margin-bottom: 10px; color: #444; font-size: 0.9rem;"><strong>White space</strong> — Time to think deeply. Non-negotiable.</li>
+          <li style="margin-bottom: 10px; color: #444; font-size: 0.9rem;"><strong>Play</strong> — For creativity, resilience, and joy.</li>
+          <li style="margin-bottom: 10px; color: #444; font-size: 0.9rem;"><strong>Sleep</strong> — For cognitive performance. No exceptions.</li>
+        </ul>
+      </div>
+
+      <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+        <h3 style="color: var(--dark); margin-bottom: 16px; font-size: 1.1rem;">The Tools You Use</h3>
+        <ul style="list-style: none; margin: 0;">
+          <li style="margin-bottom: 10px; color: #444; font-size: 0.9rem;"><strong>Buffett's 5/25</strong> — Identify your top 5, ruthlessly ignore the rest.</li>
+          <li style="margin-bottom: 10px; color: #444; font-size: 0.9rem;"><strong>Boundaries</strong> — Clear, kind limits that channel energy.</li>
+          <li style="margin-bottom: 10px; color: #444; font-size: 0.9rem;"><strong>System design</strong> — Make the essential the path of least resistance.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; margin-top: 20px; text-align: center;">
+      <p style="color: white; font-size: 0.95rem; line-height: 1.7;">The essentialist life is not about doing more in less time. It's about doing only what is truly essential, and doing it with excellence. It's the discipline to distinguish signal from noise, opportunity from distraction, and to say yes to the few things that matter and no to everything else. It's less, but infinitely better.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Essentialism: The Disciplined Pursuit of Less</strong> by Greg McKeown</p>
+  <p style="margin-top: 12px; font-size: 0.85rem;">This illustrated guide synthesizes core concepts, stories, and practices from the book.</p>
+  <p style="margin-top: 12px; font-size: 0.85rem; opacity: 0.7;">Connections to Deep Work, Getting Things Done, Zero to One, and modern AI concepts included.</p>
+</footer>
+
+</body>
+</html>

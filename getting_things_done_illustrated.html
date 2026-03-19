@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Things Done: The Art of Stress-Free Productivity - Illustrated Guide</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+:root {
+  --coral: #FF6B6B; --teal: #4ECDC4; --sunny: #FFE66D;
+  --purple: #A06CD5; --sky: #74B9FF; --mint: #55EFC4;
+  --pink: #FD79A8; --orange: #FDCB6E; --dark: #2D3436;
+  --cream: #FFEAA7; --deep-blue: #0984E3; --warm-red: #E17055;
+  --forest: #00B894; --dark-purple: #6C5CE7;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+.cover { min-height: 100vh; background: linear-gradient(135deg, #0a1628 0%, #1a2a3e 50%, #0a1628 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 40px 20px; }
+.cover h1 { font-family: 'Playfair Display', serif; font-size: 4rem; color: white; letter-spacing: -2px; text-align: center; position: relative; z-index: 2; }
+.cover .author { font-size: 1.3rem; color: var(--teal); margin-top: 8px; font-weight: 600; z-index: 2; position: relative; }
+.cover .subtitle { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 16px; z-index: 2; text-align: center; max-width: 500px; position: relative; }
+.particle { position: absolute; border-radius: 50%; opacity: 0.15; animation: float 6s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
+.lesson { min-height: 100vh; padding: 60px 20px; display: flex; align-items: center; justify-content: center; }
+.lesson-inner { max-width: 900px; width: 100%; }
+.lesson-num { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem; color: white; margin-bottom: 12px; }
+.lesson-title { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2; }
+.lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+.card { background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+.card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.card p { font-size: 0.95rem; line-height: 1.7; color: #444; }
+.quote-box { background: var(--dark); color: white; border-radius: 16px; padding: 24px 28px; margin-bottom: 20px; }
+.quote-box .quote-text { font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+.quote-box .quote-attr { color: var(--teal); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+.connect-box { background: #e8f4fd; border-left: 4px solid var(--deep-blue); border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px; }
+.connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--deep-blue); letter-spacing: 1px; margin-bottom: 6px; }
+.connect-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+.ai-box { background: linear-gradient(135deg, #0984E3, #6C5CE7); color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px; }
+.ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--sunny); margin-bottom: 6px; }
+.ai-box p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
+.funny-box { background: #fff5f5; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px; border: 2px dashed var(--coral); }
+.funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: var(--coral); letter-spacing: 1px; margin-bottom: 6px; }
+.funny-box p { font-size: 0.9rem; line-height: 1.6; color: #666; font-style: italic; }
+.story { min-height: 100vh; padding: 60px 20px; display: flex; align-items: center; justify-content: center; }
+.story-inner { max-width: 900px; width: 100%; }
+.cheatsheet { min-height: 100vh; padding: 60px 20px; background: linear-gradient(135deg, #0f0f23, #1a1a3e); display: flex; align-items: center; justify-content: center; }
+.cheatsheet-inner { max-width: 900px; width: 100%; }
+.cheatsheet h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; text-align: center; margin-bottom: 40px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+/* Custom lesson background colors */
+.lesson-1 { background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%); }
+.lesson-2 { background: linear-gradient(135deg, #ebf5fb 0%, #d6eaf8 100%); }
+.lesson-3 { background: linear-gradient(135deg, #eafaf1 0%, #d5f4e6 100%); }
+.lesson-4 { background: linear-gradient(135deg, #fef9e7 0%, #fef5e7 100%); }
+.lesson-5 { background: linear-gradient(135deg, #fdedec 0%, #fadbd8 100%); }
+.lesson-6 { background: linear-gradient(135deg, #f4ecf7 0%, #ebdef0 100%); }
+.lesson-7 { background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%); }
+.lesson-8 { background: linear-gradient(135deg, #ebf5fb 0%, #d6eaf8 100%); }
+.lesson-9 { background: linear-gradient(135deg, #eafaf1 0%, #d5f4e6 100%); }
+.lesson-10 { background: linear-gradient(135deg, #fef9e7 0%, #fef5e7 100%); }
+.lesson-11 { background: linear-gradient(135deg, #fdedec 0%, #fadbd8 100%); }
+.lesson-12 { background: linear-gradient(135deg, #f4ecf7 0%, #ebdef0 100%); }
+
+.hero-svg { width: 100%; max-width: 600px; margin: 40px 0; }
+.icon { display: inline-block; width: 24px; height: 24px; margin-right: 6px; vertical-align: middle; }
+
+.lesson-num-1 { background: var(--coral); }
+.lesson-num-2 { background: var(--teal); }
+.lesson-num-3 { background: var(--forest); }
+.lesson-num-4 { background: var(--sunny); color: var(--dark) !important; }
+.lesson-num-5 { background: var(--warm-red); }
+.lesson-num-6 { background: var(--purple); }
+.lesson-num-7 { background: var(--orange); color: var(--dark) !important; }
+.lesson-num-8 { background: var(--deep-blue); }
+.lesson-num-9 { background: var(--teal); }
+.lesson-num-10 { background: var(--pink); }
+.lesson-num-11 { background: var(--dark-purple); }
+.lesson-num-12 { background: var(--forest); }
+
+.story-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--dark); margin-bottom: 20px; }
+.story-text { font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 20px; }
+.highlight { background: var(--sunny); padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+    <svg class="particle" style="width: 80px; height: 80px; top: 10%; left: 10%;" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="#FF6B6B"/>
+    </svg>
+    <svg class="particle" style="width: 120px; height: 120px; top: 20%; right: 5%; animation-delay: 1s;" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="#4ECDC4"/>
+    </svg>
+    <svg class="particle" style="width: 60px; height: 60px; bottom: 15%; left: 5%; animation-delay: 2s;" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="#FFE66D"/>
+    </svg>
+    <svg class="particle" style="width: 100px; height: 100px; bottom: 10%; right: 10%; animation-delay: 3s;" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="#A06CD5"/>
+    </svg>
+
+    <h1>Getting Things Done</h1>
+    <div class="author">by David Allen</div>
+    <div class="subtitle">The Art of Stress-Free Productivity — Master Your Time, Clear Your Mind, Transform Your Life</div>
+</div>
+
+<!-- LESSON 1: THE OPEN LOOP TAX -->
+<div class="lesson lesson-1">
+    <div class="lesson-inner">
+        <div class="lesson-num lesson-num-1">1</div>
+        <h2 class="lesson-title">The Open Loop Tax</h2>
+        <p class="lesson-subtitle">Every unfinished commitment stored in your head costs mental RAM</p>
+
+        <div class="card">
+            <div class="card-label">🧠 The Core Problem</div>
+            <p>Your brain is a terrible reminder system. It's constantly trying to keep track of everything you haven't finished — every email to answer, every project to start, every promise to keep. The moment you think of something unfinished, your mind marks it as "pending resolution." This creates <span class="highlight">open loops</span> that drain your cognitive bandwidth relentlessly, even when you're trying to focus on something else entirely.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📊 The Scientific Cost</div>
+            <p>The Zeigarnik Effect, discovered in 1927, shows that unfinished tasks are remembered much better than completed ones. Your brain naturally gravitates toward open loops, treating them as tasks that need active management. Each open loop creates psychological tension — a low-level anxiety that persists until resolution. A typical knowledge worker has 150+ open loops at any given time. That's 150 interruptions competing for your attention.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Your mind is for having ideas, not holding them."</div>
+            <div class="quote-attr">— David Allen</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">🤖 AI Connection: Working Memory Limits</div>
+            <p>Large language models have context windows (like your working memory) that can only hold so much information. When the context is cluttered with unresolved references and incomplete thoughts, the model's ability to focus on the current task degrades. Your brain works the same way — GTD is essentially a system to optimize your cognitive architecture by externalizing open loops.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🔗 Cross-Book Connection</div>
+            <p><strong>Deep Work (Newport):</strong> Open loops destroy deep work. Cal Newport's research shows that attention residue — leftover thinking about unfinished tasks — degrades performance on complex cognitive work by up to 40%. GTD directly solves this problem.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">💭 The Mental Comedy</div>
+            <p>"I'll remember that..." said no productive person ever. Your brain at 3 AM: suddenly remembering that one email from last Tuesday while you're trying to sleep. GTD says: write it down now, sleep like a human being.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 2: CAPTURE EVERYTHING -->
+<div class="lesson lesson-2">
+    <div class="lesson-inner">
+        <div class="lesson-num lesson-num-2">2</div>
+        <h2 class="lesson-title">Capture Everything</h2>
+        <p class="lesson-subtitle">The inbox as anxiety relief — why writing it down instantly reduces stress</p>
+
+        <div class="card">
+            <div class="card-label">✍️ The Liberation Practice</div>
+            <p>The moment you capture something into an external system, your mind releases it. You've transferred the burden from your unreliable brain to a <span class="highlight">trusted system</span>. This is the foundation of GTD. Not "maybe I'll remember," but "I've written it down, it's handled, my brain is free." Capture is the first of five GTD steps, and it's where all the magic begins.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">💡 Why It Works: The Zeigarnik Relief</div>
+            <p>Writing something down doesn't just offload storage — it triggers a psychological resolution. Your mind knows the information is safe, accessible, and will be reviewed. The anxiety dissipates. This is why the Bullet Journal became a cultural phenomenon: the simple act of writing creates relief. GTD systematizes this with inboxes (physical, digital, mental capture moments) that collect everything without judgment.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📝 The Five Capture Channels</div>
+            <p><strong>1. Physical Inbox:</strong> Papers, sticky notes, actual mail<br>
+<strong>2. Digital Inbox:</strong> Email, task manager, note-taking app<br>
+<strong>3. Mental Capture:</strong> Voice memo while driving, think-of-it moment<br>
+<strong>4. Idea Capture:</strong> Napkin notes, sketch apps, voice records<br>
+<strong>5. Calendar Capture:</strong> Time-specific commitments</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Capturing is the first gateway to engagement. If you can't trust your collection system, your brain will never let go."</div>
+            <div class="quote-attr">— GTD Core Principle</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">🤖 AI Connection: System Reliability</div>
+            <p>Modern LLMs use vector embeddings and retrieval-augmented generation (RAG) because storing every piece of information in direct memory is inefficient. They externalize knowledge to a searchable database. Your brain does the same with GTD — externalizing to your system, then retrieving when needed. This is computational efficiency applied to human cognition.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🔗 Cross-Book Connection</div>
+            <p><strong>Atomic Habits (Clear):</strong> The first law of behavior change is "Make it obvious." Capture makes commitments obvious. You can't manage what you don't acknowledge.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 3: THE 2-MINUTE RULE -->
+<div class="lesson lesson-3">
+    <div class="lesson-inner">
+        <div class="lesson-num lesson-num-3">3</div>
+        <h2 class="lesson-title">The 2-Minute Rule</h2>
+        <p class="lesson-subtitle">If it takes less than 2 minutes, do it now — the economics of task-switching cost</p>
+
+        <div class="card">
+            <div class="card-label">⚡ The Economics of Speed</div>
+            <p>Here's the math: capturing a task, storing it, organizing it, retrieving it later, and finally doing it creates transaction costs. If the actual task takes 1 minute, but the overhead costs 4 minutes, you lose time by deferring. The 2-minute threshold is the break-even point where it's actually more efficient to do the thing now than to manage it later. It's not laziness; it's optimization.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🧩 Task-Switching Cost</div>
+            <p>Every time you switch tasks, your brain loses context. Research shows it takes 23 minutes to regain full focus after a context switch. If you defer a 2-minute task, you might spend 5 minutes capturing it, 18 minutes losing focus, and 2 minutes doing it. Total: 25 minutes wasted. Or you could just do it now: 2 minutes. The choice is clear.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">✅ The 2-Minute Rule in Action</div>
+            <p><strong>Example:</strong> You notice a typo in a document. Do it now (1 min). You get a text asking a quick question. Answer it now (2 min). Your colleague mentions a small idea. Respond now (2 min). None of these belongs in your task system; they live in the <span class="highlight">do-now zone</span>.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"If the next action can happen in two minutes or less, do it now. You'll have cleared a small item and freed a mental loop."</div>
+            <div class="quote-attr">— David Allen</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">🤖 AI Connection: Batch Processing vs. Single Tasks</div>
+            <p>GPUs process batches of data because context switching between individual operations is expensive. Your brain is similar — batching similar tasks (all your 2-minute items together) is more efficient than scattering them. But if something takes 2 minutes or less, it's not worth batching; it's worth doing immediately.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">😄 The Irony</div>
+            <p>The people who defer 2-minute tasks spend hours managing them in their task list. The GTD practitioner does it in 2 minutes and moves on. One group feels productive (lots of tasks!). The other actually is productive.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 4: NEXT PHYSICAL ACTION -->
+<div class="lesson lesson-4">
+    <div class="lesson-inner">
+        <div class="lesson-num lesson-num-4">4</div>
+        <h2 class="lesson-title">Next Physical Action</h2>
+        <p class="lesson-subtitle">The most powerful question: "What is the very next physical action?"</p>
+
+        <div class="card">
+            <div class="card-label">🎯 The Clarity Question</div>
+            <p>This is the question that changes everything: <span class="highlight">"What is the very next physical action to move this forward?"</span> Not "I should work on this project." Not "I need to be organized." But the specific, concrete, physical action you can take right now. "Call Sarah about the proposal." "Review the budget spreadsheet." "Schedule the meeting." This turns vagueness into velocity.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🚧 Why Vague Goals Stall</div>
+            <p>"Organize my life" paralyzes you. "File tax documents" paralyzes you. "Email the vendor asking if they have availability next week" moves you forward. Your brain naturally resists vague commitments — there's no clear path to completion, so it delays indefinitely. Concrete next actions bypass resistance. They're specific enough that your brain knows exactly what to do.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📋 The Next Action Framework</div>
+            <p><strong>Wrong:</strong> "Work on the marketing plan"<br>
+<strong>Right:</strong> "Email the design team requesting mockups"<br>
+<br>
+<strong>Wrong:</strong> "Fix the website issue"<br>
+<strong>Right:</strong> "Debug the login form on localhost"<br>
+<br>
+The right side is <span class="highlight">actionable</span>. You can start immediately. No ambiguity. No mental friction.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Until you can describe the next concrete action to take, you can't flag this as done thinking about it."</div>
+            <div class="quote-attr">— GTD Principle</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">🤖 AI Connection: Specificity in Instructions</div>
+            <p>Vague prompts to LLMs produce vague outputs. "Write a good article" doesn't work. "Write a 1200-word article explaining Git branches for beginners" produces better results. The model (like your brain) performs better with specific, concrete instructions. GTD applies this principle to human task management.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🔗 Cross-Book Connection</div>
+            <p><strong>Atomic Habits (Clear):</strong> "Make it obvious" includes making actions specific. Atomic Habits teaches implementation intentions ("When X happens, I will do Y"). GTD is the system that makes this possible at scale.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 5: PROJECTS VS. ACTIONS -->
+<div class="lesson lesson-5">
+    <div class="lesson-inner">
+        <div class="lesson-num lesson-num-5">5</div>
+        <h2 class="lesson-title">Projects vs. Actions</h2>
+        <p class="lesson-subtitle">Everything requiring more than one step is a project</p>
+
+        <div class="card">
+            <div class="card-label">🔄 The Definition</div>
+            <p>In GTD, a <span class="highlight">project</span> is any desired outcome that requires more than one action step. "Organize my office" is a project. "Update the CRM" is a project. "Plan the conference" is a project. An <span class="highlight">action</span> is a single step that can be completed in one work session. Your to-do list is probably lying to you because you're treating projects as actions.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">❌ The Mistake</div>
+            <p>People write "Finish the report" on their list, then panic because it's not finished by end of day. That's not an action; that's a project. The actual actions are: "Gather data," "Create outline," "Write introduction," "Draft body sections," "Add conclusion," "Proofread," "Format," "Send." Eight actions, not one.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">✨ The Breakthrough</div>
+            <p>Once you separate projects from actions, your task list becomes achievable. You don't manage projects directly on your daily list — you manage the next action for each project. Your list shows 40 achievable actions, not 8 impossible "finish this project" items. Suddenly, you're actually completing things.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📊 Quick Test</div>
+            <p><strong>Is this an action or project?</strong><br>
+• "Call the plumber" → Action<br>
+• "Fix the kitchen leak" → Project (needs plumber call, get estimate, decide, schedule, pay, etc.)<br>
+• "Email resume to recruiter" → Action<br>
+• "Find a new job" → Project (needs resume update, search positions, apply, interview prep, etc.)</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Your to-do list isn't failing you. You're failing it by putting projects on it instead of next actions."</div>
+            <div class="quote-attr">— GTD Practitioners</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">🤖 AI Connection: Decomposition</div>
+            <p>Complex reasoning in AI works through decomposition — breaking problems into sub-problems. Chain-of-thought prompting works because it mirrors this decomposition. GTD applies the same principle: decompose projects into actions, then execute. The planning process itself becomes a problem-solving strategy.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 6: THE SIX HORIZONS OF FOCUS -->
+<div class="lesson lesson-6">
+    <div class="lesson-inner">
+        <div class="lesson-num lesson-num-6">6</div>
+        <h2 class="lesson-title">The Six Horizons of Focus</h2>
+        <p class="lesson-subtitle">From runway to life purpose — why tactics without strategy is just busy work</p>
+
+        <div class="card">
+            <div class="card-label">🚀 The Framework</div>
+            <p>GTD's six horizons align personal actions with life purpose. Without this alignment, you optimize for urgency rather than importance. You become busy instead of productive. The six horizons are:</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📍 Horizon 0: Runway (Next 48 hours)</div>
+            <p>Your daily task list. What needs to get done this week. Context-specific actions: @computer, @phone, @errands. This is where your next actions live. If you only work at this level, you're reactive.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📍 Horizon 1: Short-term Projects (1-4 weeks)</div>
+            <p>Current projects requiring focus. The report due next month. The client proposal. The office reorganization. These are the projects you're actively managing. Weekly reviews ensure they're progressing.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📍 Horizon 2: Areas of Responsibility (3-6 months)</div>
+            <p>Your role's key areas: health, finances, relationships, career, creativity. What matters in each area? What standards are you maintaining? Are your projects aligned with your areas of responsibility?</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📍 Horizon 3: Goals & Outcomes (6-12 months)</div>
+            <p>What do you want to accomplish in the next year? New skills to learn, promotions to pursue, relationships to deepen, health goals, creative projects. These inform what projects you initiate.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📍 Horizon 4: Vision (1-5 years)</div>
+            <p>Where do you see yourself? What will your life look like? What kind of professional are you building toward? What does success mean to you? This shapes your 6-12 month goals.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📍 Horizon 5: Purpose & Principles (Lifetime)</div>
+            <p>Why do you exist? What do you stand for? What legacy do you want to create? What principles guide your decisions? Everything else flows from this. This is the foundation.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The higher horizons give your lower horizons meaning. Without them, you're just executing tasks for the sake of execution."</div>
+            <div class="quote-attr">— GTD Principle</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">🤖 AI Connection: Goal Hierarchies</div>
+            <p>Reinforcement learning systems optimize using reward signals. Without a clear reward hierarchy (goals → values → purpose), the system optimizes for short-term metrics. Your brain is similar — without clear horizons, it chases whatever feels urgent. The six horizons create the reward structure.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🔗 Cross-Book Connection</div>
+            <p><strong>Deep Work (Newport):</strong> Deep work requires vision alignment. You can't do meaningful work without knowing your purpose. GTD's six horizons create that alignment structure.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 7: THE WEEKLY REVIEW -->
+<div class="lesson lesson-7">
+    <div class="lesson-inner">
+        <div class="lesson-num lesson-num-7">7</div>
+        <h2 class="lesson-title">The Weekly Review</h2>
+        <p class="lesson-subtitle">The master practice — why missing it causes the system to collapse within weeks</p>
+
+        <div class="card">
+            <div class="card-label">🔧 The Maintenance Practice</div>
+            <p>GTD without the weekly review is a bicycle without repairs. You ride it, it works for a while, then the chain falls off and you're walking it home. The weekly review is the practice that keeps the system functional. It's the difference between "I did GTD for a month" and "GTD is my operating system."</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">⏰ The Ritual (90 minutes, once per week)</div>
+            <p><strong>1. Get Clarity (30 min):</strong> Empty your inboxes. Review all open loops. Clarify what each item means.<br>
+<strong>2. Review Context (30 min):</strong> Review each context list (@computer, @phone, @errands). Are actions still relevant? Any completions? Any new captures?<br>
+<strong>3. Review Projects (20 min):</strong> For each active project, confirm the next action. Any stalled projects? Any new projects to start?<br>
+<strong>4. Review Horizons (10 min):</strong> Zoom out. Are projects aligned with goals? Are goals aligned with vision?</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">💪 What Makes It Work</div>
+            <p>The weekly review creates three things: <span class="highlight">Reliability</span> (you can trust the system because you've maintained it), <span class="highlight">Completeness</span> (nothing is being forgotten because you review everything), and <span class="highlight">Alignment</span> (your daily work reconnects to your larger purposes). Miss it for two weeks? The system decays. Miss it for a month? You're back to stress and overwhelm.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The weekly review is where you go from reactive to proactive. It's the moment when you take control back from the chaos."</div>
+            <div class="quote-attr">— GTD Practitioners</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">🤖 AI Connection: System Maintenance</div>
+            <p>Large language models need fine-tuning to stay accurate. Databases need optimization. Codebase need refactoring. Your GTD system needs weekly review. This is fundamental maintenance that prevents technical debt and system degradation. Consistency in maintenance is what separates functional systems from failed ones.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">😂 The Truth</div>
+            <p>People who skip the weekly review: "GTD doesn't work." People who do it: "GTD changed my life." The difference isn't the system. It's the maintenance.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🔗 Cross-Book Connection</div>
+            <p><strong>Atomic Habits (Clear):</strong> The weekly review is a "habit review" — reflecting on whether your systems are working. Clear advocates the same approach.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 8: CONTEXTS AND LISTS -->
+<div class="lesson lesson-8">
+    <div class="lesson-inner">
+        <div class="lesson-num lesson-num-8">8</div>
+        <h2 class="lesson-title">Contexts and Lists</h2>
+        <p class="lesson-subtitle">@phone, @computer, @errands — batching tasks by context reduces friction</p>
+
+        <div class="card">
+            <div class="card-label">🏷️ What Are Contexts?</div>
+            <p>A context is the physical or digital location/tool required to do the action. @computer means you need a computer. @phone means you need a phone. @errands means you're out of the house. Grouping tasks by context is one of GTD's elegant efficiency hacks. It eliminates the friction of context-switching and maximizes flow.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">⚙️ The Efficiency Gain</div>
+            <p>Without contexts: you're sitting at your computer, you see a task that requires you to leave the house, you feel friction because you can't do it right now. With contexts: you only see @computer tasks while at your desk. When you leave, you see @errands. No cognitive load. No friction. The right task meets you at the right time.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📋 Common Contexts</div>
+            <p><strong>@Computer:</strong> Email, coding, writing, research, calls via Zoom<br>
+<strong>@Phone:</strong> Calls, texts, scheduling<br>
+<strong>@Errands:</strong> Shopping, banking, post office, doctor visits<br>
+<strong>@Home:</strong> Chores, repairs, organizing<br>
+<strong>@Office:</strong> Meeting prep, colleague conversations<br>
+<strong>@Waiting:</strong> Things you're waiting for someone else to complete</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">💡 The Power Move</div>
+            <p>When you're at your computer, you have a list of 20 @computer actions. You choose one. You do it. You check it off. You move to the next one. No decision fatigue. No "what should I do now?" paralysis. The context constrains the choice and enables action. Decision fatigue drops by up to 50% when actions are context-sorted.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Context is destiny in task management. The right context removes friction and enables flow."</div>
+            <div class="quote-attr">— GTD Principle</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">🤖 AI Connection: Attention Mechanisms</div>
+            <p>Transformer models use attention mechanisms to focus on relevant tokens. Your GTD contexts do the same — they focus your attention on relevant tasks. Without this filtering, your "to-do" list is noise. With contexts, it's signal.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">😄 The Realization</div>
+            <p>You realize you've been procrastinating on "Call the dentist" because you grouped it with @computer tasks and you were sitting at your desk for three weeks. Context-based lists would have put it in @phone, ensuring you'd actually do it.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 9: MIND LIKE WATER -->
+<div class="lesson lesson-9">
+    <div class="lesson-inner">
+        <div class="lesson-num lesson-num-9">9</div>
+        <h2 class="lesson-title">Mind Like Water</h2>
+        <p class="lesson-subtitle">The martial arts metaphor — how a clear system creates responsive, appropriate reactions</p>
+
+        <div class="card">
+            <div class="card-label">🌊 The Metaphor</div>
+            <p>In martial arts, the ideal state is "mind like water." When water meets an obstacle, it responds appropriately — flowing around it, finding the path of least resistance, never over-reacting or under-reacting. Your mind should work the same way. When a task arrives, you capture it and respond appropriately. No panic. No overwhelm. Just appropriate action.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">⚔️ The Problem: Emotional Reactivity</div>
+            <p>Without GTD, your mind is tense. Reactive. When a task arrives, you either panic (over-react) or ignore it (under-react). You're storing it in your head, creating anxiety. You're not responding to tasks; you're responding emotionally to the burden of managing them. This is tension. This is the opposite of "mind like water."</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">✨ The Solution: Trust</div>
+            <p>When you have a <span class="highlight">trusted system</span> that captures everything and you review it regularly, you can relax. A task arrives, you capture it, your brain knows it's safe and will be reviewed. You respond appropriately — with action if it needs immediate action, with capture if it's something for later. Your mind is calm. This is "mind like water."</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🎯 The Three Responses</div>
+            <p><strong>Do it now (2-minute rule)</strong> → Appropriate response to small tasks<br>
+<strong>Delegate it</strong> → Appropriate response when someone else owns it<br>
+<strong>Capture & organize it</strong> → Appropriate response to larger commitments<br>
+<br>
+You're not over-reacting (panicking about everything) or under-reacting (ignoring things). You're responding appropriately to each situation.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The mind is like water. When you drop a stone in a pond, the water doesn't resist or get stressed. It flows around it and returns to calm. Your mind should work the same way."</div>
+            <div class="quote-attr">— David Allen</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">🤖 AI Connection: Equilibrium States</div>
+            <p>Stable systems maintain equilibrium. When external pressure increases, a well-designed system absorbs it without degrading. GTD is your equilibrium system — it absorbs the pressure of life's tasks without degrading your mental state. The system scales; you don't break under pressure.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🔗 Cross-Book Connection</div>
+            <p><strong>Flow (Csikszentmihalyi):</strong> Flow is a mental state where anxiety and boredom are both low, and you're fully engaged. "Mind like water" is the precondition for flow. Clear mental RAM enables deep focus.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 10: NATURAL PLANNING MODEL -->
+<div class="lesson lesson-10">
+    <div class="lesson-inner">
+        <div class="lesson-num lesson-num-10">10</div>
+        <h2 class="lesson-title">Natural Planning Model</h2>
+        <p class="lesson-subtitle">How your brain actually plans — why most "planning" skips the crucial steps</p>
+
+        <div class="card">
+            <div class="card-label">🧠 The Five Steps</div>
+            <p>This is how your brain naturally plans. Most people skip steps and wonder why planning fails. GTD's natural planning model forces you through all five:</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🎯 Step 1: Purpose</div>
+            <p><span class="highlight">Why are we doing this?</span> Without a clear purpose, planning is aimless. "Plan the conference" means nothing. "Host a conference that connects practitioners in our field and generates $50K revenue" is clear. Purpose answers the "why" and constrains the planning.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">👁️ Step 2: Vision</div>
+            <p><span class="highlight">What will success look like?</span> Describe the outcome in vivid detail. The conference happens. 200 people attend. The speakers are incredible. The venue is perfect. Attendees leave energized and connected. Vision is sensory, emotional, and specific.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">💭 Step 3: Brainstorm</div>
+            <p><span class="highlight">What are all the things we need to do?</span> Divergent thinking. Don't judge. Generate 50 ideas about how to make the conference happen. All ideas are valid. No filtering. Pure brainstorm. This is where creativity lives.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🗂️ Step 4: Organize</div>
+            <p><span class="highlight">How do these pieces relate?</span> Take your 50 ideas and organize them into categories: venue, speakers, marketing, sponsorship, logistics, etc. Group related tasks. Identify sequences (you need sponsors before you can book the venue).</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">✅ Step 5: Next Actions</div>
+            <p><span class="highlight">What is the first physical action?</span> Not "plan the conference." But "Call venue manager to request availability on June 15." One specific action that moves toward the vision.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">❌ Why Planning Fails</div>
+            <p>Most people skip to step 5. "What's the next action?" without clarity on purpose, vision, or brainstorm. They start executing without fully thinking. Or they get stuck in brainstorm (step 3) without organizing the ideas (step 4). GTD forces you through all five steps in order.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Most failed projects fail because they were never fully planned. People jump to execution without thinking."</div>
+            <div class="quote-attr">— GTD Principle</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">🤖 AI Connection: Chain-of-Thought Reasoning</div>
+            <p>LLMs work better when you ask them to think step-by-step before answering. "Think about purpose, vision, and constraints before designing a system" produces better results than "design a system." The natural planning model applies the same principle to human planning.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 11: SOMEDAY/MAYBE -->
+<div class="lesson lesson-11">
+    <div class="lesson-inner">
+        <div class="lesson-num lesson-num-11">11</div>
+        <h2 class="lesson-title">Someday/Maybe</h2>
+        <p class="lesson-subtitle">Permission to not decide now — how the parking lot liberates creative thinking</p>
+
+        <div class="card">
+            <div class="card-label">🎪 The Parking Lot</div>
+            <p>Not every idea deserves a project. Not every idea should be discarded. <span class="highlight">Someday/Maybe</span> is your parking lot — a list of possibilities you're not committing to now, but you might commit to later. "Learn Spanish." "Write a book." "Take a sabbatical." "Learn woodworking." These live in your Someday/Maybe list, not your active projects.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">✨ The Liberation</div>
+            <p>Many people feel guilt about abandoned ideas. "I always wanted to paint but I never started." Someday/Maybe transforms this guilt into possibility. You're not abandoning the idea; you're parking it. You'll review it every week. If you decide to commit, it moves to active projects. If not, it stays parked. No guilt. Just honesty about what you're actually doing right now.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🎯 The Categories</div>
+            <p><strong>Learning:</strong> Languages, skills, instruments, certifications<br>
+<strong>Creative:</strong> Writing, art, music, building<br>
+<strong>Travel:</strong> Countries, cities, experiences<br>
+<strong>Purchases:</strong> Cars, homes, tools, gear<br>
+<strong>Experiences:</strong> Events, classes, retreats<br>
+<strong>Life Changes:</strong> Career pivots, relocations, relationships</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">💡 The Permission</div>
+            <p>Someday/Maybe gives you permission to want things without pressure. "I'd like to learn guitar" doesn't have to become a project today. It can sit in your parking lot. But when you're reviewing your Someday/Maybe list in your weekly review, maybe this week you're ready. You move it to active projects, you buy a guitar, you find a teacher. The permission was always there; you just needed a place to hold it.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Someday/Maybe is where you honor your dreams without being crushed by them."</div>
+            <div class="quote-attr">— GTD Practitioners</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">🤖 AI Connection: Attention Allocation</div>
+            <p>Your working memory is limited. You can only focus on so many active projects before cognitive degradation. Someday/Maybe is your way of managing attention allocation. Some ideas are in active memory (projects). Others are in long-term memory (Someday/Maybe list). You can index them without actively maintaining them.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">😌 The Relief</div>
+            <p>You finally give yourself permission to not write that novel right now. To not learn Python. To not travel to Japan. It goes in Someday/Maybe. Suddenly, you feel lighter. The guilt disappears. And weirdly? Six months later, when you review it, you're actually ready to start.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 12: THE TRUSTED SYSTEM -->
+<div class="lesson lesson-12">
+    <div class="lesson-inner">
+        <div class="lesson-num lesson-num-12">12</div>
+        <h2 class="lesson-title">The Trusted System</h2>
+        <p class="lesson-subtitle">Why the system only works if you completely trust it — the psychology of commitment</p>
+
+        <div class="card">
+            <div class="card-label">🔐 Trust is Everything</div>
+            <p>GTD only works if you trust it completely. If you don't fully believe in your system, your brain won't let go of tasks. It will hold onto them "just in case" the system fails. This defeats the entire purpose. A system you're 80% confident in creates 80% of the cognitive benefit and 100% of the paranoia. Either fully trust it or don't use it.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🏗️ How to Build Trust</div>
+            <p><strong>1. Start small:</strong> Don't capture everything on day one. Start with your current projects and priorities.<br>
+<strong>2. Review consistently:</strong> Weekly reviews prove to your brain that things are being tracked.<br>
+<strong>3. Complete tasks:</strong> Finish things on your list. Your brain learns that tasks actually get done.<br>
+<strong>4. Process inboxes:</strong> Every captured item moves through clarify → organize. Nothing stays in limbo.<br>
+<strong>5. Maintain boundaries:</strong> Only capture tasks in your system. Don't create parallel lists. Don't keep things in your head.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">💪 The Power of Commitment</div>
+            <p>Once you trust your system, you experience commitment. Your brain relaxes because it knows nothing will be forgotten. You can focus fully on what you're doing right now. This is the foundation of flow states. You cannot enter flow if part of your mind is worrying about forgotten tasks. A trusted system enables flow.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">❌ Why Systems Fail</div>
+            <p><strong>Incompleteness:</strong> You're not capturing everything, so some things slip through. Your brain stays vigilant. Trust breaks.<br>
+<strong>Abandoned review:</strong> You skip weekly reviews. Your system becomes stale. You don't trust it anymore.<br>
+<strong>No closure:</strong> Tasks aren't being marked as done. You feel stuck. Nothing feels completed.<br>
+<strong>Too complex:</strong> The system is so complicated you don't understand it. You can't trust what you don't understand.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The system is only as good as your trust in it. And trust is only as good as your maintenance of it."</div>
+            <div class="quote-attr">— GTD Core Principle</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">🤖 AI Connection: System Reliability</div>
+            <p>An AI system that occasionally hallucinates or produces errors is not trustworthy. Users will second-guess it, fact-check it, maintain parallel systems. A fully reliable system is trusted completely. Your GTD system is similar — reliability breeds trust, trust enables relaxation, relaxation enables flow.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🔗 Cross-Book Connection</div>
+            <p><strong>The Willpower Instinct (McGonigal):</strong> Trust in your system reduces ego depletion. You're not burning willpower managing tasks; you're delegating that to your system. This frees your willpower for the work that matters.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">🤝 The Relationship</div>
+            <p>Your GTD system is like a partner. If you cheat on it (keep things in your head, maintain secret lists), it breaks down and stops working. If you commit to it fully (capture everything, review weekly, trust it), it supports you completely. The relationship is that simple.</p>
+        </div>
+    </div>
+</div>
+
+<!-- STORY 1: THE MIND SWEEP -->
+<div class="story" style="background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%);">
+    <div class="story-inner">
+        <div style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--dark); margin-bottom: 20px;">The Mind Sweep: David Allen's Breakthrough Technique</div>
+
+        <div class="story-text">
+            David Allen developed the "mind sweep" in the 1980s while working with overwhelmed executives. One executive had hundreds of unfinished projects, emails, ideas, and commitments scattered across notes, emails, and his head. Allen sat with him for 4 hours and asked a single question repeatedly: "What's on your mind? What else?" Every time the executive mentioned something, Allen wrote it down. No judgment. No organization. Just capture.
+        </div>
+
+        <div class="story-text">
+            By hour two, the executive started to relax. Things were being captured. By hour three, he was laughing. "I forgot about that project!" By hour four, he was visibly lighter. They had captured over 200 items. Nothing was organized yet. Everything was still on the list. But the psychological relief was immediate and obvious.
+        </div>
+
+        <div class="story-text">
+            This became the foundation of GTD's Capture phase. <span class="highlight">The physical act of writing down a commitment transfers ownership from your brain to paper.</span> Neuroscience now confirms this: the brain releases the information when externalized. This is why bullet journaling exploded in popularity. This is why people feel instant relief when they write something down.
+        </div>
+
+        <div class="card">
+            <div class="card-label">📝 The Mind Sweep Process</div>
+            <p><strong>1. Find a quiet space</strong><br>
+<strong>2. Set a timer for 20-30 minutes</strong><br>
+<strong>3. Ask yourself: "What's on my mind? What else?"</strong><br>
+<strong>4. Write down everything</strong> — tasks, projects, ideas, worries, dreams, all of it<br>
+<strong>5. Don't organize. Don't judge. Just capture.</strong><br>
+<strong>6. When the timer ends, you'll have your first complete list of open loops</strong></p>
+        </div>
+
+        <div class="story-text">
+            The mind sweep is the most powerful GTD technique for beginners. It's not glamorous. It doesn't require fancy apps. It's just capturing everything in your head. But the psychological transformation is real. You've externalized your mind. Now you can work with it instead of carrying it.
+        </div>
+    </div>
+</div>
+
+<!-- STORY 2: THE TWO-MINUTE RULE ORIGIN -->
+<div class="story" style="background: linear-gradient(135deg, #ebf5fb 0%, #d6eaf8 100%);">
+    <div class="story-inner">
+        <div style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--dark); margin-bottom: 20px;">The Two-Minute Rule: How David Allen Discovered the Break-Even Point</div>
+
+        <div class="story-text">
+            Allen noticed something in his work with executives: they were deferring tiny tasks. Someone would think, "I should email this person," and instead of sending a quick email (2 minutes), they'd add it to their task list, organize it, review it next week, and finally do it the following week. Total elapsed time: 10+ days. Total task time: 2 minutes. This was absurd.
+        </div>
+
+        <div class="story-text">
+            Allen did the math: how long does it take to capture a task (write it down), organize it (find the right category), retrieve it (look it up later), and do it? For a 2-minute task, the overhead is roughly 4 minutes. So deferring it actually wastes time. But the psychology is interesting — people feel productive by adding things to their lists. Doing them immediately doesn't feel like "productivity." It just feels like work.
+        </div>
+
+        <div class="story-text">
+            The breakthrough came when Allen realized: <span class="highlight">tasks under 2 minutes are not part of the GTD system. They're immediate actions.</span> They belong in a different category. If it takes less time to do than to manage, do it now. This shifted the entire paradigm. People stopped accumulating task lists of small items. They started actually clearing their desks.
+        </div>
+
+        <div class="card">
+            <div class="card-label">💡 The Psychology</div>
+            <p>People love the feeling of "being organized." A task list feels organized. Doing a quick task doesn't feel organized. But being clear-headed and focused is more valuable than feeling organized. The 2-minute rule trades the feeling of organization for actual productivity.</p>
+        </div>
+
+        <div class="story-text">
+            The 2-minute rule is deceptively simple, but it solves one of the biggest sources of task-list debt: the accumulation of small, avoidable items. In many organizations, this single rule improves productivity by 15-20%, not because people work faster, but because they stop wasting time managing trivialities.
+        </div>
+    </div>
+</div>
+
+<!-- STORY 3: THE CHAOS TO CLARITY TRANSFORMATION -->
+<div class="story" style="background: linear-gradient(135deg, #eafaf1 0%, #d5f4e6 100%);">
+    <div class="story-inner">
+        <div style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--dark); margin-bottom: 20px;">From Chaos to Clarity: A Knowledge Worker's Journey</div>
+
+        <div class="story-text">
+            Sarah, a project manager at a tech company, was drowning. She had 47 tabs open in her browser (each one a commitment she didn't want to forget). She had 8 different note-taking apps with scattered ideas. She had a physical inbox on her desk with mail from six months ago. She had anxiety dreams about forgotten deadlines. She was working 60-hour weeks and still felt behind.
+        </div>
+
+        <div class="story-text">
+            Her therapist suggested GTD. Sarah was skeptical — "another productivity system" — but desperate. She started with the mind sweep. 4 hours of pure capture. She captured 300+ items. Not organized. Not prioritized. Just everything out of her head. That night, she slept better than she had in months.
+        </div>
+
+        <div class="story-text">
+            Week one: She clarified each item. Is this actionable? If yes, what's the next physical action? Is it a single action or a project? She created her first context lists: @computer (97 items), @phone (32 items), @errands (18 items), @waiting (12 items), @someday (72 items). Suddenly, "my task list" became "my task lists, organized by context."
+        </div>
+
+        <div class="story-text">
+            Week two: She closed her 47 browser tabs and put the commitments in the system. For the first time in three years, her browser had five tabs — actual work, not anxiety management. Her desktop was clean. Her mind was calm. She started her first weekly review.
+        </div>
+
+        <div class="story-text">
+            <span class="highlight">Week four: She noticed she was starting projects instead of getting lost in them. She had time for deep work again. People noticed she was more responsive — not because she worked faster, but because she wasn't distracted by anxiety about forgotten tasks.</span>
+        </div>
+
+        <div class="story-text">
+            Three months later: Sarah was working 45 hours and accomplishing more than she had at 60. She had time for life. Her manager noticed improved work quality. Her colleagues noticed she was more focused. The secret? She wasn't trying harder. She had just externalized her mind and gotten her brain back.
+        </div>
+
+        <div class="card">
+            <div class="card-label">📊 The Numbers</div>
+            <p><strong>Before GTD:</strong> 60 hrs/week, 47 open loops, 8 note apps, constant anxiety<br>
+<strong>After 3 months of GTD:</strong> 45 hrs/week, 0 open loops (all externalised), 1 system, calm focus<br>
+<strong>The improvement?</strong> Not harder work. Just a working system.</p>
+        </div>
+    </div>
+</div>
+
+<!-- CHEATSHEET -->
+<div class="cheatsheet">
+    <div class="cheatsheet-inner">
+        <h2>GTD Quick Reference Cheatsheet</h2>
+
+        <div class="two-col">
+            <div class="card">
+                <div class="card-label">🎯 The Five GTD Steps</div>
+                <p><strong>1. Capture:</strong> Get everything out of your head into a trusted system<br>
+<strong>2. Clarify:</strong> Decide what each item means and what to do about it<br>
+<strong>3. Organize:</strong> Sort actions by context, projects, waiting, someday<br>
+<strong>4. Reflect:</strong> Weekly review ensures system integrity<br>
+<strong>5. Engage:</strong> Execute with confidence, knowing nothing is forgotten</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">⚡ The 2-Minute Rule</div>
+                <p>If a task takes less than 2 minutes, do it now instead of adding it to your list. The overhead of managing it exceeds the time to complete it.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">🏷️ Standard Contexts</div>
+                <p>@Computer, @Phone, @Errands, @Home, @Office, @Waiting, @Calls, @Email</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">🎪 Someday/Maybe Categories</div>
+                <p>Learning | Creative | Travel | Purchases | Experiences | Life Changes</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">📍 Six Horizons of Focus</div>
+                <p><strong>0:</strong> Runway (Next 48 hours)<br>
+<strong>1:</strong> Short-term Projects (1-4 weeks)<br>
+<strong>2:</strong> Areas of Responsibility (3-6 months)<br>
+<strong>3:</strong> Goals & Outcomes (6-12 months)<br>
+<strong>4:</strong> Vision (1-5 years)<br>
+<strong>5:</strong> Purpose & Principles (Lifetime)</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">✅ Weekly Review (90 minutes)</div>
+                <p><strong>30 min:</strong> Get Clarity (empty inboxes)<br>
+<strong>30 min:</strong> Review Context (check all lists)<br>
+<strong>20 min:</strong> Review Projects (next actions)<br>
+<strong>10 min:</strong> Review Horizons (alignment check)</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">🧠 Mind Like Water</div>
+                <p>A clear system enables appropriate, responsive reactions. Capture enables trust. Trust enables relaxation. Relaxation enables flow.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">🎯 Natural Planning Model</div>
+                <p><strong>1. Purpose:</strong> Why?<br>
+<strong>2. Vision:</strong> What success looks like<br>
+<strong>3. Brainstorm:</strong> All ideas (no filtering)<br>
+<strong>4. Organize:</strong> Group and sequence<br>
+<strong>5. Next Actions:</strong> First physical step</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">📋 Projects vs. Actions</div>
+                <p><span class="highlight">Project:</span> Any outcome requiring 2+ steps<br>
+<span class="highlight">Action:</span> Single step completable in one session</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">🔐 Building Trust</div>
+                <p><strong>1. Start small</strong> (don't capture everything day one)<br>
+<strong>2. Review weekly</strong> (consistency builds trust)<br>
+<strong>3. Complete tasks</strong> (finish what you start)<br>
+<strong>4. Process inboxes</strong> (nothing stays in limbo)<br>
+<strong>5. Keep boundaries</strong> (only one system)</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">❓ The Clarify Questions</div>
+                <p><strong>Is this actionable?</strong> Yes → identify next action<br>
+<strong>Is this actionable?</strong> No → trash, file, or someday<br>
+<strong>Can you do it in 2 minutes?</strong> Yes → do it now<br>
+<strong>Can you do it yourself?</strong> No → delegate<br>
+<strong>Next action?</strong> (the most important question)</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">🚀 Quick Start</div>
+                <p>1. Do a mind sweep (capture everything)<br>
+2. Get clarity on each item<br>
+3. Organize by context<br>
+4. Pick one context (@computer, @phone)<br>
+5. Execute one action<br>
+6. Check it off (feel the win)<br>
+7. Repeat until you understand the rhythm<br>
+8. Schedule your first weekly review</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 40px; background: linear-gradient(135deg, #0984E3, #6C5CE7); color: white;">
+            <div class="card-label" style="color: var(--sunny);">💡 The Essential Truth</div>
+            <p style="color: white;">GTD works because it solves a fundamental problem: your brain is terrible at remembering but excellent at thinking. By externalizing memory (capture) and systematizing review (weekly), you free your brain to do what it does best — focus, think deeply, and create. The system is not complicated. Your life is. The system just organizes the chaos.</p>
+        </div>
+    </div>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="cover" style="background: linear-gradient(135deg, #1a2a3e 0%, #0a1628 50%, #1a2a3e 100%);">
+    <h1 style="font-size: 3rem;">Now Go Build Your System</h1>
+    <div class="subtitle" style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-top: 24px;">
+        The insights in this guide only matter if you implement them. Start with capture. Build trust through consistency. Transform your productivity through a system that actually works.
+    </div>
+    <div class="subtitle" style="color: var(--teal); margin-top: 40px;">
+        "Your mind is for having ideas, not holding them." — David Allen
+    </div>
+</div>
+
+</body>
+</html>
