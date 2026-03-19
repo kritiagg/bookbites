@@ -785,7 +785,7 @@
         </div>
         <div style="position:relative;flex:1">
             <div class="reader-loading show" id="reader-loading">Loading book guide...</div>
-            <iframe class="reader-frame" id="reader-frame" sandbox="allow-same-origin allow-scripts"></iframe>
+            <iframe class="reader-frame" id="reader-frame"></iframe>
         </div>
     </div>
 
@@ -1254,26 +1254,8 @@
         // Nav buttons
         updateNavButtons();
 
-        // Load the book via fetch into the iframe using srcdoc
-        const frame = document.getElementById('reader-frame');
-        const loading = document.getElementById('reader-loading');
-        loading.classList.add('show');
-        frame.style.opacity = '0';
-
         const url = `${b.id}_illustrated.html`;
-        frame.src = url;
-        frame.onload = () => {
-            loading.classList.remove('show');
-            frame.style.opacity = '1';
-        };
-        // Fallback timeout
-        setTimeout(() => {
-            loading.classList.remove('show');
-            frame.style.opacity = '1';
-        }, 3000);
-
-        document.getElementById('reader-overlay').classList.add('open');
-        document.body.style.overflow = 'hidden';
+        window.location.href = url;
     }
 
     function closeReader() {
