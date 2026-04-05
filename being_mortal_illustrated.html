@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Being Mortal: Illustrated Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+        :root { --coral: #FF6B6B; --teal: #4ECDC4; --sunny: #FFE66D; --purple: #A06CD5; --sky: #74B9FF; --mint: #55EFC4; --pink: #FD79A8; --orange: #FDCB6E; --dark: #2D3436; --cream: #FFEAA7; --deep-blue: #0984E3; --warm-red: #E17055; --forest: #00B894; --dark-purple: #6C5CE7; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+        .cover { min-height: 100vh; background: linear-gradient(135deg, #100808 0%, #281515 50%, #100808 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 40px 20px; }
+        .cover h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; color: white; letter-spacing: -2px; text-align: center; position: relative; z-index: 2; }
+        .cover .author { font-size: 1.3rem; color: var(--orange); margin-top: 8px; font-weight: 600; z-index: 2; position: relative; }
+        .cover .subtitle { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 16px; z-index: 2; text-align: center; max-width: 500px; position: relative; }
+        .particle { position: absolute; border-radius: 50%; opacity: 0.15; animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
+        .lesson { min-height: 100vh; padding: 60px 20px; display: flex; align-items: center; justify-content: center; }
+        .lesson-inner { max-width: 900px; width: 100%; }
+        .lesson-num { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem; color: white; margin-bottom: 12px; }
+        .lesson-title { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2; }
+        .lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+        .card { background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+        .card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .card p { font-size: 0.95rem; line-height: 1.7; color: #444; }
+        .quote-box { background: var(--dark); color: white; border-radius: 16px; padding: 24px 28px; margin-bottom: 20px; }
+        .quote-box .quote-text { font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+        .quote-box .quote-attr { color: var(--sunny); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+        .connect-box { background: #e8f4fd; border-left: 4px solid var(--deep-blue); border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px; }
+        .connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--deep-blue); letter-spacing: 1px; margin-bottom: 6px; }
+        .connect-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+        .ai-box { background: linear-gradient(135deg, #0984E3, #6C5CE7); color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px; }
+        .ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--sunny); margin-bottom: 6px; }
+        .ai-box p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
+        .quiet-wisdom { background: linear-gradient(135deg, #fef5e7 0%, #fde8d0 100%); border-left: 4px solid var(--orange); border-radius: 0 12px 12px 0; padding: 20px 24px; margin-bottom: 20px; }
+        .quiet-wisdom .wisdom-label { font-size: 0.7rem; font-weight: 700; color: var(--warm-red); letter-spacing: 1px; margin-bottom: 6px; }
+        .quiet-wisdom p { font-size: 0.9rem; line-height: 1.6; color: #5a4a3a; font-style: italic; }
+        .funny-box { background: #fff5f5; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px; border: 2px dashed var(--coral); }
+        .funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: var(--coral); letter-spacing: 1px; margin-bottom: 6px; }
+        .funny-box p { font-size: 0.9rem; line-height: 1.6; color: #666; font-style: italic; }
+        .story { min-height: 100vh; padding: 60px 20px; display: flex; align-items: center; justify-content: center; }
+        .story-inner { max-width: 900px; width: 100%; }
+        .cheatsheet { min-height: 100vh; padding: 60px 20px; background: linear-gradient(135deg, #0f0f23, #1a1a3e); display: flex; align-items: center; justify-content: center; }
+        .cheatsheet-inner { max-width: 900px; width: 100%; }
+        .cheatsheet h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; text-align: center; margin-bottom: 40px; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .cheatsheet-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 24px; color: white; }
+        .cheatsheet-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 12px; color: var(--sunny); }
+        .cheatsheet-card ul { list-style: none; }
+        .cheatsheet-card li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 8px; padding-left: 20px; position: relative; }
+        .cheatsheet-card li:before { content: "•"; position: absolute; left: 0; color: var(--orange); font-weight: bold; }
+        @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+        .page-break { page-break-after: always; }
+        .lesson:nth-child(3n+1) { background: linear-gradient(135deg, rgba(255,215,0,0.05) 0%, rgba(255,152,0,0.05) 100%); }
+        .lesson:nth-child(3n+2) { background: linear-gradient(135deg, rgba(74,188,226,0.03) 0%, rgba(63,81,181,0.03) 100%); }
+    </style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+    <div class="particle" style="width: 100px; height: 100px; top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="particle" style="width: 60px; height: 60px; top: 70%; right: 8%; animation-delay: 1s;"></div>
+    <div class="particle" style="width: 80px; height: 80px; top: 40%; right: 3%; animation-delay: 2s;"></div>
+    <h1>Being Mortal</h1>
+    <div class="author">Atul Gawande</div>
+    <div class="subtitle">Medicine and What Matters in the End</div>
+    <p style="color: rgba(255,255,255,0.5); margin-top: 40px; font-size: 0.95rem; max-width: 600px; text-align: center;">How modern medicine transformed the end of life—and what we can do to make dying a richer, more human experience</p>
+</section>
+
+<!-- LESSON 1 -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, #E17055, #D63031);">1</div>
+        <h2 class="lesson-title">The Medicalization of Death</h2>
+        <p class="lesson-subtitle">How dying moved from home to hospital in 50 years</p>
+
+        <div class="card">
+            <div class="card-label">🏥 THE SHIFT</div>
+            <p>A century ago, death happened at home. Grandma got sick, you stayed by her bedside, she died surrounded by family. Today, 80% of Americans die in hospitals or nursing homes. Dying became a medical problem to solve rather than a life passage to navigate.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📚 KEY INSIGHT</div>
+            <p>Doctors are trained to fight death, not to accompany people through it. Medical school teaches you to fix problems. But dying isn't a problem to fix—it's a transition requiring different skills: listening, presence, understanding what still matters to the person.</p>
+        </div>
+
+        <div class="quiet-wisdom">
+            <div class="wisdom-label">✦ QUIET WISDOM</div>
+            <p>Gawande realized doctors often know less about their patients' lives than they do about their lab results. We became experts in disease but strangers to the person experiencing it.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"What we want to know, ideally, is whether an individual's life is getting worse."</div>
+            <div class="quote-attr">— Atul Gawande</div>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🔗 BROADER CONTEXT</div>
+            <p>This mirrors Paul Kalanithi's crisis in "When Breath Becomes Air"—doctors trained to cure are lost when cure becomes impossible. Also echoes Burkeman's "Four Thousand Weeks": we spend finite time fighting finite death.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 2 -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, #A29BFE, #6C5CE7);">2</div>
+        <h2 class="lesson-title">What Old Age Is Actually Like</h2>
+        <p class="lesson-subtitle">The biology of aging bodies and what people still want</p>
+
+        <div class="card">
+            <div class="card-label">🧬 THE REALITY</div>
+            <p>Aging isn't a disease—it's a reorganization of the body. A person at 85 isn't 25 with damage. Their heart is weaker, their balance worse, their memory selective. But they adapt. They find new equilibrium. Until one day, they don't.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📊 YOUNG-OLD VS. OLD-OLD</div>
+            <p><strong>Young-old</strong> (65-75): Still independent, travel, play golf. <strong>Old-old</strong> (80+): Fragile, multiple health issues, decline accelerates. The switch happens fast and unpredictably.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📖 SARA MONOPOLI'S STORY</div>
+            <p>49-year-old woman with metastatic ovarian cancer. Doctors offered chemotherapy that had a small chance of extending life. She chose it—not because she was denying death, but because she wanted to attend her son's wedding. She died weeks after the wedding. Her doctor never asked what mattered most to her.</p>
+        </div>
+
+        <div class="quiet-wisdom">
+            <div class="wisdom-label">✦ QUIET WISDOM</div>
+            <p>The compression of morbidity—the dream that we'll be healthy until suddenly dead—rarely happens. More often: years of decline. The conversation isn't "Will you die?" but "What kind of life is possible now?"</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">💭 REFLECTION PROMPT</div>
+            <p>If you could only do three things in your final years, what would they be? A doctor who asks this question learns more than a hundred test results.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 3 -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, #FF7675, #FF6B6B);">3</div>
+        <h2 class="lesson-title">The Nursing Home Problem</h2>
+        <p class="lesson-subtitle">What nursing homes optimize for (and what's been lost)</p>
+
+        <div class="card">
+            <div class="card-label">🏛️ THE HISTORY</div>
+            <p>Nursing homes were invented in the 1950s to provide medical safety: controlled environments, professional care, standardized routines. They succeeded brilliantly at preventing accidents. But they optimized for institutional safety, not human flourishing.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🎯 THE TRADE-OFF</div>
+            <p>Rules prevent chaos: lights out at 9pm, meals at set times, no outside food. But they also strip away autonomy—the power to decide when to sleep, what to eat, whom to see. For many residents, safety without autonomy equals slow suffocation.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🐱 THE 96-YEAR-OLD AND HER CAT</div>
+            <p>Gawande describes a woman admitted to a nursing home. She had one priority: keeping her cat. The home had a no-pets policy. She could have safety without her cat, or freedom with her cat. She chose the cat. That choice—what she kept from her old life—defined what made living worth it.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">😌 GENTLE OBSERVATION</div>
+            <p>We try to make institutions run smoothly. But human life wasn't designed for smoothness. It's designed for mess, surprises, the cat on the bed, breakfast at 10am instead of 7am.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"You can't ensure safety without limiting freedom, and you can't permit freedom without accepting some risk."</div>
+            <div class="quote-attr">— Atul Gawande</div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 4 -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, #00B894, #27AE60);">4</div>
+        <h2 class="lesson-title">What Makes Life Worth Living</h2>
+        <p class="lesson-subtitle">The surprising answers that emerge when you ask</p>
+
+        <div class="card">
+            <div class="card-label">❓ THE QUESTION</div>
+            <p>Gawande asks his patients: "What is your understanding of the state of your health?" And then: "What are your worries?" And crucially: "What are your priorities?"</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🎯 THE ANSWERS</div>
+            <p>Not what you'd expect from a hospital. People say: <em>my cat, my morning paper, cold martinis, watching my grandchild learn to read, being able to bathe myself, playing bridge on Thursdays, sitting in my favorite chair.</em> Tiny ordinary things. Things that make a day feel like a day worth having.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🏛️ THE HIERARCHY</div>
+            <p>Maslow's pyramid doesn't apply at the end of life. People don't rank self-actualization above food. Instead: Can I still do the things that define me? Can I still be <em>me</em>? If not, prolonging life doesn't feel like a gift.</p>
+        </div>
+
+        <div class="quiet-wisdom">
+            <div class="wisdom-label">✦ QUIET WISDOM</div>
+            <p>The people who seemed most at peace weren't those who lived longest, but those who lived consistently with their values. The man who chose hospice and died surrounded by his book collection. The woman who spent her final weeks in her garden.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🔗 VIKTOR FRANKL'S INSIGHT</div>
+            <p>"Man's Search for Meaning" teaches that meaning persists even in suffering. Being Mortal adds: meaning also persists in aging and decline, if we're allowed to pursue it. The cat, the martini, the morning paper—these are acts of meaning-making.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 5 -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, #FF6348, #FF7F50);">5</div>
+        <h2 class="lesson-title">The Assisted Living Ideal</h2>
+        <p class="lesson-subtitle">How autonomy transforms the end of life</p>
+
+        <div class="card">
+            <div class="card-label">🏡 BILL THOMAS'S VISION</div>
+            <p>A doctor got tired of conventional nursing homes. He asked residents: What would make life here better? The answer: animals, plants, children. Life. He launched "The Green House" model—small homes, not institutional buildings, with plants and pets and autonomy.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📈 THE RESULTS</div>
+            <p>Mortality rates dropped. Happiness increased. Costs were similar. Why? Because people had something to do: feed the cat, tend the plants, have a reason to get out of bed. Because they still had <em>agency</em>—the power to choose.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🌱 THE EXPERIMENT</div>
+            <p>One nursing home gave residents a plant to care for. Half of them died within a year. The other half? They thrived. Not because plants are magic, but because being needed—having responsibility—gives life structure and meaning.</p>
+        </div>
+
+        <div class="quiet-wisdom">
+            <div class="wisdom-label">✦ QUIET WISDOM</div>
+            <p>We think of dying people as those who need care. But being able to give care—even to a plant—transforms how it feels to receive it. You shift from object to agent. From patient to person.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">💭 DESIGN QUESTION</div>
+            <p>If you were redesigning care for aging people, what's one way you'd let them have agency? A choice about when to wake up? What to eat? Who visits? The constraint that enables autonomy is the constraint worth keeping.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 6 -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, #74B9FF, #0984E3);">6</div>
+        <h2 class="lesson-title">The Conversation We Don't Have</h2>
+        <p class="lesson-subtitle">Why doctors avoid talking about death—and what we lose</p>
+
+        <div class="card">
+            <div class="card-label">🤐 THE SILENCE</div>
+            <p>A study tracked conversations between oncologists and terminal cancer patients. Most oncologists didn't know their patients' goals. One doctor said: "If they want to talk about that, I'll talk about it." But patients rarely bring it up with doctors. They wait for doctors to start. Nobody begins.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">😟 THE FEAR</div>
+            <p>Doctors fear: "If I mention death, I'll rob them of hope." "I'll depress them." "They'll stop treatment." But the reverse is usually true. People want doctors to acknowledge reality. Hope persists even with honesty. What dies is false hope—hope for cure when cure is impossible.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🎯 WHAT PATIENTS NEED TO HEAR</div>
+            <p>Not "you're dying." But: "Your cancer is advanced. Here's what that means. Let's talk about what matters most to you. I'll help you live well with what's happening." Honesty married to presence.</p>
+        </div>
+
+        <div class="quiet-wisdom">
+            <div class="wisdom-label">✦ QUIET WISDOM</div>
+            <p>Gawande realized: his patients weren't asking him to save them. They were asking him to see them. To know that they existed beyond their diagnosis. To care about the life that remained.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Avoiding discussion of mortality is avoidance of the central fact of human existence."</div>
+            <div class="quote-attr">— Atul Gawande</div>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🔗 MARCUS AURELIUS'S PRACTICE</div>
+            <p>"Meditations" teaches memento mori—remembering death daily. Not to be depressed, but to clarify what matters. The same shift happens when doctors and patients talk honestly about mortality: clarity blooms.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 7 -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, #FDCB6E, #F39C12);">7</div>
+        <h2 class="lesson-title">The Courage to Talk About Dying</h2>
+        <p class="lesson-subtitle">How to have the conversation that changes everything</p>
+
+        <div class="card">
+            <div class="card-label">🗣️ ATUL'S FRAMEWORK: FIVE QUESTIONS</div>
+            <p><strong>1. Understanding:</strong> "What is your understanding of where things are?"<br><strong>2. Values:</strong> "If time is shorter than you'd like, what would be most important to you?"<br><strong>3. Tradeoffs:</strong> "Given this situation, what are you willing to accept or tolerate?"<br><strong>4. Role:</strong> "How can I be most helpful?"<br><strong>5. Strategy:</strong> "What should we do next?"</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">👨‍👩‍👧 THE DAUGHTER'S REGRET</div>
+            <p>Gawande describes a family where the father was dying but nobody used the word. The daughter thought he didn't know. The father thought they didn't know. Both protected each other into silence. He died before the conversation happened. She spent years wishing she'd asked him what he wanted, what he feared, what would have made those final weeks feel less lonely.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">💪 THE COURAGE</div>
+            <p>These conversations are hard because they require acknowledging: I might not get what I want. My loved one might die soon. Life is uncertain and finite. But people who have these conversations report relief, not despair. Clarity feels better than the fog of avoiding it.</p>
+        </div>
+
+        <div class="quiet-wisdom">
+            <div class="wisdom-label">✦ QUIET WISDOM</div>
+            <p>The daughter who didn't ask taught Gawande something: silence isn't protection. It's abandonment. The conversation is a gift—a final chance to be truly known.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">😌 GENTLE OBSERVATION</div>
+            <p>We protect people by avoiding hard conversations. But mostly we just protect ourselves from the discomfort of awkwardness. Our loved ones pay the price.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 8 -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, #A29BFE, #6C5CE7);">8</div>
+        <h2 class="lesson-title">The Limits of Medicine</h2>
+        <p class="lesson-subtitle">When treatment prolongs dying instead of living</p>
+
+        <div class="card">
+            <div class="card-label">🏥 THE SUPPORT STUDY</div>
+            <p>A landmark study tracked how people die in ICUs. The findings: many people are on ventilators, unable to eat, in pain, unconscious, hooked to machines—and they don't recover. They die anyway, surrounded by beeping machines instead of loved ones. The technology prolongs the process of dying, not life.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">💊 CHEMOTHERAPY IN THE FINAL WEEKS</div>
+            <p>Terminal cancer patients given chemo in their last weeks: it doesn't extend life. It extends suffering. Nausea, weakness, hospitalizations. The person spends their final time nauseated in a hospital instead of lucid at home. But doctors offer it anyway because it's what doctors do. And patients accept because they hope, even when hope is false.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">⚖️ THE HARD TRUTH</div>
+            <p>Medicine is powerful. But power isn't always wisdom. A doctor can keep a dying person alive. But keeping someone alive isn't the same as keeping them living. There's a difference between extending existence and extending life.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Spending your final days in an ICU because of a treatment you didn't really want, that isn't going to work the way you hope, that isn't the medicine we should be offering."</div>
+            <div class="quote-attr">— Atul Gawande</div>
+        </div>
+
+        <div class="quiet-wisdom">
+            <div class="wisdom-label">✦ QUIET WISDOM</div>
+            <p>The bravest medical conversations aren't about what we can do. They're about what we should do. Not every weapon should be deployed just because we have it.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 9 -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, #FF7675, #FF6B6B);">9</div>
+        <h2 class="lesson-title">Hospice and Palliative Care</h2>
+        <p class="lesson-subtitle">What hospice is—and the paradox that sometimes it extends life</p>
+
+        <div class="card">
+            <div class="card-label">🏥 WHAT HOSPICE IS NOT</div>
+            <p>Hospice isn't "giving up" or "going to die." It's not a place of defeat. It's a shift: from fighting the disease to easing the person. From "let's try another treatment" to "let's make you comfortable and let you spend time with people who matter."</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">💊 COMFORT AS MEDICINE</div>
+            <p>Hospice doctors are ruthless about comfort. Pain controlled. Anxiety soothed. Nausea managed. The person feels present for the first time in months—not woozy from chemo, not exhausted from fighting, just here. Alive.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📈 THE PARADOX</div>
+            <p>Patients on hospice sometimes live longer than those getting aggressive treatment. Why? Because they're not suffering from the treatment itself. Because they eat if they want to, sleep without pain medication interfering, have energy for visitors. Because they're not dying from medicine—they're dying from their illness, gently.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🎯 WHAT IT ENABLES</div>
+            <p>Hospice gives people time for the things that matter: conversations they've been delaying, hands held, debts forgiven, stories told, legacies shaped. You can't do that in an ICU. You can't do it when you're in pain.</p>
+        </div>
+
+        <div class="quiet-wisdom">
+            <div class="wisdom-label">✦ QUIET WISDOM</div>
+            <p>Gawande discovered: comfort isn't surrender. It's an act of love. It's choosing your person over your disease. It's saying: I want to know you in your last days, and I want you to know I'm here.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">💭 PARADIGM SHIFT</div>
+            <p>What if palliative care weren't a last resort, but an option considered early? Not instead of treatment, but alongside it. Meeting people where they are, with what they want.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 10 -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, #00B894, #27AE60);">10</div>
+        <h2 class="lesson-title">Good Days vs. More Days</h2>
+        <p class="lesson-subtitle">The central trade-off that defines the final chapter</p>
+
+        <div class="card">
+            <div class="card-label">⚖️ THE QUESTION</div>
+            <p>This is the core of Gawande's book: Would you rather have one month of excellent days (pain-free, lucid, with people you love) or three months of difficult days (painful, nauseated, medicated into fog, hospitalized)? The honest answer matters. And most people, when asked clearly, choose quality over quantity.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🎯 QUALITY OF LIFE</div>
+            <p>What's a "good day" at the end of life? Often simpler than people expect. Out of bed. Able to have a conversation. Not in pain. Maybe eating something you like. The bar isn't high because the person's expectations have shifted. A good day isn't a day without death anymore. It's a day with presence.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">💬 THE HARD CONVERSATION</div>
+            <p>Doctor, patient, and family together. "If we treat aggressively, you'll likely live 4 more months but spend most of it in the hospital. If we focus on comfort, you'll have fewer months but spend them at home. Which matters more to you?" This conversation should happen when the person is lucid enough to participate. Not at midnight, crashing in an ER.</p>
+        </div>
+
+        <div class="quiet-wisdom">
+            <div class="wisdom-label">✦ QUIET WISDOM</div>
+            <p>The best deaths aren't the longest. They're the ones where the person got to decide what mattered. A month at home with autonomy beats four months of medical imprisonment. Not for everyone, but for many. The tragedy is never having the conversation to know which is which.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The crisis of modern life is that it cuts us off from the tools we need to approach the final phase of life."</div>
+            <div class="quote-attr">— Atul Gawande</div>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 11: GAWANDE'S FATHER -->
+<section class="story">
+    <div class="story-inner">
+        <div style="margin-bottom: 40px;">
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #E17055, #D63031); font-weight: 800; font-size: 1.2rem; color: white; margin-bottom: 12px;">11</div>
+            <h2 class="lesson-title">Gawande's Father</h2>
+            <p class="lesson-subtitle">The personal journey woven through the book</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">📖 THE THROUGH-LINE</div>
+            <p>Being Mortal isn't abstract theory. It's personal. Gawande's father, Sundara, is a urologist in India. A man of science, logic, reason. He gets a spinal cord tumor. The doctors offer surgery—risky, but possible. Gawande, watching from America, hopes surgery saves his father. But his father, understanding the odds, makes a different choice.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🪛 THE CHOICE TO OPERATE</div>
+            <p>Sundara initially chooses surgery. But not because he believes it will cure him. Because he wants to try. Because he wants agency—the ability to say he fought. The surgery doesn't cure him. It complicates his decline. And Gawande, reflecting later, realizes: his father might have chosen differently if they'd talked about what he actually wanted. If they'd had the conversation.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">❤️ WHAT HE WISHES HE'D KNOWN</div>
+            <p>Sundara's final months are spent managing complications from surgery. Gawande watches his father's goals shift: first, cure. Then, independence. Then, comfort. Then, presence. Each shift happens gradually, without being named. Gawande wishes they'd talked explicitly. Wishes they'd mapped the journey together. Wishes he'd asked: what matters most right now?</p>
+        </div>
+
+        <div class="quiet-wisdom">
+            <div class="wisdom-label">✦ QUIET WISDOM</div>
+            <p>Sundara dies the way many people do—with unfinished conversations. But the book he inspired teaches others to finish theirs. His death, honestly written, becomes a gift to readers.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"I should have had a different kind of conversation with him."</div>
+            <div class="quote-attr">— Atul Gawande, reflecting on his father's decline</div>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">🔗 PAUL KALANITHI'S PARALLEL</div>
+            <p>Both "When Breath Becomes Air" and "Being Mortal" are written by doctors grappling with mortality. Kalanithi writes from inside the dying experience. Gawande writes from the outside—as doctor, as son. Together, they offer a complete picture: what it's like to be dying, and what it's like to witness it.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 12: A BETTER DEATH -->
+<section class="lesson">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, #FDCB6E, #F39C12);">12</div>
+        <h2 class="lesson-title">A Better Death</h2>
+        <p class="lesson-subtitle">What a good death looks like, and how to prepare for it</p>
+
+        <div class="card">
+            <div class="card-label">🎯 THE ELEMENTS</div>
+            <p><strong>Unfinished business resolved:</strong> Apologies made, love stated, legacy shaped. <strong>Pain controlled:</strong> Not erased (some pain is part of living), but manageable. <strong>Loved ones present:</strong> Not intrusive hovering, but genuine presence. <strong>Feeling known:</strong> The person feels like themselves until the end, not erased by illness or medication.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🧭 HOW TO PREPARE</div>
+            <p><strong>Start now:</strong> Don't wait until crisis. Make a list: What matters most? Who should know? What would make a good final chapter? <strong>Tell people:</strong> Your doctor, your family. Not once. Repeatedly, as things change. <strong>Choose carefully:</strong> Where do you want to be? Who do you want nearby? What does a good day look like?</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🏥 WHAT DOCTORS NEED TO HEAR</div>
+            <p>Your hopes aren't to live longer if it means suffering. Your hopes might be: watch my grandchild graduate. Publish my book. Attend one more birthday dinner. Go to a funeral I want to go to. These are the measures of success. A doctor who knows these goals can help you achieve them.</p>
+        </div>
+
+        <div class="quiet-wisdom">
+            <div class="wisdom-label">✦ QUIET WISDOM</div>
+            <p>A better death isn't a contradiction. It's possible. Not easy, but possible. It requires honesty, courage, and people willing to sit with you through the hard conversations. It requires accepting that dying is part of living—not a medical failure but a human passage.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Dying may be the one thing I'm more of an expert in than my patients."</div>
+            <div class="quote-attr">— Atul Gawande</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">💭 FINAL REFLECTION</div>
+            <p>The invitation: live now as if you've chosen well. Make the conversations. Know what you want. Don't wait for the diagnosis to start thinking about the life you actually want to live. And when the time comes—earlier than expected, or expected—you'll be ready not to run, but to walk forward with clarity and grace.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CHEATSHEET -->
+<section class="cheatsheet">
+    <div class="cheatsheet-inner">
+        <h2>Quick Reference: Being Mortal</h2>
+
+        <div class="two-col">
+            <div class="cheatsheet-card">
+                <h3>Core Argument</h3>
+                <ul>
+                    <li>Modern medicine changed death from a home event to a hospital event—losing humanity in the process</li>
+                    <li>Doctors trained to fix problems, not to navigate finitude with patients</li>
+                    <li>People don't want to live longest; they want to live well</li>
+                    <li>The conversation about what matters must happen before crisis</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-card">
+                <h3>Key Stories</h3>
+                <ul>
+                    <li><strong>Sara Monopoli:</strong> Chose chemo to attend son's wedding, not for cure</li>
+                    <li><strong>The 96-year-old:</strong> Prioritized her cat over safety rules</li>
+                    <li><strong>Atul's father:</strong> Surgery didn't prolong life; it complicated decline</li>
+                    <li><strong>Green House model:</strong> Autonomy and meaning trump safety</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-card">
+                <h3>Five Questions Framework</h3>
+                <ul>
+                    <li>What's your understanding of where things are?</li>
+                    <li>If time is short, what matters most?</li>
+                    <li>What tradeoffs are you willing to accept?</li>
+                    <li>How can I help you?</li>
+                    <li>What should we do next?</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-card">
+                <h3>Why This Matters</h3>
+                <ul>
+                    <li>We're all dying; the question is how</li>
+                    <li>Good deaths aren't accidents; they're chosen</li>
+                    <li>Quality beats quantity for most people</li>
+                    <li>Conversations now prevent regret later</li>
+                    <li>Medicine can help, but it can also harm—the distinction is crucial</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-card">
+                <h3>For Loved Ones</h3>
+                <ul>
+                    <li>Ask the hard questions early</li>
+                    <li>Listen without trying to fix</li>
+                    <li>Honor small wishes (the cat, the martini)</li>
+                    <li>Be present without hovering</li>
+                    <li>Finish the conversations while you can</li>
+                </ul>
+            </div>
+
+            <div class="cheatsheet-card">
+                <h3>Cross-Book Connections</h3>
+                <ul>
+                    <li><strong>When Breath Becomes Air:</strong> From the inside—dying as doctor</li>
+                    <li><strong>Four Thousand Weeks:</strong> Finitude and how we use time</li>
+                    <li><strong>Man's Search for Meaning:</strong> Finding meaning even in suffering</li>
+                    <li><strong>Meditations:</strong> Memento mori and what matters</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL REFLECTION -->
+<section class="lesson" style="background: linear-gradient(135deg, rgba(255,215,0,0.08) 0%, rgba(255,152,0,0.08) 100%);">
+    <div class="lesson-inner">
+        <h2 class="lesson-title" style="margin-bottom: 30px;">The Invitation</h2>
+
+        <div class="quiet-wisdom">
+            <div class="wisdom-label">✦ BEING MORTAL ASKS</div>
+            <p>Start the conversation. Not next year when you get bad news. Now. With the people you love. Ask: What matters most? What kind of life do you want to live? What would a good day look like? What terrifies you about getting old? What brings you joy even now?</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The most important thing is to do the thing that we don't normally do, which is to make sure we're talking about this stuff."</div>
+            <div class="quote-attr">— Atul Gawande</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">🌟 THE DEEPER GIFT</div>
+            <p>Being Mortal doesn't teach you how to die. It teaches you how to live. Because once you've decided what matters—your cat, your morning paper, your grandchild's laugh, a good book, a conversation with a friend—you can live that way now. You don't have to wait for the diagnosis. You don't have to wait for permission. The life worth living is available right now.</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

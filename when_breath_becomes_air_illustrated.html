@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When Breath Becomes Air — Paul Kalanithi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+        :root { --coral: #FF6B6B; --teal: #4ECDC4; --sunny: #FFE66D; --purple: #A06CD5; --sky: #74B9FF; --mint: #55EFC4; --pink: #FD79A8; --orange: #FDCB6E; --dark: #2D3436; --cream: #FFEAA7; --deep-blue: #0984E3; --warm-red: #E17055; --forest: #00B894; --dark-purple: #6C5CE7; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+        .cover { min-height: 100vh; background: linear-gradient(135deg, #0a0a14 0%, #1a1a2e 50%, #0a0a14 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 40px 20px; }
+        .cover h1 { font-family: 'Playfair Display', serif; font-size: 4rem; color: white; letter-spacing: -2px; text-align: center; position: relative; z-index: 2; font-style: italic; }
+        .cover .author { font-size: 1.3rem; color: var(--mint); margin-top: 8px; font-weight: 600; z-index: 2; position: relative; }
+        .cover .subtitle { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 16px; z-index: 2; text-align: center; max-width: 500px; position: relative; }
+        .particle { position: absolute; border-radius: 50%; opacity: 0.15; animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
+        .lesson { min-height: 100vh; padding: 60px 20px; display: flex; align-items: center; justify-content: center; }
+        .lesson-inner { max-width: 900px; width: 100%; }
+        .lesson-num { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem; color: white; margin-bottom: 12px; }
+        .lesson-title { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2; }
+        .lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+        .card { background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+        .card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .card p { font-size: 0.95rem; line-height: 1.7; color: #444; }
+        .quote-box { background: var(--dark); color: white; border-radius: 16px; padding: 24px 28px; margin-bottom: 20px; }
+        .quote-box .quote-text { font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+        .quote-box .quote-attr { color: var(--sunny); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+        .connect-box { background: #e8f4fd; border-left: 4px solid var(--deep-blue); border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px; }
+        .connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--deep-blue); letter-spacing: 1px; margin-bottom: 6px; }
+        .connect-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+        .ai-box { background: linear-gradient(135deg, #0984E3, #6C5CE7); color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px; }
+        .ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--sunny); margin-bottom: 6px; }
+        .ai-box p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
+        .funny-box { background: #e6f0ff; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px; border-left: 4px solid #74b9ff; }
+        .funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: #0984e3; letter-spacing: 1px; margin-bottom: 6px; }
+        .funny-box p { font-size: 0.9rem; line-height: 1.6; color: #444; }
+        .story { min-height: 100vh; padding: 60px 20px; display: flex; align-items: center; justify-content: center; }
+        .story-inner { max-width: 900px; width: 100%; }
+        .cheatsheet { min-height: 100vh; padding: 60px 20px; background: linear-gradient(135deg, #0f0f23, #1a1a3e); display: flex; align-items: center; justify-content: center; }
+        .cheatsheet-inner { max-width: 900px; width: 100%; }
+        .cheatsheet h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; text-align: center; margin-bottom: 40px; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+        .svg-container { text-align: center; margin: 30px 0; }
+        svg { max-width: 100%; height: auto; }
+        .breath-animation { animation: breath 4s ease-in-out infinite; }
+        @keyframes breath { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+    <svg class="svg-container breath-animation" width="120" height="120" viewBox="0 0 120 120" fill="none">
+        <circle cx="60" cy="60" r="50" stroke="#74B9FF" stroke-width="2" opacity="0.4"/>
+        <circle cx="60" cy="60" r="40" stroke="#55EFC4" stroke-width="1.5" opacity="0.3"/>
+        <path d="M 60 20 Q 70 40, 60 60 Q 50 40, 60 20" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.8"/>
+    </svg>
+    <h1>When Breath<br/>Becomes Air</h1>
+    <p class="author">Paul Kalanithi</p>
+    <p class="subtitle">A neurosurgeon's meditation on mortality, meaning, and what makes life worth living</p>
+</div>
+
+<!-- LESSON 1: The Moment Everything Changed -->
+<div class="lesson" style="background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(74,185,212,0.05) 100%);">
+    <div class="lesson-inner">
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <div class="lesson-num" style="background: linear-gradient(135deg, #74B9FF, #55EFC4);">1</div>
+        </div>
+        <h2 class="lesson-title" style="color: #1a1a2e;">The Moment Everything Changed</h2>
+        <p class="lesson-subtitle">A future collapses into the present</p>
+
+        <svg class="svg-container" width="300" height="200" viewBox="0 0 300 200" fill="none">
+            <rect x="20" y="40" width="260" height="120" rx="8" fill="#f0f8ff" stroke="#74B9FF" stroke-width="1.5" opacity="0.6"/>
+            <circle cx="100" cy="100" r="25" fill="#74B9FF" opacity="0.4"/>
+            <circle cx="100" cy="100" r="15" fill="#74B9FF" opacity="0.6"/>
+            <path d="M 150 70 L 160 130 M 170 70 L 180 130" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+            <text x="150" y="160" font-family="Inter" font-size="12" fill="#0a0a14" text-anchor="middle">The X-ray that changed everything</text>
+        </svg>
+
+        <div class="card">
+            <div class="card-label" style="color: #0984E3;">THE DIAGNOSIS</div>
+            <p>At 36, at the height of his career as a Stanford neurosurgeon, Paul Kalanithi received a diagnosis of stage IV lung cancer. A young man who had spent his life asking patients profound questions about mortality now faced his own. In that moment, the carefully constructed future — the career, the legacy, the time he assumed he had — vanished. The present became unbearable and infinite all at once.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"You can't ever reach perfection, but if you chase perfection, you can catch excellence."</div>
+            <div class="quote-attr">— Vince Lombardi (quoted by Kalanithi)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #0984E3;">WHAT COLLAPSED</div>
+            <p>Paul had been living for the future. Medical school, residency, fellowship — each stage was a step toward becoming the kind of neurosurgeon he deeply wanted to be. He had a wife he loved, plans to have children, research to complete. Then, in the span of a conversation with an oncologist, that entire narrative shattered. The future that had structured his identity and given him purpose no longer existed. He had to learn how to live in a present that was suddenly finite.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #0984E3;">LUCY'S ROLE</div>
+            <p>His wife Lucy became his anchor. While Paul spiraled through the initial shock, she asked the practical questions, made the calls, and insisted on hope without denying reality. Their partnership, which had felt like a future-oriented team, suddenly became a moment-by-moment practice of showing up for each other. This is where the real work of dying began.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">TENDER MOMENT</div>
+            <p>Paul describes lying in bed after the diagnosis, unable to move or speak, while Lucy held his hand. She didn't try to fix it or make it better. She just stayed. That presence — that refusal to look away — became the template for everything that followed. It's not the grand gestures that save us. It's the person who simply won't leave.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">CONNECTS TO</div>
+            <p><strong>Man's Search for Meaning</strong> (Frankl): Both men face the collapse of their assumed futures and must find meaning in the present moment rather than in plans.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 2: Why He Became a Doctor -->
+<div class="lesson" style="background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(117,185,255,0.05) 100%);">
+    <div class="lesson-inner">
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <div class="lesson-num" style="background: linear-gradient(135deg, #A06CD5, #6C5CE7);">2</div>
+        </div>
+        <h2 class="lesson-title" style="color: #1a1a2e;">Why He Became a Doctor</h2>
+        <p class="lesson-subtitle">Literature vs. science — the brain as the seat of identity</p>
+
+        <svg class="svg-container" width="320" height="220" viewBox="0 0 320 220" fill="none">
+            <path d="M 60 80 Q 80 60, 100 80 Q 120 100, 100 120 Q 80 140, 60 120 Q 40 100, 60 80" fill="#6C5CE7" opacity="0.3"/>
+            <path d="M 60 80 Q 80 60, 100 80 Q 120 100, 100 120 Q 80 140, 60 120 Q 40 100, 60 80" stroke="#6C5CE7" stroke-width="2"/>
+            <circle cx="80" cy="100" r="5" fill="#6C5CE7"/>
+            <circle cx="100" cy="100" r="5" fill="#6C5CE7"/>
+            <circle cx="60" cy="100" r="5" fill="#6C5CE7"/>
+            <text x="160" y="100" font-family="Playfair Display" font-size="24" font-weight="bold" fill="#0a0a14">Brain</text>
+            <text x="160" y="130" font-family="Inter" font-size="12" fill="#555">Identity made flesh</text>
+            <path d="M 80 160 L 150 160" stroke="#A06CD5" stroke-width="2" stroke-dasharray="4" opacity="0.6"/>
+            <text x="80" y="190" font-family="Inter" font-size="11" fill="#444">Literature</text>
+            <text x="160" y="190" font-family="Inter" font-size="11" fill="#444">Neurosurgery</text>
+        </svg>
+
+        <div class="card">
+            <div class="card-label" style="color: #6C5CE7;">THE CHOICE</div>
+            <p>As a young man, Paul was drawn to literature. He read Tolstoy, Beckett, and Eliot. Literature promised insight into the human condition, the beauty of language, the mystery of consciousness. But he chose medicine — specifically neurosurgery. Why? Because he realized that the brain was where identity lived. A surgeon could enter a human being's most fundamental self, could understand the neurological basis of consciousness, could watch a person's sense of self literally change after surgery.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #6C5CE7;">SURGERY AS LITERATURE</div>
+            <p>Neurosurgery wasn't a rejection of literature; it was literature in a different form. Each surgery was a narrative. Each patient's case was a story — of who they were, what mattered to them, what they stood to lose. Operating on the brain was operating on the seat of identity itself. Paul saw his work as inherently meaningful because it was literally about preserving what makes someone human.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The brain is the only place, at least as far as we know, where the universe is studying itself."</div>
+            <div class="quote-attr">— Paul Kalanithi</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #6C5CE7;">WHAT HE SOUGHT</div>
+            <p>Paul was searching for meaning in his work. He wanted to do something that mattered, that reached into the deepest questions of what it means to be human. Medicine offered that. It offered the possibility of service — using his intelligence and skill to help people preserve their selves, their identities, their capacity to live meaningful lives. This calling would sustain him even after his diagnosis.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">TENDER MOMENT</div>
+            <p>Paul describes a moment in the OR, watching his hands move with practiced precision, thinking: "This is what I was made for." There's no grandeur in it. Just recognition. The right person in the right place, doing the work that aligns them with something larger than themselves. That alignment would matter infinitely when the diagnosis came.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">KEY INSIGHT</div>
+            <p>Your choice of work is a choice about who you become. Paul didn't become a neurosurgeon by accident. He chose that path because it aligned with his deepest curiosity — about consciousness, identity, what it means to be human. When crisis came, that alignment became an anchor.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">CONNECTS TO</div>
+            <p><strong>Meditations</strong> (Marcus Aurelius): Both men sought a life aligned with truth and service. Marcus asked: "What is the most important work you can do?" Paul answered: surgery. And he meant it.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 3: The Doctor-Patient Inversion -->
+<div class="lesson" style="background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,107,107,0.05) 100%);">
+    <div class="lesson-inner">
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <div class="lesson-num" style="background: linear-gradient(135deg, #FF6B6B, #E17055);">3</div>
+        </div>
+        <h2 class="lesson-title" style="color: #1a1a2e;">The Doctor-Patient Inversion</h2>
+        <p class="lesson-subtitle">From healer to patient — what doctors say vs. what patients hear</p>
+
+        <svg class="svg-container" width="320" height="200" viewBox="0 0 320 200" fill="none">
+            <rect x="30" y="40" width="120" height="120" rx="8" fill="#fff5f5" stroke="#FF6B6B" stroke-width="2"/>
+            <circle cx="90" cy="100" r="30" fill="#FF6B6B" opacity="0.2"/>
+            <path d="M 75 90 L 85 100 L 105 80" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="90" y="170" font-family="Inter" font-size="11" fill="#0a0a14" text-anchor="middle">Doctor</text>
+            <path d="M 170 100 L 200 100" stroke="#A06CD5" stroke-width="3" stroke-dasharray="6"/>
+            <rect x="170" y="40" width="120" height="120" rx="8" fill="#e8f4fd" stroke="#0984E3" stroke-width="2"/>
+            <path d="M 230 80 L 245 100 L 230 120" fill="none" stroke="#0984E3" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="230" cy="100" r="8" fill="#0984E3" opacity="0.5"/>
+            <text x="230" y="170" font-family="Inter" font-size="11" fill="#0a0a14" text-anchor="middle">Patient</text>
+        </svg>
+
+        <div class="card">
+            <div class="card-label" style="color: #FF6B6B;">THE CROSSING</div>
+            <p>As a neurosurgeon, Paul had learned to speak in probabilities and percentages. "You have a 70% chance of a full recovery" or "The five-year survival rate is 15%." These are the language of medicine — precise, evidence-based, reassuring in their specificity. But when Paul became the patient, he discovered that patients don't hear percentages. They hear finality or false hope. They hear what terrifies them most.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #FF6B6B;">WHAT DOCTORS SAY VS. WHAT PATIENTS HEAR</div>
+            <p>Paul sat across from his oncologist expecting the doctor-to-doctor conversation he was used to having with colleagues. Instead, he experienced the patient's perspective. His oncologist couldn't give him a clear prognosis. "How long do I have?" Paul asked. The answer was oblique, cautious, designed not to foreclose hope. But what Paul heard was: "We don't know. And that uncertainty might be worse than bad news." The inability to name the thing was its own form of torture.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The fact of death is the prime fact of the human condition. One should be able to look at death squarely and say, okay, this is the human condition, I accept it, and now let me get back to my life."</div>
+            <div class="quote-attr">— Paul Kalanithi</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #FF6B6B;">THE LONELINESS OF PROGNOSIS</div>
+            <p>One of the cruelest aspects of cancer is that it removes you from normal time. Your friends still have futures that stretch predictably ahead. You don't. Paul describes a profound loneliness in this asymmetry. Nobody in his life had to think about mortality the way he did now. His colleagues were still planning their research projects, their careers, their retirements. He was planning how many days he might have left. The difference created an unbridgeable distance.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">TENDER MOMENT</div>
+            <p>Paul describes a conversation with Lucy where she asks, "What do you need from me right now?" And he realizes: there's nothing she can do. No comfort will change the fact. No love will add years to his life. But in her asking, and in his knowing she would keep asking no matter how futile it seemed, he found something like grace. The loneliness isn't erased. But it's witnessed.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">KEY INSIGHT</div>
+            <p>If you've ever been a patient, you know the experience is disorienting. Your agency is reduced. You're asked to hope and plan while living with radical uncertainty. Paul's crossing from doctor to patient taught him that the worst isolation comes not from suffering, but from being the only one in your circle who's suffering on this timeline.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">CONNECTS TO</div>
+            <p><strong>Being Mortal</strong> (Atul Gawande): Gawande, also a physician, reaches the same conclusion: doctors who become patients discover how little medicine actually helps with the existential crisis at the core of illness.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 4: Living With Uncertainty -->
+<div class="lesson" style="background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(174,102,213,0.05) 100%);">
+    <div class="lesson-inner">
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <div class="lesson-num" style="background: linear-gradient(135deg, #74B9FF, #0984E3);">4</div>
+        </div>
+        <h2 class="lesson-title" style="color: #1a1a2e;">Living With Uncertainty</h2>
+        <p class="lesson-subtitle">Planning when you don't know how long you have</p>
+
+        <svg class="svg-container" width="320" height="220" viewBox="0 0 320 220" fill="none">
+            <path d="M 40 180 L 280 180" stroke="#74B9FF" stroke-width="2"/>
+            <circle cx="60" cy="180" r="8" fill="#74B9FF" opacity="0.5"/>
+            <circle cx="100" cy="180" r="8" fill="#74B9FF" opacity="0.5"/>
+            <circle cx="140" cy="180" r="8" fill="#74B9FF" opacity="0.5"/>
+            <circle cx="180" cy="180" r="8" fill="#FF6B6B" opacity="0.8"/>
+            <path d="M 180 180 L 260 100" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="4" opacity="0.6"/>
+            <text x="180" y="160" font-family="Inter" font-size="10" fill="#FF6B6B">Diagnosis</text>
+            <text x="260" y="90" font-family="Inter" font-size="10" fill="#FF6B6B">Unknown</text>
+            <circle cx="260" cy="100" r="6" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="3"/>
+        </svg>
+
+        <div class="card">
+            <div class="card-label" style="color: #0984E3;">THE ONCOLOGIST'S NON-ANSWER</div>
+            <p>Paul pressed his oncologist for specifics: "How long do I have?" The answer came back in careful language about medians and ranges, about statistical averages that mean nothing to the individual. "Some people live months, some live years." It was the most honest answer possible — and completely useless for the purpose of living. How do you plan your life around that? Do you assume months or years? Do you assume the best case or the worst?</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #0984E3;">THE TRAP OF HOPE AND REALISM</div>
+            <p>Paul found himself caught between two impossible positions. If he planned for years, he risked disappointment and wasted precious time on projects that wouldn't matter. If he planned for months, he was giving up on the possibility of more time. There was no rational framework for deciding. Hope and realism seemed mutually exclusive, yet he needed both. This is the peculiar agony of cancer — you must live as if you'll be here, while knowing you might not be.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"I had to find meaning in a finite, uncertain life."</div>
+            <div class="quote-attr">— Paul Kalanithi</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #0984E3;">KALANITHI'S FRAMEWORK</div>
+            <p>Paul eventually developed a kind of pragmatic philosophy. Rather than trying to predict the future, he asked: What matters most? What would I regret not doing? Not ironically, Paul's framework wasn't exotic. It centered on: finishing what he'd started (his residency), his relationship with Lucy, possible parenthood. Not legacy projects or grand gestures. Just the intimate, ordinary things that give life texture. This became his north star when uncertainty threatened to paralyze him.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">KEY INSIGHT</div>
+            <p>Uncertainty isn't unique to illness. We all live with radical uncertainty about the future. The gift — and burden — of Paul's diagnosis was that it forced him to confront explicitly what's always true: we don't actually know what time we have. His framework for living with terminal uncertainty might be useful for anyone navigating an uncertain future.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">TENDER MOMENT</div>
+            <p>Paul describes telling Lucy, "I don't know if I should plan for tomorrow or next year. I don't know which would hurt worse to get wrong." And Lucy, with her characteristic clarity, says something like: "Then plan for today. And tomorrow when it comes, plan for that day." The wisdom wasn't in resolving the uncertainty. It was in accepting it moment by moment.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">CONNECTS TO</div>
+            <p><strong>Four Thousand Weeks</strong> (Oliver Burkeman): Burkeman explores how accepting finitude — even without knowing the exact deadline — changes how we prioritize time. Paul's illness made this abstract reality concrete.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 5: Returning to the OR -->
+<div class="lesson" style="background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(85,239,196,0.05) 100%);">
+    <div class="lesson-inner">
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <div class="lesson-num" style="background: linear-gradient(135deg, #55EFC4, #00B894);">5</div>
+        </div>
+        <h2 class="lesson-title" style="color: #1a1a2e;">Returning to the OR</h2>
+        <p class="lesson-subtitle">When work is meaning, and meaning is survival</p>
+
+        <svg class="svg-container" width="320" height="220" viewBox="0 0 320 220" fill="none">
+            <rect x="40" y="50" width="240" height="140" rx="8" fill="#e8f8f5" stroke="#00B894" stroke-width="2"/>
+            <rect x="60" y="70" width="200" height="90" rx="4" fill="#fff" stroke="#00B894" stroke-width="1" opacity="0.6"/>
+            <circle cx="160" cy="115" r="20" fill="#55EFC4" opacity="0.3"/>
+            <path d="M 140 115 L 160 125 L 180 105" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="160" y="180" font-family="Inter" font-size="12" fill="#0a0a14" text-anchor="middle">The Operating Room</text>
+        </svg>
+
+        <div class="card">
+            <div class="card-label" style="color: #00B894;">THE DECISION</div>
+            <p>After his diagnosis, Paul faced a choice: withdraw from work, focus on treatment, spend time with family, prepare for death. It seemed like the rational response. Instead, he asked his team if he could continue operating. His colleagues were uncertain. Wasn't he too sick? Shouldn't he rest? But Paul insisted. He needed to go back to the OR. Not despite his diagnosis, but perhaps because of it.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #00B894;">IDENTITY REQUIRES IT</div>
+            <p>Paul realized that neurosurgery wasn't just his job; it was his identity. To stop operating was to die a little before death came for him. In the OR, he was still himself. He was still the person who'd spent a decade training for exactly this moment. The cancer could take his future, could take his time, could take his physical capacity eventually. But as long as he could enter the OR, he could be the person he'd chosen to be. The surgery wasn't a distraction from dying. It was a way of living.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"In that time, I was no longer Dr. Kalanithi. I was Paul. I was sick. I was tired. I was afraid. But I was also a neurosurgeon."</div>
+            <div class="quote-attr">— Paul Kalanithi (paraphrased)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #00B894;">WHAT IT MEANT</div>
+            <p>Returning to the OR wasn't a rejection of his illness or a denial of reality. It was an assertion of meaning in the face of meaninglessness. The cancer had no narrative, no logic, no purpose. But surgery had all three. When Paul stood at the OR table, hands steady, mind focused, he was doing something that mattered. He was using the full measure of his training to help another human being preserve their capacity to live a meaningful life. In a situation where so much had become uncertain and meaningless, that clarity was sustaining.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">KEY INSIGHT</div>
+            <p>Paul's return to surgery offers a profound lesson about meaning: it's not something you create from nothing. It's something you align yourself with through work, practice, commitment. He didn't have to invent reasons to keep operating. They were already there, waiting in the careful attention he'd built for a decade. The crisis just made them impossible to ignore.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">TENDER MOMENT</div>
+            <p>Paul describes a moment midway through a surgery, completely absorbed in the precise, delicate work of preserving a patient's capacity to think and feel. For a few hours, he wasn't a man with stage IV cancer. He wasn't dying. He was simply, fully present in the work. That's not escape. That's grace. That's what he was fighting to keep access to, for as long as the body would allow.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">CONNECTS TO</div>
+            <p><strong>Man's Search for Meaning</strong> (Frankl): Frankl survived the concentration camps by maintaining connection to meaningful work. Paul survived his diagnosis by the same principle — the work kept him anchored to his identity and purpose.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 6: The Question of a Child -->
+<div class="lesson" style="background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(253,123,168,0.05) 100%);">
+    <div class="lesson-inner">
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <div class="lesson-num" style="background: linear-gradient(135deg, #FD79A8, #FF6B6B);">6</div>
+        </div>
+        <h2 class="lesson-title" style="color: #1a1a2e;">The Question of a Child</h2>
+        <p class="lesson-subtitle">The calculation of love vs. grief — and why Lucy said yes</p>
+
+        <svg class="svg-container" width="320" height="220" viewBox="0 0 320 220" fill="none">
+            <circle cx="100" cy="110" r="35" fill="#FD79A8" opacity="0.2" stroke="#FD79A8" stroke-width="2"/>
+            <path d="M 75 110 L 85 120 L 105 100" stroke="#FD79A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="220" cy="110" r="30" fill="#FFC0CB" opacity="0.3"/>
+            <circle cx="210" cy="100" r="5" fill="#FD79A8" opacity="0.7"/>
+            <circle cx="230" cy="100" r="5" fill="#FD79A8" opacity="0.7"/>
+            <path d="M 210 115 Q 220 125 230 115" stroke="#FD79A8" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 130 110 L 190 110" stroke="#FD79A8" stroke-width="2" stroke-dasharray="4"/>
+            <text x="160" y="160" font-family="Inter" font-size="11" fill="#0a0a14" text-anchor="middle">Love & Responsibility</text>
+        </svg>
+
+        <div class="card">
+            <div class="card-label" style="color: #FD79A8;">THE QUESTION</div>
+            <p>Paul and Lucy had always planned to have children. But now, with stage IV cancer, the question became excruciating: should they try to have a baby? Paul would likely die while the child was young — or very young. Lucy would become a single parent. The child would grow up without a father, knowing him, if at all, only through Paul's absence. What love could justify that grief? What father could choose to leave a child behind?</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #FD79A8;">THE CALCULATION</div>
+            <p>There's a terrible mathematics here. Paul ran it: the child would lose a father. Lucy would lose a partner. Paul would lose the chance to see who his child became. All of this was true and would be painful. But the alternative was also true: if they didn't have the child, they would lose the possibility of a life together — the three of them, however briefly. There was no right answer, only a choice between different kinds of grief. Lucy chose to have Cady. She chose the shorter time with Paul over the longer time without him.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Before your diagnosis, we talked about having kids. I want that. I want to have your baby."</div>
+            <div class="quote-attr">— Lucy Kalanithi, to Paul</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #FD79A8;">LUCY'S ROLE</div>
+            <p>Lucy Kalanithi emerges in this section as the most fully actualized person in the book. She doesn't pretend the situation isn't tragic. She doesn't deny the cost. But she insists on living — not despite the diagnosis, but including it. She wanted to have Paul's baby not because she was in denial, but because she understood that love doesn't require a guarantee of permanence. In fact, the most profound love often comes through the willingness to be hurt.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">KEY INSIGHT</div>
+            <p>Lucy's choice to have Cady despite knowing Paul would die is an act of defiance against meaninglessness. She insists: "Yes, it will be hard. Yes, I will grieve. But I will also have had this. We will have created this together." It's not optimism. It's something deeper — a refusal to let the future's inevitability dictate the present's possibilities.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">TENDER MOMENT</div>
+            <p>Paul writes about holding newborn Cady, knowing he might not see her first day of school, her first words, her growing up. And in that moment, instead of despair, there's just tenderness. Not the tenderness of a man at peace with death — but the tenderness of a man fully awake to what matters. He holds her not because he can protect her or ensure her future, but simply because she is here, and he is here, and for this moment that is enough.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">CONNECTS TO</div>
+            <p><strong>Man's Search for Meaning</strong> (Frankl): Frankl survived unimaginable suffering by maintaining connection to the people he loved. Paul and Lucy's choice to have Cady — to accept the grief — is a refusal to let suffering have the last word.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 7: What Literature Taught Him -->
+<div class="lesson" style="background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(160,108,213,0.05) 100%);">
+    <div class="lesson-inner">
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <div class="lesson-num" style="background: linear-gradient(135deg, #A06CD5, #6C5CE7);">7</div>
+        </div>
+        <h2 class="lesson-title" style="color: #1a1a2e;">What Literature Taught Him</h2>
+        <p class="lesson-subtitle">Stories prepare us for death — why he needed to become a writer</p>
+
+        <svg class="svg-container" width="320" height="220" viewBox="0 0 320 220" fill="none">
+            <path d="M 80 60 L 80 150 M 60 80 L 100 80 M 60 110 L 100 110 M 60 140 L 100 140" stroke="#A06CD5" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="80" cy="65" r="6" fill="#A06CD5" opacity="0.7"/>
+            <path d="M 150 70 Q 160 80, 170 70 Q 180 80, 190 70" stroke="#6C5CE7" stroke-width="2" fill="none" opacity="0.8"/>
+            <path d="M 150 100 Q 160 110, 170 100 Q 180 110, 190 100" stroke="#6C5CE7" stroke-width="2" fill="none" opacity="0.8"/>
+            <path d="M 150 130 Q 160 140, 170 130 Q 180 140, 190 130" stroke="#6C5CE7" stroke-width="2" fill="none" opacity="0.8"/>
+            <text x="160" y="175" font-family="Inter" font-size="12" fill="#0a0a14" text-anchor="middle">Words as preparation</text>
+        </svg>
+
+        <div class="card">
+            <div class="card-label" style="color: #A06CD5;">THE BOOKS THAT SHAPED HIM</div>
+            <p>As Paul faced death, he turned back to the literature that had shaped him. Tolstoy's "The Death of Ivan Ilyich" — the story of a man confronting mortality. Samuel Beckett's spare, uncompromising prose. T.S. Eliot's "Four Quartets" with their meditation on time and meaning. These weren't comfort reads. They were unflinching looks at the human condition. And they gave him a language for what he was experiencing.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #A06CD5;">HOW STORIES PREPARE US</div>
+            <p>Literature doesn't resolve the question of death. It doesn't make death easier or more acceptable. But it does something subtler: it shows you that you're not alone in the experience. Ivan Ilyich faced meaninglessness and confronted the fact that his successful life hadn't prepared him for dying. Reading that story, Paul recognized himself. Not as pathology, but as human. Literature creates a space where the unspeakable can be spoken about. Where the unbearable becomes, if not bearable, at least less isolating.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"You can't ever reach perfection, but if you chase perfection, you can catch excellence."</div>
+            <div class="quote-attr">— Paul Kalanithi (paraphrased from literature and experience)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #A06CD5;">BECOMING A WRITER</div>
+            <p>For most of his life, Paul had chosen science over literature. But as he was dying, he realized he needed to write. Not just for the legacy — though that mattered. But because writing was a way of making sense of the experience. Literature had prepared him to die well. Now, by writing, he would prepare others. His book is itself a work of literature — not a medical treatise, not a self-help text, but a meditation on what it means to be human when the framework of your life collapses.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">KEY INSIGHT</div>
+            <p>Paul's turn to literature in the face of death suggests something important: the humanities aren't decorative. They're essential. Literature doesn't give us techniques for surviving mortality. It gives us witness. It gives us the knowledge that others have stood in this place before, have asked these questions, have lived (and died) with dignity. That's not nothing.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">TENDER MOMENT</div>
+            <p>Paul describes reading Eliot's "Burnt Norton" — "In my beginning is my end" — while lying in a hospital bed. Not with irony or bitterness, but with recognition. This is the human condition. Not unique to him. Not unique to his moment. But true. And in the reading, somehow lighter. He's part of a tradition of humans confronting finitude. The tradition doesn't save him, but it holds him.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">CONNECTS TO</div>
+            <p><strong>Meditations</strong> (Marcus Aurelius): Like Paul, Marcus turned to philosophy (the literature of his era) to prepare himself for death. Both men found that intellectual honesty about mortality was more sustaining than denial.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 8: The Neuroscience of Identity -->
+<div class="lesson" style="background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(93,109,126,0.05) 100%);">
+    <div class="lesson-inner">
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <div class="lesson-num" style="background: linear-gradient(135deg, #6C5CE7, #0984E3);">8</div>
+        </div>
+        <h2 class="lesson-title" style="color: #1a1a2e;">The Neuroscience of Identity</h2>
+        <p class="lesson-subtitle">What patients taught him: identity as neurological, the self as story</p>
+
+        <svg class="svg-container" width="320" height="220" viewBox="0 0 320 220" fill="none">
+            <circle cx="160" cy="90" r="50" fill="none" stroke="#6C5CE7" stroke-width="2"/>
+            <circle cx="140" cy="80" r="8" fill="#6C5CE7" opacity="0.6"/>
+            <circle cx="180" cy="80" r="8" fill="#6C5CE7" opacity="0.6"/>
+            <circle cx="160" cy="100" r="8" fill="#6C5CE7" opacity="0.6"/>
+            <path d="M 130 100 Q 160 130, 190 100" stroke="#0984E3" stroke-width="2" fill="none" opacity="0.7"/>
+            <path d="M 140 110 L 160 130 L 180 110" stroke="#6C5CE7" stroke-width="1.5" opacity="0.5"/>
+            <text x="160" y="170" font-family="Inter" font-size="12" fill="#0a0a14" text-anchor="middle">The neural basis of self</text>
+        </svg>
+
+        <div class="card">
+            <div class="card-label" style="color: #6C5CE7;">THE PATIENTS WHO TAUGHT HIM</div>
+            <p>Throughout his career, Paul had operated on patients with brain tumors and strokes — conditions that didn't just damage tissue but changed personality, erased memories, altered the fundamental character of the person. He'd seen a man's wit and charm disappear after a stroke. He'd watched a woman's rage diminish along with her tumor. He'd learned that the self isn't some immaterial soul. It's neurological. It's physical. Damage the brain, and you damage the person.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #6C5CE7;">IDENTITY AS STORY</div>
+            <p>But here's where it gets subtle. Paul learned that identity isn't just the sum of neural connections. It's also the story the brain tells about itself. When his patients lost function — lost memories, lost abilities — what seemed to matter most wasn't the lost neurons. It was the lost narrative. Who am I if I can't remember my wife? Who am I if I can't speak? Who am I if I can't work? The self, Paul came to understand, is a story that the brain tells — and that story is as important to identity as the neurons themselves.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The patient is the one who has to live with the consequences of the surgery. The patient's identity, her ability to do the things she values — that's what's at stake."</div>
+            <div class="quote-attr">— Paul Kalanithi (paraphrased)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #6C5CE7;">WHAT HE UNDERSTOOD</div>
+            <p>This knowledge became crucial after his diagnosis. Paul understood that he was not his body, but he was not separate from it either. His identity was neurological AND narrative. It was his brain AND the story he told about his life. As the cancer advanced, he wasn't just losing years. He was losing the future chapters of his life story. The neurons would function until they didn't. But the narrative — the meaning of his life — that he could still compose. That he could still author.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">KEY INSIGHT</div>
+            <p>Paul's insight about identity matters beyond neuroscience: we are creatures of story. When we lose the ability to tell stories about ourselves — about who we are, what we've done, what it all means — we lose something essential to humanity. This is why Paul's act of writing his own memoir while dying is so profound. He's insisting on the right to author his own narrative, even as his body is shutting down.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">TENDER MOMENT</div>
+            <p>Paul had spent his career trying to save the physical brain — removing tumors, repairing vessels, preserving neural tissue. But in the end, he realized that what mattered most was the meaning layer, the story layer. You can survive significant brain damage if you maintain the narrative that holds you. And you can die peacefully if you've written a life story that makes sense. The surgery was always, in a way, about narrative — about preserving the person's ability to tell the story of who they are.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">CONNECTS TO</div>
+            <p><strong>Four Thousand Weeks</strong> (Oliver Burkeman): Burkeman explores how we structure time through narrative — how we impose meaning on the sequence of moments. Paul learned that at a neurological level, identity IS narrative.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 9: The End of Residency -->
+<div class="lesson" style="background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(85,239,196,0.05) 100%);">
+    <div class="lesson-inner">
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <div class="lesson-num" style="background: linear-gradient(135deg, #00B894, #55EFC4);">9</div>
+        </div>
+        <h2 class="lesson-title" style="color: #1a1a2e;">The End of Residency</h2>
+        <p class="lesson-subtitle">The graduation he almost didn't see — and the letter to his daughter</p>
+
+        <svg class="svg-container" width="320" height="220" viewBox="0 0 320 220" fill="none">
+            <path d="M 80 80 L 120 40 L 160 80 L 120 120 Z" fill="#00B894" opacity="0.3" stroke="#00B894" stroke-width="2"/>
+            <circle cx="120" cy="80" r="8" fill="#00B894" opacity="0.8"/>
+            <path d="M 180 60 L 220 60 L 220 140 L 180 140 Z" fill="none" stroke="#55EFC4" stroke-width="2"/>
+            <line x1="190" y1="70" x2="210" y2="70" stroke="#55EFC4" stroke-width="1.5"/>
+            <line x1="190" y1="85" x2="210" y2="85" stroke="#55EFC4" stroke-width="1.5"/>
+            <line x1="190" y1="100" x2="210" y2="100" stroke="#55EFC4" stroke-width="1.5"/>
+            <line x1="190" y1="115" x2="210" y2="115" stroke="#55EFC4" stroke-width="1.5"/>
+            <line x1="190" y1="130" x2="210" y2="130" stroke="#55EFC4" stroke-width="1.5"/>
+            <text x="160" y="175" font-family="Inter" font-size="12" fill="#0a0a14" text-anchor="middle">The journey complete</text>
+        </svg>
+
+        <div class="card">
+            <div class="card-label" style="color: #00B894;">THE FINAL MILESTONE</div>
+            <p>Paul had been in medical training since college — essentially his entire adult life had been oriented toward one goal: becoming a neurosurgeon. Medical school, residency, the long years of study and on-call nights and learning to operate. It was his entire identity. And then, just as he was approaching the finish line — his final year of residency, the point at which he would officially be finished, fully certified, a peer to the surgeons he'd trained under — he got the diagnosis. For a moment, it seemed like he wouldn't make it. The finish line was visible but unreachable.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #00B894;">HE MADE IT</div>
+            <p>But Paul persisted. Through chemotherapy, through illness, through uncertainty and pain, he completed his chief year. He graduated. He became, officially, a Stanford neurosurgeon. It's such a simple fact, but it matters enormously. Not because the certification changed his abilities — he was already a skilled surgeon. But because it represented the completion of something he'd committed to. It meant that the cancer hadn't stolen the future he'd already earned.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"A life wasn't about accomplishments and exhaustion; it was about goodness and joy."</div>
+            <div class="quote-attr">— Paul Kalanithi</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #00B894;">THE LETTER TO CADY</div>
+            <p>Knowing he likely wouldn't see Cady grow up, Paul wrote her a letter. Not a grand manifesto, but a tender, practical letter. He wrote about the values he wanted her to carry forward — curiosity, kindness, the importance of meaningful work. He wrote about literature and science and the way they complement each other. He wrote about loving her mother. He wrote about how to live a good life. It's not the letter of a man trying to be remembered as a great person. It's the letter of a father, doing what he can with the time he has.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">KEY INSIGHT</div>
+            <p>The letter to Cady is Paul's answer to the question at the book's heart: what makes life worth living? It's not achievement, though achievement can be part of it. It's love, meaning, the attempt to live well and to pass along the tools for living well. It's not the grand legacy but the intimate one — a father's words to a daughter he won't raise.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">TENDER MOMENT</div>
+            <p>The letter doesn't solve anything. It doesn't make Cady's loss of her father any less real. But it does something: it asserts that Paul's life was significant, that his values matter, that his love reaches beyond his death. It's a love letter disguised as practical advice. It's him saying: "I won't be there, but here's what I believe. Here's how to live. Let this be the part of me that remains."</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">CONNECTS TO</div>
+            <p><strong>Man's Search for Meaning</strong> (Frankl): Frankl survived by maintaining connection to the people he loved and the values he cared about. Paul's letter to Cady does the same — it asserts that meaning persists beyond the individual, passed forward to the people we love.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON 10: Lucy's Epilogue -->
+<div class="lesson" style="background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(253,195,175,0.05) 100%);">
+    <div class="lesson-inner">
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <div class="lesson-num" style="background: linear-gradient(135deg, #FFB6C1, #FF69B4);">10</div>
+        </div>
+        <h2 class="lesson-title" style="color: #1a1a2e;">Lucy's Epilogue</h2>
+        <p class="lesson-subtitle">What it means to have been loved — grief and gratitude coexisting</p>
+
+        <svg class="svg-container" width="320" height="200" viewBox="0 0 320 200" fill="none">
+            <path d="M 100 80 Q 120 60, 140 80 Q 160 100, 140 120 Q 120 140, 100 120 Q 80 100, 100 80" fill="#FFB6C1" opacity="0.2" stroke="#FF69B4" stroke-width="2"/>
+            <circle cx="120" cy="100" r="6" fill="#FF69B4"/>
+            <path d="M 180 60 Q 210 80, 200 120" stroke="#FF69B4" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+            <path d="M 220 60 Q 210 80, 200 120" stroke="#FF69B4" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+            <text x="160" y="170" font-family="Inter" font-size="12" fill="#0a0a14" text-anchor="middle">Love endures</text>
+        </svg>
+
+        <div class="card">
+            <div class="card-label" style="color: #FF69B4;">PAUL DIED. LUCY REMAINED.</div>
+            <p>Paul Kalanithi died on March 9, 2015, before he could finish his book. His wife Lucy wrote the epilogue — a powerful, clear-eyed meditation on what it means to lose someone you love deeply, while also having been loved deeply in return. The epilogue doesn't resolve the tragedy. It doesn't make the loss acceptable. But it does something important: it shifts the focus from Paul's death to the life that was lived, and to the love that persists.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #FF69B4;">THE GIFT OF HAVING BEEN LOVED</div>
+            <p>Lucy writes about the peculiar grace of having loved someone fully, knowing the love would be brief. She writes about the gift of living with Paul's mind — of having had conversations with him that shaped her, having made decisions together, having created Cady together. She writes about grief and gratitude as two sides of the same coin. The depth of the grief is proportional to the depth of the love. And she chooses to feel both, fully.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The fact of his death is simply the fact of his death. But I don't find it meaningless. Our marriage, our time together — that was real. That mattered. That still matters."</div>
+            <div class="quote-attr">— Lucy Kalanithi (paraphrased from the epilogue)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #FF69B4;">WHAT PAUL LEFT BEHIND</div>
+            <p>Paul left behind his words, his ideas, his values. He left behind Lucy and Cady. He left behind the patients he'd operated on, the surgeons he'd trained, the people his life had touched. He left behind a book — this meditation on mortality and meaning that has touched millions. The book wouldn't exist without Paul. And it wouldn't exist in its present form without Lucy's decision to finish it, to add her voice to his. The love continued beyond his death.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">KEY INSIGHT</div>
+            <p>Lucy's epilogue is the final answer to the book's central question: "What makes life worth living?" Not permanence. Not legacy. Not even happiness. But the capacity to be fully present with the people you love, for whatever time you have together. And then, when that time ends, to hold both the grief and the gratitude. To insist: "Yes, I lost him. And yes, having had him was worth it."</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">TENDER MOMENT</div>
+            <p>Lucy describes a moment when Cady — Paul's daughter, who was born while he was dying — did something that reminded Lucy of her father. A gesture, a way of thinking, a kindness. And in that moment, Paul wasn't fully gone. He was present in his daughter, in the ways she inherited his mind and heart. This is how we survive: not by living forever, but by being so fully alive, so fully present, that we live on in the people we've loved.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">CONNECTS TO</div>
+            <p><strong>Being Mortal</strong> (Atul Gawande): Like Paul, Gawande learns that the goal of medicine isn't to extend life at all costs, but to ensure that the life we have is well-lived. Lucy's epilogue affirms that Paul's brief, conscious, meaningful life was worth living — grief and all.</p>
+        </div>
+    </div>
+</div>
+
+<!-- STORIES SECTION -->
+<div class="story" style="background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(74,185,212,0.05) 100%);">
+    <div class="story-inner">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 40px; color: #1a1a2e;">The Stories That Matter</h2>
+
+        <div class="card">
+            <div class="card-label" style="color: #0984E3;">STORY 1: THE DIAGNOSIS CONVERSATION</div>
+            <p>Paul sits across from his oncologist. He's used to being in the doctor's role, used to delivering bad news to patients. Now he's on the other side. The oncologist gives him the facts — stage IV lung cancer, metastatic, the odds are not good. Paul asks: "How long?" The doctor doesn't answer directly. Can't answer directly. Instead: a careful discussion of medians and ranges, of statistical averages that apply to no one. Paul, trained in medicine, understands the evasion. What he needs to hear is a number. What he gets is uncertainty. Somehow, the uncertainty is worse than bad news. Bad news, at least, has the clarity of the known.</p>
+            <p style="margin-top: 12px; font-style: italic; color: #666;">The conversation becomes the pivot point. Everything before this conversation was his old life. Everything after is his life with cancer. In the space between Paul's question and his oncologist's non-answer, a future collapses.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #00B894;">STORY 2: RETURNING TO THE OR FOR THE FIRST TIME</div>
+            <p>Paul's hands are steady. He'd worried they might not be — wondered if chemo had weakened him, if fear would make him hesitant. But as he enters the operating room, as he approaches the table, as he begins the surgery, something shifts. The cancer patient, the dying man, the person confronting mortality — all of that falls away. There's only the work. There's only the careful, precise, methodical work of accessing the tumor, of preserving the surrounding tissue, of trying to give his patient the best chance at a meaningful life. For the hours of the surgery, Paul isn't dying. He's simply a surgeon. And in that simplicity, he finds grace.</p>
+            <p style="margin-top: 12px; font-style: italic; color: #666;">This is the moment he understands: returning to work isn't a distraction from dying. It's an assertion of meaning in the face of meaninglessness. As long as he can operate, he can be himself. The cancer can take time, but it can't take identity. Not while he holds the scalpel.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #FF6B6B;">STORY 3: THE DECISION TO HAVE CADY</div>
+            <p>Paul and Lucy lie in bed, and Lucy tells him what she wants: a baby. Their baby. Paul's first instinct is to protect her from the grief she'll suffer — to refuse, to say it's selfish to bring a child into a situation where he'll likely die young. But Lucy is insistent, and her insistence comes not from denial but from clarity. "I want to have your baby while you're here," she says. "I want that more than I fear the grief." Paul realizes: she's not in denial. She's choosing love over safety. She's choosing the intensity and brevity of their time together over the false comfort of imagining a different future.</p>
+            <p style="margin-top: 12px; font-style: italic; color: #666;">Cady is born. Paul holds her, knowing he won't see her grow up. But in that moment, the future doesn't matter. Only the present matters. Only the fact of holding his daughter, of knowing she exists, of having created her with the woman he loves.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: #A06CD5;">STORY 4: THE LETTER TO HIS DAUGHTER</div>
+            <p>Paul sits at a computer (eventually from a hospital bed) and writes to Cady, a daughter he's just met, whom he's unlikely to know beyond infancy. He doesn't write a grand manifesto. He writes practically, tenderly: about how to live a good life. About the importance of curiosity and kindness. About loving her mother. About literature and science and the way they hold different kinds of truth. About being present. He writes: "When you suffer, find meaning. Meaning will sustain you." He doesn't say these things as someone who's mastered the art of living. He says them as someone who's stumbled toward them through illness and love and the attempt to make sense of a life cut short.</p>
+            <p style="margin-top: 12px; font-style: italic; color: #666;">The letter is his way of staying alive in her — not through genes or memory, but through values. Through the transmission of how to live. It's a father's last gift, wrapped in words.</p>
+        </div>
+    </div>
+</div>
+
+<!-- CHEATSHEET -->
+<div class="cheatsheet">
+    <div class="cheatsheet-inner">
+        <h2>Key Takeaways</h2>
+
+        <div class="two-col">
+            <div class="card" style="background: rgba(255,255,255,0.95);">
+                <div class="card-label" style="color: #0984E3;">ON MEANING</div>
+                <p>Meaning doesn't come from grand accomplishments or from achieving all your goals. It comes from alignment — doing work that resonates with your values, being present with people you love, asking what matters and listening to the answer.</p>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.95);">
+                <div class="card-label" style="color: #FF6B6B;">ON MORTALITY</div>
+                <p>Death is inevitable. But how you live before that death — that's not inevitable. That's a choice. You can live denying death, or you can live acknowledging it. The latter is harder, but more honest, and ultimately more alive.</p>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.95);">
+                <div class="card-label" style="color: #00B894;">ON LOVE</div>
+                <p>Love doesn't require permanence to be real or significant. In fact, the most profound love often comes when we accept that it's finite. Lucy chose to have Cady despite knowing Paul would die. Not because she was in denial, but because she understood that the brevity made the love more, not less, meaningful.</p>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.95);">
+                <div class="card-label" style="color: #A06CD5;">ON LITERATURE</div>
+                <p>Stories don't solve the problem of mortality. But they do something subtler and more valuable: they show us that we're not alone in the experience. They give language to the unspeakable. They prepare us, without our knowing it, for the hardest moments of our lives.</p>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.95);">
+                <div class="card-label" style="color: #6C5CE7;">ON IDENTITY</div>
+                <p>Who you are is partly neurological and partly narrative. You are the story your brain tells about yourself. When you lose the ability to work, to move, to think the way you used to — you haven't lost all of yourself. The narrative layer remains. You can still be the person you've chosen to be.</p>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.95);">
+                <div class="card-label" style="color: #74B9FF;">ON WHAT MATTERS</div>
+                <p>When everything is stripped away — achievement, time, the future you planned — what remains? Relationships. Values. Work that aligns with who you are. The everyday moments of presence. This is what Paul discovered. This is what's actually worth living for.</p>
+            </div>
+        </div>
+
+        <div class="card" style="background: rgba(255,255,255,0.95); margin-top: 30px;">
+            <div class="card-label" style="color: #0984E3;">CROSS-BOOK CONNECTIONS</div>
+            <p><strong>Man's Search for Meaning</strong> (Frankl) — Both Paul and Frankl discover that meaning sustains us through suffering better than anything else. For Frankl, it was love and work and the future. For Paul, who could no longer look to a future, it was presence and legacy.</p>
+            <p style="margin-top: 10px;"><strong>Four Thousand Weeks</strong> (Burkeman) — Both authors explore how accepting finitude — how acknowledging that you have limited time — changes how you prioritize. Paul's illness made this abstract. Burkeman makes it available to us all.</p>
+            <p style="margin-top: 10px;"><strong>Meditations</strong> (Marcus Aurelius) — Marcus wrote: "You have power over your mind — not outside events. Realize this, and you will find strength." Paul discovers something similar: when his circumstances collapse, his values and his capacity to choose meaning remain.</p>
+            <p style="margin-top: 10px;"><strong>Being Mortal</strong> (Atul Gawande) — Gawande, a surgeon like Paul, learns the same lesson: the goal isn't to extend life at all costs, but to ensure the life we have is well-lived. Paul's book is the lived answer to that question.</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

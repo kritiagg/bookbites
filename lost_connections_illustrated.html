@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Connections: Illustrated Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f23;
+            color: var(--dark);
+        }
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0a1a 0%, #1e1030 50%, #0f0a1a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            color: white;
+            letter-spacing: -2px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .cover .author {
+            font-size: 1.3rem;
+            color: var(--purple);
+            margin-top: 8px;
+            font-weight: 600;
+            z-index: 2;
+            position: relative;
+        }
+        .cover .subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 16px;
+            z-index: 2;
+            text-align: center;
+            max-width: 500px;
+            position: relative;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+        .lesson {
+            min-height: 100vh;
+            padding: 60px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lesson-inner {
+            max-width: 900px;
+            width: 100%;
+        }
+        .lesson-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 12px;
+        }
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        .card-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #444;
+        }
+        .quote-box {
+            background: var(--dark);
+            color: white;
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 20px;
+        }
+        .quote-box .quote-text {
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.9);
+        }
+        .quote-box .quote-attr {
+            color: var(--sunny);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+        .connect-box {
+            background: #e8f4fd;
+            border-left: 4px solid var(--deep-blue);
+            border-radius: 0 12px 12px 0;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+        }
+        .connect-box .connect-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--deep-blue);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .connect-box p {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .ai-box {
+            background: linear-gradient(135deg, #0984E3, #6C5CE7);
+            color: white;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+        }
+        .ai-box .ai-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--sunny);
+            margin-bottom: 6px;
+        }
+        .ai-box p {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+        .funny-box {
+            background: #fff5f5;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            border: 2px dashed var(--coral);
+        }
+        .funny-box .funny-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--coral);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .funny-box p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #666;
+            font-style: italic;
+        }
+        .story {
+            min-height: 100vh;
+            padding: 60px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .story-inner {
+            max-width: 900px;
+            width: 100%;
+        }
+        .cheatsheet {
+            min-height: 100vh;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cheatsheet-inner {
+            max-width: 900px;
+            width: 100%;
+        }
+        .cheatsheet h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 700px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Custom styles for disconnection/reconnection theme */
+        .disconnection-bg { background: linear-gradient(135deg, #1a0033 0%, #330066 100%); }
+        .reconnection-bg { background: linear-gradient(135deg, #330066 0%, #663300 100%); }
+        .page-title { color: white; text-align: center; margin-bottom: 40px; }
+        .bubble-illustration {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            position: relative;
+        }
+        .cross-ref {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--orange);
+        }
+        .cross-ref-title {
+            font-weight: 700;
+            color: var(--warm-red);
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+        .cross-ref p {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.6;
+        }
+        .key-stat {
+            display: inline-block;
+            background: white;
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin: 10px 10px 10px 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            font-weight: 600;
+            color: var(--dark);
+            border-left: 4px solid var(--coral);
+        }
+        .key-stat .stat-number {
+            display: block;
+            font-size: 1.8rem;
+            color: var(--coral);
+            font-weight: 800;
+        }
+        .key-stat .stat-label {
+            display: block;
+            font-size: 0.75rem;
+            color: #777;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<section class="cover">
+    <svg class="particle" style="width: 80px; height: 80px; left: 10%; top: 10%; animation-delay: 0s;" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="currentColor" style="color: var(--purple)"/>
+    </svg>
+    <svg class="particle" style="width: 120px; height: 120px; right: 10%; top: 20%; animation-delay: 1s;" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="currentColor" style="color: var(--teal)"/>
+    </svg>
+    <svg class="particle" style="width: 60px; height: 60px; left: 20%; bottom: 15%; animation-delay: 2s;" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="currentColor" style="color: var(--sunny)"/>
+    </svg>
+    <svg class="particle" style="width: 100px; height: 100px; right: 15%; bottom: 10%; animation-delay: 0.5s;" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="currentColor" style="color: var(--coral)"/>
+    </svg>
+
+    <h1>Lost Connections</h1>
+    <div class="author">by Johann Hari</div>
+    <div class="subtitle">Uncovering the Real Causes of Depression — and the Unexpected Solutions</div>
+</section>
+
+<!-- LESSON 1: THE LIE ABOUT SEROTONIN -->
+<section class="lesson disconnection-bg">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, var(--coral), var(--warm-red));">1</div>
+        <h2 class="lesson-title" style="color: white;">The Lie About Serotonin</h2>
+        <p class="lesson-subtitle" style="color: rgba(255,255,255,0.8);">When Pharmaceutical Marketing Became Medical Fact</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">🧬 THE CHEMICAL IMBALANCE MYTH</div>
+            <p>For decades, depression has been blamed on a "chemical imbalance" in the brain—specifically low serotonin. This theory became so dominant that antidepressants (SSRIs) were prescribed as a straightforward fix. But the origin story is troubling: the chemical imbalance theory was never proven; it was a marketing framework created by pharmaceutical companies to sell drugs.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The chemical imbalance theory was a useful metaphor that became a manufactured certainty."</div>
+            <div class="quote-attr">— Johann Hari, Lost Connections</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--deep-blue);">📊 THE KIRSCH META-ANALYSIS</div>
+            <p>Irving Kirsch, a Harvard psychologist, analyzed every clinical trial submitted to the FDA for antidepressant approval. His shocking finding: antidepressants barely outperform placebo for mild to moderate depression. The average difference is just 1.8 points on a 50-point scale. For severe depression, they're more effective, but the majority of people prescribed these drugs have mild-to-moderate symptoms.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">KEY INSIGHT</div>
+            <p>The placebo effect accounts for roughly 80% of antidepressants' benefit in clinical trials. If you believe the pill will help, your brain's own healing mechanisms activate—and that belief matters as much as the chemistry.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">⏰ HARI'S 13-YEAR JOURNEY</div>
+            <p>Johann Hari was prescribed antidepressants at age 18 and remained on them for 13 years. They provided some relief, but the underlying disconnection—the real source of his depression—remained unaddressed. His drug dependence masked a deeper crisis: he was isolated, his work felt meaningless, and his values were misaligned with how he was living. The pills numbed the pain without healing the wound.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">💊 THE UNCOMFORTABLE TRUTH</div>
+            <p>If SSRIs worked by simply "fixing" serotonin, then people taking the same medication should show similar results. But they don't. Some people swear by them; others feel nothing. This suggests the mechanism is far more complex than "low serotonin = depression."</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">Related Book Connection</div>
+            <p><strong>Dopamine Nation (Lembke):</strong> Extends this critique by showing how we've become disconnected from our body's natural pleasure/pain balance through overstimulation.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 2: DISCONNECTION FROM MEANINGFUL WORK -->
+<section class="lesson disconnection-bg">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, var(--sky), var(--deep-blue));">2</div>
+        <h2 class="lesson-title" style="color: white;">Disconnection from Meaningful Work</h2>
+        <p class="lesson-subtitle" style="color: rgba(255,255,255,0.8);">Why 87% of Workers Are Depressed at Their Desks</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sky);">📋 THE GALLUP FINDING</div>
+            <p>Gallup surveyed millions of workers globally. The result: 87% of people hate their jobs. They show up, collect paychecks, and experience persistent disengagement. Work occupies roughly one-third of our adult lives. If that time is hollow, meaningless, and exploitative, depression is not a psychiatric failure—it's a rational response.</p>
+        </div>
+
+        <div class="key-stat">
+            <span class="stat-number">87%</span>
+            <span class="stat-label">of workers report hating their jobs</span>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Meaningless work is not just boring—it's corrosive to the human spirit."</div>
+            <div class="quote-attr">— Johann Hari, Lost Connections</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">🎨 THE PAINT FACTORY STORY</div>
+            <p>Hari describes workers in a paint factory whose job was to watch paint dry—literally. They weren't creating anything, solving problems, or contributing to something larger than themselves. Their work had zero intrinsic meaning. They developed depression at alarming rates. The human need for purpose isn't optional; it's foundational to mental health.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">🧠 INTRINSIC VS. EXTRINSIC MOTIVATION</div>
+            <p>Research (especially by Edward Deci and Ryan) shows that extrinsic rewards—money, status, praise from others—don't sustain motivation or well-being. Intrinsic motivation—autonomy, mastery, and purpose—drives both engagement and mental health. When work provides only a paycheck, the soul withers.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">THE PROBLEM</div>
+            <p>Modern capitalism is optimized to extract labor while minimizing autonomy and meaning. Workers are treated as replaceable units, not as human beings seeking purpose. The depression epidemic among workers reflects this structural reality.</p>
+        </div>
+
+        <div class="cross-ref">
+            <div class="cross-ref-title">Cross-Book Connection: Drive (Daniel Pink)</div>
+            <p>Pink shows that autonomy, mastery, and purpose are the true drivers of human performance and satisfaction—not money. Lost Connections applies this to mental health: when these elements are absent, depression follows.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 3: DISCONNECTION FROM OTHER PEOPLE -->
+<section class="lesson disconnection-bg">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, var(--pink), var(--coral));">3</div>
+        <h2 class="lesson-title" style="color: white;">Disconnection from Other People</h2>
+        <p class="lesson-subtitle" style="color: rgba(255,255,255,0.8);">Loneliness Is as Deadly as Smoking 15 Cigarettes a Day</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--pink);">👥 THE LONELINESS EPIDEMIC</div>
+            <p>Despite living in densely populated cities and being "connected" via social media, rates of profound loneliness have skyrocketed. People have hundreds of online "friends" but no one to call at 3 AM when they're in crisis. Loneliness is not simply sadness—it's a biological state that triggers inflammation, weakens the immune system, and accelerates aging.</p>
+        </div>
+
+        <div class="key-stat">
+            <span class="stat-number">15x</span>
+            <span class="stat-label">Loneliness is as harmful as smoking 15 cigarettes/day</span>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Loneliness is not about being alone. It's about being disconnected from a community that knows and values you."</div>
+            <div class="quote-attr">— Johann Hari, Lost Connections</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sky);">🔬 CACIOPPO'S RESEARCH</div>
+            <p>John Cacioppo, a University of Chicago neuroscientist, studied elderly people and found that those with strong social connections lived significantly longer, healthier lives. But those who were socially isolated—even if they weren't lonely—showed markers of chronic stress, inflammation, and accelerated biological aging. Loneliness is a physiological emergency.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">THE NEUROBIOLOGY OF LONELINESS</div>
+            <p>When you're lonely, your brain enters a threat-detection mode. Cortisol rises. The amygdala becomes hyperactive. Your nervous system remains in fight-or-flight. Over time, this chronic stress literally rewires your brain and damages your body. Loneliness is not a psychological weakness; it's a medical crisis.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--purple);">📱 THE FACEBOOK PARADOX</div>
+            <p>Social media promised connection but often delivers isolation. You see curated highlights of others' lives, which trigger comparison and inadequacy. You accumulate "friends" but lack real intimacy. Studies show that heavy social media use correlates with increased depression and anxiety, particularly in young people. The illusion of connection masks the reality of disconnection.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">💬 THE IRONY</div>
+            <p>We've never had more ways to "connect," yet loneliness has never been more widespread. Hari argues this is because digital connection can't replace embodied, synchronous, reciprocal human presence. Your brain knows the difference.</p>
+        </div>
+
+        <div class="cross-ref">
+            <div class="cross-ref-title">Cross-Book Connection: The Happiness Hypothesis (Jonathan Haidt)</div>
+            <p>Haidt emphasizes that humans are "hive creatures"—we evolved for community. Disconnection from meaningful social bonds is a primary driver of unhappiness and mental illness.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 4: DISCONNECTION FROM MEANINGFUL VALUES -->
+<section class="lesson disconnection-bg">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, var(--orange), var(--sunny));">4</div>
+        <h2 class="lesson-title" style="color: white;">Disconnection from Meaningful Values</h2>
+        <p class="lesson-subtitle" style="color: rgba(255,255,255,0.8);">Materialism as a Depression Amplifier</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--orange);">💰 TIM KASSER'S RESEARCH</div>
+            <p>Tim Kasser, a psychologist at Knox College, has spent decades studying the mental health impact of materialism. His findings are stark: people who prioritize wealth, status, and image over intrinsic values (connection, personal growth, community contribution) experience significantly higher rates of depression, anxiety, and low self-esteem. The more someone chases external validation through money and possessions, the more depressed they become.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Materialism is a symptom of disconnection from what actually makes us human."</div>
+            <div class="quote-attr">— Tim Kasser, cited by Johann Hari</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--teal);">🎯 INTRINSIC VS. EXTRINSIC VALUES</div>
+            <p>Intrinsic values (relationships, personal growth, community) align with human flourishing. Extrinsic values (wealth, fame, image) are empty calories for the soul. Modern capitalism relentlessly markets extrinsic values, promising that buying things, achieving status, and accumulating wealth will make you happy. But the evidence is clear: it doesn't. The pursuit of these values creates chronic dissatisfaction and depression.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">THE HEDONIC TREADMILL</div>
+            <p>You get the promotion, the nice car, the bigger house. For a moment, you're happy. Then your baseline resets, and you're back to baseline unhappiness. The next goal beckons. You're on an endless treadmill, forever chasing external validation that will never satisfy the internal void.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">🌱 WHAT ACTUALLY MATTERS</div>
+            <p>Kasser's research identifies what genuinely protects mental health: deep relationships, meaningful work, contribution to community, personal growth, and self-acceptance. These can't be bought. They require vulnerability, time, and presence. In a culture obsessed with status and acquisition, cultivating these values is a radical act of resistance.</p>
+        </div>
+
+        <div class="cross-ref">
+            <div class="cross-ref-title">Cross-Book Connection: Man's Search for Meaning (Viktor Frankl)</div>
+            <p>Frankl argues that humans need purpose and meaning to survive, even in extreme suffering. Disconnection from meaning—whether through materialism or meaningless work—creates a psychological crisis that no amount of money can resolve.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 5: DISCONNECTION FROM CHILDHOOD TRAUMA -->
+<section class="lesson disconnection-bg">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, var(--warm-red), var(--pink));">5</div>
+        <h2 class="lesson-title" style="color: white;">Disconnection from Childhood Trauma</h2>
+        <p class="lesson-subtitle" style="color: rgba(255,255,255,0.8);">How Early Wounds Shape Adult Mental Health</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--warm-red);">🔍 THE ACE STUDY</div>
+            <p>The Adverse Childhood Experiences (ACE) study, led by Vincent Felitti and Robert Anda, tracked thousands of people across decades. Their finding: childhood trauma (abuse, neglect, parental mental illness, addiction, incarceration) is one of the strongest predictors of adult depression, anxiety, addiction, and chronic illness. The more ACE events someone experiences, the higher their risk of mental and physical illness.</p>
+        </div>
+
+        <div class="key-stat">
+            <span class="stat-number">4+</span>
+            <span class="stat-label">ACE events increase depression risk by 460%</span>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Your childhood wounds don't disappear. They become encoded in your nervous system and body, shaping how you relate to the world."</div>
+            <div class="quote-attr">— Johann Hari, Lost Connections</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--dark-purple);">🧬 THE BIOLOGY OF EARLY STRESS</div>
+            <p>When a child experiences trauma, their stress response system (the HPA axis) becomes dysregulated. The amygdala becomes hyperactive; the prefrontal cortex (responsible for reasoning and emotional regulation) underdevelops. Cortisol (the stress hormone) remains elevated. The child's brain literally rewires itself in response to threat. This biological legacy persists into adulthood, making the person more vulnerable to depression and anxiety.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">TRAUMA AS DISCONNECTION</div>
+            <p>Trauma creates disconnection at multiple levels: disconnection from one's body (dissociation), from emotions (numbness), from other people (mistrust), and from a sense of safety and agency. Healing requires rebuilding these connections, not just treating symptoms with medication.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">💚 TOWARD HEALING</div>
+            <p>Hari emphasizes that acknowledging childhood trauma is not about blame—it's about understanding the roots of adult suffering. Healing happens through connection: with a therapist, with trusted others, with one's own body and emotions. The road back to wholeness requires reintegration of what was fragmented by early harm.</p>
+        </div>
+
+        <div class="cross-ref">
+            <div class="cross-ref-title">Cross-Book Connection: In the Realm of Hungry Ghosts (Gabor Maté)</div>
+            <p>Maté shows how addiction and mental illness often stem from childhood trauma and disconnection. Healing requires addressing the underlying wounds, not just the symptoms.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 6: DISCONNECTION FROM STATUS AND RESPECT -->
+<section class="lesson disconnection-bg">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, var(--teal), var(--sky));">6</div>
+        <h2 class="lesson-title" style="color: white;">Disconnection from Status and Respect</h2>
+        <p class="lesson-subtitle" style="color: rgba(255,255,255,0.8);">Status Anxiety and the Inequality Effect</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--deep-blue);">⚖️ STATUS ANXIETY AS A CHRONIC STRESSOR</div>
+            <p>Humans are exquisitely sensitive to their position in social hierarchies. When you feel low status—disrespected, invisible, powerless—your body activates a chronic stress response. This isn't weakness; it's biology. Status anxiety triggers the same physiological cascade as physical threats: elevated cortisol, inflammation, suppressed immune function, and accelerated aging.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Status isn't a luxury—it's a biological need. When it's threatened, you get sick."</div>
+            <div class="quote-attr">— Johann Hari, Lost Connections</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sky);">📊 THE WHITEHALL STUDIES</div>
+            <p>The British Whitehall studies tracked civil servants across decades and made a striking discovery: job rank was the strongest predictor of heart disease and mental illness—stronger than smoking, cholesterol, or obesity. People in low-status positions (despite having adequate income) had dramatically higher rates of stress-related illness. The humiliation of low status is toxic, regardless of material poverty.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">KEY FINDING</div>
+            <p>Status matters more than absolute material wealth. Someone earning $30,000 in a society where that's respectable will be healthier than someone earning $100,000 but feeling disrespected and powerless.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">🌍 INEQUALITY'S DIRECT EFFECT ON MENTAL HEALTH</div>
+            <p>Highly unequal societies have higher rates of depression, anxiety, and mental illness across all income levels—including the wealthy. Why? Because inequality makes status visible, comparative, and precarious. You're constantly measuring yourself against others. In more equal societies, people are happier and healthier, even if everyone has less money. Relative position matters more than absolute material conditions.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">💪 THE POWER OF RESPECT</div>
+            <p>Conversely, feeling seen, valued, and respected is profoundly protective. When people have agency, are listened to, and feel they matter, their mental health improves dramatically—even in difficult circumstances. Respect is a biological necessity, not a luxury.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 7: DISCONNECTION FROM THE NATURAL WORLD -->
+<section class="lesson disconnection-bg">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, var(--forest), var(--teal));">7</div>
+        <h2 class="lesson-title" style="color: white;">Disconnection from the Natural World</h2>
+        <p class="lesson-subtitle" style="color: rgba(255,255,255,0.8);">What Happens When We Abandon Nature</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">🌳 ATTENTION RESTORATION THEORY</div>
+            <p>Rachel and Stephen Kaplan developed Attention Restoration Theory (ART), which explains why nature heals the mind. In cities, we use "directed attention"—fighting stimulation, filtering noise, maintaining focus. This is exhausting and depletes our cognitive resources. Nature requires "soft fascination"—gentle, effortless attention. A walk in the forest restores your ability to think, regulate emotions, and recover from stress.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Nature is not a luxury. It's a biological necessity for mental health."</div>
+            <div class="quote-attr">— Johann Hari, Lost Connections</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sky);">🌲 SHINRIN-YOKU: FOREST BATHING</div>
+            <p>Japanese researchers have extensively studied shinrin-yoku (forest bathing)—the practice of immersing yourself in a forest environment. Even a 20-minute walk in the forest lowers cortisol, reduces blood pressure, boosts immune function, and improves mood. Regular nature exposure is as effective as some medications for anxiety and mild depression. The Japanese health system now prescribes forest bathing as a medical intervention.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">THE MECHANISM</div>
+            <p>Trees release phytoncides (natural oils). When you breathe them in, your body responds by increasing natural killer cells (immune function) and reducing stress hormones. Additionally, nature's patterns (fractals, repetition) are calming to the brain. The absence of artificial stimulation allows your nervous system to downregulate.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">🏙️ THE URBAN TOLL</div>
+            <p>Most people in developed nations spend 90% of their time indoors, cut off from natural light, fresh air, soil contact, and the cyclical rhythms of nature. We've evolved over millions of years to exist in nature. Our brains and bodies are calibrated for it. Sustained disconnection from the natural world is a form of sensory and spiritual deprivation. Depression is a rational response to this alienation.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">🌍 WHAT WE'VE LOST</div>
+            <p>Our ancestors lived in intimate relationship with the seasons, with animals, with soil and water. They experienced awe, wonder, and their place in a living world. Modern industrial life is aesthetically and spiritually barren: concrete, screens, artificial light, controlled environments. We're not just physically disconnected from nature; we've lost the sense of belonging to something larger than ourselves.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 8: DISCONNECTION FROM A HOPEFUL FUTURE -->
+<section class="lesson disconnection-bg">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, var(--purple), var(--dark-purple));">8</div>
+        <h2 class="lesson-title" style="color: white;">Disconnection from a Hopeful Future</h2>
+        <p class="lesson-subtitle" style="color: rgba(255,255,255,0.8);">Precarity, Despair, and the Loss of Tomorrow</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--purple);">🎯 PRECARITY AND DEPRESSION</div>
+            <p>Humans need to imagine a future—to believe that tomorrow will be stable, that effort will be rewarded, that goals are achievable. This sense of a "future self" is foundational to motivation and meaning. But modern precarity destroys this. Gig workers don't know if they'll have income next month. Young people question whether climate change will make the planet habitable. These aren't neurotic anxieties; they're rational responses to real uncertainty.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"Depression about the future is not irrational. It's the mind's honest assessment when the future looks genuinely bleak."</div>
+            <div class="quote-attr">— Johann Hari, Lost Connections</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">💼 THE GIG ECONOMY'S MENTAL HEALTH TOLL</div>
+            <p>The rise of precarious work—Uber drivers, freelancers, contract workers—has eroded job security. You have no benefits, no guarantee of tomorrow's paycheck, no career ladder. This chronic uncertainty triggers a stress response that never fully resolves. Coupled with the meaninglessness of many gig jobs, the mental health impact is devastating. Suicide and substance abuse rates spike in precarious populations.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">THE PROBLEM WITH PRECARITY</div>
+            <p>You can't invest in relationships, health, or long-term projects if you're constantly anxious about basic survival. Precarity pulls your attention inward, toward immediate survival needs, and away from connection and meaning. It's biologically depleting and psychologically crushing.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sky);">🌍 CLIMATE ANXIETY AND GENERATIONAL DESPAIR</div>
+            <p>Young people face an unprecedented challenge: climate catastrophe. The future they were promised—stability, career progression, eventual homeownership—seems increasingly impossible. This isn't depression caused by individual brain chemistry; it's a sane response to a genuinely threatening future. The sense that "nothing I do matters" and "why build anything if the world is ending" is not irrational pessimism—it's adaptation to a genuinely precarious world.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">🔮 THE LOSS OF THE FUTURE SELF</div>
+            <p>Depression involves a collapse of temporal perspective. You can't imagine yourself thriving. The future feels empty. Hari argues this isn't a cognitive distortion to be corrected with positive thinking; it's a signal that something real is broken—that actual circumstances make a hopeful future difficult to envision. Healing requires both individual work and structural change to make the future credible again.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 9: RECONNECTION—OTHER PEOPLE -->
+<section class="lesson reconnection-bg">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, var(--mint), var(--teal));">9</div>
+        <h2 class="lesson-title" style="color: white;">Reconnection: Other People</h2>
+        <p class="lesson-subtitle" style="color: rgba(255,255,255,0.8);">The Power of Genuine Connection and Community</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--teal);">💚 SOCIAL PRESCRIBING</div>
+            <p>The social prescribing movement is transforming mental health care. Instead of only prescribing pills, doctors refer people to community groups, classes, volunteering opportunities, and social activities. The results are striking: people report feeling less lonely, more purposeful, and often experience a reduction in depression symptoms—sometimes comparable to or exceeding medication alone. Community becomes medicine.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The most effective treatment for loneliness is not therapy; it's belonging."</div>
+            <div class="quote-attr">— Johann Hari, Lost Connections</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">🇰🇭 THE CAMBODIAN COW: A STORY OF RECONNECTION</div>
+            <p>A Cambodian farmer sank into severe depression after the death of his wife. He was isolated, grieving, and withdrawing from life. A community intervened—they gave him a cow. Not as charity, but as a way to reconnect him to the community. He began caring for the cow, trading milk at the market, building relationships with neighbors. The cow became a bridge back to meaning, purpose, and social connection. Within months, his depression lifted. He wasn't "treated"; he was reconnected.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">THE LESSON</div>
+            <p>What heals is not individual therapy in isolation; it's reconnection to community, purpose, and reciprocal relationships. Connection is the antidepressant. The prescription and the cow are equally "medical"—both address the real cause of the depression.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">🤝 PRESCRIPTION VS. CONNECTION</div>
+            <p>There's a crucial difference. A prescription is passive—something done to you. Connection is active and reciprocal—something you co-create. When a doctor prescribes pills, you're a patient receiving treatment. When you join a community, volunteer, or engage in genuine relationships, you're an agent with dignity and value. The latter heals in ways the former cannot.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sky);">🌟 PRACTICAL RECONNECTION</div>
+            <p>This doesn't require grand gestures. Joining a book club, a sports league, a faith community, or a gardening group; volunteering; attending regular gatherings where you see the same people—these create the conditions for genuine connection. The key is consistency and reciprocity: showing up regularly, being known, and contributing something of yourself.</p>
+        </div>
+
+        <div class="cross-ref">
+            <div class="cross-ref-title">Cross-Book Connection: The Happiness Hypothesis (Jonathan Haidt)</div>
+            <p>Haidt emphasizes the happiness formula: "H = Set point + Conditions + Intentional Activity." Community and connection are among the most powerful conditions and activities for sustained well-being.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 10: RECONNECTION—MEANINGFUL WORK -->
+<section class="lesson reconnection-bg">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, var(--sunny), var(--orange));">10</div>
+        <h2 class="lesson-title" style="color: white;">Reconnection: Meaningful Work</h2>
+        <p class="lesson-subtitle" style="color: rgba(255,255,255,0.8);">Worker Cooperatives and the Reclamation of Dignity</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--orange);">🏭 WORKER COOPERATIVES AND MENTAL HEALTH</div>
+            <p>When workers own their workplace and have a voice in decisions, mental health outcomes improve dramatically. Cooperatives report higher employee satisfaction, lower turnover, better physical health, and reduced depression. Why? Because work becomes an expression of agency, not exploitation. You're not a cost to be minimized; you're an owner with a stake in the outcome.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"When you own your work, you own your dignity. Everything changes."</div>
+            <div class="quote-attr">— Johann Hari, Lost Connections</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">🌍 MONDRAGON: A LIVING EXAMPLE</div>
+            <p>Mondragon is a federation of worker cooperatives in Spain, employing over 80,000 people. Workers share profits, vote on major decisions, and experience meaningful autonomy in their roles. The result: low unemployment, high job satisfaction, strong community cohesion, and stability even during economic downturns. It proves that a different model of work is possible—one that prioritizes human flourishing alongside economic productivity.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">THE MECHANISM</div>
+            <p>When you own your work and have democratic control, three things happen: (1) Intrinsic motivation increases because your effort directly benefits you; (2) Autonomy increases, satisfying a core human need; (3) Community strengthens because you're building something together. These directly address the disconnections that cause depression in traditional employment.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sky);">💡 PRACTICAL ALTERNATIVES</div>
+            <p>Hari is not arguing everyone must work in cooperatives (though he sees them as important). Rather, he's highlighting what matters for mental health in work: autonomy, meaningfulness, collaboration, and a sense that your effort matters. Some traditional jobs provide this; most don't. The solution involves both individual choices (seeking meaningful work) and structural change (rewarding and supporting cooperative models).</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">🎯 WHAT HAPPENS WHEN PEOPLE RECLAIM THEIR WORK</div>
+            <p>When disconnection from meaningful work is reversed, depression often lifts—sometimes without medication. The mind doesn't need chemical adjustment; it needs engagement, purpose, and the experience of mattering. Work can either be a source of despair or a cornerstone of mental health. The difference is agency and meaning.</p>
+        </div>
+
+        <div class="cross-ref">
+            <div class="cross-ref-title">Cross-Book Connection: Drive (Daniel Pink)</div>
+            <p>Pink argues that autonomy, mastery, and purpose drive both engagement and well-being. Worker cooperatives embody all three, which is why they produce better mental health outcomes than traditional hierarchical employment.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 11: RECONNECTION—ACKNOWLEDGMENT AND EMPATHY -->
+<section class="lesson reconnection-bg">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, var(--pink), var(--warm-red));">11</div>
+        <h2 class="lesson-title" style="color: white;">Reconnection: Acknowledgment and Empathy</h2>
+        <p class="lesson-subtitle" style="color: rgba(255,255,255,0.8);">Being Seen as Medicine</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--warm-red);">👁️ THE KOTTI ESTATE PROTEST: BEING SEEN</div>
+            <p>In Berlin, residents of the Kotti estate—a precarious, low-income neighborhood—faced displacement through gentrification and policy neglect. Residents were invisible to the city; their struggles ignored. So they organized. They protested collectively, made their voices heard, and demanded recognition. Strikingly, residents reported that the protest itself—the act of being collectively acknowledged and fighting together—was profoundly healing. Depression symptoms decreased. Why? Because they were finally seen. Their suffering was validated. They had agency and community.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"The most isolating feeling is being unseen. The most healing is being witnessed."</div>
+            <div class="quote-attr">— Johann Hari, Lost Connections</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sky);">💬 COLLECTIVE PROTEST AS ANTIDEPRESSANT</div>
+            <p>Hari argues that collective action and protest can be antidepressant. When you stand with others, speaking truth to power, you experience: (1) Connection—you're not alone; (2) Agency—you're not passive; (3) Recognition—your voice matters; (4) Purpose—you're fighting for something larger than yourself. These address multiple causes of depression simultaneously. The political is psychiatric; the psychiatric is political.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">THE POWER OF VALIDATION</div>
+            <p>Depression often involves shame and invisibility. You internalize the message that your suffering is your fault, that you're weak, that nobody cares. When someone truly listens and validates your experience—"This is real. You're not crazy. Your pain makes sense"—something shifts. You're no longer alone with your suffering. Empathy is healing in ways medication cannot be.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">🤝 EMPATHY AS TREATMENT</div>
+            <p>Hari emphasizes that therapists and communities need to offer more than coping strategies. They need to truly listen, to validate, to communicate: "I see you. Your struggle is real. You matter." This doesn't solve structural problems, but it begins the healing process. Many people with depression have internalized the message that they're defective. Empathetic witnessing begins to dismantle this false belief.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">🌟 WHY THIS MATTERS</div>
+            <p>If depression is partly caused by disconnection and invisibility, then reconnection and acknowledgment are partly curative. You can't medicate your way out of being unseen. But when you're truly witnessed—by another person, by a community, by a movement—something fundamental shifts. You remember that you're human, that you matter, that your life has significance.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 12: A NEW STORY -->
+<section class="lesson reconnection-bg">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: linear-gradient(135deg, var(--deep-blue), var(--sky));">12</div>
+        <h2 class="lesson-title" style="color: white;">A New Story</h2>
+        <p class="lesson-subtitle" style="color: rgba(255,255,255,0.8);">Reframing Depression as Disconnection—and What Changes</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--deep-blue);">📖 CHALLENGING THE BIOLOGICAL NARRATIVE</div>
+            <p>For 40 years, psychiatry has insisted that depression is primarily a brain disease caused by chemical imbalance. Hari's central argument is not that brain chemistry is irrelevant—it clearly matters—but that the predominant narrative is incomplete and misleading. Depression has biological, social, economic, and existential dimensions. By reducing it to brain chemistry, we've obscured the real causes and prevented genuine healing.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"If depression were just chemical, the same medication should work for everyone. But it doesn't. That tells you something important is missing from the biological model."</div>
+            <div class="quote-attr">— Johann Hari, Lost Connections</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">🌍 THE POLITICAL IMPLICATIONS</div>
+            <p>This reframing has radical political implications. If depression is caused by disconnection from meaningful work, exploitative labor conditions, economic precarity, and social inequality, then the solution is not just treatment—it's structural change. We need worker cooperatives, living wages, community spaces, environmental restoration, and economic justice. We need to remake society to support human connection and flourishing. Psychiatry alone cannot solve what politics must address.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">THE UNCOMFORTABLE TRUTH</div>
+            <p>If Hari is right—if depression is partly a sane response to an insane world—then the goal isn't to make people happy with a broken system. It's to transform the system. This challenges pharmaceutical companies, traditional psychiatry, and also the individual self-help industry. It says: you might not be broken. The world might be.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sunny);">🎯 DEPRESSION AS SIGNAL, NOT SICKNESS</div>
+            <p>Hari provocatively suggests that depression is sometimes a signal—a rational response to disconnection. Your brain is telling you: "Something is wrong. You need meaningful work. You're isolated. Your life lacks purpose. You've been treated unjustly." Rather than silencing this signal with medication, we might listen to it. What is your depression trying to tell you? What needs to reconnect?</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">🌈 TOWARD A COMPREHENSIVE RESPONSE</div>
+            <p>This doesn't mean rejecting medication. For some people, in some circumstances, antidepressants provide relief that allows healing to begin. But they should be one tool among many. The comprehensive response includes: therapy (that addresses causes, not just symptoms), medication (when helpful), reconnection to community, meaningful work, nature, purpose, and structural change. It treats depression as a multi-dimensional crisis requiring a multi-dimensional response.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sky);">💪 A CALL TO ACTION</div>
+            <p>Hari ends by calling for individual and collective action. Individually, you can begin reconnecting: seek meaningful work, build genuine relationships, spend time in nature, find or create community, pursue values that matter to you. Collectively, we can demand structural change: better work conditions, mental health services that address causes, economic justice, and communities that prioritize human connection. The recovery of meaning is possible—but it requires courage to question dominant narratives and commitment to genuine change.</p>
+        </div>
+
+        <div class="cross-ref">
+            <div class="cross-ref-title">Cross-Book Connection: Man's Search for Meaning (Viktor Frankl)</div>
+            <p>Frankl's seminal insight—that humans can survive almost anything if they have meaning and purpose—echoes through Lost Connections. Depression isn't primarily a disease; it's a crisis of meaning that requires existential, social, and structural transformation to resolve.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CHEATSHEET -->
+<section class="cheatsheet">
+    <div class="cheatsheet-inner">
+        <h2>The 9 Disconnections & 7 Reconnections at a Glance</h2>
+
+        <div class="two-col">
+            <div>
+                <h3 style="color: var(--coral); margin-bottom: 20px; font-size: 1.3rem;">The 9 Causes (Disconnections)</h3>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--coral);">1. THE SEROTONIN LIE</div>
+                    <p style="font-size: 0.9rem;">Chemical imbalance theory is marketing, not science. Antidepressants barely outperform placebo for mild-to-moderate depression.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--coral);">2. MEANINGLESS WORK</div>
+                    <p style="font-size: 0.9rem;">87% of workers hate their jobs. When work lacks autonomy, mastery, and purpose, depression follows.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--coral);">3. LONELINESS</div>
+                    <p style="font-size: 0.9rem;">Social disconnection is as harmful as smoking 15 cigarettes daily. Loneliness triggers chronic stress and inflammation.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--coral);">4. MATERIALISM</div>
+                    <p style="font-size: 0.9rem;">Prioritizing wealth and status over intrinsic values (connection, growth, meaning) predicts depression.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--coral);">5. CHILDHOOD TRAUMA</div>
+                    <p style="font-size: 0.9rem;">Adverse childhood experiences dysregulate the stress response system and increase adult depression risk by up to 460%.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--coral);">6. LOW STATUS</div>
+                    <p style="font-size: 0.9rem;">Lack of respect and low social position are chronic stressors. Inequality harms mental health across all income levels.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--coral);">7. NATURE DEPRIVATION</div>
+                    <p style="font-size: 0.9rem;">Disconnection from natural environments depletes cognitive and emotional resources. Forest bathing lowers stress and improves mood.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--coral);">8. PRECARITY</div>
+                    <p style="font-size: 0.9rem;">Lack of a secure, hopeful future (gig economy, climate anxiety) makes meaning-making impossible.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--coral);">9. INVISIBILITY</div>
+                    <p style="font-size: 0.9rem;">Not being seen, heard, or valued creates profound isolation. Acknowledgment and empathy are healing.</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="color: var(--mint); margin-bottom: 20px; font-size: 1.3rem;">The 7 Reconnections (Solutions)</h3>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--mint);">✓ SOCIAL CONNECTION</div>
+                    <p style="font-size: 0.9rem;">Community, belonging, genuine relationships. Social prescribing shows connection itself is medicinal.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--mint);">✓ MEANINGFUL WORK</div>
+                    <p style="font-size: 0.9rem;">Autonomy, mastery, purpose. Worker cooperatives demonstrate that ownership transforms well-being.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--mint);">✓ INTRINSIC VALUES</div>
+                    <p style="font-size: 0.9rem;">Redirect from wealth/status to relationships, growth, and contribution. Align life with what actually matters.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--mint);">✓ TRAUMA RECOVERY</div>
+                    <p style="font-size: 0.9rem;">Therapy, connection, and nervous system healing. Reintegrate what was fragmented by early harm.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--mint);">✓ RECOGNITION & RESPECT</div>
+                    <p style="font-size: 0.9rem;">Being seen, listened to, and valued. Collective action and empathetic witnessing are antidepressants.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--mint);">✓ NATURE & RESTORATION</div>
+                    <p style="font-size: 0.9rem;">Regular immersion in natural environments. Soft fascination restores attention and regulates the nervous system.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label" style="color: var(--mint);">✓ HOPEFUL FUTURE</div>
+                    <p style="font-size: 0.9rem;">Rebuild security, community investment, and belief in possibility. Make tomorrow real and worth working toward.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 28px; margin-top: 40px; border-left: 4px solid var(--mint);">
+            <h3 style="color: white; margin-bottom: 16px; font-size: 1.2rem;">The Core Argument</h3>
+            <p style="color: rgba(255,255,255,0.9); line-height: 1.8; font-size: 0.95rem;">Depression is not primarily a brain disease. It's a signal that something real is broken—your work is meaningless, you're isolated, your future looks bleak, you're not respected, you're disconnected from nature and purpose. Medication might provide temporary relief, but genuine healing requires reconnection: to people, to meaningful work, to values that matter, to nature, to respect and agency. This is both deeply personal and profoundly political. Individual reconnection matters. Structural change is essential.</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

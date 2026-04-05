@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Be Happy: A Cross-Book Deep Dive</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f23;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+
+        /* === COVER === */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a3e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 10%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: 10%;
+            right: 10%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .cover .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        .cover .tagline {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 2rem;
+        }
+
+        .book-count {
+            display: inline-block;
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid var(--coral);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            margin-top: 2rem;
+            color: var(--coral);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* === SECTIONS === */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .section.light {
+            background: white;
+        }
+
+        .section.dark {
+            background: #0f0f23;
+            color: white;
+        }
+
+        .section.alt1 {
+            background: #f8f9fa;
+        }
+
+        .section.alt2 {
+            background: rgba(255, 107, 107, 0.05);
+        }
+
+        .section-header {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+        }
+
+        .section-number {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--coral);
+            margin-bottom: 1rem;
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section.dark h2 {
+            color: white;
+        }
+
+        .section-intro {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* === CARDS === */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--coral);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .section.dark .card {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border-left-color: var(--teal);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .section.dark .card-title {
+            color: white;
+        }
+
+        .card-author {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--coral);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-content {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* === PULL QUOTES === */
+        .pullquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            margin: 3rem 0;
+            padding: 2rem;
+            border-left: 4px solid var(--coral);
+            background: rgba(255, 107, 107, 0.05);
+            line-height: 1.6;
+        }
+
+        .section.dark .pullquote {
+            background: rgba(255, 107, 107, 0.1);
+            color: white;
+        }
+
+        /* === ANALOGIES === */
+        .analogy {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-top: 4px solid var(--sunny);
+        }
+
+        .section.dark .analogy {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border-top-color: var(--teal);
+        }
+
+        .analogy-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--sunny);
+            opacity: 0.2;
+            margin-bottom: -1rem;
+        }
+
+        .analogy-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section.dark .analogy-title {
+            color: white;
+        }
+
+        .analogy-text {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* === PRACTICE BLOCKS === */
+        .practice-block {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 2px solid var(--sky);
+        }
+
+        .section.dark .practice-block {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border-color: var(--mint);
+        }
+
+        .practice-block h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--sky);
+        }
+
+        .section.dark .practice-block h4 {
+            color: var(--mint);
+        }
+
+        .practice-item {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .practice-item::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--sky);
+        }
+
+        .section.dark .practice-item::before {
+            color: var(--mint);
+        }
+
+        /* === TENSION BLOCKS === */
+        .tension {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 2px dashed var(--warm-red);
+        }
+
+        .section.dark .tension {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .tension-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: var(--warm-red);
+            margin-bottom: 0.8rem;
+        }
+
+        .tension-question {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section.dark .tension-question {
+            color: white;
+        }
+
+        .tension-answer {
+            background: rgba(225, 112, 85, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.2rem;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .section.dark .tension-answer {
+            background: rgba(225, 112, 85, 0.1);
+        }
+
+        /* === CHEATSHEET === */
+        .cheatsheet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .cheat-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-top: 3px solid var(--coral);
+        }
+
+        .section.dark .cheat-item {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .cheat-item-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .section.dark .cheat-item-title {
+            color: white;
+        }
+
+        .cheat-item-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* === SVG DIAGRAMS === */
+        svg {
+            max-width: 100%;
+            height: auto;
+            margin: 2rem 0;
+        }
+
+        /* === TYPOGRAPHY === */
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            font-weight: 700;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            margin-top: 1.5rem;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.6rem;
+        }
+
+        /* === SPACING === */
+        .spacer {
+            height: 2rem;
+        }
+
+        .divider {
+            height: 1px;
+            background: rgba(0, 0, 0, 0.1);
+            margin: 3rem 0;
+        }
+
+        .section.dark .divider {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .section {
+                padding: 3rem 1.5rem;
+            }
+
+            .cover h1 {
+                font-size: 2.2rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .pullquote {
+                font-size: 1.3rem;
+                padding: 1.5rem;
+            }
+
+            .cheatsheet-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* === FOOTER === */
+        .footer {
+            background: #0f0f23;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* === HIGHLIGHTS === */
+        .highlight {
+            background: rgba(255, 230, 109, 0.2);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        strong {
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .section.dark strong {
+            color: white;
+        }
+
+        /* === CONTAINERS === */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===================== COVER ===================== -->
+<div class="cover">
+    <div class="cover-content">
+        <h1>How to Be Happy</h1>
+        <p class="subtitle">A Cross-Book Deep Dive</p>
+        <p class="tagline">Synthesizing 8 Masters of Meaning, Flow, and Wellbeing</p>
+        <div class="book-count">8 Books · 1 Framework</div>
+    </div>
+</div>
+
+<!-- ===================== PART 1: THE PROBLEM ===================== -->
+<div class="section light">
+    <div class="content">
+        <div class="section-header">
+            <div class="section-number">Part 1</div>
+            <h2>The Problem with Chasing Happiness</h2>
+            <p class="section-intro">Why the direct pursuit of happiness is like trying to sleep by concentrating on sleeping—the harder you grasp, the further it slips away.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-author">Daniel Gilbert · Stumbling on Happiness</div>
+            <div class="card-title">Impact Bias: The Premortem of Dreams</div>
+            <div class="card-content">
+                You will fail to imagine how your brain will adapt. Gilbert calls this "impact bias"—we systematically overestimate how much a future event (winning the lottery, getting the dream job, losing the relationship) will make us happy or miserable. You imagine yourself devastated in the wreckage of a breakup, but research shows you'll be mostly back to baseline within 18 months. You imagine yourself permanently euphoric with that promotion, but six months later it's just... your job.
+                <br><br>
+                The cruel irony: this predictive failure causes you to misallocate your present moment. You defer living now for a future happiness that won't materialize as intensely as you expect.
+            </div>
+        </div>
+
+        <div class="pullquote">
+            "Happiness cannot be pursued; it must ensue. One cannot pursue it by making it directly a goal." — Viktor Frankl
+        </div>
+
+        <div class="card">
+            <div class="card-author">Viktor Frankl · Man's Search for Meaning</div>
+            <div class="card-title">The Paradox of Direct Pursuit</div>
+            <div class="card-content">
+                The more directly you chase happiness as a goal, the more it recedes. Frankl observed this in the concentration camps and throughout his life: people who made happiness their target became neurotic and depressed. People who found meaning—a reason to survive, to create, to love—discovered that happiness arrived as a side effect, unexpected and genuine.
+                <br><br>
+                This is not pessimism. This is the discovery of a law of the mind: happiness is a byproduct, not a destination.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-author">Anna Lembke · Dopamine Nation</div>
+            <div class="card-title">The Pleasure-Pain Seesaw: Hedonic Doom</div>
+            <div class="card-content">
+                Every pleasure creates an equal and opposite pain. Lembke describes the nervous system as a seesaw: push pleasure up on one side, and the other side rises too. You get a hit of dopamine from scrolling, and within hours your baseline sensitivity drops. You need more scrolling to feel the same pleasure. Meanwhile, mundane activities (reading, walking, conversation) feel dull. You're chasing the seesaw itself, never reaching equilibrium.
+                <br><br>
+                The people chasing happiness through pleasure are literally pushing themselves deeper into a pain-based existence. Counterintuitive solution: <strong>rest the seesaw</strong>. Accept boredom, abstain voluntarily, and let baseline sensitivity reset.
+            </div>
+        </div>
+
+        <div class="analogy">
+            <div class="analogy-number">1</div>
+            <div class="analogy-title">Happiness is a Cat, Not a Destination</div>
+            <div class="analogy-text">
+                Chase a cat, and it hisses and runs. It hates being pursued. But sit down with a book, engrossed in something that interests you, and the cat wanders over, curious about your focus, and settles in your lap. Happiness works the same way. The moment you make it your goal, your nervous system tenses with effort. The moment you look away—absorbed in work that matters, in people you care about, in a challenge that engages you—happiness quietly arrives and sits beside you.
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3>The Trap You're Probably In</h3>
+        <p>You've likely internalized the cultural message: "Pursue happiness. Optimize for joy. Design your life around pleasure." This creates a vicious cycle:</p>
+        <ul>
+            <li><strong>You set happiness as a goal</strong> → your brain scans for threats to that goal</li>
+            <li><strong>You compare present reality to the happy future you imagined</strong> → present reality falls short</li>
+            <li><strong>You feel lack and pursue harder</strong> → you're now chasing a seesaw in freefall</li>
+            <li><strong>Each pleasure hit is followed by a bigger pain valley</strong> → you're more miserable than before</li>
+        </ul>
+
+        <p>The common objection: "So should I just give up and be nihilistic?" No. The books in this synthesis point to something far more powerful than happiness.</p>
+    </div>
+</div>
+
+<!-- ===================== PART 2: WHAT ACTUALLY WORKS ===================== -->
+<div class="section dark">
+    <div class="content">
+        <div class="section-header">
+            <div class="section-number">Part 2</div>
+            <h2>What Actually Works: The Convergence</h2>
+            <p class="section-intro">Where all eight books unexpectedly agree—the hidden architecture of a well-lived life.</p>
+        </div>
+
+        <h3>The Core Consensus</h3>
+        <p>Across these eight authors, written in different decades and from different fields (psychology, philosophy, neuroscience, habit research), a pattern emerges. They agree on these five pillars:</p>
+
+        <div class="card">
+            <div class="card-title">1. Relationships Trump Everything</div>
+            <div class="card-author">Haidt, Achor, Aurelius</div>
+            <div class="card-content">
+                Jonathan Haidt shows that the strongest predictor of sustained happiness isn't wealth, achievement, or pleasure. It's relationships. Shawn Achor calls investing in relationships the highest ROI activity you can do. Marcus Aurelius—a Stoic who renounced indulgence—returns again and again to the beauty of human connection, to dwell on the ways others have shaped you.
+                <br><br>
+                The finding: <strong>one deep relationship is more protective of happiness than all the self-optimization strategies combined.</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">2. Meaning Over Pleasure</div>
+            <div class="card-author">Frankl, Aurelius, Haidt, Achor</div>
+            <div class="card-content">
+                Frankl built his entire philosophy on it. Aurelius made it the Stoic foundation. Haidt's research shows it. Achor proves it biochemically: when you connect an action to a larger purpose, your brain releases different neurochemicals.
+                <br><br>
+                The pattern: <strong>sustainable wellbeing comes from meaning, not pleasure</strong>. You can chase pleasure and feel empty. You can sacrifice pleasure for something meaningful and feel full. The nervous system knows the difference.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">3. Flow: Absorption as the Portal</div>
+            <div class="card-author">Csikszentmihalyi, Achor, Gilbert</div>
+            <div class="card-content">
+                Mihaly Csikszentmihalyi spent decades studying the moments when humans are most alive: flow states, where challenge and skill are perfectly matched, and you lose yourself in the activity. Achor discovered that flow at work transforms your entire neurochemistry. Gilbert's research suggests that during flow, your affective forecasting errors vanish—you're living, not predicting.
+                <br><br>
+                The insight: <strong>the parts of life where you're most absorbed are the parts where you're most alive</strong>. Happiness during flow isn't something you feel; it's something you don't notice because you're too engaged.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">4. Control Attention, Not Circumstances</div>
+            <div class="card-author">Aurelius, Achor, Csikszentmihalyi</div>
+            <div class="card-content">
+                Marcus Aurelius built his entire Stoic practice on one insight: you don't control external events, but you completely control how you judge them. Achor called it the "Tetris effect"—your brain is a search algorithm; if it's scanning for threats, you find threats; if it's scanning for opportunities, you find those instead. Csikszentmihalyi shows this is literally true neurologically: attention is the currency of consciousness.
+                <br><br>
+                The practice: <strong>train your attention the way you'd train a muscle, and your experience of reality shifts fundamentally.</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">5. Habits as the Architecture of Baseline Mood</div>
+            <div class="card-author">Duhigg, Lembke, Achor, Aurelius</div>
+            <div class="card-content">
+                Charles Duhigg's research is clear: habits shape your emotional baseline more than any event or circumstance. Lembke adds that you can reset your hedonic set point through abstinence and deliberate discomfort. Achor shows that two minutes of daily gratitude literally rewires neural pathways. Aurelius practiced voluntary discomfort (cold baths, simple food) to reset his baseline.
+                <br><br>
+                The finding: <strong>your mood 80% of the time is determined by your daily habits, not by what happens to you.</strong>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3>The Integration: How These Work Together</h3>
+        <p>These five pillars don't exist in isolation. They form a system:</p>
+        <ul>
+            <li><strong>Relationships</strong> provide meaning and create shared flow states</li>
+            <li><strong>Meaning</strong> directs your attention toward what matters</li>
+            <li><strong>Flow</strong> emerges when your habits have trained you to engage deeply</li>
+            <li><strong>Attention training</strong> (through Stoic and gratitude practices) reshapes your habits</li>
+            <li><strong>Habits</strong> encode relationships, meaning, and flow into your daily existence</li>
+        </ul>
+
+        <p>You don't need to do everything. You need to understand the system and pull one thread. Pull the thread of one relationship. Pull the thread of meaning in your work. Pull the thread of one flow-state activity. The entire system begins to reorganize around that pull.</p>
+    </div>
+</div>
+
+<!-- ===================== PART 3: THE TENSIONS ===================== -->
+<div class="section alt1">
+    <div class="content">
+        <div class="section-header">
+            <div class="section-number">Part 3</div>
+            <h2>The Productive Tensions</h2>
+            <p class="section-intro">Where the books seem to disagree—and what that disagreement actually teaches us.</p>
+        </div>
+
+        <h3>Tension 1: Frankl Says Stop Trying. Achor Says Train Harder.</h3>
+
+        <div class="tension">
+            <div class="tension-label">Frankl vs. Achor</div>
+            <div class="tension-question">Do I need to accept happiness's impossibility, or actively reprogram my brain?</div>
+            <div class="tension-answer">
+                <strong>They're not opposed; they operate at different timescales.</strong> Frankl is describing the trap of direct pursuit—the neurotic goal-chasing that tightens the noose. Achor is describing tactical habit-rewiring—the small practices that reset your baseline without requiring years of suffering.
+                <br><br>
+                The synthesis: Accept that happiness can't be chased directly (Frankl's wisdom). Then, redirect that acceptance into daily practices that subtly reprogram your default patterns (Achor's science). You're not striving for happiness; you're building the architecture that allows it to emerge.
+            </div>
+        </div>
+
+        <h3>Tension 2: Accept What You Can't Control vs. Stop Predicting the Future</h3>
+
+        <div class="tension">
+            <div class="tension-label">Aurelius vs. Gilbert</div>
+            <div class="tension-question">Should I train equanimity, or stop bothering to forecast at all?</div>
+            <div class="tension-answer">
+                <strong>They converge from opposite directions.</strong> Aurelius is prescriptive: *choose* not to attach to outcomes you can't control. Gilbert is descriptive: you're going to adapt to outcomes anyway, so your fear/hope about the future is largely wasteful.
+                <br><br>
+                The practical insight: Aurelius's stoic practice (letting go of attachment) and Gilbert's affective forecasting research point to the same place—stop investing so much emotional energy in predictions about a future you'll adapt to regardless. Use that energy for present engagement instead.
+            </div>
+        </div>
+
+        <h3>Tension 3: Lembke's Caution vs. Achor's Savoring</h3>
+
+        <div class="tension">
+            <div class="tension-label">Lembke vs. Achor</div>
+            <div class="tension-question">Should I avoid pleasure to reset my baseline, or actively savor positive experiences?</div>
+            <div class="tension-answer">
+                <strong>The difference is in intention and balance.</strong> Lembke warns that even healthy pleasures (food, music, exercise) become dopamine traps if pursued compulsively. Achor recommends actively savoring positive experiences as a resilience-building practice.
+                <br><br>
+                The reconciliation: Savor *consciously*—notice the experience with awareness, without chasing the feeling. Achor's "three good things" exercise is savoring with awareness. Meanwhile, reset your baseline periodically through voluntary abstinence (Lembke's practice). The two aren't opposed; they're seasonal rhythms in a balanced life.
+            </div>
+        </div>
+
+        <h3>Tension 4: Gilbert's Adaptation Paradox</h3>
+
+        <div class="tension">
+            <div class="tension-label">Gilbert's Research vs. Frankl's Purpose</div>
+            <div class="tension-question">If we adapt to everything, why pursue anything?</div>
+            <div class="tension-answer">
+                <strong>Adaptation is real, but meaning isn't negated by it.</strong> Yes, you'll adapt to the fancy car. But the person who pursued that car for status is miserable in the adaptation, because they built their meaning on a moving target. The person who pursued learning, connection, or service finds the adaptation peaceful, because the meaning persists even as the circumstance changes.
+                <br><br>
+                Frankl's wisdom reframes Gilbert's finding: adaptation is inevitable. What matters is what you're building while you chase. Build meaning, and adaptation becomes a feature, not a bug.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== PART 4: THE ANALOGIES ===================== -->
+<div class="section light">
+    <div class="content">
+        <div class="section-header">
+            <div class="section-number">Part 4</div>
+            <h2>The Deep Analogies</h2>
+            <p class="section-intro">Six metaphors that capture the invisible architecture of happiness.</p>
+        </div>
+
+        <div class="analogy">
+            <div class="analogy-number">1</div>
+            <div class="analogy-title">The Thermostat: Your Happiness Set Point</div>
+            <div class="analogy-text">
+                Your happiness has a set point, like a thermostat set to 68°F. Big events move the needle dramatically—winning the lottery shoots it to 90°F, a tragedy plunges it to 40°F. But within 1-2 years, it drifts back to 68°F. This is Gilbert's "impact bias" in physical form.
+                <br><br>
+                The problem: most people try to turn up the thermostat by cranking harder on external events. Another achievement, another purchase, another milestone. The thermostat just resets.
+                <br><br>
+                The solution: raise the set point itself. This is what daily habits do. Consistent gratitude practice raises it to 70°F. A daily flow-state activity raises it to 72°F. A meaningful relationship raises it to 75°F. You're not cranking the dial wildly; you're <strong>recalibrating the baseline</strong>.
+            </div>
+        </div>
+
+        <svg viewBox="0 0 600 300" style="margin: 2rem auto; display: block;">
+            <!-- Thermostat -->
+            <circle cx="150" cy="150" r="80" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+            <circle cx="150" cy="150" r="75" fill="#FFEAA7"/>
+            <text x="150" y="160" text-anchor="middle" font-size="24" font-weight="bold">68°F</text>
+            <text x="150" y="245" text-anchor="middle" font-size="14">Default Set Point</text>
+
+            <!-- Arrow -->
+            <path d="M 250 150 L 350 150" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+            <!-- Thermostat with habits -->
+            <circle cx="450" cy="150" r="80" fill="none" stroke="#4ECDC4" stroke-width="3"/>
+            <circle cx="450" cy="150" r="75" fill="#55EFC4"/>
+            <text x="450" y="160" text-anchor="middle" font-size="24" font-weight="bold">75°F</text>
+            <text x="450" y="245" text-anchor="middle" font-size="14">With Meaning + Habits</text>
+
+            <!-- Legend -->
+            <text x="50" y="290" font-size="12" fill="#666">Gilbert's adaptation → Duhigg's habit architecture</text>
+
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+                </marker>
+            </defs>
+        </svg>
+
+        <div class="analogy">
+            <div class="analogy-number">2</div>
+            <div class="analogy-title">The Elephant and Rider on a Map with No Route</div>
+            <div class="analogy-text">
+                Haidt's elephant (your emotional/instinctive self) and rider (your rational self) are lost. The map says "HERE BE HAPPINESS" but there's no marked route. The rider tries to convince the elephant with logic: "Be positive! Optimize for wellbeing!" The elephant doesn't care about the destination; it wants to eat the fruit tree it sees right now.
+                <br><br>
+                The books show what the real map looks like: You program the elephant with daily habits (Duhigg). These habits create small moments of flow (Csikszentmihalyi). Flow requires engagement with something meaningful (Frankl). Meaning emerges from relationships and contribution (Haidt, Aurelius). You don't program the elephant to seek happiness; you program it with daily rituals that, as a side effect, pass through the territory where happiness lives.
+                <br><br>
+                <strong>The elephant doesn't need to know the destination. It just needs to know the path.</strong>
+            </div>
+        </div>
+
+        <div class="analogy">
+            <div class="analogy-number">3</div>
+            <div class="analogy-title">The Dopamine Seesaw: The Equilibrium Point Is Home</div>
+            <div class="analogy-text">
+                Imagine a seesaw weighted equally on both sides. On the right: pain and boredom. On the left: pleasure and stimulation. At the center: equilibrium—the real happiness zone.
+                <br><br>
+                Most people pile weight on the pleasure side: scrolling, shopping, eating, drinking, constant stimulation. The seesaw tips hard to the left. To feel balanced, your nervous system adds weight to the pain side: you become anxious, depleted, numb. You need more stimulation to even feel pleasure.
+                <br><br>
+                Lembke's insight: reset the seesaw by <strong>voluntarily sitting on the pain side</strong> for a while. Cold showers, dopamine fasts, boredom—these aren't punishment. They're recalibration. When you abstain, the pain side gets lighter, and equilibrium returns. Now normal activities (conversation, work, music) feel rewarding again. This is Aurelius's voluntary discomfort, modernized by neuroscience.
+            </div>
+        </div>
+
+        <svg viewBox="0 0 600 300" style="margin: 2rem auto; display: block;">
+            <!-- Seesaw baseline -->
+            <line x1="150" y1="150" x2="450" y2="150" stroke="#2D3436" stroke-width="2"/>
+            <circle cx="300" cy="150" r="8" fill="#2D3436"/>
+
+            <!-- Pain side weight (normal) -->
+            <rect x="130" y="80" width="40" height="60" fill="#FF6B6B" opacity="0.5"/>
+            <text x="150" y="145" text-anchor="middle" font-size="12" font-weight="bold">Pain</text>
+
+            <!-- Pleasure side weights (normal) -->
+            <rect x="420" y="80" width="30" height="40" fill="#FFE66D"/>
+            <rect x="460" y="90" width="30" height="30" fill="#FFE66D"/>
+            <rect x="430" y="125" width="30" height="20" fill="#FFE66D"/>
+            <text x="455" y="145" text-anchor="middle" font-size="12" font-weight="bold">Pleasure</text>
+
+            <text x="300" y="200" text-anchor="middle" font-size="14" font-weight="bold">The Dopamine Trap</text>
+
+            <!-- Arrow down -->
+            <path d="M 300 240 L 300 280" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
+
+            <!-- Seesaw after reset -->
+            <line x1="150" y1="140" x2="450" y2="160" stroke="#4ECDC4" stroke-width="2" opacity="0.6"/>
+            <circle cx="290" cy="149" r="6" fill="#4ECDC4"/>
+
+            <text x="300" y="320" text-anchor="middle" font-size="12" fill="#666">After voluntary discomfort + abstinence: equilibrium returns</text>
+
+            <defs>
+                <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+                </marker>
+            </defs>
+        </svg>
+
+        <div class="analogy">
+            <div class="analogy-number">4</div>
+            <div class="analogy-title">The Forest Clearing: Flow as an Emergent Property</div>
+            <div class="analogy-text">
+                You're lost in a dense forest trying to reach a clearing you glimpsed on the horizon. The moment you aim directly at it, it seems to vanish—it's hidden behind trees, unreachable. This is Csikszentmihalyi's core insight: <strong>you cannot reach flow by pursuing flow</strong>.
+                <br><br>
+                What works: walk toward the challenge-skill boundary. Walk where trees require full attention to navigate, where every step is neither too easy nor too hard. In that state of engagement, the clearing appears. Not as a destination, but as something you suddenly notice you're already in.
+                <br><br>
+                This is why Achor says positivity is a side effect of meaningful work, not a prerequisite. You don't feel happy in the forest; you're too focused. You realize you were happy only after you emerge from the trees.
+            </div>
+        </div>
+
+        <div class="analogy">
+            <div class="analogy-number">5</div>
+            <div class="analogy-title">The Tetris Brain: You See What You're Scanning For</div>
+            <div class="analogy-text">
+                Your brain is a search algorithm running 24/7. Achor calls it the "Tetris effect"—the research on video game players who, after hours of scanning for falling shapes, start seeing Tetris patterns in real life. They're not hallucinating; their search algorithm is trained.
+                <br><br>
+                This is literally how your attention works. Train your brain to scan for threats, and threats appear everywhere—you become anxious. Train it to scan for problems in yourself, and you become self-critical. Train it to scan for opportunities, beauty, and what you're grateful for, and that's what fills your vision.
+                <br><br>
+                Achor's research: three minutes of gratitude journaling daily literally rewires the search algorithm over 21 days. You're not being more positive; you're not denying problems. You're recalibrating the default search. This is the Stoic practice of attention training, validated by neuroscience.
+            </div>
+        </div>
+
+        <div class="analogy">
+            <div class="analogy-number">6</div>
+            <div class="analogy-title">The Letters to Your Future Self: Gilbert's Gift</div>
+            <div class="analogy-text">
+                Gilbert's research suggests this exercise: write two letters. The first, write to your future self about a catastrophe you fear. Tell him how devastated you'll be. Then read stories of people who experienced that catastrophe. Usually, they adapted and found meaning. Read your letter to them. Most will say: "But I'm not like that." They are. We all are.
+                <br><br>
+                The second letter: write to yourself about something you desperately want. Describe how permanently happy you'll be when you get it. Then research: do people who have it report that happiness? Usually, they do initially, then adapt.
+                <br><br>
+                This isn't nihilism. It's liberation. It frees you to pursue things not for the permanent happiness they'll provide, but for the meaning they hold right now. Chase the goal for what it teaches you, whom it connects you with, not for the future self it will supposedly create.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== PART 5: HOW TO USE THIS ===================== -->
+<div class="section dark">
+    <div class="content">
+        <div class="section-header">
+            <div class="section-number">Part 5</div>
+            <h2>How to Actually Use This in Your Life</h2>
+            <p class="section-intro">A weekly framework, pulling from all eight books, designed to raise your set point without chasing happiness.</p>
+        </div>
+
+        <h3>The Daily Practice Framework</h3>
+
+        <div class="practice-block">
+            <h4>🌅 Morning (5 minutes) — Achor's Positivity Primer</h4>
+            <div class="practice-item"><strong>Write 3 specific gratitudes.</strong> Not "family" or "health"—be specific. "Mom texted at 11pm asking if I was okay." "Got a song stuck in my head that reminds me of a good week." "Coffee tasted really good this morning." You're training the Tetris brain.</div>
+            <div class="practice-item"><strong>Journal one thing you're looking forward to today.</strong> Just one. Achor's research shows this shifts your brain's search algorithm toward opportunity.</div>
+            <div class="practice-item"><strong>Do NOT check your phone for 30 minutes.</strong> Lembke's non-negotiable: protect your morning dopamine baseline. The first stimulus you take in shapes your entire day's set point.</div>
+        </div>
+
+        <div class="practice-block">
+            <h4>⚡ Work (Variable) — Csikszentmihalyi + Frankl + Achor</h4>
+            <div class="practice-item"><strong>Identify your one flow-state activity today.</strong> The thing that requires full engagement, sits at your challenge-skill edge, and makes time disappear. Protect 90 minutes for it. This is non-negotiable. Flow is where life actually happens.</div>
+            <div class="practice-item"><strong>Schedule deep work in your peak cognitive hours.</strong> Research (from multiple sources) shows most people peak 2-4 hours after waking. Put your hardest mental work there. Protect it fiercely.</div>
+            <div class="practice-item"><strong>Connect one task to your larger purpose.</strong> Frankl said meaning is the path. Achor proved it biochemically: when you articulate why a mundane task matters (this email connects me to someone I care about; this project teaches me), your brain releases different neurochemicals. You're not just doing the task; you're doing it *toward* something.</div>
+        </div>
+
+        <div class="practice-block">
+            <h4>🌙 Evening (10 minutes) — Aurelius + Lembke + Achor</h4>
+            <div class="practice-item"><strong>Evening review: three good things.</strong> Achor's "three good things" exercise. Not three big things—three specific moments when something went well or felt connected. Write why it happened. This trains the Tetris brain in reverse, encoding what's worth noticing.</div>
+            <div class="practice-item"><strong>Name one thing you're accepting vs. resisting.</strong> Aurelius's core practice. Where are you fighting reality today? What's one thing you can release attachment to? (A comment someone made, a plan that fell through, an imperfection in yourself.) Notice the resistance. Then consciously let it go. This is the Stoic reset.</div>
+            <div class="practice-item"><strong>One hour screen-free before bed.</strong> Lembke again. Reset the dopamine seesaw. Read, talk, think, be bored. Your nervous system needs to remember what baseline feels like.</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3>Weekly Practices (Add These Weekly)</h3>
+
+        <div class="practice-block">
+            <h4>One Meaningful Conversation</h4>
+            <div class="practice-item">Haidt's research is unambiguous: relationships are the strongest predictor of sustained happiness. Have one real conversation weekly where you're fully present—no phone, asking questions you actually want to know the answer to, listening to the answer. This isn't about being social; it's about genuine connection. One deep conversation per week, for 30 minutes, can shift your baseline significantly.</div>
+        </div>
+
+        <div class="practice-block">
+            <h4>One Uncomfortable Thing</h4>
+            <div class="practice-item">Aurelius's voluntary discomfort + Lembke's hedonic reset. Do something slightly hard that you're avoiding. Cold shower. Fasting for a meal. Saying no to something comfortable. Having a difficult conversation. This serves two purposes: (1) resets your dopamine baseline so normal pleasures feel rewarding again, and (2) trains your nervous system that discomfort is survivable, which paradoxically increases resilience and reduces anxiety.</div>
+        </div>
+
+        <div class="practice-block">
+            <h4>The Sunday Litmus Test</h4>
+            <div class="practice-item">Once a week, ask yourself: "Am I chasing happiness, or living toward meaning?" Frankl's litmus test. If you find yourself optimizing for experiences, buying things, seeking pleasure hits, or constantly comparing your life to an imagined ideal—you've slipped back into the trap. Recalibrate. What's one thing this week that felt meaningful, not just pleasant?</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3>The Monthly Rhythm</h3>
+
+        <h4>First Week: Establish or Renew One Habit</h4>
+        <p>Duhigg's research on habits: pick one small habit (2-minute meditation, 3-minute gratitude, 10-minute walk) and stack it to an existing routine. Don't try to change everything; change one thing so completely it becomes automatic.</p>
+
+        <h4>Second Week: Reassess Your Meaning</h4>
+        <p>Frankl asked: what is uniquely yours to do? What would feel like a waste of your one life? Spend 30 minutes journaling on this. Not your career necessarily—but the work that feels meaningful only to you. Check: are you moving toward it, or away from it?</p>
+
+        <h4>Third Week: Social Investment</h4>
+        <p>Achor's highest ROI activity: deepen one relationship. Text someone you haven't spoken to in months. Take someone to coffee. Volunteer with a friend. This isn't productivity; it's the single highest-leverage happiness activity available to you.</p>
+
+        <h4>Fourth Week: Reset and Reflect</h4>
+        <p>Review the month. What worked? What was performative? Lembke's dopamine reset: what pleasure have you been chasing that's left you empty? One week in the next month, dial it back. Let yourself be bored. Let your baseline recalibrate. Aurelius's reflection: where did you show up well? Where did you lose your equanimity? No judgment—just noticing.</p>
+    </div>
+</div>
+
+<!-- ===================== PART 6: THE UNIFIED MODEL ===================== -->
+<div class="section alt2">
+    <div class="content">
+        <div class="section-header">
+            <div class="section-number">Part 6</div>
+            <h2>The Unified Model</h2>
+            <p class="section-intro">One integrated diagram showing how these eight books work as a single system.</p>
+        </div>
+
+        <svg viewBox="0 0 800 500" style="margin: 2rem auto; display: block; max-width: 100%;">
+            <!-- Central set point -->
+            <circle cx="400" cy="250" r="60" fill="#FFE66D" stroke="#FF6B6B" stroke-width="3"/>
+            <text x="400" y="260" text-anchor="middle" font-size="16" font-weight="bold">Your Happiness</text>
+            <text x="400" y="280" text-anchor="middle" font-size="12">Set Point</text>
+
+            <!-- Three inputs pulling UP -->
+            <!-- Meaning -->
+            <circle cx="150" cy="100" r="50" fill="#4ECDC4" opacity="0.8"/>
+            <text x="150" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Meaning</text>
+            <text x="150" y="120" text-anchor="middle" font-size="11" fill="white">Frankl, Aurelius</text>
+            <line x1="190" y1="130" x2="360" y2="220" stroke="#4ECDC4" stroke-width="2" stroke-dasharray="5,5"/>
+            <text x="250" y="160" font-size="10" fill="#4ECDC4">Purpose</text>
+
+            <!-- Flow -->
+            <circle cx="400" cy="50" r="50" fill="#A06CD5" opacity="0.8"/>
+            <text x="400" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Flow</text>
+            <text x="400" y="70" text-anchor="middle" font-size="11" fill="white">Csikszentmihalyi</text>
+            <line x1="400" y1="100" x2="400" y2="190" stroke="#A06CD5" stroke-width="2" stroke-dasharray="5,5"/>
+            <text x="430" y="150" font-size="10" fill="#A06CD5">Absorption</text>
+
+            <!-- Habits -->
+            <circle cx="650" cy="100" r="50" fill="#FD79A8" opacity="0.8"/>
+            <text x="650" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Habits</text>
+            <text x="650" y="120" text-anchor="middle" font-size="11" fill="white">Duhigg, Achor</text>
+            <line x1="610" y1="130" x2="440" y2="220" stroke="#FD79A8" stroke-width="2" stroke-dasharray="5,5"/>
+            <text x="550" y="160" font-size="10" fill="#FD79A8">Architecture</text>
+
+            <!-- Relationships (bonus input) -->
+            <circle cx="400" cy="420" r="50" fill="#55EFC4" opacity="0.8"/>
+            <text x="400" y="425" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Relationships</text>
+            <text x="400" y="440" text-anchor="middle" font-size="11" fill="white">Haidt</text>
+            <line x1="400" y1="370" x2="400" y2="310" stroke="#55EFC4" stroke-width="2" stroke-dasharray="5,5"/>
+
+            <!-- Two traps pulling DOWN -->
+            <!-- Pleasure chasing -->
+            <circle cx="150" cy="380" r="50" fill="#FF6B6B" opacity="0.6"/>
+            <text x="150" y="385" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Pleasure</text>
+            <text x="150" y="400" text-anchor="middle" font-size="10" fill="white">Chasing</text>
+            <text x="150" y="415" text-anchor="middle" font-size="10" fill="white">Lembke</text>
+            <line x1="190" y1="350" x2="360" y2="280" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+            <text x="250" y="330" font-size="10" fill="#FF6B6B" font-weight="bold">⚠ Trap</text>
+
+            <!-- Over-control -->
+            <circle cx="650" cy="380" r="50" fill="#E17055" opacity="0.6"/>
+            <text x="650" y="385" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Over-</text>
+            <text x="650" y="400" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Control</text>
+            <text x="650" y="415" text-anchor="middle" font-size="10" fill="white">Gilbert</text>
+            <line x1="610" y1="350" x2="440" y2="280" stroke="#E17055" stroke-width="2" stroke-dasharray="5,5"/>
+            <text x="550" y="330" font-size="10" fill="#E17055" font-weight="bold">⚠ Trap</text>
+
+            <!-- Central label -->
+            <text x="400" y="490" text-anchor="middle" font-size="12" font-weight="bold" fill="#2D3436">Happiness emerges when three inputs (Meaning, Flow, Habits) exceed two traps (Pleasure-chasing, Attachment)</text>
+        </svg>
+
+        <div class="divider"></div>
+
+        <h3>How to Read This Model</h3>
+
+        <p>The diagram shows that happiness is not a thing to chase—it's an <strong>emergent property</strong> of a well-designed system. Here's what each element means:</p>
+
+        <div class="two-column">
+            <div class="card">
+                <div class="card-title">The Three Inputs (Pull Happiness Up)</div>
+                <div class="card-content">
+                    <strong>Meaning:</strong> Work that feels like yours alone to do (Frankl) + principles you're willing to stand by (Aurelius). This creates gravity—a direction your life naturally pulls toward.
+                    <br><br>
+                    <strong>Flow:</strong> Activities that fully absorb you, where challenge and skill match perfectly (Csikszentmihalyi). This is where you're actually alive.
+                    <br><br>
+                    <strong>Habits:</strong> Daily practices that encode meaning and flow into your nervous system (Duhigg, Achor). The small decisions made repeatedly that shape your baseline mood.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">The Two Traps (Pull Happiness Down)</div>
+                <div class="card-content">
+                    <strong>Pleasure-Chasing:</strong> Direct pursuit of good feelings through stimulation, accumulation, or novelty (Lembke). This creates the seesaw—each pleasure brings equivalent pain. You're fighting gravity.
+                    <br><br>
+                    <strong>Over-Control:</strong> Trying to predict and manage the future, attaching your wellbeing to outcomes (Gilbert). This is the impact bias trap—you're chasing a ghost.
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3>How to Use the Model</h3>
+
+        <p>Assess your life right now:</p>
+
+        <ul>
+            <li><strong>Where is your meaning?</strong> Can you articulate it in one sentence? If not, Frankl's work is your starting point.</li>
+            <li><strong>Where is your flow?</strong> What activity makes time disappear? If nothing comes to mind, Csikszentmihalyi's work is calling you.</li>
+            <li><strong>What are your keystone habits?</strong> What small daily practices are shaping your baseline? If this is vague, Duhigg and Achor are your guides.</li>
+            <li><strong>Where are you trapped in pleasure-chasing?</strong> Where do you feel the seesaw? Lembke's dopamine reset is your tool.</li>
+            <li><strong>Where are you over-controlling?</strong> What future are you anxiously trying to engineer? Aurelius and Gilbert teach the release.</li>
+        </ul>
+
+        <p>Pick one element to strengthen. Pull one thread. The whole system reorganizes.</p>
+    </div>
+</div>
+
+<!-- ===================== CHEATSHEET ===================== -->
+<div class="section light">
+    <div class="content">
+        <div class="section-header">
+            <div class="section-number">Quick Reference</div>
+            <h2>The Synthesis Cheatsheet</h2>
+            <p class="section-intro">One-page summary of the entire synthesis.</p>
+        </div>
+
+        <h3>The Core Insight</h3>
+
+        <div class="pullquote">
+            Happiness is not a destination. It's an emergent property of a life oriented toward meaning, absorbed in flow, and architected through daily habits. Stop chasing it. Start living toward it.
+        </div>
+
+        <h3>The Eight Books in One Paragraph Each</h3>
+
+        <div class="cheatsheet-grid">
+            <div class="cheat-item">
+                <div class="cheat-item-title">Stumbling on Happiness</div>
+                <div class="cheat-item-text"><strong>Gilbert:</strong> You're terrible at predicting how future events will make you feel. You'll adapt to everything. Use this to be bold and stop deferring joy.</div>
+            </div>
+
+            <div class="cheat-item">
+                <div class="cheat-item-title">The Happiness Hypothesis</div>
+                <div class="cheat-item-text"><strong>Haidt:</strong> Happiness = Set point + Conditions + Voluntary action. Your elephant (emotion) and rider (reason) must work together. Relationships are the strongest predictor.</div>
+            </div>
+
+            <div class="cheat-item">
+                <div class="cheat-item-title">Flow</div>
+                <div class="cheat-item-text"><strong>Csikszentmihalyi:</strong> Peak happiness is absorption in challenge. When skill matches difficulty, time disappears. This is where life happens.</div>
+            </div>
+
+            <div class="cheat-item">
+                <div class="cheat-item-title">Man's Search for Meaning</div>
+                <div class="cheat-item-text"><strong>Frankl:</strong> Happiness cannot be pursued; it must ensue. Make meaning your goal, and happiness arrives as a side effect. Meaning > pleasure.</div>
+            </div>
+
+            <div class="cheat-item">
+                <div class="cheat-item-title">Meditations</div>
+                <div class="cheat-item-text"><strong>Aurelius:</strong> Control your judgments, not events. Voluntary discomfort resets your baseline. Equanimity is a practice, not a personality.</div>
+            </div>
+
+            <div class="cheat-item">
+                <div class="cheat-item-title">The Happiness Advantage</div>
+                <div class="cheat-item-text"><strong>Achor:</strong> Positivity first, then success (not the reverse). Small daily practices (gratitude, savoring) rewire your brain's default search.</div>
+            </div>
+
+            <div class="cheat-item">
+                <div class="cheat-item-title">The Power of Habit</div>
+                <div class="cheat-item-text"><strong>Duhigg:</strong> Your baseline mood is largely determined by your habits. Small daily practices compound into a reshaped baseline over weeks.</div>
+            </div>
+
+            <div class="cheat-item">
+                <div class="cheat-item-title">Dopamine Nation</div>
+                <div class="cheat-item-text"><strong>Lembke:</strong> Pleasure and pain are neurologically linked. Pursuing pleasure creates more pain. Reset with abstinence and voluntary discomfort.</div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 3rem;">The Practice in 60 Seconds</h3>
+
+        <div class="practice-block">
+            <h4>Morning (5 min)</h4>
+            <div class="practice-item">Write 3 specific gratitudes</div>
+            <div class="practice-item">Journal one thing you're looking forward to</div>
+            <div class="practice-item">Don't check phone for 30 min</div>
+        </div>
+
+        <div class="practice-block">
+            <h4>Work (Variable)</h4>
+            <div class="practice-item">Protect 90 min for your flow activity</div>
+            <div class="practice-item">Connect one task to your larger purpose</div>
+        </div>
+
+        <div class="practice-block">
+            <h4>Evening (10 min)</h4>
+            <div class="practice-item">Write three good things that happened</div>
+            <div class="practice-item">Name one thing you're accepting</div>
+            <div class="practice-item">One hour screen-free before bed</div>
+        </div>
+
+        <div class="practice-block">
+            <h4>Weekly</h4>
+            <div class="practice-item">One meaningful conversation (30+ min)</div>
+            <div class="practice-item">One uncomfortable thing</div>
+            <div class="practice-item">Frankl's litmus test: chasing happiness or living toward meaning?</div>
+        </div>
+
+        <h3 style="margin-top: 3rem;">The Two Questions to Ask Yourself</h3>
+
+        <div class="tension">
+            <div class="tension-label">Question 1</div>
+            <div class="tension-question">Am I chasing happiness, or living toward meaning?</div>
+            <div class="tension-answer">If you're optimizing for experiences, pleasure hits, or comparisons to an imagined ideal, you're chasing. Recalibrate toward something meaningful only to you.</div>
+        </div>
+
+        <div class="tension">
+            <div class="tension-label">Question 2</div>
+            <div class="tension-question">Where am I absorbed, and where am I attached?</div>
+            <div class="tension-answer">Protect your absorption (flow activities, meaningful work). Release your attachment (to outcomes you can't control, to imagined futures you'll adapt to anyway).</div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== FOOTER ===================== -->
+<div class="footer">
+    <p>How to Be Happy: A Cross-Book Deep Dive</p>
+    <p style="margin-top: 1rem; opacity: 0.6;">Synthesizing Stumbling on Happiness (Gilbert) · The Happiness Hypothesis (Haidt) · Flow (Csikszentmihalyi) · Man's Search for Meaning (Frankl) · Meditations (Aurelius) · The Happiness Advantage (Achor) · The Power of Habit (Duhigg) · Dopamine Nation (Lembke)</p>
+    <p style="margin-top: 2rem; opacity: 0.5;">Built as a lived synthesis, not a summary. Read with an open mind. Apply with intention.</p>
+</div>
+
+</body>
+</html>

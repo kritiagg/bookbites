@@ -266,7 +266,7 @@
         }
 
         .chart-container canvas {
-            height: 300px !important;
+            max-height: 300px;
         }
 
         .chart-full {
@@ -706,7 +706,7 @@
                 </div>
                 <div class="filters">
                     <div class="filter-group">
-                        <label for="filter-category">Category</label>
+                        <label>Category</label>
                         <select id="filter-category" onchange="dashboard.applyFilters()">
                             <option value="all">All Categories</option>
                         </select>
@@ -785,7 +785,7 @@
         </div>
         <div style="position:relative;flex:1">
             <div class="reader-loading show" id="reader-loading">Loading book guide...</div>
-            <iframe class="reader-frame" id="reader-frame"></iframe>
+            <iframe class="reader-frame" id="reader-frame" sandbox="allow-same-origin allow-scripts"></iframe>
         </div>
     </div>
 
@@ -898,7 +898,21 @@
         {id:"yearbook_rogen",title:"Yearbook",author:"Seth Rogen",category:"Comedy",size:83805,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:27},
         {id:"yes_please",title:"Yes Please",author:"Amy Poehler",category:"Comedy",size:79853,lessons:12,keyCards:13,aiBoxes:14,funnyBoxes:14},
         {id:"zero_to_one",title:"Zero to One",author:"Peter Thiel",category:"Business",size:70950,lessons:10,keyCards:13,aiBoxes:14,funnyBoxes:7},
-        {id:"zindan_nama",title:"Zindan-Nama",author:"Faiz Ahmed Faiz",category:"Poetry — Faiz",size:62655,lessons:10,keyCards:0,aiBoxes:12,funnyBoxes:10}
+        {id:"zindan_nama",title:"Zindan-Nama",author:"Faiz Ahmed Faiz",category:"Poetry — Faiz",size:62655,lessons:10,keyCards:0,aiBoxes:12,funnyBoxes:10},
+        {id:"dopamine_nation",title:"Dopamine Nation",author:"Anna Lembke",category:"Psychology",size:87866,lessons:12,keyCards:8,aiBoxes:12,funnyBoxes:12},
+        {id:"hungry_ghosts",title:"In the Realm of Hungry Ghosts",author:"Gabor Maté",category:"Psychology",size:65719,lessons:12,keyCards:8,aiBoxes:12,funnyBoxes:10},
+        {id:"getting_things_done",title:"Getting Things Done",author:"David Allen",category:"Self-Improvement",size:61597,lessons:12,keyCards:8,aiBoxes:12,funnyBoxes:10},
+        {id:"essentialism",title:"Essentialism",author:"Greg McKeown",category:"Self-Improvement",size:53168,lessons:12,keyCards:8,aiBoxes:12,funnyBoxes:10},
+        {id:"happiness_advantage",title:"The Happiness Advantage",author:"Shawn Achor",category:"Psychology",size:50525,lessons:12,keyCards:8,aiBoxes:12,funnyBoxes:10},
+        {id:"when",title:"When: The Scientific Secrets of Perfect Timing",author:"Daniel H. Pink",category:"Self-Improvement",size:46742,lessons:12,keyCards:8,aiBoxes:12,funnyBoxes:10},
+        {id:"why_we_sleep",title:"Why We Sleep",author:"Matthew Walker",category:"Science",size:60920,lessons:12,keyCards:10,aiBoxes:12,funnyBoxes:10},
+        {id:"four_thousand_weeks",title:"Four Thousand Weeks",author:"Oliver Burkeman",category:"Philosophy",size:45427,lessons:12,keyCards:10,aiBoxes:12,funnyBoxes:10},
+        {id:"alignment_problem",title:"The Alignment Problem",author:"Brian Christian",category:"AI & Deep Learning",size:64399,lessons:12,keyCards:12,aiBoxes:14,funnyBoxes:8},
+        {id:"ai_superpowers",title:"AI Superpowers",author:"Kai-Fu Lee",category:"AI & Deep Learning",size:52883,lessons:12,keyCards:10,aiBoxes:14,funnyBoxes:8},
+        {id:"when_breath_becomes_air",title:"When Breath Becomes Air",author:"Paul Kalanithi",category:"Philosophy",size:64494,lessons:10,keyCards:10,aiBoxes:8,funnyBoxes:0},
+        {id:"tiny_habits",title:"Tiny Habits",author:"BJ Fogg",category:"Self-Improvement",size:58537,lessons:12,keyCards:10,aiBoxes:12,funnyBoxes:10},
+        {id:"lost_connections",title:"Lost Connections",author:"Johann Hari",category:"Psychology",size:60330,lessons:12,keyCards:10,aiBoxes:12,funnyBoxes:8},
+        {id:"being_mortal",title:"Being Mortal",author:"Atul Gawande",category:"Philosophy",size:40199,lessons:12,keyCards:10,aiBoxes:8,funnyBoxes:4}
     ];
 
     // ==================== CATEGORY CONFIG ====================
@@ -1254,8 +1268,26 @@
         // Nav buttons
         updateNavButtons();
 
+        // Load the book via fetch into the iframe using srcdoc
+        const frame = document.getElementById('reader-frame');
+        const loading = document.getElementById('reader-loading');
+        loading.classList.add('show');
+        frame.style.opacity = '0';
+
         const url = `${b.id}_illustrated.html`;
-        window.location.href = url;
+        frame.src = url;
+        frame.onload = () => {
+            loading.classList.remove('show');
+            frame.style.opacity = '1';
+        };
+        // Fallback timeout
+        setTimeout(() => {
+            loading.classList.remove('show');
+            frame.style.opacity = '1';
+        }, 3000);
+
+        document.getElementById('reader-overlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
     }
 
     function closeReader() {

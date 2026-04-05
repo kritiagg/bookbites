@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiny Habits: The Small Changes That Change Everything — BJ Fogg</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f23;
+            color: var(--dark);
+        }
+
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a1a0a 0%, #1a2e1a 50%, #0a1a0a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            color: white;
+            letter-spacing: -2px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cover .author {
+            font-size: 1.3rem;
+            color: var(--mint);
+            margin-top: 8px;
+            font-weight: 600;
+            z-index: 2;
+            position: relative;
+        }
+
+        .cover .subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 16px;
+            z-index: 2;
+            text-align: center;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .cover-svg {
+            width: 300px;
+            height: 300px;
+            margin: 40px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .lesson {
+            min-height: 100vh;
+            padding: 60px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lesson-inner {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .lesson-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+
+        .card-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        .quote-box {
+            background: var(--dark);
+            color: white;
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 20px;
+        }
+
+        .quote-box .quote-text {
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .quote-box .quote-attr {
+            color: var(--sunny);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+
+        .connect-box {
+            background: #e8f4fd;
+            border-left: 4px solid var(--deep-blue);
+            border-radius: 0 12px 12px 0;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+        }
+
+        .connect-box .connect-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--deep-blue);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .connect-box p {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .ai-box {
+            background: linear-gradient(135deg, #0984E3, #6C5CE7);
+            color: white;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+        }
+
+        .ai-box .ai-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--sunny);
+            margin-bottom: 6px;
+        }
+
+        .ai-box p {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .funny-box {
+            background: #fff5f5;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            border: 2px dashed var(--coral);
+        }
+
+        .funny-box .funny-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--coral);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .funny-box p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #666;
+            font-style: italic;
+        }
+
+        .story {
+            min-height: 100vh;
+            padding: 60px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .story-inner {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .cheatsheet {
+            min-height: 100vh;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cheatsheet-inner {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .cheatsheet h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .two-col { grid-template-columns: 1fr; }
+            .cover h1 { font-size: 2.5rem; }
+        }
+
+        .model-diagram {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .model-formula {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--dark-purple);
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .model-explanation {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .tiny-scale {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+
+        .scale-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 16px;
+        }
+
+        .scale-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .scale-visual {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .scale-text {
+            font-size: 0.9rem;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .anchor-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--forest);
+        }
+
+        .anchor-formula {
+            background: #f0f8f6;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 0.95rem;
+            color: #333;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .celebration-visual {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .celebration-icon {
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            background: var(--dark-purple);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .comparison-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .highlight {
+            background: var(--sunny);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .icon-badge {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: white;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<section class="cover">
+    <svg class="cover-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Soil -->
+        <ellipse cx="150" cy="240" rx="120" ry="30" fill="#8B7355" opacity="0.3"/>
+
+        <!-- Tiny seed -->
+        <circle cx="150" cy="240" r="8" fill="#333"/>
+        <ellipse cx="150" cy="240" rx="6" ry="8" fill="#2D3436"/>
+
+        <!-- Sprout -->
+        <path d="M 150 240 Q 145 200 140 150" stroke="#55EFC4" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M 150 240 Q 155 200 160 150" stroke="#55EFC4" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+        <!-- Growing stem -->
+        <path d="M 150 240 L 150 80" stroke="#00B894" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+        <!-- Leaves progression -->
+        <ellipse cx="130" cy="180" rx="15" ry="8" fill="#55EFC4" transform="rotate(-45 130 180)"/>
+        <ellipse cx="170" cy="180" rx="15" ry="8" fill="#00B894" transform="rotate(45 170 180)"/>
+        <ellipse cx="120" cy="130" rx="18" ry="10" fill="#55EFC4" transform="rotate(-45 120 130)"/>
+        <ellipse cx="180" cy="130" rx="18" ry="10" fill="#00B894" transform="rotate(45 180 130)"/>
+        <ellipse cx="110" cy="80" rx="20" ry="12" fill="#55EFC4" transform="rotate(-45 110 80)"/>
+        <ellipse cx="190" cy="80" rx="20" ry="12" fill="#00B894" transform="rotate(45 190 80)"/>
+
+        <!-- Oak tree shadow (faint) -->
+        <g opacity="0.15">
+            <ellipse cx="150" cy="60" rx="100" ry="80" fill="#333"/>
+            <ellipse cx="150" cy="100" rx="80" ry="60" fill="#333"/>
+        </g>
+    </svg>
+
+    <h1>Tiny Habits</h1>
+    <p class="author">by BJ Fogg</p>
+    <p class="subtitle">The Small Changes That Change Everything</p>
+
+    <!-- Floating particles -->
+    <div class="particle" style="width: 80px; height: 80px; left: 10%; top: 20%; background: var(--mint);"></div>
+    <div class="particle" style="width: 60px; height: 60px; right: 15%; top: 40%; background: var(--forest); animation-delay: 2s;"></div>
+    <div class="particle" style="width: 100px; height: 100px; left: 20%; bottom: 15%; background: var(--teal); animation-delay: 4s;"></div>
+</section>
+
+<!-- LESSON 1: MOTIVATION IS UNRELIABLE -->
+<section class="lesson" style="background: linear-gradient(135deg, #fff5f7 0%, #f0fef8 100%);">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: var(--coral);">1</div>
+        <h2 class="lesson-title">Motivation Is Unreliable</h2>
+        <p class="lesson-subtitle">Why motivation fluctuates and why that makes it a terrible foundation</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">The Core Truth</div>
+            <p>Motivation is a wave. It comes and goes unpredictably. You feel fired up on Monday but deflated by Wednesday. This isn't a character flaw—it's how human motivation works. Building habits on motivation is like building a house on sand.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">The secret to lasting change isn't willpower or motivation—it's making behaviors so small that motivation becomes irrelevant.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--warm-red);">The Problem</div>
+            <p><strong>The motivation wave:</strong> You start a new habit with high motivation, but by week two, that motivation drops. Most people interpret this as personal failure. They think, "I'm not disciplined enough." In reality, they're experiencing a predictable pattern. Relying on motivation to sustain habits sets you up for failure.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">Connection: Drive by Daniel Pink</div>
+            <p>Pink distinguishes between extrinsic motivation (external rewards) and intrinsic motivation (internal satisfaction). Fogg flips this: he says don't rely on motivation at all. Instead, design your behavior and environment so small wins feel automatic.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">The Reality Check</div>
+            <p>Your New Year's resolution gym membership? The motivation wave crashed around January 15th. That's not you failing—that's neuroscience.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--dark-purple);">The Fogg Alternative</div>
+            <p>Instead of chasing motivation, focus on <span class="highlight">tiny behaviors</span> you can do consistently and <span class="highlight">celebration</span> that wires them into your brain. Remove motivation from the equation entirely.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 2: THE FOGG BEHAVIOR MODEL -->
+<section class="lesson" style="background: linear-gradient(135deg, #f8f0ff 0%, #f0f8fd 100%);">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: var(--dark-purple);">2</div>
+        <h2 class="lesson-title">The Fogg Behavior Model</h2>
+        <p class="lesson-subtitle">B=MAP: Understanding the three ingredients that must converge</p>
+
+        <div class="model-diagram">
+            <p style="color: #666; font-size: 0.9rem; margin-bottom: 16px;">The equation that unlocks behavior change:</p>
+            <div class="model-formula">B = MAP</div>
+            <div class="model-explanation">
+                <strong>Behavior</strong> occurs when <strong>Motivation</strong>, <strong>Ability</strong>, and <strong>Prompt</strong> converge at the same moment.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--dark-purple);">Motivation (M)</div>
+            <p>Your desire to do the behavior. It's the wave we discussed—unreliable on its own. Fogg ranks it as least important of the three factors.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">Ability (A)</div>
+            <p>Your capacity to do the behavior. Can you actually do this? Do you have the time, skills, energy, and resources? <strong>This is where Fogg focuses:</strong> make behaviors so tiny that ability becomes automatic.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--deep-blue);">Prompt (P)</div>
+            <p>A trigger that reminds you to do the behavior. It can be external (a notification) or internal (a feeling), but without a prompt, you forget. The prompt must be <span class="highlight">specific and timely</span>.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">When you design a behavior, all three elements—motivation, ability, and a prompt—must be present in the same moment for the behavior to occur.</div>
+            <div class="quote-attr">— BJ Fogg, Tiny Habits</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">Key Insight</div>
+            <p>Fogg's model differs from Atomic Habits' cue-routine-reward loop. Fogg treats motivation as optional and emphasizes immediate celebration (the "shine") as the wiring mechanism for the neural pathway, not future rewards.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 3: MAKE IT TINY -->
+<section class="lesson" style="background: linear-gradient(135deg, #fff9e6 0%, #ffe8e1 100%);">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: var(--sunny);">3</div>
+        <h2 class="lesson-title">Make It Tiny</h2>
+        <p class="lesson-subtitle">The two-pushups prescription: start smaller than feels worth it</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sunny);">The Strategy</div>
+            <p>Fogg's most radical insight: tiny isn't a compromise. It's the strategy. When you commit to <strong>two pushups</strong> (not fifty), you remove all psychological resistance. You can do it even on your worst day. This is not settling—this is smart design.</p>
+        </div>
+
+        <div class="tiny-scale">
+            <div class="scale-item">
+                <div class="scale-visual" style="background: var(--coral);">1</div>
+                <div class="scale-text"><strong>Ridiculously tiny:</strong> 2 pushups, 1 stretch, floss 2 teeth</div>
+            </div>
+            <div class="scale-item">
+                <div class="scale-visual" style="background: var(--orange);">2</div>
+                <div class="scale-text"><strong>Easy:</strong> 10 pushups, 3 stretches, floss all teeth</div>
+            </div>
+            <div class="scale-item">
+                <div class="scale-visual" style="background: var(--forest);">3</div>
+                <div class="scale-text"><strong>Feels like work:</strong> 25 pushups, full stretching routine</div>
+            </div>
+            <div class="scale-item">
+                <div class="scale-visual" style="background: var(--warm-red);">4</div>
+                <div class="scale-text"><strong>Too big:</strong> 100 pushups, 30-min gym session</div>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">Start with a version of the behavior that requires minimal motivation and ability. You can always scale up later. Right now, make it so easy you can't fail.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--warm-red);">Why This Works</div>
+            <p>Our brains are maladaptive. A goal that feels too ambitious triggers avoidance and shame. A goal you can crush? That builds momentum and confidence. Two pushups done every day beats fifty pushups attempted twice then abandoned forever.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">The Truth About Willpower</div>
+            <p>You don't need willpower to do two pushups. You need willpower to do 50 and fail. Tiny behaviors sidestep the willpower problem entirely.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 4: ANCHOR HABITS -->
+<section class="lesson" style="background: linear-gradient(135deg, #e8f8f5 0%, #f5f9ff 100%);">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: var(--forest);">4</div>
+        <h2 class="lesson-title">Anchor Habits</h2>
+        <p class="lesson-subtitle">The recipe for automaticity: After I [anchor], I will [tiny behavior]</p>
+
+        <div class="anchor-card">
+            <div class="anchor-formula">After I [existing behavior], I will [new tiny behavior].</div>
+            <p style="font-size: 0.9rem; color: #666; text-align: center;">This is the core structure. Your existing habit is the trigger. Your new behavior is linked to it like a chain.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">How It Works</div>
+            <p>An anchor is an existing behavior you do every day without thinking: pouring your morning coffee, sitting down at your desk, brushing your teeth. By attaching a tiny new behavior <span class="highlight">immediately after</span> the anchor, you leverage neurological momentum. The anchor becomes a trigger you don't have to remember.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--deep-blue);">Examples in Action</div>
+            <ul style="list-style: none; font-size: 0.95rem; color: #444; line-height: 1.8;">
+                <li>✓ After I pour my morning coffee, I will do 2 pushups.</li>
+                <li>✓ After I sit at my desk, I will write 3 sentences of my novel.</li>
+                <li>✓ After I brush my teeth, I will floss 2 teeth.</li>
+                <li>✓ After I close my laptop, I will stretch for 30 seconds.</li>
+            </ul>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">The anchor is the key. When you find a behavior someone already does every day, you can attach new behaviors to it. The existing pathway in the brain becomes the highway for the new habit.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">Comparison: Atomic Habits (James Clear)</div>
+            <p>Clear calls this a "cue." Fogg calls it an "anchor." Same concept, different framing. Fogg's emphasis on finding behaviors you do automatically without thinking—rather than setting external reminders—makes the habit stick neurologically faster.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 5: THE SHINE (CELEBRATION) -->
+<section class="lesson" style="background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: var(--warm-red);">5</div>
+        <h2 class="lesson-title">The Shine</h2>
+        <p class="lesson-subtitle">Immediate celebration: the neurological mechanism for wiring habits</p>
+
+        <div class="celebration-visual">
+            <div class="celebration-icon">✨</div>
+            <p style="font-size: 1rem; color: #444; font-weight: 600;">After you do the tiny behavior, celebrate immediately.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--warm-red);">The Science</div>
+            <p>Celebration triggers a release of dopamine in your brain, which wires the neural pathway connecting the anchor → behavior → good feeling. This is not psychology—it's neurology. "Good job" to yourself isn't silly; it's <span class="highlight">scientifically necessary</span> for habit formation.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">What Celebration Looks Like</div>
+            <ul style="list-style: none; font-size: 0.95rem; color: #444; line-height: 1.9;">
+                <li>• A fist pump</li>
+                <li>• "Nice!" said out loud</li>
+                <li>• A smile and deep breath</li>
+                <li>• A brief moment of pride</li>
+                <li>• A small reward (chocolate square)</li>
+            </ul>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">Celebration is not frivolous. It's the mechanism your brain uses to rewire itself. When you feel good immediately after a behavior, your brain marks that behavior as worth repeating.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">This Is Not Self-Delusion</div>
+            <p>You might think celebrating two pushups is silly. But your brain doesn't care about the scale of the achievement—it cares about the feeling. Dopamine doesn't judge.</p>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">Connection: Dopamine Nation (Anna Lembke)</div>
+            <p>Lembke writes about dopamine dysregulation in a "hedonic treadmill" world. Fogg flips this: by celebrating small wins intentionally, you're harnessing dopamine for behavior change instead of chasing it externally. You're the one in control of the signal.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 6: DESIGNING YOUR ENVIRONMENT -->
+<section class="lesson" style="background: linear-gradient(135deg, #dfe6e9 0%, #e8f4f8 100%);">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: var(--dark);">6</div>
+        <h2 class="lesson-title">Designing Your Environment</h2>
+        <p class="lesson-subtitle">The difference between motivation and design: make desired easy, undesired hard</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--dark);">The Core Principle</div>
+            <p>You can't motivation-yourself into consistency, but you <span class="highlight">can design</span> your way there. Environment shapes behavior more reliably than willpower ever will. Reduce friction for desired behaviors. Increase friction for undesired ones.</p>
+        </div>
+
+        <div class="two-col">
+            <div class="card">
+                <div class="card-label" style="color: var(--forest);">Make Desired Behaviors Easier</div>
+                <ul style="list-style: none; font-size: 0.9rem; color: #444; line-height: 1.9;">
+                    <li>✓ Leave your workout clothes on the bed</li>
+                    <li>✓ Put your book on your pillow</li>
+                    <li>✓ Prep healthy snacks, not junk</li>
+                    <li>✓ Set phone reminders as anchors</li>
+                    <li>✓ Make the desired behavior the default</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-label" style="color: var(--warm-red);">Make Undesired Behaviors Harder</div>
+                <ul style="list-style: none; font-size: 0.9rem; color: #444; line-height: 1.9;">
+                    <li>✗ Delete social media apps from your phone</li>
+                    <li>✗ Keep cookies off your counter</li>
+                    <li>✗ Leave your credit card in another room</li>
+                    <li>✗ Put your phone in a drawer</li>
+                    <li>✗ Add friction, not motivation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">Environment design beats motivation every time. Stop asking yourself to be stronger. Instead, make your desired behavior the path of least resistance.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">Design vs. Discipline</div>
+            <p>Fogg's radical reframe: discipline isn't the answer. Good design is. If you keep failing at a habit, don't blame yourself—blame your environment. Then redesign it.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 7: GROWING HABITS -->
+<section class="lesson" style="background: linear-gradient(135deg, #a8e6cf 0%, #d4f1d4 100%);">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: var(--mint);">7</div>
+        <h2 class="lesson-title">Growing Habits</h2>
+        <p class="lesson-subtitle">From tiny to transcendent: the multiplication effect and when to scale up</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">The Natural Growth Pattern</div>
+            <p>You don't keep doing 2 pushups forever. Once the habit becomes automatic and celebrated, something magical happens: you naturally want to do more. This isn't goal-setting—it's organic expansion. The tiny behavior becomes the seed of a bigger one.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sunny);">The Progression</div>
+            <p><strong>Week 1:</strong> 2 pushups after morning coffee → celebrated. <strong>Week 3:</strong> 5 pushups → celebrated. <strong>Week 8:</strong> 20 pushups → celebrated. By month 3, you're doing a full strength routine, not because you forced it, but because the tiny foundation made it inevitable.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">Don't scale up too fast. You'll break the celebration loop and motivation will return as a problem. Grow gradually and let the success feeling guide the pace.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--deep-blue);">The Multiplication Effect</div>
+            <p>One tiny habit sticks → you feel confident → you anchor a second tiny habit → you feel more confident → you redesign your environment → suddenly you have a system. Small changes compound into a fundamentally different life, not through willpower, but through cascading design choices.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">The Plot Twist</div>
+            <p>You start by saying "I'll just do 2 pushups." Six months later, you're the person doing pushups. Identity didn't come first—it came last.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 8: TROUBLESHOOTING -->
+<section class="lesson" style="background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: var(--orange);">8</div>
+        <h2 class="lesson-title">Troubleshooting</h2>
+        <p class="lesson-subtitle">When habits don't stick: the diagnostic toolkit</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--orange);">The Framework</div>
+            <p>When a tiny habit fails, don't assume you're broken. Instead, ask: Is the issue <span class="highlight">motivation</span>, <span class="highlight">ability</span>, or <span class="highlight">prompt</span>? Fogg provides a diagnostic for each.</p>
+        </div>
+
+        <div class="two-col">
+            <div class="card">
+                <div class="card-label" style="color: var(--coral);">Problem: Low Motivation</div>
+                <p><strong>Signal:</strong> You understand the habit but don't feel like doing it.</p>
+                <p><strong>Solution:</strong> Make the behavior <span class="highlight">even tinier</span>. If 2 pushups don't spark motivation, try 1 pushup. Or switch anchors. Or redesign the celebration.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label" style="color: var(--forest);">Problem: Low Ability</div>
+                <p><strong>Signal:</strong> You want to do it but can't (too hard, too tired).</p>
+                <p><strong>Solution:</strong> Remove barriers. Do fewer reps. Do it earlier in the day. Simplify the behavior until it's effortless.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--deep-blue);">Problem: Missing Prompt</div>
+            <p><strong>Signal:</strong> You keep forgetting. You're motivated and able, but the trigger never happens.</p>
+            <p><strong>Solution:</strong> Find a better anchor (something you do more consistently). Set a phone reminder. Write it on a sticky note. Make the prompt impossible to miss.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">Failure is information, not character. When a habit doesn't stick, you have data. Use it to adjust the system, not to punish yourself.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">Compassion First</div>
+            <p>Fogg emphasizes self-compassion in troubleshooting. Shame doesn't fix habits. Understanding does. When something doesn't work, be curious, not critical.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 9: UNTANGLING BAD HABITS -->
+<section class="lesson" style="background: linear-gradient(135deg, #fab1a0 0%, #ffeaa7 100%);">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: var(--coral);">9</div>
+        <h2 class="lesson-title">Untangling Bad Habits</h2>
+        <p class="lesson-subtitle">Breaking the chains: why "just stop" doesn't work</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">The Problem with "Just Stop"</div>
+            <p>Willpower-based approaches tell you to quit cold turkey. But a bad habit is still a behavior governed by B=MAP. Your brain formed it because it met a need (motivation, ability, prompt all converged). Simply removing the behavior creates a void. You'll revert unless you address the underlying structure.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--warm-red);">Fogg's Three-Pronged Approach</div>
+            <ol style="list-style: decimal; list-style-position: inside; font-size: 0.95rem; color: #444; line-height: 1.9; margin-left: 8px;">
+                <li><strong>Remove motivation:</strong> Don't demonize the habit. Understand why you do it. What need does it meet? Address that need differently.</li>
+                <li><strong>Reduce ability:</strong> Make the bad behavior harder. Remove triggers. Increase friction. Delete the apps. Change your environment.</li>
+                <li><strong>Eliminate prompt:</strong> Break the anchor chain. If you scroll social media after work, change when you finish work. If you snack while watching TV, don't keep snacks there.</li>
+            </ol>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">You can't willpower your way out of a bad habit. But you can design your way out. Change the environment, remove the anchor, reduce the ability. The behavior will fade naturally.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--dark-purple);">The Replacement Strategy</div>
+            <p>Don't just remove bad habits—replace them. Use the same anchor but attach a tiny good behavior instead. "After I finish work, instead of scrolling, I will walk to the window and take 3 deep breaths." Same trigger, better behavior.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">The Unsolvable Math of Willpower</div>
+            <p>Your brain has mastered the bad habit. Fighting it requires constant energy (willpower). Designing around it requires zero energy once set up. Design wins.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 10: SKILLS OF CHANGE -->
+<section class="lesson" style="background: linear-gradient(135deg, #a8e6cf 0%, #c8f7dc 100%);">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: var(--teal);">10</div>
+        <h2 class="lesson-title">Skills of Change</h2>
+        <p class="lesson-subtitle">Habit design as a meta-skill you improve at</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--teal);">The Big Reframe</div>
+            <p>Habit change isn't about motivation or willpower. It's a <span class="highlight">skill</span> you get better at with practice. The first habit is awkward. The third one is easier. By the tenth, you're fluent in the language of tiny habits, anchors, and celebration.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">The Three-Step Process You Master</div>
+            <ol style="list-style: decimal; list-style-position: inside; font-size: 0.95rem; color: #444; line-height: 2; margin-left: 8px;">
+                <li><strong>Design tiny:</strong> You learn to shrink behaviors to their essence. What's the smallest, easiest version of what you want?</li>
+                <li><strong>Find an anchor:</strong> You become sharp at spotting existing routines in your day and locking new behaviors to them.</li>
+                <li><strong>Celebrate:</strong> You learn which celebrations actually trigger dopamine for you. A fist pump? A phrase? A moment of quiet pride?</li>
+            </ol>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">The more habits you design, the better you become at designing them. This is why BJ trained 40,000 people—the goal wasn't just their habits, it was to teach them the skill of change itself.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+
+        <div class="connect-box">
+            <div class="connect-label">Fogg's 40,000-Person Experiment</div>
+            <p>Fogg ran a five-year study where he coached 40,000 people through designing tiny habits. The finding: those who mastered the skill of habit design continued changing habits long after the program ended. They didn't need Fogg anymore—they had internalized the process.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">Mastery Compounds</div>
+            <p>The first habit takes conscious effort. By habit ten, it's automatic. By habit 50, you're designing complex behavioral systems instinctively. You've built the meta-skill of change.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 11: THE ROLE OF IDENTITY -->
+<section class="lesson" style="background: linear-gradient(135deg, #dfe6e9 0%, #e8f4f8 100%);">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: var(--sky);">11</div>
+        <h2 class="lesson-title">The Role of Identity</h2>
+        <p class="lesson-subtitle">How tiny habits reshape self-perception—and why it works differently than Atomic Habits</p>
+
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Atomic Habits (Clear)</th>
+                        <th>Tiny Habits (Fogg)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Identity</strong></td>
+                        <td>Start with identity ("I'm a runner")</td>
+                        <td>Identity emerges from behavior</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sequence</strong></td>
+                        <td>Identity → Behavior → Outcome</td>
+                        <td>Behavior (tiny) → Celebration → Identity shift</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Motivation anchor</strong></td>
+                        <td>Internal identity</td>
+                        <td>External anchor + immediate celebration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scaling</strong></td>
+                        <td>1% better identity</td>
+                        <td>Organic growth from momentum</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sky);">Fogg's Identity Theory</div>
+            <p>You don't become a runner by deciding you're a runner. You become a runner by running (tiny), celebrating, anchoring, and letting the behavior generate the identity. Say two pushups after coffee for 30 days, celebrate each one, and you'll start thinking "I'm someone who exercises." Identity isn't the prerequisite—it's the result.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">Identity follows behavior. When you consistently do something small that you celebrate, your brain recodes who you are. You're not trying to become someone else—you're discovering who you already are becoming through your actions.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--deep-blue);">Why This Matters</div>
+            <p>Many people try to adopt an identity before they have the habits to support it. Fogg reverses the order: create the micro-behaviors first, wire them through celebration, and identity shifts as a natural consequence. This removes the pressure of "pretending" and replaces it with genuine experience.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">The Fogg-Clear Divergence</div>
+            <p>James Clear says "decide who you want to become" first. BJ Fogg says "start behaving and let identity catch up." Both work, but they start from opposite ends of the chain.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LESSON 12: RIPPLE EFFECTS -->
+<section class="lesson" style="background: linear-gradient(135deg, #f0f8f6 0%, #d4f1d4 100%);">
+    <div class="lesson-inner">
+        <div class="lesson-num" style="background: var(--forest);">12</div>
+        <h2 class="lesson-title">Ripple Effects</h2>
+        <p class="lesson-subtitle">How one tiny behavior cascades into a transformed life</p>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">The Cascade</div>
+            <p>Start with 2 pushups. That becomes a "I exercise" identity. That influences your sleep (you're tired from exercise, sleep better). That affects your mood (better sleep, better mood). That makes you more social (better mood, reach out to friends). That creates accountability (friends ask about your progress, you stay consistent). One tiny behavior becomes a system.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sunny);">The Golden Behaviors</div>
+            <p>Some tiny habits unlock disproportionate change. Fogg calls these "golden behaviors." For example: writing 3 sentences of a novel daily. This reshapes how you see yourself (writer), your daily structure (protected time), your confidence (measurable progress), your productivity (compound word count). One behavior, multiple ripples.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">You're not just changing one habit. You're redesigning your habit garden. One seed grows. It shades the ground differently. Other seeds germinate. Soon you have an ecosystem.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--deep-blue);">Designing Your Habit Garden</div>
+            <p>Think of your life as a garden. Don't try to plant everything at once. Choose your first seed (tiny habit) based on potential ripples. What one behavior, if wired through celebration and anchored consistently, would cascade into other positive changes? Start there. Let the system grow organically.</p>
+        </div>
+
+        <div class="funny-box">
+            <div class="funny-label">The Domino Effect Nobody Expects</div>
+            <p>You're not trying to change your life. You're trying to do 2 pushups. But your brain doesn't know the difference between a small change and a big one—it just knows it's getting better at something. And that feeling spreads to everything else.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">Fogg's Core Promise</div>
+            <p>This is why tiny habits work: they seem small because they are. But they're small in scope, not in impact. The neurological and psychological ripples are profound. You're not trying to transform your life—you're planting seeds. The transformation is inevitable.</p>
+        </div>
+    </div>
+</section>
+
+<!-- STORIES & CASE STUDIES -->
+<section class="story" style="background: linear-gradient(135deg, #fff5f7 0%, #f0fef8 100%);">
+    <div class="story-inner">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 30px; color: var(--dark);">Stories from the Field</h2>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">The Flossing Revolution</div>
+            <p>BJ Fogg's own journey began with a simple question: "How do I floss more?" He was already flossing occasionally, but inconsistently. Instead of relying on motivation, he designed: After I brush my teeth (anchor), I will floss 2 teeth (tiny behavior). Then he celebrated. Just "Good!" to himself. Within a week, he forgot to celebrate—so he did it anyway because the trigger was automatic. Within a month, he was flossing all his teeth without conscious effort. The tiny habit expanded organically because the foundation was solid. The point: his dental health transformed not through willpower, but through systems design.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">The 40,000-Person Validation</div>
+            <p>Fogg ran a five-year experiment with 40,000 participants, tracking which tiny habits stuck and which didn't. The patterns were clear: those who found good anchors and celebrated immediately had an 80% success rate at month three. Those who tried to build habits on motivation alone had less than 20% success. Those who started too large gave up within two weeks. The data proved what Fogg hypothesized: tiny, anchored, celebrated behaviors are the reliable path to lasting change. And remarkably, those 40,000 people didn't just change one habit—they learned the skill of habit design and continued designing new ones long after the study ended.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sky);">The Morning Transformation</div>
+            <p>One of Fogg's participants, Sarah, struggled with mornings. She'd hit snooze five times, rush through breakfast, skip exercise, and arrive at work frazzled. She tried everything: alarm clocks across the room, pre-planned workouts, motivational podcasts. Nothing stuck. Then she designed: After I drink my first cup of coffee (anchor), I will do 2 pushups (tiny). She celebrated with a fist pump each time. Two weeks in, it was automatic. Month two, she was doing 10 pushups and felt more energized. That energy rippled: she started saying good morning to her kids instead of rushing. She ate breakfast instead of skipping it. Her sleep improved because she was less stressed. One tiny habit—2 pushups—cascaded into a completely different morning. The lesson: design one behavior brilliantly, and the system reorganizes around it.</p>
+        </div>
+    </div>
+</section>
+
+<!-- QUICK REFERENCE: COMPARISON WITH ATOMIC HABITS & THE POWER OF HABIT -->
+<section class="cheatsheet" style="background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);">
+    <div class="cheatsheet-inner">
+        <h2>Quick Reference: How Tiny Habits Differs</h2>
+
+        <div style="margin-top: 40px;">
+            <h3 style="color: white; font-size: 1.3rem; margin-bottom: 20px;">vs. Atomic Habits (James Clear)</h3>
+
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr style="background: var(--dark-purple);">
+                            <th>Factor</th>
+                            <th style="color: var(--sunny);">Tiny Habits</th>
+                            <th style="color: var(--coral);">Atomic Habits</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: white;"><strong>Starting point</strong></td>
+                            <td>Behavior (start tiny)</td>
+                            <td>Identity (who you want to become)</td>
+                        </tr>
+                        <tr>
+                            <td style="color: white;"><strong>Motivation role</strong></td>
+                            <td>Remove it from the equation</td>
+                            <td>Use it to drive identity</td>
+                        </tr>
+                        <tr>
+                            <td style="color: white;"><strong>Wiring mechanism</strong></td>
+                            <td>Celebration + dopamine</td>
+                            <td>Cue-routine-reward loop</td>
+                        </tr>
+                        <tr>
+                            <td style="color: white;"><strong>Scale</strong></td>
+                            <td>Ridiculously tiny → organic growth</td>
+                            <td>1% improvements accumulate</td>
+                        </tr>
+                        <tr>
+                            <td style="color: white;"><strong>Best for</strong></td>
+                            <td>Starting habits, low motivation</td>
+                            <td>Refining habits, identity shift</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <h3 style="color: white; font-size: 1.3rem; margin-bottom: 20px;">vs. The Power of Habit (Charles Duhigg)</h3>
+
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr style="background: var(--dark-purple);">
+                            <th>Factor</th>
+                            <th style="color: var(--sunny);">Tiny Habits</th>
+                            <th style="color: var(--coral);">The Power of Habit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: white;"><strong>Core model</strong></td>
+                            <td>B=MAP</td>
+                            <td>Cue-Routine-Reward</td>
+                        </tr>
+                        <tr>
+                            <td style="color: white;"><strong>Focus</strong></td>
+                            <td>Individual behavior design</td>
+                            <td>Organizational & personal patterns</td>
+                        </tr>
+                        <tr>
+                            <td style="color: white;"><strong>Actionable?</strong></td>
+                            <td>Highly (three-step system)</td>
+                            <td>Interesting but abstract</td>
+                        </tr>
+                        <tr>
+                            <td style="color: white;"><strong>Celebration emphasis</strong></td>
+                            <td>Central to neurology</td>
+                            <td>Reward is part of the loop</td>
+                        </tr>
+                        <tr>
+                            <td style="color: white;"><strong>Best for</strong></td>
+                            <td>Building new habits</td>
+                            <td>Understanding habit psychology</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ACTIONABLE PLAYBOOK -->
+<section class="lesson" style="background: linear-gradient(135deg, #fff5f7 0%, #f0fef8 100%);">
+    <div class="lesson-inner">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 30px; color: var(--dark);">Your Tiny Habits Playbook</h2>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">Step 1: Choose Your First Tiny Habit</div>
+            <p>Pick one behavior you want to do. Make it <span class="highlight">absurdly small</span>. Not "exercise daily." Not "get fit." Two pushups. One stretch. Floss two teeth. Write one sentence. The smaller the better.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--deep-blue);">Step 2: Find Your Anchor</div>
+            <p>Identify an existing behavior you do every day without thinking. After I brush my teeth. After I pour my morning coffee. After I sit at my desk. After I close my laptop. The anchor must be consistent and automatic.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--warm-red);">Step 3: Link Them Together</div>
+            <p><strong>After I [ANCHOR], I will [TINY BEHAVIOR].</strong> Write it down. Say it out loud. Make it specific and exact. Not "exercise after coffee." "After I pour my coffee, I will do 2 pushups."</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--coral);">Step 4: Practice & Celebrate</div>
+            <p>Do it. Tomorrow. Then the next day. After each time, celebrate immediately. A fist pump. "Nice!" said aloud. A smile. 30 seconds of pride. This wires the neural pathway. Do this for 30 days.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--sunny);">Step 5: Troubleshoot If Needed</div>
+            <p>If it doesn't stick, ask: Is it a motivation problem (try celebration)? An ability problem (make it tinier)? A prompt problem (find a better anchor)? Adjust and try again.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--mint);">Step 6: Let It Grow</div>
+            <p>Once the tiny habit is automatic (usually 2-3 weeks), it will naturally expand. You won't need to force it—your brain will want more. Let it grow organically. Then design your next tiny habit.</p>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">Start so small that the behavior is trivial. Then rely on celebration, anchoring, and environmental design to make it stick. The magic isn't in the size of the behavior—it's in the consistency and the celebration that wires it in.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL REFLECTION -->
+<section class="lesson" style="background: linear-gradient(135deg, #a8e6cf 0%, #d4f1d4 100%);">
+    <div class="lesson-inner">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 30px; color: var(--dark);">The Core Promise</h2>
+
+        <div class="quote-box">
+            <div class="quote-text">You don't need more willpower. You don't need to be more disciplined. You don't need to motivation-hack your way through life. What you need is to design behaviors so small that they're automatic, anchor them to existing routines, celebrate immediately, and let the system do the work. That's the secret to lasting change.</div>
+            <div class="quote-attr">— BJ Fogg</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--forest);">Why This Works</div>
+            <p>For decades, self-help told you to rely on motivation and willpower. But neuroscience shows that's backwards. Your brain changes through repeated behaviors + emotional reward (celebration). Tiny habits create the perfect conditions for both. They're easy enough to do even on your worst day. They're small enough that celebration feels natural. They're anchored so you don't have to remember them. And when they stick, they cascade into bigger changes you never planned.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-label" style="color: var(--deep-blue);">The Path Forward</div>
+            <p>You don't have to be perfect. You don't have to transform your life overnight. You don't have to believe in yourself more or want it harder. You just have to choose one tiny behavior, anchor it, celebrate it, and let the system work. That's enough. And it always has been.</p>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-label">A Radical Thought</div>
+            <p>What if the reason you've struggled with habits isn't because you're broken? What if it's because you've been asked to rely on the wrong thing—motivation—instead of the right things: design, celebration, and anchoring? Fogg's answer: you were never the problem. The system was.</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

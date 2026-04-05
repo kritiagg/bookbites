@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why We Sleep: Illustrated Guide by Matthew Walker</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+        :root {
+            --coral: #FF6B6B;
+            --teal: #4ECDC4;
+            --sunny: #FFE66D;
+            --purple: #A06CD5;
+            --sky: #74B9FF;
+            --mint: #55EFC4;
+            --pink: #FD79A8;
+            --orange: #FDCB6E;
+            --dark: #2D3436;
+            --cream: #FFEAA7;
+            --deep-blue: #0984E3;
+            --warm-red: #E17055;
+            --forest: #00B894;
+            --dark-purple: #6C5CE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f23;
+            color: var(--dark);
+        }
+
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0a0a1a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            color: white;
+            letter-spacing: -2px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cover .author {
+            font-size: 1.3rem;
+            color: var(--sky);
+            margin-top: 8px;
+            font-weight: 600;
+            z-index: 2;
+            position: relative;
+        }
+
+        .cover .subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 16px;
+            z-index: 2;
+            text-align: center;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .lesson {
+            min-height: 100vh;
+            padding: 60px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lesson-inner {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .lesson-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .lesson-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+
+        .card-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        .quote-box {
+            background: var(--dark);
+            color: white;
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 20px;
+        }
+
+        .quote-box .quote-text {
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .quote-box .quote-attr {
+            color: var(--sunny);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+
+        .connect-box {
+            background: #e8f4fd;
+            border-left: 4px solid var(--deep-blue);
+            border-radius: 0 12px 12px 0;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+        }
+
+        .connect-box .connect-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--deep-blue);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .connect-box p {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .ai-box {
+            background: linear-gradient(135deg, #0984E3, #6C5CE7);
+            color: white;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+        }
+
+        .ai-box .ai-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--sunny);
+            margin-bottom: 6px;
+        }
+
+        .ai-box p {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .funny-box {
+            background: #fff5f5;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            border: 2px dashed var(--coral);
+        }
+
+        .funny-box .funny-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--coral);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .funny-box p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #666;
+            font-style: italic;
+        }
+
+        .story {
+            min-height: 100vh;
+            padding: 60px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .story-inner {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .cheatsheet {
+            min-height: 100vh;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cheatsheet-inner {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .cheatsheet h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Additional styling */
+        .bg-1 { background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 100%); }
+        .bg-2 { background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%); }
+        .bg-3 { background: linear-gradient(135deg, #1a1a3e 0%, #0f0f23 100%); }
+        .bg-4 { background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%); }
+        .bg-5 { background: linear-gradient(135deg, #0a0a1a 0%, #1a2a4e 100%); }
+        .bg-6 { background: linear-gradient(135deg, #f0f4f8 0%, #ffffff 100%); }
+        .bg-7 { background: linear-gradient(135deg, #1a1a3e 0%, #0f0f23 100%); }
+        .bg-8 { background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%); }
+        .bg-9 { background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 100%); }
+        .bg-10 { background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%); }
+        .bg-11 { background: linear-gradient(135deg, #0a0a1a 0%, #2a1a4e 100%); }
+        .bg-12 { background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%); }
+
+        .num-1 { background: linear-gradient(135deg, #FF6B6B, #E17055); }
+        .num-2 { background: linear-gradient(135deg, #74B9FF, #0984E3); }
+        .num-3 { background: linear-gradient(135deg, #FFE66D, #FDCB6E); }
+        .num-4 { background: linear-gradient(135deg, #A06CD5, #6C5CE7); }
+        .num-5 { background: linear-gradient(135deg, #FD79A8, #FF6B6B); }
+        .num-6 { background: linear-gradient(135deg, #4ECDC4, #00B894); }
+        .num-7 { background: linear-gradient(135deg, #55EFC4, #00B894); }
+        .num-8 { background: linear-gradient(135deg, #FDCB6E, #FF9FF3); }
+        .num-9 { background: linear-gradient(135deg, #A29BFE, #6C5CE7); }
+        .num-10 { background: linear-gradient(135deg, #FF7675, #E17055); }
+        .num-11 { background: linear-gradient(135deg, #74B9FF, #6C5CE7); }
+        .num-12 { background: linear-gradient(135deg, #55EFC4, #4ECDC4); }
+
+        .color-text-1 { color: #E17055; }
+        .color-text-2 { color: #0984E3; }
+        .color-text-3 { color: #FDCB6E; }
+        .color-text-4 { color: #6C5CE7; }
+        .color-text-5 { color: #FF6B6B; }
+        .color-text-6 { color: #00B894; }
+        .color-text-7 { color: #00B894; }
+        .color-text-8 { color: #FF9FF3; }
+        .color-text-9 { color: #6C5CE7; }
+        .color-text-10 { color: #E17055; }
+        .color-text-11 { color: #6C5CE7; }
+        .color-text-12 { color: #4ECDC4; }
+    </style>
+</head>
+<body>
+    <!-- COVER PAGE -->
+    <section class="cover">
+        <svg width="200" height="200" viewBox="0 0 200 200" style="position: absolute; z-index: 1; opacity: 0.3;">
+            <defs>
+                <radialGradient id="brainGradient" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" style="stop-color:#74B9FF;stop-opacity:0.8" />
+                    <stop offset="100%" style="stop-color:#6C5CE7;stop-opacity:0.4" />
+                </radialGradient>
+            </defs>
+            <!-- Brain outline -->
+            <ellipse cx="100" cy="90" rx="50" ry="55" fill="none" stroke="#74B9FF" stroke-width="2" opacity="0.6"/>
+            <path d="M 60 80 Q 70 70 80 75 Q 90 68 100 70 Q 110 68 120 75 Q 130 70 140 80" fill="none" stroke="#FFE66D" stroke-width="2" opacity="0.5"/>
+            <!-- Dream stars/neurons -->
+            <circle cx="140" cy="60" r="3" fill="#FFE66D"/>
+            <circle cx="150" cy="75" r="2" fill="#FD79A8"/>
+            <circle cx="160" cy="90" r="2.5" fill="#FFE66D"/>
+            <circle cx="50" cy="70" r="3" fill="#FD79A8"/>
+            <circle cx="40" cy="85" r="2" fill="#FFE66D"/>
+        </svg>
+
+        <div style="position: relative; z-index: 2;">
+            <h1>Why We Sleep</h1>
+            <p class="author">Matthew Walker</p>
+            <p class="subtitle">Unlocking the Power of Sleep and Dreams</p>
+            <p class="subtitle" style="font-size: 0.9rem; margin-top: 24px; color: rgba(255,255,255,0.5);">An Illustrated Guide to Sleep Science</p>
+        </div>
+    </section>
+
+    <!-- LESSON 1: The Sleep Loss Epidemic -->
+    <section class="lesson bg-2">
+        <div class="lesson-inner">
+            <span class="lesson-num num-1">1</span>
+            <h2 class="lesson-title color-text-1">The Sleep Loss Epidemic</h2>
+            <p class="lesson-subtitle">Why 2/3 of Adults Are Catastrophically Sleep Deprived</p>
+
+            <div class="card">
+                <div class="card-label">THE CRISIS</div>
+                <p>Two-thirds of adults in developed nations sleep fewer than 8 hours per night. This is not a personal failing—it's a modern disease. The 1950s narrative that 8 hours is "lazy" has created a culture that wears sleep deprivation as a badge of honor, with devastating health consequences we're only beginning to understand.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE SCIENCE</div>
+                <p>Adults need 8 hours of sleep per night as a biological non-negotiable. This isn't aspirational—it's as fundamental as needing food and water. The human body wasn't designed for the 24/7 work culture that has become normalized in developed nations over the past 70 years.</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text">"Sleep is the single most effective thing we can do to reset our brain and body health each day. Yet modern culture has systematically convinced us that sleep is expendable."</p>
+                <p class="quote-attr">— Matthew Walker</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE STATISTICS</div>
+                <p>In 1910, the average person slept 9 hours per night. Today, it's 6.8 hours for the average adult. The decline corresponds exactly with the invention of the electric light bulb and the rise of industrial culture. We've engineered ourselves into sleep poverty.</p>
+            </div>
+
+            <div class="ai-box">
+                <p class="ai-label">AI CONNECTION</p>
+                <p>Like neural networks that require offline processing to consolidate learning, humans require offline sleep to consolidate memories and reset neural connections. Trying to function well on insufficient sleep is like trying to train a neural network without allowing time for backpropagation—the system degrades.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 2: What Is Sleep? -->
+    <section class="lesson bg-3">
+        <div class="lesson-inner">
+            <span class="lesson-num num-2">2</span>
+            <h2 class="lesson-title" style="color: #74B9FF;">What Is Sleep?</h2>
+            <p class="lesson-subtitle">The Architecture of Sleep Cycles and Stages</p>
+
+            <div class="card">
+                <div class="card-label">THE 90-MINUTE CYCLE</div>
+                <p>Sleep isn't monolithic. Your brain cycles through NREM (Non-REM) and REM (Rapid Eye Movement) sleep approximately every 90 minutes. Each cycle has distinct stages, each serving different biological functions. Missing any stage creates cumulative deficits.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">NREM VS REM</div>
+                <p><strong>NREM Sleep (75% of night):</strong> Light sleep (N1-N2) and deep sleep (N3/slow-wave sleep). This is when your body repairs itself, hormones regulate, and the immune system strengthens. Adenosine—the sleep pressure chemical—builds throughout the day and is cleared during deep NREM.</p>
+                <p style="margin-top: 12px;"><strong>REM Sleep (25% of night):</strong> Brain becomes hyperactive, eyes move rapidly, muscles relax. This is when emotional processing, creativity, and complex learning consolidation happen. REM is almost entirely absent in the first cycle but dominates the later cycles of the night.</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text">"Every ninety minutes or so, your brain enters REM sleep and dreams—a time of profound processing that is as essential to your mental health as food is to your physical health."</p>
+                <p class="quote-attr">— Matthew Walker</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE TWO-FACTOR MODEL</div>
+                <p>Sleep timing is controlled by two competing systems: your <strong>circadian rhythm</strong> (24-hour biological clock) and your <strong>sleep pressure</strong> (adenosine buildup). Caffeine blocks adenosine receptors, delaying sleep pressure signals. Disrupting either system creates sleep debt.</p>
+            </div>
+
+            <div class="connect-box">
+                <p class="connect-label">KEY INSIGHT</p>
+                <p>Sleeping for 7 hours instead of 8 doesn't lose 1/8th of sleep's benefits—it can lose 30-50% of them, because you're sacrificing REM cycles that dominate the final hours of sleep.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 3: Brain on Sleep Deprivation -->
+    <section class="lesson bg-4">
+        <div class="lesson-inner">
+            <span class="lesson-num num-3">3</span>
+            <h2 class="lesson-title color-text-3">Your Brain on Sleep Deprivation</h2>
+            <p class="lesson-subtitle">The Terrifying Truth About Lost Sleep</p>
+
+            <div class="card">
+                <div class="card-label">THE DRUNK THRESHOLD</div>
+                <p>After 17 hours of wakefulness, your cognitive performance matches someone with a blood alcohol level of 0.05% (legally impaired). After 24 hours awake, you match 0.10% (legally drunk). Yet millions of people drive, make medical decisions, and perform surgery in this state daily.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE DOUBLING EFFECT</div>
+                <p>Cognitive impairment doesn't scale linearly—it compounds. Losing 1 hour of sleep might reduce performance by 10%. Losing 2 hours reduces it by nearly 40%. Losing 3 hours reduces it by 60%. The damage accelerates with each lost hour.</p>
+            </div>
+
+            <div class="funny-box">
+                <p class="funny-label">SOBERING REALITY CHECK</p>
+                <p>You feel like you're performing fine on minimal sleep. You're not. This is the cruelest trick of sleep deprivation: you lose the ability to accurately assess how impaired you are. It's the definition of dangerous incompetence.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE STATISTICS THAT SHOULD TERRIFY YOU</div>
+                <p>Sleep-deprived drivers cause more accidents than drunk drivers. Medical errors spike during 24-hour shifts. Air traffic control mistakes correlate with controller sleep deprivation. Truck driver fatigue is a leading cause of highway death. Judges are measurably harsher in their sentencing after bad sleep.</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text">"The state of your sleep determines the state of your mind. And the state of your mind affects literally everything else."</p>
+                <p class="quote-attr">— Matthew Walker</p>
+            </div>
+
+            <div class="ai-box">
+                <p class="ai-label">AI CONNECTION</p>
+                <p>Neural networks require proper training with sufficient iterations. Running inference or training with numerical instability (analogous to sleep deprivation) causes error accumulation. You can't "push through" mathematical degradation any more than you can push through biological degradation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 4: Sleep and Memory -->
+    <section class="lesson bg-2">
+        <div class="lesson-inner">
+            <span class="lesson-num num-4">4</span>
+            <h2 class="lesson-title color-text-4">Sleep and Memory</h2>
+            <p class="lesson-subtitle">Why Sleep Is the Master Consolidator of Learning</p>
+
+            <div class="card">
+                <div class="card-label">THE TWO-STAGE PROCESS</div>
+                <p><strong>Learning Stage:</strong> You experience something new. Your brain forms fragile, distributed memories. <strong>Sleep Stage:</strong> During NREM deep sleep, the hippocampus replays these memories, gradually transferring them to the cortex for long-term storage. During REM sleep, connections between distant memories are made, enabling creative insights.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE NIGHT-BEFORE EFFECT</div>
+                <p>Sleep before learning optimizes your brain's ability to learn. A good night's sleep prepares your brain to absorb new information. The day before an exam, sleep more—not less. Your brain is literally preparing its filing system.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE NIGHT-AFTER EFFECT</div>
+                <p>Sleep after learning consolidates it. The night after you learn something is when your brain converts it from "working memory" to permanent storage. This is why cramming all night is counterproductive—you're skipping the consolidation stage entirely.</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text">"Sleep is when the brain files away memories and connects the dots. Sleep deprivation doesn't just hurt your memory—it prevents you from learning in the first place."</p>
+                <p class="quote-attr">— Matthew Walker</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE ALL-NIGHTER PARADOX</div>
+                <p>Pulling an all-nighter to study is literally self-defeating. You sacrifice both the sleep-before effect (reducing your ability to learn) and the sleep-after effect (preventing consolidation). You also impair attention and focus during your study session. The only thing worse than not studying would be studying while impaired from no sleep.</p>
+            </div>
+
+            <div class="funny-box">
+                <p class="funny-label">STUDENT TRUTH</p>
+                <p>The student who sleeps 8 hours and studies 2 hours will outperform the student who studies 8 hours and sleeps 2 hours. This is not motivation—this is biology.</p>
+            </div>
+
+            <div class="ai-box">
+                <p class="ai-label">AI CONNECTION</p>
+                <p>Transformer models learn through repeated forward and backward passes. Skipping the backward pass (weight updates) is like skipping sleep—the model doesn't consolidate learning. Both require offline processing cycles to encode knowledge durably.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 5: Sleep and Emotional Health -->
+    <section class="lesson bg-3">
+        <div class="lesson-inner">
+            <span class="lesson-num num-5">5</span>
+            <h2 class="lesson-title color-text-5">Sleep and Emotional Health</h2>
+            <p class="lesson-subtitle">REM Sleep as Overnight Therapy</p>
+
+            <div class="card">
+                <div class="card-label">THE AMYGDALA EFFECT</div>
+                <p>After just one night of poor sleep, your amygdala (the brain's emotional center) becomes approximately 60% more reactive. Bad news feels catastrophic. Mild frustrations feel enraging. This isn't weakness—it's neurobiology. Your emotional regulation system needs REM sleep to function.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">REM AS THERAPY</div>
+                <p>REM sleep is nature's form of psychotherapy. During REM, norepinephrine (the stress neurochemical) is turned off while you emotionally process experiences. Dreams aren't random—they're your brain rehearsing emotional scenarios, defanging them, integrating them. This is why trauma victims who lose REM sleep develop PTSD.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">DEPRESSION AND SLEEP</div>
+                <p>Depression and sleep deprivation are bidirectional. Poor sleep causes depression; depression disrupts sleep. Patients with depression show abnormal REM architecture—too much REM too early in the night, suggesting the brain is desperately trying to process emotional pain but can't do it efficiently.</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text">"REM sleep is performing the neurochemical equivalent of emotional first aid each night. Without it, emotional wounds don't heal."</p>
+                <p class="quote-attr">— Matthew Walker</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE PTSD CONNECTION</div>
+                <p>PTSD sufferers have disrupted REM sleep. The trauma is never properly processed because REM's emotional processing is broken. This is why many trauma therapies now focus on restoring healthy sleep architecture alongside traditional therapy.</p>
+            </div>
+
+            <div class="connect-box">
+                <p class="connect-label">CLINICAL INSIGHT</p>
+                <p>Sleep medication is often a disaster for emotional health—especially drugs that suppress REM. You might sleep longer but lose the emotional processing that makes sleep healing. Talk to your doctor about sleep quality, not just sleep quantity.</p>
+            </div>
+
+            <div class="ai-box">
+                <p class="ai-label">AI CONNECTION</p>
+                <p>Reinforcement learning requires reward processing to update value functions. Sleep is like the reward consolidation phase—without it, the system can't learn to distinguish important experiences from noise. Emotional dysregulation from sleep loss parallels unstable reward learning in RL systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 6: Sleep and Physical Health -->
+    <section class="lesson bg-4">
+        <div class="lesson-inner">
+            <span class="lesson-num num-6">6</span>
+            <h2 class="lesson-title color-text-6">Sleep and Physical Health</h2>
+            <p class="lesson-subtitle">The Cascade of Disease from Sleep Deprivation</p>
+
+            <div class="card">
+                <div class="card-label">THE DAYLIGHT SAVING STUDY</div>
+                <p>In the spring, when we "lose" one hour of sleep due to daylight saving time, heart attacks increase by 24% in the following week. In the fall, when we "gain" an hour, heart attacks decrease by 21%. This isn't correlation—it's causation. A single lost hour changes mortality risk.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE DISEASE CASCADE</div>
+                <p>Sleep deprivation degrades cardiovascular health, increases cancer risk, disrupts glucose metabolism (leading to diabetes), suppresses the immune system, and impairs metabolic function (leading to obesity). It's not that sleep deprivation causes one disease—it causes all of them simultaneously.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">CANCER AND THE NIGHT SHIFT</div>
+                <p>Night shift workers have higher cancer rates. Why? During sleep, the immune system deploys cancer-fighting NK (natural killer) cells. Circadian disruption impairs this deployment. Sleep loss is essentially weakening your body's primary defense against cancer.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">DIABETES AND WEIGHT</div>
+                <p>After just one week of 5 hours of sleep per night, insulin sensitivity drops by 40%. Your body can't regulate blood sugar. You become pre-diabetic. Additionally, sleep loss increases ghrelin (hunger hormone) and decreases leptin (satiety hormone), making you hungrier and making your body store more fat.</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text">"There is no system in the body that is not optimized by sleep and damaged by the lack of sleep."</p>
+                <p class="quote-attr">— Matthew Walker</p>
+            </div>
+
+            <div class="funny-box">
+                <p class="funny-label">THE FITNESS PARADOX</p>
+                <p>You exercise to get healthy but then sacrifice sleep to "make time" for it. Sleep loss negates exercise benefits. You can't out-exercise bad sleep. The person who sleeps 8 hours and exercises 3 times per week will be healthier than the person who sleeps 4 hours and exercises 6 times per week.</p>
+            </div>
+
+            <div class="ai-box">
+                <p class="ai-label">AI CONNECTION</p>
+                <p>Like how improper cooling degrades GPU performance and lifespan, sleep deprivation degrades biological system performance and lifespan. Both are fundamentally about thermal stability and metabolic efficiency. You can't run a system at maximum capacity indefinitely without regular cooling/recovery cycles.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 7: Dreams and REM Sleep -->
+    <section class="lesson bg-2">
+        <div class="lesson-inner">
+            <span class="lesson-num num-7">7</span>
+            <h2 class="lesson-title color-text-7">Dreams and REM Sleep</h2>
+            <p class="lesson-subtitle">Why Dreams Are Your Brain's Creative Engine</p>
+
+            <div class="card">
+                <div class="card-label">WHAT DREAMS ACTUALLY DO</div>
+                <p>Dreams are your brain's creative laboratory. During REM, your brain makes novel associations between distant concepts. This is pattern recognition at its highest level. Your conscious mind would never connect concept A to concept B—but your sleeping brain does, creating insight.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE FAMOUS DISCOVERIES</div>
+                <p><strong>The Sewing Machine:</strong> Elias Howe dreamed of native tribesmen with spear tips that had holes in them. He woke realizing the needle should have the hole at the tip, not the base, solving the sewing machine problem. <strong>The Benzene Ring:</strong> August Kekulé dreamed of a snake biting its tail, revealing benzene's ring structure. <strong>Yesterday's Song:</strong> Paul McCartney woke with "Yesterday" fully composed in a dream.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">EMOTIONAL REGULATION</div>
+                <p>Dreams aren't about processing what happened—they're about processing how you feel about what happened. The dream content is often bizarre and seemingly meaningless, but the emotional regulation is precise. Your brain is defanging emotional content, integrating difficult experiences.</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text">"Dreams are not the cause of creativity—they are the birthplace of creativity. Some of the greatest discoveries in human history emerged from the sleeping brain."</p>
+                <p class="quote-attr">— Matthew Walker</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">DREAM SUPPRESSION</div>
+                <p>Alcohol suppresses REM sleep. That's why "a drink before bed" might help you fall asleep but destroys sleep quality—you're missing the creativity, emotional processing, and memory consolidation that REM provides. Sleeping pills also typically suppress REM. Real sleep, not sedation.</p>
+            </div>
+
+            <div class="connect-box">
+                <p class="connect-label">CREATIVE ADVICE</p>
+                <p>If you're stuck on a creative problem, sleep on it—literally. The insight you need is more likely to come from your dreaming brain than your conscious brain. Your REM sleep is actively working on your problem while you dream.</p>
+            </div>
+
+            <div class="ai-box">
+                <p class="ai-label">AI CONNECTION</p>
+                <p>REM's pattern-finding process is analogous to attention mechanisms in transformers—finding novel associations between distant tokens. Dreams are your brain's way of running creative inference. Without sleep, you lose the offline inference time where your system's creativity emerges.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 8: Sleep and Chronotypes -->
+    <section class="lesson bg-3">
+        <div class="lesson-inner">
+            <span class="lesson-num num-8">8</span>
+            <h2 class="lesson-title color-text-8">Sleep and Chronotypes</h2>
+            <p class="lesson-subtitle">Night Owls and Larks: It's Genetic, Not Laziness</p>
+
+            <div class="card">
+                <div class="card-label">THE CHRONOTYPE SPECTRUM</div>
+                <p>People aren't divided into two types—they exist on a spectrum. Some are "extreme larks" who naturally wake at 5 AM and crash at 8 PM. Others are "extreme owls" who naturally stay up until 2 AM and wake at 10 AM. Most are somewhere in between. This isn't preference—it's genetic.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE TEENAGE SHIFT</div>
+                <p>Adolescence brings a 2-hour biological shift toward owlishness. Teenagers' circadian rhythms naturally delay. Forcing them into 7 AM school starts is chronobiological abuse. A 9 AM school start would increase teenage sleep by 1.5 hours and dramatically improve grades, mood, and safety.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE WORKPLACE DISCRIMINATION</div>
+                <p>Forcing night owls into 9-5 schedules is like forcing left-handed people to write with their right hands. They're working against their biology. Night owls forced into early starts show cognitive decline, higher error rates, and worse health outcomes. Yet we've normalized this chronobiological discrimination.</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text">"There is no such thing as 'laziness' or 'preference'—there is only your individual biological reality. Respect it."</p>
+                <p class="quote-attr">— Matthew Walker</p>
+            </div>
+
+            <div class="funny-box">
+                <p class="funny-label">THE PRODUCTIVITY LIE</p>
+                <p>Night owls are told they need to become morning people. But forcing them to wake early doesn't make them more productive—it makes them less. Peak performance happens at your peak time. A night owl at 11 PM is more effective than a night owl at 8 AM. And a lark at 8 AM is more effective than a lark at 11 PM.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE REAL SOLUTION</div>
+                <p>Society needs flexible work schedules that respect chronotypes. Companies that allow this see improved productivity, lower turnover, and better health. It's not about accommodating preference—it's about honoring biology.</p>
+            </div>
+
+            <div class="ai-box">
+                <p class="ai-label">AI CONNECTION</p>
+                <p>Neural networks have optimal learning rates and update schedules. Forcing the wrong schedule degrades performance. Similarly, forcing humans into chronotypes that don't match their biology degrades performance. Peak performance requires alignment between system parameters and load.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 9: Caffeine, Alcohol, and Sleeping Pills -->
+    <section class="lesson bg-4">
+        <div class="lesson-inner">
+            <span class="lesson-num num-9">9</span>
+            <h2 class="lesson-title color-text-9">Caffeine, Alcohol, and Sleeping Pills</h2>
+            <p class="lesson-subtitle">What Actually (and Doesn't) Help Sleep</p>
+
+            <div class="card">
+                <div class="card-label">CAFFEINE'S HIDDEN HALF-LIFE</div>
+                <p>Caffeine's half-life is 5-7 hours. A coffee at 2 PM is 50% present at 7 PM, 25% present at midnight, and 12% present at 4 AM. That 12% might not feel like much, but it's enough to disrupt the transition to sleep. For optimal sleep, no caffeine after 2 PM. Period.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">ALCOHOL: THE FAKE SLEEP DRUG</div>
+                <p>Alcohol sedates but doesn't sleep. You fall asleep faster but sleep terribly. Alcohol fragments sleep, increases nightmares, and—most damagingly—suppresses REM sleep by up to 30-40%. You sleep but lose the emotional processing and memory consolidation that makes sleep valuable. A nightcap is actually a sleep sabotage.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">SLEEPING PILLS: A DARK TRUTH</div>
+                <p>Most prescription sleeping pills (benzodiazepines, non-benzos) don't create real sleep—they create sedation. EEG patterns during medicated sleep look abnormal. You're in a dissociative state that mimics sleep but lacks sleep's restorative power. Worse, they suppress REM sleep and create dependency.</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text">"Sleeping pills are sedatives, not sleep aids. They knock you out—they don't give you real sleep. The distinction matters for your health."</p>
+                <p class="quote-attr">— Matthew Walker</p>
+            </div>
+
+            <div class="funny-box">
+                <p class="funny-label">THE IRONIC TRUTH</p>
+                <p>People take sleeping pills because they can't sleep, but the pills that "work" (suppress REM, fragment sleep) actually make long-term sleep worse. The pills that would provide real sleep are hard to find because they don't exist. The only real sleep medicine is time, consistency, and environmental optimization.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">WHAT ACTUALLY HELPS</div>
+                <p>Cognitive behavioral therapy for insomnia (CBT-I) is more effective than pills and has no side effects. It works by retraining your brain's sleep-wake associations. For acute situations, a single dose of melatonin can reset circadian rhythm—but chronic melatonin use becomes ineffective.</p>
+            </div>
+
+            <div class="ai-box">
+                <p class="ai-label">AI CONNECTION</p>
+                <p>You can't shortcut convergence. A neural network needs proper training cycles—you can't chemically force weights to their optimal values. Similarly, sleep architecture requires proper cycles. Sedatives are like applying noise to weights randomly—they might look different but won't solve the underlying problem.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 10: Societal Cost of Sleep Deprivation -->
+    <section class="lesson bg-2">
+        <div class="lesson-inner">
+            <span class="lesson-num num-10">10</span>
+            <h2 class="lesson-title color-text-10">The Societal Cost of Sleep Deprivation</h2>
+            <p class="lesson-subtitle">Why Sleep Is a Public Health Crisis</p>
+
+            <div class="card">
+                <div class="card-label">THE ECONOMIC IMPACT</div>
+                <p>Sleep deprivation costs the United States $411 billion annually in lost productivity, medical expenses, and accidents. That's more than cancer, diabetes, and heart disease combined. If we improved sleep by just 1 hour per person, the economic benefit would exceed $50 billion per year.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE PROFESSIONAL RISK</div>
+                <p>Sleep-deprived doctors perform worse, make more medical errors, and have higher rates of depression and suicide. Sleep-deprived judges are harsher. Sleep-deprived pilots cause crashes. Sleep-deprived truck drivers cause fatalities. We've essentially built a system where impaired people make high-stakes decisions constantly.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE SCHOOL START TIME CRISIS</div>
+                <p>Schools start at 7:30 AM despite teenagers' biological need to sleep until 8:30 AM. This one-hour mismatch reduces average teenage sleep by 1-2 hours per night. Schools that shifted to 8:30 AM starts saw: grades improve by 10%, attendance improve by 5%, depression rates drop by 25%, and car crashes among teenage drivers drop by 70%.</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text">"The cost of sleep deprivation is not just personal—it is societal. It's a public health crisis that rivals smoking."</p>
+                <p class="quote-attr">— Matthew Walker</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE HIDDEN COSTS</div>
+                <p>We don't count the emotional cost of impaired relationships from sleep deprivation. We don't count the lost creativity from exhausted minds. We don't count the lives that could have been saved if critical decisions were made by well-rested people. These are unmeasured but massive costs.</p>
+            </div>
+
+            <div class="connect-box">
+                <p class="connect-label">POLICY LEVER</p>
+                <p>Changing school start times is one of the highest-ROI public health interventions available. The cost is minimal; the benefits are enormous and measurable. Yet most districts resist change because of sports schedules and transportation logistics—not evidence.</p>
+            </div>
+
+            <div class="ai-box">
+                <p class="ai-label">AI CONNECTION</p>
+                <p>Training an AI system with insufficient compute/cooling/time costs far more than training it properly. The shortcuts create technical debt. Similarly, a society that runs on sleep deprivation accumulates compounding costs—accidents, errors, disease, lost productivity. Prevention is exponentially cheaper than treatment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 11: Sleep Across a Lifetime -->
+    <section class="lesson bg-3">
+        <div class="lesson-inner">
+            <span class="lesson-num num-11">11</span>
+            <h2 class="lesson-title color-text-11">Sleep Across a Lifetime</h2>
+            <p class="lesson-subtitle">From Infants to the Elderly</p>
+
+            <div class="card">
+                <div class="card-label">INFANTS AND TODDLERS</div>
+                <p>Newborns need 16-18 hours of sleep per day (in short bursts). Sleep is how they build their brains. By age 3, children need 12-14 hours. Every hour of lost sleep impairs development. Parents who understand this prioritize sleep as seriously as feeding.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">SCHOOL-AGE CHILDREN</div>
+                <p>Children aged 6-12 need 9-10 hours. Insufficient sleep impairs academic performance more than it impairs adults. A sleep-deprived child looks like an ADHD child—yet we often medicate the sleep problem as if it were a neurological problem. Sleep first, medication later.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">TEENAGERS</div>
+                <p>Teenagers need 9+ hours and experience a circadian shift toward later sleep times. Despite this biological reality, we force them into 7 AM school starts. The cognitive, emotional, and health costs are staggering. Early school starts are not a bug—they're a design flaw in how we've structured society.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">ADULTS</div>
+                <p>Adults need 7-9 hours consistently. This is non-negotiable. The "I can function on 5 hours" people are deluded—their performance is impaired even if they don't feel it.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">THE ELDERLY AND ALZHEIMER'S</div>
+                <p>As we age, our sleep becomes lighter and more fragmented. But elderly people still need 7-8 hours. More important: sleep quality predicts Alzheimer's risk. Why? During deep sleep, the glymphatic system activates—it's your brain's waste removal system. It clears beta-amyloid (the Alzheimer's protein) and tau tangles. Poor sleep = inadequate brain cleaning = Alzheimer's accumulation.</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text">"Sleep is not a luxury. It's a biological necessity across every stage of life. Deprive any age group and you create damage."</p>
+                <p class="quote-attr">— Matthew Walker</p>
+            </div>
+
+            <div class="connect-box">
+                <p class="connect-label">THE GLYMPHATIC SYSTEM</p>
+                <p>This is one of neuroscience's most important recent discoveries. While you sleep, your brain shrinks by 60%, creating space for cerebrospinal fluid to rush in and flush out toxins. This waste-cleaning system is *only* active during sleep. There's no alternative. You cannot skip this.</p>
+            </div>
+
+            <div class="ai-box">
+                <p class="ai-label">AI CONNECTION</p>
+                <p>Neural networks accumulate numerical error and noise over time. Regular "resets" and "cleaning cycles" are necessary for long-term stability. The glymphatic system is the brain's error-correction mechanism. Without offline cleaning cycles, the system degrades. Both biological and artificial systems need maintenance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 12: How to Sleep Better -->
+    <section class="lesson bg-4">
+        <div class="lesson-inner">
+            <span class="lesson-num num-12">12</span>
+            <h2 class="lesson-title color-text-12">How to Sleep Better</h2>
+            <p class="lesson-subtitle">12 Evidence-Based Tips for Optimal Sleep</p>
+
+            <div class="two-col">
+                <div class="card">
+                    <div class="card-label">1. SLEEP REGULARITY</div>
+                    <p>Go to bed at the same time every night and wake at the same time every morning—even weekends. Your circadian rhythm craves consistency. This single change transforms sleep quality more than anything else.</p>
+                </div>
+                <div class="card">
+                    <div class="card-label">2. TEMPERATURE MATTERS</div>
+                    <p>Keep your bedroom at 65-68°F (18-20°C). Your core body temperature needs to drop by 2-3°F to fall asleep. A cool room enables this. A hot room prevents it. This is non-negotiable physics, not preference.</p>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="card">
+                    <div class="card-label">3. DARKNESS</div>
+                    <p>Blackout curtains, eye masks, or complete darkness. Light suppresses melatonin. Even small amounts of light (your phone, a street lamp) disrupt sleep quality. Make your room dark enough that you can't see your hand in front of your face.</p>
+                </div>
+                <div class="card">
+                    <div class="card-label">4. NO SCREENS</div>
+                    <p>Stop using screens (phones, tablets, computers) 30-60 minutes before bed. Blue light suppresses melatonin. Your brain thinks it's midday and stays alert. This single change often fixes insomnia completely.</p>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="card">
+                    <div class="card-label">5. NO ALCOHOL</div>
+                    <p>Alcohol before bed destroys REM sleep and fragments sleep architecture. Skip it entirely or at minimum 3 hours before bed. The sleep you think you're getting is sedation, not real sleep.</p>
+                </div>
+                <div class="card">
+                    <div class="card-label">6. WIND-DOWN RITUAL</div>
+                    <p>Spend 20-30 minutes before bed doing something calming: reading, gentle stretching, meditation, journaling. This signals your brain that sleep is coming. Your parasympathetic nervous system needs time to activate.</p>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="card">
+                    <div class="card-label">7. DON'T LIE AWAKE</div>
+                    <p>If you can't fall asleep after 20 minutes, get up and do something quiet and boring in low light until you feel sleepy. Don't lie in bed willing yourself to sleep. Your brain learns that bed = wakefulness. Preserve the bed-sleep association.</p>
+                </div>
+                <div class="card">
+                    <div class="card-label">8. NO CAFFEINE LATE</div>
+                    <p>Caffeine has a 5-7 hour half-life. No caffeine after 2 PM. Yes, it affects your sleep even if you don't feel it. This is biochemistry, not sensation.</p>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="card">
+                    <div class="card-label">9. EXERCISE (EARLY)</div>
+                    <p>Regular exercise improves sleep—but not if done within 3 hours of bedtime. Exercise raises core body temperature; sleep requires a temperature drop. Morning or afternoon exercise is ideal.</p>
+                </div>
+                <div class="card">
+                    <div class="card-label">10. LIGHT EXPOSURE</div>
+                    <p>Get bright light exposure early in the day (within 30 minutes of waking). This anchors your circadian rhythm. Exposure to bright light in the evening delays sleep. Get sun in the morning; avoid bright light at night.</p>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="card">
+                    <div class="card-label">11. CONSISTENT SLEEP DURATION</div>
+                    <p>Aim for 8 hours nightly. Some people function on 7, some need 9. But more than 10 or less than 7 is associated with disease. 8 hours is the evidence-based target.</p>
+                </div>
+                <div class="card">
+                    <div class="card-label">12. BEDROOM PURPOSE</div>
+                    <p>Use your bedroom only for sleep (and intimacy). Not for work, eating, or watching screens. Your brain should automatically associate bedroom = sleep time. Keep it sacred.</p>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text">"These aren't tips—they're requirements. Your biology doesn't negotiate. Implement these and watch your life transform."</p>
+                <p class="quote-attr">— Matthew Walker</p>
+            </div>
+
+            <div class="ai-box">
+                <p class="ai-label">AI CONNECTION</p>
+                <p>Neural networks require specific hyperparameters, proper initialization, regularization, and consistent training schedules. Randomizing any of these degrades performance. Sleep optimization is similar—each parameter (temperature, darkness, timing, etc.) serves a function. You can't skip any and expect good results.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY 1: NASA Nap Study -->
+    <section class="story bg-2">
+        <div class="story-inner">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #0984E3; margin-bottom: 20px;">The NASA Nap Study</h2>
+            <p style="font-size: 1rem; line-height: 1.8; color: #444; margin-bottom: 20px;">NASA researchers studied astronauts' performance during long space missions. They discovered something remarkable: a 26-minute nap in the early afternoon improved performance by 34% for the next 6 hours. A 40-minute nap improved it even more without the grogginess of longer sleep.</p>
+            <p style="font-size: 1rem; line-height: 1.8; color: #444; margin-bottom: 20px;">This finding revolutionized how NASA scheduled missions. But more importantly, it reveals a biological truth: we're not designed to stay awake for 16 hours straight. Most humans have a biological dip in alertness in early afternoon (the "post-lunch dip"). Rather than fight this biology, NASA capitalized on it.</p>
+            <p style="font-size: 1rem; line-height: 1.8; color: #444; margin-bottom: 20px;">The lesson for modern life: if you're struggling to stay awake at 2 PM, you're not lazy—you're biological. A 20-26 minute nap would restore your performance far more than coffee or willpower. Yet most workplaces criminalize napping while praising those who sacrifice sleep. This is backwards.</p>
+        </div>
+    </section>
+
+    <!-- STORY 2: Daylight Saving Study -->
+    <section class="story bg-3">
+        <div class="story-inner">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #E17055; margin-bottom: 20px;">The Daylight Saving Heart Attack Study</h2>
+            <p style="font-size: 1rem; line-height: 1.8; color: white; margin-bottom: 20px;">When we "spring forward" and lose an hour of sleep in March, heart attacks increase by 24% in the following week. When we "fall back" and gain an hour in October, heart attacks decrease by 21%. This isn't anecdotal—it's a massive epidemiological study with iron-tight causation.</p>
+            <p style="font-size: 1rem; line-height: 1.8; color: white; margin-bottom: 20px;">Think about that. A single hour of lost sleep is enough to dramatically increase mortality risk in vulnerable populations. Your heart can't tolerate sleep loss. Neither can your immune system, your metabolism, or your brain. We've been running a massive uncontrolled experiment on ourselves by ignoring this.</p>
+            <p style="font-size: 1rem; line-height: 1.8; color: white; margin-bottom: 20px;">This study alone should convince every person and every policymaker: sleep is not a luxury. It's a life-or-death necessity. We should eliminate daylight saving time immediately—not because of inconvenience, but because of mortality. The data is unambiguous.</p>
+        </div>
+    </section>
+
+    <!-- STORY 3: Walker's Personal Transformation -->
+    <section class="story bg-4">
+        <div class="story-inner">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #4ECDC4; margin-bottom: 20px;">Matthew Walker's Sleep Transformation</h2>
+            <p style="font-size: 1rem; line-height: 1.8; color: #444; margin-bottom: 20px;">Matthew Walker himself was a sleep deprivation martyr. As an ambitious young scientist, he thought sleep was "for the weak." He'd stay up until 2 or 3 AM working, then wake at 5 AM and run before heading to the lab. He wore his sleep deprivation as a badge of honor—proof of dedication.</p>
+            <p style="font-size: 1rem; line-height: 1.8; color: #444; margin-bottom: 20px;">Then he started researching sleep. As he learned what sleep deprivation does to the human body and brain, the realization hit him: he was slowly killing himself with the conviction that he was being productive. He was actually sabotaging his own work by being sleep-deprived.</p>
+            <p style="font-size: 1rem; line-height: 1.8; color: #444; margin-bottom: 20px;">He committed to 8 hours of sleep every night. Within weeks, his mood improved, his focus sharpened, his creativity surged. He realized that the late-night work sessions where he thought he was being brilliant were actually him being cognitively impaired. His best ideas now come during the day, with adequate sleep backing them.</p>
+            <p style="font-size: 1rem; line-height: 1.8; color: #444; margin-bottom: 20px;">Walker now prioritizes sleep obsessively. He treats bedtime like a non-negotiable appointment. And paradoxically, by sleeping more, he's accomplished more. His research, his writing, his impact—all amplified by protecting his sleep. He's now one of the world's leading sleep scientists, and his greatest discovery about sleep may be the discovery of sleep's value in his own life.</p>
+        </div>
+    </section>
+
+    <!-- CHEATSHEET -->
+    <section class="cheatsheet">
+        <div class="cheatsheet-inner">
+            <h2>Quick Reference: Sleep Science Cheatsheet</h2>
+
+            <div class="two-col" style="margin-bottom: 30px;">
+                <div class="card" style="background: rgba(255,255,255,0.95); border-radius: 12px;">
+                    <div class="card-label" style="color: #0984E3;">SLEEP STAGES</div>
+                    <p style="font-size: 0.85rem;"><strong>NREM N1:</strong> Light sleep, 1-5% of night<br><strong>NREM N2:</strong> Light sleep, 45-55% of night<br><strong>NREM N3:</strong> Deep sleep, 13-23% of night<br><strong>REM:</strong> Dream sleep, 20-25% of night</p>
+                </div>
+                <div class="card" style="background: rgba(255,255,255,0.95); border-radius: 12px;">
+                    <div class="card-label" style="color: #E17055;">SLEEP BY AGE</div>
+                    <p style="font-size: 0.85rem;"><strong>Newborns:</strong> 16-18 hrs<br><strong>Toddlers:</strong> 12-14 hrs<br><strong>Kids:</strong> 9-10 hrs<br><strong>Teens:</strong> 9+ hrs<br><strong>Adults:</strong> 7-9 hrs</p>
+                </div>
+            </div>
+
+            <div class="two-col" style="margin-bottom: 30px;">
+                <div class="card" style="background: rgba(255,255,255,0.95); border-radius: 12px;">
+                    <div class="card-label" style="color: #6C5CE7;">CAFFEINE TIMELINE</div>
+                    <p style="font-size: 0.85rem;"><strong>0 hrs:</strong> Peak (100%)<br><strong>2.5 hrs:</strong> 75%<br><strong>5 hrs:</strong> 50%<br><strong>7.5 hrs:</strong> 25%<br><strong>Safe cutoff:</strong> 2 PM</p>
+                </div>
+                <div class="card" style="background: rgba(255,255,255,0.95); border-radius: 12px;">
+                    <div class="card-label" style="color: #FF6B6B;">SLEEP DEPRIVATION</div>
+                    <p style="font-size: 0.85rem;"><strong>17 hrs awake:</strong> Like 0.05% BAC<br><strong>24 hrs awake:</strong> Like 0.10% BAC (drunk)<br><strong>Per hour lost:</strong> ~10% performance drop</p>
+                </div>
+            </div>
+
+            <div class="two-col" style="margin-bottom: 30px;">
+                <div class="card" style="background: rgba(255,255,255,0.95); border-radius: 12px;">
+                    <div class="card-label" style="color: #4ECDC4;">IDEAL SLEEP CONDITIONS</div>
+                    <p style="font-size: 0.85rem;"><strong>Temperature:</strong> 65-68°F (18-20°C)<br><strong>Darkness:</strong> Complete (no light)<br><strong>Time in bed:</strong> 8 hours<br><strong>Consistency:</strong> Same time daily</p>
+                </div>
+                <div class="card" style="background: rgba(255,255,255,0.95); border-radius: 12px;">
+                    <div class="card-label" style="color: #FDCB6E;">THE 90-MIN CYCLE</div>
+                    <p style="font-size: 0.85rem;"><strong>Total night:</strong> 5-6 cycles<br><strong>Early cycles:</strong> More NREM<br><strong>Late cycles:</strong> More REM<br><strong>Last 1-2 hrs:</strong> 90% REM</p>
+                </div>
+            </div>
+
+            <div class="card" style="background: rgba(255,255,255,0.95); border-radius: 12px; max-width: none;">
+                <div class="card-label" style="color: #FF6B6B;">DO NOT DO</div>
+                <p style="font-size: 0.85rem;"><strong>Caffeine after 2 PM</strong> | <strong>Alcohol before bed</strong> | <strong>Screens 30-60 min before bed</strong> | <strong>Exercise within 3 hours of sleep</strong> | <strong>Lie awake willing yourself to sleep</strong> | <strong>Oversleep weekends</strong> | <strong>Take sleeping pills regularly</strong> | <strong>Skip the last 2 hours of sleep</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="cover" style="background: linear-gradient(135deg, #1a1a3e 0%, #0a0a1a 50%, #1a1a3e 100%);">
+        <div style="position: relative; z-index: 2; text-align: center; max-width: 700px;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: white; margin-bottom: 20px;">Sleep Is Not Negotiable</h2>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.8); line-height: 1.8; margin-bottom: 30px;">You cannot optimize your way out of sleep deprivation. You cannot meditate, exercise, or supplement your way out of it. Sleep is the foundation. Everything else is built on top of it. Protect your sleep like you protect your life—because you are.</p>
+            <p style="font-size: 0.95rem; color: var(--sunny); font-weight: 600;">The most important health decision you make today is what time you'll go to bed tonight.</p>
+            <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 40px;">This guide was created based on <strong>Why We Sleep: Unlocking the Power of Sleep and Dreams</strong> by Matthew Walker, UC Berkeley neuroscientist and sleep researcher.</p>
+        </div>
+    </section>
+</body>
+</html>
