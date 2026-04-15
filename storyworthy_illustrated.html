@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storyworthy — Illustrated Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+    :root {
+      --coral: #FF6B6B;
+      --teal: #4ECDC4;
+      --sunny: #FFE66D;
+      --purple: #A06CD5;
+      --sky: #74B9FF;
+      --mint: #55EFC4;
+      --pink: #FD79A8;
+      --orange: #FDCB6E;
+      --dark: #2D3436;
+      --cream: #FFEAA7;
+      --deep-blue: #0984E3;
+      --warm-red: #E17055;
+      --forest: #00B894;
+      --dark-purple: #6C5CE7;
+      /* Storyworthy specific */
+      --story-sunny: #FFE66D;
+      --story-red: #E17055;
+      --story-purple: #A06CD5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f0f23;
+      color: var(--dark);
+    }
+
+    .cover {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 40px 20px;
+    }
+
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      color: white;
+      letter-spacing: -2px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cover .author {
+      font-size: 1.3rem;
+      color: var(--story-sunny);
+      margin-top: 8px;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .cover .subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 16px;
+      z-index: 2;
+      text-align: center;
+      max-width: 500px;
+    }
+
+    .cover-svg {
+      margin-top: 40px;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+      }
+    }
+
+    .lesson {
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lesson-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .lesson-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .lesson-subtitle {
+      font-size: 1rem;
+      opacity: 0.7;
+      margin-bottom: 30px;
+    }
+
+    .illustration-container {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .card ul {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #444;
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+
+    .card li {
+      margin-bottom: 8px;
+    }
+
+    .quote-box {
+      background: var(--dark);
+      color: white;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+
+    .quote-box .quote-text {
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .quote-box .quote-attr {
+      color: var(--story-sunny);
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+
+    .connect-box {
+      background: #e8f4fd;
+      border-left: 4px solid var(--deep-blue);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+
+    .connect-box .connect-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--deep-blue);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .connect-box p {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .ai-box {
+      background: linear-gradient(135deg, #0984E3, #6C5CE7);
+      color: white;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+
+    .ai-box .ai-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--story-sunny);
+      margin-bottom: 6px;
+    }
+
+    .ai-box p {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .funny-box {
+      background: #fff5f5;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      border: 2px dashed var(--coral);
+    }
+
+    .funny-box .funny-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--coral);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .funny-box p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #666;
+      font-style: italic;
+    }
+
+    .story {
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .story-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .story-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .story-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .cheatsheet {
+      min-height: 100vh;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cheatsheet-inner {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .cheatsheet h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: white;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .cheat-card {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      color: white;
+    }
+
+    .cheat-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: var(--story-sunny);
+    }
+
+    .cheat-card p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 700px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .cover h1 {
+        font-size: 3rem;
+      }
+
+      .lesson-title {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* Lesson background gradients */
+    .lesson-1 {
+      background: linear-gradient(180deg, #fff9e6 0%, #fff3cc 100%);
+    }
+
+    .lesson-2 {
+      background: linear-gradient(180deg, #f0e6ff 0%, #e6ccff 100%);
+    }
+
+    .lesson-3 {
+      background: linear-gradient(180deg, #ffe6f0 0%, #ffccdd 100%);
+    }
+
+    .lesson-4 {
+      background: linear-gradient(180deg, #e6f9ff 0%, #ccf3ff 100%);
+    }
+
+    .lesson-5 {
+      background: linear-gradient(180deg, #ffe6cc 0%, #ffd9b3 100%);
+    }
+
+    .lesson-6 {
+      background: linear-gradient(180deg, #e6ffe6 0%, #ccffcc 100%);
+    }
+
+    .lesson-7 {
+      background: linear-gradient(180deg, #ffe6e6 0%, #ffcccc 100%);
+    }
+
+    .lesson-8 {
+      background: linear-gradient(180deg, #f0e6ff 0%, #e6d9ff 100%);
+    }
+
+    .lesson-9 {
+      background: linear-gradient(180deg, #fff9e6 0%, #ffecb3 100%);
+    }
+
+    .lesson-10 {
+      background: linear-gradient(180deg, #ffe6f0 0%, #ffd9e6 100%);
+    }
+
+    .lesson-11 {
+      background: linear-gradient(180deg, #e6f9ff 0%, #b3ebff 100%);
+    }
+
+    .story-1 {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: white;
+    }
+
+    .story-2 {
+      background: linear-gradient(135deg, #2d1b69 0%, #1a0f2e 100%);
+      color: white;
+    }
+
+    .story-3 {
+      background: linear-gradient(135deg, #0f3460 0%, #0a1929 100%);
+      color: white;
+    }
+
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER SECTION -->
+  <section class="cover">
+    <div class="particle" style="width: 80px; height: 80px; background: var(--story-sunny); top: 10%; left: 10%;"></div>
+    <div class="particle" style="width: 60px; height: 60px; background: var(--story-red); top: 20%; right: 15%; animation-delay: 1s;"></div>
+    <div class="particle" style="width: 100px; height: 100px; background: var(--story-purple); bottom: 15%; left: 20%; animation-delay: 2s;"></div>
+    <div class="particle" style="width: 70px; height: 70px; background: var(--story-sunny); bottom: 20%; right: 10%; animation-delay: 3s;"></div>
+
+    <h1>Storyworthy</h1>
+    <div class="author">by Matthew Dicks</div>
+    <div class="subtitle">Engage, Teach, Persuade, and Change Your Life through the Power of Storytelling</div>
+
+    <div class="cover-svg">
+      <svg viewBox="0 0 700 350" style="width: 400px; height: 280px;">
+        <!-- Open book -->
+        <path d="M 150 150 Q 140 80 200 80 L 250 80 L 250 280 L 150 280 Q 140 220 150 150" fill="#FFE66D" stroke="#E17055" stroke-width="2"/>
+        <path d="M 550 150 Q 560 80 500 80 L 450 80 L 450 280 L 550 280 Q 560 220 550 150" fill="#FFE66D" stroke="#E17055" stroke-width="2"/>
+
+        <!-- Story arc emerging from left page -->
+        <path d="M 200 200 Q 240 120 280 160 Q 300 180 320 140" fill="none" stroke="#A06CD5" stroke-width="3" stroke-linecap="round"/>
+
+        <!-- Story arc emerging from right page -->
+        <path d="M 500 200 Q 460 120 420 160 Q 400 180 380 140" fill="none" stroke="#E17055" stroke-width="3" stroke-linecap="round"/>
+
+        <!-- Spiraling transformation marker -->
+        <circle cx="280" cy="160" r="8" fill="#A06CD5"/>
+        <circle cx="240" cy="100" r="6" fill="#FFE66D"/>
+        <circle cx="200" cy="180" r="7" fill="#E17055"/>
+
+        <!-- Spotlight beam -->
+        <ellipse cx="350" cy="60" rx="120" ry="40" fill="#FFE66D" opacity="0.3"/>
+
+        <!-- Microphone at bottom -->
+        <circle cx="350" cy="310" r="8" fill="#E17055"/>
+        <rect x="345" y="315" width="10" height="20" fill="#E17055"/>
+        <line x1="350" y1="335" x2="350" y2="320" stroke="#A06CD5" stroke-width="2"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- LESSON 1: Five-Second Moment -->
+  <section class="lesson lesson-1">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--story-sunny);">1</div>
+      <h2 class="lesson-title">The Five-Second Moment</h2>
+      <p class="lesson-subtitle">The transformation is everything — not the whole story, but the moment you changed</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 250" style="width: 100%; max-width: 600px;">
+          <!-- Before state -->
+          <g>
+            <circle cx="150" cy="100" r="30" fill="#E17055"/>
+            <path d="M 150 80 L 150 50" stroke="#E17055" stroke-width="2"/>
+            <path d="M 130 100 L 100 100" stroke="#E17055" stroke-width="2"/>
+            <path d="M 170 100 L 200 100" stroke="#E17055" stroke-width="2"/>
+            <text x="150" y="160" text-anchor="middle" font-size="14" fill="#333">Before</text>
+            <text x="150" y="180" text-anchor="middle" font-size="12" fill="#666">"I am worthless"</text>
+          </g>
+
+          <!-- Lightning bolt transition -->
+          <path d="M 280 50 L 300 120 L 290 120 L 310 200 L 290 160 L 300 160 Z" fill="#FFE66D" stroke="#E17055" stroke-width="2"/>
+
+          <!-- After state -->
+          <g>
+            <circle cx="550" cy="100" r="30" fill="#A06CD5"/>
+            <path d="M 550 80 L 550 40 M 530 60 L 560 60" stroke="#A06CD5" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 540 110 Q 550 120 560 110" stroke="#A06CD5" stroke-width="2"/>
+            <text x="550" y="160" text-anchor="middle" font-size="14" fill="#333">After</text>
+            <text x="550" y="180" text-anchor="middle" font-size="12" fill="#666">"I am enough"</text>
+          </g>
+
+          <!-- 5 second clock -->
+          <circle cx="350" cy="230" r="20" fill="none" stroke="#E17055" stroke-width="2"/>
+          <line x1="350" y1="215" x2="350" y2="210" stroke="#E17055" stroke-width="2"/>
+          <text x="350" y="240" text-anchor="middle" font-size="11" fill="#E17055" font-weight="bold">5 sec</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label" style="color: var(--story-sunny);">⚡ KEY LESSON</div>
+        <p>The entire story is about capturing <strong>the single moment you changed</strong>. Not the vacation, not the event, not the 3-hour conversation—the 5-second moment where your worldview shifted. Matt Dicks calls this the "transformation" and it's the engine of every storyworthy tale.</p>
+        <ul>
+          <li><strong>The "I Am Not Worthless" Moment:</strong> Matt's foundational story: standing in a middle school classroom, a student asks "Mr. Dicks, have you ever felt like you don't matter?" Matt realizes he can help. Before: depression, suicidal. After: purpose. 5 seconds.</li>
+          <li><strong>The College Rejection:</strong> Opening a letter, expecting Stanford, finding a rejection. The moment your future collapsed and you chose to see it as redirection instead.</li>
+          <li><strong>The Job Offer:</strong> The phone call changes everything. You went from "unpromotable" to "leader" in 10 seconds of hearing the words "We want you."</li>
+        </ul>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Most people tell the 45-minute version: "So I woke up, and the weather was nice, and I got coffee, and I talked to Sarah, and THEN..." Meanwhile, the actual story moment lasts longer than the attention span of a TikTok user. That's why everyone's stories are boring. You're trying to tell a season of TV when people want a 5-second scene.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>The 5-second moment is the <strong>attention bottleneck</strong> in human cognition. LLMs operate on tokens; humans operate on moments of maximum cognitive load or surprise. The transformation is where the gradient is steepest—the point of maximum change. This mirrors how transformer architectures use attention mechanisms to focus on the most information-rich parts of a sequence. The 5-second moment is where the "loss" changes most dramatically.</p>
+        <p>In autoregressive generation (how LLMs predict the next token), there's a "hinge point" where the distribution shifts. Stories with a clear 5-second moment have a sharp perplexity cliff—the audience's uncertainty about "what happens next" spikes, then resolves. That's compulsive listening.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p>In <em>Made to Stick</em> by the Heath Brothers, they call this the "unexpected" element—the moment that breaks the pattern. In <em>Save the Cat!</em> Blake Snyder calls it the "all is lost" moment. In <em>Story</em> by Robert McKee, it's the inciting incident with highest stakes. All point to the same truth: transformation is memory.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"You're not telling the story of the trip. You're telling the story of the moment your mind changed about something."</div>
+        <div class="quote-attr">— Matthew Dicks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 2: Homework for Life -->
+  <section class="lesson lesson-2">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--story-red);">2</div>
+      <h2 class="lesson-title">Homework for Life</h2>
+      <p class="lesson-subtitle">Mine your days for stories—transform how you see the world by asking one question daily</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" style="width: 100%; max-width: 600px;">
+          <!-- Day 1 -->
+          <circle cx="100" cy="100" r="25" fill="#A06CD5" opacity="0.3"/>
+          <text x="100" y="105" text-anchor="middle" font-size="12" fill="#333">Day 1</text>
+
+          <!-- Day 2 -->
+          <circle cx="150" cy="80" r="25" fill="#A06CD5" opacity="0.4"/>
+          <text x="150" y="85" text-anchor="middle" font-size="12" fill="#333">Day 2</text>
+
+          <!-- Day 3 -->
+          <circle cx="200" cy="120" r="25" fill="#A06CD5" opacity="0.5"/>
+          <text x="200" y="125" text-anchor="middle" font-size="12" fill="#333">Day 3</text>
+
+          <!-- Day 4 -->
+          <circle cx="250" cy="100" r="25" fill="#A06CD5" opacity="0.6"/>
+          <text x="250" y="105" text-anchor="middle" font-size="12" fill="#333">Day 4</text>
+
+          <!-- Building to critical mass -->
+          <circle cx="300" cy="110" r="30" fill="#A06CD5" opacity="0.7"/>
+          <text x="300" y="116" text-anchor="middle" font-size="12" fill="#333">Day 5</text>
+
+          <!-- Brain lighting up -->
+          <circle cx="350" cy="100" r="40" fill="#A06CD5" opacity="0.85"/>
+          <text x="350" y="108" text-anchor="middle" font-size="12" fill="white" font-weight="bold">Brain!</text>
+
+          <!-- Database forming -->
+          <rect x="420" y="50" width="250" height="200" fill="none" stroke="#FFE66D" stroke-width="2" stroke-dasharray="5,5"/>
+          <text x="545" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#E17055">Story Database</text>
+          <line x1="430" y1="85" x2="660" y2="85" stroke="#FFE66D" stroke-width="1"/>
+          <text x="545" y="105" text-anchor="middle" font-size="11" fill="#333">500+ moments</text>
+          <text x="545" y="120" text-anchor="middle" font-size="11" fill="#333">indexed by theme</text>
+          <text x="545" y="135" text-anchor="middle" font-size="11" fill="#333">ready to deploy</text>
+
+          <!-- Arrows connecting -->
+          <path d="M 380 100 Q 400 95 420 100" fill="none" stroke="#FFE66D" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#FFE66D"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label" style="color: var(--story-red);">📝 KEY LESSON</div>
+        <p>Every night, ask: <strong>"What was the most storyworthy moment in my day?"</strong> This simple question transforms how you experience life. You stop on autopilot and start noticing. Over 500 days, you build a database of stories indexed by emotion, theme, and message. You become a storyteller.</p>
+        <ul>
+          <li><strong>First week:</strong> Small moments—spilled coffee, awkward elevator ride, kid's weird question. You learn that mundane = rich.</li>
+          <li><strong>First month:</strong> You stop the autopilot. Your brain starts pre-scanning for storyworthy moments. You *live* differently.</li>
+          <li><strong>One year:</strong> You have 365 stories. You've indexed shame, humor, transformation, failure, success. You can tell a story about nearly anything because you've lived with awareness.</li>
+        </ul>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Most people's "big story" is something that happened to them once. Matt's "big story" is the one he's told 500 times because he mined it from yesterday. The difference between being interesting at parties and being a professional storyteller is literally doing 5 minutes of homework every night. Yes, your life is boring. But you're not asking the right question.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>"Homework for Life" is <strong>continuous data collection with attention to signal</strong>. In ML, you need massive labeled datasets. Your brain is doing the same: labeling moments as "storyworthy" vs. noise. Over time, you build a training set where the signal (transformation moments) separates from noise (everything else). This is how transfer learning works—you learn a general "what makes a story interesting" classifier from your own life.</p>
+        <p>The daily question creates <strong>active sampling</strong> rather than passive observation. Like how active learning algorithms query the most informative examples, Homework for Life queries the most meaningful moments. Your brain becomes a better story-detection algorithm through repeated practice.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><em>Atomic Habits</em> (James Clear) calls this "habit stacking"—attaching a new behavior to an existing anchor (bedtime). <em>Deep Work</em> (Cal Newport) emphasizes deliberate practice on the margins. <em>Bird by Bird</em> (Anne Lamott) teaches noticing small details. Matt's Homework for Life is all three: a daily micro-practice that rewires perception.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"At the end of every day, ask yourself: What was the most storyworthy moment in my day? If you do this for a year, you will have 365 stories."</div>
+        <div class="quote-attr">— Matthew Dicks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 3: The Story Spine -->
+  <section class="lesson lesson-3">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--story-purple);">3</div>
+      <h2 class="lesson-title">The Story Spine</h2>
+      <p class="lesson-subtitle">Kenn Adams' framework that powers Pixar, The Moth, and every great story ever told</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 350" style="width: 100%; max-width: 600px;">
+          <!-- Vertebrae -->
+          <circle cx="100" cy="50" r="20" fill="#FFE66D" stroke="#E17055" stroke-width="2"/>
+          <text x="100" y="55" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Once Upon</text>
+
+          <circle cx="100" cy="110" r="20" fill="#FFE66D" stroke="#E17055" stroke-width="2"/>
+          <text x="100" y="115" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Every Day</text>
+
+          <circle cx="100" cy="170" r="20" fill="#FFE66D" stroke="#E17055" stroke-width="2"/>
+          <text x="100" y="175" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">But One Day</text>
+
+          <circle cx="100" cy="230" r="20" fill="#FFE66D" stroke="#E17055" stroke-width="2"/>
+          <text x="100" y="235" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Because</text>
+
+          <circle cx="100" cy="290" r="20" fill="#FFE66D" stroke="#E17055" stroke-width="2"/>
+          <text x="100" y="295" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Finally</text>
+
+          <!-- Connecting spine -->
+          <line x1="100" y1="70" x2="100" y2="90" stroke="#E17055" stroke-width="3"/>
+          <line x1="100" y1="130" x2="100" y2="150" stroke="#E17055" stroke-width="3"/>
+          <line x1="100" y1="190" x2="100" y2="210" stroke="#E17055" stroke-width="3"/>
+          <line x1="100" y1="250" x2="100" y2="270" stroke="#E17055" stroke-width="3"/>
+
+          <!-- Description boxes -->
+          <rect x="150" y="35" width="520" height="40" fill="#FFE66D" opacity="0.2" rx="4"/>
+          <text x="410" y="62" text-anchor="middle" font-size="12" fill="#333">Once upon a time, there was a [character]</text>
+
+          <rect x="150" y="95" width="520" height="40" fill="#FFE66D" opacity="0.2" rx="4"/>
+          <text x="410" y="122" text-anchor="middle" font-size="12" fill="#333">Every day, [routine/status quo]</text>
+
+          <rect x="150" y="155" width="520" height="40" fill="#FFE66D" opacity="0.2" rx="4"/>
+          <text x="410" y="182" text-anchor="middle" font-size="12" fill="#333">But one day, [inciting incident]</text>
+
+          <rect x="150" y="215" width="520" height="40" fill="#FFE66D" opacity="0.2" rx="4"/>
+          <text x="410" y="242" text-anchor="middle" font-size="12" fill="#333">Because of that, [consequences/struggle]</text>
+
+          <rect x="150" y="275" width="520" height="40" fill="#FFE66D" opacity="0.2" rx="4"/>
+          <text x="410" y="302" text-anchor="middle" font-size="12" fill="#333">And finally, [resolution/transformation]</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label" style="color: var(--story-purple);">🦴 KEY LESSON</div>
+        <p>The Story Spine is the skeleton of every memorable story. Created by Kenn Adams for Pixar's writers, it's deceptively simple: 5 sentences that contain all story DNA. Master it and you can tell any story in 2 minutes.</p>
+        <ul>
+          <li><strong>"Toy Story" spine:</strong> Once a toy cowboy (Woody). Every day, he was Andy's favorite. But one day, a new space ranger arrives. Because of that, they're thrown out the window together. Finally, they learn they need each other and get back to Andy.</li>
+          <li><strong>Matt's "This Is Going to Suck" (Moth GrandSLAM winner):</strong> Once I planned a run. Every day I trained. But one day a truck hits me (spoiler: it doesn't). Because of that I panic. Finally I realize I'm alive and the universe is glorious.</li>
+          <li><strong>Your story:</strong> Practice filling this in for three moments from your Homework for Life. You'll be shocked how 5 sentences contain everything.</li>
+        </ul>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>If you can't say your story in the Story Spine, it's not a story—it's a journal entry. Most people try to tell you the spine plus the weather, plus what they ate, plus a tangent about their cousin. Pixar's screenwriters get paid millions to put the spine *first*, then decorate it. You can just... do that too. For free.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>The Story Spine is a <strong>structured prompt template</strong>. In prompt engineering, you learn that giving LLMs structure dramatically improves output. The five elements (character, status quo, inciting incident, consequence, resolution) are like the five "thought heads" in a transformer—they separate the problem space into interpretable components. When you feed an LLM a story spine, its probability distribution sharpens because the narrative scaffolding reduces entropy.</p>
+        <p>The spine also mirrors the <strong>causal chain</strong> in chain-of-thought reasoning: each sentence is a dependency. "Because of that" creates explicit causality rather than mere chronology. This is exactly how LLMs learn to reason—by chaining dependencies step by step.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><em>Save the Cat!</em> (Blake Snyder) uses a similar 15-point structure; the spine is the Cliff Notes version. <em>The Moth</em> storytellers use the spine without naming it. <em>Story</em> (Robert McKee) calls it "the three-act structure." They're all describing the same backbone.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"The Story Spine is not decoration. It's the spine. Everything else is just muscle and skin."</div>
+        <div class="quote-attr">— Matthew Dicks (via Kenn Adams)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 4: The First, Last, Best, Worst -->
+  <section class="lesson lesson-4">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--story-sunny);">4</div>
+      <h2 class="lesson-title">The First, Last, Best, Worst</h2>
+      <p class="lesson-subtitle">Four story prompts that unlock hundreds of stories hiding in your memory</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" style="width: 100%; max-width: 600px;">
+          <!-- Four quadrants -->
+          <rect x="50" y="50" width="140" height="100" fill="#FFE66D" opacity="0.3" rx="8"/>
+          <text x="120" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">First</text>
+          <text x="120" y="130" text-anchor="middle" font-size="11" fill="#666">first kiss</text>
+
+          <rect x="260" y="50" width="140" height="100" fill="#E17055" opacity="0.3" rx="8"/>
+          <text x="330" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Last</text>
+          <text x="330" y="130" text-anchor="middle" font-size="11" fill="#666">last argument</text>
+
+          <rect x="470" y="50" width="140" height="100" fill="#A06CD5" opacity="0.3" rx="8"/>
+          <text x="540" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Best</text>
+          <text x="540" y="130" text-anchor="middle" font-size="11" fill="#666">best meal</text>
+
+          <rect x="260" y="200" width="140" height="100" fill="#4ECDC4" opacity="0.3" rx="8"/>
+          <text x="330" y="225" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Worst</text>
+          <text x="330" y="280" text-anchor="middle" font-size="11" fill="#666">worst day</text>
+
+          <!-- Arrows showing variety -->
+          <path d="M 120 160 L 120 180" stroke="#FFE66D" stroke-width="2" marker-end="url(#arrow1)"/>
+          <path d="M 330 160 L 260 190" stroke="#E17055" stroke-width="2" marker-end="url(#arrow2)"/>
+          <path d="M 540 160 L 400 190" stroke="#A06CD5" stroke-width="2" marker-end="url(#arrow3)"/>
+
+          <defs>
+            <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#FFE66D"/>
+            </marker>
+            <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#E17055"/>
+            </marker>
+            <marker id="arrow3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#A06CD5"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label" style="color: var(--story-sunny);">🎯 KEY LESSON</div>
+        <p>Ask yourself four questions. Each unlocks a treasure vault of stories. These aren't prompts to answer once—they're keys you use repeatedly as you age and accumulate more "firsts," "lasts," "bests," and "worsts."</p>
+        <ul>
+          <li><strong>First:</strong> First kiss, first job, first time you felt ashamed, first time you knew someone loved you. "Firsts" carry transformation because you went from not-knowing to knowing.</li>
+          <li><strong>Last:</strong> Last conversation with your grandfather, last drink before sobriety, last day at a job, last time you saw a best friend. "Lasts" have built-in stakes because they're endpoints.</li>
+          <li><strong>Best:</strong> Best meal, best advice someone gave you, best day of your life, best unexpected surprise. "Bests" are effortless to tell because they're already elevated in memory.</li>
+          <li><strong>Worst:</strong> Worst day, worst decision, worst thing you've said, worst betrayal. "Worsts" are goldmines because they contain conflict, stakes, and hard-earned wisdom.</li>
+        </ul>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Everyone has a "first kiss" story. Everyone. Some are beautiful, some are horrifying, all are useful. The reason people think they don't have stories is they're waiting for something *movie-worthy* to happen. Matt's telling you: your first kiss *is* the movie. Your worst day *is* the movie. Stop waiting for Netflix to show up.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>These four prompts are <strong>query vectors</strong> that retrieve high-relevance items from your memory. In vector databases and semantic search, you need good queries. "First," "last," "best," and "worst" are information-maximizing queries because they're extrema—they separate signal from noise. Your brain's memory is indexed by emotional intensity; these queries hit the peaks.</p>
+        <p>In reinforcement learning, you learn from extreme outcomes (best reward, worst penalty). The four prompts do the same: they surface the edge cases of your experience where learning happened most acutely.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><em>Thinking in Bets</em> (Annie Duke) emphasizes outcome analysis—looking at best and worst case. <em>Crucial Conversations</em> uses "worst moment" framing to unlock vulnerability. <em>The Moth</em> stories almost always involve a "last" or "first" moment of high stakes.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Ask yourself four questions: What's the first time you...? The last time you...? Your best...? Your worst...? You'll have 400 stories by next week."</div>
+        <div class="quote-attr">— Matthew Dicks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 5: Start In the Middle of the Action -->
+  <section class="lesson lesson-5">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--story-red);">5</div>
+      <h2 class="lesson-title">Start In the Middle of the Action</h2>
+      <p class="lesson-subtitle">In medias res: Skip the weather, skip the driving, start where it's interesting</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 250" style="width: 100%; max-width: 600px;">
+          <!-- Wrong way -->
+          <text x="100" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#E17055">❌ Boring Start</text>
+          <line x1="50" y1="50" x2="150" y2="50" stroke="#E17055" stroke-width="2" stroke-dasharray="5,5"/>
+          <text x="100" y="75" text-anchor="middle" font-size="11" fill="#666">"It was Tuesday morning..."</text>
+          <text x="100" y="95" text-anchor="middle" font-size="11" fill="#666">"The weather was nice..."</text>
+          <text x="100" y="115" text-anchor="middle" font-size="11" fill="#666">"I got in my car..."</text>
+          <text x="100" y="135" text-anchor="middle" font-size="11" fill="#666">"Drove to the store..."</text>
+          <line x1="50" y1="150" x2="150" y2="150" stroke="#E17055" stroke-width="2" stroke-dasharray="5,5"/>
+          <text x="100" y="175" text-anchor="middle" font-size="10" fill="#999">(3 min to get interesting)</text>
+
+          <!-- Right way -->
+          <text x="550" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#FFE66D">✓ Interesting Start</text>
+          <line x1="500" y1="50" x2="600" y2="50" stroke="#FFE66D" stroke-width="3"/>
+          <text x="550" y="85" text-anchor="middle" font-size="11" fill="#333" font-weight="bold">"I'm standing in the frozen food aisle"</text>
+          <text x="550" y="105" text-anchor="middle" font-size="11" fill="#333" font-weight="bold">"and I realize I'm the worst parent alive."</text>
+          <line x1="500" y1="120" x2="600" y2="120" stroke="#FFE66D" stroke-width="3"/>
+          <text x="550" y="150" text-anchor="middle" font-size="10" fill="#555">(Boom. We want to know why.)</text>
+
+          <!-- Cinema parallels -->
+          <rect x="300" y="170" width="100" height="70" fill="#A06CD5" opacity="0.2" rx="4"/>
+          <text x="350" y="190" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Cinema does this.</text>
+          <text x="350" y="210" text-anchor="middle" font-size="10" fill="#666">Start with the</text>
+          <text x="350" y="225" text-anchor="middle" font-size="10" fill="#666">explosion, not the car.</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label" style="color: var(--story-red);">🎬 KEY LESSON</div>
+        <p><strong>In medias res</strong> means "in the middle of things." Skip all preamble. The Moth stage technique is brutal: if you haven't gripped the audience in 10 seconds, you've lost them. Cinema understood this 100 years ago. Storytellers are just catching up.</p>
+        <ul>
+          <li><strong>Wrong:</strong> "So I had a stressful day at work, and on my way home I stopped at the grocery store..."</li>
+          <li><strong>Right:</strong> "I'm in the produce section and my 6-year-old asks me a question that stops me cold."</li>
+          <li><strong>Moth principle:</strong> Start with dialogue, physical sensation, conflict, or emotion. Start *mid-scene*. The audience should immediately feel like they're eavesdropping on something real.</li>
+        </ul>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>If your story starts with weather or a commute, your story has already failed. I don't care that it was "a dark and stormy night." I care that you did something stupid and learned a painful lesson. Show me the stupid part. The lesson will come.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>In autoregressive generation, the first tokens set the probability distribution for all following tokens. A well-chosen first token creates <strong>strong priors</strong> that make subsequent generation coherent. "I'm standing in the frozen food aisle" immediately primes the model (and human listener) to expect conflict, not a weather report. It's the difference between high-entropy (anything could happen) and low-entropy (now the audience has priors that guide attention).</p>
+        <p>This is also the <strong>primacy effect</strong> in action: first information shapes all interpretation. Start wrong and you've wasted the most valuable real estate in the story.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><em>Made to Stick</em> calls this "creating curiosity gaps." <em>Save the Cat!</em> starts with the "hook." <em>The Moth</em> lives and dies by this principle. Every screenwriter knows: your opening 30 seconds determine whether people stay.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Never start your story at the beginning. Start your story at the moment right before everything changes."</div>
+        <div class="quote-attr">— Matthew Dicks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 6: Stakes -->
+  <section class="lesson lesson-6">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--story-purple);">6</div>
+      <h2 class="lesson-title">Stakes: The Engine of Every Story</h2>
+      <p class="lesson-subtitle">Make the audience wonder "what happens next?"—that wondering is stakes</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 280" style="width: 100%; max-width: 600px;">
+          <!-- Five stakes tools -->
+          <g>
+            <circle cx="80" cy="80" r="30" fill="#FFE66D"/>
+            <text x="80" y="85" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Elephant</text>
+            <text x="80" y="160" text-anchor="middle" font-size="11" fill="#666">Big, obvious</text>
+            <text x="80" y="175" text-anchor="middle" font-size="11" fill="#666">problem (death,</text>
+            <text x="80" y="190" text-anchor="middle" font-size="11" fill="#666">job loss, betrayal)</text>
+          </g>
+
+          <g>
+            <circle cx="210" cy="80" r="30" fill="#E17055"/>
+            <text x="210" y="85" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Backpack</text>
+            <text x="210" y="160" text-anchor="middle" font-size="11" fill="#666">Accumulated</text>
+            <text x="210" y="175" text-anchor="middle" font-size="11" fill="#666">small details</text>
+            <text x="210" y="190" text-anchor="middle" font-size="11" fill="#666">(he's angry, she lied)</text>
+          </g>
+
+          <g>
+            <circle cx="340" cy="80" r="30" fill="#A06CD5"/>
+            <text x="340" y="85" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Breadcrumbs</text>
+            <text x="340" y="160" text-anchor="middle" font-size="11" fill="#666">Unanswered</text>
+            <text x="340" y="175" text-anchor="middle" font-size="11" fill="#666">questions</text>
+            <text x="340" y="190" text-anchor="middle" font-size="11" fill="#666">("Did he know?")</text>
+          </g>
+
+          <g>
+            <circle cx="470" cy="80" r="30" fill="#4ECDC4"/>
+            <text x="470" y="85" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Hourglass</text>
+            <text x="470" y="160" text-anchor="middle" font-size="11" fill="#666">Time pressure</text>
+            <text x="470" y="175" text-anchor="middle" font-size="11" fill="#666">Sand is running</text>
+            <text x="470" y="190" text-anchor="middle" font-size="11" fill="#666">out</text>
+          </g>
+
+          <g>
+            <circle cx="600" cy="80" r="30" fill="#00B894"/>
+            <text x="600" y="85" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Crystal Ball</text>
+            <text x="600" y="160" text-anchor="middle" font-size="11" fill="#666">Foreshadowing</text>
+            <text x="600" y="175" text-anchor="middle" font-size="11" fill="#666">"something</text>
+            <text x="600" y="190" text-anchor="middle" font-size="11" fill="#666">bad is coming"</text>
+          </g>
+
+          <!-- Audience wondering -->
+          <rect x="200" y="230" width="300" height="40" fill="#FFF9E6" border="1px solid #FFE66D" rx="4"/>
+          <text x="350" y="257" text-anchor="middle" font-size="12" fill="#333" font-weight="bold">Audience: "What happens next?"</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label" style="color: var(--story-purple);">⚡ KEY LESSON</div>
+        <p>Stakes aren't just big external problems. They're anything that makes your audience *wonder* what comes next. Matt teaches five stakes-building tools, each useful in different moments:</p>
+        <ul>
+          <li><strong>The Elephant:</strong> The obvious, high-stakes problem. You might lose your house, your love, your life. Clear and brutal.</li>
+          <li><strong>The Backpack:</strong> Accumulated resentment, unspoken grief, hidden history. You've been carrying this the whole story without naming it.</li>
+          <li><strong>The Breadcrumbs:</strong> Mysterious clues. "Why did she say that?" "What does he know?" The audience is detective.</li>
+          <li><strong>The Hourglass:</strong> Time pressure. The plane is landing, the surgery is starting, the wedding is in 10 minutes. Urgency = stakes.</li>
+          <li><strong>The Crystal Ball:</strong> Foreshadowing. "This is the day everything changed." Now every moment drips with tension.</li>
+        </ul>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Most people think stakes = death or disaster. So they say "I almost died" and expect you to care. But you didn't care about someone else almost dying. You care about *understanding why they tell it now*. Stakes is the why, not the what. A forgotten birthday has infinite stakes if it means your partner doesn't love you anymore. A car crash has zero stakes if you're boring about it.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>In loss functions, stakes are <strong>the magnitude of what's at risk</strong>. A large gradient means high stakes: small changes to the story produce massive shifts in outcome. In reinforcement learning, this is reward magnitude—higher stakes = higher reward signal. The audience's attention follows the loss function: where stakes are highest, focus is sharpest.</p>
+        <p>Breadcrumbs create <strong>information gain</strong>: each clue reduces uncertainty. Hourglass creates <strong>penalty for delay</strong>—waiting has a cost. Crystal Ball creates <strong>trajectory prediction</strong>: we're predicting future state. All five tools are ways of controlling the information dynamics of the story.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><em>Made to Stick</em> (Heath) emphasizes consequence. <em>Save the Cat!</em> (Snyder) is all stakes. <em>The Moth</em> winners all have bone-deep stakes—something real to lose.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Stakes is anything that makes your audience wonder what happens next. Without that wondering, there is no story."</div>
+        <div class="quote-attr">— Matthew Dicks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 7: The Five-Second Moment (Revisited) -->
+  <section class="lesson lesson-7">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--story-sunny);">7</div>
+      <h2 class="lesson-title">Building to the Transformation Moment</h2>
+      <p class="lesson-subtitle">What did you believe before? What do you believe now? Contrast = power</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" style="width: 100%; max-width: 600px;">
+          <!-- Left side: belief before -->
+          <g>
+            <rect x="50" y="50" width="150" height="180" fill="#FFE66D" opacity="0.2" rx="8"/>
+            <text x="125" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">BEFORE</text>
+            <circle cx="125" cy="140" r="35" fill="#E17055"/>
+            <text x="125" y="145" text-anchor="middle" font-size="11" fill="white" font-weight="bold">"I'm not</text>
+            <text x="125" y="160" text-anchor="middle" font-size="11" fill="white" font-weight="bold">enough"</text>
+            <text x="125" y="210" text-anchor="middle" font-size="10" fill="#666">Belief system</text>
+          </g>
+
+          <!-- The 5-second lightning strike -->
+          <g>
+            <path d="M 280 50 L 300 140 L 290 140 L 310 230 L 290 180 L 300 180 Z" fill="#FFE66D" stroke="#E17055" stroke-width="2"/>
+            <text x="280" y="270" text-anchor="middle" font-size="11" font-weight="bold" fill="#E17055">5 seconds</text>
+          </g>
+
+          <!-- Right side: belief after -->
+          <g>
+            <rect x="500" y="50" width="150" height="180" fill="#A06CD5" opacity="0.2" rx="8"/>
+            <text x="575" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">AFTER</text>
+            <circle cx="575" cy="140" r="35" fill="#A06CD5"/>
+            <text x="575" y="145" text-anchor="middle" font-size="11" fill="white" font-weight="bold">"I can help</text>
+            <text x="575" y="160" text-anchor="middle" font-size="11" fill="white" font-weight="bold">someone"</text>
+            <text x="575" y="210" text-anchor="middle" font-size="10" fill="#666">New understanding</text>
+          </g>
+
+          <!-- Arrow showing transformation -->
+          <path d="M 220 140 L 460 140" fill="none" stroke="#FFE66D" stroke-width="3" marker-end="url(#arrowBig)"/>
+          <defs>
+            <marker id="arrowBig" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#FFE66D"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label" style="color: var(--story-sunny);">💡 KEY LESSON</div>
+        <p>The five-second moment is not an event. It's a *change in belief*. The power of a story lives in the contrast between "before" and "after." The bigger the gap, the more powerful the story. Your entire narrative should serve this one pivot.</p>
+        <ul>
+          <li><strong>"I am not worthless" moment:</strong> Matt stands in a classroom. A student asks if he's ever felt like he doesn't matter. Before: depression, suicidal ideation, self-loathing. After: purpose, identity, reason to live. The gap is his whole life.</li>
+          <li><strong>The job offer call:</strong> Before: "I'll never be promoted." After: "I'm a leader." Five seconds. Everything changes.</li>
+          <li><strong>Homework for Life:</strong> Before: life happens *to* you. After: you curate life deliberately. The same five-second realization, repeated daily until it's transformation.</li>
+        </ul>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>People always want to know "how did you craft that moment?" It wasn't craft. It was *noticing*. The moment happened. Your job is to *see* it, then build the entire story around it. The story's skeleton is: "Here's what I believed. Then a thing happened. Now I believe something different." Done.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Transformation is <strong>maximum gradient</strong>—the point where the loss function drops most steeply. In neural networks, we follow gradients downhill. In storytelling, we build toward the steepest descent. Before/After belief is the equivalent of the input and output of a neural transformation: the network is the story, the architecture is the narrative, the transformation is what the network *learns*.</p>
+        <p>This also mirrors <strong>attention heads</strong> in transformers: they focus on the most information-rich tokens. The five-second moment is the information-richest token in your story—it should have the highest attention weight.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><em>Man's Search for Meaning</em> (Frankl) is about before/after meaning. <em>Mindset</em> (Dweck) is before/after identity. <em>Atomic Habits</em> (Clear) is before/after belief about change. All great transformation narratives live in this gap.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"The story is not what happened. The story is what you believed before and what you believe now."</div>
+        <div class="quote-attr">— Matthew Dicks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 8: But and Therefore -->
+  <section class="lesson lesson-8">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--story-red);">8</div>
+      <h2 class="lesson-title">But and Therefore: Causality Over Chronology</h2>
+      <p class="lesson-subtitle">Replace "and then" with "but" and "therefore"—South Park's rule of logic</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 280" style="width: 100%; max-width: 600px;">
+          <!-- Wrong: And Then -->
+          <g>
+            <text x="100" y="30" text-anchor="middle" font-size="13" font-weight="bold" fill="#E17055">❌ BORING: And Then</text>
+            <line x1="40" y1="45" x2="160" y2="45" stroke="#E17055" stroke-width="2" stroke-dasharray="5,5"/>
+
+            <rect x="50" y="60" width="100" height="40" fill="#FFE66D" opacity="0.2" rx="4"/>
+            <text x="100" y="85" text-anchor="middle" font-size="11" fill="#333">Event A happens</text>
+
+            <text x="100" y="120" text-anchor="middle" font-size="14" fill="#E17055" font-weight="bold">And Then</text>
+
+            <rect x="50" y="130" width="100" height="40" fill="#FFE66D" opacity="0.2" rx="4"/>
+            <text x="100" y="155" text-anchor="middle" font-size="11" fill="#333">Event B happens</text>
+
+            <text x="100" y="190" text-anchor="middle" font-size="10" fill="#999">"So what? Who cares?"</text>
+          </g>
+
+          <!-- Right: But and Therefore -->
+          <g>
+            <text x="550" y="30" text-anchor="middle" font-size="13" font-weight="bold" fill="#FFE66D">✓ ENGAGING: But & Therefore</text>
+            <line x1="490" y1="45" x2="610" y2="45" stroke="#FFE66D" stroke-width="3"/>
+
+            <rect x="500" y="60" width="100" height="40" fill="#FFE66D" opacity="0.2" rx="4"/>
+            <text x="550" y="85" text-anchor="middle" font-size="11" fill="#333">Event A happens</text>
+
+            <text x="550" y="120" text-anchor="middle" font-size="14" fill="#FFE66D" font-weight="bold">BUT</text>
+
+            <rect x="500" y="130" width="100" height="40" fill="#FFE66D" opacity="0.2" rx="4"/>
+            <text x="550" y="155" text-anchor="middle" font-size="11" fill="#333">Complication</text>
+
+            <text x="550" y="190" text-anchor="middle" font-size="14" fill="#A06CD5" font-weight="bold">THEREFORE</text>
+
+            <rect x="500" y="200" width="100" height="40" fill="#FFE66D" opacity="0.2" rx="4"/>
+            <text x="550" y="225" text-anchor="middle" font-size="11" fill="#333">Consequence</text>
+
+            <text x="550" y="260" text-anchor="middle" font-size="10" fill="#333" font-weight="bold">"Yes! Keep going!"</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label" style="color: var(--story-red);">🔗 KEY LESSON</div>
+        <p>This is from Trey Parker and Matt Stone (South Park). A story is not "then this happened, then that happened." A story is "because of X, Y happens. Because Y happens, Z becomes necessary." It's causality, not timeline.</p>
+        <ul>
+          <li><strong>And Then version:</strong> "I proposed to her. And then she said yes. And then we got married. And then we had a kid. And then I realized I loved her." Boring. Chronological. No logic.</li>
+          <li><strong>But/Therefore version:</strong> "I proposed to her. BUT she said yes for the wrong reason. THEREFORE I had to choose: fake the marriage or confess. THEREFORE when she found out the truth, she either left or forgave me. THEREFORE I learned what love actually is." Logical. Causal. Engaging.</li>
+          <li><strong>Moth rule:</strong> Every sentence should follow from the last one logically. "Therefore" is magic—it makes the audience predict what's coming. "But" is surprise—it breaks the prediction. Loop them.</li>
+        </ul>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Most people's stories are just a list. "I went to the store. I bought milk. I went home. I made cereal." That's not a story, that's inventory. Add one "but" and suddenly: "I went to the store to buy milk for my son's cereal, BUT they were out of stock, THEREFORE I had to improvise..." Now you're cooking.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>In language models, causality is expressed through <strong>logical chain-of-thought</strong>. "And then" creates mere sequence; "but" and "therefore" create <strong>causal dependency</strong>. When you generate text with explicit reasoning (Chain-of-Thought prompting), you're doing exactly this: linking steps with causal logic rather than mere temporal order.</p>
+        <p>This also mirrors how search and reasoning works: if you can't explain *why* B follows A, you haven't reasoned—you've just listed. "Therefore" forces explicit reasoning. "But" forces handling of exceptions and reversals. Both are crucial to coherent generation.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><em>The Moth</em> storytellers use this religiously. <em>Save the Cat!</em> beat sheets emphasize causality. <em>Made to Stick</em> stresses cause-and-effect over mere surprise.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Get rid of 'and then.' Replace it with 'but' and 'therefore.' That's the secret Trey Parker and Matt Stone taught us."</div>
+        <div class="quote-attr">— Matthew Dicks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 9: The Present Tense Trick -->
+  <section class="lesson lesson-9">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--story-purple);">9</div>
+      <h2 class="lesson-title">The Present Tense Trick</h2>
+      <p class="lesson-subtitle">Bring the audience INTO the moment—immersive storytelling through grammar</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 280" style="width: 100%; max-width: 600px;">
+          <!-- Past tense: distance -->
+          <g>
+            <text x="120" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#E17055">PAST TENSE: Distant</text>
+            <circle cx="120" cy="100" r="40" fill="#FFE66D" opacity="0.2"/>
+            <text x="120" y="105" text-anchor="middle" font-size="10" fill="#666">"I stood in</text>
+            <text x="120" y="120" text-anchor="middle" font-size="10" fill="#666">the room..."</text>
+            <path d="M 120 150 L 200 200" stroke="#E17055" stroke-width="2" stroke-dasharray="5,5"/>
+            <circle cx="250" cy="240" r="30" fill="#333"/>
+            <text x="250" y="245" text-anchor="middle" font-size="11" fill="white">You</text>
+            <text x="250" y="260" text-anchor="middle" font-size="9" fill="white">(far away)</text>
+          </g>
+
+          <!-- Present tense: immersive -->
+          <g>
+            <text x="540" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#FFE66D">PRESENT TENSE: Immersive</text>
+            <circle cx="540" cy="100" r="40" fill="#FFE66D"/>
+            <text x="540" y="105" text-anchor="middle" font-size="10" fill="white" font-weight="bold">"I am standing</text>
+            <text x="540" y="120" text-anchor="middle" font-size="10" fill="white" font-weight="bold">in the room..."</text>
+            <path d="M 540 150 L 460 200" stroke="#FFE66D" stroke-width="3"/>
+            <circle cx="410" cy="240" r="30" fill="#FFE66D"/>
+            <text x="410" y="245" text-anchor="middle" font-size="11" fill="white" font-weight="bold">You</text>
+            <text x="410" y="260" text-anchor="middle" font-size="9" fill="white">(right here)</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label" style="color: var(--story-purple);">🎭 KEY LESSON</div>
+        <p>Switch to present tense for the crucial moments. Not the whole story—just the five-second moment and the lead-up. It collapses the distance between speaker and listener. You're not recalling; you're *reliving*. The audience is eavesdropping on it happening now.</p>
+        <ul>
+          <li><strong>Past: "I walked into the coffee shop and saw her sitting alone."</strong> You're telling me about something that happened.</li>
+          <li><strong>Present: "I walk into the coffee shop. There she is. Sitting alone. At our table."</strong> I'm *there* with you. I'm seeing what you see, feeling what you feel.</li>
+          <li><strong>Moth technique:</strong> Use past tense for setup, context, preamble. Switch to present tense the moment you cross the threshold into the main moment. Stay there for the transformation. Switch back to past for the resolution.</li>
+        </ul>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Grammar is usually boring. But present tense is the storytelling cheat code. Suddenly you're not boring them with a memory—you're *showing* them something happening. It's like the difference between "I watched a great sunset" and "The sun is melting into the horizon and I'm holding my breath." One is memory. One is cinema.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Present tense in language mirrors <strong>autoregressive generation in real-time</strong>. LLMs generate token by token, each one conditioning on the previous. Present tense narration does the same to the listener: each moment conditions on the last. It creates the sense of *unfolding*—the future is unknown, the present is all we have.</p>
+        <p>This also taps into how humans experience time: working memory (present tense) is narrow and immediate. Semantic memory (past tense) is abstracted and distant. Stories that use present tense borrow working memory's immediacy, making the story feel present and real rather than historical.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><em>Save the Cat!</em> emphasizes "showing" vs. "telling"—present tense is showing. <em>The Moth</em> winners almost always shift to present in the climactic moment. <em>Talk Like TED</em> emphasizes immediacy and presence in storytelling.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Stop telling me what happened. Show me what's happening. Right now. Present tense."</div>
+        <div class="quote-attr">— Matthew Dicks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 10: Humor in Storytelling -->
+  <section class="lesson lesson-10">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--story-sunny);">10</div>
+      <h2 class="lesson-title">Humor in Storytelling</h2>
+      <p class="lesson-subtitle">Surprise, specificity, and callbacks—the rule of three with a twist</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" style="width: 100%; max-width: 600px;">
+          <!-- Three elements setup -->
+          <circle cx="150" cy="80" r="35" fill="#FFE66D"/>
+          <text x="150" y="85" text-anchor="middle" font-size="11" fill="#333">Element</text>
+          <text x="150" y="100" text-anchor="middle" font-size="11" fill="#333">A</text>
+
+          <circle cx="350" cy="80" r="35" fill="#FFE66D"/>
+          <text x="350" y="85" text-anchor="middle" font-size="11" fill="#333">Element</text>
+          <text x="350" y="100" text-anchor="middle" font-size="11" fill="#333">B</text>
+
+          <circle cx="550" cy="80" r="35" fill="#FFE66D"/>
+          <text x="550" y="85" text-anchor="middle" font-size="11" fill="#333">Element</text>
+          <text x="550" y="100" text-anchor="middle" font-size="11" fill="#333">C (Twist!)</text>
+
+          <!-- Pattern recognition -->
+          <path d="M 150 120 L 350 150 L 550 120" fill="none" stroke="#FFE66D" stroke-width="2" stroke-dasharray="5,5"/>
+          <text x="350" y="145" text-anchor="middle" font-size="11" fill="#666">Pattern: A, B, C...</text>
+
+          <!-- Brain realizes twist -->
+          <circle cx="350" cy="220" r="45" fill="#A06CD5"/>
+          <path d="M 325 200 L 335 210 L 325 220 L 330 230 L 345 215" fill="white" stroke="white" stroke-width="1"/>
+          <text x="350" y="250" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Brain goes:</text>
+          <text x="350" y="265" text-anchor="middle" font-size="11" fill="white" font-weight="bold">"HA!"</text>
+
+          <!-- Why it works -->
+          <rect x="100" y="290" width="500" height="0" fill="none"/>
+          <text x="350" y="290" text-anchor="middle" font-size="10" fill="#333" font-weight="bold">Humor = Surprise at the end of a pattern. Not forced jokes. Real moments with a twist.</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label" style="color: var(--story-sunny);">😄 KEY LESSON</div>
+        <p>Don't tell jokes. Let humor emerge from the story's specificity and surprise. The rule of three: set up a pattern (A, B, C...), then break it with the fourth element. Your brain loves patterns; it loves breaking them more.</p>
+        <ul>
+          <li><strong>Specificity:</strong> "I was awkward in middle school" = boring. "I had a growth spurt that made me six feet tall before my voice dropped, so I sounded like a squeaking giraffe for two years" = funny (and true).</li>
+          <li><strong>Surprise callback:</strong> Early: "My mom always said I was 'special.'" Later: "I finally realized she meant special like a special-needs student." Boom. The callback rewires what you thought you knew.</li>
+          <li><strong>Not a joke:</strong> Don't punch lines. Let the absurdity of what really happened speak. The Moth stage: if the audience laughs, that's a gift. Don't perform for it.</li>
+        </ul>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>The worst storytellers are the ones trying to be funny. They signal: "Here comes the joke!" and then the joke lands like a dead fish. Real humor sneaks up. It's the specific detail that doesn't fit. It's the callback that lands perfectly. It's the thing you didn't expect to be funny until your brain realized it is.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Humor is <strong>prediction error resolution</strong>. Your brain predicts "A, B, C" but gets "A, B, D." The gap between prediction and reality is funny. In LLMs, this is entropy: high entropy (unpredictable) creates surprise. Humor is when the model's prediction is violated in an *enjoyable* way.</p>
+        <p>The rule of three works because it trains a prior: three examples teach a pattern. The fourth element violates the pattern your own brain constructed. You're laughing at *your own* prediction being wrong in hindsight. That's the magic.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><em>Made to Stick</em> emphasizes unexpected details. <em>Talk Like TED</em> uses humor to create connection. <em>Save the Cat!</em> uses comic relief as catharsis. All rooted in the same principle: surprise + specificity = laughter.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Don't add jokes to your story. Add specificity and surprise. Humor follows."</div>
+        <div class="quote-attr">— Matthew Dicks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 11: The Moth and Performance -->
+  <section class="lesson lesson-11">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--story-red);">11</div>
+      <h2 class="lesson-title">The Moth and Performance</h2>
+      <p class="lesson-subtitle">No notes, no slides, no safety net—just you and your story (and 50+ Moth wins)</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" style="width: 100%; max-width: 600px;">
+          <!-- Empty stage -->
+          <rect x="100" y="80" width="500" height="140" fill="none" stroke="#FFE66D" stroke-width="3" stroke-dasharray="5,5"/>
+          <text x="350" y="160" text-anchor="middle" font-size="16" fill="#666">THE MOTH STAGE</text>
+
+          <!-- Spotlight -->
+          <ellipse cx="350" cy="40" rx="150" ry="50" fill="#FFE66D" opacity="0.4"/>
+
+          <!-- Figure on stage -->
+          <circle cx="350" cy="150" r="20" fill="#E17055"/>
+          <line x1="350" y1="170" x2="350" y2="200" stroke="#E17055" stroke-width="2"/>
+          <line x1="330" y1="180" x2="370" y2="180" stroke="#E17055" stroke-width="2"/>
+          <line x1="330" y1="200" x2="320" y2="230" stroke="#E17055" stroke-width="2"/>
+          <line x1="370" y1="200" x2="380" y2="230" stroke="#E17055" stroke-width="2"/>
+
+          <!-- Audience -->
+          <circle cx="200" cy="250" r="8" fill="#333"/>
+          <circle cx="280" cy="260" r="8" fill="#333"/>
+          <circle cx="420" cy="260" r="8" fill="#333"/>
+          <circle cx="500" cy="250" r="8" fill="#333"/>
+
+          <!-- No notes -->
+          <text x="100" y="260" text-anchor="middle" font-size="10" fill="#333" font-weight="bold">✓ No notes</text>
+          <text x="250" y="280" text-anchor="middle" font-size="10" fill="#333" font-weight="bold">✓ No slides</text>
+          <text x="450" y="280" text-anchor="middle" font-size="10" fill="#333" font-weight="bold">✓ No safety net</text>
+          <text x="600" y="260" text-anchor="middle" font-size="10" fill="#333" font-weight="bold">✓ Vulnerability</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label" style="color: var(--story-red);">🎤 KEY LESSON</div>
+        <p>The Moth is the ultimate storytelling gym. No notes. No slides. No teleprompter. Just you, a story, and 5 minutes. Matt Dicks has won 50+ Moth shows and grandslammed the competition. He didn't get there by accident. He rehearsed obsessively, performed relentlessly, and learned that vulnerability is performance.</p>
+        <ul>
+          <li><strong>Rehearsal:</strong> Not "memorization"—rehearsal means living the story again and again until your body knows it. Your hands move to the right place. Your voice breaks at the right moment. It all feels spontaneous because it's been practiced thousands of times.</li>
+          <li><strong>Eye contact:</strong> Scan the audience. Find a face. Tell them the story. Move to another face. The Moth stage is not "perform for everyone"—it's "have a series of intimate conversations."</li>
+          <li><strong>Physical presence:</strong> Move. Don't pace nervously. Move with intention. Your body narrates the story. When the protagonist panics, your shoulders tense. When they realize something, your whole face shifts.</li>
+          <li><strong>Silence:</strong> The Moth teaches you to own silence. Not "ums" and "likes." Silence. Let the audience sit with the weight of what you just said. That moment is everything.</li>
+        </ul>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>The Moth is where people learn they're either good storytellers or they're not. There's no audience for your PowerPoint to blame. There's no script to hide behind. It's just: do you have a story, or do you just have a sequence of events? The stage doesn't lie.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>The Moth stage is <strong>zero-shot inference</strong>. No notes, no prompts, no scaffolding. You've trained (rehearsed) thoroughly, so you can generate (perform) smoothly. In LLMs, this is the difference between fine-tuning on a specific task and few-shot learning: rehearsal is fine-tuning; performance is inference.</p>
+        <p>The eye contact and physical presence are <strong>human-in-the-loop feedback</strong>. You're reading the audience's reactions in real-time and adjusting tempo, emphasis, and pacing. It's not scripted generation—it's adaptive, context-aware performance. Each audience is different; you're conditioning on their feedback.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><em>Talk Like TED</em> teaches presentation. <em>Crucial Conversations</em> teaches dialogue. <em>Atomic Habits</em> teaches the rehearsal principle. The Moth combines all three: vulnerability, dialogue with audience, deliberate practice.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"You have to know your story so well that you can forget about knowing it and just tell it."</div>
+        <div class="quote-attr">— Matthew Dicks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY SPOTLIGHT 1 -->
+  <section class="story story-1">
+    <div class="story-inner">
+      <h2 class="story-title">Story Spotlight: "This Is Going to Suck"</h2>
+      <p class="story-text"><strong>Context:</strong> Matt signs up for a 5K race in New York City. He's trained for months. The morning of the race, a massive truck hits him at full speed on the way there. At least, that's the first-second clue the audience gets.</p>
+
+      <p class="story-text"><strong>The Story Spine:</strong> Once, Matt planned a race. Every day, he trained for months. But one day, a truck hits him. Because of that, he panics about being hurt. Therefore, he realizes he's alive and the universe is miraculous.</p>
+
+      <p class="story-text"><strong>The Five-Second Moment:</strong> Matt realizes the truck didn't actually hit him—he imagined it. But in that moment of thinking he might die, something shifted. He went from worried about race time to grateful for being alive. That's the moment. The story decoys you into thinking one thing, then pivots to show that the real transformation wasn't about the race or the truck—it was about gratitude.</p>
+
+      <p class="story-text"><strong>Why It Won:</strong> Moth GrandSLAM winner because it has every element. Stakes (you think he's dying). Surprise (he's not). Transformation (his whole worldview shifts). Humor (the misdirect). And a moment of pure vulnerability where he admits: he almost died and all he could think was how much he loves being alive. The audience sits in complete silence when he finishes.</p>
+
+      <div style="margin: 40px 0; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px; border-left: 4px solid #FFE66D;">
+        <p style="color: white; font-size: 0.95rem; line-height: 1.7;"><em>"The moment I thought the truck hit me, I wasn't thinking about my time. I wasn't thinking about anything except: I want to be here. I want to be alive."</em></p>
+        <p style="color: var(--story-sunny); font-weight: 600; margin-top: 12px;">— From "This Is Going to Suck," The Moth</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY SPOTLIGHT 2 -->
+  <section class="story story-2">
+    <div class="story-inner">
+      <h2 class="story-title">Story Spotlight: The "I Am Not Worthless" Moment</h2>
+      <p class="story-text"><strong>Context:</strong> Matt is a teacher. He's depressed. He's suicidal. He doesn't see a future. A student in his class asks: "Mr. Dicks, have you ever felt like you don't matter?"</p>
+
+      <p class="story-text"><strong>The Story Spine:</strong> Once, I was a teacher and I was depressed. Every day, I went through the motions of teaching. But one day, a student asked me if I'd ever felt worthless. Because of that, I realized I had the answer she needed. Therefore, I learned that my existence matters because I can help someone.</p>
+
+      <p class="story-text"><strong>The Five-Second Moment:</strong> The moment he answers her question. Not a long answer—a real answer. The moment where he goes from "I'm worthless" to "I matter because I can help." Five seconds. Everything changes. His entire identity shifts from self-loathing to purpose.</p>
+
+      <p class="story-text"><strong>Why It Works:</strong> This is Matt's origin story. It's the story he'd already told hundreds of times in Homework for Life. Then he decided to tell it on stage. The power comes from witnessing a real person admit their deepest shame, then show how a single interaction rewired their entire brain. The student asked the question he needed to hear too.</p>
+
+      <div style="margin: 40px 0; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px; border-left: 4px solid #FFE66D;">
+        <p style="color: white; font-size: 0.95rem; line-height: 1.7;"><em>"She asked me if I'd ever felt like I didn't matter. And I said yes. But the moment I said it, I realized: I could help her. And if I could help her, then I mattered."</em></p>
+        <p style="color: var(--story-sunny); font-weight: 600; margin-top: 12px;">— Matthew Dicks</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY SPOTLIGHT 3 -->
+  <section class="story story-3">
+    <div class="story-inner">
+      <h2 class="story-title">Story Spotlight: The Homework for Life Transformation</h2>
+      <p class="story-text"><strong>Context:</strong> After Matt developed Homework for Life, he challenged his students to ask the question every day. One student spent a year mining her life for storyworthy moments. By the end of the year, she'd collected 365 stories. More importantly, she'd changed how she experienced every single day.</p>
+
+      <p class="story-text"><strong>The Story Spine:</strong> Once, I taught my students Homework for Life. Every day, they'd ask: "What was the most storyworthy moment today?" But one day, one student told me that the practice had changed her life. Because of that, I realized Homework for Life wasn't really about collecting stories—it was about rewiring perception. Therefore, I understood that the question itself is the answer.</p>
+
+      <p class="story-text"><strong>The Five-Second Moment:</strong> The moment the student realizes that asking the question is changing her. Not the stories themselves—the *asking*. Her brain has started pre-scanning for storyworthy moments. She's no longer on autopilot. She's living with intention. She's *noticing*.</p>
+
+      <p class="story-text"><strong>Why It Matters:</strong> This is the meta-story. It shows that the technique works. It's not theoretical—it's proof. A real person's life changed because they asked one question every day. If you've been thinking "I don't have stories," this story is Matt's answer: neither did she. Until she started asking.</p>
+
+      <div style="margin: 40px 0; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px; border-left: 4px solid #FFE66D;">
+        <p style="color: white; font-size: 0.95rem; line-height: 1.7;"><em>"The question isn't really about collecting stories. It's about training your brain to see your own life as storyworthy. Everything changes when you start noticing."</em></p>
+        <p style="color: var(--story-sunny); font-weight: 600; margin-top: 12px;">— Matthew Dicks</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEATSHEET SECTION -->
+  <section class="cheatsheet">
+    <div class="cheatsheet-inner">
+      <h2>Storyworthy Cheatsheet</h2>
+
+      <div class="two-col">
+        <div class="cheat-card">
+          <h3>The Story Spine</h3>
+          <p><strong>Once upon a time</strong> → [character + status quo]<br><strong>Every day</strong> → [routine]<br><strong>But one day</strong> → [inciting incident]<br><strong>Because of that</strong> → [consequence]<br><strong>And finally</strong> → [resolution]</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>The Five-Second Moment</h3>
+          <p>Identify the moment you <strong>changed</strong>. Not the whole event. The instant your belief shifted. Build the entire story to reach this moment.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>Homework for Life</h3>
+          <p>Every night, ask: <strong>"What was the most storyworthy moment in my day?"</strong> Answer in 1 minute. Do this for 365 days. You'll have 365 stories indexed by emotion.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>First, Last, Best, Worst</h3>
+          <p>Four questions that unlock stories: <strong>First</strong> kiss/job/time. <strong>Last</strong> conversation/moment. <strong>Best</strong> meal/day/advice. <strong>Worst</strong> day/decision.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>In Medias Res</h3>
+          <p>Start in the middle of action, not at the beginning. Begin where it's interesting. Skip weather, skip commute. Start where something is already happening.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>Five Stakes Tools</h3>
+          <p><strong>Elephant:</strong> Big obvious problem. <strong>Backpack:</strong> Accumulated resentment. <strong>Breadcrumbs:</strong> Unanswered questions. <strong>Hourglass:</strong> Time pressure. <strong>Crystal Ball:</strong> Foreshadowing.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>But & Therefore</h3>
+          <p>Replace "and then" with <strong>"but"</strong> (surprise) and <strong>"therefore"</strong> (consequence). Creates causality, not just chronology. Every sentence should follow logically.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>Present Tense Trick</h3>
+          <p>Use present tense for the five-second moment: <strong>"I am standing..."</strong> vs. <strong>"I stood..."</strong> Brings audience into the moment. Immersive, not distant.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>Humor: Rule of Three + Twist</h3>
+          <p>Set up pattern (A, B, C). Break it with fourth element (D). Specificity + surprise = laughter. No forced jokes. Let absurdity speak.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>The Moth Performance</h3>
+          <p><strong>Rehearse obsessively</strong> so you can perform naturally. No notes. Eye contact with audience. Physical movement with intention. Own the silence.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>Story Structure Checklist</h3>
+          <p>□ Clear 5-second moment<br>□ Conflict/stakes<br>□ Present tense at climax<br>□ But/Therefore logic<br>□ In medias res opening<br>□ Transformation (before/after)</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>Quick Reference: Where to Find Stories</h3>
+          <p><strong>Homework for Life</strong> (end of day)<br><strong>First/Last/Best/Worst</strong> (memory prompts)<br><strong>Moments you avoid telling</strong> (shame/embarrassment = gold)<br><strong>Conversations that changed you</strong> (ideas)<br><strong>Small absurd details</strong> (specificity)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indistractable — Illustrated Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+    :root {
+      --coral: #FF6B6B; --teal: #4ECDC4; --sunny: #FFE66D;
+      --purple: #A06CD5; --sky: #74B9FF; --mint: #55EFC4;
+      --pink: #FD79A8; --orange: #FDCB6E; --dark: #2D3436;
+      --cream: #FFEAA7; --deep-blue: #0984E3; --warm-red: #E17055;
+      --forest: #00B894; --dark-purple: #6C5CE7;
+      --indistractable-teal: #4ECDC4; --indistractable-blue: #0984E3; --indistractable-sunny: #FFE66D;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); line-height: 1.6; }
+
+    .cover {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 40px 20px;
+    }
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem; color: white; letter-spacing: -2px;
+      text-align: center; position: relative; z-index: 2; margin-bottom: 10px;
+    }
+    .cover .author { font-size: 1.3rem; color: var(--indistractable-sunny); margin-top: 8px; font-weight: 600; z-index: 2; }
+    .cover .subtitle { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 16px; z-index: 2; text-align: center; max-width: 500px; }
+
+    .particle {
+      position: absolute; border-radius: 50%; opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .illustration-container {
+      margin: 30px 0; display: flex; justify-content: center;
+    }
+
+    .lesson {
+      min-height: 100vh; padding: 60px 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lesson-inner { max-width: 900px; width: 100%; }
+    .lesson-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem;
+      color: white; margin-bottom: 12px;
+    }
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2;
+    }
+    .lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+
+    .card {
+      background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .card-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 10px; display: flex; align-items: center; gap: 8px; color: var(--indistractable-teal);
+    }
+    .card p { font-size: 0.95rem; line-height: 1.7; color: #444; margin-bottom: 8px; }
+
+    .quote-box {
+      background: var(--dark); color: white; border-radius: 16px;
+      padding: 24px 28px; margin-bottom: 20px;
+    }
+    .quote-box .quote-text { font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+    .quote-box .quote-attr { color: var(--indistractable-sunny); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+
+    .connect-box {
+      background: #e8f4fd; border-left: 4px solid var(--indistractable-blue);
+      border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px;
+    }
+    .connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--indistractable-blue); letter-spacing: 1px; margin-bottom: 6px; }
+    .connect-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+
+    .ai-box {
+      background: linear-gradient(135deg, #0984E3, #6C5CE7);
+      color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px;
+    }
+    .ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--indistractable-sunny); margin-bottom: 6px; }
+    .ai-box p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 8px; }
+
+    .funny-box {
+      background: #fff5f5; border-radius: 16px; padding: 20px 24px;
+      margin-bottom: 20px; border: 2px dashed var(--coral);
+    }
+    .funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: var(--coral); letter-spacing: 1px; margin-bottom: 6px; }
+    .funny-box p { font-size: 0.9rem; line-height: 1.6; color: #666; font-style: italic; }
+
+    .story {
+      min-height: 100vh; padding: 60px 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .story-inner { max-width: 900px; width: 100%; }
+    .story h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px; }
+    .story p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 16px; }
+
+    .cheatsheet {
+      min-height: 100vh; padding: 60px 20px;
+      background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cheatsheet-inner { max-width: 900px; width: 100%; }
+    .cheatsheet h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; text-align: center; margin-bottom: 40px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+    .cheat-card {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px; padding: 24px; color: white; margin-bottom: 20px;
+    }
+    .cheat-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--indistractable-sunny); }
+    .cheat-card p { font-size: 0.85rem; line-height: 1.6; opacity: 0.9; }
+
+    .lesson-1 { background: linear-gradient(180deg, #f8f9fa 0%, #e8f4fd 100%); }
+    .lesson-2 { background: linear-gradient(180deg, #fff5f5 0%, #ffe8e8 100%); }
+    .lesson-3 { background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%); }
+    .lesson-4 { background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%); }
+    .lesson-5 { background: linear-gradient(180deg, #f3e8ff 0%, #e9d5ff 100%); }
+    .lesson-6 { background: linear-gradient(180deg, #e0e7ff 0%, #c7d2fe 100%); }
+    .lesson-7 { background: linear-gradient(180deg, #f5f3ff 0%, #ede9fe 100%); }
+    .lesson-8 { background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%); }
+    .lesson-9 { background: linear-gradient(180deg, #fef2f2 0%, #fee2e2 100%); }
+    .lesson-10 { background: linear-gradient(180deg, #f5f3ff 0%, #e9d5ff 100%); }
+    .lesson-11 { background: linear-gradient(180deg, #f0fdf4 0%, #dbeafe 100%); }
+
+    .story-1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; }
+    .story-2 { background: linear-gradient(135deg, #0f3460 0%, #16213e 100%); color: white; }
+
+    svg { max-width: 100%; height: auto; }
+  </style>
+</head>
+<body>
+
+  <!-- COVER SECTION -->
+  <section class="cover">
+    <div class="particle" style="width: 100px; height: 100px; background: var(--indistractable-teal); top: 10%; left: 5%;"></div>
+    <div class="particle" style="width: 150px; height: 150px; background: var(--indistractable-blue); top: 60%; right: 8%; animation-delay: 2s;"></div>
+    <div class="particle" style="width: 80px; height: 80px; background: var(--indistractable-sunny); bottom: 15%; left: 20%; animation-delay: 4s;"></div>
+
+    <h1>Indistractable</h1>
+    <p class="author">by Nir Eyal</p>
+    <p class="subtitle">How to Control Your Attention and Choose Your Life</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300" width="600" height="300">
+        <!-- Focus beam from brain -->
+        <defs>
+          <linearGradient id="focusGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#4ECDC4;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#0984E3;stop-opacity:0.3" />
+          </linearGradient>
+          <linearGradient id="distractGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:0.6" />
+            <stop offset="100%" style="stop-color:#FFE66D;stop-opacity:0.2" />
+          </linearGradient>
+        </defs>
+
+        <!-- Person figure -->
+        <circle cx="350" cy="80" r="25" fill="#FFE66D" stroke="#0984E3" stroke-width="2"/>
+        <rect x="335" y="110" width="30" height="50" rx="5" fill="#E8E8E8" stroke="#0984E3" stroke-width="2"/>
+
+        <!-- Shield (barrier) -->
+        <path d="M 350 130 L 310 150 L 310 210 Q 350 240 350 240 Q 350 240 390 210 L 390 150 Z"
+              fill="url(#focusGrad)" stroke="var(--indistractable-teal)" stroke-width="2"/>
+        <text x="350" y="190" text-anchor="middle" font-size="24" fill="white" font-weight="bold">⊘</text>
+
+        <!-- Distraction arrows bouncing off shield (left) -->
+        <g opacity="0.7">
+          <line x1="200" y1="100" x2="280" y2="130" stroke="var(--warm-red)" stroke-width="3" marker-end="url(#arrowRed)"/>
+          <circle cx="250" cy="140" r="8" fill="var(--warm-red)" opacity="0.6"/>
+        </g>
+
+        <!-- Distraction arrows bouncing off shield (right) -->
+        <g opacity="0.7">
+          <line x1="500" y1="100" x2="420" y2="130" stroke="var(--warm-red)" stroke-width="3" marker-end="url(#arrowRed)"/>
+          <circle cx="450" cy="140" r="8" fill="var(--warm-red)" opacity="0.6"/>
+        </g>
+
+        <!-- Focus path ahead (clear) -->
+        <path d="M 350 240 Q 350 280 400 300" stroke="var(--indistractable-teal)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.8"/>
+        <polygon points="400,300 410,295 395,310" fill="var(--indistractable-teal)"/>
+
+        <!-- Arrow markers -->
+        <defs>
+          <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="var(--warm-red)"/>
+          </marker>
+        </defs>
+
+        <!-- Phone notifications (distraction sources) -->
+        <rect x="50" y="50" width="60" height="80" rx="8" fill="#E8E8E8" stroke="#999" stroke-width="2"/>
+        <circle cx="80" cy="75" r="8" fill="var(--warm-red)"/>
+        <text x="80" y="120" text-anchor="middle" font-size="28" fill="var(--warm-red)">⊕</text>
+
+        <!-- The path beyond (focused goals) -->
+        <text x="500" y="280" font-size="18" fill="var(--indistractable-teal)" font-weight="bold">YOUR GOALS</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- LESSON 1: Distraction Is Not About Technology -->
+  <section class="lesson lesson-1">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--indistractable-teal);">1</div>
+      <h2 class="lesson-title">Distraction Is Not About Technology</h2>
+      <p class="lesson-subtitle">Internal triggers, not apps, drive distraction</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 280" width="600" height="250">
+          <defs>
+            <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#A06CD5;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#74B9FF;stop-opacity:0.8" />
+            </linearGradient>
+          </defs>
+
+          <!-- Brain -->
+          <circle cx="200" cy="140" r="50" fill="url(#brainGrad)" stroke="#6C5CE7" stroke-width="2"/>
+          <circle cx="165" cy="110" r="15" fill="#6C5CE7" opacity="0.6"/>
+          <circle cx="235" cy="110" r="15" fill="#6C5CE7" opacity="0.6"/>
+          <path d="M 180 160 Q 200 180 220 160" stroke="#6C5CE7" stroke-width="2" fill="none"/>
+
+          <!-- Internal Triggers (floating around brain) -->
+          <text x="100" y="60" font-size="16" fill="#A06CD5" font-weight="bold">BOREDOM</text>
+          <text x="280" y="80" font-size="16" fill="#A06CD5" font-weight="bold">LONELINESS</text>
+          <text x="100" y="220" font-size="16" fill="#A06CD5" font-weight="bold">UNCERTAINTY</text>
+          <text x="320" y="240" font-size="16" fill="#A06CD5" font-weight="bold">ANXIETY</text>
+
+          <!-- Arrows pointing inward -->
+          <path d="M 120 80 Q 150 110 180 140" stroke="#A06CD5" stroke-width="2" fill="none" marker-end="url(#arrowPurple)"/>
+          <path d="M 290 100 Q 270 120 240 140" stroke="#A06CD5" stroke-width="2" fill="none" marker-end="url(#arrowPurple)"/>
+          <path d="M 130 200 Q 160 170 190 150" stroke="#A06CD5" stroke-width="2" fill="none" marker-end="url(#arrowPurple)"/>
+          <path d="M 330 220 Q 280 180 240 160" stroke="#A06CD5" stroke-width="2" fill="none" marker-end="url(#arrowPurple)"/>
+
+          <!-- 4 Psychological Needs (right side) -->
+          <rect x="450" y="40" width="220" height="180" rx="12" fill="#F5F3FF" stroke="#A06CD5" stroke-width="2"/>
+          <text x="560" y="65" text-anchor="middle" font-size="14" fill="#6C5CE7" font-weight="bold">4 PSYCHOLOGICAL NEEDS</text>
+          <text x="465" y="95" font-size="12" fill="#555">✓ Autonomy</text>
+          <text x="465" y="125" font-size="12" fill="#555">✓ Competence</text>
+          <text x="465" y="155" font-size="12" fill="#555">✓ Relatedness</text>
+          <text x="465" y="185" font-size="12" fill="#555">✓ Novelty</text>
+
+          <defs>
+            <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#A06CD5"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🔍 KEY LESSON</div>
+        <p><strong>Nir's core insight:</strong> We reach for our phones not because they're addictive technology, but because they soothe internal emotional states. When you feel <strong>bored, lonely, uncertain, or anxious</strong>, your brain seeks a quick dopamine hit.</p>
+        <p><strong>The 4 Psychological Needs:</strong> Humans need autonomy, competence, relatedness, and novelty. When these aren't met in our actual lives, we chase them in digital spaces. A teenage girl who feels excluded at school seeks belonging in Instagram comments. A bored executive scrolls Twitter instead of doing strategic work.</p>
+        <p><strong>Real example:</strong> Nir himself, distracted by his phone while his 5-year-old daughter asked him a question. He realized it wasn't the iPhone's fault—it was his internal discomfort with being "just present" that made him reach for distraction.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>We blame Apple and Mark Zuckerberg for ruining our attention spans, but really we're just using our phones as emotional band-aids. The phone is innocent—we're the ones who weaponize it against boredom the way our parents used cigarettes and TV dinners.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>In transformer neural networks, <strong>attention mechanisms</strong> dynamically allocate computational resources based on what's "important" in the input. Similarly, human attention is dynamically allocated based on emotional state and need-satisfaction. When your reward signals (dopamine systems) are depleted by unmet psychological needs, your "attention mechanism" gets hijacked by whatever offers quick reward—like notifications.</p>
+        <p>AI systems have reward signals and loss functions; humans have emotions and needs. Both get "distracted" when their goal-seeking behavior is interrupted by more salient stimuli. The difference: AI can be constrained by code; humans need awareness.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+        <p><strong>Atomic Habits (Clear):</strong> Clear writes that habits form around emotional regulation—you don't have a Netflix addiction, you have a boredom-management habit. <strong>Hooked (Eyal's own earlier book):</strong> Even there, the "trigger" can be internal (emotional state) or external (notification). <strong>The Power of Habit (Duhigg):</strong> The cue-routine-reward loop often starts with an emotional cue, not a technology cue.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Distraction is not a character flaw—it's a symptom of a life that isn't aligned with your values."</div>
+        <div class="quote-attr">— Nir Eyal, Indistractable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 2: Master Internal Triggers -->
+  <section class="lesson lesson-2">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--warm-red);">2</div>
+      <h2 class="lesson-title">Master Internal Triggers</h2>
+      <p class="lesson-subtitle">The 10-minute rule and cognitive surfing</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" width="600" height="280">
+          <!-- Timeline showing urge arc -->
+          <text x="50" y="40" font-size="14" fill="#555" font-weight="bold">URGE INTENSITY OVER TIME</text>
+
+          <!-- Axes -->
+          <line x1="80" y1="250" x2="650" y2="250" stroke="#999" stroke-width="2"/>
+          <line x1="80" y1="250" x2="80" y2="50" stroke="#999" stroke-width="2"/>
+          <text x="600" y="270" font-size="12" fill="#999">Time (minutes)</text>
+          <text x="40" y="150" font-size="12" fill="#999" transform="rotate(-90 40 150)">Intensity</text>
+
+          <!-- Bell curve of urge (like ocean wave) -->
+          <path d="M 100,240 Q 200,80 350,250" stroke="#FF6B6B" stroke-width="4" fill="none"/>
+          <text x="200" y="100" font-size="12" fill="#FF6B6B" font-weight="bold">PEAK</text>
+          <text x="350" y="270" font-size="12" fill="#FF6B6B" font-weight="bold">~10 min</text>
+
+          <!-- Three zones -->
+          <rect x="100" y="250" width="100" height="30" fill="#FFE8E8" opacity="0.6"/>
+          <text x="150" y="270" text-anchor="middle" font-size="11" fill="#555">1-2 min: URGE HITS</text>
+
+          <rect x="200" y="80" width="120" height="30" fill="#FFE8E8" opacity="0.6"/>
+          <text x="260" y="100" text-anchor="middle" font-size="11" fill="#555">3-7 min: PEAK</text>
+
+          <rect x="320" y="250" width="100" height="30" fill="#C7FFFE" opacity="0.6"/>
+          <text x="370" y="270" text-anchor="middle" font-size="11" fill="#555">8-10 min: FADE</text>
+
+          <!-- "Surf the urge" instruction -->
+          <rect x="430" y="50" width="220" height="180" rx="12" fill="#E8F4FD" stroke="#0984E3" stroke-width="2"/>
+          <text x="540" y="75" text-anchor="middle" font-size="13" fill="#0984E3" font-weight="bold">SURFING THE URGE</text>
+          <text x="445" y="100" font-size="11" fill="#555">• Observe the urge without</text>
+          <text x="445" y="120" font-size="11" fill="#555">  acting on it</text>
+          <text x="445" y="140" font-size="11" fill="#555">• Name the emotion</text>
+          <text x="445" y="160" font-size="11" fill="#555">• Ride it out 10 minutes</text>
+          <text x="445" y="180" font-size="11" fill="#555">• Urge naturally subsides</text>
+          <text x="445" y="200" font-size="11" fill="#555">• (Like a wave)</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🔍 KEY LESSON</div>
+        <p><strong>The 10-minute rule:</strong> When an internal trigger hits, don't immediately suppress it or give in. Instead, use the "urge surfing" technique from ACT (Acceptance and Commitment Therapy). Neuroscientist Adriene Chen's research shows emotional urges peak and fade naturally in 3–10 minutes if you don't feed them.</p>
+        <p><strong>Implementation:</strong> When you feel the urge to check your phone, pause. Name the emotion: "I'm bored," "I'm anxious," "I'm lonely." Then wait 10 minutes while engaging in another activity. The urge will dissipate like a wave crashing on shore.</p>
+        <p><strong>Game designer Ian Bogost's insight on "fun":</strong> Boredom itself can be reframed as interesting if you change your perspective. Instead of reaching for your phone when bored, you can *become curious* about boredom—what is it telling you about your unmet needs?</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Your urge to check Slack is not your enemy; it's a tiny emotional alarm bell in your brain saying "Hey, I need novelty/connection!" The secret? Don't strangle the alarm—just let it ring for 10 minutes while you make coffee. It'll get bored and leave you alone.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>In reinforcement learning, an agent learns to take actions that maximize cumulative reward. If you train an AI by rewarding it every time it checks email (instant feedback), it will become obsessed with email. Humans are the same: your brain is a reward-prediction machine that's been trained by dopamine hits. The fix isn't to reject the reward signal—it's to <strong>extend the time horizon</strong> and accept short-term discomfort for long-term goals.</p>
+        <p>Urge surfing = training your brain's reward system to value delayed gratification, like how AI systems learn to sacrifice short-term rewards for better long-term policies (Q-learning).</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+        <p><strong>Flow (Csikszentmihalyi):</strong> Flow states happen when you're fully absorbed—the opposite of distraction. Flow requires engaging with moderately challenging tasks, which aligns with surfing urges: you redirect your brain toward meaningful difficulty. <strong>The Power of Habit:</strong> Changing the routine (how you respond to triggers) is easier than eliminating triggers.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"An urge is like a wave. It builds, crests, and subsides. If you can surf the wave, you'll be indistractable."</div>
+        <div class="quote-attr">— Nir Eyal, Indistractable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 3: Make Time for Traction -->
+  <section class="lesson lesson-3">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--forest);">3</div>
+      <h2 class="lesson-title">Make Time for Traction</h2>
+      <p class="lesson-subtitle">Timeboxing beats to-do lists</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" width="600" height="280">
+          <!-- To-do list (left, sad) -->
+          <rect x="50" y="50" width="250" height="200" rx="8" fill="#FFE8E8" stroke="#FF6B6B" stroke-width="2"/>
+          <text x="175" y="75" text-anchor="middle" font-size="14" fill="#FF6B6B" font-weight="bold">OLD: TO-DO LIST</text>
+          <text x="65" y="100" font-size="11" fill="#555">☐ Email inbox (900)</text>
+          <text x="65" y="125" font-size="11" fill="#555">☐ Quarterly planning</text>
+          <text x="65" y="150" font-size="11" fill="#555">☐ Code review (4 PRs)</text>
+          <text x="65" y="175" font-size="11" fill="#555">☐ Marketing campaign</text>
+          <text x="65" y="200" font-size="11" fill="#555">☐ Learn TypeScript</text>
+          <text x="65" y="225" font-size="11" fill="#555">☐ Therapy homework (??)</text>
+          <text x="175" y="260" text-anchor="middle" font-size="12" fill="#FF6B6B" font-weight="bold">→ OVERLOAD</text>
+
+          <!-- Timeboxed calendar (right, happy) -->
+          <rect x="400" y="50" width="250" height="200" rx="8" fill="#DCFCE7" stroke="#00B894" stroke-width="2"/>
+          <text x="525" y="75" text-anchor="middle" font-size="14" fill="#00B894" font-weight="bold">NEW: TIMEBOXED</text>
+          <text x="415" y="100" font-size="11" fill="#555">9-10am: DEEP WORK</text>
+          <text x="415" y="125" font-size="11" fill="#555">10-11am: CODE REVIEW</text>
+          <text x="415" y="150" font-size="11" fill="#555">2-3pm: PLANNING</text>
+          <text x="415" y="175" font-size="11" fill="#555">4-5pm: EMAIL BATCH</text>
+          <text x="415" y="200" font-size="11" fill="#555">5-6pm: LEARNING</text>
+          <text x="415" y="225" font-size="11" fill="#555">6-7pm: FAMILY TIME</text>
+          <text x="525" y="260" text-anchor="middle" font-size="12" fill="#00B894" font-weight="bold">→ CLARITY</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🔍 KEY LESSON</div>
+        <p><strong>The problem with to-do lists:</strong> They're infinite. You can always add more, and completing one item doesn't feel good because ten more wait. Psychologically, this creates learned helplessness. At BCG, Nir observed that high performers didn't have longer to-do lists—they had *values-based time allocation*.</p>
+        <p><strong>Timeboxing solution:</strong> Instead of "What do I need to do?", ask "Who do I want to be?" Then schedule time blocks that reflect your values: deep work, family time, learning, exercise. Every hour of your calendar is either <strong>traction</strong> (pulling you toward your values) or <strong>distraction</strong> (pulling you away).</p>
+        <p><strong>Real example:</strong> Leslie Perlow's research at BCG found that when teams blocked "predictable time off" (scheduled focus time), productivity *increased* by 21%. Paradoxically, saying "no" to meetings made people *more* productive, not less.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Your to-do list is basically a pile of anxiety notes to your future self. Timeboxing is like saying to that future self, "I've got you. Here's exactly when we're handling this, and here's when we're actually living." It's the difference between drowning in paper and having a plan.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>In machine learning, <strong>compute budgets</strong> are finite: you allocate GPU time to training, inference, data processing. If you don't timebox, your compute gets stolen by high-overhead tasks (email, notifications) while your core training (deep work) gets starved. Timeboxing is exactly like resource allocation in distributed computing: you reserve critical resources upfront for high-impact jobs.</p>
+        <p>An AI system that optimizes locally (responding to every signal) performs worse than one with a long-term objective function. Your timeboxed calendar is your objective function.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+        <p><strong>Deep Work (Newport):</strong> Newport calls deep, focused work "rare and valuable" in modern economies. Timeboxing is the operational practice that makes deep work possible. <strong>Atomic Habits:</strong> Identity-based habits (who you want to be) matter more than goal-based (what you want to do). Timeboxing embeds identity into your calendar.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Being indistractable means proactively scheduling time for traction, not reactively responding to distraction."</div>
+        <div class="quote-attr">— Nir Eyal, Indistractable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 4: Hack Back External Triggers -->
+  <section class="lesson lesson-4">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--orange);">4</div>
+      <h2 class="lesson-title">Hack Back External Triggers</h2>
+      <p class="lesson-subtitle">Audit every notification, not just technology</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" width="600" height="280">
+          <!-- Phone with notifications -->
+          <rect x="80" y="60" width="120" height="180" rx="12" fill="#E8E8E8" stroke="#333" stroke-width="2"/>
+          <rect x="85" y="65" width="110" height="165" rx="10" fill="#000"/>
+
+          <!-- Notification badges -->
+          <circle cx="150" cy="80" r="12" fill="#FF6B6B"/>
+          <text x="150" y="85" text-anchor="middle" font-size="10" fill="white" font-weight="bold">9</text>
+
+          <rect x="90" y="100" width="100" height="30" rx="4" fill="#333" stroke="#666" stroke-width="1"/>
+          <text x="140" y="125" text-anchor="middle" font-size="9" fill="#999">New message: "Hey"</text>
+
+          <rect x="90" y="140" width="100" height="30" rx="4" fill="#333" stroke="#666" stroke-width="1"/>
+          <text x="140" y="160" text-anchor="middle" font-size="9" fill="#FFF">LinkedIn: 5 endorsements</text>
+
+          <!-- X marks removing notification -->
+          <circle cx="185" cy="110" r="20" fill="#00B894" opacity="0.8"/>
+          <text x="185" y="117" text-anchor="middle" font-size="24" fill="white">✓</text>
+
+          <!-- Stats on right -->
+          <rect x="350" y="50" width="300" height="220" rx="12" fill="#FFF5F5" stroke="#FFE66D" stroke-width="2"/>
+          <text x="500" y="75" text-anchor="middle" font-size="13" fill="#FF6B6B" font-weight="bold">EXTERNAL TRIGGERS AUDIT</text>
+
+          <text x="365" y="105" font-size="12" fill="#555" font-weight="bold">📱 Average person checks phone:</text>
+          <text x="385" y="125" font-size="12" fill="#FF6B6B" font-weight="bold">150× per day (every 10 min!)</text>
+
+          <text x="365" y="155" font-size="12" fill="#555" font-weight="bold">🔔 Most notifications:</text>
+          <text x="385" y="175" font-size="12" fill="#555">• Unnecessary (92% unread)</text>
+          <text x="385" y="195" font-size="12" fill="#555">• Designed to hijack attention</text>
+          <text x="385" y="215" font-size="12" fill="#555">• Often socially irrelevant</text>
+
+          <text x="500" y="250" text-anchor="middle" font-size="11" fill="#666" font-style="italic">→ Disable 80% of them</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🔍 KEY LESSON</div>
+        <p><strong>The external trigger audit:</strong> Most people blame willpower for their phone addiction, but the real culprit is *notification design*. The average person checks their phone 150 times per day (once every ~10 minutes). That's 150 external triggers, not 150 choice failures.</p>
+        <p><strong>Eyal's framework:</strong> Notifications are designed with <strong>variable reward schedules</strong>—the same operant conditioning that makes slot machines addictive. You don't know if this notification will be important, so you check. Every. Time. Solution: <strong>Disable ruthlessly.</strong> Turn off all notifications except calls from 5 people on your whitelist.</p>
+        <p><strong>Real example:</strong> A Fortune 500 company that made notifications opt-in (instead of opt-out) saw 98% of employees disable them within a week. The default wasn't chosen by users—it was imposed by designers.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Every notification is a tiny person in your pocket saying "Hey, pay attention to me!" Your phone is basically a restaurant manager constantly yelling orders at you while you're trying to eat. And somehow *you* are blamed for not focusing. Sure, buddy.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Notification algorithms use <strong>reinforcement learning</strong>: each click trains the model to show you more notifications like that one. This creates a feedback loop where your attention becomes the reward signal. Tech companies optimize their objective function (engagement/ad revenue) using ML, which directly opposes your objective function (deep work/wellbeing). It's adversarial: they're using AI to hack your attention, so you need counter-strategies (disabling their exploits).</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+        <p><strong>Influence (Cialdini):</strong> Notifications exploit psychological principles like scarcity (FOMO) and social proof (likes/comments). Eyal applies Cialdini's defense: become aware of the influence attempt, and you're less susceptible. <strong>Atomic Habits:</strong> Removing friction from bad habits is as important as adding friction to good ones.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Technology is not the enemy—inattention to how technology is designed is."</div>
+        <div class="quote-attr">— Nir Eyal, Indistractable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 5: Prevent Distraction with Pacts -->
+  <section class="lesson lesson-5">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--purple);">5</div>
+      <h2 class="lesson-title">Prevent Distraction with Pacts</h2>
+      <p class="lesson-subtitle">Price, effort, and identity pacts</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 320" width="600" height="300">
+          <!-- Three pact types -->
+          <!-- Price Pact -->
+          <rect x="40" y="40" width="170" height="140" rx="8" fill="#FFE8E8" stroke="#FF6B6B" stroke-width="2"/>
+          <text x="125" y="65" text-anchor="middle" font-size="12" fill="#FF6B6B" font-weight="bold">PRICE PACT</text>
+          <text x="50" y="90" font-size="10" fill="#555">Bet money on your</text>
+          <text x="50" y="105" font-size="10" fill="#555">behavior</text>
+          <text x="50" y="125" font-size="11" fill="#333" font-weight="bold">Example:</text>
+          <text x="50" y="140" font-size="9" fill="#555">"$20 to charity if I</text>
+          <text x="50" y="153" font-size="9" fill="#555">check Twitter before 9am"</text>
+
+          <!-- Effort Pact -->
+          <rect x="265" y="40" width="170" height="140" rx="8" fill="#E8F4FD" stroke="#0984E3" stroke-width="2"/>
+          <text x="350" y="65" text-anchor="middle" font-size="12" fill="#0984E3" font-weight="bold">EFFORT PACT</text>
+          <text x="275" y="90" font-size="10" fill="#555">Make distraction</text>
+          <text x="275" y="105" font-size="10" fill="#555">hard to do</text>
+          <text x="275" y="125" font-size="11" fill="#333" font-weight="bold">Example:</text>
+          <text x="275" y="140" font-size="9" fill="#555">"Delete Twitter app</text>
+          <text x="275" y="153" font-size="9" fill="#555">(5 min to reinstall)"</text>
+
+          <!-- Identity Pact -->
+          <rect x="490" y="40" width="170" height="140" rx="8" fill="#DCFCE7" stroke="#00B894" stroke-width="2"/>
+          <text x="575" y="65" text-anchor="middle" font-size="12" fill="#00B894" font-weight="bold">IDENTITY PACT</text>
+          <text x="500" y="90" font-size="10" fill="#555">Redefine who you are</text>
+          <text x="500" y="105" font-size="10" fill="#555"></text>
+          <text x="500" y="125" font-size="11" fill="#333" font-weight="bold">Example:</text>
+          <text x="500" y="140" font-size="9" fill="#555">"I am someone who</text>
+          <text x="500" y="153" font-size="9" fill="#555">values deep focus"</text>
+
+          <!-- Story: Ulysses (bottom) -->
+          <rect x="40" y="200" width="620" height="100" rx="8" fill="#F5F3FF" stroke="#A06CD5" stroke-width="2"/>
+          <text x="350" y="225" text-anchor="middle" font-size="12" fill="#6C5CE7" font-weight="bold">THE ULYSSES PACT</text>
+          <text x="60" y="250" font-size="11" fill="#555">In Homer's Odyssey, Ulysses binds himself to a mast so he can't respond to the Sirens' song.</text>
+          <text x="60" y="268" font-size="11" fill="#555">He makes a pact with his past self to prevent his future self from making a bad choice. Modern equivalent:</text>
+          <text x="60" y="286" font-size="11" fill="#555" font-weight="bold">"Burn or Bounce" app: Delete your Twitter password so you can't check social media during work hours.</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🔍 KEY LESSON</div>
+        <p><strong>Three types of pacts prevent distraction:</strong></p>
+        <p>1. <strong>Price pacts:</strong> Bet money on your behavior (Beeminder, Stickk). If you check Twitter before 9am, $50 goes to a charity you hate. Your rational brain knows the cost, so you're less likely to do it.</p>
+        <p>2. <strong>Effort pacts:</strong> Make distraction inconvenient. Delete the app; uninstall; block sites. It doesn't prevent distraction, but it buys 5 minutes of friction time. Often, that's enough for an urge to fade.</p>
+        <p>3. <strong>Identity pacts:</strong> "I am someone indistractable" is more powerful than "I will not check my phone." It reframes the behavior as inconsistent with your self-image. Research by Kristin Neff shows self-compassion + identity reframing beats pure willpower.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Making a pact with your future self is like leaving traps for a burglar—except the burglar is *you* at 2pm on Tuesday. It's not pretty, but it works. Your future self will hate the friction, and *that's the point*.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>In AI safety, <strong>alignment</strong> means ensuring your system does what you *actually* want, not just what its training process incentivized. Pacts are alignment mechanisms: you align your future behavior with your current values by adding constraints. Computer scientists call this "<strong>commit to a constraint</strong>" in reinforcement learning: your policy is bounded by rules that prevent harmful actions, even if they'd give short-term reward.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+        <p><strong>Atomic Habits:</strong> Clear's identity-based habits map directly to Eyal's identity pacts. <strong>Thinking in Bets (Annie Duke):</strong> Pre-commitment strategies reduce regret and poor decision-making. <strong>Mindset (Dweck):</strong> Seeing distraction as a skill to build (not a character flaw) makes pacts more effective.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"The best time to prevent a distraction is before you feel the urge. Pacts are how you tell your future self the plan."</div>
+        <div class="quote-attr">— Nir Eyal, Indistractable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 6: Indistractable Relationships -->
+  <section class="lesson lesson-6">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--deep-blue);">6</div>
+      <h2 class="lesson-title">Indistractable Relationships</h2>
+      <p class="lesson-subtitle">Be present with people you love</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 280" width="600" height="260">
+          <!-- Two people, one distracted -->
+          <circle cx="150" cy="80" r="20" fill="#FFD700" stroke="#333" stroke-width="2"/>
+          <rect x="135" y="105" width="30" height="50" rx="5" fill="#E8E8E8" stroke="#333" stroke-width="2"/>
+
+          <!-- Phone in hand -->
+          <rect x="155" y="120" width="40" height="60" rx="4" fill="#000" stroke="#666" stroke-width="1"/>
+          <circle cx="175" cy="130" r="6" fill="#FF6B6B"/>
+          <text x="175" y="155" text-anchor="middle" font-size="8" fill="#666">5 messages</text>
+
+          <!-- Sad person -->
+          <circle cx="500" cy="80" r="20" fill="#FFD700" stroke="#333" stroke-width="2"/>
+          <rect x="485" y="105" width="30" height="50" rx="5" fill="#E8E8E8" stroke="#333" stroke-width="2"/>
+          <path d="M 493 85 L 497 85" stroke="#333" stroke-width="1"/>
+          <path d="M 507 85 L 511 85" stroke="#333" stroke-width="1"/>
+          <path d="M 500 95 L 500 93 M 500 93 L 495 88" stroke="#333" stroke-width="1"/>
+
+          <!-- Sad bubble -->
+          <path d="M 520 70 L 540 60 L 545 75 Z" fill="#FFE8E8"/>
+          <text x="530" y="68" text-anchor="middle" font-size="11" fill="#666">You're not</text>
+          <text x="530" y="81" text-anchor="middle" font-size="11" fill="#666">listening...</text>
+
+          <!-- Solution: Phone Stacking -->
+          <rect x="150" y="190" width="400" height="80" rx="8" fill="#E8F4FD" stroke="#0984E3" stroke-width="2"/>
+          <text x="350" y="215" text-anchor="middle" font-size="13" fill="#0984E3" font-weight="bold">PHONE STACKING GAME</text>
+          <text x="170" y="240" font-size="11" fill="#555">Everyone puts their phone in the center of the table. First person to</text>
+          <text x="170" y="257" font-size="11" fill="#555">check theirs pays for dinner. Makes presence a group commitment.</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🔍 KEY LESSON</div>
+        <p><strong>Being indistractable with others is about respect:</strong> When you're physically present but mentally absent, you're communicating "this person is less important than whatever is on my screen." Relationships atrophy through a thousand tiny moments of inattention.</p>
+        <p><strong>Two tactical solutions:</strong></p>
+        <p>1. <strong>Phone stacking:</strong> Everyone puts their phone in the center of the table during meals. First to check theirs buys dinner. Simple, fun, and creates accountability.</p>
+        <p>2. <strong>Scheduled device-free time:</strong> Block off 7–9pm (dinner to bedtime) as a "no phones" window for your family. This requires saying no to other things, but it's a pact with the people you love.</p>
+        <p><strong>Real example:</strong> Nir's own struggle: he realized his daughter had stopped asking him questions because she'd learned he was never truly listening. Once he implemented phone-free time, she opened up again.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Your family doesn't hate that you use your phone—they hate that you're *here but not here*. It's like being a ghost who occasionally nods. The phone stacking game is basically you all agreeing: "Let's be equally addicted or equally present." Guess which one wins?</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>In AI, <strong>attention is zero-sum</strong>: if a transformer allocates attention to token A, it allocates *less* to token B. Similarly, your attention is finite. When you allocate 30% of your mental resources to your phone, you allocate 30% less to the person in front of you. They *feel* this mathematically—it's not paranoia, it's neurobiology.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+        <p><strong>Flow (Csikszentmihalyi):</strong> Flow is deepest when shared—joint attention between people creates the conditions for intimacy. <strong>Emotional Intelligence (Goleman):</strong> Presence and empathy are foundational to emotional intelligence. You can't be emotionally intelligent while half-distracted.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Indistractable doesn't mean never using technology. It means being indistractable with the people you love."</div>
+        <div class="quote-attr">— Nir Eyal, Indistractable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 7: Indistractable Children -->
+  <section class="lesson lesson-7">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--sky);">7</div>
+      <h2 class="lesson-title">Indistractable Children</h2>
+      <p class="lesson-subtitle">The 4 needs apply to kids too</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" width="600" height="280">
+          <!-- Child -->
+          <circle cx="200" cy="80" r="18" fill="#FFD700" stroke="#333" stroke-width="2"/>
+          <rect x="188" y="102" width="24" height="45" rx="4" fill="#E8E8E8" stroke="#333" stroke-width="2"/>
+
+          <!-- 4 needs as building blocks (Maslow style) -->
+          <rect x="350" y="220" width="150" height="50" rx="4" fill="#FFE66D" stroke="#333" stroke-width="2"/>
+          <text x="425" y="250" text-anchor="middle" font-size="11" fill="#333" font-weight="bold">Novelty</text>
+
+          <rect x="350" y="160" width="150" height="50" rx="4" fill="#55EFC4" stroke="#333" stroke-width="2"/>
+          <text x="425" y="190" text-anchor="middle" font-size="11" fill="#333" font-weight="bold">Relatedness</text>
+
+          <rect x="350" y="100" width="150" height="50" rx="4" fill="#74B9FF" stroke="#333" stroke-width="2"/>
+          <text x="425" y="130" text-anchor="middle" font-size="11" fill="#333" font-weight="bold">Competence</text>
+
+          <rect x="350" y="40" width="150" height="50" rx="4" fill="#A06CD5" stroke="#333" stroke-width="2"/>
+          <text x="425" y="70" text-anchor="middle" font-size="11" fill="#333" font-weight="bold">Autonomy</text>
+
+          <!-- Arrows from child to needs -->
+          <path d="M 218 95 Q 280 140 350 100" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowBlack)"/>
+
+          <!-- Problem: Tablets as parenting hack -->
+          <rect x="50" y="190" width="250" height="90" rx="8" fill="#FFE8E8" stroke="#FF6B6B" stroke-width="2"/>
+          <text x="175" y="215" text-anchor="middle" font-size="12" fill="#FF6B6B" font-weight="bold">THE TABLET TRAP</text>
+          <text x="65" y="240" font-size="10" fill="#555">Handing kids a tablet *meets no needs*:</text>
+          <text x="65" y="257" font-size="10" fill="#555">✗ No autonomy (watch passively)</text>
+          <text x="65" y="274" font-size="10" fill="#555">✗ No competence (no challenge)</text>
+
+          <defs>
+            <marker id="arrowBlack" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🔍 KEY LESSON</div>
+        <p><strong>Teaching kids to be indistractable:</strong> The 4 psychological needs (autonomy, competence, relatedness, novelty) apply to children too. When kids' *real needs* are unmet, they seek distraction in screens just like adults.</p>
+        <p><strong>The tablet trap:</strong> Parents often use tablets as a parenting hack ("Here, watch this so I can have 30 minutes of peace"). But passive screen time meets *none* of the 4 needs. It's a Band-Aid that creates dependence.</p>
+        <p><strong>Better approach:</strong> Meet kids' needs through activities where they have <strong>autonomy</strong> (choose the activity), <strong>competence</strong> (experience challenge and mastery), <strong>relatedness</strong> (do it together), and <strong>novelty</strong> (try something new). A kid who feels competent at building Legos doesn't need a tablet.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Kids are like mini versions of us: give them an unmet need and they'll find the nearest dopamine hack. The difference is, we blame ourselves for our phone addiction, but we blame our kids for their iPad addiction. Maybe the real problem is the *unmet need*, not the device.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Neural plasticity (the brain's ability to form new connections) is highest in childhood. Repeated behavior patterns reinforce neural pathways. If a child's brain is trained to seek instant gratification through screens, those reward pathways become deeply entrenched. This is <strong>reinforcement learning</strong> applied to development: early experiences shape policy learning. Teaching kids to engage with challenging, rewarding activities *trains better policies* than letting screens do the training.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+        <p><strong>Mindset (Dweck):</strong> Kids develop growth mindset through mastery and challenge, not passive consumption. <strong>Flow (Csikszentmihalyi):</strong> Children experience flow when given appropriately challenging tasks with clear feedback—exactly what screens *don't* provide at optimal difficulty.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Children don't need more screens. They need more autonomy, competence, relatedness, and novelty—from the real world."</div>
+        <div class="quote-attr">— Nir Eyal, Indistractable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 8: Indistractable at Work -->
+  <section class="lesson lesson-8">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--mint);">8</div>
+      <h2 class="lesson-title">Indistractable at Work</h2>
+      <p class="lesson-subtitle">Psychological safety drives focus</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" width="600" height="280">
+          <!-- Left side: Unsafe workplace (lots of interruptions) -->
+          <text x="175" y="30" text-anchor="middle" font-size="12" fill="#FF6B6B" font-weight="bold">UNSAFE: Always On-Call</text>
+
+          <rect x="80" y="50" width="190" height="200" rx="8" fill="#FFE8E8" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+
+          <!-- Desk with interruptions -->
+          <rect x="100" y="80" width="150" height="80" rx="4" fill="#E8E8E8" stroke="#333" stroke-width="1"/>
+          <text x="175" y="110" text-anchor="middle" font-size="10" fill="#555">DEEP WORK</text>
+          <text x="175" y="127" text-anchor="middle" font-size="9" fill="#999">(but interrupted)</text>
+
+          <!-- Interruption icons -->
+          <circle cx="120" cy="170" r="8" fill="#FF6B6B"/>
+          <text x="120" y="175" text-anchor="middle" font-size="9" fill="white">!</text>
+
+          <circle cx="150" cy="180" r="8" fill="#FF6B6B"/>
+          <text x="150" y="185" text-anchor="middle" font-size="9" fill="white">!</text>
+
+          <circle cx="200" cy="175" r="8" fill="#FF6B6B"/>
+          <text x="200" y="180" text-anchor="middle" font-size="9" fill="white">!</text>
+
+          <text x="175" y="220" text-anchor="middle" font-size="10" fill="#FF6B6B" font-weight="bold">⚠ Slack always on</text>
+          <text x="175" y="237" text-anchor="middle" font-size="10" fill="#FF6B6B" font-weight="bold">⚠ 1-on-1s on demand</text>
+
+          <!-- Right side: Safe workplace (scheduled time) -->
+          <text x="525" y="30" text-anchor="middle" font-size="12" fill="#00B894" font-weight="bold">SAFE: Predictable Time Off</text>
+
+          <rect x="430" y="50" width="190" height="200" rx="8" fill="#DCFCE7" stroke="#00B894" stroke-width="2"/>
+
+          <!-- Calendar blocks -->
+          <rect x="450" y="80" width="150" height="50" rx="4" fill="#FFE66D" stroke="#333" stroke-width="1"/>
+          <text x="525" y="110" text-anchor="middle" font-size="9" fill="#333" font-weight="bold">FOCUS BLOCK</text>
+
+          <rect x="450" y="140" width="150" height="50" rx="4" fill="#74B9FF" stroke="#333" stroke-width="1"/>
+          <text x="525" y="170" text-anchor="middle" font-size="9" fill="#333" font-weight="bold">COLLAB TIME</text>
+
+          <text x="525" y="220" text-anchor="middle" font-size="10" fill="#00B894" font-weight="bold">✓ Slack off 9-11am</text>
+          <text x="525" y="237" text-anchor="middle" font-size="10" fill="#00B894" font-weight="bold">✓ No meetings Fri</text>
+
+          <!-- Stats box (bottom) -->
+          <rect x="80" y="260" width="510" height="30" rx="4" fill="#F5F3FF" stroke="#A06CD5" stroke-width="1"/>
+          <text x="100" y="279" font-size="10" fill="#555">BCG Study: Predictable time off → 21% higher productivity + lower burnout. It's not less work; it's permission.</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🔍 KEY LESSON</div>
+        <p><strong>Psychological safety is the foundation of indistractability:</strong> If you don't trust that you can take uninterrupted time without repercussions, you'll be distracted by anxiety. At BCG, researcher Leslie Perlow implemented "predictable time off" (no meetings Friday, no Slack 9–11am). Productivity increased 21% and burnout decreased.</p>
+        <p><strong>Why?</strong> When people know focus time is coming and protected, they can relax between meetings instead of being perpetually on-edge. They're also *less* distracted by email/Slack because they know they'll batch-process it at designated times.</p>
+        <p><strong>Real example:</strong> A team leader who sent "no urgent" Slack messages after hours vs. one who respected off-hours got wildly different results. The second team was more productive *and* more satisfied. Culture beats willpower.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Your company says "deep work is important" while making Slack mandatory and honoring any-time meetings. That's like saying "be healthy!" while serving free donuts and running fire drills during exercise time. The system is gaslighting you.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>In machine learning, <strong>context switching</strong> is computationally expensive. If a model is constantly re-initialized with new inputs (like a person context-switching between emails, Slack, and code), performance degrades catastrophically. <strong>Batch processing</strong> (grouping similar inputs together) is vastly more efficient. Deep work is batch processing for human attention. Interrupt-driven work is the computational equivalent of thrashing.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+        <p><strong>Deep Work (Newport):</strong> Newport argues deep work is disappearing in modern knowledge work due to constant connectivity. Eyal's solution is systemic: it requires cultural and organizational change, not individual heroics. <strong>The Power of Habit:</strong> Organizational culture shapes individual habit formation more than willpower ever could.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"You can't be indistractable in a distracting culture. But you can build a culture that supports indistractability."</div>
+        <div class="quote-attr">— Nir Eyal, Indistractable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 9: Traction vs Distraction Etymology -->
+  <section class="lesson lesson-9">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--coral);">9</div>
+      <h2 class="lesson-title">Traction vs Distraction</h2>
+      <p class="lesson-subtitle">Both come from Latin "trahere" (to pull)</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" width="600" height="280">
+          <!-- Root word in center -->
+          <circle cx="350" cy="100" r="40" fill="#FFE66D" stroke="#333" stroke-width="2"/>
+          <text x="350" y="95" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">TRAHERE</text>
+          <text x="350" y="113" text-anchor="middle" font-size="10" fill="#555">(Latin: to pull)</text>
+
+          <!-- Left: Traction (good pull) -->
+          <g>
+            <text x="150" y="180" text-anchor="middle" font-size="13" fill="#00B894" font-weight="bold">TRACTION</text>
+            <text x="150" y="200" font-size="11" fill="#555">"Pulling toward</text>
+            <text x="150" y="216" font-size="11" fill="#555">your values"</text>
+
+            <!-- Arrow from root -->
+            <path d="M 310 130 Q 230 150 180 180" stroke="#00B894" stroke-width="3" fill="none" marker-end="url(#arrowGreen)"/>
+
+            <!-- Examples -->
+            <rect x="80" y="230" width="140" height="60" rx="4" fill="#DCFCE7" stroke="#00B894" stroke-width="1"/>
+            <text x="150" y="250" text-anchor="middle" font-size="9" fill="#555">✓ Deep work</text>
+            <text x="150" y="264" text-anchor="middle" font-size="9" fill="#555">✓ Family time</text>
+            <text x="150" y="278" text-anchor="middle" font-size="9" fill="#555">✓ Learning</text>
+          </g>
+
+          <!-- Right: Distraction (bad pull) -->
+          <g>
+            <text x="550" y="180" text-anchor="middle" font-size="13" fill="#FF6B6B" font-weight="bold">DISTRACTION</text>
+            <text x="550" y="200" font-size="11" fill="#555">"Pulling away from</text>
+            <text x="550" y="216" font-size="11" fill="#555">your values"</text>
+
+            <!-- Arrow from root -->
+            <path d="M 390 130 Q 470 150 520 180" stroke="#FF6B6B" stroke-width="3" fill="none" marker-end="url(#arrowRed)"/>
+
+            <!-- Examples -->
+            <rect x="480" y="230" width="140" height="60" rx="4" fill="#FFE8E8" stroke="#FF6B6B" stroke-width="1"/>
+            <text x="550" y="250" text-anchor="middle" font-size="9" fill="#555">✗ Social media</text>
+            <text x="550" y="264" text-anchor="middle" font-size="9" fill="#555">✗ Doom scrolling</text>
+            <text x="550" y="278" text-anchor="middle" font-size="9" fill="#555">✗ Idle browsing</text>
+          </g>
+
+          <defs>
+            <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#00B894"/>
+            </marker>
+            <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#FF6B6B"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🔍 KEY LESSON</div>
+        <p><strong>The key insight:</strong> Both "traction" and "distraction" come from the Latin word *trahere*, meaning "to pull." The difference isn't about what's pulling you—it's about the *direction*. Traction pulls you *toward* your values; distraction pulls you *away* from them.</p>
+        <p><strong>This reframe changes everything:</strong> Indistractability isn't about willpower or discipline; it's about having <strong>clear values</strong> so you can recognize when something is pulling you away. If you don't know your values, you can't distinguish between traction and distraction—everything just feels like "stuff I could do."</p>
+        <p><strong>Real example:</strong> Two people browsing the internet for an hour. One is researching for a presentation (traction); one is procrastinating (distraction). The *activity* is identical; the *direction* is different. The person with clear values recognizes the difference immediately.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Traction and distraction are identical twins separated at birth. The only difference is which direction they're pulling. So if you don't know where you're trying to go, they both look the same. That's why lost people are so easily distracted.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>In reinforcement learning, you define an <strong>objective function</strong> (the goal the agent is trying to maximize). An agent without a clear objective will be pulled in random directions by any reward signal. A human without clear values is exactly this: susceptible to distraction because you have no internal objective function. When you define your values, you're essentially programming your own objective function—and suddenly you can recognize which pulls are aligned with your goals and which aren't.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+        <p><strong>Man's Search for Meaning (Frankl):</strong> Frankl argues that meaning and purpose are the deepest human drives. Without them, you drift. Eyal's values framework is essentially Frankl's meaning-making applied to attention. <strong>Deep Work (Newport):</strong> Newport emphasizes that meaningful work requires knowing your craft's *values*, not just its tasks.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Traction and distraction both pull. The question is: toward what?"</div>
+        <div class="quote-attr">— Nir Eyal, Indistractable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 10: Willpower Isn't the Answer -->
+  <section class="lesson lesson-10">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--dark-purple);">10</div>
+      <h2 class="lesson-title">Willpower Isn't the Answer</h2>
+      <p class="lesson-subtitle">Ego depletion debunked; self-compassion wins</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" width="600" height="280">
+          <!-- Left: Old willpower model (failed) -->
+          <text x="175" y="30" text-anchor="middle" font-size="12" fill="#FF6B6B" font-weight="bold">OLD MODEL: Ego Depletion</text>
+
+          <rect x="70" y="50" width="210" height="200" rx="8" fill="#FFE8E8" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+
+          <!-- Willpower meter depleting -->
+          <rect x="90" y="70" width="170" height="20" rx="4" fill="#E8E8E8" stroke="#333" stroke-width="1"/>
+          <rect x="90" y="70" width="85" height="20" rx="4" fill="#FF6B6B"/>
+          <text x="175" y="87" text-anchor="middle" font-size="9" fill="#555">Willpower:</text>
+          <text x="175" y="100" text-anchor="middle" font-size="9" fill="#555">↓ Each act of restraint depletes reserves</text>
+
+          <!-- Result -->
+          <rect x="90" y="130" width="170" height="70" rx="4" fill="#FFF5F5" stroke="#FF6B6B" stroke-width="1"/>
+          <text x="175" y="155" text-anchor="middle" font-size="10" fill="#FF6B6B" font-weight="bold">Baumeister's Study (1998)</text>
+          <text x="100" y="175" font-size="9" fill="#555">"Ego Depletion" = willpower is</text>
+          <text x="100" y="190" font-size="9" fill="#555">finite, exhausted by resisting</text>
+
+          <!-- X mark -->
+          <circle cx="175" cy="220" r="15" fill="#FF6B6B" opacity="0.7"/>
+          <text x="175" y="227" text-anchor="middle" font-size="18" fill="white">✗</text>
+          <text x="175" y="245" text-anchor="middle" font-size="9" fill="#FF6B6B" font-weight="bold">FAILED REPLICATION</text>
+
+          <!-- Right: New model (self-compassion) -->
+          <text x="525" y="30" text-anchor="middle" font-size="12" fill="#00B894" font-weight="bold">NEW MODEL: Self-Compassion</text>
+
+          <rect x="420" y="50" width="210" height="200" rx="8" fill="#DCFCE7" stroke="#00B894" stroke-width="2"/>
+
+          <!-- Self-compassion cycle -->
+          <circle cx="525" cy="90" r="25" fill="#00B894" stroke="#333" stroke-width="1"/>
+          <text x="525" y="97" text-anchor="middle" font-size="10" fill="white" font-weight="bold">Self</text>
+          <text x="525" y="109" text-anchor="middle" font-size="10" fill="white" font-weight="bold">Compassion</text>
+
+          <!-- Arrows showing reinforcement -->
+          <path d="M 525 120 L 525 140" stroke="#00B894" stroke-width="2" marker-end="url(#arrowGreen)"/>
+          <text x="555" y="130" font-size="9" fill="#555">↓ Lower shame</text>
+
+          <path d="M 525 160 L 525 180" stroke="#00B894" stroke-width="2" marker-end="url(#arrowGreen)"/>
+          <text x="555" y="190" font-size="9" fill="#555">↓ Better recovery</text>
+
+          <!-- Bottom insight -->
+          <rect x="70" y="260" width="510" height="30" rx="4" fill="#F5F3FF" stroke="#6C5CE7" stroke-width="1"/>
+          <text x="90" y="279" font-size="10" fill="#555">When you fail (and you will), self-compassion predicts rebound better than willpower. Shame drives relapse; kindness drives growth.</text>
+
+          <defs>
+            <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#00B894"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🔍 KEY LESSON</div>
+        <p><strong>The ego depletion myth:</strong> In 1998, Roy Baumeister published the famous "chocolate chip cookie" study suggesting willpower is a limited resource that depletes with use. This became dogma in psychology for 20+ years.</p>
+        <p><strong>The problem:</strong> In 2023, when researchers tried to replicate the study with modern methodology, it *completely failed*. The effect size was zero. Willpower depletion, it turns out, is largely a belief effect—when people *think* their willpower is depleted, they act more impulsively (placebo effect).</p>
+        <p><strong>What actually works:</strong> Research by Kristin Neff shows that <strong>self-compassion</strong> (treating yourself kindly after failure) predicts better recovery than willpower. When you slip and check Twitter, shame makes you say "I'm hopeless" and give up. Self-compassion says "I'm human, I'm learning, I'll try again tomorrow." The second predicts long-term success.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>We spent 25 years torturing ourselves with the idea that willpower is finite, burning out faster, feeling worse about every failure. Turns out, the whole foundation was wrong. The cruelty was in the science, not in ourselves. Go be nice to yourself for once.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p><strong>Training dynamics in neural networks:</strong> If you penalize a model harshly for every mistake during training (high loss function), it often diverges or gets stuck in bad local minima. But if you use <strong>curriculum learning</strong> (progressively increasing difficulty while being forgiving of early mistakes), the model learns better. Similarly, self-compassion after failure is like gentle curriculum learning: it lets your behavioral policy improve without diverging into shame spirals.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+        <p><strong>Mindset (Dweck):</strong> Dweck's growth mindset is about self-compassion: mistakes are data points for learning, not evidence of inadequacy. <strong>Atomic Habits (Clear):</strong> Clear emphasizes that habit formation is about systems and environment, not willpower. The willpower myth kept us from building better systems.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"You don't need more willpower. You need more self-compassion and better systems."</div>
+        <div class="quote-attr">— Nir Eyal, Indistractable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 11: Social Antibodies -->
+  <section class="lesson lesson-11">
+    <div class="lesson-inner">
+      <div class="lesson-num" style="background: var(--mint);">11</div>
+      <h2 class="lesson-title">Social Antibodies</h2>
+      <p class="lesson-subtitle">How culture resists new distractions</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 320" width="600" height="300">
+          <!-- Timeline of moral panics -->
+          <text x="350" y="25" text-anchor="middle" font-size="13" fill="#333" font-weight="bold">HISTORY OF "DANGEROUS" TECHNOLOGY</text>
+
+          <!-- 1600s: Novels -->
+          <rect x="30" y="50" width="120" height="100" rx="6" fill="#E8F4FD" stroke="#0984E3" stroke-width="2"/>
+          <text x="90" y="75" text-anchor="middle" font-size="11" fill="#0984E3" font-weight="bold">1600s</text>
+          <text x="90" y="95" text-anchor="middle" font-size="10" fill="#555">Novels</text>
+          <text x="90" y="112" text-anchor="middle" font-size="8" fill="#666">"Will damage</text>
+          <text x="90" y="122" text-anchor="middle" font-size="8" fill="#666">women's minds"</text>
+          <text x="90" y="135" text-anchor="middle" font-size="8" fill="#666">✗ False alarm</text>
+
+          <!-- 1920s: Radio -->
+          <rect x="175" y="50" width="120" height="100" rx="6" fill="#FFE8E8" stroke="#FF6B6B" stroke-width="2"/>
+          <text x="235" y="75" text-anchor="middle" font-size="11" fill="#FF6B6B" font-weight="bold">1920s</text>
+          <text x="235" y="95" text-anchor="middle" font-size="10" fill="#555">Radio</text>
+          <text x="235" y="112" text-anchor="middle" font-size="8" fill="#666">"Youth will lose</text>
+          <text x="235" y="122" text-anchor="middle" font-size="8" fill="#666">ability to read"</text>
+          <text x="235" y="135" text-anchor="middle" font-size="8" fill="#666">✗ False alarm</text>
+
+          <!-- 1950s: TV -->
+          <rect x="320" y="50" width="120" height="100" rx="6" fill="#DCFCE7" stroke="#00B894" stroke-width="2"/>
+          <text x="380" y="75" text-anchor="middle" font-size="11" fill="#00B894" font-weight="bold">1950s</text>
+          <text x="380" y="95" text-anchor="middle" font-size="10" fill="#555">Television</text>
+          <text x="380" y="112" text-anchor="middle" font-size="8" fill="#666">"Children will</text>
+          <text x="380" y="122" text-anchor="middle" font-size="8" fill="#666">become zombies"</text>
+          <text x="380" y="135" text-anchor="middle" font-size="8" fill="#666">✗ False alarm</text>
+
+          <!-- 1990s: Video games -->
+          <rect x="465" y="50" width="120" height="100" rx="6" fill="#F5F3FF" stroke="#A06CD5" stroke-width="2"/>
+          <text x="525" y="75" text-anchor="middle" font-size="11" fill="#A06CD5" font-weight="bold">1990s</text>
+          <text x="525" y="95" text-anchor="middle" font-size="10" fill="#555">Video games</text>
+          <text x="525" y="112" text-anchor="middle" font-size="8" fill="#666">"Cause violence</text>
+          <text x="525" y="122" text-anchor="middle" font-size="8" fill="#666">& addiction"</text>
+          <text x="525" y="135" text-anchor="middle" font-size="8" fill="#666">⚠ Partially true</text>
+
+          <!-- Bottom box: The pattern -->
+          <rect x="30" y="170" width="555" height="120" rx="8" fill="#FFF5F5" stroke="#FF6B6B" stroke-width="2"/>
+          <text x="310" y="195" text-anchor="middle" font-size="12" fill="#FF6B6B" font-weight="bold">THE PATTERN: Moral Panic Cycle</text>
+          <text x="50" y="220" font-size="10" fill="#555">1. New tech emerges → 2. Society fears it → 3. Moral panic → 4. Regulation/norms develop</text>
+          <text x="50" y="237" font-size="10" fill="#555">5. Society adapts → 6. New norms become "common sense" → 7. Next tech emerges, cycle repeats</text>
+          <text x="50" y="260" font-size="10" fill="#555" font-weight="bold">Social antibodies = Cultural immune system. It's slow, imperfect, but it works.</text>
+          <text x="50" y="277" font-size="10" fill="#555">Smartphones are the same: panic now, norms later (like phone-free dinners), sanity eventually.</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🔍 KEY LESSON</div>
+        <p><strong>Every new technology triggers a moral panic:</strong> Novels (1600s) would damage women's minds. Radio (1920s) would make people stop reading. Television (1950s) would create zombies. Video games (1990s) would cause violence. Every single one was met with apocalyptic predictions. Most were wrong.</p>
+        <p><strong>Social antibodies develop over time:</strong> Society develops norms and regulations. We now have healthy relationships with novels, radio, TV, and (mostly) games. Society creates "social antibodies"—cultural immune responses—that protect us from genuinely problematic uses while allowing beneficial uses.</p>
+        <p><strong>Smartphones are no different:</strong> We're panicking now, but in 20 years, new norms will emerge (phone-free times, notification defaults, digital literacy curricula). The solution isn't to ban technology—it's to let social antibodies develop while minimizing harm in the interim.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Every generation thinks the *next* generation's tech will destroy civilization. Your grandparents feared your parents' TV. Your parents feared your video games. You fear your kids' TikTok. It's Recency Bias: The Musical. Humans are hilariously predictable.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>This is an <strong>emergent system behavior</strong>: individual actors (people, institutions, regulators) interact locally, and global patterns (cultural norms, social antibodies) emerge without centralized planning. Like how immune cells respond to pathogens, society responds to technological threats through decentralized adaptation. Some responses are overreactions; some are justified. The system self-corrects over time, much like biological immunity after repeated exposure.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+        <p><strong>Sapiens (Harari):</strong> Harari traces how social norms and collective fictions coordinate human behavior at scale. Social antibodies are exactly this: emergent, decentralized coordination without a central authority. <strong>The Black Swan (Taleb):</strong> We systematically underestimate the probability of novel events (new tech) and overestimate their impact. Moral panics reflect this bias.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Society has an immune system. It's called culture. It's slow, but it works."</div>
+        <div class="quote-attr">— Nir Eyal, Indistractable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY SPOTLIGHT 1: Nir's Moment -->
+  <section class="story story-1">
+    <div class="story-inner">
+      <h2>Story Spotlight: The Question</h2>
+      <p>Nir Eyal was working in his home office when his 5-year-old daughter walked in and asked him something. He didn't hear her. His attention was split between her presence and his phone in his hand. By the time he looked up, she had already turned away.</p>
+      <p>She didn't ask again. And in that moment, Eyal realized: <strong>his daughter had learned that asking Daddy was futile.</strong> She'd adapted to his distraction by no longer seeking his attention.</p>
+      <p>This wasn't a failure of willpower. It wasn't a technology problem (though the phone was the instrument). It was a <strong>values problem.</strong> Eyal claimed his family was his top priority, but his calendar and attention allocation told a different story. His values and his behaviors were misaligned.</p>
+      <p>That conversation (or lack thereof) sparked the entire Indistractable project. Eyal realized that the people who are truly indistractable aren't those with the most willpower—they're the ones whose lives are deeply aligned with their values. When your attention naturally flows toward what matters, distraction stops being a willpower problem and becomes a design problem.</p>
+      <p><strong>The lesson:</strong> Before you blame your phone, audit your values. Are your calendar, notifications, and time allocation reflecting what you actually care about? If not, all the productivity hacks in the world won't help.</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 200" width="600" height="180">
+          <!-- Dad at desk -->
+          <circle cx="150" cy="60" r="18" fill="#FFD700" stroke="#333" stroke-width="2"/>
+          <rect x="135" y="82" width="30" height="50" rx="4" fill="#E8E8E8" stroke="#333" stroke-width="2"/>
+
+          <!-- Phone in hand -->
+          <rect x="160" y="90" width="35" height="55" rx="3" fill="#000" stroke="#666" stroke-width="1"/>
+          <circle cx="177" cy="100" r="5" fill="#FF6B6B"/>
+
+          <!-- Daughter -->
+          <circle cx="400" cy="80" r="16" fill="#FFD700" stroke="#333" stroke-width="2"/>
+          <rect x="388" y="100" width="24" height="40" rx="4" fill="#E8E8E8" stroke="#333" stroke-width="2"/>
+
+          <!-- Speech bubble (question) -->
+          <ellipse cx="420" cy="50" rx="50" ry="25" fill="#FFF" stroke="#333" stroke-width="1"/>
+          <text x="420" y="55" text-anchor="middle" font-size="10" fill="#333">"Dad, can you...?"</text>
+
+          <!-- Dad not hearing (X mark) -->
+          <circle cx="150" cy="150" r="12" fill="#FF6B6B" opacity="0.7"/>
+          <line x1="142" y1="142" x2="158" y2="158" stroke="white" stroke-width="2"/>
+          <line x1="158" y1="142" x2="142" y2="158" stroke="white" stroke-width="2"/>
+
+          <!-- Daughter turning away (sad) -->
+          <path d="M 400 140 Q 400 160 420 170" stroke="#999" stroke-width="2" fill="none"/>
+          <text x="440" y="155" font-size="9" fill="#999" font-style="italic">walks away...</text>
+
+          <!-- Value misalignment arrow (bottom) -->
+          <path d="M 150 160 L 400 160" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+          <text x="275" y="180" text-anchor="middle" font-size="10" fill="#FF6B6B" font-weight="bold">Values say "family first" / Attention says "phone first"</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY SPOTLIGHT 2: The BCG Experiment -->
+  <section class="story story-2">
+    <div class="story-inner">
+      <h2>Story Spotlight: Predictable Time Off</h2>
+      <p>At Boston Consulting Group (BCG), researcher Leslie Perlow implemented an experiment: give one team "predictable time off" (no Slack before 9am, no meetings on Fridays, scheduled focus time), and see if productivity suffers.</p>
+      <p>Conventional wisdom said it would tank. How can people be productive with fewer working hours? But Perlow's hypothesis was different: <strong>people are more productive when they can relax.</strong> Constant vigilance—the anxiety of never knowing when you'll be interrupted—is itself a distraction.</p>
+      <p>The results shocked the firm: <strong>the team with predictable time off was 21% more productive, had lower burnout, and better client satisfaction.</strong> Why? Because people knew focus time was coming, they could relax between meetings instead of staying hyper-alert. They batched their email and Slack instead of context-switching constantly. They did deeper work in less time.</p>
+      <p>The key insight: <strong>Indistractability is a team sport.</strong> You can't be indistractable alone in a culture that punishes focus. But when an organization explicitly protects focus time and rejects the always-on culture, individuals naturally become indistractable.</p>
+      <p><strong>The lesson:</strong> If you're struggling to focus despite all your techniques, check your environment. Are you in a culture that respects boundaries? If not, no amount of personal discipline will help. You need systemic change.</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 200" width="600" height="180">
+          <!-- Before: Distracted team -->
+          <text x="150" y="30" text-anchor="middle" font-size="11" fill="#FF6B6B" font-weight="bold">BEFORE: Always On-Call</text>
+
+          <g opacity="0.6">
+            <circle cx="100" cy="70" r="12" fill="#FFD700" stroke="#FF6B6B" stroke-width="2"/>
+            <circle cx="150" cy="70" r="12" fill="#FFD700" stroke="#FF6B6B" stroke-width="2"/>
+            <circle cx="200" cy="70" r="12" fill="#FFD700" stroke="#FF6B6B" stroke-width="2"/>
+          </g>
+
+          <!-- Notifications bouncing off them -->
+          <circle cx="80" cy="100" r="6" fill="#FF6B6B" opacity="0.8"/>
+          <circle cx="130" cy="110" r="6" fill="#FF6B6B" opacity="0.8"/>
+          <circle cx="180" cy="105" r="6" fill="#FF6B6B" opacity="0.8"/>
+
+          <text x="150" y="140" text-anchor="middle" font-size="9" fill="#FF6B6B">Constant interruptions</text>
+          <text x="150" y="153" text-anchor="middle" font-size="9" fill="#FF6B6B">= low focus, high anxiety</text>
+
+          <!-- After: Focused team -->
+          <text x="550" y="30" text-anchor="middle" font-size="11" fill="#00B894" font-weight="bold">AFTER: Protected Time</text>
+
+          <g opacity="1">
+            <circle cx="500" cy="70" r="12" fill="#FFD700" stroke="#00B894" stroke-width="2"/>
+            <circle cx="550" cy="70" r="12" fill="#FFD700" stroke="#00B894" stroke-width="2"/>
+            <circle cx="600" cy="70" r="12" fill="#FFD700" stroke="#00B894" stroke-width="2"/>
+          </g>
+
+          <!-- Shield of blocked time -->
+          <path d="M 480 50 L 480 90 Q 550 110 550 110 Q 550 110 620 90 L 620 50"
+                fill="#C7FFFE" stroke="#00B894" stroke-width="2" opacity="0.5"/>
+
+          <text x="550" y="140" text-anchor="middle" font-size="9" fill="#00B894" font-weight="bold">+21% productivity</text>
+          <text x="550" y="153" text-anchor="middle" font-size="9" fill="#00B894" font-weight="bold">↓ Burnout, ↑ Focus</text>
+
+          <!-- Magic stat (bottom) -->
+          <rect x="50" y="170" width="600" height="25" rx="4" fill="#FFF5F5" stroke="#FF6B6B" stroke-width="1"/>
+          <text x="350" y="188" text-anchor="middle" font-size="10" fill="#FF6B6B" font-weight="bold">Same people, same work, different CULTURE = entirely different results</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEATSHEET SECTION -->
+  <section class="cheatsheet">
+    <div class="cheatsheet-inner">
+      <h2>The Indistractable Framework</h2>
+
+      <div class="two-col">
+        <div class="cheat-card">
+          <h3>1. MASTER YOUR INTERNAL TRIGGERS</h3>
+          <p>Name the emotion (boredom, anxiety, loneliness). Wait 10 minutes. Surf the urge like a wave. The feeling will pass.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>2. MAKE TIME FOR TRACTION</h3>
+          <p>Replace to-do lists with timeboxed calendar blocks. Schedule time toward your values: deep work, family, learning. Traction pulls toward values.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>3. ELIMINATE EXTERNAL TRIGGERS</h3>
+          <p>Audit every notification. Disable 80% of them. Make distraction inconvenient (effort pacts). Technology is just an instrument—the design is the problem.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>4. USE PACTS TO PREVENT DISTRACTION</h3>
+          <p>Price pacts (bet money). Effort pacts (delete the app). Identity pacts ("I am indistractable"). Your past self helps your future self.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>5. BE INDISTRACTABLE WITH PEOPLE</h3>
+          <p>Phone stacking during meals. Device-free time with family. Presence is the gift. Relationships die through a thousand tiny moments of inattention.</p>
+        </div>
+
+        <div class="cheat-card">
+          <h3>6. BUILD INDISTRACTABLE SYSTEMS</h3>
+          <p>Culture beats willpower. Create psychological safety. Protect focus time systematically. Leslie Perlow's research: predictable time off = higher productivity.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px; padding: 24px; background: rgba(255,255,255,0.1); border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">
+        <h3 style="color: var(--indistractable-sunny); margin-bottom: 12px;">The Core Insight</h3>
+        <p style="color: rgba(255,255,255,0.9); font-size: 0.95rem; line-height: 1.8;">
+          Indistractability isn't about having the strongest willpower or the best productivity apps. It's about <strong>alignment between your values and your attention.</strong> When you know what matters and you've built systems (timeboxes, pacts, environmental design) that support those values, distraction stops being a character flaw and becomes a design problem you've already solved.
+        </p>
+        <p style="color: rgba(255,255,255,0.9); font-size: 0.95rem; line-height: 1.8; margin-top: 12px;">
+          The opposite of indistractable isn't distracted—it's <strong>distracted.</strong> The way forward is self-compassion when you fail, clear values always, and systems that make the right choice the easy choice.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

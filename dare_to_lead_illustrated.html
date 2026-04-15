@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dare to Lead — Illustrated Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+    :root {
+      --coral: #FF6B6B; --teal: #4ECDC4; --sunny: #FFE66D;
+      --purple: #A06CD5; --sky: #74B9FF; --mint: #55EFC4;
+      --pink: #FD79A8; --orange: #FDCB6E; --dark: #2D3436;
+      --cream: #FFEAA7; --deep-blue: #0984E3; --warm-red: #E17055;
+      --forest: #00B894; --dark-purple: #6C5CE7;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+
+    /* COVER SECTION */
+    .cover {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 40px 20px;
+    }
+
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem; color: white; letter-spacing: -2px;
+      text-align: center; position: relative; z-index: 2; line-height: 1.1;
+    }
+
+    .cover .author { font-size: 1.3rem; color: var(--sunny); margin-top: 8px; font-weight: 600; z-index: 2; }
+    .cover .subtitle { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 16px; z-index: 2; text-align: center; max-width: 600px; }
+
+    .cover svg { max-width: 500px; width: 100%; height: auto; margin-top: 30px; z-index: 2; }
+
+    .particle {
+      position: absolute; border-radius: 50%; opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* LESSON SECTIONS */
+    .lesson {
+      min-height: 100vh; padding: 60px 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .lesson-inner { max-width: 900px; width: 100%; }
+
+    .lesson-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem;
+      color: white; margin-bottom: 12px;
+    }
+
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2;
+    }
+
+    .lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+
+    .illustration-container {
+      margin: 40px 0; display: flex; justify-content: center;
+    }
+
+    .illustration-container svg {
+      max-width: 600px; width: 100%; height: auto;
+    }
+
+    /* CARDS */
+    .card {
+      background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    .card-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+    }
+
+    .card p { font-size: 0.95rem; line-height: 1.7; color: #444; margin-bottom: 12px; }
+    .card p:last-child { margin-bottom: 0; }
+
+    .quote-box {
+      background: var(--dark); color: white; border-radius: 16px;
+      padding: 24px 28px; margin-bottom: 20px;
+    }
+
+    .quote-box .quote-text { font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+    .quote-box .quote-attr { color: var(--sunny); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+
+    .connect-box {
+      background: #e8f4fd; border-left: 4px solid var(--deep-blue);
+      border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px;
+    }
+
+    .connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--deep-blue); letter-spacing: 1px; margin-bottom: 6px; }
+    .connect-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+
+    .ai-box {
+      background: linear-gradient(135deg, #0984E3, #6C5CE7);
+      color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px;
+    }
+
+    .ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--sunny); margin-bottom: 6px; }
+    .ai-box p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 10px; }
+    .ai-box p:last-child { margin-bottom: 0; }
+
+    .funny-box {
+      background: #fff5f5; border-radius: 16px; padding: 20px 24px;
+      margin-bottom: 20px; border: 2px dashed var(--coral);
+    }
+
+    .funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: var(--coral); letter-spacing: 1px; margin-bottom: 6px; }
+    .funny-box p { font-size: 0.9rem; line-height: 1.6; color: #666; font-style: italic; }
+
+    /* STORY SECTION */
+    .story {
+      min-height: 100vh; padding: 60px 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .story-inner { max-width: 900px; width: 100%; }
+
+    .story h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; margin-bottom: 20px; line-height: 1.2;
+    }
+
+    .story p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 16px; }
+
+    .story svg { max-width: 600px; width: 100%; height: auto; margin: 40px 0; }
+
+    /* CHEATSHEET SECTION */
+    .cheatsheet {
+      min-height: 100vh; padding: 60px 20px;
+      background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .cheatsheet-inner { max-width: 900px; width: 100%; }
+
+    .cheatsheet h2 {
+      font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; text-align: center; margin-bottom: 40px;
+    }
+
+    .cheatsheet h3 {
+      color: white; font-size: 1.3rem; margin-bottom: 20px; margin-top: 30px;
+    }
+
+    .cheatsheet-card {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px; padding: 20px; margin-bottom: 15px;
+    }
+
+    .cheatsheet-card h4 {
+      color: var(--sunny); font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px;
+    }
+
+    .cheatsheet-card p {
+      color: rgba(255,255,255,0.8); font-size: 0.85rem; line-height: 1.6;
+    }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    @media (max-width: 700px) {
+      .two-col { grid-template-columns: 1fr; }
+      .cover h1 { font-size: 2.5rem; }
+      .lesson-title { font-size: 1.8rem; }
+      .story h2 { font-size: 1.8rem; }
+    }
+
+    /* LESSON BACKGROUND GRADIENTS */
+    .lesson-1 { background: linear-gradient(180deg, #fff8f0 0%, #ffe8d6 100%); }
+    .lesson-2 { background: linear-gradient(180deg, #f0f9ff 0%, #d6e9ff 100%); }
+    .lesson-3 { background: linear-gradient(180deg, #fef9f0 0%, #ffefd6 100%); }
+    .lesson-4 { background: linear-gradient(180deg, #f0fff4 0%, #d6ffe8 100%); }
+    .lesson-5 { background: linear-gradient(180deg, #fdf0f9 0%, #fdd6f0 100%); }
+    .lesson-6 { background: linear-gradient(180deg, #f9f0ff 0%, #f0d6ff 100%); }
+    .lesson-7 { background: linear-gradient(180deg, #fff0f0 0%, #ffd6d6 100%); }
+    .lesson-8 { background: linear-gradient(180deg, #f0fef9 0%, #d6fff0 100%); }
+    .lesson-9 { background: linear-gradient(180deg, #fffaf0 0%, #ffe5d6 100%); }
+    .lesson-10 { background: linear-gradient(180deg, #f5f0ff 0%, #e8d6ff 100%); }
+    .lesson-11 { background: linear-gradient(180deg, #fff8f0 0%, #ffe8d6 100%); }
+
+    /* STORY BACKGROUNDS */
+    .story-1 { background: linear-gradient(135deg, #1a1a3e 0%, #2d2d5f 100%); color: white; }
+    .story-2 { background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%); color: white; }
+    .story-3 { background: linear-gradient(135deg, #1a2332 0%, #2d3e5f 100%); color: white; }
+
+    .story-1 p, .story-2 p, .story-3 p { color: rgba(255,255,255,0.9); }
+
+    /* ACCENT COLORS BY LESSON */
+    .lesson-1 .lesson-num { background: #E17055; }
+    .lesson-2 .lesson-num { background: #0984E3; }
+    .lesson-3 .lesson-num { background: #FDCB6E; }
+    .lesson-4 .lesson-num { background: #00B894; }
+    .lesson-5 .lesson-num { background: #FD79A8; }
+    .lesson-6 .lesson-num { background: #A06CD5; }
+    .lesson-7 .lesson-num { background: #FF6B6B; }
+    .lesson-8 .lesson-num { background: #4ECDC4; }
+    .lesson-9 .lesson-num { background: #FDCB6E; }
+    .lesson-10 .lesson-num { background: #6C5CE7; }
+    .lesson-11 .lesson-num { background: #E17055; }
+
+    .lesson-1 .lesson-title { color: #E17055; }
+    .lesson-2 .lesson-title { color: #0984E3; }
+    .lesson-3 .lesson-title { color: #FDCB6E; }
+    .lesson-4 .lesson-title { color: #00B894; }
+    .lesson-5 .lesson-title { color: #FD79A8; }
+    .lesson-6 .lesson-title { color: #A06CD5; }
+    .lesson-7 .lesson-title { color: #FF6B6B; }
+    .lesson-8 .lesson-title { color: #4ECDC4; }
+    .lesson-9 .lesson-title { color: #FDCB6E; }
+    .lesson-10 .lesson-title { color: #6C5CE7; }
+    .lesson-11 .lesson-title { color: #E17055; }
+  </style>
+</head>
+<body>
+
+  <!-- ============== COVER SECTION ============== -->
+  <section class="cover">
+    <div class="particle" style="width: 120px; height: 120px; background: var(--pink); left: 10%; top: 15%; animation-delay: 0s;"></div>
+    <div class="particle" style="width: 80px; height: 80px; background: var(--purple); right: 15%; top: 25%; animation-delay: 1s;"></div>
+    <div class="particle" style="width: 100px; height: 100px; background: var(--warm-red); left: 20%; bottom: 20%; animation-delay: 2s;"></div>
+    <div class="particle" style="width: 90px; height: 90px; background: var(--sunny); right: 10%; bottom: 15%; animation-delay: 3s;"></div>
+
+    <h1>Dare to Lead</h1>
+    <p class="author">Brené Brown</p>
+    <p class="subtitle">Brave Work. Tough Conversations. Whole Hearts.</p>
+    <p class="subtitle" style="font-size: 0.9rem; margin-top: 24px; color: rgba(255,255,255,0.5);">An illustrated guide to vulnerability, leadership, and the courage to be imperfect</p>
+
+    <svg viewBox="0 0 700 300" style="margin-top: 40px;">
+      <!-- Arena/Colosseum silhouette -->
+      <defs>
+        <linearGradient id="arenaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#FD79A8;stop-opacity:0.8" />
+          <stop offset="100%" style="stop-color:#E17055;stop-opacity:0.8" />
+        </linearGradient>
+      </defs>
+
+      <!-- Open arena -->
+      <ellipse cx="350" cy="200" rx="280" ry="100" fill="none" stroke="url(#arenaGrad)" stroke-width="3" opacity="0.7"/>
+      <ellipse cx="350" cy="200" rx="260" ry="85" fill="none" stroke="url(#arenaGrad)" stroke-width="2" opacity="0.5"/>
+      <ellipse cx="350" cy="200" rx="240" ry="70" fill="none" stroke="url(#arenaGrad)" stroke-width="2" opacity="0.3"/>
+
+      <!-- Center figure standing brave -->
+      <circle cx="350" cy="200" r="30" fill="#FD79A8" opacity="0.6"/>
+      <rect x="335" y="170" width="30" height="40" fill="#E17055" opacity="0.7"/>
+      <circle cx="350" cy="160" r="15" fill="#FFE66D" opacity="0.8"/>
+
+      <!-- Rising arms (vulnerability pose) -->
+      <line x1="320" y1="190" x2="280" y2="140" stroke="#FD79A8" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+      <line x1="380" y1="190" x2="420" y2="140" stroke="#FD79A8" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+
+      <!-- Shields being lowered (fading away) -->
+      <rect x="150" y="120" width="50" height="60" fill="none" stroke="#A06CD5" stroke-width="2" opacity="0.3" transform="rotate(-15 175 150)"/>
+      <rect x="500" y="120" width="50" height="60" fill="none" stroke="#A06CD5" stroke-width="2" opacity="0.3" transform="rotate(15 525 150)"/>
+
+      <!-- Light rays (hope/courage) -->
+      <line x1="350" y1="80" x2="350" y2="30" stroke="var(--sunny)" stroke-width="2" opacity="0.4"/>
+      <line x1="380" y1="90" x2="420" y2="50" stroke="var(--sunny)" stroke-width="2" opacity="0.4"/>
+      <line x1="320" y1="90" x2="280" y2="50" stroke="var(--sunny)" stroke-width="2" opacity="0.4"/>
+
+      <!-- Text overlay -->
+      <text x="350" y="280" font-family="Playfair Display, serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle" opacity="0.6">Courage in the Arena</text>
+    </svg>
+  </section>
+
+  <!-- ============== LESSON 1: RUMBLING WITH VULNERABILITY ============== -->
+  <section class="lesson lesson-1">
+    <div class="lesson-inner">
+      <div class="lesson-num">1</div>
+      <h2 class="lesson-title">Rumbling with Vulnerability</h2>
+      <p class="lesson-subtitle">Courage to show up and be seen</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300">
+          <!-- Man in the Arena (Roosevelt reference) -->
+          <defs>
+            <linearGradient id="arenaLight" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#E17055;stop-opacity:0.6" />
+              <stop offset="100%" style="stop-color:#D63031;stop-opacity:0.6" />
+            </linearGradient>
+          </defs>
+
+          <!-- Arena backdrop -->
+          <ellipse cx="350" cy="150" rx="250" ry="80" fill="none" stroke="#E17055" stroke-width="2" opacity="0.4"/>
+
+          <!-- Central figure (vulnerable) -->
+          <circle cx="350" cy="100" r="25" fill="#E17055"/>
+          <rect x="330" y="130" width="40" height="50" fill="#E17055" rx="4"/>
+          <rect x="310" y="140" width="20" height="40" fill="#E17055" rx="4"/>
+          <rect x="370" y="140" width="20" height="40" fill="#E17055" rx="4"/>
+          <rect x="320" y="190" width="15" height="30" fill="#E17055" rx="3"/>
+          <rect x="365" y="190" width="15" height="30" fill="#E17055" rx="3"/>
+
+          <!-- Open heart symbol (vulnerability) -->
+          <path d="M 350 110 L 355 105 L 360 110 Q 365 105 365 100 Q 365 95 360 95 Q 355 100 350 105 Q 345 100 340 95 Q 335 95 335 100 Q 335 105 340 110 Z" fill="#FD79A8" opacity="0.8"/>
+
+          <!-- Spotlight (visibility/being seen) -->
+          <circle cx="350" cy="150" r="100" fill="none" stroke="#FFE66D" stroke-width="1" opacity="0.3"/>
+          <circle cx="350" cy="150" r="80" fill="none" stroke="#FFE66D" stroke-width="1" opacity="0.2"/>
+
+          <!-- 20 years research data visualization (small dots) -->
+          <circle cx="200" cy="80" r="3" fill="#A06CD5" opacity="0.6"/>
+          <circle cx="220" cy="90" r="3" fill="#A06CD5" opacity="0.5"/>
+          <circle cx="240" cy="70" r="3" fill="#A06CD5" opacity="0.6"/>
+          <circle cx="500" cy="85" r="3" fill="#A06CD5" opacity="0.6"/>
+          <circle cx="480" cy="95" r="3" fill="#A06CD5" opacity="0.5"/>
+          <circle cx="520" cy="75" r="3" fill="#A06CD5" opacity="0.6"/>
+
+          <!-- Text labels -->
+          <text x="350" y="250" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#E17055" text-anchor="middle">The Man in the Arena</text>
+          <text x="350" y="270" font-family="Inter, sans-serif" font-size="12" fill="#888" text-anchor="middle">Brené's 20 years of research</text>
+          <text x="350" y="290" font-family="Inter, sans-serif" font-size="11" fill="#999" text-anchor="middle">400,000+ data points on vulnerability</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🎯 KEY LESSON</div>
+        <p>Vulnerability is not weakness — it's the birthplace of innovation, creativity, and change. Brené's 20-year research on 400,000+ data points reveals that the most resilient, creative, and connected people share one trait: they are willing to be uncomfortable. Theodore Roosevelt's "Man in the Arena" speech frames this perfectly: power comes not from critics on the sidelines, but from those brave enough to fail in the ring.</p>
+        <p><strong>Real Examples:</strong> NASA engineers who admit mistakes early save lives; Satya Nadella's vulnerable leadership at Microsoft (acknowledging past failures) drove the company's renaissance; Brené's own TED talk went viral (12M+ views) precisely because she shared her shame research and personal breakdown publicly.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Vulnerability is like opening your laptop in a coffee shop with someone looking over your shoulder. Your instinct is to close it immediately, but the real magic happens when you keep it open and let them see your unfinished work, your messy drafts, your search history for "is it normal to feel like an imposter?"</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>In machine learning, vulnerability parallels model uncertainty quantification. Just as vulnerable leaders admit what they don't know, well-calibrated models output confidence scores alongside predictions. Overconfident models (those without "vulnerability") fail catastrophically on new data. Bayesian neural networks that express epistemic uncertainty (the AI equivalent of "I'm not sure") make better decisions at distribution shift.</p>
+        <p>LLMs like Claude use techniques like temperature sampling and top-k filtering—essentially expressing uncertainty rather than faking confidence. Armor (false certainty) kills learning; vulnerability (admitting uncertainty) enables adaptation.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><strong>Mindset (Dweck):</strong> Growth mindset requires admitting you don't know something. <strong>Crucial Conversations:</strong> Staying in dialogue requires vulnerability about your stakes and stories. <strong>Emotional Intelligence (Goleman):</strong> Self-awareness means acknowledging your emotions, not armoring against them.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Vulnerability is not weakness. It's our most accurate measure of courage."</div>
+        <div class="quote-attr">— Brené Brown</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== LESSON 2: THE ARMOR WE WEAR ============== -->
+  <section class="lesson lesson-2">
+    <div class="lesson-inner">
+      <div class="lesson-num">2</div>
+      <h2 class="lesson-title">The Armor We Wear</h2>
+      <p class="lesson-subtitle">Three shields that distance us from connection</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300">
+          <!-- Three shields (armor) -->
+          <defs>
+            <linearGradient id="shield1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#D63031;stop-opacity:0.8" />
+            </linearGradient>
+            <linearGradient id="shield2" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#0984E3;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#2D3436;stop-opacity:0.8" />
+            </linearGradient>
+            <linearGradient id="shield3" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#6C5CE7;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#2D3436;stop-opacity:0.8" />
+            </linearGradient>
+          </defs>
+
+          <!-- Shield 1: Cynicism -->
+          <path d="M 150 80 L 180 80 Q 200 70 200 100 L 200 180 Q 200 200 150 220 Q 100 200 100 180 L 100 100 Q 100 70 120 80 Z" fill="url(#shield1)"/>
+          <text x="150" y="150" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">CYNICISM</text>
+
+          <!-- Shield 2: Criticism -->
+          <path d="M 350 80 L 380 80 Q 400 70 400 100 L 400 180 Q 400 200 350 220 Q 300 200 300 180 L 300 100 Q 300 70 320 80 Z" fill="url(#shield2)"/>
+          <text x="350" y="150" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">CRITICISM</text>
+
+          <!-- Shield 3: Cool/Detachment -->
+          <path d="M 550 80 L 580 80 Q 600 70 600 100 L 600 180 Q 600 200 550 220 Q 500 200 500 180 L 500 100 Q 500 70 520 80 Z" fill="url(#shield3)"/>
+          <text x="550" y="150" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">COOL</text>
+
+          <!-- Arrows showing deflection -->
+          <line x1="150" y1="230" x2="150" y2="270" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+          <line x1="350" y1="230" x2="350" y2="270" stroke="#0984E3" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+          <line x1="550" y1="230" x2="550" y2="270" stroke="#6C5CE7" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+
+          <!-- Vulnerability rays being blocked -->
+          <text x="150" y="290" font-family="Inter, sans-serif" font-size="10" fill="#FF6B6B" text-anchor="middle">Foreboding Joy</text>
+          <text x="350" y="290" font-family="Inter, sans-serif" font-size="10" fill="#0984E3" text-anchor="middle">Numbing</text>
+          <text x="550" y="290" font-family="Inter, sans-serif" font-size="10" fill="#6C5CE7" text-anchor="middle">Perfectionism</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🎯 KEY LESSON</div>
+        <p>We armor ourselves in three ways: <strong>Cynicism</strong> (sarcasm, eye-rolling, "nothing matters anyway"), <strong>Criticism</strong> (attacking before being attacked), and <strong>Cool</strong> (emotional distance, appearing unaffected). These aren't just personality quirks—they're survival strategies that backfire.</p>
+        <p><strong>Real Examples:</strong> Foreboding joy: You get promoted, but immediately worry you'll fail. Numbing: Using alcohol, shopping, or screens to avoid feeling. Perfectionism: A tech leader who never admits mistakes and burns out their team. Brené found that 85% of people carry shame memories from school—the armor often begins there.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>We equip ourselves with emotional armor the way a hermit crab finds a shell. The problem: hermit crabs eventually need bigger shells. We just keep squishing into the same one, hoping no one notices the cracks.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>In neural networks, armor is overfitting. A model that's "cynical" about new data (high regularization, frozen layers) protects itself but fails to adapt. Criticism-based learning (adversarial training taken to extremes) can make models brittle. The "cool" detached model maximizes validation metrics at the cost of generalization.</p>
+        <p>The solution in ML: dropout (admitting uncertainty), ensemble methods (many vulnerable models), and calibration. Systems that acknowledge what they don't know adapt better than those hiding behind false confidence.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><strong>Radical Candor (Kim Scott):</strong> Armor prevents the "care personally + challenge directly" feedback needed for growth. <strong>The 7 Habits (Covey):</strong> Habit 5 (seek first to understand) requires lowering your shields. <strong>Thinking Fast and Slow (Kahneman):</strong> Defensive reasoning is a cognitive bias that armor amplifies.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"The thing that makes us most cynical and fearful is when we've gone through things that we've not allowed ourselves to process."</div>
+        <div class="quote-attr">— Brené Brown</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== LESSON 3: THE STORIES WE TELL OURSELVES ============== -->
+  <section class="lesson lesson-3">
+    <div class="lesson-inner">
+      <div class="lesson-num">3</div>
+      <h2 class="lesson-title">The Stories We Tell Ourselves</h2>
+      <p class="lesson-subtitle">Confabulation and the "SFD" technique</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300">
+          <!-- Brain thought bubbles (confabulation) -->
+          <defs>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- Central head -->
+          <circle cx="350" cy="120" r="50" fill="#FDCB6E" opacity="0.7"/>
+          <circle cx="330" cy="100" r="8" fill="#2D3436" opacity="0.6"/>
+          <circle cx="370" cy="100" r="8" fill="#2D3436" opacity="0.6"/>
+
+          <!-- Messy thought bubbles (SFD - Shitty First Draft) -->
+          <circle cx="150" cy="80" r="35" fill="none" stroke="#FDCB6E" stroke-width="2" opacity="0.6" filter="url(#glow)"/>
+          <text x="150" y="85" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle">What if</text>
+          <text x="150" y="100" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle">they hate</text>
+          <text x="150" y="115" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle">me?</text>
+
+          <circle cx="550" cy="80" r="35" fill="none" stroke="#FDCB6E" stroke-width="2" opacity="0.6" filter="url(#glow)"/>
+          <text x="550" y="85" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle">They're</text>
+          <text x="550" y="100" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle">talking</text>
+          <text x="550" y="115" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle">about me</text>
+
+          <circle cx="200" cy="220" r="35" fill="none" stroke="#FDCB6E" stroke-width="2" opacity="0.6" filter="url(#glow)"/>
+          <text x="200" y="225" font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle">I'm not</text>
+          <text x="200" y="238" font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle">good enough</text>
+
+          <circle cx="500" cy="220" r="35" fill="none" stroke="#FDCB6E" stroke-width="2" opacity="0.6" filter="url(#glow)"/>
+          <text x="500" y="225" font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle">This will</text>
+          <text x="500" y="238" font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle">never work</text>
+
+          <!-- Lines connecting head to thoughts -->
+          <line x1="310" y1="100" x2="180" y2="100" stroke="#FDCB6E" stroke-width="1" opacity="0.3"/>
+          <line x1="390" y1="100" x2="530" y2="100" stroke="#FDCB6E" stroke-width="1" opacity="0.3"/>
+          <line x1="320" y1="160" x2="220" y2="210" stroke="#FDCB6E" stroke-width="1" opacity="0.3"/>
+          <line x1="380" y1="160" x2="480" y2="210" stroke="#FDCB6E" stroke-width="1" opacity="0.3"/>
+
+          <!-- Label -->
+          <text x="350" y="280" font-family="Inter, sans-serif" font-size="12" fill="#2D3436" text-anchor="middle" font-weight="600">Story-making loop (confirmation bias)</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🎯 KEY LESSON</div>
+        <p>Our brains are storytelling machines. We collect a few data points, then confabulate a narrative to explain them. Your coworker didn't smile—boom, "They're mad at me." They didn't email back—"I blew it." Brené teaches the "SFD" technique: <strong>Story, First Draft.</strong> Name the story you're making up, rumble with it, and replace it with a more honest one.</p>
+        <p><strong>Real Examples:</strong> A manager assumes silence means disagreement (creates conflict); a parent reads the store clerk's tiredness as judgment. Confirmation bias amplifies this: we notice evidence confirming our story and ignore contradictory data. The antidote: curiosity. "What else might be true here?"</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Our brains are basically TMZ for our own lives. Five minutes of silence from your partner = they're planning to leave. One typo in your message = career over. We're all writing fan fiction about ourselves, except the plot keeps being a tragedy.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>This is hallucination and confabulation in language models. GPT confidently generates plausible-sounding text that may be completely false, filling gaps with patterns from training data (not facts). Our brains do the same thing: given incomplete information, they use statistical patterns to generate a "most likely" story.</p>
+        <p>The fix: alignment techniques like RLHF (reinforcement learning from human feedback) train models to express uncertainty. Similarly, humans benefit from training to notice when they're confabulating and pause to gather more data.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><strong>Thinking Fast and Slow (Kahneman):</strong> System 1 thinking jumps to narratives; System 2 thinking slows down to check them. <strong>Crucial Conversations:</strong> "What story am I telling myself?" is the first step to dialogue.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"The most dangerous stories we make up are the ones about ourselves."</div>
+        <div class="quote-attr">— Brené Brown</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== LESSON 4: LIVING INTO OUR VALUES ============== -->
+  <section class="lesson lesson-4">
+    <div class="lesson-inner">
+      <div class="lesson-num">4</div>
+      <h2 class="lesson-title">Living Into Our Values</h2>
+      <p class="lesson-subtitle">Name them. Choose them. Operationalize them.</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300">
+          <!-- Two core values (Brené's example: Courage + Faith) -->
+          <defs>
+            <linearGradient id="valGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#00B894;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#00805D;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="valGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#A06CD5;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#6C3A9E;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+
+          <!-- Left pillar: Courage -->
+          <rect x="100" y="80" width="100" height="160" fill="url(#valGrad1)" rx="4"/>
+          <text x="150" y="130" font-family="Playfair Display, serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">COURAGE</text>
+          <text x="150" y="160" font-family="Inter, sans-serif" font-size="11" fill="white" text-anchor="middle" opacity="0.9">Show up</text>
+          <text x="150" y="175" font-family="Inter, sans-serif" font-size="11" fill="white" text-anchor="middle" opacity="0.9">Tell truth</text>
+          <text x="150" y="190" font-family="Inter, sans-serif" font-size="11" fill="white" text-anchor="middle" opacity="0.9">Take risks</text>
+
+          <!-- Right pillar: Faith -->
+          <rect x="500" y="80" width="100" height="160" fill="url(#valGrad2)" rx="4"/>
+          <text x="550" y="130" font-family="Playfair Display, serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">FAITH</text>
+          <text x="550" y="160" font-family="Inter, sans-serif" font-size="11" fill="white" text-anchor="middle" opacity="0.9">Trust process</text>
+          <text x="550" y="175" font-family="Inter, sans-serif" font-size="11" fill="white" text-anchor="middle" opacity="0.9">Let go</text>
+          <text x="550" y="190" font-family="Inter, sans-serif" font-size="11" fill="white" text-anchor="middle" opacity="0.9">Believe in change</text>
+
+          <!-- Bridge/connection -->
+          <line x1="200" y1="130" x2="500" y2="130" stroke="#2D3436" stroke-width="3" opacity="0.3"/>
+
+          <!-- Performative values (shallow, broken) -->
+          <text x="350" y="250" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#888" text-anchor="middle">Saying vs. Living</text>
+          <text x="150" y="280" font-family="Inter, sans-serif" font-size="10" fill="#E17055" text-anchor="middle">❌ "I value courage"</text>
+          <text x="150" y="295" font-family="Inter, sans-serif" font-size="10" fill="#00B894" text-anchor="middle">✓ Speak up in meetings</text>
+          <text x="550" y="280" font-family="Inter, sans-serif" font-size="10" fill="#E17055" text-anchor="middle">❌ "I value family"</text>
+          <text x="550" y="295" font-family="Inter, sans-serif" font-size="10" fill="#00B894" text-anchor="middle">✓ No phones at dinner</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🎯 KEY LESSON</div>
+        <p>Naming your values is step one. Living them is the whole game. Brené discovered that most people can't name more than 2-3 core values. Worse, they confuse aspirational values ("I want to be courageous") with lived values ("This is how I actually show up").</p>
+        <p><strong>Real Examples:</strong> Brené's values are courage and faith. When she made a mistake, she had to operationalize: courage meant admitting it, faith meant trusting the process. A company says "we value innovation" but punishes failure. A parent says "family first" but checks work email at dinner. Values without behavior are just Instagram captions.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>We treat values like a vision board we bought at TJ Maxx, hang on the wall, and completely ignore. "I value authenticity!"—while carefully curating a LinkedIn persona that would make a marketing agency blush.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>This is alignment in AI. We say we want models to be "safe," but the training process (reward signal) doesn't actually operationalize that. Misalignment comes when espoused values differ from incentivized values. RLHF tries to operationalize safety through feedback, but only works if the feedback actually represents what we claim to value.</p>
+        <p>Similarly, a company's "real" values are revealed by their resource allocation, not their mission statement. Where does the money go? What behavior is rewarded? That's the true value system.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><strong>Atomic Habits (Clear):</strong> Your values define your identity; actions build identity. <strong>The 7 Habits (Covey):</strong> Begin with the end in mind = clarify your values. <strong>Mindset (Dweck):</strong> Growth mindset is a value that requires specific behaviors.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"When we stop trying to be everything to everyone, we can be everything to someone—and more importantly, to ourselves."</div>
+        <div class="quote-attr">— Brené Brown</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== LESSON 5: BRAVING TRUST ============== -->
+  <section class="lesson lesson-5">
+    <div class="lesson-inner">
+      <div class="lesson-num">5</div>
+      <h2 class="lesson-title">Braving Trust</h2>
+      <p class="lesson-subtitle">The BRAVING inventory: 7 pillars of trustworthy relationships</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 350">
+          <!-- 7 pillars of BRAVING -->
+          <defs>
+            <linearGradient id="pillarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#FD79A8;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#E17055;stop-opacity:0.8" />
+            </linearGradient>
+          </defs>
+
+          <!-- Seven columns -->
+          <g id="pillars">
+            <rect x="30" y="80" width="80" height="180" fill="url(#pillarGrad)" opacity="0.8"/>
+            <text x="70" y="140" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">B</text>
+            <text x="70" y="240" font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle" font-weight="600">BOUNDARIES</text>
+
+            <rect x="120" y="80" width="80" height="180" fill="url(#pillarGrad)" opacity="0.7"/>
+            <text x="160" y="140" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">R</text>
+            <text x="160" y="240" font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle" font-weight="600">RELIABILITY</text>
+
+            <rect x="210" y="80" width="80" height="180" fill="url(#pillarGrad)" opacity="0.7"/>
+            <text x="250" y="140" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">A</text>
+            <text x="250" y="240" font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle" font-weight="600">ACCOUNTABILITY</text>
+
+            <rect x="300" y="80" width="80" height="180" fill="url(#pillarGrad)" opacity="0.8"/>
+            <text x="340" y="140" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">V</text>
+            <text x="340" y="240" font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle" font-weight="600">VAULT</text>
+
+            <rect x="390" y="80" width="80" height="180" fill="url(#pillarGrad)" opacity="0.7"/>
+            <text x="430" y="140" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">I</text>
+            <text x="430" y="240" font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle" font-weight="600">INTEGRITY</text>
+
+            <rect x="480" y="80" width="80" height="180" fill="url(#pillarGrad)" opacity="0.7"/>
+            <text x="520" y="140" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">N</text>
+            <text x="520" y="240" font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle" font-weight="600">NON-JUDGMENT</text>
+
+            <rect x="570" y="80" width="80" height="180" fill="url(#pillarGrad)" opacity="0.8"/>
+            <text x="610" y="140" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">G</text>
+            <text x="610" y="240" font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle" font-weight="600">GENEROSITY</text>
+          </g>
+
+          <!-- Marble jar metaphor (trust accumulation) -->
+          <ellipse cx="350" cy="300" rx="120" ry="40" fill="none" stroke="#FD79A8" stroke-width="2" opacity="0.6"/>
+          <text x="350" y="310" font-family="Inter, sans-serif" font-size="12" fill="#2D3436" text-anchor="middle" font-weight="600">Marble Jar (Trust Accumulates)</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🎯 KEY LESSON</div>
+        <p>BRAVING is Brené's acronym for the 7 elements of trustworthiness: <strong>Boundaries</strong> (you set and respect them), <strong>Reliability</strong> (you do what you say), <strong>Accountability</strong> (you own mistakes), <strong>Vault</strong> (you keep confidences), <strong>Integrity</strong> (your actions match your values), <strong>Non-judgment</strong> (you don't judge people for struggling), <strong>Generosity</strong> (you assume good intent).</p>
+        <p><strong>Real Examples:</strong> The marble jar metaphor: trust builds one marble at a time, but one betrayal removes handfuls. A single lie about "I'll call you back" empties the jar. Teams with high-BRAVING leaders report 3x higher engagement. Brené's research shows that people recover faster from violation when the person shows accountability.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Trust is like a plant. You water it daily (small marbles: "I showed up on time," "I kept your secret"). Betrayal is like throwing the plant out the window. Even if you buy a new plant, everyone remembers the last one flying down Fifth Avenue.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>BRAVING is homomorphic to AI safety frameworks. Boundaries = capability constraints. Reliability = consistent, predictable behavior. Accountability = interpretability and ability to explain decisions. Vault = privacy preservation. Integrity = alignment with stated values. Non-judgment = avoiding adversarial robustness failures. Generosity = assuming users act in good faith.</p>
+        <p>Just as trust in humans requires all seven, robust AI systems need all seven elements. Fail one, and users lose confidence in the whole system (marbles fall).</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><strong>Radical Candor (Kim Scott):</strong> Trust enables the feedback that drives growth. <strong>Crucial Conversations:</strong> Safety (related to judgment) is foundational to dialogue. <strong>The 7 Habits (Covey):</strong> Emotional bank account is Covey's marble jar.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Trust is earned in drops and lost in buckets."</div>
+        <div class="quote-attr">— Brené Brown</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== LESSON 6: LEARNING TO RISE ============== -->
+  <section class="lesson lesson-6">
+    <div class="lesson-inner">
+      <div class="lesson-num">6</div>
+      <h2 class="lesson-title">Learning to Rise</h2>
+      <p class="lesson-subtitle">The reckoning, rumble, and revolution cycle</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300">
+          <!-- Three-stage cycle -->
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#A06CD5"/>
+            </marker>
+          </defs>
+
+          <!-- Stage 1: Fall (Reckoning) -->
+          <circle cx="150" cy="150" r="50" fill="#E17055" opacity="0.7"/>
+          <text x="150" y="145" font-family="Playfair Display, serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">↓</text>
+          <text x="150" y="230" font-family="Inter, sans-serif" font-size="11" fill="#2D3436" text-anchor="middle" font-weight="600">RECKONING</text>
+          <text x="150" y="245" font-family="Inter, sans-serif" font-size="9" fill="#666" text-anchor="middle">Feel the hurt</text>
+
+          <!-- Arrow -->
+          <path d="M 200 150 L 290 150" stroke="#A06CD5" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+          <!-- Stage 2: Get Curious (Rumble) -->
+          <circle cx="350" cy="150" r="50" fill="#A06CD5" opacity="0.7"/>
+          <text x="350" y="145" font-family="Playfair Display, serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">?</text>
+          <text x="350" y="230" font-family="Inter, sans-serif" font-size="11" fill="#2D3436" text-anchor="middle" font-weight="600">RUMBLE</text>
+          <text x="350" y="245" font-family="Inter, sans-serif" font-size="9" fill="#666" text-anchor="middle">Get curious & learn</text>
+
+          <!-- Arrow -->
+          <path d="M 400 150 L 490 150" stroke="#A06CD5" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+          <!-- Stage 3: Try Again (Revolution) -->
+          <circle cx="550" cy="150" r="50" fill="#00B894" opacity="0.7"/>
+          <text x="550" y="155" font-family="Playfair Display, serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">↑</text>
+          <text x="550" y="230" font-family="Inter, sans-serif" font-size="11" fill="#2D3436" text-anchor="middle" font-weight="600">REVOLUTION</text>
+          <text x="550" y="245" font-family="Inter, sans-serif" font-size="9" fill="#666" text-anchor="middle">Try again differently</text>
+
+          <!-- Loop back -->
+          <path d="M 520 100 Q 350 40 180 100" stroke="#A06CD5" stroke-width="2" fill="none" stroke-dasharray="5,5" marker-end="url(#arrowhead)"/>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🎯 KEY LESSON</div>
+        <p>Resilience isn't about never falling—it's about the cycle of rising. <strong>Reckoning:</strong> Feel the emotions (shame, disappointment, failure). <strong>Rumble:</strong> Get curious. What happened? What can I learn? What story am I telling myself? <strong>Revolution:</strong> Try again, but differently. The secret: emotional literacy. You can't skip to revolution without processing the fall.</p>
+        <p><strong>Real Examples:</strong> Brené's own breakdown (which led to her TED talk and research pivot). Teams that skip rumbling and go straight to "move on" build a culture of avoidance. Organizations that teach emotional literacy see higher resilience. Permission slips help: "It's okay to fail at this. That's how we learn."</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>We treat failure like a one-night stand: something to be ashamed of and never speak of again. But resilience is the difference between someone who had one bad date and someone who learned to date better.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>This is the training loop in ML. Reckoning = loss signal (you messed up). Rumble = gradient descent (get curious about why). Revolution = weight update (try again differently). Models that skip rumbling (no backprop, no learning) never improve. Teams that build psychological safety for failure learn faster than those that punish it.</p>
+        <p>Emotional literacy in humans = interpretability in AI. If you don't understand why you failed (the gradient), you can't improve. Transparent failure is data.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><strong>Mindset (Dweck):</strong> Growth mindset reframes failure as data, not identity. <strong>Atomic Habits (Clear):</strong> Systems beat goals; resilient systems include feedback loops. <strong>Man's Search for Meaning (Frankl):</strong> Meaning-making turns suffering into growth.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Failure is the hallway between who we were and who we're becoming."</div>
+        <div class="quote-attr">— Brené Brown (paraphrased)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== LESSON 7: CLEAR IS KIND ============== -->
+  <section class="lesson lesson-7">
+    <div class="lesson-inner">
+      <div class="lesson-num">7</div>
+      <h2 class="lesson-title">Clear Is Kind, Unclear Is Unkind</h2>
+      <p class="lesson-subtitle">The courage to have tough conversations</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300">
+          <!-- Two paths: clarity vs. avoidance -->
+          <defs>
+            <linearGradient id="clearPath" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#D63031;stop-opacity:0.8" />
+            </linearGradient>
+            <linearGradient id="avoidPath" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#CDDC39;stop-opacity:0.5" />
+              <stop offset="100%" style="stop-color:#9CCC65;stop-opacity:0.5" />
+            </linearGradient>
+          </defs>
+
+          <!-- Left path: Clarity (hard but honest) -->
+          <rect x="50" y="80" width="280" height="120" fill="url(#clearPath)" rx="8" opacity="0.8"/>
+          <text x="190" y="110" font-family="Playfair Display, serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">THE CLEAR PATH</text>
+          <text x="190" y="135" font-family="Inter, sans-serif" font-size="11" fill="white" text-anchor="middle">Hard conversation</text>
+          <text x="190" y="155" font-family="Inter, sans-serif" font-size="11" fill="white" text-anchor="middle">Specific feedback</text>
+          <text x="190" y="175" font-family="Inter, sans-serif" font-size="10" fill="white" text-anchor="middle" opacity="0.9">Immediate clarity</text>
+          <text x="190" y="200" font-family="Inter, sans-serif" font-size="9" fill="white" text-anchor="middle" opacity="0.8">↓ Healing & Growth</text>
+
+          <!-- Right path: Avoidance (easy but cruel) -->
+          <rect x="370" y="80" width="280" height="120" fill="url(#avoidPath)" rx="8" opacity="0.7"/>
+          <text x="510" y="110" font-family="Playfair Display, serif" font-size="18" font-weight="bold" fill="#2D3436" text-anchor="middle">THE AVOIDANCE PATH</text>
+          <text x="510" y="135" font-family="Inter, sans-serif" font-size="11" fill="#2D3436" text-anchor="middle">Silence/hints</text>
+          <text x="510" y="155" font-family="Inter, sans-serif" font-size="11" fill="#2D3436" text-anchor="middle">Gossip & venting</text>
+          <text x="510" y="175" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle" opacity="0.9">Confusion & resentment</text>
+          <text x="510" y="200" font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle" opacity="0.8">↓ Toxicity & Breakdown</text>
+
+          <!-- Label -->
+          <text x="350" y="270" font-family="Inter, sans-serif" font-size="12" fill="#2D3436" text-anchor="middle" font-weight="600">Kind ≠ Nice. Clarity ≠ Cruelty.</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🎯 KEY LESSON</div>
+        <p>We avoid tough conversations because we think we're being kind. We're not. We're being unkind. Unclear feedback leaves people guessing, anxious, and resentful. Clear feedback—delivered with care—is an act of respect.</p>
+        <p><strong>Real Examples:</strong> "You did great work, but I need you to improve X" (clear, kind) vs. "You're really talented" while passively excluding them (avoidant, cruel). Brené calls this "paint done"—if you're not willing to say it to someone's face, stop thinking it. Feedback frameworks (SBI—Situation, Behavior, Impact) make clarity easier and less personal.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>We've been told "if you don't have anything nice to say, don't say anything." What we didn't understand: that's for gossip, not feedback. Staying silent about real problems isn't nice—it's lazy and mean.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>This is training signal clarity. Vague reward signals (avoidance) lead to misalignment and confused behavior. Clear, specific reward signals (feedback frameworks) train better models. RLHF works because the human feedback is explicit about what's wanted.</p>
+        <p>Also applies to interpretability: if you can't tell a system clearly what went wrong, it can't learn. Clarity in training is kindness to the model's future performance.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><strong>Radical Candor (Kim Scott):</strong> Care personally + challenge directly = candor. <strong>Crucial Conversations:</strong> Clear dialogue is the foundation. <strong>Nonviolent Communication (Rosenberg):</strong> Honesty delivered with care transforms relationships.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Clear is kind. Unclear is unkind."</div>
+        <div class="quote-attr">— Brené Brown</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== LESSON 8: SHAME VS. GUILT ============== -->
+  <section class="lesson lesson-8">
+    <div class="lesson-inner">
+      <div class="lesson-num">8</div>
+      <h2 class="lesson-title">Shame vs. Guilt</h2>
+      <p class="lesson-subtitle">One destroys; the other teaches</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300">
+          <!-- Shame vs. Guilt comparison -->
+          <defs>
+            <linearGradient id="shameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#D63031;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#8B0000;stop-opacity:0.8" />
+            </linearGradient>
+            <linearGradient id="guiltGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#FDCB6E;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#DDA15E;stop-opacity:0.8" />
+            </linearGradient>
+          </defs>
+
+          <!-- SHAME: "I am bad" -->
+          <g>
+            <rect x="50" y="50" width="280" height="220" fill="url(#shameGrad)" rx="12" opacity="0.8"/>
+            <text x="190" y="90" font-family="Playfair Display, serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">SHAME</text>
+            <text x="190" y="115" font-family="Inter, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="600">"I AM BAD"</text>
+
+            <line x1="70" y1="140" x2="310" y2="140" stroke="white" stroke-width="1" opacity="0.3"/>
+
+            <text x="190" y="165" font-family="Inter, sans-serif" font-size="10" fill="white" text-anchor="middle">Identity attack</text>
+            <text x="190" y="185" font-family="Inter, sans-serif" font-size="10" fill="white" text-anchor="middle">Hide/Protect self</text>
+            <text x="190" y="205" font-family="Inter, sans-serif" font-size="10" fill="white" text-anchor="middle">Disconnection</text>
+            <text x="190" y="225" font-family="Inter, sans-serif" font-size="10" fill="white" text-anchor="middle">85% remember shame from school</text>
+            <text x="190" y="245" font-family="Inter, sans-serif" font-size="10" fill="white" text-anchor="middle">Antidote: Empathy</text>
+          </g>
+
+          <!-- GUILT: "I did bad" -->
+          <g>
+            <rect x="370" y="50" width="280" height="220" fill="url(#guiltGrad)" rx="12" opacity="0.8"/>
+            <text x="510" y="90" font-family="Playfair Display, serif" font-size="22" font-weight="bold" fill="#2D3436" text-anchor="middle">GUILT</text>
+            <text x="510" y="115" font-family="Inter, sans-serif" font-size="12" fill="#2D3436" text-anchor="middle" font-weight="600">"I DID BAD"</text>
+
+            <line x1="390" y1="140" x2="630" y2="140" stroke="#2D3436" stroke-width="1" opacity="0.3"/>
+
+            <text x="510" y="165" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle">Behavior focused</text>
+            <text x="510" y="185" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle">Repair/Make amends</text>
+            <text x="510" y="205" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle">Growth & learning</text>
+            <text x="510" y="225" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle">Natural resilience</text>
+            <text x="510" y="245" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle">Antidote: Accountability</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🎯 KEY LESSON</div>
+        <p><strong>Shame:</strong> "I am bad" (identity). <strong>Guilt:</strong> "I did something bad" (behavior). Shame is corrosive and leads to hiding, perfectionism, and broken relationships. Guilt is constructive—it motivates repair and learning.</p>
+        <p><strong>Real Examples:</strong> 85% of people surveyed remember a shame event from school (a teacher or peer making them feel fundamentally wrong). Someone with guilt says "I made a mistake; let me fix it." Someone with shame says "I'm a failure" and shuts down. Shame resilience requires empathy—someone witnessing your struggle without judgment.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Shame is like your brain's way of saying "You should cease to exist." Guilt is saying "Your choice was bad; let's try again." One is an existential crisis; the other is useful feedback.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>Shame in loss functions is catastrophic. If every mistake triggers a complete parameter reset (existential crisis), the model can't learn—it just avoids risks. Guilt-like learning (targeted loss signal on specific behaviors) enables adaptation.</p>
+        <p>Shame spiraling = mode collapse in training (model learns to hide by producing same output). Guilt-based learning = healthy loss landscape exploration. AI safety requires guilt-like signals (this action was bad), not shame-like ones (you are fundamentally misaligned).</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><strong>Emotional Intelligence (Goleman):</strong> Self-awareness includes recognizing shame triggers. <strong>Man's Search for Meaning (Frankl):</strong> Shame without meaning is torture; guilt with purpose is growth. <strong>The 7 Habits (Covey):</strong> Personal integrity is built by acknowledging guilt and making amends.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Shame corrodes the part of us that believes we can change."</div>
+        <div class="quote-attr">— Brené Brown</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== LESSON 9: EMPATHY VS. SYMPATHY ============== -->
+  <section class="lesson lesson-9">
+    <div class="lesson-inner">
+      <div class="lesson-num">9</div>
+      <h2 class="lesson-title">Empathy vs. Sympathy</h2>
+      <p class="lesson-subtitle">Connection over pity; the 4 attributes of empathy</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300">
+          <!-- Two figures: sympathy vs empathy -->
+          <defs>
+            <linearGradient id="empGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#FD79A8;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#E17055;stop-opacity:0.8" />
+            </linearGradient>
+          </defs>
+
+          <!-- Theresa Wiseman's 4 attributes of empathy -->
+          <g>
+            <rect x="30" y="50" width="620" height="40" fill="url(#empGrad)" rx="6" opacity="0.8"/>
+            <text x="350" y="78" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">THERESA WISEMAN'S 4 ATTRIBUTES OF EMPATHY</text>
+          </g>
+
+          <!-- 4 boxes -->
+          <g>
+            <!-- 1. Perspective Taking -->
+            <rect x="30" y="110" width="140" height="140" fill="white" stroke="#FD79A8" stroke-width="2" rx="8"/>
+            <text x="100" y="135" font-family="Playfair Display, serif" font-size="16" font-weight="bold" fill="#E17055" text-anchor="middle">1. Perspective</text>
+            <text x="100" y="180" font-family="Inter, sans-serif" font-size="9" fill="#666" text-anchor="middle" font-style="italic">See the world</text>
+            <text x="100" y="195" font-family="Inter, sans-serif" font-size="9" fill="#666" text-anchor="middle" font-style="italic">through their eyes</text>
+            <text x="100" y="210" font-family="Inter, sans-serif" font-size="8" fill="#999" text-anchor="middle">(not your story)</text>
+
+            <!-- 2. Stay out of judgment -->
+            <rect x="190" y="110" width="140" height="140" fill="white" stroke="#FD79A8" stroke-width="2" rx="8"/>
+            <text x="260" y="135" font-family="Playfair Display, serif" font-size="16" font-weight="bold" fill="#E17055" text-anchor="middle">2. Non-judgment</text>
+            <text x="260" y="180" font-family="Inter, sans-serif" font-size="9" fill="#666" text-anchor="middle" font-style="italic">Hold their story</text>
+            <text x="260" y="195" font-family="Inter, sans-serif" font-size="9" fill="#666" text-anchor="middle" font-style="italic">without fixing</text>
+            <text x="260" y="210" font-family="Inter, sans-serif" font-size="8" fill="#999" text-anchor="middle">or advising</text>
+
+            <!-- 3. Identify emotion -->
+            <rect x="350" y="110" width="140" height="140" fill="white" stroke="#FD79A8" stroke-width="2" rx="8"/>
+            <text x="420" y="135" font-family="Playfair Display, serif" font-size="16" font-weight="bold" fill="#E17055" text-anchor="middle">3. Feel with them</text>
+            <text x="420" y="180" font-family="Inter, sans-serif" font-size="9" fill="#666" text-anchor="middle" font-style="italic">Recognize their</text>
+            <text x="420" y="195" font-family="Inter, sans-serif" font-size="9" fill="#666" text-anchor="middle" font-style="italic">emotion in yourself</text>
+            <text x="420" y="210" font-family="Inter, sans-serif" font-size="8" fill="#999" text-anchor="middle">(mirror neurons)</text>
+
+            <!-- 4. Communicate -->
+            <rect x="510" y="110" width="140" height="140" fill="white" stroke="#FD79A8" stroke-width="2" rx="8"/>
+            <text x="580" y="135" font-family="Playfair Display, serif" font-size="16" font-weight="bold" fill="#E17055" text-anchor="middle">4. Communicate</text>
+            <text x="580" y="180" font-family="Inter, sans-serif" font-size="9" fill="#666" text-anchor="middle" font-style="italic">"I'm here with you"</text>
+            <text x="580" y="195" font-family="Inter, sans-serif" font-size="9" fill="#666" text-anchor="middle" font-style="italic">not "at least..."</text>
+            <text x="580" y="210" font-family="Inter, sans-serif" font-size="8" fill="#999" text-anchor="middle">show you see them</text>
+          </g>
+
+          <!-- Bottom note -->
+          <text x="350" y="285" font-family="Inter, sans-serif" font-size="10" fill="#2D3436" text-anchor="middle" font-weight="600">Sympathy = "I feel sorry for you" (distance). Empathy = "I'm in this with you" (connection).</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🎯 KEY LESSON</div>
+        <p>Theresa Wiseman's four attributes of empathy: <strong>1) Perspective taking</strong> (see through their eyes, not yours), <strong>2) Non-judgment</strong> (hold their story without fixing it), <strong>3) Identify emotion</strong> (feel with them), <strong>4) Communicate</strong> (show you're with them). Sympathy says "at least..." (comparisons, silver-lining toxicity). Empathy says "I see you. This is hard."</p>
+        <p><strong>Real Examples:</strong> Someone loses a job. Sympathy: "At least you can relax now!" (unkind). Empathy: "That sounds terrifying. I'm here." One person dismisses; the other connects. Silver-lining culture ("at least") trains people to hide struggles.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Sympathy is like saying "I see you're drowning" from a boat. Empathy is wading in to help. People don't want your "but look at the bright side" life jacket—they want to know they're not drowning alone.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>This is RLHF and reward modeling. Sympathy-like systems map input → generic response (the "at least" template). Empathy-like systems map input → personalized, context-aware response. Mirror neurons in humans ≈ attention mechanisms in transformers that align with the user's emotional state.</p>
+        <p>ChatGPT with empathy training (RLHF) will say "I understand that's difficult" (perspective + non-judgment) rather than dismissing your concern. The 4 attributes of empathy are literally the objectives of aligned AI dialogue.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><strong>Nonviolent Communication (Rosenberg):</strong> Empathy is fully understanding someone's needs and feelings. <strong>Emotional Intelligence (Goleman):</strong> Empathy is a core social skill. <strong>Crucial Conversations:</strong> Safety (rooted in empathy) enables dialogue.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"If we can share our story with someone who responds with empathy and understanding, shame can't survive."</div>
+        <div class="quote-attr">— Brené Brown</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== LESSON 10: DARING LEADERSHIP ============== -->
+  <section class="lesson lesson-10">
+    <div class="lesson-inner">
+      <div class="lesson-num">10</div>
+      <h2 class="lesson-title">Daring Leadership</h2>
+      <p class="lesson-subtitle">The 4 skillsets of brave leaders</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300">
+          <!-- 4 pillars of daring leadership -->
+          <defs>
+            <linearGradient id="leaderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#6C5CE7;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#2D3436;stop-opacity:0.8" />
+            </linearGradient>
+          </defs>
+
+          <!-- Central leader figure -->
+          <circle cx="350" cy="80" r="25" fill="#6C5CE7" opacity="0.8"/>
+          <rect x="330" y="110" width="40" height="50" fill="#6C5CE7" opacity="0.8" rx="4"/>
+
+          <!-- 4 skills radiating outward -->
+
+          <!-- 1. Rumble with vulnerability -->
+          <g>
+            <circle cx="100" cy="180" r="45" fill="white" stroke="#6C5CE7" stroke-width="2"/>
+            <text x="100" y="170" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#6C5CE7" text-anchor="middle">1. Rumble with</text>
+            <text x="100" y="185" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#6C5CE7" text-anchor="middle">Vulnerability</text>
+            <text x="100" y="205" font-family="Inter, sans-serif" font-size="8" fill="#999" text-anchor="middle">Admit what</text>
+            <text x="100" y="215" font-family="Inter, sans-serif" font-size="8" fill="#999" text-anchor="middle">you don't know</text>
+          </g>
+
+          <!-- 2. Living values -->
+          <g>
+            <circle cx="600" cy="180" r="45" fill="white" stroke="#6C5CE7" stroke-width="2"/>
+            <text x="600" y="170" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#6C5CE7" text-anchor="middle">2. Operationalize</text>
+            <text x="600" y="185" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#6C5CE7" text-anchor="middle">Values</text>
+            <text x="600" y="205" font-family="Inter, sans-serif" font-size="8" fill="#999" text-anchor="middle">Walk the talk;</text>
+            <text x="600" y="215" font-family="Inter, sans-serif" font-size="8" fill="#999" text-anchor="middle">reward what matters</text>
+          </g>
+
+          <!-- 3. BRAVING trust -->
+          <g>
+            <circle cx="350" cy="250" r="45" fill="white" stroke="#6C5CE7" stroke-width="2"/>
+            <text x="350" y="240" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#6C5CE7" text-anchor="middle">3. BRAVING</text>
+            <text x="350" y="255" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#6C5CE7" text-anchor="middle">Trust</text>
+            <text x="350" y="275" font-family="Inter, sans-serif" font-size="8" fill="#999" text-anchor="middle">Be trustworthy;</text>
+            <text x="350" y="285" font-family="Inter, sans-serif" font-size="8" fill="#999" text-anchor="middle">hold people accountable</text>
+          </g>
+
+          <!-- Lines connecting -->
+          <line x1="320" y1="100" x2="130" y2="160" stroke="#6C5CE7" stroke-width="1" opacity="0.3"/>
+          <line x1="380" y1="100" x2="570" y2="160" stroke="#6C5CE7" stroke-width="1" opacity="0.3"/>
+          <line x1="350" y1="130" x2="350" y2="205" stroke="#6C5CE7" stroke-width="1" opacity="0.3"/>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🎯 KEY LESSON</div>
+        <p>Daring leaders combine four skillsets: <strong>1) Rumbling with vulnerability</strong> (admitting what they don't know, asking for help), <strong>2) Living their values</strong> (decisions reflect stated values; culture rewards what matters), <strong>3) BRAVING trust</strong> (being trustworthy while holding people accountable), <strong>4) Learning to rise</strong> (modeling resilience, failure recovery, and growth).</p>
+        <p><strong>Real Examples:</strong> Melinda Gates publicly shares her learning curve as she moves into philanthropy. Shonda Rhimes talks openly about her fear and how she acts anyway. Companies with daring leaders report higher engagement, lower turnover, and more innovation. The pattern: vulnerability + values + trust + resilience.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>Most leaders think courage looks like unwavering confidence and all the answers. Actually, it looks like someone saying "I don't know" and asking the room for help. Guess which team actually innovates?</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>This is systems leadership. A daring leader sets constraints (values, BRAVING boundaries) and creates feedback loops (rumbling = transparency, learning to rise = error correction). It mirrors how well-governed AI systems work: clear values, trustworthy mechanisms, transparent failures, continuous learning.</p>
+        <p>Organizations that hide failures (no learning to rise) become brittle, like unaligned AI systems. Those that rumble openly adapt. Leadership is engineering systems for human flourishing—same principles as AI safety.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><strong>The 7 Habits (Covey):</strong> Integrity is the foundation; model it. <strong>Radical Candor (Kim Scott):</strong> Care + challenge = brave leadership. <strong>Mindset (Dweck):</strong> Leaders who model growth mindset unlock team potential. <strong>Range (Epstein):</strong> Broad learning + humility outperforms narrow expertise.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"A brave leader is someone who is willing to rumble with uncertainty, vulnerability, and her [or his] imperfections."</div>
+        <div class="quote-attr">— Brené Brown</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== LESSON 11: THE COURAGE TO BE IMPERFECT ============== -->
+  <section class="lesson lesson-11">
+    <div class="lesson-inner">
+      <div class="lesson-num">11</div>
+      <h2 class="lesson-title">The Courage to Be Imperfect</h2>
+      <p class="lesson-subtitle">Wholehearted living and the 10 guideposts</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300">
+          <!-- Open hand/heart symbolizing wholehearted -->
+          <defs>
+            <linearGradient id="wholeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#E17055;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#FD79A8;stop-opacity:0.8" />
+            </linearGradient>
+          </defs>
+
+          <!-- Hand opening (palm up, vulnerability) -->
+          <ellipse cx="350" cy="150" rx="100" ry="120" fill="url(#wholeGrad)" opacity="0.7"/>
+
+          <!-- Heart inside hand -->
+          <path d="M 350 130 Q 360 115 370 115 Q 380 115 380 125 Q 380 135 350 155 Q 320 135 320 125 Q 320 115 330 115 Q 340 115 350 130 Z" fill="white" opacity="0.8"/>
+
+          <!-- 10 guideposts arranged in circle -->
+          <g font-family="Inter, sans-serif" font-size="9" fill="#2D3436" text-anchor="middle">
+            <text x="180" y="80">1. Authenticity</text>
+            <text x="250" y="55">2. Self-compassion</text>
+            <text x="380" y="50">3. Resilience</text>
+            <text x="520" y="65">4. Gratitude</text>
+            <text x="580" y="120">5. Creativity</text>
+            <text x="600" y="200">6. Play & Rest</text>
+            <text x="550" y="270">7. Calm & Still</text>
+            <text x="400" y="290">8. Meaningful Work</text>
+            <text x="230" y="290">9. Friendship</text>
+            <text x="80" y="270">10. Spirituality</text>
+          </g>
+
+          <!-- Central message -->
+          <text x="350" y="180" font-family="Playfair Display, serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">WHOLEHEARTED</text>
+          <text x="350" y="200" font-family="Inter, sans-serif" font-size="10" fill="white" text-anchor="middle" opacity="0.9">Imperfection is beauty</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">🎯 KEY LESSON</div>
+        <p>Wholehearted living is the goal of all previous lessons. It's not about being perfect—it's about being whole, which means embracing all of yourself: joy and shame, strength and struggle. Brené's 10 guideposts: authenticity, self-compassion, resilience, gratitude, creativity, play, rest, calm, meaningful work, and spirituality.</p>
+        <p><strong>Real Examples:</strong> People who let go of certainty are more creative. Those who embrace rest are more productive. Organizations that allow imperfection (psychological safety) innovate faster. The paradox: perfectionism kills performance. Wholehearted people dare bigger because failure isn't identity-threatening—it's data.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">😄 FUNNY TAKE</div>
+        <p>We spend our whole lives trying to become someone worthy. Then Brené shows up and says "You already are; you just need to stop fighting yourself." Plot twist: we're not the problem. Our armor is.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">🤖 AI CONNECTION</div>
+        <p>This is the ultimate goal of AI alignment and interpretability: a system that knows its own limits (self-compassion), adapts when wrong (resilience), seeks meaningful tasks (purpose), and operates transparently (authenticity). Wholeness in AI = internal consistency + external alignment + ability to improve.</p>
+        <p>The lesson applies to training: models that embrace imperfection (uncertainty quantification, calibration) are more robust than those clinging to false certainty. Letting go of the need to be perfect everywhere lets you be excellent where it matters.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">🔗 CROSS-BOOK CONNECTION</div>
+        <p><strong>Man's Search for Meaning (Frankl):</strong> Meaning comes from accepting struggle, not avoiding it. <strong>The Alchemist (Coelho):</strong> Personal legend requires embracing your authentic self. <strong>Atomic Habits (Clear):</strong> Identity is revealed by small behaviors; be the person who embraces imperfection. <strong>Flow (Csikszentmihalyi):</strong> Wholeness emerges from doing what matters with full attention.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Imperfection is not just a way of being human; it is the way of being alive. When we accept ourselves, we accept our creativity, our uniqueness, and our power."</div>
+        <div class="quote-attr">— Brené Brown (paraphrased from Daring Greatly)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== STORY SPOTLIGHT 1: THE VIRAL TED TALK ============== -->
+  <section class="story story-1">
+    <div class="story-inner">
+      <h2>Story Spotlight 1: The TED Talk That Changed Everything</h2>
+
+      <svg viewBox="0 0 700 250">
+        <!-- Stage with spotlight -->
+        <defs>
+          <radialGradient id="spotlight" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#FFE66D;stop-opacity:0.6" />
+            <stop offset="100%" style="stop-color:#FFE66D;stop-opacity:0.1" />
+          </radialGradient>
+        </defs>
+
+        <!-- Stage -->
+        <rect x="100" y="150" width="500" height="80" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+
+        <!-- Spotlight -->
+        <circle cx="350" cy="100" r="120" fill="url(#spotlight)"/>
+
+        <!-- Speaker figure (Brené) -->
+        <circle cx="350" cy="100" r="20" fill="#FFE66D"/>
+        <rect x="330" y="125" width="40" height="45" fill="#FFE66D" rx="2"/>
+        <line x1="320" y1="130" x2="300" y2="110" stroke="#FFE66D" stroke-width="3"/>
+        <line x1="380" y1="130" x2="400" y2="110" stroke="#FFE66D" stroke-width="3"/>
+
+        <!-- Audience symbols -->
+        <circle cx="150" cy="200" r="8" fill="rgba(255,255,255,0.3)"/>
+        <circle cx="180" cy="205" r="6" fill="rgba(255,255,255,0.2)"/>
+        <circle cx="210" cy="200" r="7" fill="rgba(255,255,255,0.25)"/>
+        <circle cx="490" cy="200" r="8" fill="rgba(255,255,255,0.3)"/>
+        <circle cx="520" cy="205" r="6" fill="rgba(255,255,255,0.2)"/>
+        <circle cx="550" cy="200" r="7" fill="rgba(255,255,255,0.25)"/>
+
+        <!-- Text -->
+        <text x="350" y="240" font-family="Inter, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="600">12+ Million Views</text>
+      </svg>
+
+      <p>In 2010, Brené Brown gave a TED talk on vulnerability that would eventually reach 12+ million views. What made it viral wasn't a polished performance—it was her willingness to share her own breakdown, her shame research, and her journey from shame to wholehearted living. She talked about researching vulnerability for years before realizing she was armored against it herself. She shared how she'd had a breakdown, gone to therapy, and discovered the very thing she'd been studying in others.</p>
+
+      <p>The talk resonated because it was the opposite of the typical TED formula: no grand pronouncements, no false certainty, just honest storytelling about research and real struggle. In an age of personal branding and perfectionism, someone standing on stage and saying "I had a breakdown and it was the best thing that happened to me" was revolutionary. The comments poured in: "I thought I was the only one." "I've been living armored." "Thank you for permission to be imperfect."</p>
+
+      <p>That one talk became the genesis of this book and everything that followed. Brené had rumbled with her own vulnerability and discovered that authenticity—not perfection—is what connects people. The irony: she became more influential by admitting her limits than she'd ever been by claiming expertise.</p>
+    </div>
+  </section>
+
+  <!-- ============== STORY SPOTLIGHT 2: NASA ENGINEERS ============== -->
+  <section class="story story-2">
+    <div class="story-inner">
+      <h2>Story Spotlight 2: NASA Engineers and the Power of Vulnerability</h2>
+
+      <svg viewBox="0 0 700 250">
+        <!-- Mission control / engineering team -->
+        <rect x="50" y="80" width="150" height="100" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="2" rx="4"/>
+        <text x="125" y="105" font-family="Inter, sans-serif" font-size="10" fill="rgba(255,255,255,0.6)" text-anchor="middle" font-weight="600">MISSION</text>
+        <text x="125" y="120" font-family="Inter, sans-serif" font-size="10" fill="rgba(255,255,255,0.6)" text-anchor="middle" font-weight="600">CONTROL</text>
+        <circle cx="100" cy="150" r="5" fill="#FFE66D"/>
+        <circle cx="125" cy="155" r="4" fill="#FFE66D"/>
+        <circle cx="150" cy="148" r="5" fill="#FFE66D"/>
+
+        <!-- Rocket/spacecraft in middle -->
+        <rect x="300" y="60" width="100" height="150" fill="rgba(255,255,255,0.1)" stroke="#FFE66D" stroke-width="2"/>
+        <polygon points="350,50 340,80 360,80" fill="#FFE66D"/>
+        <circle cx="350" cy="120" r="20" fill="rgba(255,255,255,0.2)"/>
+
+        <!-- Problem indicators -->
+        <circle cx="500" cy="120" r="30" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5,5"/>
+        <text x="500" y="125" font-family="Inter, sans-serif" font-size="12" fill="#FF6B6B" text-anchor="middle" font-weight="600">PROBLEM</text>
+
+        <!-- Arrow showing early reporting -->
+        <path d="M 430 120 L 470 120" stroke="#FFE66D" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+        <!-- Safe culture symbol -->
+        <text x="350" y="230" font-family="Inter, sans-serif" font-size="11" fill="#FFE66D" text-anchor="middle" font-weight="600">Early error reporting = lives saved</text>
+      </svg>
+
+      <p>When Brené worked with NASA engineers, she discovered something remarkable: the teams most likely to catch catastrophic problems early were those with psychological safety. These teams had a culture where admitting mistakes, raising concerns, and asking for help wasn't a sign of weakness—it was expected.</p>
+
+      <p>In mission-critical work, vulnerability becomes safety. An engineer who's too proud to say "I might have made an error" can kill people. But teams that normalized vulnerability—where people felt safe admitting uncertainty, where asking "does this look right to you?" was routine—caught problems before they became disasters. Brené found that leaders who modeled vulnerability, who admitted what they didn't know, created the conditions for honest reporting.</p>
+
+      <p>The lesson scaled beyond NASA: organizations across industries discovered that psychological safety (rooted in vulnerability) predicts error detection, innovation, and resilience. Google's Project Aristotle later confirmed this: psychological safety was the #1 predictor of team effectiveness. The teams that succeeded were those where people felt safe being imperfect.</p>
+    </div>
+  </section>
+
+  <!-- ============== STORY SPOTLIGHT 3: THE MARBLE JAR ============== -->
+  <section class="story story-3">
+    <div class="story-inner">
+      <h2>Story Spotlight 3: The Marble Jar and the Cost of Betrayal</h2>
+
+      <svg viewBox="0 0 700 250">
+        <!-- Two jar states -->
+
+        <!-- Jar 1: Full -->
+        <g>
+          <ellipse cx="150" cy="100" rx="50" ry="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+          <rect x="100" y="100" width="100" height="80" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+          <ellipse cx="150" cy="180" rx="50" ry="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+
+          <!-- Marbles inside (trust) -->
+          <circle cx="130" cy="130" r="6" fill="#FFE66D" opacity="0.8"/>
+          <circle cx="155" cy="135" r="6" fill="#FFE66D" opacity="0.8"/>
+          <circle cx="170" cy="125" r="6" fill="#FFE66D" opacity="0.8"/>
+          <circle cx="140" cy="155" r="6" fill="#FFE66D" opacity="0.8"/>
+          <circle cx="160" cy="160" r="6" fill="#FFE66D" opacity="0.8"/>
+          <circle cx="125" cy="165" r="6" fill="#FFE66D" opacity="0.8"/>
+
+          <text x="150" y="220" font-family="Inter, sans-serif" font-size="11" fill="rgba(255,255,255,0.7)" text-anchor="middle">Trust Built</text>
+          <text x="150" y="235" font-family="Inter, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)" text-anchor="middle">(Over time, marble by marble)</text>
+        </g>
+
+        <!-- Betrayal event -->
+        <g>
+          <path d="M 250 120 L 300 120" stroke="#FF6B6B" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+          <text x="275" y="110" font-family="Inter, sans-serif" font-size="10" fill="#FF6B6B" text-anchor="middle" font-weight="600">BETRAYAL</text>
+        </g>
+
+        <!-- Jar 2: Empty -->
+        <g>
+          <ellipse cx="550" cy="100" rx="50" ry="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+          <rect x="500" y="100" width="100" height="80" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+          <ellipse cx="550" cy="180" rx="50" ry="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+
+          <!-- Few marbles left -->
+          <circle cx="545" cy="160" r="5" fill="#FF6B6B" opacity="0.5"/>
+
+          <!-- Marbles falling -->
+          <circle cx="520" cy="200" r="5" fill="#FFE66D" opacity="0.3"/>
+          <circle cx="550" cy="210" r="5" fill="#FFE66D" opacity="0.3"/>
+          <circle cx="580" cy="200" r="5" fill="#FFE66D" opacity="0.3"/>
+
+          <text x="550" y="220" font-family="Inter, sans-serif" font-size="11" fill="rgba(255,255,255,0.7)" text-anchor="middle">Trust Lost</text>
+          <text x="550" y="235" font-family="Inter, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)" text-anchor="middle">(In buckets, not drops)</text>
+        </g>
+      </svg>
+
+      <p>Brené uses the marble jar as a metaphor for trust in relationships. Every small act of integrity, follow-through, and care puts a marble in the jar. You show up on time—marble. You keep a secret—marble. You remember what matters to someone—marble. Over time, trust accumulates.</p>
+
+      <p>But betrayal removes marbles in buckets, not drops. A significant lie, a broken confidence, infidelity—these don't just remove a marble. They puncture the jar. Even if you later rebuild trust (marble by marble), the relationship has changed. The person has learned that the jar can break.</p>
+
+      <p>The deeper lesson: accountability matters more than the mistake. If you betray someone but own it immediately, acknowledge the impact, and repair, you refill the jar faster. If you hide it, deny it, or minimize it, you drain more marbles. This is why Brené's BRAVING inventory (especially accountability) is so crucial. Trust can be rebuilt, but only with radical honesty about what broke it.</p>
+    </div>
+  </section>
+
+  <!-- ============== CHEATSHEET SECTION ============== -->
+  <section class="cheatsheet">
+    <div class="cheatsheet-inner">
+      <h2>Dare to Lead: Quick Reference Guide</h2>
+
+      <h3>The BRAVING Inventory</h3>
+      <div class="two-col">
+        <div>
+          <div class="cheatsheet-card">
+            <h4>B — Boundaries</h4>
+            <p>You set boundaries and respect those of others.</p>
+          </div>
+          <div class="cheatsheet-card">
+            <h4>R — Reliability</h4>
+            <p>You do what you say; people know they can count on you.</p>
+          </div>
+          <div class="cheatsheet-card">
+            <h4>A — Accountability</h4>
+            <p>You own your mistakes without excuses.</p>
+          </div>
+        </div>
+        <div>
+          <div class="cheatsheet-card">
+            <h4>V — Vault</h4>
+            <p>You keep confidences; others' stories are safe with you.</p>
+          </div>
+          <div class="cheatsheet-card">
+            <h4>I — Integrity</h4>
+            <p>Your actions match your values; you walk the talk.</p>
+          </div>
+          <div class="cheatsheet-card">
+            <h4>N — Non-Judgment</h4>
+            <p>You don't judge people for struggling or being human.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cheatsheet-card" style="grid-column: 1/-1; background: rgba(255,230,109,0.1); border-color: rgba(255,230,109,0.3);">
+        <h4>G — Generosity</h4>
+        <p>You assume good intent and give people the benefit of the doubt.</p>
+      </div>
+
+      <h3>The 4 Skillsets of Daring Leadership</h3>
+      <div class="two-col">
+        <div>
+          <div class="cheatsheet-card">
+            <h4>1. Rumble with Vulnerability</h4>
+            <p>Admit what you don't know. Ask for help. Show up imperfectly. Create space for others to do the same.</p>
+          </div>
+          <div class="cheatsheet-card">
+            <h4>2. Operationalize Values</h4>
+            <p>Name your core values (2-3 max). Make decisions that reflect them. Reward behavior aligned with values.</p>
+          </div>
+        </div>
+        <div>
+          <div class="cheatsheet-card">
+            <h4>3. BRAVING Trust</h4>
+            <p>Build trustworthiness through all 7 elements. Hold people accountable. Repair when trust is broken.</p>
+          </div>
+          <div class="cheatsheet-card">
+            <h4>4. Learning to Rise</h4>
+            <p>Reckoning → Rumble → Revolution. Feel emotions, get curious, try again differently. Model resilience.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Shame vs. Guilt</h3>
+      <div class="two-col">
+        <div>
+          <div class="cheatsheet-card" style="background: rgba(214,48,49,0.1); border-color: rgba(214,48,49,0.3);">
+            <h4>Shame: "I AM Bad"</h4>
+            <p>Identity attack. Leads to hiding, perfectionism, disconnection. Antidote: empathy. 85% of people remember shame events from childhood.</p>
+          </div>
+        </div>
+        <div>
+          <div class="cheatsheet-card" style="background: rgba(253,203,110,0.1); border-color: rgba(253,203,110,0.3);">
+            <h4>Guilt: "I DID Bad"</h4>
+            <p>Behavior focused. Leads to repair and learning. Natural resilience. Antidote: accountability. Make amends.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>The 4 Attributes of Empathy</h3>
+      <div class="two-col">
+        <div>
+          <div class="cheatsheet-card">
+            <h4>1. Perspective Taking</h4>
+            <p>See the world through their eyes, not yours. Understand their experience, not just their actions.</p>
+          </div>
+          <div class="cheatsheet-card">
+            <h4>2. Non-Judgment</h4>
+            <p>Hold their story without fixing it or offering advice. Create space for them to feel.</p>
+          </div>
+        </div>
+        <div>
+          <div class="cheatsheet-card">
+            <h4>3. Feel with Them</h4>
+            <p>Identify the emotion they're experiencing and recognize it in yourself. This is empathy, not pity.</p>
+          </div>
+          <div class="cheatsheet-card">
+            <h4>4. Communicate Understanding</h4>
+            <p>Say "I'm here with you" not "at least..." Silver-lining responses dismiss; empathy validates.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>The SFD Technique</h3>
+      <div class="cheatsheet-card" style="grid-column: 1/-1;">
+        <h4>Story, First Draft — When you catch yourself confabulating:</h4>
+        <p><strong>1) Name the story:</strong> "The story I'm making up is that she's angry with me."</p>
+        <p><strong>2) Get curious:</strong> What evidence is there? What else might be true? What am I not seeing?</p>
+        <p><strong>3) Rumble with it:</strong> Test your story. Ask clarifying questions. Sit with uncertainty.</p>
+        <p><strong>4) Choose a new story:</strong> Based on facts, not fear. Often: "I don't actually know what she's thinking."</p>
+      </div>
+
+      <h3>The Reckoning-Rumble-Revolution Cycle</h3>
+      <div class="cheatsheet-card" style="grid-column: 1/-1;">
+        <h4>How to Learn to Rise (Recover from Failure)</h4>
+        <p><strong>Reckoning:</strong> Feel the emotions (disappointment, shame, anger) without judgment. Don't rush past this.</p>
+        <p><strong>Rumble:</strong> Get curious. What happened? What can I learn? What story am I telling myself? Get emotional literacy.</p>
+        <p><strong>Revolution:</strong> Try again, but differently. Use what you learned. Model this cycle for others.</p>
+      </div>
+
+      <h3>Core Values Framework</h3>
+      <div class="cheatsheet-card" style="grid-column: 1/-1;">
+        <h4>Living Into Your Values (Not Just Naming Them)</h4>
+        <p><strong>Step 1: Name 2-3 core values</strong> (not aspirational, but actually lived). Example: courage, faith.</p>
+        <p><strong>Step 2: Operationalize them</strong> — What does this value look like in decisions? In resource allocation? In behavior?</p>
+        <p><strong>Step 3: Check alignment</strong> — Do your decisions reflect your values? If not, you're living performative values, not real ones.</p>
+      </div>
+
+      <h3>Clear Is Kind Framework</h3>
+      <div class="two-col">
+        <div>
+          <div class="cheatsheet-card" style="background: rgba(255,107,107,0.1); border-color: rgba(255,107,107,0.3);">
+            <h4>NOT Kind</h4>
+            <p>Hints, gossip, avoidance, vague feedback, "you're great but..." confusion, silence.</p>
+          </div>
+        </div>
+        <div>
+          <div class="cheatsheet-card" style="background: rgba(0,184,148,0.1); border-color: rgba(0,184,148,0.3);">
+            <h4>KIND & CLEAR</h4>
+            <p>Direct feedback, specific examples, clear expectations, delivered with care, "paint done" honesty.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Wholehearted Living: 10 Guideposts</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+        <div class="cheatsheet-card"><h4>1. Authenticity</h4><p>Let go of who you think you should be; embrace who you are.</p></div>
+        <div class="cheatsheet-card"><h4>2. Self-Compassion</h4><p>Treat yourself with the kindness you'd offer a friend.</p></div>
+        <div class="cheatsheet-card"><h4>3. Resilience</h4><p>Build the capacity to recover from failure and keep going.</p></div>
+        <div class="cheatsheet-card"><h4>4. Gratitude</h4><p>Name what you're grateful for; it rewires your brain toward joy.</p></div>
+        <div class="cheatsheet-card"><h4>5. Creativity</h4><p>Make something; don't worry if it's perfect. Expression matters.</p></div>
+        <div class="cheatsheet-card"><h4>6. Play & Rest</h4><p>You're not a machine. Fun and sleep are productive.</p></div>
+        <div class="cheatsheet-card"><h4>7. Calm & Still</h4><p>Quiet your mind regularly. Silence is where insight lives.</p></div>
+        <div class="cheatsheet-card"><h4>8. Meaningful Work</h4><p>Work that aligns with your values and contributes to something bigger.</p></div>
+        <div class="cheatsheet-card"><h4>9. Friendship</h4><p>Show up fully for people. Vulnerability deepens bonds.</p></div>
+        <div class="cheatsheet-card"><h4>10. Spirituality</h4><p>Connection to something larger than yourself. Your definition.</p></div>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>
