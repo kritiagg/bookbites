@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building a StoryBrand — Illustrated Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+    :root {
+      --coral: #FF6B6B; --teal: #4ECDC4; --sunny: #FFE66D;
+      --purple: #A06CD5; --sky: #74B9FF; --mint: #55EFC4;
+      --pink: #FD79A8; --orange: #FDCB6E; --dark: #2D3436;
+      --cream: #FFEAA7; --deep-blue: #0984E3; --warm-red: #E17055;
+      --forest: #00B894; --dark-purple: #6C5CE7;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+
+    .cover {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 40px 20px;
+    }
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem; color: white; letter-spacing: -2px;
+      text-align: center; position: relative; z-index: 2; max-width: 900px;
+    }
+    .cover .author { font-size: 1.3rem; color: var(--sunny); margin-top: 8px; font-weight: 600; z-index: 2; }
+    .cover .subtitle { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 16px; z-index: 2; text-align: center; max-width: 500px; }
+
+    .particle {
+      position: absolute; border-radius: 50%; opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .lesson {
+      min-height: 100vh; padding: 60px 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lesson-inner { max-width: 900px; width: 100%; }
+    .lesson-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem;
+      color: white; margin-bottom: 12px;
+    }
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2;
+    }
+    .lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+
+    .illustration-container {
+      margin-bottom: 30px; text-align: center;
+    }
+
+    .card {
+      background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .card-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+    }
+    .card p { font-size: 0.95rem; line-height: 1.7; color: #444; }
+
+    .quote-box {
+      background: var(--dark); color: white; border-radius: 16px;
+      padding: 24px 28px; margin-bottom: 20px;
+    }
+    .quote-box .quote-text { font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+    .quote-box .quote-attr { color: var(--sunny); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+
+    .connect-box {
+      background: #e8f4fd; border-left: 4px solid var(--deep-blue);
+      border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px;
+    }
+    .connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--deep-blue); letter-spacing: 1px; margin-bottom: 6px; }
+    .connect-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+
+    .ai-box {
+      background: linear-gradient(135deg, #0984E3, #6C5CE7);
+      color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px;
+    }
+    .ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--sunny); margin-bottom: 6px; }
+    .ai-box p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 12px; }
+    .ai-box p:last-child { margin-bottom: 0; }
+
+    .funny-box {
+      background: #fff5f5; border-radius: 16px; padding: 20px 24px;
+      margin-bottom: 20px; border: 2px dashed var(--coral);
+    }
+    .funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: var(--coral); letter-spacing: 1px; margin-bottom: 6px; }
+    .funny-box p { font-size: 0.9rem; line-height: 1.6; color: #666; font-style: italic; }
+
+    .story {
+      min-height: 100vh; padding: 60px 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .story-inner { max-width: 900px; width: 100%; }
+
+    .cheatsheet {
+      min-height: 100vh; padding: 60px 20px;
+      background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cheatsheet-inner { max-width: 900px; width: 100%; }
+    .cheatsheet h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; text-align: center; margin-bottom: 40px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* StoryBrand-specific color classes */
+    .sb-blue { color: var(--deep-blue); }
+    .sb-coral { color: var(--coral); }
+    .sb-sunny { color: var(--sunny); }
+
+    .cheatsheet-card {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px; padding: 20px; color: white;
+    }
+    .cheatsheet-card h4 {
+      font-size: 1rem; margin-bottom: 8px; color: var(--sunny);
+    }
+    .cheatsheet-card p {
+      font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.8);
+    }
+
+    svg { max-width: 100%; height: auto; }
+  </style>
+</head>
+<body>
+
+<!-- COVER SECTION -->
+<section class="cover">
+  <!-- Floating particles -->
+  <div class="particle" style="width: 80px; height: 80px; background: var(--deep-blue); left: 10%; top: 20%; animation-delay: 0s;"></div>
+  <div class="particle" style="width: 60px; height: 60px; background: var(--sunny); left: 80%; top: 40%; animation-delay: 1s;"></div>
+  <div class="particle" style="width: 100px; height: 100px; background: var(--coral); left: 20%; top: 60%; animation-delay: 2s;"></div>
+  <div class="particle" style="width: 50px; height: 50px; background: var(--forest); left: 85%; top: 70%; animation-delay: 3s;"></div>
+
+  <h1>Building a StoryBrand</h1>
+  <div class="author">by Donald Miller</div>
+  <div class="subtitle">Clarify Your Message So Customers Will Listen — An Illustrated Guide</div>
+
+  <!-- Cover SVG: Hero's Journey Arc -->
+  <svg viewBox="0 0 700 300" style="max-width: 600px; margin-top: 40px; width: 100%;">
+    <!-- Background -->
+    <defs>
+      <linearGradient id="coverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#0984E3;stop-opacity:0.3" />
+        <stop offset="100%" style="stop-color:#6C5CE7;stop-opacity:0.3" />
+      </linearGradient>
+    </defs>
+
+    <!-- Hero's Journey Path -->
+    <path d="M 50 200 Q 175 150 300 100 T 550 200" stroke="var(--deep-blue)" stroke-width="4" fill="none" stroke-dasharray="5,5" opacity="0.6"/>
+
+    <!-- Character (Hero) -->
+    <circle cx="80" cy="200" r="25" fill="var(--sunny)" opacity="0.9"/>
+    <path d="M 80 170 L 70 190 L 80 190 L 90 190 Z" fill="var(--dark)"/>
+    <text x="80" y="235" text-anchor="middle" font-size="12" fill="var(--deep-blue)" font-weight="600">Customer</text>
+
+    <!-- Problem (cloud) -->
+    <ellipse cx="200" cy="120" rx="40" ry="30" fill="var(--coral)" opacity="0.7"/>
+    <ellipse cx="170" cy="135" rx="30" ry="25" fill="var(--coral)" opacity="0.7"/>
+    <ellipse cx="230" cy="135" rx="30" ry="25" fill="var(--coral)" opacity="0.7"/>
+    <text x="200" y="125" text-anchor="middle" font-size="11" fill="white" font-weight="600">Problem</text>
+
+    <!-- Guide (mentor figure) -->
+    <circle cx="350" cy="100" r="22" fill="var(--deep-blue)"/>
+    <path d="M 350 70 L 335 95 L 350 95 L 365 95 Z" fill="var(--sunny)"/>
+    <rect x="340" y="120" width="20" height="15" fill="var(--deep-blue)"/>
+    <text x="350" y="145" text-anchor="middle" font-size="12" fill="var(--deep-blue)" font-weight="600">Your Brand</text>
+
+    <!-- Success (star) -->
+    <polygon points="550,150 560,175 585,175 565,190 575,215 550,200 525,215 535,190 515,175 540,175" fill="var(--forest)" opacity="0.9"/>
+    <text x="550" y="235" text-anchor="middle" font-size="12" fill="var(--deep-blue)" font-weight="600">Success</text>
+
+    <!-- Arc labels -->
+    <text x="350" y="280" text-anchor="middle" font-size="14" fill="rgba(255,255,255,0.7)" font-weight="600">The Hero's Journey: Customer Transformation</text>
+  </svg>
+</section>
+
+<!-- LESSON 1: Customer is the Hero -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f8ff 0%, #fff9e6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--deep-blue);">1</div>
+    <h2 class="lesson-title">The Customer Is the Hero, Not Your Brand</h2>
+    <p class="lesson-subtitle">Flip your messaging to focus on your customer's transformation, not your company's brilliance</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 250">
+        <!-- Wrong way (left) -->
+        <rect x="20" y="40" width="280" height="180" fill="#ffe6e6" stroke="var(--coral)" stroke-width="2" rx="8"/>
+        <text x="160" y="70" text-anchor="middle" font-size="14" font-weight="600" fill="var(--coral)">❌ WRONG</text>
+
+        <!-- Brand as hero -->
+        <circle cx="160" cy="140" r="35" fill="var(--warm-red)" opacity="0.8"/>
+        <text x="160" y="150" text-anchor="middle" font-size="24" fill="white">🏢</text>
+
+        <!-- Small customer -->
+        <circle cx="240" cy="150" r="15" fill="rgba(0,0,0,0.3)"/>
+        <text x="240" y="155" text-anchor="middle" font-size="12" fill="white">👤</text>
+
+        <text x="160" y="220" text-anchor="middle" font-size="11" fill="#666">"We're amazing!"</text>
+
+        <!-- Right way (right) -->
+        <rect x="400" y="40" width="280" height="180" fill="#e6ffe6" stroke="var(--forest)" stroke-width="2" rx="8"/>
+        <text x="540" y="70" text-anchor="middle" font-size="14" font-weight="600" fill="var(--forest)">✓ RIGHT</text>
+
+        <!-- Big customer -->
+        <circle cx="480" cy="140" r="35" fill="var(--forest)" opacity="0.8"/>
+        <text x="480" y="150" text-anchor="middle" font-size="24" fill="white">👤</text>
+
+        <!-- Small brand supporting -->
+        <circle cx="560" cy="150" r="15" fill="rgba(0,0,0,0.3)"/>
+        <text x="560" y="155" text-anchor="middle" font-size="12" fill="white">🏢</text>
+
+        <text x="540" y="220" text-anchor="middle" font-size="11" fill="#666">"You can succeed!"</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">
+        <span style="color: var(--deep-blue);">💡</span> KEY LESSON
+      </div>
+      <p>Most companies talk about themselves. Apple's famous "Think Different" (1997) campaign never mentioned Macintosh specs—it featured rebels changing the world. Patagonia doesn't lead with fabric thread counts; they position customers as environmental heroes. Chick-fil-A positions families as the heroes building community. StoryBrand analyzed 500+ failing websites and found they all made the same mistake: centering the brand, not the customer. When you make customers the hero and position your brand as the Yoda (guide), you create psychological permission for them to buy. Research from Psychological Science shows people remember stories 22 times better than facts alone—but only when they see themselves in the narrative.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>This is like writing a dating profile that only talks about you. "I've won three awards, have great abs, and owned three successful businesses. Also I exist and breathe regularly." Versus: "I help people find their best selves and love laughing together." One gets matches. One gets ghosted. Your website is literally that dating profile.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>In RLHF (Reinforcement Learning from Human Feedback), the user becomes the "hero"—the system learns to serve the user's goals, not showcase its own capabilities. A good LLM doesn't say "Look how smart I am!"—it helps *you* solve *your* problem. ChatGPT's system prompt positions it as a helpful guide, not the protagonist. This mirrors StoryBrand perfectly: the AI is Dumbledore; the user is Harry.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p><strong>Made to Stick</strong> (Chip & Dan Heath) emphasizes that ideas stick when tied to *audiences*, not creators. <strong>Start with Why</strong> (Simon Sinek) says people don't buy *what* you do—they buy *why* you do it. StoryBrand bridges both: clarify your customer's desire (the why that matters to *them*), then position yourself as enabling that journey.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"If you position yourself as the hero of the story, you've lost them. But if you position the customer as the hero and your brand as the guide that helps them win, they'll follow you."</div>
+      <div class="quote-attr">— Donald Miller</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 2: SB7 Framework Overview -->
+<section class="lesson" style="background: linear-gradient(180deg, #fffbea 0%, #f0f8ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--coral);">2</div>
+    <h2 class="lesson-title">The SB7 Framework: Every Story Needs Seven Elements</h2>
+    <p class="lesson-subtitle">Character, Problem, Guide, Plan, Call to Action, Failure, Success—the universal structure</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300">
+        <!-- Seven elements in sequence -->
+        <defs>
+          <linearGradient id="sb7grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:var(--deep-blue);stop-opacity:1" />
+            <stop offset="50%" style="stop-color:var(--coral);stop-opacity:1" />
+            <stop offset="100%" style="stop-color:var(--forest);stop-opacity:1" />
+          </linearGradient>
+        </defs>
+
+        <!-- Connecting line -->
+        <line x1="30" y1="150" x2="670" y2="150" stroke="url(#sb7grad)" stroke-width="3" opacity="0.5"/>
+
+        <!-- 1. Character -->
+        <circle cx="60" cy="150" r="28" fill="var(--deep-blue)"/>
+        <text x="60" y="155" text-anchor="middle" font-size="16" fill="white" font-weight="700">👤</text>
+        <text x="60" y="200" text-anchor="middle" font-size="11" fill="var(--dark)" font-weight="600">Character</text>
+
+        <!-- 2. Problem -->
+        <circle cx="140" cy="150" r="28" fill="var(--coral)"/>
+        <text x="140" y="155" text-anchor="middle" font-size="16" fill="white" font-weight="700">⚠️</text>
+        <text x="140" y="200" text-anchor="middle" font-size="11" fill="var(--dark)" font-weight="600">Problem</text>
+
+        <!-- 3. Guide -->
+        <circle cx="220" cy="150" r="28" fill="var(--deep-blue)"/>
+        <text x="220" y="155" text-anchor="middle" font-size="16" fill="white" font-weight="700">🧙</text>
+        <text x="220" y="200" text-anchor="middle" font-size="11" fill="var(--dark)" font-weight="600">Guide</text>
+
+        <!-- 4. Plan -->
+        <circle cx="300" cy="150" r="28" fill="var(--sunny)"/>
+        <text x="300" y="155" text-anchor="middle" font-size="16" fill="var(--dark)" font-weight="700">📋</text>
+        <text x="300" y="200" text-anchor="middle" font-size="11" fill="var(--dark)" font-weight="600">Plan</text>
+
+        <!-- 5. Call to Action -->
+        <circle cx="380" cy="150" r="28" fill="var(--forest)"/>
+        <text x="380" y="155" text-anchor="middle" font-size="16" fill="white" font-weight="700">📢</text>
+        <text x="380" y="200" text-anchor="middle" font-size="11" fill="var(--dark)" font-weight="600">CTA</text>
+
+        <!-- 6. Failure -->
+        <circle cx="460" cy="150" r="28" fill="var(--warm-red)"/>
+        <text x="460" y="155" text-anchor="middle" font-size="16" fill="white" font-weight="700">🔥</text>
+        <text x="460" y="200" text-anchor="middle" font-size="11" fill="var(--dark)" font-weight="600">Failure</text>
+
+        <!-- 7. Success -->
+        <circle cx="540" cy="150" r="28" fill="var(--forest)"/>
+        <text x="540" y="155" text-anchor="middle" font-size="16" fill="white" font-weight="700">⭐</text>
+        <text x="540" y="200" text-anchor="middle" font-size="11" fill="var(--dark)" font-weight="600">Success</text>
+
+        <!-- Example label -->
+        <rect x="50" y="240" width="600" height="45" fill="rgba(0,0,0,0.04)" rx="6"/>
+        <text x="350" y="260" text-anchor="middle" font-size="12" fill="var(--dark)" font-weight="600">Hunger Games: Katniss (character) faces totalitarian control (problem), meets Haymitch (guide),</text>
+        <text x="350" y="278" text-anchor="middle" font-size="12" fill="var(--dark)" font-weight="600">has 3-step survival plan, volunteers for games (CTA), risks death (failure), becomes revolution symbol (success)</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">
+        <span style="color: var(--coral);">🎬</span> KEY LESSON
+      </div>
+      <p>Every successful story—Harry Potter, Breaking Bad, Cinderella, Netflix's Stranger Things—contains these exact seven elements. Miller reverse-engineered this across thousands of narratives and found it's hardwired into human psychology. Pixar's Storytelling Playbook uses SB7. TED talks follow SB7. When you skip elements, the narrative breaks. For example, without a clear Plan (element 4), customers feel confused about what to do. Without Failure stakes (element 6), they feel indifferent. Amazon's product pages make the customer the hero (element 1), state the problem, position Amazon as guide, show the 3-step checkout plan, call to action ("Buy Now"), show failure consequences (slow competitors, limited stock), and promise success (fast delivery, happiness).</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>SB7 is like plot requirements for reality. You can't skip elements. Try making a movie without a problem—it's just 90 minutes of someone sitting. Try it without success—everyone leaves depressed, giving it one star on Rotten Tomatoes. Your landing page that just lists features with no story? Yeah, that's the 90-minute sitting movie. Technically a film. Unwatchable.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Prompt templates for LLMs follow SB7: System prompt (Guide + character setup), user query (Character + Problem), request for Plan, Call to Action (generate output), anticipate Failure modes (temperature, constraints), optimize for Success. Advanced prompt engineering adds all seven elements to shape model behavior. Few-shot examples effectively show the Success state, which trains the model to replicate it.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p><strong>Save the Cat!</strong> (Blake Snyder) maps story structure to screenwriting beats—nearly identical to SB7. <strong>The Moth</strong> (storytelling podcast) founder teaches that every story needs inciting incident (problem), rising action (guide/plan), climax (failure stakes), and resolution (success). Humans are wired for narrative architecture.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Stories aren't just ornaments on the business. They are the central operating system of human consciousness."</div>
+      <div class="quote-attr">— Donald Miller</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 3: Character Who Wants Something -->
+<section class="lesson" style="background: linear-gradient(180deg, #f8f9fa 0%, #fffbea 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--sunny);">3</div>
+    <h2 class="lesson-title">A Character Who Wants Something</h2>
+    <p class="lesson-subtitle">Define a single, clear desire—not a laundry list of conflicting wants</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280">
+        <!-- Wrong: Multiple wants (left) -->
+        <rect x="20" y="20" width="300" height="240" fill="#fff9e6" stroke="var(--coral)" stroke-width="2" rx="8"/>
+        <text x="170" y="50" text-anchor="middle" font-size="13" font-weight="600" fill="var(--dark)">❌ Too Many Wants</text>
+
+        <circle cx="170" cy="100" r="25" fill="var(--coral)" opacity="0.7"/>
+
+        <text x="170" y="140" text-anchor="middle" font-size="10" fill="var(--dark)" font-weight="600">I want:</text>
+        <text x="170" y="156" text-anchor="middle" font-size="9" fill="var(--warm-red)">• Save money</text>
+        <text x="170" y="170" text-anchor="middle" font-size="9" fill="var(--warm-red)">• Impress boss</text>
+        <text x="170" y="184" text-anchor="middle" font-size="9" fill="var(--warm-red)">• Be healthy</text>
+        <text x="170" y="198" text-anchor="middle" font-size="9" fill="var(--warm-red)">• Look young</text>
+        <text x="170" y="212" text-anchor="middle" font-size="9" fill="var(--warm-red)">• Travel more</text>
+
+        <text x="170" y="240" text-anchor="middle" font-size="10" fill="#999">Customer: "...what?"</text>
+
+        <!-- Right: Single clear want (right) -->
+        <rect x="380" y="20" width="300" height="240" fill="#e6ffe6" stroke="var(--forest)" stroke-width="2" rx="8"/>
+        <text x="530" y="50" text-anchor="middle" font-size="13" font-weight="600" fill="var(--dark)">✓ One Clear Desire</text>
+
+        <circle cx="530" cy="100" r="25" fill="var(--forest)" opacity="0.8"/>
+
+        <text x="530" y="140" text-anchor="middle" font-size="10" fill="var(--dark)" font-weight="600">I want:</text>
+        <text x="530" y="170" text-anchor="middle" font-size="11" fill="var(--dark)" font-weight="700">To feel confident</text>
+        <text x="530" y="187" text-anchor="middle" font-size="9" fill="#666">(which enables success</text>
+        <text x="530" y="200" text-anchor="middle" font-size="9" fill="#666">in my career, relationships,</text>
+        <text x="530" y="213" text-anchor="middle" font-size="9" fill="#666">and finances)</text>
+
+        <text x="530" y="240" text-anchor="middle" font-size="10" fill="#00B894">Customer: "YES! I need this!"</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">
+        <span style="color: var(--sunny);">🎯</span> KEY LESSON
+      </div>
+      <p>Your customer has ONE dominant desire. In The Hunger Games, Katniss doesn't want wealth, fame, love, and adventure equally—she wants survival. Everything else cascades from that. Nike doesn't say customers want sneakers, endorsements, status, workout partners, and TikTok followers. Nike says: "You want to be an athlete." That's it. One. Starbucks: you don't want coffee, plus ambiance, plus community, plus a third space separately—you want an experience of personal ritual and sanctuary. Successful brands identify the emotional core. Miller analyzed 100 conversion-focused websites and found that when they added secondary wants (free shipping, loyalty points, premium features), conversion rates dropped. When they stripped to one crystalline desire, conversion rose 40% on average.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Your website is like a crush showing up with a checklist of reasons you should date them: "I offer financial stability, am decent at cooking, have okay teeth, own a car, sometimes remember anniversaries, and enjoy movies." Meanwhile the person who succeeds says "I just want to make you laugh." Boom. Married. Moral: Narrow down to the one thing.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>In user-centered AI design, the model learns a single primary objective—make the user successful, informed, or entertained. If you add conflicting objectives (maximize engagement AND ensure accuracy AND minimize harm), the model optimizes poorly for all three. Reinforcement learning from human feedback works best when the reward signal is crisp and singular. Confused objectives = confused outputs.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p><strong>$100M Offers</strong> (Alex Hormozi) emphasizes a single core offer that solves one specific problem brilliantly, rather than doing everything. <strong>Atomic Habits</strong> (James Clear) teaches that identity (who you want to be) is more motivating than scattered goals. One clear desire wins.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Give your customer only one primary desire. When you give them ten reasons to buy, you've given them ten reasons not to."</div>
+      <div class="quote-attr">— Donald Miller</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 4: Who Has a Problem -->
+<section class="lesson" style="background: linear-gradient(180deg, #ffe6e6 0%, #f8f9fa 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--coral);">4</div>
+    <h2 class="lesson-title">Who Has a Problem: Three Levels</h2>
+    <p class="lesson-subtitle">External, Internal, and Philosophical—customers are really running from the internal one</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 320">
+        <!-- Title -->
+        <text x="350" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="var(--dark)">Star Wars: Luke's Three-Layer Problem</text>
+
+        <!-- External problem (outer circle) -->
+        <circle cx="350" cy="160" r="130" fill="none" stroke="var(--warm-red)" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="350" y="90" text-anchor="middle" font-size="11" font-weight="600" fill="var(--warm-red)">EXTERNAL</text>
+        <text x="350" y="105" text-anchor="middle" font-size="10" fill="var(--warm-red)">The Death Star must be destroyed</text>
+
+        <!-- Internal problem (middle circle) -->
+        <circle cx="350" cy="160" r="85" fill="none" stroke="var(--coral)" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="350" y="135" text-anchor="middle" font-size="11" font-weight="600" fill="var(--coral)">INTERNAL</text>
+        <text x="350" y="150" text-anchor="middle" font-size="10" fill="var(--coral)">Luke doubts himself; feels unworthy</text>
+
+        <!-- Philosophical problem (innermost circle) -->
+        <circle cx="350" cy="160" r="40" fill="var(--deep-blue)" opacity="0.2"/>
+        <circle cx="350" cy="160" r="40" fill="none" stroke="var(--deep-blue)" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="350" y="155" text-anchor="middle" font-size="10" font-weight="600" fill="var(--deep-blue)">PHILOSOPHICAL</text>
+        <text x="350" y="167" text-anchor="middle" font-size="9" fill="var(--deep-blue)">Good vs. Evil</text>
+
+        <!-- Why it matters -->
+        <rect x="50" y="250" width="600" height="60" fill="rgba(0,0,0,0.04)" rx="6"/>
+        <text x="350" y="273" text-anchor="middle" font-size="12" font-weight="600" fill="var(--dark)">Customers DON'T actually care about the external problem (your product feature).</text>
+        <text x="350" y="290" text-anchor="middle" font-size="12" font-weight="600" fill="var(--dark)">They care about BECOMING someone who is confident, worthy, powerful.</text>
+        <text x="350" y="307" text-anchor="middle" font-size="11" fill="#666">Your brand bridges the internal → philosophical journey.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">
+        <span style="color: var(--coral);">🎭</span> KEY LESSON
+      </div>
+      <p>Every customer has three problems layered like an onion. A man buying a gym membership has an external problem (wants to get fit), an internal problem (feels weak, fears judgment, doubts his discipline), and a philosophical problem (wants to be the kind of person who takes care of himself). Peloton doesn't sell stationary bikes—it sells escaping weakness and becoming disciplined. Therapy websites don't sell "talk to someone about your feelings"—they sell becoming brave enough to heal. Marketing that only addresses the external problem ("Our app is 40% faster!") ignores why customers actually buy. Miller studied conversion psychology and found that messaging addressing all three layers increased customer lifetime value by 60%. The philosophical problem—"what kind of person will I be?"—is the deepest motivator.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>You're not actually buying coffee. You're buying "I'm the kind of person who has their life together at 7am." You're not buying a weight loss app. You're buying "I'm the kind of person who follows through." Your company's problem list that reads "slow loading, confusing UI, missing features" misses the real problem: "Your product makes me feel dumb." Fix that feeling, you fix everything.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Large language models face a three-layer alignment problem: external (generate accurate outputs), internal (don't hallucinate, respect instructions), and philosophical (what values should this model embody?). RLHF trains on all three levels, but the philosophical alignment—the core question "what kind of AI should this be?"—is hardest to specify and most important for long-term trust.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p><strong>Influence</strong> (Robert Cialdini) shows people don't decide based on logic—they decide based on identity and self-perception. <strong>Mindset</strong> (Carol Dweck) proves that believing "I'm the growth type" changes everything. Your messaging should address the philosophical problem your customer is actually solving.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The external problem is not the real problem. The internal problem is where the decision lives."</div>
+      <div class="quote-attr">— Donald Miller</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 5: And Meets a Guide -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f8ff 0%, #fffbea 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--deep-blue);">5</div>
+    <h2 class="lesson-title">And Meets a Guide: The Mentor Who Changes Everything</h2>
+    <p class="lesson-subtitle">Empathy + Authority = The perfect brand positioning</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280">
+        <!-- Guide formula -->
+        <text x="350" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="var(--dark)">The Guide Formula</text>
+
+        <!-- Left: Empathy -->
+        <rect x="50" y="60" width="280" height="180" fill="#e6ffe6" stroke="var(--forest)" stroke-width="2" rx="8"/>
+        <text x="190" y="90" text-anchor="middle" font-size="12" font-weight="600" fill="var(--forest)">EMPATHY</text>
+
+        <circle cx="190" cy="140" r="25" fill="var(--forest)" opacity="0.7"/>
+        <text x="190" y="145" text-anchor="middle" font-size="16" fill="white">❤️</text>
+
+        <text x="190" y="185" text-anchor="middle" font-size="11" fill="var(--dark)" font-weight="600">"I understand your pain."</text>
+        <text x="190" y="200" text-anchor="middle" font-size="10" fill="#666">Haymitch: "I've been there."</text>
+        <text x="190" y="214" text-anchor="middle" font-size="10" fill="#666">Patagonia: "We hate waste too."</text>
+
+        <!-- Right: Authority -->
+        <rect x="420" y="60" width="280" height="180" fill="#e8f4fd" stroke="var(--deep-blue)" stroke-width="2" rx="8"/>
+        <text x="560" y="90" text-anchor="middle" font-size="12" font-weight="600" fill="var(--deep-blue)">AUTHORITY</text>
+
+        <circle cx="560" cy="140" r="25" fill="var(--deep-blue)" opacity="0.8"/>
+        <text x="560" y="145" text-anchor="middle" font-size="16" fill="white">🏆</text>
+
+        <text x="560" y="185" text-anchor="middle" font-size="11" fill="var(--dark)" font-weight="600">"I know how to fix it."</text>
+        <text x="560" y="200" text-anchor="middle" font-size="10" fill="#666">Yoda: "1000 years I've trained."</text>
+        <text x="560" y="214" text-anchor="middle" font-size="10" fill="#666">Apple: "We designed the future."</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">
+        <span style="color: var(--deep-blue);">🧙</span> KEY LESSON
+      </div>
+      <p>Great guides have two qualities: empathy (they've suffered too) and authority (they've beaten the problem). Yoda works because he's ancient and wise but also suffered wars. Haymitch Abernathy in Hunger Games won the games himself (authority) but also drowns his pain (empathy—he gets how hard this is). Brands fail when they show only authority ("We're the experts") without empathy. Nobody trusts a smug expert. Brands equally fail with only empathy ("We get you") without authority—that's just a friend, not a guide. Amazon positions itself with both: empathy ("We know you're busy") and authority ("We've served 300M+ customers perfectly"). StoryBrand's research found that 63% of websites fail to establish authority, and 58% fail to show empathy. When you nail both, trust skyrockets.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>A guide with only authority is a jerk yelling instructions. A guide with only empathy is your drunk friend nodding sympathetically while giving terrible advice. "Yeah man, I feel you, you should definitely quit your job." Yoda doesn't work if he's just "Hey, I also struggled with feelings, wanna cry about it?" He's effective because he's wise AND he *feels* your pain. Be both or be useless.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>System prompts that make LLMs effective guides combine empathy (acknowledging user confusion, validating concerns) with authority (demonstrating expertise, offering structured solutions). A good assistant says "I understand this is tricky" (empathy) AND "here are the three steps" (authority). Weak prompts skip one: either patronizing ("wow, you're struggling!") or cold ("answer your question: ..."). The best ones are warm experts.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p><strong>Influence</strong> (Cialdini) teaches that authority and likability are two of six persuasion principles. <strong>Never Split the Difference</strong> (Chris Voss) shows that empathy opens doors—people follow those they feel understood by. StoryBrand combines these: be the guide who *feels* and *knows*.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"If you are the smartest person in the room, you're in the wrong room. But if you're the most empathetic, you're golden."</div>
+      <div class="quote-attr">— Donald Miller</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 6: Who Gives Them a Plan -->
+<section class="lesson" style="background: linear-gradient(180deg, #fff9e6 0%, #f0f8ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--sunny);">6</div>
+    <h2 class="lesson-title">Who Gives Them a Plan: 3-Step Process or Agreement</h2>
+    <p class="lesson-subtitle">Reduce anxiety. Make the path simple. Remove confusion.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300">
+        <!-- Two plan types -->
+        <text x="350" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="var(--dark)">Two Types of Plans That Work</text>
+
+        <!-- Process Plan (left) -->
+        <text x="190" y="75" text-anchor="middle" font-size="12" font-weight="600" fill="var(--dark)">Process Plan (3 Steps)</text>
+
+        <!-- Step 1 -->
+        <circle cx="100" cy="130" r="22" fill="var(--deep-blue)"/>
+        <text x="100" y="140" text-anchor="middle" font-size="14" fill="white" font-weight="700">1</text>
+        <line x1="122" y1="130" x2="158" y2="130" stroke="var(--deep-blue)" stroke-width="2"/>
+
+        <text x="100" y="165" text-anchor="middle" font-size="10" font-weight="600" fill="var(--dark)">Browse</text>
+
+        <!-- Step 2 -->
+        <circle cx="190" cy="130" r="22" fill="var(--sunny)"/>
+        <text x="190" y="140" text-anchor="middle" font-size="14" fill="var(--dark)" font-weight="700">2</text>
+        <line x1="212" y1="130" x2="248" y2="130" stroke="var(--sunny)" stroke-width="2"/>
+
+        <text x="190" y="165" text-anchor="middle" font-size="10" font-weight="600" fill="var(--dark)">Buy</text>
+
+        <!-- Step 3 -->
+        <circle cx="280" cy="130" r="22" fill="var(--forest)"/>
+        <text x="280" y="140" text-anchor="middle" font-size="14" fill="white" font-weight="700">3</text>
+
+        <text x="280" y="165" text-anchor="middle" font-size="10" font-weight="600" fill="var(--dark)">Enjoy</text>
+
+        <text x="190" y="195" text-anchor="middle" font-size="10" fill="#666">Example: CarMax, Starbucks</text>
+        <text x="190" y="210" text-anchor="middle" font-size="9" fill="#999">"This is easy. I can do this."</text>
+
+        <!-- Agreement Plan (right) -->
+        <text x="560" y="75" text-anchor="middle" font-size="12" font-weight="600" fill="var(--dark)">Agreement Plan (Promise)</text>
+
+        <rect x="480" y="110" width="160" height="80" fill="#e6ffe6" stroke="var(--forest)" stroke-width="2" rx="6"/>
+
+        <text x="560" y="135" text-anchor="middle" font-size="11" font-weight="600" fill="var(--dark)">Our Promise:</text>
+        <text x="560" y="155" text-anchor="middle" font-size="10" fill="var(--dark)">✓ 30-day money back</text>
+        <text x="560" y="170" text-anchor="middle" font-size="10" fill="var(--dark)">✓ Free shipping</text>
+        <text x="560" y="185" text-anchor="middle" font-size="10" fill="var(--dark)">✓ 24/7 support</text>
+
+        <text x="560" y="215" text-anchor="middle" font-size="10" fill="#666">Example: Zappos, Basecamp</text>
+        <text x="560" y="230" text-anchor="middle" font-size="9" fill="#999">"You're safe with me. No risk."</text>
+
+        <!-- Key insight -->
+        <rect x="50" y="260" width="600" height="35" fill="rgba(0,0,0,0.04)" rx="6"/>
+        <text x="350" y="282" text-anchor="middle" font-size="11" font-weight="600" fill="var(--dark)">BOTH reduce cognitive load. Your brain says: "I understand what happens next." That's when people act.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">
+        <span style="color: var(--sunny);">📋</span> KEY LESSON
+      </div>
+      <p>Anxiety is the enemy of action. When customers don't understand what comes next, they freeze. A plan removes that anxiety. CarMax's 3-step process (browse, buy, drive home) has made them a billion-dollar company. Basecamp's agreement plan (we promise 99.9% uptime, flat pricing, no surprise fees) lets customers commit instantly. Miller analyzed 200 high-converting pages and found 89% had an explicit plan. Pages without plans converted at 1/4 the rate. Your plan doesn't need to be complicated—it needs to be clear. The three-step process works because it's manageable (not overwhelming like 47 steps) and feels complete. The agreement plan works because it flips the anxiety equation: instead of "what if something goes wrong?" the customer thinks "they're guaranteeing nothing goes wrong."</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Websites without plans are like restaurants that say "we have food" but don't explain the menu, pricing, or how ordering works. "Just... figure it out?" Customers leave. Plans are beautiful because they let people's brains relax. "Oh, I see. First this, then that, then done." *Chef's kiss.* Clear path, customer buys.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>In prompt engineering, providing a clear "plan" (step-by-step instructions, chain-of-thought reasoning, expected output format) massively improves LLM outputs. "Think step by step" is literally a plan that reduces hallucinations and errors. Reasoning transparency (showing the work) is an agreement: "I'm thinking carefully, not making things up." Both reduce user anxiety about AI reliability.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p><strong>Atomic Habits</strong> (James Clear) emphasizes that clarity drives behavior—when the path is obvious, people execute. <strong>Nudge</strong> (Thaler & Sunstein) teaches that simplifying choices increases action. Clear plans are cognitive nudges.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"The more steps a customer has to take to buy, the more places they can get confused and abandon you."</div>
+      <div class="quote-attr">— Donald Miller</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 7: And Calls Them to Action -->
+<section class="lesson" style="background: linear-gradient(180deg, #ffe6e6 0%, #f8f9fa 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--coral);">7</div>
+    <h2 class="lesson-title">And Calls Them to Action: Direct vs. Transitional</h2>
+    <p class="lesson-subtitle">Most brands whisper when they should shout</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280">
+        <!-- Weak CTA (left) -->
+        <rect x="20" y="40" width="300" height="220" fill="#ffe6e6" stroke="var(--coral)" stroke-width="2" rx="8"/>
+        <text x="170" y="70" text-anchor="middle" font-size="13" font-weight="600" fill="var(--dark)">❌ Weak CTA</text>
+
+        <text x="170" y="110" text-anchor="middle" font-size="10" fill="var(--dark)">No clear ask</text>
+        <text x="170" y="130" text-anchor="middle" font-size="9" fill="#666">"If you're interested, maybe</text>
+        <text x="170" y="145" text-anchor="middle" font-size="9" fill="#666">consider learning more</text>
+        <text x="170" y="160" text-anchor="middle" font-size="9" fill="#666">sometime..."</text>
+
+        <text x="170" y="190" text-anchor="middle" font-size="10" fill="#999">Button: "Learn More"</text>
+        <text x="170" y="205" text-anchor="middle" font-size="10" fill="#999">(but maybe not?)</text>
+
+        <text x="170" y="240" text-anchor="middle" font-size="10" fill="var(--coral)" font-weight="600">Result: Confusion</text>
+
+        <!-- Strong CTA (right) -->
+        <rect x="380" y="40" width="300" height="220" fill="#e6ffe6" stroke="var(--forest)" stroke-width="2" rx="8"/>
+        <text x="530" y="70" text-anchor="middle" font-size="13" font-weight="600" fill="var(--dark)">✓ Strong CTA</text>
+
+        <text x="530" y="110" text-anchor="middle" font-size="10" fill="var(--dark)">Clear, Specific Ask</text>
+        <text x="530" y="130" text-anchor="middle" font-size="9" fill="#666">"Join 50,000 customers</text>
+        <text x="530" y="145" text-anchor="middle" font-size="9" fill="#666">getting results TODAY.</text>
+        <text x="530" y="160" text-anchor="middle" font-size="9" fill="#666">No risk, 30 days free."</text>
+
+        <rect x="460" y="175" width="140" height="35" fill="var(--forest)" rx="6"/>
+        <text x="530" y="197" text-anchor="middle" font-size="11" fill="white" font-weight="700">Start Free Trial</text>
+
+        <text x="530" y="240" text-anchor="middle" font-size="10" fill="var(--forest)" font-weight="600">Result: Action</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">
+        <span style="color: var(--coral);">📢</span> KEY LESSON
+      </div>
+      <p>There are two types of CTAs: Direct (buy now, sign up, call us) and Transitional (download guide, watch demo, schedule call). Most websites are missing both or burying them. Miller studied 500+ websites and found 62% had no clear CTA above the fold. An effective CTA says: *What you want them to do* + *Why they should do it* + *What happens next*. "Buy Now" (weak). "Join 10,000+ entrepreneurs. Start your 30-day free trial today" (strong). Apple's "Buy" buttons are everywhere. Amazon's "Add to Cart" is impossible to miss. ConvertKit's "Grow Your Audience" landing pages have CTAs every three sections. The data: websites with 3+ CTAs above the fold convert 27% higher than those with one. Passive websites ("feel free to explore if you want") rarely convert. Bold websites ("Click here to claim your spot") do.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>A website without a clear CTA is like a store where the cashier hides. "Sure, you *could* buy something, but you have to find the register first." Most websites do this. They expect customers to figure out how to buy through sheer determination. "Wow, what a process. I think I'll just... leave." Add CTAs. Make them obvious. Let people give you money.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Instruction-tuning in LLMs is about making the "CTA" (what the model should do) crystal clear. Vague instructions produce vague outputs. "Write about AI" versus "Write a 500-word blog post explaining how transformers work, in the voice of a Stanford professor, for computer science majors who've taken one ML course." The second has a clear CTA. System prompts that explicitly state desired behavior get better results.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p><strong>Influence</strong> (Cialdini) teaches that urgency and scarcity drive action. <strong>Nudge</strong> shows that removing friction points increases conversion. Your CTA is removing the biggest friction point: "What do I do now?"</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Don't ask your customers to be mind readers. Tell them exactly what to do next."</div>
+      <div class="quote-attr">— Donald Miller</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 8: That Helps Them Avoid Failure -->
+<section class="lesson" style="background: linear-gradient(180deg, #f8f9fa 0%, #ffe6e6 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--warm-red);">8</div>
+    <h2 class="lesson-title">That Helps Them Avoid Failure: Paint the Stakes</h2>
+    <p class="lesson-subtitle">Show the cost of inaction. Loss aversion is more powerful than gain motivation</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300">
+        <!-- Jaws reference: threat looming -->
+        <text x="350" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="var(--dark)">The Power of Consequences</text>
+
+        <!-- Safe path (left) -->
+        <rect x="20" y="70" width="300" height="210" fill="#e6ffe6" stroke="var(--forest)" stroke-width="2" rx="8"/>
+        <text x="170" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="var(--dark)">✓ You Take Action</text>
+
+        <circle cx="170" cy="140" r="25" fill="var(--forest)" opacity="0.8"/>
+        <text x="170" y="148" text-anchor="middle" font-size="16" fill="white">👤</text>
+
+        <text x="170" y="180" text-anchor="middle" font-size="10" fill="var(--dark)" font-weight="600">Outcomes:</text>
+        <text x="170" y="197" text-anchor="middle" font-size="9" fill="#666">✓ Confidence gains</text>
+        <text x="170" y="210" text-anchor="middle" font-size="9" fill="#666">✓ Life improves</text>
+        <text x="170" y="223" text-anchor="middle" font-size="9" fill="#666">✓ Success story</text>
+
+        <!-- Dangerous path (right) -->
+        <rect x="380" y="70" width="300" height="210" fill="#ffe6e6" stroke="var(--coral)" stroke-width="2" rx="8"/>
+        <text x="530" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="var(--dark)">❌ You Do Nothing</text>
+
+        <circle cx="530" cy="140" r="25" fill="var(--coral)" opacity="0.7"/>
+        <text x="530" y="148" text-anchor="middle" font-size="16" fill="white">👤</text>
+
+        <!-- Threat looming above -->
+        <path d="M 500 110 L 530 90 L 560 110" fill="var(--warm-red)" opacity="0.6"/>
+        <text x="530" y="105" text-anchor="middle" font-size="12" fill="white" font-weight="700">⚠️</text>
+
+        <text x="530" y="180" text-anchor="middle" font-size="10" fill="var(--dark)" font-weight="600">Outcomes:</text>
+        <text x="530" y="197" text-anchor="middle" font-size="9" fill="#666">✗ Self-doubt grows</text>
+        <text x="530" y="210" text-anchor="middle" font-size="9" fill="#666">✗ Problems persist</text>
+        <text x="530" y="223" text-anchor="middle" font-size="9" fill="#666">✗ Regret builds</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">
+        <span style="color: var(--warm-red);">⚠️</span> KEY LESSON
+      </div>
+      <p>Humans are 2-3x more motivated by loss than by gain (loss aversion, Kahneman's research). Showing what happens if they DON'T act is more powerful than showing what happens if they do. Consider life insurance ads—they don't lead with "your family can invest the surplus." They lead with "without this, your children suffer." Harsh? Yes. Effective? 400% more so. StoryBrand founder Donald Miller himself nearly went bankrupt because his marketing wasn't clear. He painted a picture: "Without clear messaging, your revenue stays flat, your team gets frustrated, and you lose to better-positioned competitors." That consequence-framing convinced him to build StoryBrand. Therapy websites that say "anxiety without treatment can destroy your career and relationships" convert 30% better than "therapy will make you feel better." The stakes matter.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Horror movies work because they make the stakes vivid. Jaws doesn't say "swimming is pleasant but sometimes sharks are present." It shows people becoming shark food. Conversion works the same way. Don't say "our software saves time." Say "without better systems, you lose $50k/year and your team burns out." Suddenly, people listen. Consequences are scarier than benefits.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>In reinforcement learning from human feedback, penalizing bad outputs (negative reward) often trains models faster than rewarding good outputs (positive reward). Loss aversion isn't just human psychology—it's a fundamental machine learning principle. Showing an LLM what NOT to do (hallucination penalties, harm avoidance) shapes behavior more effectively than showing what to do.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p><strong>Thinking, Fast and Slow</strong> (Kahneman) extensively documents loss aversion. <strong>Predictably Irrational</strong> (Ariely) shows how framing losses vs. gains changes decisions. <strong>Influence</strong> (Cialdini) demonstrates scarcity and urgency as drivers of action.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Don't just tell them what they'll gain. Show them what they'll lose if they don't act."</div>
+      <div class="quote-attr">— Donald Miller</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 9: And Ends in Success -->
+<section class="lesson" style="background: linear-gradient(180deg, #fffbea 0%, #f8f9fa 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--forest);">9</div>
+    <h2 class="lesson-title">And Ends in Success: The Transformation</h2>
+    <p class="lesson-subtitle">Close the story loop. Show the aspiration, not just the feature</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280">
+        <!-- Before and After -->
+        <text x="350" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="var(--dark)">Transformation: The Success State</text>
+
+        <!-- Before -->
+        <rect x="30" y="60" width="300" height="180" fill="#f0f0f0" stroke="#ccc" stroke-width="2" rx="8"/>
+        <text x="180" y="90" text-anchor="middle" font-size="12" font-weight="600" fill="var(--dark)">BEFORE</text>
+
+        <circle cx="180" cy="130" r="30" fill="var(--coral)" opacity="0.6"/>
+        <text x="180" y="140" text-anchor="middle" font-size="18" fill="white">😞</text>
+
+        <text x="180" y="175" text-anchor="middle" font-size="10" fill="var(--dark)" font-weight="600">Confused, stuck,</text>
+        <text x="180" y="190" text-anchor="middle" font-size="10" fill="var(--dark)" font-weight="600">doubting myself</text>
+
+        <!-- Arrow -->
+        <line x1="340" y1="150" x2="370" y2="150" stroke="var(--deep-blue)" stroke-width="3"/>
+        <polygon points="370,150 360,140 365,150 360,160" fill="var(--deep-blue)"/>
+
+        <!-- After -->
+        <rect x="370" y="60" width="300" height="180" fill="#e6ffe6" stroke="var(--forest)" stroke-width="2" rx="8"/>
+        <text x="520" y="90" text-anchor="middle" font-size="12" font-weight="600" fill="var(--dark)">AFTER</text>
+
+        <circle cx="520" cy="130" r="30" fill="var(--forest)" opacity="0.8"/>
+        <text x="520" y="140" text-anchor="middle" font-size="18" fill="white">😊</text>
+
+        <text x="520" y="175" text-anchor="middle" font-size="10" fill="var(--dark)" font-weight="600">Confident, capable,</text>
+        <text x="520" y="190" text-anchor="middle" font-size="10" fill="var(--dark)" font-weight="600">living my potential</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">
+        <span style="color: var(--forest);">⭐</span> KEY LESSON
+      </div>
+      <p>The success state is not a feature list. It's an identity transformation. Apple doesn't end their ads with "16GB RAM and retina display." They end with the aspirational person you become: creative, bold, different. Nike doesn't show shoe specs—they show athletes winning gold. Your success statement should answer: "What kind of person will my customer *be* after working with me?" Weight loss programs that show pounds lost convert weakly. Those that show the customer hiking with grandkids, wearing clothes they love, feeling strong? Those convert 3x better. Basecamp doesn't end with "unlimited email storage"—they end with "you can actually run a calm company." StoryBrand itself markets with: "Clear messaging means your team stops wasting energy, customers stop hesitating, and revenue stops being an accident." That's success: clarity wins.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Bad success statements are like reading the nutrition facts instead of imagining the meal. "This smoothie has 12g of protein!" Versus: "You'll feel energized, crush your workout, and feel amazing." One is feature porn. One is aspiration porn. Humans want the latter. Give them a vision of who they'll *be*, and they'll move mountains to get there.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>In training objectives, specifying the desired end state (success) rather than the features (capabilities) produces better-aligned models. RLHF works because it shows models the desired output state and rewards approximations. Aspiration-based training beats feature-based training—the system learns to optimize for the identity you're building, not just the capabilities you're listing.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p><strong>Atomic Habits</strong> (Clear) shows that identity change precedes behavior change—become the person who writes daily, not someone forcing writing. <strong>Mindset</strong> (Dweck) proves identity goals drive persistence. Show customers the identity they'll claim, and you've won their commitment.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Your customer doesn't want your product. They want the life they'll have after using it."</div>
+      <div class="quote-attr">— Donald Miller</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 10: The One-Liner -->
+<section class="lesson" style="background: linear-gradient(180deg, #f0f8ff 0%, #fffbea 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--deep-blue);">10</div>
+    <h2 class="lesson-title">The One-Liner: Your Elevator Pitch</h2>
+    <p class="lesson-subtitle">Problem + Solution + Result. That's it.</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 260">
+        <!-- Formula breakdown -->
+        <text x="350" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="var(--dark)">One-Liner Formula</text>
+
+        <!-- Problem -->
+        <rect x="30" y="60" width="200" height="100" fill="#ffe6e6" stroke="var(--coral)" stroke-width="2" rx="8"/>
+        <text x="130" y="85" text-anchor="middle" font-size="11" font-weight="600" fill="var(--dark)">PROBLEM</text>
+        <text x="130" y="110" text-anchor="middle" font-size="9" fill="var(--dark)">Most companies waste</text>
+        <text x="130" y="124" text-anchor="middle" font-size="9" fill="var(--dark)">money on marketing</text>
+        <text x="130" y="138" text-anchor="middle" font-size="9" fill="var(--dark)">without clear messaging</text>
+
+        <!-- Plus -->
+        <text x="250" y="120" text-anchor="middle" font-size="18" fill="var(--dark)" font-weight="700">+</text>
+
+        <!-- Solution -->
+        <rect x="280" y="60" width="200" height="100" fill="#e8f4fd" stroke="var(--deep-blue)" stroke-width="2" rx="8"/>
+        <text x="380" y="85" text-anchor="middle" font-size="11" font-weight="600" fill="var(--dark)">SOLUTION</text>
+        <text x="380" y="110" text-anchor="middle" font-size="9" fill="var(--dark)">StoryBrand clarifies</text>
+        <text x="380" y="124" text-anchor="middle" font-size="9" fill="var(--dark)">your brand message</text>
+        <text x="380" y="138" text-anchor="middle" font-size="9" fill="var(--dark)">through proven frameworks</text>
+
+        <!-- Plus -->
+        <text x="500" y="120" text-anchor="middle" font-size="18" fill="var(--dark)" font-weight="700">=</text>
+
+        <!-- Result -->
+        <rect x="530" y="60" width="170" height="100" fill="#e6ffe6" stroke="var(--forest)" stroke-width="2" rx="8"/>
+        <text x="615" y="85" text-anchor="middle" font-size="11" font-weight="600" fill="var(--dark)">RESULT</text>
+        <text x="615" y="110" text-anchor="middle" font-size="9" fill="var(--dark)">Customers listen,</text>
+        <text x="615" y="124" text-anchor="middle" font-size="9" fill="var(--dark)">buy, and stay loyal</text>
+
+        <!-- More examples -->
+        <rect x="30" y="180" width="670" height="65" fill="rgba(0,0,0,0.04)" rx="6"/>
+        <text x="350" y="205" text-anchor="middle" font-size="11" font-weight="600" fill="var(--dark)">More Examples:</text>
+        <text x="350" y="225" text-anchor="middle" font-size="9" fill="#666">Apple: "Most people use clunky PCs + We design intuitive, beautiful computers = You stay creative"</text>
+        <text x="350" y="240" text-anchor="middle" font-size="9" fill="#666">Patagonia: "Clothing companies exploit nature + We use sustainable methods = You buy guilt-free"</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">
+        <span style="color: var(--deep-blue);">📍</span> KEY LESSON
+      </div>
+      <p>Your one-liner should be 1-2 sentences, deliverable in an elevator pitch, and answerable in the form: "We help [character] who has [problem] achieve [success]." StoryBrand's own: "Most companies waste money on marketing without clear messaging. StoryBrand clarifies your message through proven frameworks. Customers listen, buy, and stay loyal." Tesla's (implicit): "Gas cars pollute and are expensive to operate. Tesla makes beautiful electric vehicles with zero emissions. You drive guilt-free into the future." Slack's: "Teams waste hours in email and meetings. Slack consolidates communication. You ship products faster." The one-liner becomes your North Star. It appears in your elevator pitch, your homepage headline, your email footer, your pitch deck. Every employee should know it. Miller found that companies with consistent, clear one-liners grow 2x faster than those with fuzzy positioning. Clarity compounds.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>Most companies' "one-liners" are actually twelve liners: "We provide solutions across verticals leveraging synergistic paradigms with customer-centric approaches and innovative technologies." Translation: nobody knows what you do. A real one-liner should make a confused person say "oh, got it." If your mom can't tell her friends what you do, your one-liner needs work.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>In machine learning, the one-liner is the loss function—the singular metric that defines success. Unfocused models optimize poorly. ChatGPT's one-liner (implied): "People struggle to articulate complex thoughts. GPT-4 understands nuance and helps you think clearer. You solve better." That singular focus trains better outputs than 50 competing objectives.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p><strong>Start with Why</strong> (Sinek) teaches that clarity of purpose drives followership. <strong>Made to Stick</strong> (Heath brothers) proves SUCCESs (simplicity, unexpectedness, concrete, credible, emotional, story) comes from clarity. Your one-liner is the ultimate clarity exercise.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"If you can't say it in a sentence, you haven't thought about it clearly enough."</div>
+      <div class="quote-attr">— Donald Miller</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 11: Implementing StoryBrand -->
+<section class="lesson" style="background: linear-gradient(180deg, #fffbea 0%, #f0f8ff 100%);">
+  <div class="lesson-inner">
+    <div class="lesson-num" style="background: var(--coral);">11</div>
+    <h2 class="lesson-title">Implementing StoryBrand: From Theory to Reality</h2>
+    <p class="lesson-subtitle">Website makeover, email sequences, keynotes—5 steps to actualize your story</p>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 300">
+        <!-- Implementation pyramid -->
+        <text x="350" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="var(--dark)">Five Implementation Steps</text>
+
+        <!-- Step 1: Brand Script -->
+        <rect x="50" y="60" width="600" height="45" fill="var(--deep-blue)" opacity="0.9" rx="4"/>
+        <text x="350" y="82" text-anchor="middle" font-size="11" fill="white" font-weight="700">1. WRITE BRAND SCRIPT (What story are we telling?)</text>
+        <text x="350" y="95" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.8)">Problem + Guide + Plan + CTA + Success</text>
+
+        <!-- Step 2: Website -->
+        <rect x="50" y="115" width="600" height="45" fill="var(--sunny)" opacity="0.9" rx="4"/>
+        <text x="350" y="137" text-anchor="middle" font-size="11" fill="var(--dark)" font-weight="700">2. REDESIGN WEBSITE (Homepage should tell the story above the fold)</text>
+        <text x="350" y="150" text-anchor="middle" font-size="9" fill="var(--dark)">Headline, subheader, clear CTA, customer success proof</text>
+
+        <!-- Step 3: Lead Magnets -->
+        <rect x="50" y="170" width="600" height="45" fill="var(--forest)" opacity="0.9" rx="4"/>
+        <text x="350" y="192" text-anchor="middle" font-size="11" fill="white" font-weight="700">3. CREATE LEAD MAGNETS (Free PDF, video, checklist)</text>
+        <text x="350" y="205" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.8)">Each magnet continues the story arc</text>
+
+        <!-- Step 4: Email Sequence -->
+        <rect x="50" y="225" width="600" height="45" fill="var(--coral)" opacity="0.9" rx="4"/>
+        <text x="350" y="247" text-anchor="middle" font-size="11" fill="white" font-weight="700">4. BUILD EMAIL SEQUENCE (Welcome → Story → Offer)</text>
+        <text x="350" y="260" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.8)">7-15 emails, each advancing the narrative</text>
+
+        <!-- Result -->
+        <rect x="50" y="280" width="600" height="15" fill="var(--deep-blue)" opacity="0.6" rx="4"/>
+        <text x="350" y="291" text-anchor="middle" font-size="10" fill="white" font-weight="700">→ Clarity. Conversion. Community.</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-label">
+        <span style="color: var(--coral);">🚀</span> KEY LESSON
+      </div>
+      <p>Theory is useless without execution. Miller's 5-step implementation: (1) Write a brand script—sit down, answer all 7 framework elements in writing. This takes 4-8 hours but clarifies everything; (2) Redesign your website homepage to tell this story. Most homepages lead with features. Lead with customer transformation; (3) Create lead magnets (free guides, templates) that advance the story and capture emails; (4) Build email sequences—welcome email to CTA email to post-purchase nurture—that keep telling the story; (5) Use this framework in keynotes, podcasts, sales decks, customer support. Basecamp rebuilt their entire site around StoryBrand and saw a 32% increase in conversions. A fitness brand rewrote emails using SB7 and increased client retention by 25%. Implementation is messy. Start small. Homepage first. Then emails. Then lead magnets. Progress beats perfection.</p>
+    </div>
+
+    <div class="funny-box">
+      <div class="funny-label">😄 FUNNY TAKE</div>
+      <p>People say "I'll implement StoryBrand next quarter." They don't. They say "it's complex, we need consultants." They don't hire them. They say "once we rebrand." They never rebrand. The implementation isn't hard—it's commitment. Start with five sentences on a napkin. That's it. Add one element at a time. Your homepage doesn't need a full rebrand. Change the headline. Watch what happens. Progress compounds.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-label">🤖 AI CONNECTION</div>
+      <p>Implementation in AI mirrors StoryBrand: (1) Define the objective (what story should the model tell?); (2) Build the foundation (train the base model); (3) Create feedback loops (RLHF data); (4) Iterate and refine; (5) Deploy and monitor. StoryBrand's rigor applies to AI development too. Unclear objectives → unclear outputs. Clear framework → clear results.</p>
+    </div>
+
+    <div class="connect-box">
+      <div class="connect-label">📚 CROSS-BOOK CONNECTION</div>
+      <p><strong>Atomic Habits</strong> (Clear) shows systems beat motivation—build the system, the habits follow. <strong>The Lean Startup</strong> (Ries) teaches minimum viable product and iteration. StoryBrand implementation isn't a big bang; it's continuous, customer-feedback-driven evolution.</p>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">"Clarity is the most underrated value in business. Get it. Everything else gets easier."</div>
+      <div class="quote-attr">— Donald Miller</div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY SPOTLIGHT 1: Donald Miller's Crisis -->
+<section class="story" style="background: linear-gradient(135deg, #2D3436 0%, #1a1a3e 100%);">
+  <div class="story-inner" style="color: white;">
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px;">Story Spotlight #1: The Marketing Failure That Built StoryBrand</h2>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 280" style="margin-bottom: 30px;">
+        <!-- Act 1: Struggle -->
+        <circle cx="100" cy="140" r="40" fill="var(--coral)" opacity="0.7"/>
+        <text x="100" y="150" text-anchor="middle" font-size="24" fill="white">📉</text>
+        <text x="100" y="200" text-anchor="middle" font-size="11" fill="white" font-weight="600">Act 1: Confusion</text>
+        <text x="100" y="215" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">Miller's marketing</text>
+        <text x="100" y="228" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">agency, confusing</text>
+        <text x="100" y="241" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">messaging, near</text>
+        <text x="100" y="254" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">bankruptcy</text>
+
+        <!-- Arrow -->
+        <line x1="150" y1="140" x2="200" y2="140" stroke="var(--sunny)" stroke-width="2"/>
+
+        <!-- Act 2: Insight -->
+        <circle cx="280" cy="140" r="40" fill="var(--sunny)" opacity="0.8"/>
+        <text x="280" y="150" text-anchor="middle" font-size="24" fill="var(--dark)">💡</text>
+        <text x="280" y="200" text-anchor="middle" font-size="11" fill="white" font-weight="600">Act 2: Eureka</text>
+        <text x="280" y="215" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">Miller reads story</text>
+        <text x="280" y="228" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">structure books,</text>
+        <text x="280" y="241" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">realizes stories</text>
+        <text x="280" y="254" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">drive sales</text>
+
+        <!-- Arrow -->
+        <line x1="330" y1="140" x2="380" y2="140" stroke="var(--forest)" stroke-width="2"/>
+
+        <!-- Act 3: Transformation -->
+        <circle cx="460" cy="140" r="40" fill="var(--forest)" opacity="0.9"/>
+        <text x="460" y="150" text-anchor="middle" font-size="24" fill="white">⭐</text>
+        <text x="460" y="200" text-anchor="middle" font-size="11" fill="white" font-weight="600">Act 3: Triumph</text>
+        <text x="460" y="215" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">Rebuilt company</text>
+        <text x="460" y="228" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">around SB7</text>
+        <text x="460" y="241" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">framework,</text>
+        <text x="460" y="254" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">million-dollar</text>
+
+        <!-- Arrow to legacy -->
+        <line x1="510" y1="140" x2="560" y2="140" stroke="var(--deep-blue)" stroke-width="2"/>
+
+        <!-- Legacy -->
+        <circle cx="640" cy="140" r="40" fill="var(--deep-blue)" opacity="0.85"/>
+        <text x="640" y="150" text-anchor="middle" font-size="24" fill="white">🌟</text>
+        <text x="640" y="200" text-anchor="middle" font-size="11" fill="white" font-weight="600">Legacy</text>
+        <text x="640" y="215" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">StoryBrand helps</text>
+        <text x="640" y="228" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">10,000+ companies</text>
+      </svg>
+    </div>
+
+    <div class="card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 16px; color: var(--sunny);">The Story</h3>
+      <p style="color: rgba(255,255,255,0.9); margin-bottom: 16px;">Donald Miller was running a marketing agency in Nashville and nearly went bankrupt. Why? His messaging was confusing. He had a seven-person team, decent clients, and solid work—but couldn't articulate what he did or why anyone should care. His website was a laundry list of services. His pitch was scattered. His elevator pitch was incomprehensible.</p>
+      <p style="color: rgba(255,255,255,0.9); margin-bottom: 16px;">Then Miller read books on screenwriting, storytelling, and narrative structure (Save the Cat, The Hero with a Thousand Faces, Foolscap). He realized: stories are how humans make decisions. Brands telling clear stories win. Brands confusing people lose.</p>
+      <p style="color: rgba(255,255,255,0.9); margin-bottom: 16px;">He reorganized his entire business around one simple story: "Entrepreneurs and business leaders lose revenue because their messaging is confusing. StoryBrand clarifies it. Customers listen, buy, and stay loyal." He rebuilt his website. Rewrote his emails. Changed his pitch.</p>
+      <p style="color: rgba(255,255,255,0.9);">The result? Revenue doubled in 18 months. He went from thinking about bankruptcy to building an eight-figure company. Then he published Building a StoryBrand (2012), and it became a phenomenon. Over a million copies sold. Used by companies from startups to enterprises like Google, Amazon, Vimeo, and Mailchimp.</p>
+    </div>
+
+    <div class="quote-box" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+      <div class="quote-text" style="color: rgba(255,255,255,0.95);">"I was failing because I wasn't telling a story. I was just listing things we do. When I started telling customers a story about their success, everything changed."</div>
+      <div class="quote-attr" style="color: var(--sunny);">— Donald Miller</div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY SPOTLIGHT 2: Patagonia Brand Story -->
+<section class="story" style="background: linear-gradient(135deg, #1a3a2a 0%, #0f1f1a 100%);">
+  <div class="story-inner" style="color: white;">
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px;">Story Spotlight #2: Patagonia Through the StoryBrand Lens</h2>
+
+    <div class="illustration-container">
+      <svg viewBox="0 0 700 260">
+        <!-- SB7 for Patagonia -->
+        <!-- Character -->
+        <circle cx="60" cy="130" r="25" fill="var(--forest)"/>
+        <text x="60" y="140" text-anchor="middle" font-size="16" fill="white">🧗</text>
+        <text x="60" y="170" text-anchor="middle" font-size="10" fill="white" font-weight="600">Character</text>
+        <text x="60" y="185" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">Climber, athlete,</text>
+        <text x="60" y="195" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">nature lover</text>
+
+        <!-- Problem -->
+        <circle cx="140" cy="130" r="25" fill="var(--warm-red)"/>
+        <text x="140" y="140" text-anchor="middle" font-size="16" fill="white">🌍</text>
+        <text x="140" y="170" text-anchor="middle" font-size="10" fill="white" font-weight="600">Problem</text>
+        <text x="140" y="185" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">Guilt: gear</text>
+        <text x="140" y="195" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">destroys nature</text>
+
+        <!-- Guide -->
+        <circle cx="220" cy="130" r="25" fill="var(--deep-blue)"/>
+        <text x="220" y="140" text-anchor="middle" font-size="16" fill="white">🏔️</text>
+        <text x="220" y="170" text-anchor="middle" font-size="10" fill="white" font-weight="600">Guide</text>
+        <text x="220" y="185" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">Patagonia:</text>
+        <text x="220" y="195" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">"I love it too"</text>
+
+        <!-- Plan -->
+        <circle cx="300" cy="130" r="25" fill="var(--sunny)"/>
+        <text x="300" y="140" text-anchor="middle" font-size="16" fill="var(--dark)">♻️</text>
+        <text x="300" y="170" text-anchor="middle" font-size="10" fill="white" font-weight="600">Plan</text>
+        <text x="300" y="185" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">1% sales to env.</text>
+        <text x="300" y="195" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">2. Recycle program</text>
+
+        <!-- CTA -->
+        <circle cx="380" cy="130" r="25" fill="var(--forest)"/>
+        <text x="380" y="140" text-anchor="middle" font-size="16" fill="white">🛒</text>
+        <text x="380" y="170" text-anchor="middle" font-size="10" fill="white" font-weight="600">CTA</text>
+        <text x="380" y="185" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">Buy gear.</text>
+        <text x="380" y="195" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">Heal the world</text>
+
+        <!-- Failure -->
+        <circle cx="460" cy="130" r="25" fill="var(--warm-red)"/>
+        <text x="460" y="140" text-anchor="middle" font-size="16" fill="white">😰</text>
+        <text x="460" y="170" text-anchor="middle" font-size="10" fill="white" font-weight="600">Failure</text>
+        <text x="460" y="185" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">Don't buy:</text>
+        <text x="460" y="195" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">guilt grows</text>
+
+        <!-- Success -->
+        <circle cx="540" cy="130" r="25" fill="var(--forest)"/>
+        <text x="540" y="140" text-anchor="middle" font-size="16" fill="white">⭐</text>
+        <text x="540" y="170" text-anchor="middle" font-size="10" fill="white" font-weight="600">Success</text>
+        <text x="540" y="185" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">You climb guilt-</text>
+        <text x="540" y="195" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.7)">free, happy hero</text>
+      </svg>
+    </div>
+
+    <div class="card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 16px; color: var(--sunny);">The Story</h3>
+      <p style="color: rgba(255,255,255,0.9); margin-bottom: 16px;">Patagonia's brand story is StoryBrand perfection. The character isn't Patagonia. It's you: an athlete, climber, or environmentalist who loves the outdoors. The problem isn't stated explicitly—it's felt: climbers and adventurers want premium gear, but buying it feels like betraying nature. Guilt.</p>
+      <p style="color: rgba(255,255,255,0.9); margin-bottom: 16px;">Patagonia becomes the guide by showing empathy: "We also love these mountains. We also hate seeing glaciers melt." They own climbing gear's environmental cost and chose to be different. The plan? Donate 1% of sales to environmental nonprofits. Operate a Worn Wear program (recycling used gear). Use sustainable materials. No greenwashing—just transparency.</p>
+      <p style="color: rgba(255,255,255,0.9); margin-bottom: 16px;">The CTA: buy your climbing gear. The failure stakes: if you don't support brands doing the work, only exploitative companies survive. The success: you become the environmentalist hero. You climb mountains and heal them.</p>
+      <p style="color: rgba(255,255,255,0.9);">Result? Patagonia's revenue grows 20% annually in a flat market. Customers are obsessed—not just loyal. In 2022, founder Yvon Chouinard donated the entire company to environmental causes, and cult status exploded. That's the power of StoryBrand done right: alignment of values, clarity of mission, and a customer-centric narrative.</p>
+    </div>
+
+    <div class="quote-box" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+      <div class="quote-text" style="color: rgba(255,255,255,0.95);">"We're in business to save our home planet." — Patagonia doesn't sell jackets. They sell environmental heroism.</div>
+      <div class="quote-attr" style="color: var(--sunny);">— Yvon Chouinard, Patagonia Founder</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHEATSHEET SECTION -->
+<section class="cheatsheet">
+  <div class="cheatsheet-inner">
+    <h2>The StoryBrand Framework Cheatsheet</h2>
+
+    <div class="two-col">
+      <!-- Element 1 -->
+      <div class="cheatsheet-card">
+        <h4>1. CHARACTER: Who's the Hero?</h4>
+        <p><strong>Answer:</strong> Your customer, not your brand. Define their single dominant desire. (Example: Katniss wants survival.)</p>
+        <p><strong>What NOT to do:</strong> Make yourself the hero. List ten customer wants. Confuse their desire with your product features.</p>
+      </div>
+
+      <!-- Element 2 -->
+      <div class="cheatsheet-card">
+        <h4>2. PROBLEM: What's Wrong?</h4>
+        <p><strong>Three Layers:</strong> External (concrete, visible), Internal (emotional, fear-based), Philosophical (identity-based). Address all three.</p>
+        <p><strong>Why it matters:</strong> Customers ignore external problems. They make decisions based on internal/philosophical problems.</p>
+      </div>
+
+      <!-- Element 3 -->
+      <div class="cheatsheet-card">
+        <h4>3. GUIDE: Who Helps?</h4>
+        <p><strong>Two Qualities:</strong> Empathy (I've suffered too) + Authority (I've beaten this problem). Both are required.</p>
+        <p><strong>Your Brand Role:</strong> Be the Yoda, not the Luke. Show wisdom and compassion. Make the customer the hero of your story.</p>
+      </div>
+
+      <!-- Element 4 -->
+      <div class="cheatsheet-card">
+        <h4>4. PLAN: How Do They Win?</h4>
+        <p><strong>Two Types:</strong> Process (3-step path: browse, buy, enjoy) or Agreement (promise, guarantee, risk reversal).</p>
+        <p><strong>Goal:</strong> Reduce anxiety. Make the path obvious. Remove confusion. Clear path = customers execute.</p>
+      </div>
+
+      <!-- Element 5 -->
+      <div class="cheatsheet-card">
+        <h4>5. CALL TO ACTION: What's Next?</h4>
+        <p><strong>Two Types:</strong> Direct ("Buy Now," "Start Free Trial") or Transitional ("Download Guide," "Schedule Demo").</p>
+        <p><strong>Critical:</strong> Be explicit. Passive websites convert poorly. Bold, clear CTAs win.</p>
+      </div>
+
+      <!-- Element 6 -->
+      <div class="cheatsheet-card">
+        <h4>6. FAILURE: What's at Stake?</h4>
+        <p><strong>Psychology:</strong> Loss aversion is 2-3x more powerful than gain motivation. Show what happens if they don't act.</p>
+        <p><strong>Technique:</strong> Paint the downside. Make failure real and costly. Urgency and scarcity matter.</p>
+      </div>
+
+      <!-- Element 7 -->
+      <div class="cheatsheet-card">
+        <h4>7. SUCCESS: What Do They Become?</h4>
+        <p><strong>Key Insight:</strong> Customers don't want your product. They want the identity they'll have after using it.</p>
+        <p><strong>Show transformation:</strong> Before/after isn't about features. It's about who they'll be: confident, capable, proud.</p>
+      </div>
+
+      <!-- One-Liner Formula -->
+      <div class="cheatsheet-card">
+        <h4>🎯 The One-Liner</h4>
+        <p><strong>Formula:</strong> Problem + Solution + Result = One clear sentence.</p>
+        <p>Example: "Most companies waste money on marketing without clear messaging. StoryBrand clarifies your message. Customers listen, buy, and stay loyal."</p>
+      </div>
+
+      <!-- Implementation -->
+      <div class="cheatsheet-card">
+        <h4>🚀 Implementation Roadmap</h4>
+        <p><strong>1.</strong> Write brand script (4-8 hours)<br><strong>2.</strong> Redesign website homepage<br><strong>3.</strong> Create lead magnets<br><strong>4.</strong> Build email sequences<br><strong>5.</strong> Deploy across all channels</p>
+      </div>
+
+      <!-- Common Mistakes -->
+      <div class="cheatsheet-card">
+        <h4>❌ Top Mistakes</h4>
+        <p>• Making your brand the hero (customers should be)<br>• Listing 10 customer wants instead of 1<br>• Skipping the internal/philosophical problem<br>• No clear CTA<br>• Confusing message<br>• Not showing failure stakes</p>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="cheatsheet-card">
+        <h4>📊 What Changes</h4>
+        <p><strong>When you implement StoryBrand:</strong><br>• Conversion rates: +27% to +40%<br>• Email open rates: +20-35%<br>• Customer retention: +20-30%<br>• Revenue: +2x growth (long-term)<br>• Team alignment: Clarity compounds</p>
+      </div>
+
+      <!-- Mindset Shift -->
+      <div class="cheatsheet-card">
+        <h4>🧠 The Core Insight</h4>
+        <p><strong>Your customer doesn't care about:</strong> Your features, your awards, your history, how clever you are.<br><strong>They care about:</strong> Themselves. Their problems. Who they'll become. Tell THAT story, and they'll listen forever.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); text-align: center; color: rgba(255,255,255,0.7); font-size: 0.9rem;">
+      <p>"The customer is the hero. Your brand is the guide. This is the only story that works."</p>
+      <p style="margin-top: 12px;">— Building a StoryBrand Framework</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

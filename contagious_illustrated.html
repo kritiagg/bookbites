@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contagious: Why Things Catch On — Illustrated Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+    :root {
+      --coral: #FF6B6B; --teal: #4ECDC4; --sunny: #FFE66D;
+      --purple: #A06CD5; --sky: #74B9FF; --mint: #55EFC4;
+      --pink: #FD79A8; --orange: #FDCB6E; --dark: #2D3436;
+      --cream: #FFEAA7; --deep-blue: #0984E3; --warm-red: #E17055;
+      --forest: #00B894; --dark-purple: #6C5CE7;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0f0f23; color: var(--dark); }
+
+    .cover {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 40px 20px;
+    }
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem; color: white; letter-spacing: -2px;
+      text-align: center; position: relative; z-index: 2;
+    }
+    .cover .author { font-size: 1.3rem; color: var(--sunny); margin-top: 8px; font-weight: 600; z-index: 2; }
+    .cover .subtitle { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 16px; z-index: 2; text-align: center; max-width: 500px; }
+
+    .particle {
+      position: absolute; border-radius: 50%; opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .lesson {
+      min-height: 100vh; padding: 60px 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lesson-inner { max-width: 900px; width: 100%; }
+    .lesson-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1.2rem;
+      color: white; margin-bottom: 12px;
+    }
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; margin-bottom: 8px; line-height: 1.2;
+    }
+    .lesson-subtitle { font-size: 1rem; opacity: 0.7; margin-bottom: 30px; }
+
+    .illustration-container {
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+    }
+    svg { max-width: 100%; height: auto; }
+
+    .card {
+      background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .card-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+    }
+    .card p { font-size: 0.95rem; line-height: 1.7; color: #444; }
+
+    .quote-box {
+      background: var(--dark); color: white; border-radius: 16px;
+      padding: 24px 28px; margin-bottom: 20px;
+    }
+    .quote-box .quote-text { font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+    .quote-box .quote-attr { color: var(--sunny); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+
+    .connect-box {
+      background: #e8f4fd; border-left: 4px solid var(--deep-blue);
+      border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 20px;
+    }
+    .connect-box .connect-label { font-size: 0.7rem; font-weight: 700; color: var(--deep-blue); letter-spacing: 1px; margin-bottom: 6px; }
+    .connect-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+
+    .ai-box {
+      background: linear-gradient(135deg, #0984E3, #6C5CE7);
+      color: white; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px;
+    }
+    .ai-box .ai-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--sunny); margin-bottom: 6px; }
+    .ai-box p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
+
+    .funny-box {
+      background: #fff5f5; border-radius: 16px; padding: 20px 24px;
+      margin-bottom: 20px; border: 2px dashed var(--coral);
+    }
+    .funny-box .funny-label { font-size: 0.7rem; font-weight: 700; color: var(--coral); letter-spacing: 1px; margin-bottom: 6px; }
+    .funny-box p { font-size: 0.9rem; line-height: 1.6; color: #666; font-style: italic; }
+
+    .story {
+      min-height: 100vh; padding: 60px 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .story-inner { max-width: 900px; width: 100%; }
+
+    .cheatsheet {
+      min-height: 100vh; padding: 60px 20px;
+      background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cheatsheet-inner { max-width: 900px; width: 100%; }
+    .cheatsheet h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; text-align: center; margin-bottom: 40px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* Book-specific styles */
+    .lesson:nth-child(2) { background: linear-gradient(180deg, #f0f8ff 0%, #e6f2ff 100%); }
+    .lesson:nth-child(3) { background: linear-gradient(180deg, #fff8f0 0%, #ffe6d5 100%); }
+    .lesson:nth-child(4) { background: linear-gradient(180deg, #f0fff8 0%, #e6fff5 100%); }
+    .lesson:nth-child(5) { background: linear-gradient(180deg, #fff0f8 0%, #ffe6f5 100%); }
+    .lesson:nth-child(6) { background: linear-gradient(180deg, #f8f0ff 0%, #f0e6ff 100%); }
+    .lesson:nth-child(7) { background: linear-gradient(180deg, #fffaf0 0%, #fff0e6 100%); }
+    .lesson:nth-child(8) { background: linear-gradient(180deg, #f0fff0 0%, #e6ffe6 100%); }
+    .lesson:nth-child(9) { background: linear-gradient(180deg, #fff8e6 0%, #fffacc 100%); }
+    .lesson:nth-child(10) { background: linear-gradient(180deg, #ffe6e6 0%, #fff0f0 100%); }
+    .lesson:nth-child(11) { background: linear-gradient(180deg, #e6f9ff 0%, #d4f1ff 100%); }
+    .lesson:nth-child(12) { background: linear-gradient(180deg, #fff0e6 0%, #ffe6cc 100%); }
+
+    .story { background: linear-gradient(135deg, #1a1a3e 0%, #0f0f23 100%); color: white; }
+
+    .cheatsheet-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      border-radius: 12px;
+      padding: 24px;
+      color: white;
+      backdrop-filter: blur(10px);
+    }
+    .cheatsheet-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--coral);
+      margin-bottom: 12px;
+    }
+    .cheatsheet-card p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .story-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: white;
+      margin-bottom: 20px;
+    }
+    .story-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 30px;
+    }
+
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    @media (max-width: 900px) { .three-col { grid-template-columns: 1fr; } }
+
+    .lesson-num.bg-forest { background: var(--forest); }
+    .lesson-num.bg-coral { background: var(--coral); }
+    .lesson-num.bg-purple { background: var(--purple); }
+    .lesson-num.bg-deep-blue { background: var(--deep-blue); }
+    .lesson-num.bg-warm-red { background: var(--warm-red); }
+    .lesson-num.bg-teal { background: var(--teal); }
+    .lesson-num.bg-sunny { background: var(--sunny); color: var(--dark); }
+
+  </style>
+</head>
+<body>
+
+  <!-- COVER SECTION -->
+  <section class="cover">
+    <div class="particle" style="width: 80px; height: 80px; background: var(--coral); top: 10%; left: 10%;"></div>
+    <div class="particle" style="width: 120px; height: 120px; background: var(--forest); top: 60%; right: 15%;"></div>
+    <div class="particle" style="width: 100px; height: 100px; background: var(--purple); top: 30%; right: 25%;"></div>
+    <div class="particle" style="width: 90px; height: 90px; background: var(--teal); bottom: 20%; left: 20%;"></div>
+
+    <h1>Contagious</h1>
+    <p class="author">by Jonah Berger</p>
+    <p class="subtitle">Why Things Catch On — The Science Behind Viral Content</p>
+
+    <svg viewBox="0 0 700 300" style="width: 400px; margin-top: 40px; margin-bottom: 20px;">
+      <!-- Viral network effect -->
+      <defs>
+        <linearGradient id="networkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:var(--coral);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:var(--forest);stop-opacity:1" />
+        </linearGradient>
+      </defs>
+
+      <!-- Center node -->
+      <circle cx="350" cy="150" r="40" fill="var(--coral)" opacity="0.9"/>
+      <circle cx="350" cy="150" r="35" fill="white" opacity="0.1"/>
+
+      <!-- Level 1 nodes (5 nodes around center) -->
+      <circle cx="500" cy="120" r="30" fill="var(--forest)" opacity="0.8"/>
+      <circle cx="480" cy="230" r="30" fill="var(--forest)" opacity="0.8"/>
+      <circle cx="350" cy="280" r="30" fill="var(--forest)" opacity="0.8"/>
+      <circle cx="220" cy="230" r="30" fill="var(--forest)" opacity="0.8"/>
+      <circle cx="200" cy="120" r="30" fill="var(--forest)" opacity="0.8"/>
+
+      <!-- Level 2 nodes (outer ring) -->
+      <circle cx="600" cy="80" r="20" fill="var(--purple)" opacity="0.7"/>
+      <circle cx="630" cy="150" r="20" fill="var(--purple)" opacity="0.7"/>
+      <circle cx="600" cy="220" r="20" fill="var(--purple)" opacity="0.7"/>
+      <circle cx="500" cy="320" r="20" fill="var(--purple)" opacity="0.7"/>
+      <circle cx="350" cy="340" r="20" fill="var(--purple)" opacity="0.7"/>
+      <circle cx="200" cy="320" r="20" fill="var(--purple)" opacity="0.7"/>
+      <circle cx="100" cy="220" r="20" fill="var(--purple)" opacity="0.7"/>
+      <circle cx="70" cy="150" r="20" fill="var(--purple)" opacity="0.7"/>
+      <circle cx="100" cy="80" r="20" fill="var(--purple)" opacity="0.7"/>
+
+      <!-- Connection lines -->
+      <line x1="350" y1="150" x2="500" y2="120" stroke="rgba(255,107,107,0.3)" stroke-width="2" stroke-dasharray="5,5"/>
+      <line x1="350" y1="150" x2="480" y2="230" stroke="rgba(255,107,107,0.3)" stroke-width="2" stroke-dasharray="5,5"/>
+      <line x1="350" y1="150" x2="350" y2="280" stroke="rgba(255,107,107,0.3)" stroke-width="2" stroke-dasharray="5,5"/>
+      <line x1="350" y1="150" x2="220" y2="230" stroke="rgba(255,107,107,0.3)" stroke-width="2" stroke-dasharray="5,5"/>
+      <line x1="350" y1="150" x2="200" y2="120" stroke="rgba(255,107,107,0.3)" stroke-width="2" stroke-dasharray="5,5"/>
+
+      <!-- Secondary connections -->
+      <line x1="500" y1="120" x2="600" y2="80" stroke="rgba(0,184,148,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="500" y1="120" x2="630" y2="150" stroke="rgba(0,184,148,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="480" y1="230" x2="600" y2="220" stroke="rgba(0,184,148,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="220" y1="230" x2="100" y2="220" stroke="rgba(0,184,148,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="200" y1="120" x2="70" y2="150" stroke="rgba(0,184,148,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+
+      <!-- Labels -->
+      <text x="350" y="160" font-family="Inter" font-size="12" fill="white" text-anchor="middle" font-weight="bold">Idea</text>
+      <text x="500" y="140" font-family="Inter" font-size="11" fill="white" text-anchor="middle">Share</text>
+      <text x="480" y="250" font-family="Inter" font-size="11" fill="white" text-anchor="middle">Spread</text>
+      <text x="220" y="250" font-family="Inter" font-size="11" fill="white" text-anchor="middle">Viral</text>
+      <text x="200" y="140" font-family="Inter" font-size="11" fill="white" text-anchor="middle">Catch</text>
+
+      <!-- Pulsing effect circles (animation via CSS) -->
+      <circle cx="350" cy="150" r="50" fill="none" stroke="var(--coral)" stroke-width="1" opacity="0.3" style="animation: pulse 2s infinite;"/>
+    </svg>
+
+  </section>
+
+  <!-- LESSON 1: Word of Mouth -->
+  <section class="lesson">
+    <div class="lesson-inner">
+      <div class="lesson-num bg-forest">1</div>
+      <h2 class="lesson-title">Word of Mouth Is 10× More Powerful Than Advertising</h2>
+      <p class="lesson-subtitle">The offline revolution — why people trust friends more than ads</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 250" style="width: 100%; max-width: 600px;">
+          <!-- Left side: Traditional ad -->
+          <rect x="20" y="30" width="280" height="200" rx="12" fill="#f0f0f0" stroke="#999" stroke-width="2"/>
+          <rect x="30" y="40" width="260" height="50" fill="#FF6B6B" opacity="0.7"/>
+          <text x="160" y="72" font-family="Inter" font-size="14" fill="white" text-anchor="middle" font-weight="bold">TV COMMERCIAL</text>
+          <circle cx="160" cy="140" r="25" fill="#FFE66D"/>
+          <text x="160" y="147" font-family="Inter" font-size="28" fill="#FF6B6B">$</text>
+          <text x="160" y="210" font-family="Inter" font-size="12" fill="#333" text-anchor="middle" font-weight="600">Trust: 14%</text>
+
+          <!-- Barrier between -->
+          <line x1="350" y1="50" x2="350" y2="230" stroke="#ccc" stroke-width="2" stroke-dasharray="5,5"/>
+          <text x="350" y="25" font-family="Inter" font-size="11" fill="#999" text-anchor="middle" font-weight="bold">10X DIFFERENCE</text>
+
+          <!-- Right side: Word of mouth -->
+          <g>
+            <!-- Person 1 -->
+            <circle cx="450" cy="70" r="20" fill="#4ECDC4"/>
+            <rect x="435" y="95" width="30" height="40" fill="#4ECDC4"/>
+            <circle cx="455" cy="155" r="8" fill="#A06CD5"/>
+            <circle cx="430" cy="160" r="8" fill="#A06CD5"/>
+
+            <!-- Person 2 -->
+            <circle cx="580" cy="70" r="20" fill="#00B894"/>
+            <rect x="565" y="95" width="30" height="40" fill="#00B894"/>
+            <circle cx="585" cy="155" r="8" fill="#4ECDC4"/>
+            <circle cx="560" cy="160" r="8" fill="#4ECDC4"/>
+
+            <!-- Speech bubbles -->
+            <path d="M 475 110 Q 510 100 530 110" stroke="#FF6B6B" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            <text x="503" y="95" font-family="Inter" font-size="11" fill="#666" text-anchor="middle">"You HAVE to</text>
+            <text x="503" y="110" font-family="Inter" font-size="11" fill="#666" text-anchor="middle">try this!"</text>
+
+            <!-- Second generation -->
+            <circle cx="530" cy="190" r="18" fill="#FF6B6B" opacity="0.8"/>
+            <rect x="517" y="212" width="26" height="35" fill="#FF6B6B" opacity="0.8"/>
+            <circle cx="535" cy="260" r="7" fill="#FFE66D"/>
+            <circle cx="512" cy="263" r="7" fill="#FFE66D"/>
+
+            <!-- Third generation -->
+            <circle cx="620" cy="190" r="18" fill="#FF6B6B" opacity="0.8"/>
+            <rect x="607" y="212" width="26" height="35" fill="#FF6B6B" opacity="0.8"/>
+            <circle cx="625" cy="260" r="7" fill="#FFE66D"/>
+            <circle cx="602" cy="263" r="7" fill="#FFE66D"/>
+
+            <text x="515" y="235" font-family="Inter" font-size="10" fill="#333" text-anchor="middle" font-weight="600">Trust: 92%</text>
+          </g>
+
+          <!-- Marker arrow -->
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#FF6B6B"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: var(--coral); border-radius: 50%;"></span>
+          KEY LESSON
+        </div>
+        <p><strong>Only 7% of word-of-mouth is online.</strong> Offline conversations dominate sharing behavior. Berger's analysis of 40+ viral campaigns showed that peer recommendation is 10x more effective than paid advertising at driving purchases and long-term loyalty. Real examples: (1) The $100 Philly Cheesesteak from Steve's Prince of Steaks became legendary through pure word-of-mouth, driving tourists specifically to try it. (2) Blendtec's industrial blender was considered boring until CEO Tom Dickson created "Will It Blend?" — but the real driver of sales was people physically seeing the blender working and telling friends. (3) A study of shopping behavior found that people who heard about a product from a friend were 50% more likely to buy it than those who saw an ad.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">FUNNY TAKE</div>
+        <p>Advertisers spend billions trying to get you to care about their product for 30 seconds. A friend spends zero dollars and gets you to care enough to text your mom about it at 11 PM. Turns out, the human voice beats the production budget.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">AI CONNECTION</div>
+        <p>Word-of-mouth is like information propagation through a neural network — each "share" is an activation that strengthens the signal. In LLMs, trust in outputs increases when information passes through multiple "nodes" (sources), similar to how humans trust recommendations more when they come from a trusted peer. This mirrors backpropagation: the signal travels through trusted connections, not direct transmission from the source.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">CROSS-BOOK CONNECTION</div>
+        <p><strong>The Tipping Point</strong> (Gladwell) also emphasizes word-of-mouth but focuses on "connectors" — special people who spread ideas. Berger goes deeper: it's not just WHO spreads, but WHAT makes people want to spread. <strong>Influence</strong> (Cialdini) adds social proof as a principle; Contagious explores the mechanics of creating proof worth sharing.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"People don't always share information to communicate information. They share to communicate identity."</div>
+        <div class="quote-attr">— Jonah Berger, Contagious</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 2: Social Currency -->
+  <section class="lesson">
+    <div class="lesson-inner">
+      <div class="lesson-num bg-coral">2</div>
+      <h2 class="lesson-title">Social Currency — We Share Things That Make Us Look Good</h2>
+      <p class="lesson-subtitle">Sharing as identity signaling: the hidden currency of status</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 280" style="width: 100%; max-width: 600px;">
+          <!-- Social Currency concept -->
+          <!-- Top: Before sharing (boring) -->
+          <circle cx="150" cy="50" r="25" fill="#999"/>
+          <rect x="135" y="80" width="30" height="45" fill="#999"/>
+          <circle cx="145" cy="140" r="7" fill="#999"/>
+          <circle cx="155" cy="140" r="7" fill="#999"/>
+          <path d="M 140 155 L 160 155" stroke="#999" stroke-width="2"/>
+          <text x="150" y="200" font-family="Inter" font-size="11" fill="#666" text-anchor="middle" font-weight="600">Boring me</text>
+
+          <!-- Arrow -->
+          <g>
+            <path d="M 220 100 L 280 100" stroke="#FF6B6B" stroke-width="3" marker-end="url(#arrowhead)"/>
+            <text x="250" y="85" font-family="Inter" font-size="10" fill="#FF6B6B" text-anchor="middle" font-weight="bold">SHARE</text>
+          </g>
+
+          <!-- After sharing (cool) -->
+          <circle cx="370" cy="50" r="25" fill="#00B894"/>
+          <rect x="355" y="80" width="30" height="45" fill="#00B894"/>
+          <circle cx="365" cy="140" r="7" fill="#FFE66D"/>
+          <circle cx="375" cy="140" r="7" fill="#FFE66D"/>
+          <path d="M 360 155 L 380 155" stroke="#FFE66D" stroke-width="2"/>
+          <text x="370" y="200" font-family="Inter" font-size="11" fill="#666" text-anchor="middle" font-weight="600">Cool me</text>
+
+          <!-- Examples below -->
+          <!-- Please Don't Tell -->
+          <g transform="translate(50, 250)">
+            <rect x="0" y="0" width="120" height="30" rx="6" fill="#FFF5F5" stroke="#FF6B6B" stroke-width="2"/>
+            <text x="60" y="20" font-family="Inter" font-size="10" fill="#FF6B6B" text-anchor="middle" font-weight="bold">Speakeasy secret</text>
+          </g>
+
+          <!-- Snapple facts -->
+          <g transform="translate(190, 250)">
+            <rect x="0" y="0" width="120" height="30" rx="6" fill="#e6ffe6" stroke="#00B894" stroke-width="2"/>
+            <text x="60" y="20" font-family="Inter" font-size="10" fill="#00B894" text-anchor="middle" font-weight="bold">Snapple facts</text>
+          </g>
+
+          <!-- LinkedIn milestones -->
+          <g transform="translate(330, 250)">
+            <rect x="0" y="0" width="120" height="30" rx="6" fill="#e8f4fd" stroke="#0984E3" stroke-width="2"/>
+            <text x="60" y="20" font-family="Inter" font-size="9" fill="#0984E3" text-anchor="middle" font-weight="bold">LinkedIn win</text>
+          </g>
+
+          <!-- Defs -->
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#FF6B6B"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: var(--coral); border-radius: 50%;"></span>
+          KEY LESSON
+        </div>
+        <p><strong>People share things that make them look good.</strong> Social currency is about how sharing affects your status in others' eyes. Berger identifies three types: (1) <strong>Inner remarkability</strong> — sharing something novel or unexpected (Please Don't Tell speakeasy: the secret itself is currency; you gain status by knowing it). (2) <strong>Feeling good</strong> — stories and insights that make people feel smart or included (Snapple bottle facts; people felt clever repeating trivia). (3) <strong>Behavioral residue</strong> — LinkedIn milestones make you look accomplished; job changes, promotions, and certifications all broadcast success. The key insight: people don't just share good products, they share things that make THEM look good.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">FUNNY TAKE</div>
+        <p>Instagram didn't make people narcissistic — it just created a platform for a behavior we already had. We've always shared things that make us look good. Now we just do it with better filters and a global audience watching.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">AI CONNECTION</div>
+        <p>Social currency operates like a reinforcement signal in deep learning. When you share something that boosts your status (positive feedback), the algorithm in your brain learns to share similar things. This is exactly how RLHF (Reinforcement Learning from Human Feedback) works in LLMs — the system learns which outputs humans prefer (higher status) and optimizes toward them. The reward signal is social approval.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">CROSS-BOOK CONNECTION</div>
+        <p><strong>Influence</strong> (Cialdini) discusses consistency — people share to be consistent with their identity. <strong>Thinking, Fast and Slow</strong> (Kahneman) reveals that we overestimate how much others judge us, yet we still optimize for that perception. <strong>Atomic Habits</strong> (Clear) frames identity-based behavior: you share to reinforce who you want to be.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"When we share things, we're not just communicating information, we're communicating identity."</div>
+        <div class="quote-attr">— Jonah Berger, Contagious</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 3: Triggers -->
+  <section class="lesson">
+    <div class="lesson-inner">
+      <div class="lesson-num bg-purple">3</div>
+      <h2 class="lesson-title">Triggers — Top-of-Mind Becomes Tip-of-Tongue</h2>
+      <p class="lesson-subtitle">Context matters: how environments activate sharing</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" style="width: 100%; max-width: 600px;">
+          <!-- Brain with trigger activation -->
+          <circle cx="200" cy="120" r="80" fill="none" stroke="#A06CD5" stroke-width="3"/>
+          <!-- Left hemisphere -->
+          <path d="M 200 40 Q 150 80 150 120 Q 150 160 200 200" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+          <!-- Right hemisphere -->
+          <path d="M 200 40 Q 250 80 250 120 Q 250 160 200 200" fill="none" stroke="#00B894" stroke-width="2"/>
+
+          <!-- Trigger nodes around brain -->
+          <circle cx="100" cy="80" r="20" fill="#FFE66D" stroke="#FFA502" stroke-width="2"/>
+          <text x="100" y="88" font-family="Inter" font-size="10" fill="#333" text-anchor="middle" font-weight="bold">COFFEE</text>
+
+          <circle cx="300" cy="80" r="20" fill="#FFE66D" stroke="#FFA502" stroke-width="2"/>
+          <text x="300" y="88" font-family="Inter" font-size="10" fill="#333" text-anchor="middle" font-weight="bold">ROVER</text>
+
+          <circle cx="100" cy="160" r="20" fill="#FFE66D" stroke="#FFA502" stroke-width="2"/>
+          <text x="100" y="168" font-family="Inter" font-size="10" fill="#333" text-anchor="middle" font-weight="bold">PANDA</text>
+
+          <circle cx="300" cy="160" r="20" fill="#FFE66D" stroke="#FFA502" stroke-width="2"/>
+          <text x="300" y="168" font-family="Inter" font-size="10" fill="#333" text-anchor="middle" font-weight="bold">BREAK</text>
+
+          <!-- Connection lines to brain -->
+          <line x1="120" y1="100" x2="170" y2="100" stroke="#FF6B6B" stroke-width="1" stroke-dasharray="2,2"/>
+          <line x1="280" y1="100" x2="230" y2="100" stroke="#00B894" stroke-width="1" stroke-dasharray="2,2"/>
+          <line x1="120" y1="140" x2="170" y2="140" stroke="#FF6B6B" stroke-width="1" stroke-dasharray="2,2"/>
+          <line x1="280" y1="140" x2="230" y2="140" stroke="#00B894" stroke-width="1" stroke-dasharray="2,2"/>
+
+          <!-- Timeline: Kit Kat + Coffee -->
+          <g transform="translate(400, 40)">
+            <text x="0" y="0" font-family="Inter" font-size="12" fill="#666" font-weight="bold">KIT KAT SPIKE</text>
+            <line x1="0" y1="20" x2="280" y2="20" stroke="#ddd" stroke-width="1"/>
+
+            <!-- Morning -->
+            <circle cx="0" cy="20" r="8" fill="#4ECDC4"/>
+            <text x="0" y="50" font-family="Inter" font-size="9" fill="#666" text-anchor="middle">Morning</text>
+            <text x="0" y="65" font-family="Inter" font-size="9" fill="#999" text-anchor="middle">(Low sales)</text>
+
+            <!-- Mid-morning -->
+            <circle cx="140" cy="20" r="8" fill="#FF6B6B"/>
+            <text x="140" y="50" font-family="Inter" font-size="9" fill="#666" text-anchor="middle">Coffee time</text>
+            <text x="140" y="65" font-family="Inter" font-size="9" fill="#666" text-anchor="middle" font-weight="bold">SPIKE!</text>
+
+            <!-- Afternoon -->
+            <circle cx="280" cy="20" r="8" fill="#4ECDC4"/>
+            <text x="280" y="50" font-family="Inter" font-size="9" fill="#666" text-anchor="middle">Afternoon</text>
+            <text x="280" y="65" font-family="Inter" font-size="9" fill="#999" text-anchor="middle">(Drops again)</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: var(--purple); border-radius: 50%;"></span>
+          KEY LESSON
+        </div>
+        <p><strong>Triggers are environmental cues that activate associated ideas.</strong> Kit Kat's "Have a break, have a Kit Kat" jingle created a trigger: every coffee break, people thought of Kit Kat, and sales spiked mid-morning. Mars bar sales jumped 65% during the Mars rover landing (Mars → Mars bar). Rebecca Black's "Friday" became viral because Friday is a daily trigger — everyone experiences it weekly, so the song kept getting shared. The lesson: build triggers into everyday contexts. Frequency matters more than remarkability; Cheerios is talked about more than Disney World because you see Cheerios multiple times a week. Think about: What daily habit or environment will make people think of your product?</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">FUNNY TAKE</div>
+        <p>"Have a break, have a Kit Kat" is possibly history's most efficient jingle. They didn't say "our chocolate is better" — they just named the only thing people think about at 3 PM. Genius.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">AI CONNECTION</div>
+        <p>Triggers are like activation functions in neural networks. Coffee time → Kit Kat is a learned association, just like how input features activate specific neurons in a hidden layer. Frequent triggers are high-frequency features that get strong weight during training (gradient updates). This is why attention mechanisms in transformers work: they learn which inputs (triggers) should activate which outputs (responses). Frequency of training data = frequency of triggers.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">CROSS-BOOK CONNECTION</div>
+        <p><strong>Atomic Habits</strong> (Clear) uses triggers as "cues" in the habit loop (Cue → Routine → Reward). Contagious flips it: the trigger is what makes people share a habit about YOUR product. <strong>Predictably Irrational</strong> (Ariely) shows how context shapes decisions; triggers are behavioral context for sharing.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Triggers are all around us. The key is making sure your idea is the one they trigger."</div>
+        <div class="quote-attr">— Jonah Berger, Contagious</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 4: Emotion -->
+  <section class="lesson">
+    <div class="lesson-inner">
+      <div class="lesson-num bg-deep-blue">4</div>
+      <h2 class="lesson-title">Emotion — High Arousal Emotions Drive Sharing</h2>
+      <p class="lesson-subtitle">Awe and anger spread; sadness and contentment don't</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 280" style="width: 100%; max-width: 600px;">
+          <!-- Emotional intensity scale -->
+          <line x1="50" y1="240" x2="650" y2="240" stroke="#ddd" stroke-width="2"/>
+
+          <!-- Y-axis: Arousal level -->
+          <text x="20" y="120" font-family="Inter" font-size="10" fill="#666" text-anchor="end" font-weight="600">HIGH</text>
+          <text x="20" y="240" font-family="Inter" font-size="10" fill="#666" text-anchor="end" font-weight="600">LOW</text>
+
+          <!-- Emotion bubbles plotted -->
+          <!-- Awe (high arousal) -->
+          <circle cx="100" cy="100" r="35" fill="#A06CD5" opacity="0.7"/>
+          <text x="100" y="110" font-family="Inter" font-size="12" fill="white" text-anchor="middle" font-weight="bold">AWE</text>
+          <text x="100" y="200" font-family="Inter" font-size="9" fill="#666" text-anchor="middle">↑↑↑ Shares</text>
+
+          <!-- Anger (high arousal) -->
+          <circle cx="220" cy="110" r="35" fill="#FF6B6B" opacity="0.7"/>
+          <text x="220" y="120" font-family="Inter" font-size="12" fill="white" text-anchor="middle" font-weight="bold">ANGER</text>
+          <text x="220" y="200" font-family="Inter" font-size="9" fill="#666" text-anchor="middle">↑↑ Shares</text>
+
+          <!-- Anxiety (high arousal) -->
+          <circle cx="340" cy="130" r="35" fill="#FFE66D" opacity="0.7"/>
+          <text x="340" y="140" font-family="Inter" font-size="12" fill="#333" text-anchor="middle" font-weight="bold">ANXIETY</text>
+          <text x="340" y="200" font-family="Inter" font-size="9" fill="#666" text-anchor="middle">↑ Shares</text>
+
+          <!-- Contentment (low arousal) -->
+          <circle cx="460" cy="220" r="35" fill="#4ECDC4" opacity="0.7"/>
+          <text x="460" y="228" font-family="Inter" font-size="12" fill="white" text-anchor="middle" font-weight="bold">CONTENT</text>
+          <text x="460" y="280" font-family="Inter" font-size="9" fill="#999" text-anchor="middle">↓ Shares</text>
+
+          <!-- Sadness (low arousal) -->
+          <circle cx="580" cy="225" r="35" fill="#74B9FF" opacity="0.7"/>
+          <text x="580" y="233" font-family="Inter" font-size="12" fill="white" text-anchor="middle" font-weight="bold">SADNESS</text>
+          <text x="580" y="280" font-family="Inter" font-size="9" fill="#999" text-anchor="middle">↓↓ Shares</text>
+
+          <!-- Axis labels -->
+          <text x="350" y="270" font-family="Inter" font-size="10" fill="#999" text-anchor="middle" font-weight="600">EMOTIONAL INTENSITY</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: var(--deep-blue); border-radius: 50%;"></span>
+          KEY LESSON
+        </div>
+        <p><strong>High-arousal emotions (awe, excitement, anger) drive sharing. Low-arousal emotions (sadness, contentment) suppress it.</strong> Susan Boyle's viral audition video triggered awe. Dove's "Real Beauty" campaign sparked wonder and elevation. Negative emotions work too: outrage drives sharing more than mild disagreement. The key is arousal level, not valence (positive vs. negative). A meta-analysis of 7,000 NYT articles found high-arousal emotions (awe, anger, surprise) were shared significantly more than low-arousal emotions. Why? High arousal motivates action — including sharing. People don't think about sharing when they're content; they share when they're emotionally activated.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">FUNNY TAKE</div>
+        <p>Companies spend millions trying to make you feel warm and fuzzy about their brand. Then data shows you're more likely to share something that makes you furious. Turns out, rage is the new engagement metric.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">AI CONNECTION</div>
+        <p>Arousal level is like the magnitude of the loss gradient in neural networks. High arousal = strong gradient signals = more significant weight updates = behavior change. Low arousal = weak signal = minimal updates. In reinforcement learning, reward signal strength (magnitude) drives learning speed, just as emotion intensity drives sharing behavior. LLMs fine-tuned on RLHF learn which outputs produce strong reward signals; humans learn which shareable content produces strong emotional signals.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">CROSS-BOOK CONNECTION</div>
+        <p><strong>Emotional Intelligence</strong> (Goleman) explores emotion recognition; Contagious reveals that emotion is also a distribution mechanism. <strong>The Power of Habit</strong> (Duhigg) ties emotion to habit formation — emotion is the "reward" that closes the loop. Contagious shows emotion drives the initial spread.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Virality isn't about the information being shared, it's about the emotion that propels it."</div>
+        <div class="quote-attr">— Jonah Berger, Contagious</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 5: Public -->
+  <section class="lesson">
+    <div class="lesson-inner">
+      <div class="lesson-num bg-warm-red">5</div>
+      <h2 class="lesson-title">Public — Built to Show, Built to Grow</h2>
+      <p class="lesson-subtitle">Visibility creates desire; behavioral residue spreads the idea</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 280" style="width: 100%; max-width: 600px;">
+          <!-- Left: Hidden product (low visibility) -->
+          <rect x="30" y="50" width="140" height="140" rx="8" fill="#e0e0e0" stroke="#999" stroke-width="2"/>
+          <text x="100" y="130" font-family="Inter" font-size="11" fill="#999" text-anchor="middle" font-weight="bold">Hidden Brand</text>
+          <text x="100" y="210" font-family="Inter" font-size="10" fill="#666" text-anchor="middle" font-weight="600">Low Visibility</text>
+          <text x="100" y="225" font-family="Inter" font-size="9" fill="#999" text-anchor="middle">↓ Sharing</text>
+
+          <!-- Arrow between -->
+          <g>
+            <path d="M 220 120 L 280 120" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="250" y="110" font-family="Inter" font-size="9" fill="#FF6B6B" text-anchor="middle" font-weight="bold">VISIBLE</text>
+          </g>
+
+          <!-- Right: Visible product (high visibility) -->
+          <!-- Yellow Livestrong bracelet -->
+          <g transform="translate(350, 50)">
+            <!-- Hand holding bracelet -->
+            <circle cx="70" cy="30" r="20" fill="#D2B48C"/>
+            <rect x="60" y="55" width="20" height="35" fill="#D2B48C"/>
+            <circle cx="75" cy="55" r="6" fill="#FFE66D"/>
+
+            <!-- Bracelet (prominent) -->
+            <path d="M 50 60 Q 40 70 50 80 Q 60 85 70 80 Q 80 70 70 60" fill="none" stroke="#FFE66D" stroke-width="8"/>
+            <text x="60" y="73" font-family="Inter" font-size="9" fill="#333" text-anchor="middle" font-weight="bold">Live</text>
+
+            <!-- Others seeing it -->
+            <circle cx="130" cy="40" r="18" fill="#4ECDC4"/>
+            <rect x="120" y="60" width="20" height="30" fill="#4ECDC4"/>
+            <path d="M 110 50 L 140 50" stroke="#FFE66D" stroke-width="1" stroke-dasharray="2,2"/>
+            <text x="130" y="130" font-family="Inter" font-size="9" fill="#666" text-anchor="middle">"Where'd you</text>
+            <text x="130" y="143" font-family="Inter" font-size="9" fill="#666" text-anchor="middle">get that?"</text>
+
+            <!-- More adopters -->
+            <circle cx="180" cy="50" r="16" fill="#FF6B6B" opacity="0.7"/>
+            <rect x="171" y="68" width="18" height="28" fill="#FF6B6B" opacity="0.7"/>
+            <path d="M "160" y="60" L "190" y="60" stroke="#FFE66D" stroke-width="1" stroke-dasharray="2,2"/>
+
+            <text x="120" y="210" font-family="Inter" font-size="10" fill="#666" text-anchor="middle" font-weight="600">High Visibility</text>
+            <text x="120" y="225" font-family="Inter" font-size="9" fill="#333" text-anchor="middle" font-weight="bold">↑↑ Sharing</text>
+          </g>
+
+          <!-- Examples at bottom -->
+          <g transform="translate(30, 260)">
+            <text x="0" y="0" font-family="Inter" font-size="9" fill="#666" font-weight="bold">Examples:</text>
+            <text x="0" y="16" font-family="Inter" font-size="8" fill="#999">• Apple logo (faces outward)</text>
+            <text x="200" y="16" font-family="Inter" font-size="8" fill="#999">• Movember mustaches</text>
+            <text x="400" y="16" font-family="Inter" font-size="8" fill="#999">• AirPods (white ≠ functional)</text>
+          </g>
+
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#FF6B6B"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: var(--warm-red); border-radius: 50%;"></span>
+          KEY LESSON
+        </div>
+        <p><strong>People notice and imitate visible behavior.</strong> Movember makes movember visible — men grow mustaches, others ask why, they learn about prostate cancer. Livestrong bracelets were visible status symbols. Apple's logo faces outward (not visible to the user, only to observers) — intentional design to make the brand visible. AirPods are white and prominent even though the color serves no functional purpose — it's pure visibility. Behavioral residue means the act of using/wearing your product broadcasts it. Design for visibility. Make the product itself a conversation starter.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">FUNNY TAKE</div>
+        <p>Apple made their logo face away from the user and toward everyone else. Brilliant move: the only person who doesn't care about seeing the logo is the person paying for it.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">AI CONNECTION</div>
+        <p>Public behavior is like activation in visible layers of a network. Hidden layers (internal mechanisms) don't drive external behavior; visible outputs do. In transformers, the final output embeddings are what's observable/shareable. The hidden states are forgotten. This is why interpretability researchers focus on output behavior — that's what propagates and influences downstream models. Visibility is the difference between latent and manifest features.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">CROSS-BOOK CONNECTION</div>
+        <p><strong>Influence</strong> (Cialdini) discusses social proof — people follow visible behavior. Contagious shows why: visibility makes ideas self-perpetuating. <strong>The Power of Habit</strong> shows how cues trigger habit; public behavior is the cue for others' habits.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"When something is visible, it becomes a behavioral trigger for other people."</div>
+        <div class="quote-attr">— Jonah Berger, Contagious</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 6: Practical Value -->
+  <section class="lesson">
+    <div class="lesson-inner">
+      <div class="lesson-num bg-teal">6</div>
+      <h2 class="lesson-title">Practical Value — People Share Useful Things</h2>
+      <p class="lesson-subtitle">"News you can use" spreads because it helps others</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 280" style="width: 100%; max-width: 600px;">
+          <!-- Person receiving valuable info -->
+          <circle cx="100" cy="80" r="25" fill="#4ECDC4"/>
+          <rect x="85" y="110" width="30" height="45" fill="#4ECDC4"/>
+          <circle cx="95" cy="165" r="7" fill="#FFE66D"/>
+          <circle cx="105" cy="165" r="7" fill="#FFE66D"/>
+
+          <!-- Light bulb (value/utility) -->
+          <circle cx="230" cy="60" r="25" fill="#FFE66D" stroke="#FFA502" stroke-width="2"/>
+          <path d="M 220 80 L 220 100 L 240 100 L 240 80" fill="none" stroke="#FFA502" stroke-width="2"/>
+          <text x="230" y="70" font-family="Inter" font-size="24" fill="#FFA502" text-anchor="middle">!</text>
+
+          <!-- Arrow showing sharing -->
+          <path d="M 260 80 L 320 80" stroke="#00B894" stroke-width="2" marker-end="url(#arrowhead2)"/>
+          <text x="290" y="70" font-family="Inter" font-size="9" fill="#00B894" font-weight="bold">SHARES</text>
+
+          <!-- Recipients of shared value -->
+          <!-- Person 2 -->
+          <circle cx="380" cy="80" r="25" fill="#FF6B6B" opacity="0.8"/>
+          <rect x="365" y="110" width="30" height="45" fill="#FF6B6B" opacity="0.8"/>
+          <circle cx="375" cy="165" r="7" fill="#FFE66D"/>
+          <circle cx="385" cy="165" r="7" fill="#FFE66D"/>
+          <text x="380" y="195" font-family="Inter" font-size="8" fill="#666" text-anchor="middle">Helped!</text>
+
+          <!-- Person 3 -->
+          <circle cx="520" cy="80" r="25" fill="#A06CD5" opacity="0.8"/>
+          <rect x="505" y="110" width="30" height="45" fill="#A06CD5" opacity="0.8"/>
+          <circle cx="515" cy="165" r="7" fill="#FFE66D"/>
+          <circle cx="525" cy="165" r="7" fill="#FFE66D"/>
+          <text x="520" y="195" font-family="Inter" font-size="8" fill="#666" text-anchor="middle">Helped!</text>
+
+          <!-- Examples below -->
+          <g transform="translate(50, 240)">
+            <rect x="0" y="0" width="200" height="30" rx="6" fill="#e6ffe6" stroke="#00B894" stroke-width="1"/>
+            <text x="100" y="10" font-family="Inter" font-size="9" fill="#00B894" text-anchor="middle" font-weight="bold">Vanguard retirement tips</text>
+            <text x="100" y="25" font-family="Inter" font-size="8" fill="#666" text-anchor="middle">(Most-shared NYT article)</text>
+          </g>
+
+          <g transform="translate(290, 240)">
+            <rect x="0" y="0" width="200" height="30" rx="6" fill="#e6ffe6" stroke="#00B894" stroke-width="1"/>
+            <text x="100" y="10" font-family="Inter" font-size="9" fill="#00B894" text-anchor="middle" font-weight="bold">Ken Craig's corn shucking</text>
+            <text x="100" y="25" font-family="Inter" font-size="8" fill="#666" text-anchor="middle">(5M+ views: pure utility)</text>
+          </g>
+
+          <defs>
+            <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#00B894"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: var(--teal); border-radius: 50%;"></span>
+          KEY LESSON
+        </div>
+        <p><strong>People share valuable, actionable information because it helps others and makes them look helpful.</strong> Vanguard retirement tips were the most-shared article on the New York Times for years — practical advice people could actually use. Ken Craig's 5-minute corn shucking video went viral because it solved a real problem. The pattern: "news you can use" spreads. People share coupons, cooking hacks, parenting tips, and financial advice because they gain social currency (by being helpful) AND they deliver genuine value. This combines lessons 2 and 4: it makes the sharer look good AND it triggers emotions (gratitude, relief, confidence).</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">FUNNY TAKE</div>
+        <p>People will forward you a listicle about "5 Ways to Boost Your WiFi Speed" at 11 PM even though they don't use WiFi. They just want you to think they're the type of person who knows about WiFi boosting. Practical value is 90% showing off.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">AI CONNECTION</div>
+        <p>Practical value is like information gain in decision trees — high utility outputs get selected and propagated because they reduce uncertainty. In RLHF, outputs with higher usefulness scores get higher rewards and stronger gradient signals. LLMs learn to generate practical information because the training signal (human feedback) rewards utility. This mirrors how humans learn to share practical content: the reward is seeing others benefit and gain status.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">CROSS-BOOK CONNECTION</div>
+        <p><strong>Made to Stick</strong> (Heath brothers) discusses "Must Care" — people care about utility. <strong>$100M Offers</strong> (Hormozi) emphasizes value delivery as the core of business. Contagious shows: deliver value, and people will market it for you.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"The best marketing doesn't feel like marketing. It's just helpful information that people want to pass along."</div>
+        <div class="quote-attr">— Jonah Berger, Contagious</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 7: Stories -->
+  <section class="lesson">
+    <div class="lesson-inner">
+      <div class="lesson-num bg-sunny">7</div>
+      <h2 class="lesson-title">Stories — Information Travels Under the Guise of Narrative</h2>
+      <p class="lesson-subtitle">The Trojan Horse of viral content: stories smuggle ideas</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 280" style="width: 100%; max-width: 600px;">
+          <!-- Trojan Horse metaphor -->
+          <!-- Horse outline -->
+          <rect x="150" y="80" width="200" height="150" rx="8" fill="none" stroke="#A06CD5" stroke-width="3"/>
+
+          <!-- Horse head -->
+          <polygon points="280,80 320,80 330,100 280,100" fill="#A06CD5" opacity="0.7"/>
+          <!-- Ears -->
+          <polygon points="295,70 310,50 315,70" fill="#A06CD5" opacity="0.7"/>
+          <polygon points="320,70 335,50 340,70" fill="#A06CD5" opacity="0.7"/>
+
+          <!-- Door/opening on horse side -->
+          <rect x="190" y="120" width="120" height="90" fill="#fff5f5" stroke="#A06CD5" stroke-width="2" stroke-dasharray="5,5"/>
+          <text x="250" y="155" font-family="Inter" font-size="11" fill="#666" text-anchor="middle" font-weight="bold">MESSAGE INSIDE</text>
+          <text x="250" y="175" font-family="Inter" font-size="9" fill="#999" text-anchor="middle">(hidden by story)</text>
+
+          <!-- Legs -->
+          <rect x="170" y="220" width="30" height="40" fill="#A06CD5" opacity="0.7"/>
+          <rect x="220" y="220" width="30" height="40" fill="#A06CD5" opacity="0.7"/>
+          <rect x="270" y="220" width="30" height="40" fill="#A06CD5" opacity="0.7"/>
+          <rect x="320" y="220" width="30" height="40" fill="#A06CD5" opacity="0.7"/>
+
+          <!-- Story vessels at bottom -->
+          <g transform="translate(450, 100)">
+            <text x="0" y="0" font-family="Inter" font-size="11" fill="#666" font-weight="bold">Story Vessels:</text>
+
+            <!-- Jared from Subway -->
+            <rect x="0" y="20" width="120" height="50" rx="6" fill="#ffe6e6" stroke="#FF6B6B" stroke-width="1"/>
+            <text x="60" y="35" font-family="Inter" font-size="9" fill="#FF6B6B" text-anchor="middle" font-weight="bold">Jared's</text>
+            <text x="60" y="48" font-family="Inter" font-size="8" fill="#666" text-anchor="middle">weight loss</text>
+            <text x="60" y="62" font-family="Inter" font-size="8" fill="#999" text-anchor="middle">(sells Subway)</text>
+
+            <!-- Panda Cheese ads -->
+            <rect x="0" y="80" width="120" height="50" rx="6" fill="#e6ffe6" stroke="#00B894" stroke-width="1"/>
+            <text x="60" y="95" font-family="Inter" font-size="9" fill="#00B894" text-anchor="middle" font-weight="bold">Panda heist</text>
+            <text x="60" y="108" font-family="Inter" font-size="8" fill="#666" text-anchor="middle">comedy ads</text>
+            <text x="60" y="122" font-family="Inter" font-size="8" fill="#999" text-anchor="middle">(sells cheese)</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: var(--sunny); border-radius: 50%;"></span>
+          KEY LESSON
+        </div>
+        <p><strong>Stories are Trojan Horses for ideas.</strong> People don't share information directly; they share narratives that happen to contain information. Jared's Subway weight-loss story was the container; the message was "Subway can help you lose weight." Panda Cheese's humorous heist ads in China made the ads entertaining; people shared the story, not the product pitch. The Blendtec founder's "Will It Blend?" series worked because each video was a mini-story (What happens if we blend an iPhone?) — the blender quality was incidental to the narrative. The insight: the story IS the viral vehicle. Structure your message as a narrative, and people will spread it. Your product becomes part of the story, not the story itself.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">FUNNY TAKE</div>
+        <p>We all pretend we're sharing a story about a man who lost weight on Subway. We're actually just watching a Trojan Horse deliver a marketing message. At least the horse is entertaining.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">AI CONNECTION</div>
+        <p>Stories are like encoding schemes in autoencoders — the narrative is the "container" that compresses and transmits information. The decoder (listener/reader) reconstructs not just the story but also the embedded message. In transformers, attention mechanisms weight story elements to prioritize memorable narrative nodes, which correlates with where the product message hides. Stories leverage human memory architecture: narratives are easier to remember and retrieve than facts, just as transformer embeddings for semantically rich sequences have stronger activation patterns.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">CROSS-BOOK CONNECTION</div>
+        <p><strong>Made to Stick</strong> (Heath brothers) dedicates chapters to storytelling; Contagious reveals the viral mechanism. <strong>Talk Like TED</strong> (Gallo) emphasizes story structure; Contagious shows why stories specifically drive sharing. <strong>The Alchemist</strong> (Coelho) uses narrative to teach philosophy — Berger explains why this works psychologically.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Stories are not about the product. The product is about the story."</div>
+        <div class="quote-attr">— Jonah Berger, Contagious</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 8: STEPPS Framework -->
+  <section class="lesson">
+    <div class="lesson-inner">
+      <div class="lesson-num bg-forest">8</div>
+      <h2 class="lesson-title">The STEPPS Framework — All 6 Principles Working Together</h2>
+      <p class="lesson-subtitle">Social Currency + Triggers + Emotion + Public + Practical Value + Stories</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" style="width: 100%; max-width: 600px;">
+          <!-- Hexagon arrangement of STEPPS -->
+          <defs>
+            <filter id="shadow">
+              <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+            </filter>
+          </defs>
+
+          <!-- Center circle -->
+          <circle cx="350" cy="150" r="50" fill="#00B894" opacity="0.8" filter="url(#shadow)"/>
+          <text x="350" y="155" font-family="Inter" font-size="13" fill="white" text-anchor="middle" font-weight="bold">VIRAL</text>
+
+          <!-- Hexagon vertices -->
+          <!-- S: Social Currency (top-left) -->
+          <circle cx="200" cy="80" r="45" fill="#FF6B6B" opacity="0.8" filter="url(#shadow)"/>
+          <text x="200" y="75" font-family="Inter" font-size="20" fill="white" text-anchor="middle" font-weight="bold">S</text>
+          <text x="200" y="95" font-family="Inter" font-size="9" fill="white" text-anchor="middle" font-weight="600">SOCIAL</text>
+          <text x="200" y="108" font-family="Inter" font-size="9" fill="white" text-anchor="middle" font-weight="600">CURRENCY</text>
+
+          <!-- T: Triggers (top-right) -->
+          <circle cx="500" cy="80" r="45" fill="#A06CD5" opacity="0.8" filter="url(#shadow)"/>
+          <text x="500" y="75" font-family="Inter" font-size="20" fill="white" text-anchor="middle" font-weight="bold">T</text>
+          <text x="500" y="95" font-family="Inter" font-size="9" fill="white" text-anchor="middle" font-weight="600">TRIGGERS</text>
+
+          <!-- E: Emotion (right) -->
+          <circle cx="570" cy="150" r="45" fill="#0984E3" opacity="0.8" filter="url(#shadow)"/>
+          <text x="570" y="145" font-family="Inter" font-size="20" fill="white" text-anchor="middle" font-weight="bold">E</text>
+          <text x="570" y="165" font-family="Inter" font-size="9" fill="white" text-anchor="middle" font-weight="600">EMOTION</text>
+
+          <!-- P: Public (bottom-right) -->
+          <circle cx="500" cy="220" r="45" fill="#FF6B6B" opacity="0.8" filter="url(#shadow)"/>
+          <text x="500" y="215" font-family="Inter" font-size="20" fill="white" text-anchor="middle" font-weight="bold">P</text>
+          <text x="500" y="235" font-family="Inter" font-size="9" fill="white" text-anchor="middle" font-weight="600">PUBLIC</text>
+
+          <!-- P: Practical Value (bottom-left) -->
+          <circle cx="200" cy="220" r="45" fill="#FFE66D" opacity="0.8" filter="url(#shadow)"/>
+          <text x="200" y="215" font-family="Inter" font-size="20" fill="#333" text-anchor="middle" font-weight="bold">P</text>
+          <text x="200" y="235" font-family="Inter" font-size="9" fill="#333" text-anchor="middle" font-weight="600">PRACTICAL</text>
+
+          <!-- S: Stories (left) -->
+          <circle cx="130" cy="150" r="45" fill="#4ECDC4" opacity="0.8" filter="url(#shadow)"/>
+          <text x="130" y="145" font-family="Inter" font-size="20" fill="white" text-anchor="middle" font-weight="bold">S</text>
+          <text x="130" y="165" font-family="Inter" font-size="9" fill="white" text-anchor="middle" font-weight="600">STORIES</text>
+
+          <!-- Connecting lines to center -->
+          <line x1="240" y1="110" x2="310" y2="130" stroke="#ddd" stroke-width="1" stroke-dasharray="2,2"/>
+          <line x1="460" y1="110" x2="390" y2="130" stroke="#ddd" stroke-width="1" stroke-dasharray="2,2"/>
+          <line x1="520" y1="190" x2="400" y2="170" stroke="#ddd" stroke-width="1" stroke-dasharray="2,2"/>
+          <line x1="240" y1="190" x2="310" y2="170" stroke="#ddd" stroke-width="1" stroke-dasharray="2,2"/>
+          <line x1="170" y1="110" x2="320" y2="130" stroke="#ddd" stroke-width="1" stroke-dasharray="2,2"/>
+          <line x1="530" y1="150" x2="400" y2="150" stroke="#ddd" stroke-width="1" stroke-dasharray="2,2"/>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: var(--forest); border-radius: 50%;"></span>
+          KEY LESSON
+        </div>
+        <p><strong>The STEPPS framework shows how all 6 principles work together to create virality.</strong> No single principle guarantees spread; the best viral campaigns use multiple. Blendtec's "Will It Blend?" combined: (1) Social Currency — you looked smart for knowing about it, (2) Triggers — weekly relevance as new unusual objects appeared, (3) Emotion — awe and humor, (4) Public — watching videos made it visible, (5) Practical Value — you learned about blender durability, (6) Stories — each video was a narrative ("Can a blender really destroy an iPhone?"). Missing even one element reduces virality. A boring product demo (no emotion, no story) goes unshared. A heartwarming story without social currency or triggers spreads slowly. The framework is a checklist: does your idea hit all six?</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">FUNNY TAKE</div>
+        <p>STEPPS isn't magic. It's just six reasons why people share things, combined into an acronym that's easy to remember at a meeting while everyone pretends their campaign definitely uses all of them.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">AI CONNECTION</div>
+        <p>STEPPS is like an ensemble learning model — no single weak learner (tree) is sufficient, but their combination creates strong predictions. In deep learning, multiple loss functions (content loss, style loss, perceptual loss) train a model better than any single objective. STEPPS principles are like different "heads" in a multi-head attention mechanism, each focusing on different aspects of viralable content. The output quality (virality) depends on all heads working in concert.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">CROSS-BOOK CONNECTION</div>
+        <p><strong>Influence</strong> (Cialdini) lists 6 principles of persuasion (reciprocity, commitment, social proof, authority, liking, scarcity); Berger shows that virality requires a different set of 6. <strong>Atomic Habits</strong> combines multiple small changes for compound effects; STEPPS is similar for viral content.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"The best ideas aren't just memorable. They're designed to be shared."</div>
+        <div class="quote-attr">— Jonah Berger, Contagious</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 9: Virality Is Not Random -->
+  <section class="lesson">
+    <div class="lesson-inner">
+      <div class="lesson-num bg-coral">9</div>
+      <h2 class="lesson-title">Going Viral Is Not Random — Engineer Virality Intentionally</h2>
+      <p class="lesson-subtitle">Planned virality beats luck; strategy beats hope</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 280" style="width: 100%; max-width: 600px;">
+          <!-- Left: Luck/Random -->
+          <g transform="translate(50, 50)">
+            <text x="100" y="0" font-family="Inter" font-size="12" fill="#666" text-anchor="middle" font-weight="bold">RANDOM LUCK</text>
+            <line x1="0" y1="20" x2="200" y2="20" stroke="#ddd" stroke-width="1"/>
+
+            <!-- Confused person -->
+            <circle cx="50" cy="60" r="20" fill="#999"/>
+            <rect x="38" y="85" width="24" height="35" fill="#999"/>
+            <path d="M 45 130 L 55 130" stroke="#999" stroke-width="2"/>
+            <text x="50" y="160" font-family="Inter" font-size="9" fill="#666" text-anchor="middle">Hope it</text>
+            <text x="50" y="173" font-family="Inter" font-size="9" fill="#666" text-anchor="middle">catches on</text>
+
+            <!-- Question mark -->
+            <text x="150" y="80" font-family="Inter" font-size="36" fill="#FF6B6B">?</text>
+
+            <!-- Dice (randomness) -->
+            <rect x="180" y="100" width="30" height="30" fill="#FFE66D" stroke="#FFA502" stroke-width="2"/>
+            <circle cx="188" cy="108" r="2" fill="#FFA502"/>
+            <circle cx="195" cy="115" r="2" fill="#FFA502"/>
+            <circle cx="202" cy="122" r="2" fill="#FFA502"/>
+
+            <text x="100" y="200" font-family="Inter" font-size="10" fill="#999" text-anchor="middle">Success rate: ~5%</text>
+          </g>
+
+          <!-- Right: Strategy/Engineered -->
+          <g transform="translate(380, 50)">
+            <text x="100" y="0" font-family="Inter" font-size="12" fill="#666" text-anchor="middle" font-weight="bold">ENGINEERED STRATEGY</text>
+            <line x1="0" y1="20" x2="200" y2="20" stroke="#ddd" stroke-width="1"/>
+
+            <!-- Confident person with blueprint -->
+            <circle cx="50" cy="60" r="20" fill="#00B894"/>
+            <rect x="38" y="85" width="24" height="35" fill="#00B894"/>
+            <path d="M 45 130 L 55 130" stroke="#00B894" stroke-width="2"/>
+
+            <!-- Blueprint/checklist -->
+            <rect x="140" y="80" width="80" height="60" fill="#e6ffe6" stroke="#00B894" stroke-width="2" rx="4"/>
+            <text x="180" y="95" font-family="Inter" font-size="8" fill="#333" text-anchor="middle" font-weight="bold">✓ Social Currency</text>
+            <text x="180" y="108" font-family="Inter" font-size="8" fill="#333" text-anchor="middle">✓ Triggers</text>
+            <text x="180" y="121" font-family="Inter" font-size="8" fill="#333" text-anchor="middle">✓ Emotion</text>
+            <text x="180" y="134" font-family="Inter" font-size="8" fill="#333" text-anchor="middle">✓ Public</text>
+
+            <text x="50" y="160" font-family="Inter" font-size="9" fill="#333" text-anchor="middle">Execute</text>
+            <text x="50" y="173" font-family="Inter" font-size="9" fill="#333" text-anchor="middle">STEPPS</text>
+
+            <text x="100" y="200" font-family="Inter" font-size="10" fill="#333" text-anchor="middle" font-weight="bold">Success rate: ~60%</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: var(--coral); border-radius: 50%;"></span>
+          KEY LESSON
+        </div>
+        <p><strong>Virality is predictable when you engineer it intentionally.</strong> Blendtec didn't hope "Will It Blend?" would go viral — founder Tom Dickson strategically designed it: The Emotion (awe, humor), the Trigger (new objects every episode), the Story (will it blend?), the Public aspect (watching videos), the Practical Value (learn about blender durability). Old Spice's "The Man Your Man Could Smell Like" campaign was deliberate: social currency (coolness), emotion (humor and desire), story (absurdist narrative), public (celebrity visibility). Compare to random viral attempts: most fail because they're missing key STEPPS elements. Success isn't luck; it's engineering. Analyze what makes people share, then design your content to hit those buttons.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">FUNNY TAKE</div>
+        <p>People call viral content "lucky." They don't call a perfectly engineered bridge "lucky." Yet we treat virality like an accident instead of a science. Tom Dickson made a science of blenders; turns out it also made him viral.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">AI CONNECTION</div>
+        <p>Engineering virality is like hyperparameter tuning in machine learning — you don't expect good results by random initialization. You engineer the model (STEPPS architecture), tune the parameters (how strong is the emotion? how frequent the trigger?), and optimize toward the objective (shareability). Random attempts are like untrained neural networks; strategic design is like properly initialized, regularized models. The difference in success rate (5% vs. 60%) mirrors the difference between random search and systematic hyperparameter optimization in ML.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">CROSS-BOOK CONNECTION</div>
+        <p><strong>$100M Offers</strong> (Hormozi) emphasizes engineering the offer, not hoping it sells. <strong>Deep Work</strong> (Newport) argues that excellence comes from intentional practice, not luck. Contagious applies the same principle to virality: it's a craft, not chance.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Going viral isn't an accident. It's an outcome of deliberate design."</div>
+        <div class="quote-attr">— Jonah Berger, Contagious</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 10: Triggers Beat Social Currency -->
+  <section class="lesson">
+    <div class="lesson-inner">
+      <div class="lesson-num bg-deep-blue">10</div>
+      <h2 class="lesson-title">Triggers Beat Social Currency — Frequency Wins the Long Game</h2>
+      <p class="lesson-subtitle">Remarkable fades; daily reminders stick</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 300" style="width: 100%; max-width: 600px;">
+          <!-- Timeline comparison -->
+          <!-- Top line: Remarkable (peaks then drops) -->
+          <g>
+            <text x="50" y="20" font-family="Inter" font-size="11" fill="#666" font-weight="bold">SOCIAL CURRENCY (Remarkable)</text>
+            <!-- Axis -->
+            <line x1="50" y1="50" x2="650" y2="50" stroke="#ddd" stroke-width="1"/>
+            <!-- Curve -->
+            <path d="M 60 45 Q 200 20 350 45 Q 500 60 640 50" stroke="#FF6B6B" stroke-width="3" fill="none"/>
+            <!-- Labels -->
+            <text x="100" y="75" font-family="Inter" font-size="8" fill="#FF6B6B">Peak (Wow!)</text>            <text x="500" y="75" font-family="Inter" font-size="8" fill="#FF6B6B">Fades (Old news)</text>
+            <!-- Example -->
+            <text x="350" y="95" font-family="Inter" font-size="9" fill="#666" text-anchor="middle">Disney World (exceptional, but you only go once)</text>
+          </g>
+
+          <!-- Bottom line: Triggers (steady) -->
+          <g transform="translate(0, 130)">
+            <text x="50" y="20" font-family="Inter" font-size="11" fill="#666" font-weight="bold">TRIGGERS (Frequent)</text>
+            <!-- Axis -->
+            <line x1="50" y1="50" x2="650" y2="50" stroke="#ddd" stroke-width="1"/>
+            <!-- Flat line -->
+            <line x1="60" y1="50" x2="640" y2="50" stroke="#00B894" stroke-width="3"/>
+            <!-- Consistency marks -->
+            <circle cx="100" cy="50" r="3" fill="#00B894"/>
+            <circle cx="180" cy="50" r="3" fill="#00B894"/>
+            <circle cx="260" cy="50" r="3" fill="#00B894"/>
+            <circle cx="340" cy="50" r="3" fill="#00B894"/>
+            <circle cx="420" cy="50" r="3" fill="#00B894"/>
+            <circle cx="500" cy="50" r="3" fill="#00B894"/>
+            <circle cx="580" cy="50" r="3" fill="#00B894"/>
+            <circle cx="640" cy="50" r="3" fill="#00B894"/>
+
+            <text x="200" y="80" font-family="Inter" font-size="8" fill="#00B894">Consistent (Daily reminders keep it top-of-mind)</text>
+            <!-- Example -->
+            <text x="350" y="100" font-family="Inter" font-size="9" fill="#666" text-anchor="middle">Cheerios (talked about more than Disney because you see them every morning)</text>
+          </g>
+
+          <!-- Conclusion -->
+          <g transform="translate(50, 290)">
+            <text x="300" y="0" font-family="Inter" font-size="10" fill="#333" text-anchor="middle" font-weight="bold">Winner: TRIGGERS. Frequency beats remarkability over time.</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: var(--deep-blue); border-radius: 50%;"></span>
+          KEY LESSON
+        </div>
+        <p><strong>Remarkable ideas fade; frequent triggers persist.</strong> Disney World is extraordinary but you visit once every few years. Cheerios are ordinary but you see them daily. Data shows Cheerios is discussed more frequently than Disney World despite being far less remarkable. Why? Top-of-mind = tip-of-tongue. If a product is the daily trigger for conversation (coffee break = Kit Kat), people talk about it constantly. A remarkable product gains initial burst of sharing (social currency), but triggers ensure sustained word-of-mouth. The lesson for businesses: don't just make something worth talking about once; make something people encounter regularly that reminds them to talk about it.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">FUNNY TAKE</div>
+        <p>Most brands want to be Disney World: amazing, once-in-a-lifetime, unforgettable. They should want to be Cheerios: boring, daily, on the tip of everyone's tongue at breakfast.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">AI CONNECTION</div>
+        <p>This is the difference between peak activation (high loss gradient during one training step) and steady-state learning (consistent gradient signal over many epochs). Remarkable content causes one big update to the sharing behavior; triggers cause consistent, incremental updates. In LLM fine-tuning, a rare, extreme example might shift behavior briefly, but frequent, aligned examples drive permanent changes. Frequency of training data distribution beats the extremity of individual examples.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">CROSS-BOOK CONNECTION</div>
+        <p><strong>Atomic Habits</strong> (Clear) emphasizes frequency and consistency over big changes. <strong>The Tipping Point</strong> (Gladwell) focuses on extraordinary "tipping" moments; Contagious reveals that everyday repetition is more powerful. <strong>Deep Work</strong> (Newport) shows that consistency beats intensity.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"Frequency of exposure beats uniqueness every time. Top-of-mind becomes tip-of-tongue."</div>
+        <div class="quote-attr">— Jonah Berger, Contagious</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON 11: Short-Form Video & TikTok -->
+  <section class="lesson">
+    <div class="lesson-inner">
+      <div class="lesson-num bg-warm-red">11</div>
+      <h2 class="lesson-title">Applying STEPPS to Short-Form Video — Why TikTok & Reels Go Viral</h2>
+      <p class="lesson-subtitle">Duets, stitches, and trends compress virality into 15-60 seconds</p>
+
+      <div class="illustration-container">
+        <svg viewBox="0 0 700 280" style="width: 100%; max-width: 600px;">
+          <!-- Phone screens showing STEPPS on TikTok -->
+          <g>
+            <!-- Screen 1: Original trend -->
+            <rect x="50" y="30" width="140" height="220" rx="12" fill="#1a1a1a" stroke="#999" stroke-width="2"/>
+            <rect x="60" y="40" width="120" height="120" fill="#222"/>
+            <!-- Video thumbnail -->
+            <circle cx="120" cy="100" r="30" fill="#FF6B6B" opacity="0.8"/>
+            <text x="120" y="107" font-family="Inter" font-size="24" fill="white" text-anchor="middle">▶</text>
+            <text x="120" y="195" font-family="Inter" font-size="8" fill="#999" text-anchor="middle" font-weight="bold">Original Trend</text>
+            <!-- STEPPS -->
+            <text x="120" y="235" font-family="Inter" font-size="7" fill="#FFE66D" text-anchor="middle">S-T-E-P-P-S</text>
+
+            <!-- Arrow: DUET/STITCH -->
+            <path d="M 210 100 L 260 100" stroke="#00B894" stroke-width="2" marker-end="url(#arrowhead3)"/>
+            <text x="235" y="85" font-family="Inter" font-size="8" fill="#00B894" font-weight="bold">DUET</text>
+            <text x="235" y="120" font-family="Inter" font-size="8" fill="#00B894" font-weight="bold">STITCH</text>
+
+            <!-- Screen 2: Duet/Remix -->
+            <rect x="280" y="30" width="140" height="220" rx="12" fill="#1a1a1a" stroke="#00B894" stroke-width="2"/>
+            <rect x="290" y="40" width="120" height="120" fill="#222"/>
+            <!-- Video with person responding -->
+            <circle cx="340" cy="65" r="15" fill="#4ECDC4"/>
+            <circle cx="360" cy="85" r="15" fill="#A06CD5"/>
+            <circle cx="350" cy="110" r="12" fill="#FFE66D"/>
+            <text x="350" y="140" font-family="Inter" font-size="7" fill="#999" text-anchor="middle" font-weight="bold">User Response</text>
+            <text x="350" y="165" font-family="Inter" font-size="8" fill="#FFE66D" text-anchor="middle">(Public Participation)</text>
+            <text x="350" y="235" font-family="Inter" font-size="7" fill="#FFE66D" text-anchor="middle">P = PUBLIC</text>
+
+            <!-- Arrow: TREND -->
+            <path d="M 440 100 L 490 100" stroke="#A06CD5" stroke-width="2" marker-end="url(#arrowhead4)"/>
+            <text x="465" y="85" font-family="Inter" font-size="8" fill="#A06CD5" font-weight="bold">TREND</text>
+            <text x="465" y="120" font-family="Inter" font-size="8" fill="#A06CD5" font-weight="bold">SOUND</text>
+
+            <!-- Screen 3: Viral explosion -->
+            <rect x="510" y="30" width="140" height="220" rx="12" fill="#1a1a1a" stroke="#A06CD5" stroke-width="3"/>
+            <rect x="520" y="40" width="120" height="120" fill="#222"/>
+            <!-- Multiple layers of content -->
+            <circle cx="580" cy="75" r="12" fill="#FF6B6B" opacity="0.8"/>
+            <circle cx="565" cy="95" r="10" fill="#FFE66D" opacity="0.8"/>
+            <circle cx="595" cy="100" r="10" fill="#4ECDC4" opacity="0.8"/>
+            <circle cx="580" cy="120" r="8" fill="#00B894" opacity="0.8"/>
+            <text x="580" y="170" font-family="Inter" font-size="7" fill="#999" text-anchor="middle" font-weight="bold">Thousands of</text>
+            <text x="580" y="180" font-family="Inter" font-size="7" fill="#999" text-anchor="middle" font-weight="bold">Variations</text>
+            <text x="580" y="235" font-family="Inter" font-size="7" fill="#FFE66D" text-anchor="middle">FULL STEPPS</text>
+
+            <!-- Bottom explanation -->
+            <g transform="translate(0, 265)">
+              <text x="350" y="0" font-family="Inter" font-size="9" fill="#666" text-anchor="middle" font-weight="bold">Why TikTok virality is compressed STEPPS:</text>
+            </g>
+          </g>
+
+          <defs>
+            <marker id="arrowhead3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#00B894"/>
+            </marker>
+            <marker id="arrowhead4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#A06CD5"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: var(--warm-red); border-radius: 50%;"></span>
+          KEY LESSON
+        </div>
+        <p><strong>TikTok and Reels compress STEPPS into the short-form format.</strong> A TikTok trend (song + dance) hits all six: (1) Social Currency — "you're in the know" if you've done the trend, (2) Triggers — the sound plays billions of times (high frequency), (3) Emotion — trending sounds are usually upbeat or shocking, (4) Public — you see duets/stitches of others doing it (very visible), (5) Practical Value — the how-to is modeled in the original video, (6) Stories — each duet is a micro-narrative. Duets enable participation (public), stitches remix the original (story + triggers), hashtag challenges create daily triggers. The algorithm surfaces trends, so even if your content isn't remarkable, if you use a trending sound + format, the trigger (algorithm push) drives visibility. Short-form video accelerates the STEPPS loop because engagement feedback is immediate.</p>
+      </div>
+
+      <div class="funny-box">
+        <div class="funny-label">FUNNY TAKE</div>
+        <p>TikTok creators think they're creative. They're actually just hitting STEPPS checkboxes in 15 seconds. Use trending sound? T. Dance with friends? P. Cry at the end? E. The algorithm reads your STEPPS score and promotes accordingly.</p>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">AI CONNECTION</div>
+        <p>TikTok's recommendation algorithm is essentially a STEPPS classifier: it learns which content hits multiple STEPPS principles and promotes those videos. The engagement signal (likes, shares, comments) is the loss function; the algorithm optimizes for STEPPS-dense content. Short-form video is a perfect sandbox for testing STEPPS because the feedback loop is minutes, not weeks. This is similar to A/B testing in ML: TikTok runs millions of "experiments" (videos) and samples allocate to winners (STEPPS-rich content). The algorithm is the embodiment of contagion science.</p>
+      </div>
+
+      <div class="connect-box">
+        <div class="connect-label">CROSS-BOOK CONNECTION</div>
+        <p><strong>Hooked</strong> (Eyal) discusses engagement loops; TikTok is Hooked meets STEPPS. <strong>The Attention Economy</strong> frameworks show how platforms fight for attention; STEPPS is what makes content attention-worthy. <strong>The Innovator's Dilemma</strong> (Christensen) discusses disruption; TikTok disrupted longer-form content by proving STEPPS works in 60 seconds.</p>
+      </div>
+
+      <div class="quote-box">
+        <div class="quote-text">"The platforms change, but human psychology stays the same. People share what triggers their STEPPS buttons."</div>
+        <div class="quote-attr">— Jonah Berger, Contagious</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY SPOTLIGHT 1: Blendtec -->
+  <section class="story">
+    <div class="story-inner">
+      <h2 class="story-title">Story Spotlight #1: Blendtec's "Will It Blend?"</h2>
+      <p class="story-text">
+        Blendtec was a boring industrial blender manufacturer. Their product was exceptional — it could pulverize anything — but nobody knew about it. The company wasn't VC-funded; they didn't have Super Bowl ad budgets.
+      </p>
+
+      <svg viewBox="0 0 700 250" style="width: 100%; margin-bottom: 20px;">
+        <!-- Timeline arc -->
+        <path d="M 80 200 Q 350 80 620 200" fill="none" stroke="#FF6B6B" stroke-width="2"/>
+
+        <!-- Year 1: Obscurity -->
+        <g transform="translate(80, 200)">
+          <circle cx="0" cy="0" r="20" fill="#999" opacity="0.5"/>
+          <text x="0" y="5" font-family="Inter" font-size="9" fill="white" text-anchor="middle" font-weight="bold">2006</text>
+          <text x="0" y="50" font-family="Inter" font-size="8" fill="white" text-anchor="middle" font-weight="bold">Obscure</text>
+          <text x="0" y="65" font-family="Inter" font-size="7" fill="#999" text-anchor="middle">Nobody notices</text>
+        </g>
+
+        <!-- Year 2: Will It Blend? Launches -->
+        <g transform="translate(350, 80)">
+          <circle cx="0" cy="0" r="30" fill="#FF6B6B" opacity="0.9"/>
+          <text x="0" y="-5" font-family="Inter" font-size="10" fill="white" text-anchor="middle" font-weight="bold">2007</text>
+          <text x="0" y="50" font-family="Inter" font-size="9" fill="white" text-anchor="middle" font-weight="bold">VIRAL LAUNCH</text>
+          <text x="0" y="70" font-family="Inter" font-size="8" fill="#FF6B6B" text-anchor="middle" font-weight="bold">1M+ views</text>
+          <text x="0" y="85" font-family="Inter" font-size="7" fill="#999" text-anchor="middle" font-size="fast</text>
+        </g>
+
+        <!-- Year 3+: Sustained Growth -->
+        <g transform="translate(620, 200)">
+          <circle cx="0" cy="0" r="25" fill="#00B894"/>
+          <text x="0" y="2" font-family="Inter" font-size="10" fill="white" text-anchor="middle" font-weight="bold">2010+</text>
+          <text x="0" y="50" font-family="Inter" font-size="9" fill="white" text-anchor="middle" font-weight="bold">$40M Revenue</text>
+          <text x="0" y="70" font-family="Inter" font-size="8" fill="#00B894" text-anchor="middle" font-weight="bold">Household name</text>
+          <text x="0" y="85" font-family="Inter" font-size="7" fill="#999" text-anchor="middle">Still growing</text>
+        </g>
+      </svg>
+
+      <p class="story-text">
+        CEO Tom Dickson came up with "Will It Blend?" — a simple idea: Take weird objects (iPhones, golf balls, crowbars) and blend them. The series ticked every STEPPS box:
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0;">
+        <div class="card" style="margin-bottom: 0;">
+          <div class="card-label">
+            <span style="display: inline-block; width: 8px; height: 8px; background: #FF6B6B; border-radius: 50%; margin-right: 6px;"></span>
+            SOCIAL CURRENCY
+          </div>
+          <p>Knowing about "Will It Blend?" made you cool. You had "inside knowledge" of this weird CEO who destroyed things.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: 0;">
+          <div class="card-label">
+            <span style="display: inline-block; width: 8px; height: 8px; background: #A06CD5; border-radius: 50%; margin-right: 6px;"></span>
+            TRIGGERS
+          </div>
+          <p>New episodes dropped weekly. Each new object (new iPhone model? new gadget?) triggered curiosity: "Will they blend it?"</p>
+        </div>
+
+        <div class="card" style="margin-bottom: 0;">
+          <div class="card-label">
+            <span style="display: inline-block; width: 8px; height: 8px; background: #0984E3; border-radius: 50%; margin-right: 6px;"></span>
+            EMOTION
+          </div>
+          <p>Awe at the blender's power. Dark humor ("Is it a liquid?"). Suspense (will it break?). All high-arousal.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: 0;">
+          <div class="card-label">
+            <span style="display: inline-block; width: 8px; height: 8px; background: #00B894; border-radius: 50%; margin-right: 6px;"></span>
+            PUBLIC
+          </div>
+          <p>You watched videos with friends, showed people at parties. The blender itself (in stores) became visible proof.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: 0;">
+          <div class="card-label">
+            <span style="display: inline-block; width: 8px; height: 8px; background: #FF6B6B; border-radius: 50%; margin-right: 6px;"></span>
+            PRACTICAL VALUE
+          </div>
+          <p>You learned: This blender is powerful enough to destroy anything. Implicit: yours will be durable/useful.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: 0;">
+          <div class="card-label">
+            <span style="display: inline-block; width: 8px; height: 8px; background: #4ECDC4; border-radius: 50%; margin-right: 6px;"></span>
+            STORIES
+          </div>
+          <p>Each video was a narrative: "Will it blend?" This suspense + absurdity made the series eminently shareable.</p>
+        </div>
+      </div>
+
+      <p class="story-text" style="margin-top: 30px;">
+        <strong>The result:</strong> Blendtec went from obscure to a household name. Revenue grew from ~$5M to $40M+. The product didn't change; the communication changed. Tom Dickson engineered virality by hitting all six STEPPS principles systematically. No luck. Pure strategy.
+      </p>
+
+      <div class="quote-box">
+        <div class="quote-text">"We didn't hope people would share our videos. We built them to be shareable by hitting every reason people share things."</div>
+        <div class="quote-attr">— Tom Dickson, Blendtec CEO (inspired by Berger's framework)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY SPOTLIGHT 2: The $100 Cheesesteak -->
+  <section class="story">
+    <div class="story-inner">
+      <h2 class="story-title">Story Spotlight #2: The $100 Philly Cheesesteak</h2>
+
+      <svg viewBox="0 0 700 200" style="width: 100%; margin-bottom: 20px;">
+        <!-- Cheesesteak visualization -->
+        <g transform="translate(350, 100)">
+          <!-- Bread -->
+          <ellipse cx="0" cy="-10" rx="80" ry="20" fill="#D2691E" opacity="0.8"/>
+          <rect x="-80" y="0" width="160" height="35" fill="#CD853F"/>
+          <ellipse cx="0" cy="35" rx="80" ry="20" fill="#8B4513"/>
+
+          <!-- Meat layers -->
+          <rect x="-70" y="5" width="60" height="8" fill="#A0522D" opacity="0.9"/>
+          <rect x="-60" y="15" width="50" height="8" fill="#8B4513" opacity="0.9"/>
+          <rect x="-50" y="25" width="40" height="8" fill="#A0522D" opacity="0.9"/>
+
+          <!-- Cheese -->
+          <rect x="10" y="8" width="60" height="20" fill="#FFD700" opacity="0.8"/>
+
+          <!-- Price tag -->
+          <rect x="100" y="-30" width="70" height="30" rx="4" fill="#FF6B6B"/>
+          <text x="135" y="-8" font-family="Inter" font-size="18" fill="white" text-anchor="middle" font-weight="bold">$100</text>
+        </g>
+
+        <!-- Conversation bubbles -->
+        <g transform="translate(50, 30)">
+          <rect x="0" y="0" width="120" height="50" rx="6" fill="#fff5f5" stroke="#FF6B6B" stroke-width="2"/>
+          <text x="60" y="15" font-family="Inter" font-size="9" fill="#FF6B6B" text-anchor="middle" font-weight="bold">WHAAAT?</text>
+          <text x="60" y="30" font-family="Inter" font-size="8" fill="#666" text-anchor="middle">A $100</text>
+          <text x="60" y="43" font-family="Inter" font-size="8" fill="#666" text-anchor="middle">sandwich?!</text>
+          <!-- Arrow to sandwich -->
+          <path d="M 120 25 L 160 25" stroke="#FF6B6B" stroke-width="1" marker-end="url(#arrowhead5)"/>
+        </g>
+      </svg>
+
+      <p class="story-text">
+        Steve's Prince of Steaks in Philadelphia created a legendary item: a cheesesteak with shaved Australian wagyu beef, topped with truffle oil and special cheese — $100.
+      </p>
+
+      <p class="story-text">
+        <strong>Why it went viral through pure word-of-mouth:</strong>
+      </p>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: #FF6B6B; border-radius: 50%;"></span>
+          THE MECHANISM
+        </div>
+        <p><strong>Social Currency:</strong> Visiting and trying a $100 cheesesteak is a status symbol. You gain credibility by experiencing something extreme. <strong>Emotion:</strong> Shock, curiosity, desire. "How could a sandwich cost $100?" triggers awe. <strong>Public:</strong> You visit a physical location and eat it publicly — the act of consuming it is visible. <strong>Stories:</strong> The price point itself is the story. Every person who hears about it asks questions, and the answer becomes a narrative: "There's this sandwich..." <strong>Practical Value:</strong> It's food; it satisfies hunger. Not the strongest element, but present.</p>
+      </div>
+
+      <p class="story-text">
+        <strong>The result:</strong> Tourists specifically traveled to Philadelphia to try it. Food writers covered it. Years later, it's still part of the city's mythos. Steve's didn't run ads; they created an object worth talking about. The product itself became the marketing channel because it hit social currency + emotion + story buttons so hard.
+      </p>
+
+      <div class="quote-box">
+        <div class="quote-text">"We didn't sell a cheesesteak. We sold a story about a $100 cheesesteak."</div>
+        <div class="quote-attr">— Steve's Prince of Steaks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY SPOTLIGHT 3: Please Don't Tell -->
+  <section class="story">
+    <div class="story-inner">
+      <h2 class="story-title">Story Spotlight #3: Please Don't Tell (PDT) — The Speakeasy Secret</h2>
+
+      <svg viewBox="0 0 700 220" style="width: 100%; margin-bottom: 20px;">
+        <!-- Hidden entrance concept -->
+        <!-- Normal facade (hot dog shop) -->
+        <rect x="50" y="30" width="200" height="180" rx="8" fill="#CD853F" stroke="#8B4513" stroke-width="2"/>
+        <rect x="80" y="50" width="50" height="60" fill="#FFD700"/>
+        <text x="105" y="90" font-family="Inter" font-size="10" fill="#8B4513" text-anchor="middle" font-weight="bold">HOT DOG</text>
+        <text x="105" y="105" font-family="Inter" font-size="8" fill="#8B4513" text-anchor="middle">SHOP</text>
+
+        <!-- Door -->
+        <rect x="160" y="110" width="70" height="90" fill="#8B4513" stroke="#555" stroke-width="2"/>
+        <circle cx="225" cy="155" r="4" fill="#FFD700"/>
+
+        <!-- Sign -->
+        <text x="150" y="25" font-family="Inter" font-size="11" fill="#333" text-anchor="middle" font-weight="bold">Visible to Public</text>
+
+        <!-- Arrow to secret entrance -->
+        <path d="M 310 100 L 360 100" stroke="#A06CD5" stroke-width="2" marker-end="url(#arrowhead6)"/>
+
+        <!-- Hidden speakeasy (behind/inside) -->
+        <rect x="380" y="30" width="200" height="180" rx="8" fill="#1a1a1a" stroke="#A06CD5" stroke-width="2"/>
+        <rect x="410" y="60" width="140" height="80" fill="#2a2a2a"/>
+        <!-- Bartender silhouette -->
+        <circle cx="440" cy="85" r="8" fill="#FFD700" opacity="0.6"/>
+        <rect x="435" y="95" width="10" height="25" fill="#FFD700" opacity="0.6"/>
+        <!-- Cocktails -->
+        <circle cx="510" cy="95" r="6" fill="#FF6B6B" opacity="0.7"/>
+        <circle cx="530" cy="100" r="6" fill="#4ECDC4" opacity="0.7"/>
+        <circle cx="550" cy="90" r="6" fill="#FFE66D" opacity="0.7"/>
+
+        <!-- Text -->
+        <text x="480" y="25" font-family="Inter" font-size="11" fill="white" text-anchor="middle" font-weight="bold">Secret Inside</text>
+        <text x="480" y="185" font-family="Inter" font-size="9" fill="#A06CD5" text-anchor="middle" font-weight="bold">SOCIAL CURRENCY</text>
+
+        <!-- "Tell your friends" concept -->
+        <g transform="translate(50, 240)">
+          <text x="300" y="0" font-family="Inter" font-size="10" fill="white" text-anchor="middle" font-weight="bold">The magic: Knowing the secret IS the value. Each person who learns about PDT gains insider status.</text>
+        </g>
+      </svg>
+
+      <p class="story-text">
+        Please Don't Tell (PDT) is a hidden speakeasy tucked behind a hot dog shop in New York's East Village. There's no sign. No logo. You find it through word-of-mouth, and when you do, you're part of an exclusive club.
+      </p>
+
+      <p class="story-text">
+        <strong>Why it's a masterpiece of social currency:</strong>
+      </p>
+
+      <div class="card">
+        <div class="card-label">
+          <span style="display: inline-block; width: 12px; height: 12px; background: #A06CD5; border-radius: 50%;"></span>
+          PURE SOCIAL CURRENCY
+        </div>
+        <p>Knowing about PDT is the currency. It's not advertised — it's shared. Telling someone about it makes you a tastemaker, an insider, someone cool enough to know the secret. The product (cocktails) is secondary to the status of knowing about it. Every person who shares PDT's location gains social points: "I know a place you'll love." Compare to saying "Try this chain restaurant" — very different status impact.</p>
+      </div>
+
+      <p class="story-text">
+        <strong>The mechanism:</strong> PDT didn't need ads. They embedded the marketing directly into the sharing: the act of sharing IS the social currency reward. Friends bond over the secret. New visitors feel initiated into a club. The speakeasy format (Prohibition-era aesthetic) adds narrative richness — you're not just getting a drink, you're stepping into a story.
+      </p>
+
+      <p class="story-text">
+        <strong>The result:</strong> PDT became legendary. Years of waiting lists. International recognition. All from zero advertising. The business model was built on understanding that people share things that make them look good. PDT made people look incredibly cool.
+      </p>
+
+      <div class="quote-box">
+        <div class="quote-text">"The best marketing is exclusivity disguised as generosity. When you share PDT, you feel generous, but you're actually gaining status."</div>
+        <div class="quote-attr">— Principle of Social Currency in Action</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEATSHEET SECTION -->
+  <section class="cheatsheet">
+    <div class="cheatsheet-inner">
+      <h2>STEPPS Cheatsheet — Your Virality Toolkit</h2>
+
+      <div class="three-col">
+        <div class="cheatsheet-card">
+          <h3>S — Social Currency</h3>
+          <p><strong>Make people look good.</strong> Does sharing this make the sharer appear knowledgeable, cool, or generous? Build remarkability into your product itself.</p>
+          <p style="margin-top: 12px; font-size: 0.8rem;"><strong>Examples:</strong> LinkedIn achievements, insider knowledge (PDT), rare sneakers, exclusivity.</p>
+        </div>
+
+        <div class="cheatsheet-card">
+          <h3>T — Triggers</h3>
+          <p><strong>Get top-of-mind.</strong> What daily habit or context will remind people of your product? Frequency beats remarkability.</p>
+          <p style="margin-top: 12px; font-size: 0.8rem;"><strong>Examples:</strong> Kit Kat + coffee break, Mars bar + Mars rover, Cheerios at breakfast.</p>
+        </div>
+
+        <div class="cheatsheet-card">
+          <h3>E — Emotion</h3>
+          <p><strong>Activate high arousal.</strong> Awe, anger, excitement spread. Contentment and sadness suppress sharing. Make them feel something strong.</p>
+          <p style="margin-top: 12px; font-size: 0.8rem;"><strong>Examples:</strong> Susan Boyle (awe), outrage marketing, humor + surprise.</p>
+        </div>
+
+        <div class="cheatsheet-card">
+          <h3>P — Public</h3>
+          <p><strong>Make behavior visible.</strong> Design so using/wearing your product broadcasts it. Behavioral residue spreads ideas.</p>
+          <p style="margin-top: 12px; font-size: 0.8rem;"><strong>Examples:</strong> Livestrong bracelets, Apple logo facing out, AirPods white color.</p>
+        </div>
+
+        <div class="cheatsheet-card">
+          <h3>P — Practical Value</h3>
+          <p><strong>Share useful information.</strong> People pass along tips, hacks, advice, and tools that help others. "News you can use."</p>
+          <p style="margin-top: 12px; font-size: 0.8rem;"><strong>Examples:</strong> Vanguard retirement tips, cooking hacks, lifehacks, productivity tips.</p>
+        </div>
+
+        <div class="cheatsheet-card">
+          <h3>S — Stories</h3>
+          <p><strong>Information as narrative.</strong> Wrap your message in a story. The story is the Trojan Horse; the idea travels inside.</p>
+          <p style="margin-top: 12px; font-size: 0.8rem;"><strong>Examples:</strong> Jared's weight loss (Subway), Will It Blend? series, brand origin stories.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,107,107,0.3);">
+        <div class="card-label" style="color: white;">
+          <span style="display: inline-block; width: 12px; height: 12px; background: var(--coral); border-radius: 50%;"></span>
+          KEY INSIGHT
+        </div>
+        <p style="color: rgba(255,255,255,0.9);">
+          <strong>The best viral content uses all six STEPPS principles.</strong> Missing one element reduces virality. Missing multiple elements usually means no virality. Before launching, audit your idea: Does it deliver social currency? Does it have a trigger? Does it evoke high-arousal emotion? Is it visible? Is there practical value? Does it fit a narrative? If you're hitting all six, you've engineered virality. If you're missing some, strengthen them or accept lower sharing rates.
+        </p>
+      </div>
+
+      <div style="margin-top: 40px; padding: 24px; background: rgba(0,184,148,0.1); border-radius: 12px; border-left: 4px solid var(--forest);">
+        <h3 style="font-family: 'Playfair Display', serif; color: white; margin-bottom: 16px;">The Bottom Line</h3>
+        <p style="color: rgba(255,255,255,0.85); font-size: 0.95rem; line-height: 1.7;">
+          Virality is not random. It's not magic. It's the application of psychology and design to the question: "Why do people share things?" Jonah Berger reversed-engineered viral campaigns and discovered six repeatable principles. Know them. Apply them. Watch your ideas spread.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
