@@ -1,1324 +1,583 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kriti's Illustrated Book Library</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #0f0f1a;
-            --bg-card: #1a1a2e;
-            --bg-card-hover: #222240;
-            --bg-header: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            --text-primary: #e8e8f0;
-            --text-secondary: #8888a8;
-            --text-muted: #5555777;
-            --text-on-dark: #ffffff;
-            --coral: #FF6B6B;
-            --teal: #4ECDC4;
-            --sunny: #FFE66D;
-            --purple: #A06CD5;
-            --sky: #74B9FF;
-            --mint: #55EFC4;
-            --pink: #FD79A8;
-            --orange: #FDCB6E;
-            --deep-blue: #0984E3;
-            --warm-red: #E17055;
-            --forest: #00B894;
-            --dark-purple: #6C5CE7;
-            --positive: #55EFC4;
-            --negative: #FF6B6B;
-            --gap: 16px;
-            --radius: 12px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        .dashboard-container {
-            max-width: 1500px;
-            margin: 0 auto;
-            padding: var(--gap);
-        }
-
-        /* ============ HEADER ============ */
-        .dashboard-header {
-            background: var(--bg-header);
-            padding: 32px 36px;
-            border-radius: var(--radius);
-            margin-bottom: var(--gap);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .dashboard-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(78,205,196,0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .dashboard-header::after {
-            content: '';
-            position: absolute;
-            bottom: -50%;
-            left: 20%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(160,108,213,0.06) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 16px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .header-title h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--text-on-dark);
-            margin-bottom: 4px;
-            background: linear-gradient(135deg, #fff 0%, var(--teal) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header-title p {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .filters {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
-        }
-
-        .filter-group {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .filter-group label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-        }
-
-        .filter-group select,
-        .search-input {
-            padding: 8px 14px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            background: rgba(255,255,255,0.05);
-            color: var(--text-primary);
-            font-size: 13px;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.2s;
-            backdrop-filter: blur(10px);
-        }
-
-        .filter-group select:hover,
-        .search-input:hover {
-            border-color: rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.08);
-        }
-
-        .filter-group select:focus,
-        .search-input:focus {
-            outline: none;
-            border-color: var(--teal);
-            box-shadow: 0 0 0 3px rgba(78,205,196,0.15);
-        }
-
-        .filter-group select option {
-            background: var(--bg-card);
-            color: var(--text-primary);
-        }
-
-        .search-input {
-            width: 220px;
-        }
-
-        .search-input::placeholder {
-            color: var(--text-secondary);
-        }
-
-        /* ============ KPI ROW ============ */
-        .kpi-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: var(--gap);
-            margin-bottom: var(--gap);
-        }
-
-        .kpi-card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .kpi-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            border-radius: var(--radius) var(--radius) 0 0;
-        }
-
-        .kpi-card:nth-child(1)::after { background: var(--coral); }
-        .kpi-card:nth-child(2)::after { background: var(--teal); }
-        .kpi-card:nth-child(3)::after { background: var(--purple); }
-        .kpi-card:nth-child(4)::after { background: var(--sunny); }
-        .kpi-card:nth-child(5)::after { background: var(--sky); }
-        .kpi-card:nth-child(6)::after { background: var(--mint); }
-
-        .kpi-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(255,255,255,0.1);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
-
-        .kpi-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        .kpi-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .kpi-value {
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--text-on-dark);
-            line-height: 1.1;
-        }
-
-        .kpi-sub {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-
-        /* ============ CHARTS ============ */
-        .chart-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--gap);
-            margin-bottom: var(--gap);
-        }
-
-        .chart-container {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 24px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .chart-container h3 {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .chart-container canvas {
-            max-height: 300px;
-        }
-
-        .chart-full {
-            grid-column: 1 / -1;
-        }
-
-        /* ============ VIEW TOGGLE ============ */
-        .view-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--gap);
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .view-toggle {
-            display: flex;
-            gap: 4px;
-            background: var(--bg-card);
-            border-radius: 8px;
-            padding: 4px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .view-btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            background: transparent;
-            color: var(--text-secondary);
-            font-size: 13px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .view-btn.active {
-            background: var(--teal);
-            color: #000;
-        }
-
-        .view-btn:hover:not(.active) {
-            color: var(--text-primary);
-            background: rgba(255,255,255,0.05);
-        }
-
-        .results-count {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        /* ============ CARD GRID VIEW ============ */
-        .book-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: var(--gap);
-            margin-bottom: var(--gap);
-        }
-
-        .book-card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 0;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s;
-            cursor: pointer;
-            overflow: hidden;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .book-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255,255,255,0.15);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-        }
-
-        .book-card-accent {
-            height: 6px;
-            width: 100%;
-        }
-
-        .book-card-body {
-            padding: 20px;
-        }
-
-        .book-card-category {
-            display: inline-block;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            padding: 3px 10px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-        }
-
-        .book-card-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-on-dark);
-            margin-bottom: 6px;
-            line-height: 1.3;
-        }
-
-        .book-card-author {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-        }
-
-        .book-card-stats {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .book-stat {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        .book-stat .stat-icon { font-size: 14px; }
-        .book-stat .stat-val { color: var(--text-primary); font-weight: 600; }
-
-        /* ============ TABLE VIEW ============ */
-        .table-section {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            border: 1px solid rgba(255,255,255,0.05);
-            overflow: hidden;
-            margin-bottom: var(--gap);
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
-
-        .data-table thead th {
-            text-align: left;
-            padding: 14px 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            color: var(--text-secondary);
-            font-weight: 600;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            white-space: nowrap;
-            cursor: pointer;
-            user-select: none;
-            transition: color 0.2s;
-            position: sticky;
-            top: 0;
-            background: var(--bg-card);
-            z-index: 2;
-        }
-
-        .data-table thead th:hover {
-            color: var(--teal);
-        }
-
-        .data-table tbody td {
-            padding: 12px 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-        }
-
-        .data-table tbody tr {
-            transition: background 0.2s;
-        }
-
-        .data-table tbody tr:hover {
-            background: var(--bg-card-hover);
-        }
-
-        .data-table .title-cell {
-            font-weight: 600;
-            color: var(--text-on-dark);
-            max-width: 280px;
-        }
-
-        .data-table .title-cell a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .data-table .title-cell a:hover {
-            color: var(--teal);
-        }
-
-        .data-table .cat-badge {
-            display: inline-block;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            padding: 2px 8px;
-            border-radius: 12px;
-            white-space: nowrap;
-        }
-
-        .data-table .size-bar {
-            display: inline-block;
-            height: 6px;
-            border-radius: 3px;
-            min-width: 4px;
-        }
-
-        /* ============ CATEGORY COLORS ============ */
-        .cat-psychology { background: rgba(255,107,107,0.15); color: var(--coral); }
-        .cat-psychology .book-card-accent, .cat-psychology-bar { background: var(--coral); }
-
-        .cat-philosophy { background: rgba(160,108,213,0.15); color: var(--purple); }
-        .cat-philosophy .book-card-accent, .cat-philosophy-bar { background: var(--purple); }
-
-        .cat-science { background: rgba(78,205,196,0.15); color: var(--teal); }
-        .cat-science .book-card-accent, .cat-science-bar { background: var(--teal); }
-
-        .cat-self-improvement { background: rgba(253,203,110,0.15); color: var(--orange); }
-        .cat-self-improvement .book-card-accent, .cat-self-improvement-bar { background: var(--orange); }
-
-        .cat-communication { background: rgba(116,185,255,0.15); color: var(--sky); }
-        .cat-communication .book-card-accent, .cat-communication-bar { background: var(--sky); }
-
-        .cat-business { background: rgba(85,239,196,0.15); color: var(--mint); }
-        .cat-business .book-card-accent, .cat-business-bar { background: var(--mint); }
-
-        .cat-comedy { background: rgba(255,230,109,0.2); color: var(--sunny); }
-        .cat-comedy .book-card-accent, .cat-comedy-bar { background: var(--sunny); }
-
-        .cat-writing { background: rgba(253,121,168,0.15); color: var(--pink); }
-        .cat-writing .book-card-accent, .cat-writing-bar { background: var(--pink); }
-
-        .cat-ai { background: rgba(9,132,227,0.15); color: var(--deep-blue); }
-        .cat-ai .book-card-accent, .cat-ai-bar { background: var(--deep-blue); }
-
-        .cat-poetry-gulzar { background: rgba(0,184,148,0.15); color: var(--forest); }
-        .cat-poetry-gulzar .book-card-accent, .cat-poetry-gulzar-bar { background: var(--forest); }
-
-        .cat-poetry-faiz { background: rgba(225,112,85,0.15); color: var(--warm-red); }
-        .cat-poetry-faiz .book-card-accent, .cat-poetry-faiz-bar { background: var(--warm-red); }
-
-        /* ============ CLUSTER VIEW ============ */
-        .cluster-section {
-            margin-bottom: 32px;
-        }
-
-        .cluster-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .cluster-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .cluster-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--text-on-dark);
-        }
-
-        .cluster-count {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-left: auto;
-        }
-
-        /* ============ FOOTER ============ */
-        .dashboard-footer {
-            text-align: center;
-            padding: 24px;
-            color: var(--text-secondary);
-            font-size: 12px;
-        }
-
-        /* ============ RESPONSIVE ============ */
-        @media (max-width: 900px) {
-            .chart-row { grid-template-columns: 1fr; }
-            .book-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-            .header-top { flex-direction: column; }
-            .kpi-row { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 600px) {
-            .kpi-row { grid-template-columns: 1fr; }
-            .filters { flex-direction: column; align-items: stretch; }
-            .search-input { width: 100%; }
-        }
-
-        /* Scrollbar styling */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-primary); }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-
-        .hidden { display: none !important; }
-
-        /* ============ BOOK READER OVERLAY ============ */
-        .reader-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--bg-primary);
-            z-index: 100;
-            flex-direction: column;
-        }
-
-        .reader-overlay.open {
-            display: flex;
-        }
-
-        .reader-toolbar {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 12px 24px;
-            background: var(--bg-card);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            flex-shrink: 0;
-        }
-
-        .reader-back-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 8px;
-            background: rgba(255,255,255,0.05);
-            color: var(--text-primary);
-            font-size: 13px;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .reader-back-btn:hover {
-            background: var(--teal);
-            color: #000;
-            border-color: var(--teal);
-        }
-
-        .reader-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 16px;
-            color: var(--text-on-dark);
-            flex: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .reader-cat-badge {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            flex-shrink: 0;
-        }
-
-        .reader-frame {
-            flex: 1;
-            border: none;
-            width: 100%;
-            background: white;
-        }
-
-        .reader-loading {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--text-secondary);
-            font-size: 16px;
-            display: none;
-        }
-
-        .reader-loading.show { display: block; }
-
-        .reader-nav {
-            display: flex;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-
-        .reader-nav-btn {
-            padding: 6px 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 6px;
-            background: rgba(255,255,255,0.05);
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .reader-nav-btn:hover:not(:disabled) {
-            background: rgba(255,255,255,0.1);
-            color: var(--text-primary);
-        }
-
-        .reader-nav-btn:disabled {
-            opacity: 0.3;
-            cursor: default;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BookBites — Kriti's Illustrated Book Library</title>
+<meta name="description" content="A searchable library of deep, funny, illustrated guides to 130+ great books — psychology, philosophy, comedy, writing, poetry, AI and more.">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --coral:#FF6B6B; --teal:#16b8a6; --sunny:#FFE66D; --hl:#FFE94D;
+  --purple:#8b5cf6; --sky:#3b82f6; --mint:#10b981; --pink:#ec4899;
+  --orange:#f59e0b; --deep-blue:#2563eb; --warm-red:#e1604f; --forest:#0d9488;
+  --ink:#1f2430; --ink-soft:#5b6472; --line:#e3e6ee; --paper:#fbfbf7;
+  --card:#ffffff; --radius:16px; --gap:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  color:var(--ink); line-height:1.6; min-height:100vh;
+  background:
+    linear-gradient(rgba(220,224,236,.5) 1px,transparent 1px) 0 0/26px 26px,
+    linear-gradient(90deg,rgba(220,224,236,.5) 1px,transparent 1px) 0 0/26px 26px,
+    var(--paper);
+}
+.wrap{max-width:1280px;margin:0 auto;padding:0 20px 60px}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  position:sticky; top:0; z-index:40;
+  background:rgba(251,251,247,.9); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{max-width:1280px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.5px;flex-shrink:0}
+.brand .dot{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--coral),var(--orange));display:flex;align-items:center;justify-content:center;font-size:15px}
+.search-wrap{flex:1;min-width:200px;position:relative}
+.search-input{
+  width:100%;padding:11px 16px 11px 42px;border:1.5px solid var(--line);border-radius:30px;
+  background:#fff;font-size:15px;font-family:inherit;transition:.2s;color:var(--ink)
+}
+.search-input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px rgba(22,184,166,.12)}
+.search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);font-size:16px;opacity:.5}
+.sort-select{padding:10px 14px;border:1.5px solid var(--line);border-radius:30px;background:#fff;font-family:inherit;font-size:13px;color:var(--ink);cursor:pointer}
+.sort-select:focus{outline:none;border-color:var(--teal)}
+
+/* ===== HERO ===== */
+.hero{padding:46px 0 22px;text-align:center}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,58px);font-weight:800;letter-spacing:-1.5px;line-height:1.05}
+.hero h1 .mark{
+  background:linear-gradient(transparent 58%, var(--hl) 58%);
+  padding:0 6px;border-radius:2px;
+}
+.hero p{margin:16px auto 0;max-width:600px;color:var(--ink-soft);font-size:16px}
+
+/* ===== STATS ===== */
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--gap);margin:30px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;position:relative;overflow:hidden}
+.stat::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.stat:nth-child(1)::before{background:var(--coral)}
+.stat:nth-child(2)::before{background:var(--teal)}
+.stat:nth-child(3)::before{background:var(--purple)}
+.stat:nth-child(4)::before{background:var(--deep-blue)}
+.stat:nth-child(5)::before{background:var(--orange)}
+.stat:nth-child(6)::before{background:var(--pink)}
+.stat .v{font-size:26px;font-weight:800;line-height:1}
+.stat .l{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--ink-soft);font-weight:600;margin-top:6px}
+.stat .s{font-size:11px;color:var(--ink-soft);margin-top:3px}
+
+/* ===== CATEGORY CHIPS ===== */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin:8px 0 24px;justify-content:center}
+.chip{
+  padding:7px 15px;border-radius:30px;border:1.5px solid var(--line);background:#fff;
+  font-size:13px;font-weight:600;cursor:pointer;transition:.18s;color:var(--ink-soft);display:flex;align-items:center;gap:6px
+}
+.chip:hover{border-color:currentColor;transform:translateY(-1px)}
+.chip.active{color:#fff!important;border-color:transparent}
+.chip .ct{font-size:11px;opacity:.8}
+
+/* ===== ANALYSIS ===== */
+.analysis{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:24px;overflow:hidden}
+.analysis summary{cursor:pointer;padding:16px 22px;font-weight:700;font-size:15px;display:flex;align-items:center;gap:10px;list-style:none}
+.analysis summary::-webkit-details-marker{display:none}
+.analysis summary .caret{margin-left:auto;transition:.2s;color:var(--ink-soft)}
+.analysis[open] summary .caret{transform:rotate(180deg)}
+.analysis-body{padding:0 22px 22px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.chart-box h4{font-size:13px;color:var(--ink-soft);margin-bottom:12px;font-weight:600}
+.chart-box{min-height:280px}
+canvas{max-height:280px}
+
+/* ===== VIEW CONTROLS ===== */
+.viewbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px}
+.toggle{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:30px;padding:4px}
+.toggle button{padding:8px 16px;border:none;border-radius:30px;background:transparent;font-family:inherit;font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.18s}
+.toggle button.active{background:var(--ink);color:#fff}
+.count{font-size:13px;color:var(--ink-soft)}
+
+/* ===== BOOK GRID / COVERS ===== */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:24px}
+.book{cursor:pointer;background:none;border:none;text-align:left;font-family:inherit;padding:0;display:flex;flex-direction:column;transition:.2s}
+.book:hover{transform:translateY(-5px)}
+.cover{
+  aspect-ratio:1/1.5;border-radius:10px;padding:20px 18px;display:flex;flex-direction:column;
+  position:relative;overflow:hidden;box-shadow:0 8px 22px rgba(31,36,48,.16);color:#fff
+}
+.book:hover .cover{box-shadow:0 16px 38px rgba(31,36,48,.28)}
+.cover::after{content:'';position:absolute;left:0;top:0;bottom:0;width:8px;background:rgba(0,0,0,.16)}
+.cover .cat-tag{font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;opacity:.92}
+.cover .ctitle{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(16px,2vw,21px);line-height:1.15;margin-top:auto;text-shadow:0 1px 10px rgba(0,0,0,.18)}
+.cover .cauthor{font-size:12px;margin-top:8px;opacity:.92;font-weight:500}
+.cover .emoji{position:absolute;right:14px;top:14px;font-size:20px;opacity:.85}
+.cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease;z-index:4}
+.cover.has-img .cover-img{opacity:1}
+.cover.has-img .cat-tag,.cover.has-img .emoji,.cover.has-img .ctitle,.cover.has-img .cauthor{opacity:0;transition:opacity .3s}
+.cover.has-img::after{opacity:0}
+.meta{padding:11px 4px 0}
+.meta .t{font-weight:700;font-size:14px;line-height:1.25}
+.meta .t .hl{background:linear-gradient(transparent 60%,var(--hl) 60%);padding:0 2px}
+.meta .a{font-size:12px;color:var(--ink-soft);margin-top:2px}
+.meta .mini{display:flex;gap:12px;margin-top:8px;font-size:11px;color:var(--ink-soft)}
+.meta .mini b{color:var(--ink)}
+
+/* ===== CLUSTER ===== */
+.cluster{margin-bottom:34px}
+.cluster-h{display:flex;align-items:center;gap:11px;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+.cluster-h .cd{width:13px;height:13px;border-radius:50%}
+.cluster-h h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:800}
+.cluster-h .cc{margin-left:auto;font-size:13px;color:var(--ink-soft)}
+
+/* ===== TABLE ===== */
+.tablebox{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.tscroll{overflow-x:auto;max-height:74vh;overflow-y:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{position:sticky;top:0;background:#fff;text-align:left;padding:13px 16px;border-bottom:2px solid var(--line);font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--ink-soft);cursor:pointer;white-space:nowrap;z-index:2}
+thead th:hover{color:var(--teal)}
+tbody td{padding:11px 16px;border-bottom:1px solid var(--line)}
+tbody tr{cursor:pointer;transition:.15s}
+tbody tr:hover{background:#f6f8fc}
+td.tt{font-weight:600;max-width:300px}
+.badge{display:inline-block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;padding:3px 9px;border-radius:20px;white-space:nowrap}
+
+.empty{text-align:center;padding:70px 20px;color:var(--ink-soft)}
+.footer{text-align:center;padding:36px 20px 0;color:var(--ink-soft);font-size:13px}
+
+/* ===== READER OVERLAY ===== */
+.reader{display:none;position:fixed;inset:0;background:#fff;z-index:100;flex-direction:column}
+.reader.open{display:flex}
+.reader-bar{display:flex;align-items:center;gap:14px;padding:11px 18px;background:var(--ink);color:#fff;flex-shrink:0}
+.rbtn{display:flex;align-items:center;gap:7px;padding:8px 15px;border:1px solid rgba(255,255,255,.22);border-radius:30px;background:rgba(255,255,255,.08);color:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.18s}
+.rbtn:hover:not(:disabled){background:#fff;color:var(--ink)}
+.rbtn:disabled{opacity:.35;cursor:default}
+.rtitle{font-family:'Playfair Display',serif;font-size:16px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rnav{display:flex;gap:8px;flex-shrink:0}
+.reader iframe{flex:1;border:none;width:100%;background:#fff}
+@media(max-width:980px){.stats{grid-template-columns:repeat(3,1fr)}.analysis-body{grid-template-columns:1fr}}
+@media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}.rtitle{display:none}}
+</style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- HEADER -->
-        <header class="dashboard-header">
-            <div class="header-top">
-                <div class="header-title">
-                    <h1>Kriti's Illustrated Book Library</h1>
-                    <p>107 deep, funny, illustrated HTML guides — psychology, philosophy, comedy, poetry, AI & more</p>
-                </div>
-                <div class="filters">
-                    <div class="filter-group">
-                        <label>Category</label>
-                        <select id="filter-category" onchange="dashboard.applyFilters()">
-                            <option value="all">All Categories</option>
-                        </select>
-                    </div>
-                    <input type="text" class="search-input" id="search-input" placeholder="Search books or authors..." oninput="dashboard.applyFilters()">
-                </div>
-            </div>
-        </header>
 
-        <!-- KPI ROW -->
-        <section class="kpi-row" id="kpi-row"></section>
-
-        <!-- CHARTS -->
-        <section class="chart-row">
-            <div class="chart-container">
-                <h3>📚 Books by Category</h3>
-                <canvas id="chart-categories"></canvas>
-            </div>
-            <div class="chart-container">
-                <h3>📏 Guide Depth (File Size Distribution)</h3>
-                <canvas id="chart-sizes"></canvas>
-            </div>
-        </section>
-
-        <!-- VIEW CONTROLS -->
-        <div class="view-controls">
-            <div class="view-toggle">
-                <button class="view-btn active" onclick="dashboard.setView('grid')" id="btn-grid">Cards</button>
-                <button class="view-btn" onclick="dashboard.setView('cluster')" id="btn-cluster">Clusters</button>
-                <button class="view-btn" onclick="dashboard.setView('table')" id="btn-table">Table</button>
-            </div>
-            <div class="results-count" id="results-count"></div>
-        </div>
-
-        <!-- GRID VIEW -->
-        <div id="view-grid" class="book-grid"></div>
-
-        <!-- CLUSTER VIEW -->
-        <div id="view-cluster" class="hidden"></div>
-
-        <!-- TABLE VIEW -->
-        <div id="view-table" class="table-section hidden">
-            <div style="overflow-x:auto; max-height: 70vh; overflow-y: auto;">
-                <table class="data-table" id="book-table">
-                    <thead>
-                        <tr>
-                            <th onclick="dashboard.sortBy('title')">Title</th>
-                            <th onclick="dashboard.sortBy('author')">Author</th>
-                            <th onclick="dashboard.sortBy('category')">Category</th>
-                            <th onclick="dashboard.sortBy('size')">Depth</th>
-                            <th onclick="dashboard.sortBy('lessons')">Lessons</th>
-                            <th onclick="dashboard.sortBy('aiBoxes')">AI Boxes</th>
-                            <th onclick="dashboard.sortBy('funnyBoxes')">Funny Takes</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <footer class="dashboard-footer">
-            Built with love by Claude for Kriti · <span id="book-count">107</span> books and counting
-        </footer>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="dot">📚</span> BookBites</div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input id="search" class="search-input" type="text" placeholder="Search 130+ books, authors, topics…" oninput="App.apply()">
     </div>
+    <select id="sort" class="sort-select" onchange="App.apply()">
+      <option value="title">Sort: Title A–Z</option>
+      <option value="author">Sort: Author A–Z</option>
+      <option value="category">Sort: Category</option>
+      <option value="size">Sort: Depth (longest)</option>
+    </select>
+  </div>
+</div>
 
-    <!-- READER OVERLAY -->
-    <div class="reader-overlay" id="reader-overlay">
-        <div class="reader-toolbar">
-            <button class="reader-back-btn" onclick="closeReader()">← Library</button>
-            <div class="reader-title" id="reader-title"></div>
-            <div class="reader-nav">
-                <button class="reader-nav-btn" id="reader-prev" onclick="navigateBook(-1)">← Prev</button>
-                <button class="reader-nav-btn" id="reader-next" onclick="navigateBook(1)">Next →</button>
-            </div>
-            <span class="reader-cat-badge" id="reader-cat"></span>
-        </div>
-        <div style="position:relative;flex:1">
-            <div class="reader-loading show" id="reader-loading">Loading book guide...</div>
-            <iframe class="reader-frame" id="reader-frame" sandbox="allow-same-origin allow-scripts"></iframe>
-        </div>
+<div class="wrap">
+  <header class="hero">
+    <h1>Kriti's <span class="mark">Illustrated</span> Book Library</h1>
+    <p>Deep, funny, hand-illustrated guides to every book worth remembering — search, explore by theme, and read any guide right here.</p>
+  </header>
+
+  <section class="stats" id="stats"></section>
+
+  <div class="chips" id="chips"></div>
+
+  <details class="analysis">
+    <summary>📊 Library analysis <span class="caret">▾</span></summary>
+    <div class="analysis-body">
+      <div class="chart-box"><h4>Books by category</h4><canvas id="catChart"></canvas></div>
+      <div class="chart-box"><h4>Deepest 15 guides (KB of content)</h4><canvas id="sizeChart"></canvas></div>
     </div>
+  </details>
 
-    <script>
-    // ==================== BOOK DATA ====================
-    const BOOKS = [
-        {id:"a_brief_history_of_time",title:"A Brief History of Time",author:"Stephen Hawking",category:"Science",size:97387,lessons:12,keyCards:7,aiBoxes:13,funnyBoxes:10},
-        {id:"anatomy_of_story",title:"The Anatomy of Story",author:"John Truby",category:"Writing",size:99467,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:27},
-        {id:"antifragile",title:"Antifragile",author:"Nassim Nicholas Taleb",category:"Philosophy",size:61376,lessons:12,keyCards:2,aiBoxes:2,funnyBoxes:0},
-        {id:"atomic_habits",title:"Atomic Habits",author:"James Clear",category:"Self-Improvement",size:53640,lessons:10,keyCards:7,aiBoxes:13,funnyBoxes:7},
-        {id:"attached",title:"Attached",author:"Amir Levine & Rachel Heller",category:"Psychology",size:62666,lessons:10,keyCards:0,aiBoxes:3,funnyBoxes:2},
-        {id:"attention_is_all_you_need",title:"Attention Is All You Need",author:"Vaswani et al.",category:"AI & Deep Learning",size:103526,lessons:12,keyCards:34,aiBoxes:14,funnyBoxes:14},
-        {id:"behave",title:"Behave",author:"Robert Sapolsky",category:"Science",size:73465,lessons:12,keyCards:28,aiBoxes:14,funnyBoxes:14},
-        {id:"best_of_faiz",title:"The Best of Faiz",author:"Faiz Ahmed Faiz",category:"Poetry — Faiz",size:105948,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:27},
-        {id:"big_magic",title:"Big Magic",author:"Elizabeth Gilbert",category:"Writing",size:87429,lessons:10,keyCards:13,aiBoxes:14,funnyBoxes:14},
-        {id:"bird_by_bird",title:"Bird by Bird",author:"Anne Lamott",category:"Writing",size:90568,lessons:12,keyCards:56,aiBoxes:16,funnyBoxes:16},
-        {id:"blink",title:"Blink",author:"Malcolm Gladwell",category:"Psychology",size:41672,lessons:12,keyCards:3,aiBoxes:11,funnyBoxes:0},
-        {id:"born_standing_up",title:"Born Standing Up",author:"Steve Martin",category:"Comedy",size:110080,lessons:12,keyCards:12,aiBoxes:14,funnyBoxes:14},
-        {id:"bossypants",title:"Bossypants",author:"Tina Fey",category:"Comedy",size:88086,lessons:12,keyCards:0,aiBoxes:16,funnyBoxes:16},
-        {id:"comedy_bible",title:"The Comedy Bible",author:"Judy Carter",category:"Comedy",size:84804,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:27},
-        {id:"comedy_writing_secrets",title:"Comedy Writing Secrets",author:"Mark Shatz & Mel Helitzer",category:"Comedy",size:84947,lessons:12,keyCards:13,aiBoxes:15,funnyBoxes:15},
-        {id:"craft_in_the_real_world",title:"Craft in the Real World",author:"Matthew Salesses",category:"Writing",size:100826,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:27},
-        {id:"crucial_conversations",title:"Crucial Conversations",author:"Patterson, Grenny, McMillan & Switzler",category:"Communication",size:110827,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:13},
-        {id:"dast_e_saba",title:"Dast-e-Saba",author:"Faiz Ahmed Faiz",category:"Poetry — Faiz",size:78557,lessons:10,keyCards:36,aiBoxes:8,funnyBoxes:8},
-        {id:"deep_learning",title:"Deep Learning",author:"Goodfellow, Bengio & Courville",category:"AI & Deep Learning",size:102396,lessons:12,keyCards:62,aiBoxes:16,funnyBoxes:13},
-        {id:"deep_work",title:"Deep Work",author:"Cal Newport",category:"Self-Improvement",size:108896,lessons:12,keyCards:18,aiBoxes:14,funnyBoxes:14},
-        {id:"draft_no_4",title:"Draft No. 4",author:"John McPhee",category:"Writing",size:92810,lessons:12,keyCards:13,aiBoxes:28,funnyBoxes:27},
-        {id:"drive",title:"Drive",author:"Daniel H. Pink",category:"Psychology",size:65069,lessons:10,keyCards:18,aiBoxes:11,funnyBoxes:11},
-        {id:"elements_of_style",title:"The Elements of Style",author:"Strunk & White",category:"Writing",size:93943,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:27},
-        {id:"emotional_intelligence",title:"Emotional Intelligence",author:"Daniel Goleman",category:"Psychology",size:65525,lessons:10,keyCards:1,aiBoxes:1,funnyBoxes:1},
-        {id:"flow",title:"Flow",author:"Mihaly Csikszentmihalyi",category:"Psychology",size:23551,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"freakonomics",title:"Freakonomics",author:"Steven Levitt & Stephen Dubner",category:"Business",size:59005,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"godel_escher_bach",title:"Gödel, Escher, Bach",author:"Douglas Hofstadter",category:"Science",size:59953,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"good_to_great",title:"Good to Great",author:"Jim Collins",category:"Business",size:70816,lessons:12,keyCards:1,aiBoxes:0,funnyBoxes:0},
-        {id:"green_poems_gulzar",title:"Green Poems",author:"Gulzar",category:"Poetry — Gulzar",size:78704,lessons:10,keyCards:0,aiBoxes:23,funnyBoxes:23},
-        {id:"grit",title:"Grit",author:"Angela Duckworth",category:"Psychology",size:50688,lessons:12,keyCards:63,aiBoxes:13,funnyBoxes:10},
-        {id:"how_the_mind_works",title:"How the Mind Works",author:"Steven Pinker",category:"Science",size:104649,lessons:12,keyCards:13,aiBoxes:28,funnyBoxes:27},
-        {id:"i_cant_make_this_up",title:"I Can't Make This Up",author:"Kevin Hart",category:"Comedy",size:88165,lessons:10,keyCards:52,aiBoxes:20,funnyBoxes:19},
-        {id:"impro",title:"Impro",author:"Keith Johnstone",category:"Comedy",size:102789,lessons:12,keyCards:51,aiBoxes:16,funnyBoxes:16},
-        {id:"incognito",title:"Incognito",author:"David Eagleman",category:"Science",size:83844,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"influence",title:"Influence",author:"Robert Cialdini",category:"Psychology",size:55867,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"is_everyone_hanging_out",title:"Is Everyone Hanging Out Without Me?",author:"Mindy Kaling",category:"Comedy",size:42412,lessons:10,keyCards:1,aiBoxes:1,funnyBoxes:7},
-        {id:"letters_from_a_stoic",title:"Letters from a Stoic",author:"Seneca",category:"Philosophy",size:82411,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"life_3_0",title:"Life 3.0",author:"Max Tegmark",category:"AI & Deep Learning",size:101870,lessons:12,keyCards:16,aiBoxes:29,funnyBoxes:13},
-        {id:"made_to_stick",title:"Made to Stick",author:"Chip & Dan Heath",category:"Communication",size:91074,lessons:12,keyCards:22,aiBoxes:13,funnyBoxes:9},
-        {id:"mans_search_for_meaning",title:"Man's Search for Meaning",author:"Viktor Frankl",category:"Philosophy",size:57061,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"meditations",title:"Meditations",author:"Marcus Aurelius",category:"Philosophy",size:77148,lessons:12,keyCards:56,aiBoxes:16,funnyBoxes:16},
-        {id:"mindset",title:"Mindset",author:"Carol Dweck",category:"Psychology",size:25439,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"mistakes_were_made",title:"Mistakes Were Made (But Not by Me)",author:"Carol Tavris & Elliot Aronson",category:"Psychology",size:70348,lessons:12,keyCards:2,aiBoxes:2,funnyBoxes:2},
-        {id:"modern_romance",title:"Modern Romance",author:"Aziz Ansari & Eric Klinenberg",category:"Comedy",size:84281,lessons:12,keyCards:0,aiBoxes:15,funnyBoxes:15},
-        {id:"naqsh_e_faryadi",title:"Naqsh-e-Faryadi",author:"Faiz Ahmed Faiz",category:"Poetry — Faiz",size:79512,lessons:10,keyCards:32,aiBoxes:11,funnyBoxes:10},
-        {id:"neglected_poems_gulzar",title:"Neglected Poems (Triveni ke Baad)",author:"Gulzar",category:"Poetry — Gulzar",size:104517,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:26},
-        {id:"never_split_the_difference",title:"Never Split the Difference",author:"Chris Voss",category:"Communication",size:51818,lessons:10,keyCards:8,aiBoxes:11,funnyBoxes:9},
-        {id:"nudge",title:"Nudge",author:"Richard Thaler & Cass Sunstein",category:"Psychology",size:59799,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"on_writing",title:"On Writing",author:"Stephen King",category:"Writing",size:85500,lessons:12,keyCards:0,aiBoxes:18,funnyBoxes:17},
-        {id:"on_writing_well",title:"On Writing Well",author:"William Zinsser",category:"Writing",size:92356,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:27},
-        {id:"opening_up",title:"Opening Up",author:"James W. Pennebaker",category:"Psychology",size:94500,lessons:12,keyCards:12,aiBoxes:25,funnyBoxes:25},
-        {id:"phantoms_in_the_brain",title:"Phantoms in the Brain",author:"V.S. Ramachandran",category:"Science",size:85969,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"pluto_gulzar",title:"Pluto",author:"Gulzar",category:"Poetry — Gulzar",size:75876,lessons:10,keyCards:32,aiBoxes:8,funnyBoxes:8},
-        {id:"poking_a_dead_frog",title:"Poking a Dead Frog",author:"Mike Sacks",category:"Comedy",size:86478,lessons:12,keyCards:26,aiBoxes:27,funnyBoxes:27},
-        {id:"predictably_irrational",title:"Predictably Irrational",author:"Dan Ariely",category:"Psychology",size:62139,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"quiet",title:"Quiet",author:"Susan Cain",category:"Psychology",size:86285,lessons:10,keyCards:27,aiBoxes:11,funnyBoxes:12},
-        {id:"range",title:"Range",author:"David Epstein",category:"Self-Improvement",size:94388,lessons:10,keyCards:1,aiBoxes:1,funnyBoxes:1},
-        {id:"rebels_silhouette_faiz",title:"The Rebel's Silhouette",author:"Faiz Ahmed Faiz (tr. Agha Shahid Ali)",category:"Poetry — Faiz",size:106620,lessons:12,keyCards:13,aiBoxes:22,funnyBoxes:24},
-        {id:"sapiens",title:"Sapiens",author:"Yuval Noah Harari",category:"Science",size:95600,lessons:12,keyCards:49,aiBoxes:13,funnyBoxes:13},
-        {id:"save_the_cat",title:"Save the Cat!",author:"Blake Snyder",category:"Writing",size:61210,lessons:10,keyCards:0,aiBoxes:1,funnyBoxes:0},
-        {id:"several_short_sentences",title:"Several Short Sentences About Writing",author:"Verlyn Klinkenborg",category:"Writing",size:83411,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:27},
-        {id:"sham_e_sheher_faiz",title:"Sham-e-Sheher-e-Yaaran",author:"Faiz Ahmed Faiz",category:"Poetry — Faiz",size:96588,lessons:12,keyCards:11,aiBoxes:23,funnyBoxes:23},
-        {id:"sick_in_the_head",title:"Sick in the Head",author:"Judd Apatow",category:"Comedy",size:82646,lessons:12,keyCards:14,aiBoxes:17,funnyBoxes:16},
-        {id:"siddhartha",title:"Siddhartha",author:"Hermann Hesse",category:"Philosophy",size:55245,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"sophies_world",title:"Sophie's World",author:"Jostein Gaarder",category:"Philosophy",size:101532,lessons:10,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"steal_like_an_artist",title:"Steal Like an Artist",author:"Austin Kleon",category:"Writing",size:90717,lessons:12,keyCards:11,aiBoxes:20,funnyBoxes:11},
-        {id:"step_by_step_standup",title:"Step by Step to Stand-Up Comedy",author:"Greg Dean",category:"Comedy",size:106884,lessons:12,keyCards:13,aiBoxes:14,funnyBoxes:14},
-        {id:"story_mckee",title:"Story",author:"Robert McKee",category:"Writing",size:63238,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:6},
-        {id:"stumbling_on_happiness",title:"Stumbling on Happiness",author:"Daniel Gilbert",category:"Psychology",size:25277,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"subliminal",title:"Subliminal",author:"Leonard Mlodinow",category:"Psychology",size:93860,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:27},
-        {id:"superintelligence",title:"Superintelligence",author:"Nick Bostrom",category:"AI & Deep Learning",size:98772,lessons:12,keyCards:44,aiBoxes:30,funnyBoxes:4},
-        {id:"suspected_poems_gulzar",title:"Suspected Poems (Mashkook)",author:"Gulzar",category:"Poetry — Gulzar",size:89986,lessons:12,keyCards:12,aiBoxes:26,funnyBoxes:24},
-        {id:"switch",title:"Switch",author:"Chip & Dan Heath",category:"Self-Improvement",size:99150,lessons:10,keyCards:35,aiBoxes:10,funnyBoxes:9},
-        {id:"the_7_habits",title:"The 7 Habits of Highly Effective People",author:"Stephen R. Covey",category:"Self-Improvement",size:57515,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"the_alchemist",title:"The Alchemist",author:"Paulo Coelho",category:"Philosophy",size:103442,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"the_art_of_war",title:"The Art of War",author:"Sun Tzu",category:"Philosophy",size:126921,lessons:12,keyCards:0,aiBoxes:11,funnyBoxes:9},
-        {id:"the_artists_way",title:"The Artist's Way",author:"Julia Cameron",category:"Writing",size:76720,lessons:12,keyCards:37,aiBoxes:27,funnyBoxes:28},
-        {id:"the_black_swan",title:"The Black Swan",author:"Nassim Nicholas Taleb",category:"Philosophy",size:23398,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"the_body_keeps_the_score",title:"The Body Keeps the Score",author:"Bessel van der Kolk",category:"Psychology",size:104547,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"the_brain_that_changes_itself",title:"The Brain That Changes Itself",author:"Norman Doidge",category:"Science",size:67670,lessons:12,keyCards:0,aiBoxes:3,funnyBoxes:0},
-        {id:"the_comedians_nesteroff",title:"The Comedians",author:"Kliph Nesteroff",category:"Comedy",size:98207,lessons:12,keyCards:13,aiBoxes:15,funnyBoxes:27},
-        {id:"the_happiness_hypothesis",title:"The Happiness Hypothesis",author:"Jonathan Haidt",category:"Psychology",size:96900,lessons:10,keyCards:1,aiBoxes:0,funnyBoxes:0},
-        {id:"the_humor_code",title:"The Humor Code",author:"Peter McGraw & Joel Warner",category:"Comedy",size:108108,lessons:12,keyCards:13,aiBoxes:16,funnyBoxes:14},
-        {id:"the_innovators_dilemma",title:"The Innovator's Dilemma",author:"Clayton Christensen",category:"Business",size:88073,lessons:12,keyCards:0,aiBoxes:1,funnyBoxes:1},
-        {id:"the_lucifer_effect",title:"The Lucifer Effect",author:"Philip Zimbardo",category:"Psychology",size:89783,lessons:12,keyCards:12,aiBoxes:0,funnyBoxes:0},
-        {id:"the_man_who_mistook_his_wife",title:"The Man Who Mistook His Wife for a Hat",author:"Oliver Sacks",category:"Science",size:63199,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"the_moth",title:"The Moth",author:"Catherine Burns (ed.)",category:"Communication",size:39647,lessons:10,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"the_myth_of_sisyphus",title:"The Myth of Sisyphus",author:"Albert Camus",category:"Philosophy",size:69140,lessons:10,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"the_paradox_of_choice",title:"The Paradox of Choice",author:"Barry Schwartz",category:"Psychology",size:76720,lessons:10,keyCards:0,aiBoxes:0,funnyBoxes:16},
-        {id:"the_power_of_habit",title:"The Power of Habit",author:"Charles Duhigg",category:"Psychology",size:78912,lessons:12,keyCards:13,aiBoxes:16,funnyBoxes:13},
-        {id:"the_righteous_mind",title:"The Righteous Mind",author:"Jonathan Haidt",category:"Psychology",size:98304,lessons:10,keyCards:11,aiBoxes:21,funnyBoxes:12},
-        {id:"the_selfish_gene",title:"The Selfish Gene",author:"Richard Dawkins",category:"Science",size:103191,lessons:12,keyCards:29,aiBoxes:27,funnyBoxes:22},
-        {id:"the_social_animal",title:"The Social Animal",author:"David Brooks",category:"Psychology",size:98034,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:27},
-        {id:"the_tao_of_pooh",title:"The Tao of Pooh",author:"Benjamin Hoff",category:"Philosophy",size:48153,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"the_undoing_project",title:"The Undoing Project",author:"Michael Lewis",category:"Psychology",size:84424,lessons:10,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"the_war_of_art",title:"The War of Art",author:"Steven Pressfield",category:"Writing",size:95532,lessons:12,keyCards:12,aiBoxes:15,funnyBoxes:14},
-        {id:"the_willpower_instinct",title:"The Willpower Instinct",author:"Kelly McGonigal",category:"Psychology",size:46740,lessons:10,keyCards:1,aiBoxes:2,funnyBoxes:2},
-        {id:"thinking_fast_slow",title:"Thinking, Fast and Slow",author:"Daniel Kahneman",category:"Psychology",size:81162,lessons:12,keyCards:0,aiBoxes:12,funnyBoxes:4},
-        {id:"thinking_in_bets",title:"Thinking in Bets",author:"Annie Duke",category:"Business",size:77984,lessons:12,keyCards:0,aiBoxes:11,funnyBoxes:4},
-        {id:"triveni_gulzar",title:"Triveni",author:"Gulzar",category:"Poetry — Gulzar",size:94271,lessons:12,keyCards:70,aiBoxes:15,funnyBoxes:14},
-        {id:"truth_in_comedy",title:"Truth in Comedy",author:"Del Close & Charna Halpern",category:"Comedy",size:113797,lessons:12,keyCards:0,aiBoxes:0,funnyBoxes:0},
-        {id:"two_gulzar",title:"Two (Do)",author:"Gulzar",category:"Poetry — Gulzar",size:96408,lessons:12,keyCards:13,aiBoxes:15,funnyBoxes:14},
-        {id:"writing_down_the_bones",title:"Writing Down the Bones",author:"Natalie Goldberg",category:"Writing",size:86319,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:27},
-        {id:"yearbook_rogen",title:"Yearbook",author:"Seth Rogen",category:"Comedy",size:83805,lessons:12,keyCards:13,aiBoxes:27,funnyBoxes:27},
-        {id:"yes_please",title:"Yes Please",author:"Amy Poehler",category:"Comedy",size:79853,lessons:12,keyCards:13,aiBoxes:14,funnyBoxes:14},
-        {id:"zero_to_one",title:"Zero to One",author:"Peter Thiel",category:"Business",size:70950,lessons:10,keyCards:13,aiBoxes:14,funnyBoxes:7},
-        {id:"zindan_nama",title:"Zindan-Nama",author:"Faiz Ahmed Faiz",category:"Poetry — Faiz",size:62655,lessons:10,keyCards:0,aiBoxes:12,funnyBoxes:10},
-        {id:"dopamine_nation",title:"Dopamine Nation",author:"Anna Lembke",category:"Psychology",size:87866,lessons:12,keyCards:8,aiBoxes:12,funnyBoxes:12},
-        {id:"hungry_ghosts",title:"In the Realm of Hungry Ghosts",author:"Gabor Maté",category:"Psychology",size:65719,lessons:12,keyCards:8,aiBoxes:12,funnyBoxes:10},
-        {id:"getting_things_done",title:"Getting Things Done",author:"David Allen",category:"Self-Improvement",size:61597,lessons:12,keyCards:8,aiBoxes:12,funnyBoxes:10},
-        {id:"essentialism",title:"Essentialism",author:"Greg McKeown",category:"Self-Improvement",size:53168,lessons:12,keyCards:8,aiBoxes:12,funnyBoxes:10},
-        {id:"happiness_advantage",title:"The Happiness Advantage",author:"Shawn Achor",category:"Psychology",size:50525,lessons:12,keyCards:8,aiBoxes:12,funnyBoxes:10},
-        {id:"when",title:"When: The Scientific Secrets of Perfect Timing",author:"Daniel H. Pink",category:"Self-Improvement",size:46742,lessons:12,keyCards:8,aiBoxes:12,funnyBoxes:10},
-        {id:"why_we_sleep",title:"Why We Sleep",author:"Matthew Walker",category:"Science",size:60920,lessons:12,keyCards:10,aiBoxes:12,funnyBoxes:10},
-        {id:"four_thousand_weeks",title:"Four Thousand Weeks",author:"Oliver Burkeman",category:"Philosophy",size:45427,lessons:12,keyCards:10,aiBoxes:12,funnyBoxes:10},
-        {id:"alignment_problem",title:"The Alignment Problem",author:"Brian Christian",category:"AI & Deep Learning",size:64399,lessons:12,keyCards:12,aiBoxes:14,funnyBoxes:8},
-        {id:"ai_superpowers",title:"AI Superpowers",author:"Kai-Fu Lee",category:"AI & Deep Learning",size:52883,lessons:12,keyCards:10,aiBoxes:14,funnyBoxes:8},
-        {id:"when_breath_becomes_air",title:"When Breath Becomes Air",author:"Paul Kalanithi",category:"Philosophy",size:64494,lessons:10,keyCards:10,aiBoxes:8,funnyBoxes:0},
-        {id:"tiny_habits",title:"Tiny Habits",author:"BJ Fogg",category:"Self-Improvement",size:58537,lessons:12,keyCards:10,aiBoxes:12,funnyBoxes:10},
-        {id:"lost_connections",title:"Lost Connections",author:"Johann Hari",category:"Psychology",size:60330,lessons:12,keyCards:10,aiBoxes:12,funnyBoxes:8},
-        {id:"being_mortal",title:"Being Mortal",author:"Atul Gawande",category:"Philosophy",size:40199,lessons:12,keyCards:10,aiBoxes:8,funnyBoxes:4}
-    ];
+  <div class="viewbar">
+    <div class="toggle">
+      <button class="active" id="v-grid" onclick="App.setView('grid')">Covers</button>
+      <button id="v-cluster" onclick="App.setView('cluster')">By theme</button>
+      <button id="v-table" onclick="App.setView('table')">Table</button>
+    </div>
+    <div class="count" id="count"></div>
+  </div>
 
-    // ==================== CATEGORY CONFIG ====================
-    const CAT_CONFIG = {
-        "Psychology":       { color: "#FF6B6B", emoji: "🧠", css: "psychology" },
-        "Philosophy":       { color: "#A06CD5", emoji: "🤔", css: "philosophy" },
-        "Science":          { color: "#4ECDC4", emoji: "🔬", css: "science" },
-        "Self-Improvement": { color: "#FDCB6E", emoji: "💪", css: "self-improvement" },
-        "Communication":    { color: "#74B9FF", emoji: "🗣️", css: "communication" },
-        "Business":         { color: "#55EFC4", emoji: "📈", css: "business" },
-        "Comedy":           { color: "#FFE66D", emoji: "😂", css: "comedy" },
-        "Writing":          { color: "#FD79A8", emoji: "✍️", css: "writing" },
-        "AI & Deep Learning":{ color: "#0984E3", emoji: "🤖", css: "ai" },
-        "Poetry — Gulzar":  { color: "#00B894", emoji: "🌿", css: "poetry-gulzar" },
-        "Poetry — Faiz":    { color: "#E17055", emoji: "🌹", css: "poetry-faiz" }
-    };
+  <div id="grid" class="grid"></div>
+  <div id="cluster" style="display:none"></div>
+  <div id="table" class="tablebox" style="display:none">
+    <div class="tscroll"><table>
+      <thead><tr>
+        <th onclick="App.sortBy('title')">Title</th>
+        <th onclick="App.sortBy('author')">Author</th>
+        <th onclick="App.sortBy('category')">Category</th>
+        <th onclick="App.sortBy('size')">Depth</th>
+        <th onclick="App.sortBy('lessons')">Lessons</th>
+      </tr></thead>
+      <tbody id="tbody"></tbody>
+    </table></div>
+  </div>
 
-    const CATEGORY_ORDER = [
-        "Psychology", "Comedy", "Writing", "Science", "Philosophy",
-        "Self-Improvement", "Poetry — Gulzar", "Poetry — Faiz",
-        "AI & Deep Learning", "Communication", "Business"
-    ];
+  <div class="empty" id="empty" style="display:none">No books match your search. Try a different term.</div>
 
-    // ==================== DASHBOARD CLASS ====================
-    class Dashboard {
-        constructor(data) {
-            this.rawData = data;
-            this.filteredData = data;
-            this.charts = {};
-            this.currentView = 'grid';
-            this.sortCol = 'category';
-            this.sortDir = 'asc';
-            this.init();
-        }
+  <footer class="footer">Built with care for Kriti · <span id="fcount"></span> illustrated guides and counting · click any cover to read</footer>
+</div>
 
-        init() {
-            this.populateFilters();
-            this.renderKPIs();
-            try { this.renderCharts(); } catch(e) { console.warn('Charts failed to load:', e); }
-            this.renderBooks();
-        }
+<div class="reader" id="reader">
+  <div class="reader-bar">
+    <button class="rbtn" onclick="App.closeReader()">← Library</button>
+    <div class="rtitle" id="rtitle"></div>
+    <div class="rnav">
+      <button class="rbtn" id="rprev" onclick="App.navReader(-1)">← Prev</button>
+      <button class="rbtn" id="rnext" onclick="App.navReader(1)">Next →</button>
+    </div>
+  </div>
+  <iframe id="rframe" title="Book guide"></iframe>
+</div>
 
-        populateFilters() {
-            const sel = document.getElementById('filter-category');
-            CATEGORY_ORDER.forEach(cat => {
-                const cfg = CAT_CONFIG[cat];
-                const count = this.rawData.filter(b => b.category === cat).length;
-                const opt = document.createElement('option');
-                opt.value = cat;
-                opt.textContent = `${cfg.emoji} ${cat} (${count})`;
-                sel.appendChild(opt);
-            });
-        }
+<script>
+const BOOKS = [
+{id:"100m_offers",title:"$100M Offers",author:"Alex Hormozi",category:"Business",size:94855,lessons:12,ai:16,funny:15},
+{id:"a_brief_history_of_time",title:"A Brief History of Time",author:"Stephen Hawking",category:"Science",size:97387,lessons:12,ai:13,funny:10},
+{id:"adweek_copywriting",title:"The Adweek Copywriting Handbook",author:"Joseph Sugarman",category:"Communication",size:78010,lessons:12,ai:14,funny:14},
+{id:"ai_superpowers",title:"AI Superpowers",author:"Kai-Fu Lee",category:"AI & Deep Learning",size:52883,lessons:12,ai:14,funny:8},
+{id:"alignment_problem",title:"The Alignment Problem",author:"Brian Christian",category:"AI & Deep Learning",size:64399,lessons:12,ai:14,funny:8},
+{id:"anatomy_of_story",title:"The Anatomy of Story",author:"John Truby",category:"Writing",size:99467,lessons:12,ai:27,funny:27},
+{id:"antifragile",title:"Antifragile",author:"Nassim Nicholas Taleb",category:"Philosophy",size:61376,lessons:12,ai:2,funny:0},
+{id:"atomic_habits",title:"Atomic Habits",author:"James Clear",category:"Self-Improvement",size:53640,lessons:10,ai:13,funny:7},
+{id:"attached",title:"Attached",author:"Amir Levine & Rachel Heller",category:"Psychology",size:62666,lessons:10,ai:3,funny:2},
+{id:"attention_is_all_you_need",title:"Attention Is All You Need",author:"Vaswani et al.",category:"AI & Deep Learning",size:103526,lessons:12,ai:14,funny:14},
+{id:"behave",title:"Behave",author:"Robert Sapolsky",category:"Science",size:73465,lessons:12,ai:14,funny:14},
+{id:"being_mortal",title:"Being Mortal",author:"Atul Gawande",category:"Philosophy",size:40199,lessons:12,ai:8,funny:4},
+{id:"best_of_faiz",title:"The Best of Faiz",author:"Faiz Ahmed Faiz",category:"Poetry — Faiz",size:105948,lessons:12,ai:27,funny:27},
+{id:"big_magic",title:"Big Magic",author:"Elizabeth Gilbert",category:"Writing",size:87429,lessons:10,ai:14,funny:14},
+{id:"bird_by_bird",title:"Bird by Bird",author:"Anne Lamott",category:"Writing",size:90568,lessons:12,ai:16,funny:16},
+{id:"blink",title:"Blink",author:"Malcolm Gladwell",category:"Psychology",size:41672,lessons:12,ai:11,funny:0},
+{id:"born_standing_up",title:"Born Standing Up",author:"Steve Martin",category:"Comedy",size:110080,lessons:12,ai:14,funny:14},
+{id:"bossypants",title:"Bossypants",author:"Tina Fey",category:"Comedy",size:88086,lessons:12,ai:16,funny:16},
+{id:"breath",title:"Breath",author:"James Nestor",category:"Science",size:79202,lessons:12,ai:14,funny:14},
+{id:"building_a_storybrand",title:"Building a StoryBrand",author:"Donald Miller",category:"Communication",size:85855,lessons:11,ai:15,funny:14},
+{id:"comedy_bible",title:"The Comedy Bible",author:"Judy Carter",category:"Comedy",size:84804,lessons:12,ai:27,funny:27},
+{id:"comedy_writing_secrets",title:"Comedy Writing Secrets",author:"Mark Shatz & Mel Helitzer",category:"Comedy",size:84947,lessons:12,ai:15,funny:15},
+{id:"contagious",title:"Contagious",author:"Jonah Berger",category:"Communication",size:98978,lessons:11,ai:14,funny:14},
+{id:"craft_in_the_real_world",title:"Craft in the Real World",author:"Matthew Salesses",category:"Writing",size:100826,lessons:12,ai:27,funny:27},
+{id:"crucial_conversations",title:"Crucial Conversations",author:"Patterson, Grenny, McMillan & Switzler",category:"Communication",size:110827,lessons:12,ai:0,funny:13},
+{id:"dare_to_lead",title:"Dare to Lead",author:"Brené Brown",category:"Self-Improvement",size:95508,lessons:12,ai:15,funny:14},
+{id:"dast_e_saba",title:"Dast-e-Saba",author:"Faiz Ahmed Faiz",category:"Poetry — Faiz",size:78557,lessons:10,ai:8,funny:8},
+{id:"deep_learning",title:"Deep Learning",author:"Goodfellow, Bengio & Courville",category:"AI & Deep Learning",size:102396,lessons:12,ai:16,funny:13},
+{id:"deep_work",title:"Deep Work",author:"Cal Newport",category:"Self-Improvement",size:108896,lessons:12,ai:14,funny:14},
+{id:"dopamine_nation",title:"Dopamine Nation",author:"Anna Lembke",category:"Psychology",size:87866,lessons:12,ai:12,funny:12},
+{id:"draft_no_4",title:"Draft No. 4",author:"John McPhee",category:"Writing",size:92810,lessons:12,ai:28,funny:27},
+{id:"drive",title:"Drive",author:"Daniel H. Pink",category:"Psychology",size:65069,lessons:10,ai:11,funny:11},
+{id:"elements_of_style",title:"The Elements of Style",author:"Strunk & White",category:"Writing",size:93943,lessons:12,ai:27,funny:27},
+{id:"emotional_intelligence",title:"Emotional Intelligence",author:"Daniel Goleman",category:"Psychology",size:65525,lessons:10,ai:1,funny:1},
+{id:"essentialism",title:"Essentialism",author:"Greg McKeown",category:"Self-Improvement",size:53168,lessons:12,ai:12,funny:10},
+{id:"flow",title:"Flow",author:"Mihaly Csikszentmihalyi",category:"Psychology",size:23551,lessons:12,ai:0,funny:0},
+{id:"four_thousand_weeks",title:"Four Thousand Weeks",author:"Oliver Burkeman",category:"Philosophy",size:45427,lessons:12,ai:12,funny:10},
+{id:"freakonomics",title:"Freakonomics",author:"Steven Levitt & Stephen Dubner",category:"Business",size:59005,lessons:12,ai:0,funny:0},
+{id:"getting_things_done",title:"Getting Things Done",author:"David Allen",category:"Self-Improvement",size:61597,lessons:12,ai:12,funny:10},
+{id:"godel_escher_bach",title:"Gödel, Escher, Bach",author:"Douglas Hofstadter",category:"Science",size:59953,lessons:12,ai:0,funny:0},
+{id:"good_to_great",title:"Good to Great",author:"Jim Collins",category:"Business",size:70816,lessons:12,ai:0,funny:0},
+{id:"green_poems_gulzar",title:"Green Poems",author:"Gulzar",category:"Poetry — Gulzar",size:78704,lessons:10,ai:23,funny:23},
+{id:"grit",title:"Grit",author:"Angela Duckworth",category:"Psychology",size:50688,lessons:12,ai:13,funny:10},
+{id:"happiness_advantage",title:"The Happiness Advantage",author:"Shawn Achor",category:"Psychology",size:50525,lessons:12,ai:12,funny:10},
+{id:"hook_point",title:"Hook Point",author:"Brendan Kane",category:"Communication",size:61430,lessons:12,ai:15,funny:17},
+{id:"how_the_mind_works",title:"How the Mind Works",author:"Steven Pinker",category:"Science",size:104649,lessons:12,ai:28,funny:27},
+{id:"hungry_ghosts",title:"In the Realm of Hungry Ghosts",author:"Gabor Maté",category:"Psychology",size:65719,lessons:12,ai:12,funny:10},
+{id:"i_cant_make_this_up",title:"I Can't Make This Up",author:"Kevin Hart",category:"Comedy",size:88165,lessons:10,ai:20,funny:19},
+{id:"i_will_teach_you_to_be_rich",title:"I Will Teach You to Be Rich",author:"Ramit Sethi",category:"Business",size:77154,lessons:12,ai:16,funny:15},
+{id:"impro",title:"Impro",author:"Keith Johnstone",category:"Comedy",size:102789,lessons:12,ai:16,funny:16},
+{id:"incognito",title:"Incognito",author:"David Eagleman",category:"Science",size:83844,lessons:12,ai:0,funny:0},
+{id:"indistractable",title:"Indistractable",author:"Nir Eyal",category:"Self-Improvement",size:85310,lessons:12,ai:14,funny:14},
+{id:"influence",title:"Influence",author:"Robert Cialdini",category:"Psychology",size:55867,lessons:12,ai:0,funny:0},
+{id:"is_everyone_hanging_out",title:"Is Everyone Hanging Out Without Me?",author:"Mindy Kaling",category:"Comedy",size:42412,lessons:10,ai:1,funny:7},
+{id:"letters_from_a_stoic",title:"Letters from a Stoic",author:"Seneca",category:"Philosophy",size:82411,lessons:12,ai:0,funny:0},
+{id:"life_3_0",title:"Life 3.0",author:"Max Tegmark",category:"AI & Deep Learning",size:101870,lessons:12,ai:29,funny:13},
+{id:"lost_connections",title:"Lost Connections",author:"Johann Hari",category:"Psychology",size:60330,lessons:12,ai:12,funny:8},
+{id:"made_to_stick",title:"Made to Stick",author:"Chip & Dan Heath",category:"Communication",size:91074,lessons:12,ai:13,funny:9},
+{id:"mans_search_for_meaning",title:"Man's Search for Meaning",author:"Viktor Frankl",category:"Philosophy",size:57061,lessons:12,ai:0,funny:0},
+{id:"meditations",title:"Meditations",author:"Marcus Aurelius",category:"Philosophy",size:77148,lessons:12,ai:16,funny:16},
+{id:"mindset",title:"Mindset",author:"Carol Dweck",category:"Psychology",size:25439,lessons:12,ai:0,funny:0},
+{id:"mistakes_were_made",title:"Mistakes Were Made (But Not by Me)",author:"Carol Tavris & Elliot Aronson",category:"Psychology",size:70348,lessons:12,ai:2,funny:2},
+{id:"modern_romance",title:"Modern Romance",author:"Aziz Ansari & Eric Klinenberg",category:"Comedy",size:84281,lessons:12,ai:15,funny:15},
+{id:"naqsh_e_faryadi",title:"Naqsh-e-Faryadi",author:"Faiz Ahmed Faiz",category:"Poetry — Faiz",size:79512,lessons:10,ai:11,funny:10},
+{id:"neglected_poems_gulzar",title:"Neglected Poems",author:"Gulzar",category:"Poetry — Gulzar",size:104517,lessons:12,ai:27,funny:26},
+{id:"never_eat_alone",title:"Never Eat Alone",author:"Keith Ferrazzi",category:"Business",size:70713,lessons:11,ai:14,funny:14},
+{id:"never_split_the_difference",title:"Never Split the Difference",author:"Chris Voss",category:"Communication",size:51818,lessons:10,ai:11,funny:9},
+{id:"nudge",title:"Nudge",author:"Richard Thaler & Cass Sunstein",category:"Psychology",size:59799,lessons:12,ai:0,funny:0},
+{id:"on_writing",title:"On Writing",author:"Stephen King",category:"Writing",size:85500,lessons:12,ai:18,funny:17},
+{id:"on_writing_well",title:"On Writing Well",author:"William Zinsser",category:"Writing",size:92356,lessons:12,ai:27,funny:27},
+{id:"one_million_followers",title:"One Million Followers",author:"Brendan Kane",category:"Business",size:92785,lessons:11,ai:15,funny:14},
+{id:"opening_up",title:"Opening Up",author:"James W. Pennebaker",category:"Psychology",size:94500,lessons:12,ai:25,funny:25},
+{id:"phantoms_in_the_brain",title:"Phantoms in the Brain",author:"V.S. Ramachandran",category:"Science",size:85969,lessons:12,ai:0,funny:0},
+{id:"pluto_gulzar",title:"Pluto",author:"Gulzar",category:"Poetry — Gulzar",size:75876,lessons:10,ai:8,funny:8},
+{id:"poking_a_dead_frog",title:"Poking a Dead Frog",author:"Mike Sacks",category:"Comedy",size:86478,lessons:12,ai:27,funny:27},
+{id:"predictably_irrational",title:"Predictably Irrational",author:"Dan Ariely",category:"Psychology",size:62139,lessons:12,ai:0,funny:0},
+{id:"quiet",title:"Quiet",author:"Susan Cain",category:"Psychology",size:86285,lessons:10,ai:11,funny:12},
+{id:"range",title:"Range",author:"David Epstein",category:"Self-Improvement",size:94388,lessons:10,ai:1,funny:1},
+{id:"rebels_silhouette_faiz",title:"The Rebel's Silhouette",author:"Faiz Ahmed Faiz (tr. Agha Shahid Ali)",category:"Poetry — Faiz",size:106620,lessons:12,ai:22,funny:24},
+{id:"sapiens",title:"Sapiens",author:"Yuval Noah Harari",category:"Science",size:95600,lessons:12,ai:13,funny:13},
+{id:"save_the_cat",title:"Save the Cat!",author:"Blake Snyder",category:"Writing",size:61210,lessons:10,ai:1,funny:0},
+{id:"several_short_sentences",title:"Several Short Sentences About Writing",author:"Verlyn Klinkenborg",category:"Writing",size:83411,lessons:12,ai:27,funny:27},
+{id:"sham_e_sheher_faiz",title:"Sham-e-Sheher-e-Yaaran",author:"Faiz Ahmed Faiz",category:"Poetry — Faiz",size:96588,lessons:12,ai:23,funny:23},
+{id:"show_your_work",title:"Show Your Work!",author:"Austin Kleon",category:"Writing",size:62608,lessons:11,ai:13,funny:13},
+{id:"sick_in_the_head",title:"Sick in the Head",author:"Judd Apatow",category:"Comedy",size:82646,lessons:12,ai:17,funny:16},
+{id:"siddhartha",title:"Siddhartha",author:"Hermann Hesse",category:"Philosophy",size:55245,lessons:12,ai:0,funny:0},
+{id:"sophies_world",title:"Sophie's World",author:"Jostein Gaarder",category:"Philosophy",size:101532,lessons:10,ai:0,funny:0},
+{id:"steal_like_an_artist",title:"Steal Like an Artist",author:"Austin Kleon",category:"Writing",size:90717,lessons:12,ai:20,funny:11},
+{id:"step_by_step_standup",title:"Step by Step to Stand-Up Comedy",author:"Greg Dean",category:"Comedy",size:106884,lessons:12,ai:14,funny:14},
+{id:"story_mckee",title:"Story",author:"Robert McKee",category:"Writing",size:63238,lessons:12,ai:0,funny:6},
+{id:"storyworthy",title:"Storyworthy",author:"Matthew Dicks",category:"Communication",size:82636,lessons:12,ai:14,funny:14},
+{id:"stumbling_on_happiness",title:"Stumbling on Happiness",author:"Daniel Gilbert",category:"Psychology",size:25277,lessons:12,ai:0,funny:0},
+{id:"subliminal",title:"Subliminal",author:"Leonard Mlodinow",category:"Psychology",size:93860,lessons:12,ai:27,funny:27},
+{id:"superintelligence",title:"Superintelligence",author:"Nick Bostrom",category:"AI & Deep Learning",size:98772,lessons:12,ai:30,funny:4},
+{id:"suspected_poems_gulzar",title:"Suspected Poems",author:"Gulzar",category:"Poetry — Gulzar",size:89986,lessons:12,ai:26,funny:24},
+{id:"switch",title:"Switch",author:"Chip & Dan Heath",category:"Self-Improvement",size:99150,lessons:10,ai:10,funny:9},
+{id:"talk_like_ted",title:"Talk Like TED",author:"Carmine Gallo",category:"Communication",size:84000,lessons:12,ai:14,funny:14},
+{id:"the_7_habits",title:"The 7 Habits of Highly Effective People",author:"Stephen R. Covey",category:"Self-Improvement",size:57515,lessons:12,ai:0,funny:0},
+{id:"the_alchemist",title:"The Alchemist",author:"Paulo Coelho",category:"Philosophy",size:103442,lessons:12,ai:0,funny:0},
+{id:"the_art_of_war",title:"The Art of War",author:"Sun Tzu",category:"Philosophy",size:126921,lessons:12,ai:11,funny:9},
+{id:"the_artists_way",title:"The Artist's Way",author:"Julia Cameron",category:"Writing",size:76720,lessons:12,ai:27,funny:28},
+{id:"the_black_swan",title:"The Black Swan",author:"Nassim Nicholas Taleb",category:"Philosophy",size:23398,lessons:12,ai:0,funny:0},
+{id:"the_body_keeps_the_score",title:"The Body Keeps the Score",author:"Bessel van der Kolk",category:"Psychology",size:104547,lessons:12,ai:0,funny:0},
+{id:"the_brain_that_changes_itself",title:"The Brain That Changes Itself",author:"Norman Doidge",category:"Science",size:67670,lessons:12,ai:3,funny:0},
+{id:"the_comedians_nesteroff",title:"The Comedians",author:"Kliph Nesteroff",category:"Comedy",size:98207,lessons:12,ai:15,funny:27},
+{id:"the_happiness_hypothesis",title:"The Happiness Hypothesis",author:"Jonathan Haidt",category:"Psychology",size:96900,lessons:10,ai:0,funny:0},
+{id:"the_humor_code",title:"The Humor Code",author:"Peter McGraw & Joel Warner",category:"Comedy",size:108108,lessons:12,ai:16,funny:14},
+{id:"the_innovators_dilemma",title:"The Innovator's Dilemma",author:"Clayton Christensen",category:"Business",size:88073,lessons:12,ai:1,funny:1},
+{id:"the_lucifer_effect",title:"The Lucifer Effect",author:"Philip Zimbardo",category:"Psychology",size:89783,lessons:12,ai:0,funny:0},
+{id:"the_man_who_mistook_his_wife",title:"The Man Who Mistook His Wife for a Hat",author:"Oliver Sacks",category:"Science",size:63199,lessons:12,ai:0,funny:0},
+{id:"the_moth",title:"The Moth",author:"Catherine Burns (ed.)",category:"Communication",size:39647,lessons:10,ai:0,funny:0},
+{id:"the_myth_of_sisyphus",title:"The Myth of Sisyphus",author:"Albert Camus",category:"Philosophy",size:69140,lessons:10,ai:0,funny:0},
+{id:"the_paradox_of_choice",title:"The Paradox of Choice",author:"Barry Schwartz",category:"Psychology",size:76720,lessons:10,ai:0,funny:16},
+{id:"the_power_of_habit",title:"The Power of Habit",author:"Charles Duhigg",category:"Psychology",size:78912,lessons:12,ai:16,funny:13},
+{id:"the_righteous_mind",title:"The Righteous Mind",author:"Jonathan Haidt",category:"Psychology",size:98304,lessons:10,ai:21,funny:12},
+{id:"the_selfish_gene",title:"The Selfish Gene",author:"Richard Dawkins",category:"Science",size:103191,lessons:12,ai:27,funny:22},
+{id:"the_social_animal",title:"The Social Animal",author:"David Brooks",category:"Psychology",size:98034,lessons:12,ai:27,funny:27},
+{id:"the_tao_of_pooh",title:"The Tao of Pooh",author:"Benjamin Hoff",category:"Philosophy",size:48153,lessons:12,ai:0,funny:0},
+{id:"the_undoing_project",title:"The Undoing Project",author:"Michael Lewis",category:"Psychology",size:84424,lessons:10,ai:0,funny:0},
+{id:"the_war_of_art",title:"The War of Art",author:"Steven Pressfield",category:"Writing",size:95532,lessons:12,ai:15,funny:14},
+{id:"the_willpower_instinct",title:"The Willpower Instinct",author:"Kelly McGonigal",category:"Psychology",size:46740,lessons:10,ai:2,funny:2},
+{id:"thinking_fast_slow",title:"Thinking, Fast and Slow",author:"Daniel Kahneman",category:"Psychology",size:90513,lessons:12,ai:16,funny:15},
+{id:"thinking_in_bets",title:"Thinking in Bets",author:"Annie Duke",category:"Business",size:77984,lessons:12,ai:11,funny:4},
+{id:"tiny_habits",title:"Tiny Habits",author:"BJ Fogg",category:"Self-Improvement",size:58537,lessons:12,ai:12,funny:10},
+{id:"to_sell_is_human",title:"To Sell Is Human",author:"Daniel H. Pink",category:"Business",size:94673,lessons:12,ai:14,funny:14},
+{id:"triveni_gulzar",title:"Triveni",author:"Gulzar",category:"Poetry — Gulzar",size:94271,lessons:12,ai:15,funny:14},
+{id:"truth_in_comedy",title:"Truth in Comedy",author:"Del Close & Charna Halpern",category:"Comedy",size:113797,lessons:12,ai:0,funny:0},
+{id:"two_gulzar",title:"Two",author:"Gulzar",category:"Poetry — Gulzar",size:96408,lessons:12,ai:15,funny:14},
+{id:"when",title:"When: The Scientific Secrets of Perfect Timing",author:"Daniel H. Pink",category:"Self-Improvement",size:46742,lessons:12,ai:12,funny:10},
+{id:"when_breath_becomes_air",title:"When Breath Becomes Air",author:"Paul Kalanithi",category:"Philosophy",size:64494,lessons:10,ai:8,funny:0},
+{id:"why_we_sleep",title:"Why We Sleep",author:"Matthew Walker",category:"Science",size:60920,lessons:12,ai:12,funny:10},
+{id:"writing_down_the_bones",title:"Writing Down the Bones",author:"Natalie Goldberg",category:"Writing",size:86319,lessons:12,ai:27,funny:27},
+{id:"yearbook_rogen",title:"Yearbook",author:"Seth Rogen",category:"Comedy",size:83805,lessons:12,ai:27,funny:27},
+{id:"yes_please",title:"Yes Please",author:"Amy Poehler",category:"Comedy",size:79853,lessons:12,ai:14,funny:14},
+{id:"zero_to_one",title:"Zero to One",author:"Peter Thiel",category:"Business",size:70950,lessons:10,ai:14,funny:7},
+{id:"zindan_nama",title:"Zindan-Nama",author:"Faiz Ahmed Faiz",category:"Poetry — Faiz",size:62655,lessons:10,ai:12,funny:10}
+];
 
-        applyFilters() {
-            const cat = document.getElementById('filter-category').value;
-            const search = document.getElementById('search-input').value.toLowerCase().trim();
+const CAT = {
+  "Psychology":       {c:"#FF6B6B", e:"🧠"},
+  "Philosophy":       {c:"#8b5cf6", e:"🤔"},
+  "Science":          {c:"#16b8a6", e:"🔬"},
+  "Self-Improvement": {c:"#f59e0b", e:"💪"},
+  "Communication":    {c:"#3b82f6", e:"🗣️"},
+  "Business":         {c:"#10b981", e:"📈"},
+  "Comedy":           {c:"#eab308", e:"😂"},
+  "Writing":          {c:"#ec4899", e:"✍️"},
+  "AI & Deep Learning":{c:"#2563eb", e:"🤖"},
+  "Poetry — Gulzar":  {c:"#0d9488", e:"🌿"},
+  "Poetry — Faiz":    {c:"#e1604f", e:"🌹"}
+};
+const ORDER = ["Psychology","Comedy","Writing","Science","Philosophy","Self-Improvement","Poetry — Gulzar","Poetry — Faiz","AI & Deep Learning","Communication","Business"];
+const fileOf = b => `${b.id}_illustrated.html`;
+function darken(hex,f){const n=parseInt(hex.slice(1),16);let r=(n>>16)&255,g=(n>>8)&255,b=n&255;r=Math.round(r*f);g=Math.round(g*f);b=Math.round(b*f);return `rgb(${r},${g},${b})`;}
 
-            this.filteredData = this.rawData.filter(b => {
-                if (cat !== 'all' && b.category !== cat) return false;
-                if (search && !b.title.toLowerCase().includes(search) && !b.author.toLowerCase().includes(search)) return false;
-                return true;
-            });
-
-            this.renderKPIs();
-            this.updateCharts();
-            this.renderBooks();
-        }
-
-        // ---- KPIs ----
-        renderKPIs() {
-            const d = this.filteredData;
-            const totalBooks = d.length;
-            const totalSize = d.reduce((s, b) => s + b.size, 0);
-            const avgSize = totalSize / (totalBooks || 1);
-            const totalLessons = d.reduce((s, b) => s + b.lessons, 0);
-            const totalAI = d.reduce((s, b) => s + b.aiBoxes, 0);
-            const totalFunny = d.reduce((s, b) => s + b.funnyBoxes, 0);
-            const categories = new Set(d.map(b => b.category)).size;
-
-            const kpis = [
-                { icon: "📚", label: "Total Books", value: totalBooks, sub: `across ${categories} categories` },
-                { icon: "📖", label: "Total Lessons", value: totalLessons.toLocaleString(), sub: `~${Math.round(totalLessons / (totalBooks || 1))} per book` },
-                { icon: "🤖", label: "AI Connection Boxes", value: totalAI.toLocaleString(), sub: "bridging books → AI/ML" },
-                { icon: "😂", label: "Funny Take Boxes", value: totalFunny.toLocaleString(), sub: "humor in every guide" },
-                { icon: "📏", label: "Total Content", value: `${(totalSize / 1048576).toFixed(1)} MB`, sub: `avg ${(avgSize / 1024).toFixed(0)} KB per guide` },
-                { icon: "🏆", label: "Deepest Guide", value: "", sub: "" }
-            ];
-
-            // Find deepest
-            if (d.length > 0) {
-                const deepest = [...d].sort((a, b) => b.size - a.size)[0];
-                kpis[5].value = `${(deepest.size / 1024).toFixed(0)} KB`;
-                kpis[5].sub = deepest.title;
-            }
-
-            const container = document.getElementById('kpi-row');
-            container.innerHTML = kpis.map(k => `
-                <div class="kpi-card">
-                    <div class="kpi-icon">${k.icon}</div>
-                    <div class="kpi-label">${k.label}</div>
-                    <div class="kpi-value">${k.value}</div>
-                    <div class="kpi-sub">${k.sub}</div>
-                </div>
-            `).join('');
-        }
-
-        // ---- Charts ----
-        renderCharts() {
-            this.renderCategoryChart();
-            this.renderSizeChart();
-        }
-
-        renderCategoryChart() {
-            const counts = {};
-            CATEGORY_ORDER.forEach(c => counts[c] = 0);
-            this.filteredData.forEach(b => { counts[b.category] = (counts[b.category] || 0) + 1; });
-
-            const labels = CATEGORY_ORDER.filter(c => counts[c] > 0);
-            const data = labels.map(c => counts[c]);
-            const colors = labels.map(c => CAT_CONFIG[c].color + 'CC');
-            const borders = labels.map(c => CAT_CONFIG[c].color);
-
-            const ctx = document.getElementById('chart-categories').getContext('2d');
-            if (this.charts.categories) this.charts.categories.destroy();
-
-            this.charts.categories = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: labels,
-                    datasets: [{ data, backgroundColor: colors, borderColor: borders, borderWidth: 2 }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '55%',
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            labels: {
-                                color: '#e8e8f0',
-                                usePointStyle: true,
-                                padding: 12,
-                                font: { size: 11, family: 'Inter' }
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: ctx => {
-                                    const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                                    return ` ${ctx.label}: ${ctx.parsed} books (${((ctx.parsed/total)*100).toFixed(0)}%)`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        renderSizeChart() {
-            const sorted = [...this.filteredData].sort((a, b) => b.size - a.size).slice(0, 20);
-            const labels = sorted.map(b => b.title.length > 25 ? b.title.slice(0, 25) + '…' : b.title);
-            const data = sorted.map(b => Math.round(b.size / 1024));
-            const colors = sorted.map(b => (CAT_CONFIG[b.category]?.color || '#888') + 'CC');
-
-            const ctx = document.getElementById('chart-sizes').getContext('2d');
-            if (this.charts.sizes) this.charts.sizes.destroy();
-
-            this.charts.sizes = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels,
-                    datasets: [{ label: 'Size (KB)', data, backgroundColor: colors, borderRadius: 4 }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'y',
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: { label: ctx => ` ${ctx.parsed.x} KB` }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            grid: { color: 'rgba(255,255,255,0.05)' },
-                            ticks: { color: '#8888a8', font: { size: 11 }, callback: v => v + ' KB' }
-                        },
-                        y: {
-                            grid: { display: false },
-                            ticks: { color: '#e8e8f0', font: { size: 11, family: 'Inter' } }
-                        }
-                    }
-                }
-            });
-        }
-
-        updateCharts() {
-            try { this.renderCategoryChart(); } catch(e) {}
-            try { this.renderSizeChart(); } catch(e) {}
-        }
-
-        // ---- Views ----
-        setView(view) {
-            this.currentView = view;
-            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-' + view).classList.add('active');
-
-            document.getElementById('view-grid').classList.toggle('hidden', view !== 'grid');
-            document.getElementById('view-cluster').classList.toggle('hidden', view !== 'cluster');
-            document.getElementById('view-table').classList.toggle('hidden', view !== 'table');
-
-            this.renderBooks();
-        }
-
-        renderBooks() {
-            const d = this.getSortedData();
-            document.getElementById('results-count').textContent = `Showing ${d.length} of ${this.rawData.length} books`;
-
-            if (this.currentView === 'grid') this.renderGrid(d);
-            else if (this.currentView === 'cluster') this.renderClusters(d);
-            else this.renderTable(d);
-        }
-
-        getSortedData() {
-            const d = [...this.filteredData];
-            const col = this.sortCol;
-            const dir = this.sortDir === 'asc' ? 1 : -1;
-            return d.sort((a, b) => {
-                let av = a[col], bv = b[col];
-                if (typeof av === 'string') return av.localeCompare(bv) * dir;
-                return (av - bv) * dir;
-            });
-        }
-
-        sortBy(col) {
-            if (this.sortCol === col) this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';
-            else { this.sortCol = col; this.sortDir = col === 'title' || col === 'author' || col === 'category' ? 'asc' : 'desc'; }
-            this.renderBooks();
-        }
-
-        renderGrid(data) {
-            const container = document.getElementById('view-grid');
-            container.innerHTML = data.map(b => {
-                const cfg = CAT_CONFIG[b.category] || { color: '#888', css: 'psychology', emoji: '📖' };
-                return `
-                <div class="book-card" onclick="openDetail('${b.id}')">
-                    <div class="book-card-accent" style="background:${cfg.color}"></div>
-                    <div class="book-card-body">
-                        <span class="book-card-category cat-${cfg.css}">${cfg.emoji} ${b.category}</span>
-                        <div class="book-card-title">${b.title}</div>
-                        <div class="book-card-author">by ${b.author}</div>
-                        <div class="book-card-stats">
-                            <span class="book-stat"><span class="stat-icon">📖</span> <span class="stat-val">${b.lessons}</span> lessons</span>
-                            <span class="book-stat"><span class="stat-icon">🤖</span> <span class="stat-val">${b.aiBoxes}</span> AI</span>
-                            <span class="book-stat"><span class="stat-icon">😂</span> <span class="stat-val">${b.funnyBoxes}</span> funny</span>
-                            <span class="book-stat"><span class="stat-icon">📏</span> <span class="stat-val">${Math.round(b.size/1024)}</span> KB</span>
-                        </div>
-                    </div>
-                </div>`;
-            }).join('');
-        }
-
-        renderClusters(data) {
-            const container = document.getElementById('view-cluster');
-            const groups = {};
-            data.forEach(b => {
-                if (!groups[b.category]) groups[b.category] = [];
-                groups[b.category].push(b);
-            });
-
-            let html = '';
-            CATEGORY_ORDER.forEach(cat => {
-                if (!groups[cat] || groups[cat].length === 0) return;
-                const cfg = CAT_CONFIG[cat];
-                const books = groups[cat].sort((a, b) => b.size - a.size);
-                html += `
-                <div class="cluster-section">
-                    <div class="cluster-header">
-                        <div class="cluster-dot" style="background:${cfg.color}"></div>
-                        <div class="cluster-title">${cfg.emoji} ${cat}</div>
-                        <div class="cluster-count">${books.length} books</div>
-                    </div>
-                    <div class="book-grid">
-                        ${books.map(b => `
-                        <div class="book-card" onclick="openDetail('${b.id}')">
-                            <div class="book-card-accent" style="background:${cfg.color}"></div>
-                            <div class="book-card-body">
-                                <span class="book-card-category cat-${cfg.css}">${cfg.emoji} ${cat}</span>
-                                <div class="book-card-title">${b.title}</div>
-                                <div class="book-card-author">by ${b.author}</div>
-                                <div class="book-card-stats">
-                                    <span class="book-stat"><span class="stat-icon">📖</span> <span class="stat-val">${b.lessons}</span> lessons</span>
-                                    <span class="book-stat"><span class="stat-icon">🤖</span> <span class="stat-val">${b.aiBoxes}</span> AI</span>
-                                    <span class="book-stat"><span class="stat-icon">😂</span> <span class="stat-val">${b.funnyBoxes}</span> funny</span>
-                                    <span class="book-stat"><span class="stat-icon">📏</span> <span class="stat-val">${Math.round(b.size/1024)}</span> KB</span>
-                                </div>
-                            </div>
-                        </div>`).join('')}
-                    </div>
-                </div>`;
-            });
-
-            container.innerHTML = html;
-        }
-
-        renderTable(data) {
-            const maxSize = Math.max(...this.rawData.map(b => b.size));
-            const tbody = document.getElementById('table-body');
-            tbody.innerHTML = data.map(b => {
-                const cfg = CAT_CONFIG[b.category] || { color: '#888', css: 'psychology' };
-                const pct = (b.size / maxSize * 100).toFixed(0);
-                return `<tr onclick="openDetail('${b.id}')" style="cursor:pointer">
-                    <td class="title-cell" style="color:var(--text-on-dark)">${b.title}</td>
-                    <td style="color:var(--text-secondary)">${b.author}</td>
-                    <td><span class="cat-badge cat-${cfg.css}">${b.category}</span></td>
-                    <td>
-                        <div style="display:flex;align-items:center;gap:8px">
-                            <div class="size-bar" style="width:${pct}%;background:${cfg.color};max-width:120px"></div>
-                            <span style="color:var(--text-secondary);font-size:12px">${Math.round(b.size/1024)} KB</span>
-                        </div>
-                    </td>
-                    <td style="text-align:center;font-weight:600">${b.lessons}</td>
-                    <td style="text-align:center;font-weight:600;color:var(--deep-blue)">${b.aiBoxes}</td>
-                    <td style="text-align:center;font-weight:600;color:var(--sunny)">${b.funnyBoxes}</td>
-                </tr>`;
-            }).join('');
-        }
-    }
-
-    // ==================== INIT ====================
-    const dashboard = new Dashboard(BOOKS);
-
-    // ==================== INLINE READER ====================
-    let currentBookId = null;
-    let currentBookIndex = -1;
-
-    function openDetail(id) {
-        const idx = dashboard.filteredData.findIndex(x => x.id === id);
-        const b = BOOKS.find(x => x.id === id);
-        if (!b) return;
-        currentBookId = id;
-        currentBookIndex = idx;
-        const cfg = CAT_CONFIG[b.category] || { color: '#888', css: 'psychology', emoji: '📖' };
-
-        // Update toolbar
-        document.getElementById('reader-title').textContent = `${b.title} — ${b.author}`;
-        const catEl = document.getElementById('reader-cat');
-        catEl.className = `reader-cat-badge cat-${cfg.css}`;
-        catEl.textContent = `${cfg.emoji} ${b.category}`;
-
-        // Nav buttons
-        updateNavButtons();
-
-        // Load the book via fetch into the iframe using srcdoc
-        const frame = document.getElementById('reader-frame');
-        const loading = document.getElementById('reader-loading');
-        loading.classList.add('show');
-        frame.style.opacity = '0';
-
-        const url = `${b.id}_illustrated.html`;
-        frame.src = url;
-        frame.onload = () => {
-            loading.classList.remove('show');
-            frame.style.opacity = '1';
-        };
-        // Fallback timeout
-        setTimeout(() => {
-            loading.classList.remove('show');
-            frame.style.opacity = '1';
-        }, 3000);
-
-        document.getElementById('reader-overlay').classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeReader() {
-        document.getElementById('reader-overlay').classList.remove('open');
-        document.body.style.overflow = '';
-        const frame = document.getElementById('reader-frame');
-        frame.srcdoc = '';
-        frame.src = 'about:blank';
-        currentBookId = null;
-        currentBookIndex = -1;
-    }
-
-    function navigateBook(dir) {
-        const list = dashboard.filteredData;
-        const newIdx = currentBookIndex + dir;
-        if (newIdx < 0 || newIdx >= list.length) return;
-        openDetail(list[newIdx].id);
-    }
-
-    function updateNavButtons() {
-        const list = dashboard.filteredData;
-        document.getElementById('reader-prev').disabled = currentBookIndex <= 0;
-        document.getElementById('reader-next').disabled = currentBookIndex >= list.length - 1;
-    }
-
-    // Close on Escape
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closeReader();
-        if (e.key === 'ArrowLeft' && currentBookId) navigateBook(-1);
-        if (e.key === 'ArrowRight' && currentBookId) navigateBook(1);
+const App = {
+  view:'grid', cat:'all', sortCol:'title', sortDir:'asc', data:BOOKS.slice(), charts:{}, coverCache:{}, observer:null,
+  loadCache(){ try{ this.coverCache=JSON.parse(localStorage.getItem('bb_covers')||'{}'); }catch(e){ this.coverCache={}; } },
+  saveCache(){ try{ localStorage.setItem('bb_covers',JSON.stringify(this.coverCache)); }catch(e){} },
+  setCover(el,url){
+    const img=el.querySelector('.cover-img'); if(!img||img.src)return;
+    img.onload=()=>el.classList.add('has-img');
+    img.onerror=()=>{ el.classList.remove('has-img'); img.removeAttribute('src'); };
+    img.src=url;
+  },
+  loadCover(el){
+    const id=el.dataset.bookid; if(!id)return;
+    const b=BOOKS.find(x=>x.id===id); if(!b)return;
+    const c=this.coverCache;
+    if(c[id]==='none')return;
+    if(c[id]){ this.setCover(el,c[id]); return; }
+    if(b.category.indexOf('Poetry')===0){ c[id]='none'; this.saveCache(); return; }
+    const au=(b.author.split(/[,&(]/)[0]||'').trim();
+    const q=`https://openlibrary.org/search.json?title=${encodeURIComponent(b.title)}&author=${encodeURIComponent(au)}&limit=1&fields=cover_i`;
+    fetch(q).then(r=>r.json()).then(d=>{
+      const ci=d&&d.docs&&d.docs[0]&&d.docs[0].cover_i;
+      if(ci){ const url=`https://covers.openlibrary.org/b/id/${ci}-M.jpg`; c[id]=url; this.saveCache(); this.setCover(el,url); }
+      else { c[id]='none'; this.saveCache(); }
+    }).catch(()=>{});
+  },
+  observeCovers(){
+    if(!('IntersectionObserver' in window)){ document.querySelectorAll('.cover[data-bookid]').forEach(el=>this.loadCover(el)); return; }
+    if(this.observer)this.observer.disconnect();
+    this.observer=new IntersectionObserver((entries,obs)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ this.loadCover(e.target); obs.unobserve(e.target); } });
+    },{rootMargin:'300px'});
+    document.querySelectorAll('.cover[data-bookid]').forEach(el=>this.observer.observe(el));
+  },
+  init(){
+    this.loadCache();
+    this.renderChips(); this.renderStats(); this.apply();
+    document.getElementById('fcount').textContent = BOOKS.length;
+    document.addEventListener('keydown',e=>{
+      if(!document.getElementById('reader').classList.contains('open'))return;
+      if(e.key==='Escape')this.closeReader();
+      if(e.key==='ArrowLeft')this.navReader(-1);
+      if(e.key==='ArrowRight')this.navReader(1);
     });
-    </script>
+  },
+  renderChips(){
+    const el=document.getElementById('chips');
+    let html=`<div class="chip active" style="background:var(--ink)" data-cat="all" onclick="App.pickCat('all',this)">All <span class="ct">${BOOKS.length}</span></div>`;
+    ORDER.forEach(c=>{
+      const n=BOOKS.filter(b=>b.category===c).length; if(!n)return;
+      html+=`<div class="chip" style="color:${CAT[c].c}" data-cat="${c}" onclick="App.pickCat('${c.replace(/'/g,"\\'")}',this)">${CAT[c].e} ${c} <span class="ct">${n}</span></div>`;
+    });
+    el.innerHTML=html;
+  },
+  pickCat(c,node){
+    this.cat=c;
+    document.querySelectorAll('.chip').forEach(ch=>{ch.classList.remove('active');ch.style.background='';});
+    node.classList.add('active');
+    node.style.background = c==='all' ? 'var(--ink)' : CAT[c].c;
+    this.apply();
+  },
+  renderStats(){
+    const t=BOOKS.length, cats=new Set(BOOKS.map(b=>b.category)).size;
+    const lessons=BOOKS.reduce((s,b)=>s+b.lessons,0);
+    const ai=BOOKS.reduce((s,b)=>s+b.ai,0);
+    const funny=BOOKS.reduce((s,b)=>s+b.funny,0);
+    const mb=(BOOKS.reduce((s,b)=>s+b.size,0)/1048576).toFixed(1);
+    const S=[["📚",t,"Books",cats+" categories"],["📖",lessons.toLocaleString(),"Lessons","~"+Math.round(lessons/t)+" per book"],
+      ["🤖",ai.toLocaleString(),"AI links","book → ML ideas"],["😂",funny.toLocaleString(),"Funny takes","humor everywhere"],
+      ["✨",mb+" MB","Content","hand-built guides"],["🏆",ORDER.map(c=>[c,BOOKS.filter(b=>b.category===c).length]).sort((a,b)=>b[1]-a[1])[0][0].split(" — ")[0],"Biggest theme",""]];
+    document.getElementById('stats').innerHTML=S.map(s=>`<div class="stat"><div class="v">${s[1]}</div><div class="l">${s[2]}</div><div class="s">${s[3]}</div></div>`).join('');
+  },
+  apply(){
+    const q=document.getElementById('search').value.toLowerCase().trim();
+    this.sortCol=document.getElementById('sort').value;
+    let d=BOOKS.filter(b=>{
+      if(this.cat!=='all'&&b.category!==this.cat)return false;
+      if(q&&!(b.title.toLowerCase().includes(q)||b.author.toLowerCase().includes(q)||b.category.toLowerCase().includes(q)))return false;
+      return true;
+    });
+    d.sort((a,b)=>{
+      if(this.sortCol==='size')return b.size-a.size;
+      if(this.sortCol==='lessons')return b.lessons-a.lessons;
+      const x=(a[this.sortCol]||'').toString().toLowerCase(), y=(b[this.sortCol]||'').toString().toLowerCase();
+      return x<y?-1:x>y?1:0;
+    });
+    this.data=d;
+    document.getElementById('count').textContent=`${d.length} book${d.length!==1?'s':''}`;
+    document.getElementById('empty').style.display=d.length?'none':'block';
+    this.render();
+  },
+  setView(v){
+    this.view=v;
+    ['grid','cluster','table'].forEach(x=>{
+      document.getElementById(x).style.display = x===v?(x==='grid'?'grid':'block'):'none';
+      document.getElementById('v-'+x).classList.toggle('active',x===v);
+    });
+    this.render();
+  },
+  sortBy(col){document.getElementById('sort').value=['title','author','category','size','lessons'].includes(col)?col:'title';this.apply();},
+  coverHTML(b){
+    const cfg=CAT[b.category]||{c:'#888',e:'📘'};
+    const bg=`linear-gradient(150deg, ${cfg.c}, ${darken(cfg.c,0.62)})`;
+    return `<div class="cover" data-bookid="${b.id}" style="background:${bg}">
+      <img class="cover-img" alt="" loading="lazy">
+      <span class="cat-tag">${b.category}</span>
+      <span class="emoji">${cfg.e}</span>
+      <div class="ctitle">${b.title}</div>
+      <div class="cauthor">${b.author}</div>
+    </div>`;
+  },
+  cardHTML(b){
+    return `<button class="book" onclick="App.openReader('${b.id}')">
+      ${this.coverHTML(b)}
+      <div class="meta">
+        <div class="t"><span class="hl">${b.title}</span></div>
+        <div class="a">${b.author}</div>
+        <div class="mini"><span><b>${Math.round(b.size/1024)}</b>KB</span>${b.lessons?`<span><b>${b.lessons}</b> lessons</span>`:''}${b.ai?`<span>🤖 <b>${b.ai}</b></span>`:''}</div>
+      </div>
+    </button>`;
+  },
+  render(){
+    if(this.view==='grid'){
+      document.getElementById('grid').innerHTML=this.data.map(b=>this.cardHTML(b)).join('');
+    }else if(this.view==='cluster'){
+      let html='';
+      ORDER.forEach(c=>{
+        const items=this.data.filter(b=>b.category===c); if(!items.length)return;
+        html+=`<div class="cluster"><div class="cluster-h"><span class="cd" style="background:${CAT[c].c}"></span><h3>${CAT[c].e} ${c}</h3><span class="cc">${items.length} books</span></div><div class="grid">${items.map(b=>this.cardHTML(b)).join('')}</div></div>`;
+      });
+      document.getElementById('cluster').innerHTML=html;
+    }else{
+      document.getElementById('tbody').innerHTML=this.data.map(b=>{
+        const cfg=CAT[b.category]||{c:'#888'};
+        return `<tr onclick="App.openReader('${b.id}')">
+          <td class="tt">${b.title}</td><td>${b.author}</td>
+          <td><span class="badge" style="background:${cfg.c}22;color:${darken(cfg.c,0.8)}">${b.category}</span></td>
+          <td>${Math.round(b.size/1024)} KB</td><td>${b.lessons||'—'}</td></tr>`;
+      }).join('');
+    }
+    if(this.view!=='table')this.observeCovers();
+    if(document.querySelector('.analysis').open)this.renderCharts();
+  },
+  openReader(id){
+    const i=this.data.findIndex(b=>b.id===id);
+    this.readIdx = i>=0?i:0;
+    this.showRead();
+    document.getElementById('reader').classList.add('open');
+    document.body.style.overflow='hidden';
+  },
+  showRead(){
+    const b=this.data[this.readIdx];
+    document.getElementById('rframe').src=fileOf(b);
+    document.getElementById('rtitle').textContent=`${b.title} — ${b.author}`;
+    document.getElementById('rprev').disabled=this.readIdx<=0;
+    document.getElementById('rnext').disabled=this.readIdx>=this.data.length-1;
+  },
+  navReader(d){
+    const n=this.readIdx+d;
+    if(n<0||n>=this.data.length)return;
+    this.readIdx=n; this.showRead();
+  },
+  closeReader(){
+    document.getElementById('reader').classList.remove('open');
+    document.getElementById('rframe').src='about:blank';
+    document.body.style.overflow='';
+  },
+  renderCharts(){
+    if(typeof Chart==='undefined')return;
+    const counts={}; ORDER.forEach(c=>counts[c]=0);
+    BOOKS.forEach(b=>counts[b.category]++);
+    const labels=ORDER.filter(c=>counts[c]>0);
+    if(this.charts.cat)this.charts.cat.destroy();
+    this.charts.cat=new Chart(document.getElementById('catChart'),{type:'doughnut',
+      data:{labels,datasets:[{data:labels.map(c=>counts[c]),backgroundColor:labels.map(c=>CAT[c].c),borderColor:'#fff',borderWidth:2}]},
+      options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:11,family:'Inter'},color:'#5b6472'}}}}});
+    const top=[...BOOKS].sort((a,b)=>b.size-a.size).slice(0,15);
+    if(this.charts.size)this.charts.size.destroy();
+    this.charts.size=new Chart(document.getElementById('sizeChart'),{type:'bar',
+      data:{labels:top.map(b=>b.title.length>22?b.title.slice(0,22)+'…':b.title),
+        datasets:[{data:top.map(b=>Math.round(b.size/1024)),backgroundColor:top.map(b=>CAT[b.category].c),borderRadius:5}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+        scales:{x:{grid:{color:'#eef0f5'},ticks:{color:'#5b6472',font:{size:10}}},y:{grid:{display:false},ticks:{color:'#5b6472',font:{size:10}}}}}});
+  }
+};
+document.querySelector('.analysis').addEventListener('toggle',function(){if(this.open)App.renderCharts();});
+App.init();
+</script>
 </body>
 </html>

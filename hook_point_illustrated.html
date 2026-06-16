@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hook Point — Illustrated Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+:root{--coral:#FF6B6B;--teal:#4ECDC4;--sunny:#FFE66D;--purple:#A06CD5;--sky:#74B9FF;--mint:#55EFC4;--pink:#FD79A8;--orange:#FDCB6E;--dark:#2D3436;--cream:#FFEAA7;--deep-blue:#0984E3;--warm-red:#E17055;--forest:#00B894;--dark-purple:#6C5CE7;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#0f0f23;color:var(--dark);}
+.cover{min-height:100vh;background:linear-gradient(135deg,#0f0f23 0%,#1a1a3e 50%,#0f0f23 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:40px 20px;}
+.cover h1{font-family:'Playfair Display',serif;font-size:4.5rem;color:white;letter-spacing:-2px;text-align:center;position:relative;z-index:2;}
+.cover .author{font-size:1.3rem;color:var(--sunny);margin-top:8px;font-weight:600;z-index:2;}
+.cover .subtitle{font-size:1rem;color:rgba(255,255,255,0.6);margin-top:16px;z-index:2;text-align:center;max-width:500px;}
+.particle{position:absolute;border-radius:50%;opacity:0.15;animation:float 6s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0px) rotate(0deg);}50%{transform:translateY(-20px) rotate(180deg);}}
+.lesson{min-height:100vh;padding:60px 20px;display:flex;align-items:center;justify-content:center;}
+.lesson-inner{max-width:900px;width:100%;}
+.lesson-num{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-weight:800;font-size:1.2rem;color:white;margin-bottom:12px;}
+.lesson-title{font-family:'Playfair Display',serif;font-size:2.4rem;margin-bottom:8px;line-height:1.2;}
+.lesson-subtitle{font-size:1rem;opacity:0.7;margin-bottom:30px;}
+.card{background:white;border-radius:16px;padding:28px;margin-bottom:20px;box-shadow:0 4px 24px rgba(0,0,0,0.08);}
+.card-label{font-size:0.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.card p{font-size:0.95rem;line-height:1.7;color:#444;}
+.card ul{margin:12px 0 0 18px;}
+.card li{font-size:0.92rem;line-height:1.7;color:#444;margin-bottom:8px;}
+.quote-box{background:var(--dark);color:white;border-radius:16px;padding:24px 28px;margin-bottom:20px;}
+.quote-box .quote-text{font-style:italic;font-size:1rem;line-height:1.7;color:rgba(255,255,255,0.9);}
+.quote-box .quote-attr{color:var(--sunny);font-weight:600;font-size:0.85rem;margin-top:8px;}
+.connect-box{background:#e8f4fd;border-left:4px solid var(--deep-blue);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:20px;}
+.connect-box .connect-label{font-size:0.7rem;font-weight:700;color:var(--deep-blue);letter-spacing:1px;margin-bottom:6px;}
+.connect-box p{font-size:0.85rem;color:#555;line-height:1.6;}
+.ai-box{background:linear-gradient(135deg,#0984E3,#6C5CE7);color:white;border-radius:16px;padding:20px 24px;margin-bottom:20px;}
+.ai-box .ai-label{font-size:0.7rem;font-weight:700;letter-spacing:1.5px;color:var(--sunny);margin-bottom:6px;}
+.ai-box p{font-size:0.88rem;line-height:1.6;color:rgba(255,255,255,0.9);}
+.funny-box{background:#fff5f5;border-radius:16px;padding:20px 24px;margin-bottom:20px;border:2px dashed var(--coral);}
+.funny-box .funny-label{font-size:0.7rem;font-weight:700;color:var(--coral);letter-spacing:1px;margin-bottom:6px;}
+.funny-box p{font-size:0.9rem;line-height:1.6;color:#666;font-style:italic;}
+.story{min-height:100vh;padding:60px 20px;display:flex;align-items:center;justify-content:center;}
+.story-inner{max-width:900px;width:100%;}
+.cheatsheet{min-height:100vh;padding:60px 20px;background:linear-gradient(135deg,#0f0f23,#1a1a3e);display:flex;align-items:center;justify-content:center;}
+.cheatsheet-inner{max-width:900px;width:100%;}
+.cheatsheet h2{font-family:'Playfair Display',serif;font-size:2.5rem;color:white;text-align:center;margin-bottom:40px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:700px){.two-col{grid-template-columns:1fr;}}
+/* book-specific accents */
+.backlink{position:absolute;top:24px;left:24px;z-index:5;color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.85rem;font-weight:600;letter-spacing:0.5px;transition:color .2s;}
+.backlink:hover{color:var(--sunny);}
+.svg-wrap{background:white;border-radius:16px;padding:24px;margin-bottom:20px;box-shadow:0 4px 24px rgba(0,0,0,0.08);display:flex;justify-content:center;}
+.svg-wrap svg{max-width:100%;height:auto;}
+.story-inner .lesson-title{color:white;}
+.story-inner .lesson-subtitle{color:rgba(255,255,255,0.7);}
+.story.dark{background:linear-gradient(135deg,#1a1a3e,#0f0f23);}
+.cs-card{background:white;border-radius:14px;padding:20px 22px;}
+.cs-card h3{font-size:0.95rem;font-weight:800;margin-bottom:8px;color:var(--dark);}
+.cs-card p,.cs-card li{font-size:0.85rem;line-height:1.6;color:#555;}
+.cs-card ul{margin-left:16px;}
+.tag{display:inline-block;background:var(--sunny);color:var(--dark);font-size:0.7rem;font-weight:800;padding:3px 9px;border-radius:20px;letter-spacing:0.5px;margin-bottom:8px;}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+<a href="book_library_dashboard.html" class="backlink">&larr; Library</a>
+<!-- floating particles -->
+<div class="particle" style="width:80px;height:80px;background:var(--coral);top:12%;left:10%;"></div>
+<div class="particle" style="width:120px;height:120px;background:var(--teal);top:20%;right:8%;animation-delay:1.5s;"></div>
+<div class="particle" style="width:60px;height:60px;background:var(--sunny);bottom:18%;left:15%;animation-delay:2.5s;"></div>
+<div class="particle" style="width:100px;height:100px;background:var(--purple);bottom:12%;right:14%;animation-delay:1s;"></div>
+<div class="particle" style="width:40px;height:40px;background:var(--pink);top:45%;left:6%;animation-delay:3s;"></div>
+
+<!-- thematic SVG: phone with 3-second timer + a hook catching a scrolling thumb -->
+<svg width="220" height="220" viewBox="0 0 220 220" style="z-index:2;margin-bottom:24px;">
+  <rect x="55" y="20" width="110" height="180" rx="18" fill="#1a1a3e" stroke="#4ECDC4" stroke-width="3"/>
+  <rect x="64" y="34" width="92" height="152" rx="6" fill="#0f0f23"/>
+  <!-- countdown ring -->
+  <circle cx="110" cy="92" r="34" fill="none" stroke="#2D3436" stroke-width="8"/>
+  <circle cx="110" cy="92" r="34" fill="none" stroke="#FF6B6B" stroke-width="8" stroke-linecap="round"
+          stroke-dasharray="160 214" transform="rotate(-90 110 92)"/>
+  <text x="110" y="101" text-anchor="middle" font-family="Inter,sans-serif" font-size="26" font-weight="900" fill="#FFE66D">3s</text>
+  <!-- scrolling feed bars -->
+  <rect x="74" y="138" width="72" height="9" rx="4" fill="#4ECDC4" opacity="0.8"/>
+  <rect x="74" y="153" width="54" height="9" rx="4" fill="#A06CD5" opacity="0.7"/>
+  <rect x="74" y="168" width="64" height="9" rx="4" fill="#74B9FF" opacity="0.6"/>
+  <!-- the hook -->
+  <path d="M180 150 q22 -2 22 -26 q0 -20 -18 -20 q-14 0 -14 12" fill="none" stroke="#FFE66D" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="172" cy="146" r="4" fill="#FFE66D"/>
+  <!-- thumb being caught -->
+  <path d="M150 150 q-6 -14 6 -18 q10 -3 12 6 l2 12 q1 8 -8 9 z" fill="#FDCB6E" stroke="#E17055" stroke-width="2"/>
+</svg>
+
+<h1>Hook Point</h1>
+<div class="author">Brendan Kane</div>
+<div class="subtitle">How to Stand Out in a 3-Second World — a creator's illustrated field guide to winning the scroll, on Instagram, YouTube, and in the comedy of life.</div>
+</section>
+
+<!-- ============ LESSON 1 ============ -->
+<section class="lesson" style="background:#fff0f0;">
+<div class="lesson-inner">
+<div class="lesson-num" style="background:var(--coral);">1</div>
+<div class="lesson-title">You're Not Competing with Other Creators. You're Competing with the Thumb.</div>
+<div class="lesson-subtitle">The 3-second world and the scroll problem</div>
+
+<div class="svg-wrap">
+<svg width="520" height="200" viewBox="0 0 520 200">
+  <text x="20" y="34" font-family="Inter" font-size="13" font-weight="800" fill="#2D3436">~60 BILLION messages / day</text>
+  <rect x="20" y="44" width="480" height="14" rx="7" fill="#eee"/>
+  <rect x="20" y="44" width="470" height="14" rx="7" fill="#FF6B6B"/>
+  <text x="20" y="92" font-family="Inter" font-size="13" font-weight="800" fill="#2D3436">Your window to matter</text>
+  <rect x="20" y="102" width="480" height="14" rx="7" fill="#eee"/>
+  <rect x="20" y="102" width="24" height="14" rx="7" fill="#4ECDC4"/>
+  <text x="56" y="113" font-family="Inter" font-size="11" font-weight="700" fill="#4ECDC4">3 seconds</text>
+  <!-- scrolling thumb -->
+  <path d="M250 150 q-10 -22 10 -28 q16 -4 19 9 l3 19 q2 12 -12 14 z" fill="#FDCB6E" stroke="#E17055" stroke-width="2.5"/>
+  <path d="M255 175 l60 0" stroke="#A06CD5" stroke-width="3" stroke-dasharray="6 6" stroke-linecap="round"/>
+  <path d="M312 175 l-8 -5 m8 5 l-8 5" stroke="#A06CD5" stroke-width="3" stroke-linecap="round" fill="none"/>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 Key Lesson</div>
+<p>Kane's premise: with roughly <strong>60 billion messages sent across digital platforms every day</strong> and the average person hit with thousands of ads, your real opponent isn't the next creator — it's the half-second flick of a thumb. Facebook's own data showed users decide in about <strong>three seconds</strong> whether to keep watching. Concrete moves:</p>
+<ul>
+<li><strong>Front-load the payoff.</strong> A YouTube "How I lost 40 lbs" video that opens on the before/after photo beats one that opens with "Hey guys, welcome back."</li>
+<li><strong>Design for the muted autoplay.</strong> Instagram Reels start silent — your first frame and on-screen text are your hook, not your voiceover.</li>
+<li><strong>Earn the second 3 seconds.</strong> Kane's point isn't just the open; each beat has to re-hook so the thumb never leaves.</li>
+</ul>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>The human attention span is now shorter than a goldfish's, which is humbling because a goldfish has never once said "let me circle back on that." Your audience will give a stranger's cat 3 seconds and your heartfelt 4-minute monologue about your creative journey... also 3 seconds. The thumb is undefeated. The thumb fears nothing.</p>
+</div>
+
+<div class="ai-box">
+<div class="ai-label">🤖 AI Connection</div>
+<p>This is literally an <strong>attention mechanism</strong>. Transformers don't read every token equally — they assign weights to what's salient and let the rest decay. The feed algorithm is doing the same triage on your post: early signals (watch-time in the first seconds) get heavily weighted, and low-attention content gets its "softmax score" crushed before it ever reaches a wider audience.</p>
+</div>
+
+<div class="connect-box">
+<div class="connect-label">🔗 Cross-Book Connection</div>
+<p>Chip & Dan Heath's <em>Made to Stick</em> calls this "the curse of knowledge" — you over-explain context the viewer never asked for. Kane's 3-second rule is the antidote: lead with the idea, not the warm-up.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"With over sixty billion messages sent out on digital platforms each day, you likely have less than three seconds to stand out and capture your audience's attention."</div>
+<div class="quote-attr">— Brendan Kane, Hook Point</div>
+</div>
+</div>
+</section>
+
+<!-- ============ LESSON 2 ============ -->
+<section class="lesson" style="background:#f0fffd;">
+<div class="lesson-inner">
+<div class="lesson-num" style="background:var(--teal);">2</div>
+<div class="lesson-title">A Hook Point Is the One Idea That Makes Someone Stop, Not Scroll</div>
+<div class="lesson-subtitle">What a hook point actually is</div>
+
+<div class="svg-wrap">
+<svg width="420" height="190" viewBox="0 0 420 190">
+  <!-- fishing line -->
+  <path d="M210 10 L210 80" stroke="#74B9FF" stroke-width="3"/>
+  <!-- hook -->
+  <path d="M210 80 q0 40 -26 40 q-22 0 -22 -22 q0 -14 14 -14" fill="none" stroke="#FFE66D" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="176" cy="84" r="5" fill="#FFE66D"/>
+  <!-- idea lightbulb on hook -->
+  <circle cx="184" cy="120" r="22" fill="#FF6B6B"/>
+  <text x="184" y="127" text-anchor="middle" font-family="Inter" font-size="20" font-weight="900" fill="white">!</text>
+  <!-- curious fish -->
+  <g transform="translate(300,110)">
+    <ellipse cx="0" cy="0" rx="34" ry="20" fill="#4ECDC4"/>
+    <path d="M30 0 l22 -12 l0 24 z" fill="#4ECDC4"/>
+    <circle cx="-14" cy="-4" r="4" fill="#2D3436"/>
+  </g>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 Key Lesson</div>
+<p>A <strong>hook point</strong> is a single, succinct, surprising idea that pattern-interrupts the scroll and earns the next beat of attention. Kane notes it can <em>sometimes</em> be your tagline, USP, or mission statement — but only if that line actually makes a stranger stop. Examples of the genre:</p>
+<ul>
+<li><strong>A premise hook:</strong> "I gave $10,000 to whoever could stay in this circle the longest." The whole concept <em>is</em> the hook.</li>
+<li><strong>A contrarian hook:</strong> "Stop using a morning routine — here's why it's making you less productive."</li>
+<li><strong>A number/curiosity hook:</strong> "I tested every $1 item at the dollar store so you don't have to."</li>
+</ul>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>"Hey guys, so today I wanted to kind of talk about, um, a thing that's been on my mind" is not a hook point. That's a hostage situation where the hostage is the viewer's afternoon. A hook point is the difference between "I quit my job" and "I quit my job at 2pm on a Tuesday by faxing my boss a drawing of a horse." One of those, you keep watching.</p>
+</div>
+
+<div class="ai-box">
+<div class="ai-label">🤖 AI Connection</div>
+<p>Think of a hook point as a high-quality <strong>embedding</strong>: it compresses your whole message into one dense vector that lands close to "must click" in the audience's mental space. A vague hook embeds near everything and therefore near nothing — it's noise. A sharp hook is distinct, separable, and easy for both humans and the recommender to classify as "worth surfacing."</p>
+</div>
+
+<div class="connect-box">
+<div class="connect-label">🔗 Cross-Book Connection</div>
+<p>This is the social-feed cousin of <em>Made to Stick</em>'s "Simple" — find the core, lead with it. And it echoes Austin Kleon's <em>Show Your Work!</em>: you don't need to be a genius, you need one share-worthy idea per post.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"A Hook Point is a tool that helps you grab attention in a world that's saturated with content — a succinct, attention-grabbing way to package your message."</div>
+<div class="quote-attr">— Brendan Kane, Hook Point</div>
+</div>
+</div>
+</section>
+
+<!-- ============ LESSON 3 ============ -->
+<section class="lesson" style="background:#fdf0ff;">
+<div class="lesson-inner">
+<div class="lesson-num" style="background:var(--purple);">3</div>
+<div class="lesson-title">A Hook Gets the Click. A Gimmick Gets the Unfollow.</div>
+<div class="lesson-subtitle">Hook vs. gimmick — the payoff must be real</div>
+
+<div class="svg-wrap">
+<svg width="460" height="190" viewBox="0 0 460 190">
+  <!-- good hook -->
+  <g transform="translate(20,20)">
+    <rect width="180" height="150" rx="14" fill="#e8fff5" stroke="#00B894" stroke-width="2"/>
+    <text x="90" y="34" text-anchor="middle" font-family="Inter" font-size="13" font-weight="800" fill="#00B894">HOOK</text>
+    <text x="90" y="72" text-anchor="middle" font-family="Inter" font-size="11" fill="#2D3436">promise → delivered</text>
+    <path d="M50 100 l24 24 l50 -50" fill="none" stroke="#00B894" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <!-- gimmick -->
+  <g transform="translate(260,20)">
+    <rect width="180" height="150" rx="14" fill="#fff0f0" stroke="#FF6B6B" stroke-width="2"/>
+    <text x="90" y="34" text-anchor="middle" font-family="Inter" font-size="13" font-weight="800" fill="#FF6B6B">GIMMICK</text>
+    <text x="90" y="72" text-anchor="middle" font-family="Inter" font-size="11" fill="#2D3436">promise → nothing</text>
+    <path d="M60 95 l60 60 M120 95 l-60 60" stroke="#FF6B6B" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 Key Lesson</div>
+<p>Kane is blunt: a hook point is <strong>not clickbait</strong>. A hook makes a promise and then keeps it; a gimmick makes a promise and ghosts. The payoff has to be real — what Kane calls "branded utility," content that's genuinely useful or meaningful. The tell:</p>
+<ul>
+<li><strong>Gimmick:</strong> A thumbnail screaming "GONE WRONG!!!" over footage where nothing goes wrong. The algorithm sees the swipe-away and buries you.</li>
+<li><strong>Hook:</strong> Jeep's "Groundhog Day" Super Bowl spot with Bill Murray — surprising premise, and the brand actually fits the story, so the payoff lands.</li>
+<li><strong>Self-test:</strong> If a viewer finished and felt <em>tricked</em>, you built a gimmick. If they felt <em>rewarded</em>, you built a hook.</li>
+</ul>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>Clickbait is a one-night stand the algorithm remembers forever. Sure, you got the click — but now 8,000 people watched 4 seconds and left, and YouTube has quietly filed you under "do not promote." The bait worked. The relationship is over. You played yourself, and you did it at scale.</p>
+</div>
+
+<div class="ai-box">
+<div class="ai-label">🤖 AI Connection</div>
+<p>Recommender systems optimize for <strong>retention and downstream engagement</strong>, not raw clicks — exactly to defeat gimmicks. A title that over-promises spikes CTR but tanks average-view-duration and satisfaction signals, so the model learns to <em>suppress</em> it. It's reward-hacking the loss function for one step and getting penalized on every step after. Honest hooks are the policy that actually maximizes long-run reward.</p>
+</div>
+
+<div class="connect-box">
+<div class="connect-label">🔗 Cross-Book Connection</div>
+<p>Robert Cialdini's <em>Influence</em> warns that violated expectations destroy trust permanently. And <em>Contagious</em> by Jonah Berger shows that "Social Currency" only compounds when sharing your stuff makes people look good — a gimmick makes the sharer look gullible.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"A Hook Point is not clickbait. It's attached to an authentic and compelling story that provides value and builds trust and credibility."</div>
+<div class="quote-attr">— Brendan Kane, Hook Point</div>
+</div>
+</div>
+</section>
+
+<!-- ============ LESSON 4 ============ -->
+<section class="lesson" style="background:#f0f8ff;">
+<div class="lesson-inner">
+<div class="lesson-num" style="background:var(--sky);">4</div>
+<div class="lesson-title">Disrupt, Engage, Educate — In That Order</div>
+<div class="lesson-subtitle">Standardizing your message into a repeatable formula</div>
+
+<div class="svg-wrap">
+<svg width="500" height="150" viewBox="0 0 500 150">
+  <g font-family="Inter" font-weight="800" font-size="13" text-anchor="middle">
+    <circle cx="80" cy="60" r="44" fill="#FF6B6B"/>
+    <text x="80" y="58" fill="white">DISRUPT</text>
+    <text x="80" y="76" fill="white" font-size="10" font-weight="600">stop the scroll</text>
+    <circle cx="250" cy="60" r="44" fill="#A06CD5"/>
+    <text x="250" y="58" fill="white">ENGAGE</text>
+    <text x="250" y="76" fill="white" font-size="10" font-weight="600">hit emotion</text>
+    <circle cx="420" cy="60" r="44" fill="#00B894"/>
+    <text x="420" y="58" fill="white">EDUCATE</text>
+    <text x="420" y="76" fill="white" font-size="10" font-weight="600">deliver value</text>
+  </g>
+  <path d="M128 60 l70 0" stroke="#2D3436" stroke-width="3" marker-end="url(#a4)"/>
+  <path d="M298 60 l70 0" stroke="#2D3436" stroke-width="3" marker-end="url(#a4)"/>
+  <defs><marker id="a4" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0 0 l6 3 l-6 3" fill="#2D3436"/></marker></defs>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 Key Lesson</div>
+<p>Kane gives a repeatable structure so hooks aren't a fluke: <strong>Disrupt</strong> the pattern, <strong>Engage</strong> the emotion, <strong>Educate</strong> / deliver value. Standardizing your message means you can produce hooks on a schedule instead of waiting for inspiration. In practice:</p>
+<ul>
+<li><strong>Disrupt:</strong> open Reel on a frozen, weird frame — "Here's why I keep a brick in my fridge."</li>
+<li><strong>Engage:</strong> connect to a feeling — frustration, FOMO, "wait, am I doing this wrong?"</li>
+<li><strong>Educate:</strong> pay it off so they save, share, and come back. Build a content "engine," not one-off lottery tickets.</li>
+</ul>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>Most creators run the formula backwards: Educate (a 90-second intro on the history of the topic), then Engage (a guilt trip about subscribing), then finally Disrupt (their own audience, who left at second 4). Do it in the right order or you're just a very passionate person talking to a phone in an empty room — which, to be fair, is also most of comedy.</p>
+</div>
+
+<div class="ai-box">
+<div class="ai-label">🤖 AI Connection</div>
+<p>This is a <strong>prompt template</strong> for virality — a structured scaffold that turns a fuzzy goal ("go viral") into reliable, repeatable outputs. Just like few-shot prompting standardizes an LLM's behavior, Disrupt-Engage-Educate standardizes a human creative team's output and reduces variance. Consistency in, consistency out.</p>
+</div>
+
+<div class="connect-box">
+<div class="connect-label">🔗 Cross-Book Connection</div>
+<p><em>Made to Stick</em>'s SUCCESs checklist (Simple, Unexpected, Concrete...) is the same instinct: bottle the principles so anyone on the team can make sticky content. <em>One Million Followers</em> turns this into a literal production pipeline.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"Disrupt the audience's pattern, engage their emotions, and educate or provide value to keep them hooked."</div>
+<div class="quote-attr">— the Hook Point formula, per Brendan Kane</div>
+</div>
+</div>
+</section>
+
+<!-- ============ LESSON 5 ============ -->
+<section class="lesson" style="background:#fffdf0;">
+<div class="lesson-inner">
+<div class="lesson-num" style="background:var(--orange);">5</div>
+<div class="lesson-title">Decide HOW Before You Decide WHAT</div>
+<div class="lesson-subtitle">Format before story</div>
+
+<div class="svg-wrap">
+<svg width="460" height="170" viewBox="0 0 460 170">
+  <rect x="30" y="30" width="120" height="110" rx="12" fill="#FFE66D"/>
+  <text x="90" y="80" text-anchor="middle" font-family="Inter" font-size="14" font-weight="800" fill="#2D3436">FORMAT</text>
+  <text x="90" y="100" text-anchor="middle" font-family="Inter" font-size="10" fill="#2D3436">the vessel</text>
+  <path d="M160 85 l50 0" stroke="#2D3436" stroke-width="3" marker-end="url(#a5)"/>
+  <rect x="220" y="30" width="120" height="110" rx="12" fill="#74B9FF"/>
+  <text x="280" y="80" text-anchor="middle" font-family="Inter" font-size="14" font-weight="800" fill="white">STORY</text>
+  <text x="280" y="100" text-anchor="middle" font-family="Inter" font-size="10" fill="white">the cargo</text>
+  <path d="M350 85 l50 0" stroke="#2D3436" stroke-width="3" marker-end="url(#a5)"/>
+  <circle cx="430" cy="85" r="20" fill="#00B894"/>
+  <path d="M420 85 l7 7 l13 -15" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <defs><marker id="a5" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0 0 l6 3 l-6 3" fill="#2D3436"/></marker></defs>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 Key Lesson</div>
+<p>Kane argues you should choose the <strong>format that historically wins attention on a platform first</strong>, then pour your story into it. Format is the proven container; story is what you carry. Don't reinvent the vessel and the cargo at once. Examples:</p>
+<ul>
+<li><strong>Listicle / "ranking" format</strong> reliably performs — so "Ranking every coffee in my city" carries your personality inside a structure people already click.</li>
+<li><strong>"Day in the life" and "I tried X for 30 days"</strong> are formats with built-in hooks; you supply the unique angle.</li>
+<li><strong>Reaction / duet formats</strong> on TikTok and Reels borrow an existing attention magnet, then add your take.</li>
+</ul>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>You, an artist: "I refuse to do the trending format, I have integrity." Also you: posting a 7-minute experimental film to 11 views while your friend who filmed himself ranking gas station hot dogs has a verified checkmark and a brand deal with a mattress company. Integrity is great. Integrity inside a proven format is a career.</p>
+</div>
+
+<div class="ai-box">
+<div class="ai-label">🤖 AI Connection</div>
+<p>Format-before-story is <strong>transfer learning</strong>. The platform already trained millions of viewers (and the recommender) to engage with a known format — that's a pretrained base model. You don't fine-tune from scratch; you take the proven backbone and add a thin layer of your unique content on top. Cheaper, faster, and far more likely to converge.</p>
+</div>
+
+<div class="connect-box">
+<div class="connect-label">🔗 Cross-Book Connection</div>
+<p><em>Contagious</em>'s "Practical Value" and "Public" triggers explain why list and how-to formats spread. And <em>Steal the Show</em> by Michael Port: choose your "role" (the format/persona) before you walk on stage.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"You have to think about the format and how you package your content before you think about the story you want to tell."</div>
+<div class="quote-attr">— Brendan Kane, Hook Point</div>
+</div>
+</div>
+</section>
+
+<!-- ============ LESSON 6 ============ -->
+<section class="lesson" style="background:#f0fff5;">
+<div class="lesson-inner">
+<div class="lesson-num" style="background:var(--forest);">6</div>
+<div class="lesson-title">Your Gut Is a Terrible A/B Tester</div>
+<div class="lesson-subtitle">Testing and iterating hooks</div>
+
+<div class="svg-wrap">
+<svg width="460" height="180" viewBox="0 0 460 180">
+  <rect x="40" y="30" width="150" height="60" rx="10" fill="#FF6B6B"/>
+  <text x="115" y="58" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="white">Hook A</text>
+  <text x="115" y="76" text-anchor="middle" font-family="Inter" font-size="11" fill="white">CTR 2%</text>
+  <rect x="40" y="110" width="150" height="60" rx="10" fill="#00B894"/>
+  <text x="115" y="138" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="white">Hook B</text>
+  <text x="115" y="156" text-anchor="middle" font-family="Inter" font-size="11" fill="white">CTR 9% ✓</text>
+  <!-- bar chart -->
+  <g transform="translate(250,30)">
+    <rect x="0" y="90" width="30" height="50" fill="#FFE66D"/>
+    <rect x="45" y="40" width="30" height="100" fill="#74B9FF"/>
+    <rect x="90" y="10" width="30" height="130" fill="#A06CD5"/>
+    <rect x="135" y="65" width="30" height="75" fill="#FD79A8"/>
+    <line x1="-6" y1="140" x2="180" y2="140" stroke="#2D3436" stroke-width="2"/>
+  </g>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 Key Lesson</div>
+<p>Kane treats hooks as hypotheses to be <strong>tested, measured, and iterated</strong> — A/B and split testing, then read the data. The hook you love is rarely the hook that wins; the audience votes. Practical loop:</p>
+<ul>
+<li><strong>Test titles/thumbnails:</strong> YouTube's built-in A/B thumbnail test, or post the same video with 2–3 hooks and watch retention.</li>
+<li><strong>Watch the right metric:</strong> not vanity likes — swipe-away rate, average view duration, click-through on thumbnails.</li>
+<li><strong>Kill your darlings:</strong> drop the clever hook nobody clicks; double down on the "boring" one that quietly does 4x.</li>
+</ul>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>Every creator's most-viewed video is the one they filmed in 8 minutes wearing a stained shirt, while their masterpiece — color-graded, scripted, scored by a sad piano — sits at 47 views, 12 of them their mom. The algorithm has no respect for your suffering. It respects the data. The data is rude and it is correct.</p>
+</div>
+
+<div class="ai-box">
+<div class="ai-label">🤖 AI Connection</div>
+<p>This is the <strong>explore/exploit tradeoff</strong> and online experimentation, straight out of multi-armed bandits. Each hook is an "arm"; you pull a few to explore, then exploit the winner. It's also how RLHF works: generate variations, get a reward signal (engagement), reinforce what scores. Your channel is a slow, organic gradient descent toward "what your audience actually wants."</p>
+</div>
+
+<div class="connect-box">
+<div class="connect-label">🔗 Cross-Book Connection</div>
+<p><em>One Million Followers</em> is built entirely on this: Kane ran rapid paid tests to find winning hooks fast. <em>Show Your Work!</em> reframes the failures kindly — share the process, the misses are content too.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"Test, iterate, and refine. The market will tell you what works — your job is to listen and adapt quickly."</div>
+<div class="quote-attr">— paraphrasing Brendan Kane, Hook Point</div>
+</div>
+</div>
+</section>
+
+<!-- ============ STORY SPOTLIGHT 1 ============ -->
+<section class="story">
+<div class="story-inner">
+<span class="tag">Story Spotlight</span>
+<div class="lesson-title">One Million Followers in 30 Days</div>
+<div class="lesson-subtitle">How Brendan Kane turned himself into the experiment</div>
+
+<div class="svg-wrap">
+<svg width="520" height="200" viewBox="0 0 520 200">
+  <!-- rising curve -->
+  <polyline points="30,170 110,160 190,140 270,100 350,55 470,20" fill="none" stroke="#4ECDC4" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="470" cy="20" r="8" fill="#FFE66D"/>
+  <text x="470" y="14" text-anchor="middle" font-family="Inter" font-size="11" font-weight="800" fill="white">1M</text>
+  <line x1="30" y1="175" x2="490" y2="175" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <text x="30" y="195" font-family="Inter" font-size="11" fill="rgba(255,255,255,0.6)">Day 0</text>
+  <text x="440" y="195" font-family="Inter" font-size="11" fill="rgba(255,255,255,0.6)">Day 30</text>
+  <!-- test flasks -->
+  <g transform="translate(120,70)" opacity="0.9">
+    <path d="M0 0 l0 18 l-10 22 l30 0 l-10 -22 l0 -18 z" fill="#FD79A8"/>
+  </g>
+  <g transform="translate(230,40)" opacity="0.9">
+    <path d="M0 0 l0 18 l-10 22 l30 0 l-10 -22 l0 -18 z" fill="#A06CD5"/>
+  </g>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 The Story</div>
+<p>Before <em>Hook Point</em>, Kane wrote <em>One Million Followers</em> — and to prove his method, he made <strong>himself</strong> the case study. In 2018 he set out to generate a million real social followers in <strong>30 days</strong>, on a modest budget, by treating hooks like a scientist treats hypotheses. He ran fast, cheap tests across countries and creatives, killed the losers, scaled the winners, and crossed the million mark inside the month.</p>
+<p>The takeaway for a creator: you don't need to guess your way to growth. You need a <strong>system</strong> — test hooks rapidly, let real data pick the winners, and pour fuel on what's already catching fire. The followers were real; the method was repeatable. That repeatability is the whole thesis he later distilled into <em>Hook Point</em>.</p>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>Most of us would spend 30 days "building toward launch" by buying a ring light, two domain names, and a planner we'll never open. Kane spent 30 days actually testing and ended up with a million followers and a book deal. The lesson is painful: the planner is procrastination cosplaying as preparation.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"I built a massive social following in 30 days — not with luck, but with a repeatable, testable process anyone can learn."</div>
+<div class="quote-attr">— Brendan Kane, One Million Followers</div>
+</div>
+</div>
+</section>
+
+<!-- ============ LESSON 7 ============ -->
+<section class="lesson" style="background:#fff0f8;">
+<div class="lesson-inner">
+<div class="lesson-num" style="background:var(--pink);">7</div>
+<div class="lesson-title">The Package Is the Product (Until They Open It)</div>
+<div class="lesson-subtitle">Packaging: headlines, thumbnails, titles</div>
+
+<div class="svg-wrap">
+<svg width="460" height="180" viewBox="0 0 460 180">
+  <!-- thumbnail frame -->
+  <rect x="30" y="30" width="200" height="115" rx="10" fill="#2D3436"/>
+  <circle cx="80" cy="88" r="26" fill="#FDCB6E"/>
+  <path d="M72 88 l0 -16 l16 8 z" fill="#2D3436"/>
+  <rect x="120" y="60" width="90" height="14" rx="5" fill="#FF6B6B"/>
+  <rect x="120" y="82" width="70" height="12" rx="5" fill="#FFE66D"/>
+  <text x="130" y="120" font-family="Inter" font-size="11" font-weight="800" fill="white">CLICK-WORTHY</text>
+  <!-- big arrow -->
+  <path d="M250 88 l40 0" stroke="#2D3436" stroke-width="4" marker-end="url(#a7)"/>
+  <!-- emotion face -->
+  <circle cx="360" cy="88" r="50" fill="#A06CD5"/>
+  <circle cx="345" cy="78" r="6" fill="white"/>
+  <circle cx="378" cy="78" r="6" fill="white"/>
+  <path d="M338 102 q22 22 44 0" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <defs><marker id="a7" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0 0 l6 3 l-6 3" fill="#2D3436"/></marker></defs>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 Key Lesson</div>
+<p>Kane stresses that finding a great hook is only half the job — <strong>packaging and selling it</strong> in the feed is the new challenge. Thumbnails, titles, and first lines ARE the hook for most viewers; they decide before they ever press play. Tactics:</p>
+<ul>
+<li><strong>One emotion per thumbnail.</strong> A single clear face/expression beats a cluttered collage — the eye parses it in well under a second.</li>
+<li><strong>Title and thumbnail shouldn't repeat each other</strong> — they should combine into one bigger idea (the "1+1=3" packaging move many top YouTubers use).</li>
+<li><strong>Lead Reels/TikToks with on-screen text</strong> that states the promise in the silent first frame.</li>
+</ul>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>You can spend 40 hours editing a documentary and 4 minutes on the thumbnail, and the universe will judge you entirely on those 4 minutes. It's like writing a brilliant novel and printing it with a cover that says "book, probably good, idk." Nobody opens "book, probably good." They open the one with the shocked face and the red arrow pointing at nothing.</p>
+</div>
+
+<div class="ai-box">
+<div class="ai-label">🤖 AI Connection</div>
+<p>Packaging is your content's <strong>metadata and feature representation</strong> — the part the ranking model "sees" first. A great video with bad packaging is a great example with garbage features: the classifier can't tell it apart from junk, so it never gets surfaced. In ML terms, you can have high-quality data and still lose to poor feature engineering.</p>
+</div>
+
+<div class="connect-box">
+<div class="connect-label">🔗 Cross-Book Connection</div>
+<p><em>Made to Stick</em>'s "Unexpected" is the engine behind a great title; <em>Contagious</em>'s "Emotion" (high-arousal: awe, anger, amusement) is what a strong thumbnail face triggers. <em>Steal the Show</em>: your opening line is your stage entrance.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"Finding the perfect hook point has always been a challenge, but packaging and selling that hook point in today's fast-paced digital landscape is a new one."</div>
+<div class="quote-attr">— Brendan Kane, Hook Point</div>
+</div>
+</div>
+</section>
+
+<!-- ============ LESSON 8 ============ -->
+<section class="lesson" style="background:#f3f0ff;">
+<div class="lesson-inner">
+<div class="lesson-num" style="background:var(--dark-purple);">8</div>
+<div class="lesson-title">Specific Beats Clever. Curiosity Beats Complete.</div>
+<div class="lesson-subtitle">Specificity and the curiosity gap</div>
+
+<div class="svg-wrap">
+<svg width="460" height="170" viewBox="0 0 460 170">
+  <!-- vague -->
+  <rect x="30" y="40" width="180" height="44" rx="22" fill="#eee"/>
+  <text x="120" y="67" text-anchor="middle" font-family="Inter" font-size="12" fill="#999">"Tips to grow online"</text>
+  <text x="120" y="100" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#FF6B6B">😴 ignored</text>
+  <!-- specific -->
+  <rect x="240" y="40" width="190" height="44" rx="22" fill="#FFE66D"/>
+  <text x="335" y="61" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#2D3436">"The 1 caption that got</text>
+  <text x="335" y="76" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#2D3436">me 12k followers"</text>
+  <text x="335" y="105" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#00B894">👀 click</text>
+  <!-- curiosity gap -->
+  <text x="230" y="145" text-anchor="middle" font-family="Inter" font-size="12" font-weight="800" fill="#A06CD5">open a loop the brain HAS to close</text>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 Key Lesson</div>
+<p>Kane lists the killers of weak hooks: <strong>too wordy, vague, clichéd, or irrelevant</strong>. The fixes are specificity and a curiosity gap — an open loop the brain feels compelled to close. Concrete swaps:</p>
+<ul>
+<li>"How to be more productive" → <strong>"The 2-minute rule that cleared my 200-email inbox."</strong></li>
+<li>"My morning routine" → <strong>"The 5am habit I quit that doubled my output."</strong> (curiosity gap: which habit?)</li>
+<li>Specific numbers, named tools, exact outcomes — specificity reads as <em>credible</em>; vagueness reads as <em>spam</em>.</li>
+</ul>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>"You won't BELIEVE what happened next" — I will, actually. I've seen the internet. Nothing happens next. A curiosity gap only works if there's something on the other side of it. Otherwise you've just built a beautiful door that opens onto a brick wall and a sad little "thanks for watching" card.</p>
+</div>
+
+<div class="ai-box">
+<div class="ai-label">🤖 AI Connection</div>
+<p>Specificity is <strong>signal vs. noise</strong>. A vague hook has high entropy — it could mean anything, so it carries almost no information and the model can't distinguish it. A specific hook is low-entropy and high-information: it predicts exactly who will engage. Curiosity gaps exploit <strong>predictive coding</strong> — the brain hates an unresolved prediction error and will click to resolve it.</p>
+</div>
+
+<div class="connect-box">
+<div class="connect-label">🔗 Cross-Book Connection</div>
+<p>This is <em>Made to Stick</em>'s "Concrete" plus the Heaths' explicit "gap theory of curiosity." <em>Influence</em>'s commitment principle also kicks in: once a loop is open, you've made a tiny commitment to closing it.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"Ineffective hooks tend to be too wordy, confusing, vague, full of clichés, or simply irrelevant to the audience."</div>
+<div class="quote-attr">— Brendan Kane, Hook Point</div>
+</div>
+</div>
+</section>
+
+<!-- ============ LESSON 9 ============ -->
+<section class="lesson" style="background:#fffaf0;">
+<div class="lesson-inner">
+<div class="lesson-num" style="background:var(--warm-red);">9</div>
+<div class="lesson-title">Borrow Authority Until You Build Your Own</div>
+<div class="lesson-subtitle">Credibility and authority hooks</div>
+
+<div class="svg-wrap">
+<svg width="440" height="170" viewBox="0 0 440 170">
+  <!-- badge -->
+  <circle cx="100" cy="85" r="50" fill="#FDCB6E"/>
+  <path d="M100 50 l8 22 l24 0 l-19 14 l7 23 l-20 -14 l-20 14 l7 -23 l-19 -14 l24 0 z" fill="#2D3436"/>
+  <!-- ladder of proof -->
+  <g transform="translate(210,30)">
+    <rect width="190" height="22" rx="6" fill="#74B9FF"/><text x="10" y="16" font-family="Inter" font-size="11" font-weight="700" fill="white">Named results &amp; numbers</text>
+    <rect y="34" width="190" height="22" rx="6" fill="#A06CD5"/><text x="10" y="50" font-family="Inter" font-size="11" font-weight="700" fill="white">Recognizable clients</text>
+    <rect y="68" width="190" height="22" rx="6" fill="#FD79A8"/><text x="10" y="84" font-family="Inter" font-size="11" font-weight="700" fill="white">Social proof / testimonials</text>
+    <rect y="102" width="190" height="22" rx="6" fill="#00B894"/><text x="10" y="118" font-family="Inter" font-size="11" font-weight="700" fill="white">Your own track record</text>
+  </g>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 Key Lesson</div>
+<p>Kane notes that <strong>authenticity, trust, and credibility</strong> make a hook <em>stick</em> — people bite because they trust you'll deliver. He routinely opens with borrowed authority: he's overseen <strong>$200M+ in marketing spend</strong> and built platforms for <strong>Taylor Swift, Rihanna, and Adriana Lima</strong>, advising <strong>MTV, Vice, IKEA, and Skechers</strong>. For a smaller creator:</p>
+<ul>
+<li><strong>Lead with the proof you have:</strong> "The post that hit 1M views taught me this," not "I think maybe..."</li>
+<li><strong>Borrow credibility honestly:</strong> "I studied 100 viral Reels and here's the pattern" — research as authority.</li>
+<li><strong>Specific receipts beat adjectives:</strong> "grew to 50k in 6 months" outperforms "expert content creator."</li>
+</ul>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>"As a thought leader and visionary in the space" — said the man with 340 followers, 11 of whom are bots advertising crypto. Credibility you announce is the credibility you don't have. Just say the true specific thing. "I made one video that did 2 million views and I have absolutely no idea why" is more authoritative than any LinkedIn bio ever written.</p>
+</div>
+
+<div class="ai-box">
+<div class="ai-label">🤖 AI Connection</div>
+<p>Authority hooks are <strong>RAG with a trusted source</strong>: grounding your claim in verifiable evidence (real numbers, named clients) raises the audience's "confidence score" just like retrieval grounding reduces an LLM's hallucination. Unsupported flexing is an ungrounded generation — fluent, confident, and immediately distrusted once anyone checks.</p>
+</div>
+
+<div class="connect-box">
+<div class="connect-label">🔗 Cross-Book Connection</div>
+<p>Pure Cialdini: <em>Influence</em>'s "Authority" and "Social Proof" principles in action. <em>Show Your Work!</em> offers the indie path — you build authority by documenting the work publicly until the receipts accumulate.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"People will bite on your hook because they trust your brand to mean what they say. Authenticity, trust, and credibility go a long way."</div>
+<div class="quote-attr">— Brendan Kane, Hook Point</div>
+</div>
+</div>
+</section>
+
+<!-- ============ LESSON 10 ============ -->
+<section class="lesson" style="background:#f0fbff;">
+<div class="lesson-inner">
+<div class="lesson-num" style="background:var(--deep-blue);">10</div>
+<div class="lesson-title">The Hook Buys the Time. The Story Earns the Follow.</div>
+<div class="lesson-subtitle">Storytelling after the hook</div>
+
+<div class="svg-wrap">
+<svg width="480" height="160" viewBox="0 0 480 160">
+  <!-- hook flag at start -->
+  <line x1="40" y1="30" x2="40" y2="130" stroke="#2D3436" stroke-width="3"/>
+  <path d="M40 30 l44 0 l-10 12 l10 12 l-44 0 z" fill="#FF6B6B"/>
+  <text x="46" y="48" font-family="Inter" font-size="10" font-weight="800" fill="white">HOOK</text>
+  <!-- story wave -->
+  <path d="M40 110 q60 -70 120 0 t120 0 t120 0" fill="none" stroke="#4ECDC4" stroke-width="5"/>
+  <!-- payoff -->
+  <circle cx="440" cy="60" r="18" fill="#00B894"/>
+  <path d="M431 60 l6 7 l12 -14" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <text x="400" y="100" font-family="Inter" font-size="10" font-weight="700" fill="#2D3436">payoff &amp; follow</text>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 Key Lesson</div>
+<p>The hook is a loan of attention — <strong>the story repays it</strong>. Kane ties hooks to "authentic and compelling stories that provide value." A killer open with no story is a firework: bright, then gone. Structure:</p>
+<ul>
+<li><strong>Hook → stakes → turn → payoff.</strong> "I tried to learn guitar in 30 days" (hook), then the struggle, the breakthrough, the playable song (payoff).</li>
+<li><strong>Re-hook every beat:</strong> tease what's coming ("but then it completely backfired...") so retention holds.</li>
+<li><strong>End with a reason to follow:</strong> a clear next chapter, not just "like and subscribe."</li>
+</ul>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>A hook with no story is a person who walks into a party, shouts "I ALMOST DIED LAST WEEK," and then immediately starts talking about parking. Sir. SIR. You opened a loop. There are 30 of us emotionally invested now. You cannot pivot to parking. The story is the rent you pay for the attention you took.</p>
+</div>
+
+<div class="ai-box">
+<div class="ai-label">🤖 AI Connection</div>
+<p>Narrative is <strong>sequence modeling</strong>: each beat conditions the audience's expectation of the next, exactly like an autoregressive model predicting the next token. A good story keeps <strong>perplexity</strong> in the sweet spot — predictable enough to follow, surprising enough to stay engaged. Pure randomness loses them; pure predictability bores them.</p>
+</div>
+
+<div class="connect-box">
+<div class="connect-label">🔗 Cross-Book Connection</div>
+<p><em>Made to Stick</em>'s final S is "Stories." <em>Contagious</em>'s "Stories" principle: people share narratives, not facts, so build a "Trojan Horse" story that carries your message. <em>Steal the Show</em>: structure every talk as a story arc.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"A Hook Point grabs attention — but it's attached to an authentic and compelling story that provides value and builds trust."</div>
+<div class="quote-attr">— Brendan Kane, Hook Point</div>
+</div>
+</div>
+</section>
+
+<!-- ============ STORY SPOTLIGHT 2 ============ -->
+<section class="story dark">
+<div class="story-inner">
+<span class="tag">Story Spotlight</span>
+<div class="lesson-title">Jeep, Bill Murray, and the Hook That Earned Its Brand</div>
+<div class="lesson-subtitle">Why "Groundhog Day" is branded utility done right</div>
+
+<div class="svg-wrap">
+<svg width="500" height="190" viewBox="0 0 500 190">
+  <!-- loop arrow (groundhog day) -->
+  <circle cx="120" cy="95" r="58" fill="none" stroke="#FFE66D" stroke-width="8" stroke-dasharray="300 60"/>
+  <path d="M120 37 l-12 -10 l0 20 z" fill="#FFE66D"/>
+  <text x="120" y="100" text-anchor="middle" font-family="Inter" font-size="13" font-weight="800" fill="white">repeat</text>
+  <!-- jeep block -->
+  <g transform="translate(250,55)">
+    <rect width="100" height="48" rx="8" fill="#00B894"/>
+    <circle cx="26" cy="58" r="14" fill="#2D3436"/>
+    <circle cx="74" cy="58" r="14" fill="#2D3436"/>
+    <text x="50" y="30" text-anchor="middle" font-family="Inter" font-size="14" font-weight="900" fill="white">JEEP</text>
+  </g>
+  <text x="300" y="150" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="rgba(255,255,255,0.85)">surprise + relevance = payoff</text>
+  <!-- happy face -->
+  <circle cx="440" cy="80" r="34" fill="#FD79A8"/>
+  <circle cx="430" cy="72" r="4" fill="white"/><circle cx="450" cy="72" r="4" fill="white"/>
+  <path d="M426 90 q14 14 28 0" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 The Story</div>
+<p>Kane points to Jeep's <strong>"Groundhog Day" Super Bowl spot</strong> with Bill Murray as a model of a hook that delivers. The hook is the surprise premise — Murray reliving the famous movie loop — which stops you cold. But it doesn't stay a gimmick: every loop he takes the Jeep out for an adventure, so by the end the viewer <strong>understands exactly why Jeep belongs in the story.</strong></p>
+<p>That's what Kane calls <strong>branded utility</strong>: the brand isn't bolted on, it's the reason the joy in the ad is possible. Surprise earns the stop; relevance earns the trust. For creators the lesson scales down: your sponsor, your product, your CTA should feel like a natural part of the story you already wanted to tell — not a toll booth jammed into the middle of it.</p>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>Most sponsored content is a heartfelt story that screeches to a halt so someone can read a script about a meal kit like a hostage blinking in Morse code. Jeep's flex was making you forget it was an ad until you actively wanted the car. That's the dream: an ad so good you're mad it ended. Meanwhile your favorite YouTuber is whispering "...and that's why I trust this VPN" while visibly dying inside.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"Branded content has to demonstrate how a brand can be useful or meaningful in a consumer's life — the brand earns its place in the story."</div>
+<div class="quote-attr">— on the principle of branded utility, Hook Point</div>
+</div>
+</div>
+</section>
+
+<!-- ============ LESSON 11 ============ -->
+<section class="lesson" style="background:#fff5f0;">
+<div class="lesson-inner">
+<div class="lesson-num" style="background:var(--coral);">11</div>
+<div class="lesson-title">Every Platform Speaks a Different Hook Dialect</div>
+<div class="lesson-subtitle">Platform-specific hooks: Reels, YouTube, TikTok</div>
+
+<div class="svg-wrap">
+<svg width="500" height="160" viewBox="0 0 500 160">
+  <g font-family="Inter" text-anchor="middle">
+    <rect x="20" y="30" width="140" height="100" rx="14" fill="#FD79A8"/>
+    <text x="90" y="60" font-size="13" font-weight="800" fill="white">INSTAGRAM</text>
+    <text x="90" y="84" font-size="10" fill="white">silent first frame</text>
+    <text x="90" y="100" font-size="10" fill="white">on-screen text</text>
+    <text x="90" y="116" font-size="10" fill="white">loop-able</text>
+    <rect x="180" y="30" width="140" height="100" rx="14" fill="#FF6B6B"/>
+    <text x="250" y="60" font-size="13" font-weight="800" fill="white">YOUTUBE</text>
+    <text x="250" y="84" font-size="10" fill="white">title + thumbnail</text>
+    <text x="250" y="100" font-size="10" fill="white">first 15 seconds</text>
+    <text x="250" y="116" font-size="10" fill="white">searchable</text>
+    <rect x="340" y="30" width="140" height="100" rx="14" fill="#2D3436"/>
+    <text x="410" y="60" font-size="13" font-weight="800" fill="white">TIKTOK</text>
+    <text x="410" y="84" font-size="10" fill="white">first 1-2 seconds</text>
+    <text x="410" y="100" font-size="10" fill="white">trends + sounds</text>
+    <text x="410" y="116" font-size="10" fill="white">native, raw</text>
+  </g>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 Key Lesson</div>
+<p>Kane stresses tailoring hooks per platform — what stops a thumb differs by feed. Same idea, different hook dialect:</p>
+<ul>
+<li><strong>Instagram Reels:</strong> autoplay is muted, so the hook lives in the <em>first frame + on-screen text</em>. Design loop-able content so it replays into a higher view count.</li>
+<li><strong>YouTube:</strong> the hook is the <em>title + thumbnail combo</em> (decided before the click), then the first ~15 seconds. It's also a <em>search engine</em> — front-load the keyword.</li>
+<li><strong>TikTok:</strong> the open is brutal — <em>first 1–2 seconds</em>, native/raw look, riding a trending sound or format as a borrowed hook.</li>
+</ul>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>Posting the exact same vertical video to all three platforms with the TikTok watermark still on it is the digital equivalent of showing up to three different weddings in the same gravy-stained shirt. Instagram can SEE the watermark. It's judging you. It will quietly show your masterpiece to four people, one of whom is you, checking if it posted.</p>
+</div>
+
+<div class="ai-box">
+<div class="ai-label">🤖 AI Connection</div>
+<p>Each platform is a different <strong>model with different training data and a different objective function</strong>. YouTube optimizes long watch-time; TikTok optimizes fast completion + rewatch; Reels weighs sends/saves. Cross-posting blindly is like serving one prompt to three models and expecting identical results — you have to adapt the input to each system's reward.</p>
+</div>
+
+<div class="connect-box">
+<div class="connect-label">🔗 Cross-Book Connection</div>
+<p><em>One Million Followers</em> dives deep into per-platform mechanics. <em>Contagious</em>'s "Public" trigger explains why platform-native formats spread — built to imitate, visibly.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"You need to tailor your Hook Points to each platform — Facebook, Instagram, YouTube, and beyond each demand a different approach."</div>
+<div class="quote-attr">— Brendan Kane, Hook Point</div>
+</div>
+</div>
+</section>
+
+<!-- ============ LESSON 12 ============ -->
+<section class="lesson" style="background:#f0fff8;">
+<div class="lesson-inner">
+<div class="lesson-num" style="background:var(--forest);">12</div>
+<div class="lesson-title">Attention Is the Currency. A Following Is the Bank.</div>
+<div class="lesson-subtitle">Turning attention into a following and a business</div>
+
+<div class="svg-wrap">
+<svg width="500" height="170" viewBox="0 0 500 170">
+  <!-- funnel -->
+  <path d="M40 30 l200 0 l-50 50 l-100 0 z" fill="#74B9FF"/>
+  <text x="140" y="60" text-anchor="middle" font-family="Inter" font-size="12" font-weight="800" fill="white">ATTENTION</text>
+  <path d="M90 80 l100 0 l-30 40 l-40 0 z" fill="#A06CD5"/>
+  <text x="140" y="105" text-anchor="middle" font-family="Inter" font-size="11" font-weight="800" fill="white">FOLLOWERS</text>
+  <path d="M120 120 l40 0 l-12 30 l-16 0 z" fill="#00B894"/>
+  <text x="140" y="142" text-anchor="middle" font-family="Inter" font-size="9" font-weight="800" fill="white">$$$</text>
+  <!-- arrow to business -->
+  <path d="M250 95 l60 0" stroke="#2D3436" stroke-width="4" marker-end="url(#a12)"/>
+  <g transform="translate(330,55)">
+    <rect width="130" height="80" rx="10" fill="#FFE66D"/>
+    <text x="65" y="38" text-anchor="middle" font-family="Inter" font-size="12" font-weight="800" fill="#2D3436">clients · products</text>
+    <text x="65" y="56" text-anchor="middle" font-family="Inter" font-size="12" font-weight="800" fill="#2D3436">deals · email list</text>
+  </g>
+  <defs><marker id="a12" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0 0 l6 3 l-6 3" fill="#2D3436"/></marker></defs>
+</svg>
+</div>
+
+<div class="card">
+<div class="card-label">🎯 Key Lesson</div>
+<p>Hooks aren't the goal — they're the <strong>top of the funnel</strong>. Kane shows how to leverage hook points to <strong>scale a business, attract influential clients, and stay competitive</strong>. Views are vanity until you convert them:</p>
+<ul>
+<li><strong>Capture, don't just entertain:</strong> route attention to an email list or a clear next step — the one asset the algorithm can't take from you.</li>
+<li><strong>Turn proof into pitch:</strong> Kane parlayed viral growth into advising MTV, IKEA, Skechers, and A-list artists. Receipts open doors.</li>
+<li><strong>One clear offer beats ten vague ones:</strong> the same specificity that wins hooks wins sales.</li>
+</ul>
+</div>
+
+<div class="funny-box">
+<div class="funny-label">😂 Funny Take</div>
+<p>Going viral with no funnel is winning the lottery and then immediately losing the ticket. 4 million views, 0 emails, 0 dollars, and one comment that says "first." You were trending in 14 countries for a weekend and your reward is a tiny dopamine hit and a notification that your storage is full. Build the bank before you make it rain.</p>
+</div>
+
+<div class="ai-box">
+<div class="ai-label">🤖 AI Connection</div>
+<p>Attention without conversion is a model with great <strong>recall but no precision</strong> — it reaches everyone and converts no one. Building a following and email list is owning your <strong>distribution layer</strong> instead of renting it from a platform whose ranking model can change overnight. Don't build your entire business on someone else's API you don't control.</p>
+</div>
+
+<div class="connect-box">
+<div class="connect-label">🔗 Cross-Book Connection</div>
+<p><em>Show Your Work!</em>: the long game is building an audience that follows the human, not the algorithm. <em>Influence</em>'s "Reciprocity" and "Liking" turn an audience into customers; <em>One Million Followers</em> closes the loop from reach to revenue.</p>
+</div>
+
+<div class="quote-box">
+<div class="quote-text">"Hook Points can be used to scale businesses, attract influential clients, and adapt to remain competitive in evolving markets."</div>
+<div class="quote-attr">— Brendan Kane, Hook Point</div>
+</div>
+</div>
+</section>
+
+<!-- ============ CHEAT SHEET ============ -->
+<section class="cheatsheet">
+<div class="cheatsheet-inner">
+<h2>The Hook Point Cheat Sheet</h2>
+<div class="two-col">
+
+<div class="cs-card">
+<span class="tag">The Core Rule</span>
+<h3>The 3-Second Test</h3>
+<p>You have ~3 seconds against 60B daily messages. If your first frame, line, or thumbnail wouldn't stop your own thumb, it won't stop anyone else's.</p>
+</div>
+
+<div class="cs-card">
+<span class="tag">The Formula</span>
+<h3>Disrupt → Engage → Educate</h3>
+<ul>
+<li><strong>Disrupt</strong> the scroll pattern</li>
+<li><strong>Engage</strong> an emotion</li>
+<li><strong>Educate</strong> / deliver real value</li>
+</ul>
+</div>
+
+<div class="cs-card">
+<span class="tag">The Litmus</span>
+<h3>Hook vs. Gimmick</h3>
+<p>Hook = promise kept (felt rewarded). Gimmick = promise broken (felt tricked). Gimmicks spike clicks, then the algorithm buries you. Deliver "branded utility."</p>
+</div>
+
+<div class="cs-card">
+<span class="tag">The Sequence</span>
+<h3>Format Before Story</h3>
+<p>Pick the proven container (listicle, day-in-life, "I tried X for 30 days," reaction) first — then pour your unique story into it.</p>
+</div>
+
+<div class="cs-card">
+<span class="tag">The Method</span>
+<h3>Test, Don't Guess</h3>
+<p>A/B titles and thumbnails. Watch swipe-away rate and average view duration, not vanity likes. Kill darlings; scale the quiet winner.</p>
+</div>
+
+<div class="cs-card">
+<span class="tag">The Surface</span>
+<h3>Package It</h3>
+<p>Title + thumbnail = the hook for most viewers. One clear emotion per thumbnail. Title and thumbnail combine into one bigger idea, never repeat.</p>
+</div>
+
+<div class="cs-card">
+<span class="tag">The Wording</span>
+<h3>Specific + Curiosity Gap</h3>
+<p>Avoid wordy, vague, clichéd. Use exact numbers, named tools, real outcomes. Open a loop the brain must close — then actually close it.</p>
+</div>
+
+<div class="cs-card">
+<span class="tag">The Trust</span>
+<h3>Credibility Hooks</h3>
+<p>Lead with real proof (named results, recognizable work, research). Specific receipts &gt; self-applied titles like "thought leader."</p>
+</div>
+
+<div class="cs-card">
+<span class="tag">The Payoff</span>
+<h3>Story After the Hook</h3>
+<p>Hook → stakes → turn → payoff. Re-hook each beat. End with a real reason to follow, not just "like and subscribe."</p>
+</div>
+
+<div class="cs-card">
+<span class="tag">The Dialect</span>
+<h3>Platform-Specific</h3>
+<ul>
+<li><strong>IG Reels:</strong> silent first frame + text, loop-able</li>
+<li><strong>YouTube:</strong> title+thumbnail, first 15s, searchable</li>
+<li><strong>TikTok:</strong> first 1–2s, trends, native/raw</li>
+</ul>
+</div>
+
+<div class="cs-card">
+<span class="tag">The Endgame</span>
+<h3>Attention → Following → Business</h3>
+<p>Views are vanity until converted. Route attention to an email list. Turn proof into pitch. Own your distribution layer.</p>
+</div>
+
+<div class="cs-card">
+<span class="tag">Remember</span>
+<h3>The One-Liner</h3>
+<p>A hook point is the single surprising idea that makes a stranger choose YOU over the next swipe — and then keeps its promise. Earn the stop; repay it with the story.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+</body>
+</html>
